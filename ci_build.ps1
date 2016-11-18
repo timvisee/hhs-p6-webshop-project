@@ -43,13 +43,14 @@ fancyLog -msg "Restoring NuGet dependencies..."
 nuget restore hhs-p6-webshop-project.sln
 
 # Build the actual project using xbuild
-fancyLog -msg "Building project (Debug)..."
+fancyLog -msg "Building project (xbuild/Debug)..."
 & "C:\Program Files (x86)\Mono\bin\xbuild" /p:Configuration=Debug hhs-p6-webshop-project.sln
-fancyLog -msg "Building project (Release)..."
+fancyLog -msg "Building project (xbuild/Release)..."
 & "C:\Program Files (x86)\Mono\bin\xbuild" /p:Configuration=Release hhs-p6-webshop-project.sln
 
 # Run the build
-# & "C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe" hhs-p6-webshop-project.sln
+fancyLog -msg "Buidling project (MSBuild)..."
+& "C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe" hhs-p6-webshop-project.sln
 
 ## Tests
 #dnvm use 1.0.0-rc1-update1 -a x64 -r coreclr
