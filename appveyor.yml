@@ -3,6 +3,9 @@ install:
   - msiexec /i "mono-4.6.2.7-gtksharp-2.12.38-win32-0.msi" TARGETDIR="C:\Mono" /qn /quiet /norestart /L*V! "msilog.log"
   - SET PATH=%PATH%;C:\Mono\bin
   - SET PATH=%PATH%;C:\Mono\
+  - tree C:\Mono
+  - tree C:\Program Files (x86)
+  - tree C:\Program Files
 
 version: 0.0.1.{build}
 
