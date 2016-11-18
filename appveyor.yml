@@ -1,12 +1,7 @@
 version: 0.0.1.{build}
 
-configuration:
-- Debug
-- Release
+build: false
 
-platform: Any CPU
-
-build:
-  project: hhs-p6-webshop-project.sln
-  parallel: true
-  verbosity: minimal
+test_script:
+- ps: echo "Manually building Mono project..."
+- xbuild *.sln
