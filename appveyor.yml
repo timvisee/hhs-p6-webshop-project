@@ -5,9 +5,8 @@ install:
   - SET PATH=%PATH%;C:\Mono\
   - tree Mono
   - tree C:\Mono
-  - where xbuild
-  - xbuild /version
-  - mono /version
+  - "\"C:\\Program Files (x86)\\Mono\\bin\\mono\" /version
+  - "\"C:\\Program Files (x86)\\Mono\\bin\\xbuild\" /version
 
 version: 0.0.1.{build}
 
