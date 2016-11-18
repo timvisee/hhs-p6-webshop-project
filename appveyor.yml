@@ -1,12 +1,13 @@
 install:
   - ps: Start-FileDownload 'https://download.mono-project.com/archive/4.6.2/windows-installer/mono-4.6.2.7-gtksharp-2.12.38-win32-0.msi'
-  - msiexec /i "mono-4.6.2.7-gtksharp-2.12.38-win32-0.msi" TARGETDIR="Mono" /qn /quiet /norestart /L*V! "msilog.log"
+  - msiexec /i "mono-4.6.2.7-gtksharp-2.12.38-win32-0.msi" TARGETDIR="C:\Mono" INSTALLDIR="C:\Mono" MSI_INSTALLDIR="C:\Mono" /qn /quiet /norestart
   - SET PATH=%PATH%;C:\Mono\bin
   - SET PATH=%PATH%;C:\Mono\
   - tree Mono
   - tree C:\Mono
-  - tree "C:\Program Files (x86)"
-  - tree "C:\Program Files"
+  - where xbuild
+  - xbuild /version
+  - mono /version
 
 version: 0.0.1.{build}
 
