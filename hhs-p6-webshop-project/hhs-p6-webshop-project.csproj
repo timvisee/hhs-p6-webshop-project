@@ -93,6 +93,9 @@
     <Content Include="..\appveyor.yml">
       <Link>appveyor.yml</Link>
     </Content>
+    <Content Include="..\README.md">
+      <Link>README.md</Link>
+    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap-theme.min.css" />
