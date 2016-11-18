@@ -4,4 +4,5 @@ build: false
 
 test_script:
 - ps: echo "Manually building Mono project..."
+- where mono
 - C:\Program Files (x86)\Mono\bin\xbuild *.sln
