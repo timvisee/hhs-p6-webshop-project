@@ -9,4 +9,4 @@ platform: Any CPU
 build:
   project: hhs-p6-webshop-project.sln
   parallel: true
-verbosity: minimal
+  verbosity: minimal
