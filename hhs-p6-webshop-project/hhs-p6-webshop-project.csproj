@@ -93,6 +93,12 @@
     <Content Include="..\appveyor.yml">
       <Link>appveyor.yml</Link>
     </Content>
+    <Content Include="..\ci_build.ps1">
+      <Link>ci_build.ps1</Link>
+    </Content>
+    <Content Include="..\NuGet.Config">
+      <Link>NuGet.Config</Link>
+    </Content>
     <Content Include="..\README.md">
       <Link>README.md</Link>
     </Content>
