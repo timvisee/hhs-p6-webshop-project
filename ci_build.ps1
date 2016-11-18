@@ -9,7 +9,7 @@ dnvm use 1.0.0-rc1-update1 -a x64 -r coreclr
 dnu feeds list
 dnu restore
 
-// Report mono and xbuild versions
+# Report mono and xbuild versions
 & "C:\Program Files (x86)\Mono\bin\mono" /version
 & "C:\Program Files (x86)\Mono\bin\xbuild" /version
 
