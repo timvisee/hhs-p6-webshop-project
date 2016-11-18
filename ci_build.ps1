@@ -8,9 +8,7 @@ echo "----------------------------------------------------------------`n"
 
 
 # Header
-fancyLog -msg "Starting MonoOnWinCI..."
-fancyLog -msg "Tool for building Mono projects on Windows CI"
-fancyLog -msg "Developed by Tim Visee, timvisee.com.
+fancyLog -msg "Starting MonoOnWinCI...`n  Tool for building Mono projects on Windows CI`n  Developed by Tim Visee, timvisee.com."
 
 # Log the current runtimes
 fancyLog -msg "Current runtimes:"
@@ -60,3 +58,6 @@ fancyLog -msg "Building project (Release)..."
 ## Upload results to AppVeyor
 #$wc = New-Object 'System.Net.WebClient'
 #$wc.UploadFile("https://ci.appveyor.com/api/testresults/xunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\xunit-results.xml))
+
+# We're done
+fancyLog -msg "Done."
