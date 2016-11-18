@@ -87,6 +87,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\.travis.yml">
+      <Link>.travis.yml</Link>
+    </Content>
     <Content Include="..\appveyor.yml">
       <Link>appveyor.yml</Link>
     </Content>

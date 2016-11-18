@@ -1,0 +1,6 @@
+language: csharp
+solution: hhs-p6-webshop-project.sln
+mono:
+  - latest
+  - beta
+  - alpha
