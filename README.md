@@ -5,7 +5,10 @@
 C#/ASP.NET webshop collaboration project for college (HHS) period 6.
 
 ## Requirements
-The following packages are required to build and/or run the project.
+This project is built using Mono, as crossplatform implementation for Microsoft's language.
+Required packages might be installed automatically, if not, the command `dotnet restore` can be used.
+
+If building and/or running the project fails, you may need to install the following dependencies manually:
 * [Mono](http://www.mono-project.com/) [[Download]](http://www.mono-project.com/download/) (not Windows' default build environment)
 * Additional requirements on Windows:
     * IIS [[Download]](https://www.microsoft.com/en-us/download/details.aspx?id=48264)
