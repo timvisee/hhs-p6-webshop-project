@@ -96,6 +96,9 @@
     <Content Include="..\ci_build.ps1">
       <Link>ci_build.ps1</Link>
     </Content>
+    <Content Include="..\hhs-p6-webshop-project.sln.DotSettings">
+      <Link>hhs-p6-webshop-project.sln.DotSettings</Link>
+    </Content>
     <Content Include="..\README.md">
       <Link>README.md</Link>
     </Content>
