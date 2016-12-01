@@ -8,7 +8,8 @@ mono:
 
 matrix:
   include:
-    - os: osx
-      mono: latest
   allow_failures:
     - mono: alpha
+    - os: osx
+      mono: latest
+  fast_finish: true
