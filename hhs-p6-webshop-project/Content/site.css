@@ -1,24 +1,131 @@
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display|Roboto:400,700,900|Raleway');
+
 body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    font-family: roboto;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+/*--- Colors ---*/
+.white-text {
+     color: #fff;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+.hm-pink {
+     background-color: #fac9c4;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+.hm-pink-dark {
+     background-color: #f0597c;
+}
+
+.hm-pink-text {
+     color: #fac9c4;
+}
+
+.hm-pink-dark-text {
+     color: #f0597c;
+}
+
+/*--- Top part of header ---*/
+#header_top,
+#header_nav,
+#main_content,
+footer {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+#header_top {
+    display: flex;
+    justify-content: space-between;
+}
+
+#choose_website {
+    margin-left: 20px;
+}
+
+#choose_website a,
+.phone-number {
+    line-height: 60px;
+    font-size: 1.2em;
+}
+
+#choose_website a {
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 0 10px;
+}
+
+#choose_website .active {
+    color: #000;
+}
+
+.phone-number {
+    padding: 0 15px;
+    font-family: Raleway;
+}
+
+/*--- Bottom part of header ---*/
+#header_nav {
+    padding: 25px 0;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #e5e5e5;
+    display: flex;
+    justify-content: space-between;
+}
+
+.navbar-brand {
+    font-family: Playfair Display;
+    color: #000;
+    font-size: 2em;
+    line-height: 40px;
+    height: auto;
+    padding: 0 15px;
+    margin-left: 20px;
+    text-transform: uppercase;
+}
+
+/*--- Menu ---*/
+nav ul {
+    margin: 0;
+}
+
+nav li {
+    display: inline-block;
+}
+
+nav li a {
+    text-transform: uppercase;
+    color: #000;
+    font-size: 1.2em;
+    display: block;
+    font-weight: bold;
+    padding: 0 20px;
+    line-height: 40px;
+}
+
+nav .active a,
+nav li a:hover {
+     color: #ef5879;
+}
+
+nav li a.hm-pink-dark:hover {
+     color: #fff;
+}
+
+/*--- Content ---*/
+
+/*--- Footer---*/
+footer {
+    padding: 20px;
+    font-family: Raleway;
+}
+
+footer h3 {
+    font-weight: bold;
+}
+
+footer ul {
+    list-style-type: none;
+    padding: 0;
 }
