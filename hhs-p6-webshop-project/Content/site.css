@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Playfair+Display|Roboto:400,700,900|Raleway');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700,900|Raleway|Sumana');
 
 body {
     font-family: roboto;
@@ -75,9 +75,10 @@ footer {
 }
 
 .navbar-brand {
-    font-family: Playfair Display;
+    font-family: Sumana;
+    font-weight: lighter;
     color: #000;
-    font-size: 2em;
+    font-size: 3em;
     line-height: 40px;
     height: auto;
     padding: 0 15px;
