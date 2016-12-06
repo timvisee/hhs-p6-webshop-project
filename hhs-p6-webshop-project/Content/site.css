@@ -13,16 +13,24 @@ body {
      background-color: #fac9c4;
 }
 
-.hm-pink-dark {
-     background-color: #f0597c;
+.hm-pink-text {
+    color: #fac9c4;
 }
 
-.hm-pink-text {
-     color: #fac9c4;
+.hm-pink-light {
+    background-color: #fce8e7;
+}
+
+.hm-pink-light-text {
+    color: #fce8e7;
+}
+
+.hm-pink-dark {
+    background-color: #f0597c;
 }
 
 .hm-pink-dark-text {
-     color: #f0597c;
+    color: #f0597c;
 }
 
 /*--- Top part of header ---*/
@@ -122,11 +130,19 @@ footer {
     font-family: Raleway;
 }
 
-footer h3 {
+footer h4 {
     font-weight: bold;
+    font-family: Roboto;
+    margin-bottom: 0px;
+    text-transform: uppercase;
 }
 
 footer ul {
     list-style-type: none;
     padding: 0;
+}
+
+footer ul a {
+    color: #696564;
+    line-height: 2em;
 }
