@@ -130,6 +130,11 @@ footer {
     font-family: Raleway;
 }
 
+#footer_shop_info {
+    font-size: 1.2em;
+    margin-bottom: 3em;
+}
+
 footer h4 {
     font-weight: bold;
     font-family: Roboto;
