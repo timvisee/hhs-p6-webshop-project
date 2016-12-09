@@ -106,6 +106,9 @@
     <Content Include="..\ci_build.ps1">
       <Link>ci_build.ps1</Link>
     </Content>
+    <Content Include="..\docs\Git_guide.md">
+      <Link>Git_guide.md</Link>
+    </Content>
     <Content Include="..\hhs-p6-webshop-project.sln.DotSettings">
       <Link>hhs-p6-webshop-project.sln.DotSettings</Link>
     </Content>
