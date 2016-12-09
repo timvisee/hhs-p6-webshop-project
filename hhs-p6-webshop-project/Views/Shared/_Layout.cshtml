@@ -19,7 +19,18 @@
                     <strong>T</strong>
                     <span>(010) 4126143</span>
                </div>
-               <!-- <input type="search"/> -->
+               <div id="search_wrapper">
+                    <button id="header_search_toggle">
+                         <span class="glyphicon glyphicon-search"></span>
+                    </button>
+
+                    <div id="search_box">
+                         <input id="header_search" type="search" placeholder="Wat zoek je?"/>
+                         <button id="header_search_submit">
+                              <span class="glyphicon glyphicon-search hm-pink-dark-text"></span>
+                         </button>
+                    </div>
+               </div>
           </div>
      </div>
      <div id="header_nav">
@@ -71,7 +82,7 @@
                </p>
           </div>
           <div class="col-sm-12 footer-wedding-show text-center">
-          <img src="~/images/footer-grand-wedding-show.png" alt="The Grand Wedding Show" />
+               <img src="~/images/footer-grand-wedding-show.png" alt="The Grand Wedding Show"/>
           </div>
           <div class="col-md-offset-1-5 col-md-3 col-sm-12">
                <h4 class="hm-pink-dark-text">Winkel</h4>
@@ -121,4 +132,9 @@
 
 @RenderSection("scripts", required: false)
 </body>
+<script type="text/javascript">
+     $("#header_search_toggle").click(function(){
+          $("#search_box").animate({width:'toggle'}, 750);
+     });
+</script>
 </html>
