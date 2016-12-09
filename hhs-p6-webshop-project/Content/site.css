@@ -44,7 +44,7 @@ body.layout-banner {
 }
 
 .row {
-/*fucking bootstrap*/
+    /*fucking bootstrap*/
     margin: 0;
 }
 
@@ -102,9 +102,52 @@ header {
     color: #000;
 }
 
+#header_contact {
+    display: flex;
+}
+
 .phone-number {
     padding: 0 15px;
     font-family: Raleway;
+}
+
+#search_wrapper {
+    max-height: 60px;
+    min-width: 70px;
+}
+
+#header_search {
+    border: 0;
+    line-height: 60px; /*todo fix height top header*/
+    padding: 0px 70px 0 25px;
+    float: left;
+    font-size: 1.2em;
+    font-family: Raleway;
+}
+
+#search_box {
+    display: none;
+    float: right;
+    margin-right: -70px;
+}
+
+#header_search_toggle,
+#header_search_submit {
+    margin-left: -70px;
+    width: 70px;
+    line-height: 60px;
+    background-color: transparent;
+    border: 0;
+}
+
+#header_search_submit {
+    float: left;
+}
+
+#header_search_toggle {
+    float: right;
+    margin-left: 0;
+    z-index: 10;
 }
 
 /*--- Bottom part of header ---*/
