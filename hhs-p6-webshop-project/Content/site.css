@@ -1,38 +1,80 @@
-@import url('https://fonts.googleapis.com/css?family=Playfair+Display|Roboto:400,700,900|Raleway');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700,900|Raleway|Sumana|Niconne');
 
 body {
     font-family: roboto;
+    background-color: #fce8e7;
+}
+
+body.layout-banner {
+    background-color: #FFF;
 }
 
 /*--- Colors ---*/
 .white-text {
-     color: #fff;
+    color: #fff;
 }
 
 .hm-pink {
-     background-color: #fac9c4;
-}
-
-.hm-pink-dark {
-     background-color: #f0597c;
+    background-color: #fac9c4;
 }
 
 .hm-pink-text {
-     color: #fac9c4;
+    color: #fac9c4;
+}
+
+.hm-pink-light {
+    background-color: #fce8e7;
+}
+
+.hm-pink-light-text {
+    color: #fce8e7;
+}
+
+.hm-pink-dark {
+    background-color: #f0597c;
 }
 
 .hm-pink-dark-text {
-     color: #f0597c;
+    color: #f0597c;
 }
 
-/*--- Top part of header ---*/
-#header_top,
-#header_nav,
+/*--- Custom beun bootstrap ---*/
+.col-md-offset-1-5 {
+    margin-left: 12.5%;
+}
+
+.row {
+    /*fucking bootstrap*/
+    margin: 0;
+}
+
+/*--- Main structure ---*/
+header,
 #main_content,
 footer {
     width: 100%;
     max-width: 1400px;
     margin: 0 auto;
+    background-color: #fff;
+}
+
+/*--- Typography ---*/
+button,
+input[type="submit"],
+a:focus,
+a:hover,
+a:active {
+    outline: 0 !important;
+}
+
+/*--- Top part of header ---*/
+header {
+    position: relative;
+}
+
+#header_nav,
+#header_top {
+    width: 100%;
 }
 
 #header_top {
@@ -60,24 +102,67 @@ footer {
     color: #000;
 }
 
+#header_contact {
+    display: flex;
+}
+
 .phone-number {
     padding: 0 15px;
     font-family: Raleway;
 }
 
+#search_wrapper {
+    max-height: 60px;
+    min-width: 70px;
+}
+
+#header_search {
+    border: 0;
+    line-height: 60px; /*todo fix height top header*/
+    padding: 0px 70px 0 25px;
+    float: left;
+    font-size: 1.2em;
+    font-family: Raleway;
+}
+
+#search_box {
+    display: none;
+    float: right;
+    margin-right: -70px;
+}
+
+#header_search_toggle,
+#header_search_submit {
+    margin-left: -70px;
+    width: 70px;
+    line-height: 60px;
+    background-color: transparent;
+    border: 0;
+}
+
+#header_search_submit {
+    float: left;
+}
+
+#header_search_toggle {
+    float: right;
+    margin-left: 0;
+    z-index: 10;
+}
+
 /*--- Bottom part of header ---*/
 #header_nav {
     padding: 25px 0;
-    margin-bottom: 15px;
     border-bottom: 2px solid #e5e5e5;
     display: flex;
     justify-content: space-between;
 }
 
 .navbar-brand {
-    font-family: Playfair Display;
+    font-family: Sumana;
+    font-weight: lighter;
     color: #000;
-    font-size: 2em;
+    font-size: 3em;
     line-height: 40px;
     height: auto;
     padding: 0 15px;
@@ -87,7 +172,7 @@ footer {
 
 /*--- Menu ---*/
 nav ul {
-    margin: 0;
+    margin: 0 25px 0 0;
 }
 
 nav li {
@@ -106,14 +191,43 @@ nav li a {
 
 nav .active a,
 nav li a:hover {
-     color: #ef5879;
+    color: #ef5879;
 }
 
 nav li a.hm-pink-dark:hover {
-     color: #fff;
+    color: #fff;
+}
+
+/*--- Banner layout ---*/
+.layout-banner #header_nav {
+    position: absolute;
+    border: 0;
+}
+
+.layout-banner nav .active a,
+.layout-banner nav li a:hover {
+    color: #ef5879;
+}
+
+.layout-banner nav li a.white-text:hover,
+.layout-banner .navbar-brand,
+.layout-banner nav li a {
+    color: #FFF;
 }
 
 /*--- Content ---*/
+.container {
+    padding: 15px;
+}
+
+.layout-banner .container {
+    padding: 0;
+}
+
+.banner-image {
+    max-width: 100%;
+    margin: 0;
+}
 
 /*--- Footer---*/
 footer {
@@ -121,11 +235,61 @@ footer {
     font-family: Raleway;
 }
 
-footer h3 {
+.social-box {
+    margin-bottom: 2em;
+    height: 170px;
+    width: 23%;
+    margin-left: 5%;
+    position: relative;
+}
+
+.social-box:first-child {
+    margin-left: 10.5%;
+}
+
+.social-box .bg-text {
+    z-index: 0;
+    position: absolute;
+    font-size: 6em;
+    width: 100%;
+    text-align: center;
+    left: 0;
+    line-height: 125px;
+    opacity: 0.6;
+    font-family: Niconne;
+}
+
+.social-box .front-text {
+    font-family: Roboto;
     font-weight: bold;
+    margin-top: 80px;
+    line-height: 1.1em;
+    font-size: 1.7em;
+    text-transform: uppercase;
+}
+
+#footer_shop_info {
+    font-size: 1.2em;
+    margin-bottom: 4em;
+}
+
+.footer-wedding-show {
+    margin-bottom: 5em;
+}
+
+footer h4 {
+    font-weight: bold;
+    font-family: Roboto;
+    margin-bottom: 0px;
+    text-transform: uppercase;
 }
 
 footer ul {
     list-style-type: none;
     padding: 0;
+}
+
+footer ul a {
+    color: #696564;
+    line-height: 2em;
 }
