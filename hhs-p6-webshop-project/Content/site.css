@@ -1,56 +1,66 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,700,900|Raleway|Sumana');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700,900|Raleway|Sumana|Niconne');
 
 body {
     font-family: roboto;
-}
-
-/*--- Colors ---*/
-.white-text {
-     color: #fff;
-}
-
-.hm-pink {
-     background-color: #fac9c4;
-}
-
-.hm-pink-text {
-    color: #fac9c4;
-}
-
-.hm-pink-light {
     background-color: #fce8e7;
 }
 
-.hm-pink-light-text {
-    color: #fce8e7;
-}
+body.layout-banner { background-color: #FFF; }
 
-.hm-pink-dark {
-    background-color: #f0597c;
-}
+/*--- Colors ---*/
 
-.hm-pink-dark-text {
-    color: #f0597c;
-}
+.white-text { color: #fff; }
 
-/*--- Top part of header ---*/
-#header_top,
-#header_nav,
+.hm-pink { background-color: #fac9c4; }
+
+.hm-pink-text { color: #fac9c4; }
+
+.hm-pink-light { background-color: #fce8e7; }
+
+.hm-pink-light-text { color: #fce8e7; }
+
+.hm-pink-dark { background-color: #f0597c; }
+
+.hm-pink-dark-text { color: #f0597c; }
+
+/*--- Custom beun bootstrap ---*/
+
+.col-md-offset-1-5 { margin-left: 12.5%; }
+
+/*--- Main structure ---*/
+
+header,
 #main_content,
 footer {
     width: 100%;
     max-width: 1400px;
     margin: 0 auto;
+    background-color: #fff;
 }
+
+/*--- Typography ---*/
+button,
+input[type="submit"],
+a:focus,
+a:hover,
+a:active {
+    outline: 0 !important;
+}
+
+/*--- Top part of header ---*/
+
+header { position: relative; }
+
+
+#header_nav,
+#header_top { width: 100%; }
 
 #header_top {
     display: flex;
     justify-content: space-between;
 }
 
-#choose_website {
-    margin-left: 20px;
-}
+#choose_website { margin-left: 20px; }
 
 #choose_website a,
 .phone-number {
@@ -64,9 +74,7 @@ footer {
     padding: 0 10px;
 }
 
-#choose_website .active {
-    color: #000;
-}
+#choose_website .active { color: #000; }
 
 .phone-number {
     padding: 0 15px;
@@ -74,9 +82,9 @@ footer {
 }
 
 /*--- Bottom part of header ---*/
+
 #header_nav {
     padding: 25px 0;
-    margin-bottom: 15px;
     border-bottom: 2px solid #e5e5e5;
     display: flex;
     justify-content: space-between;
@@ -94,14 +102,12 @@ footer {
     text-transform: uppercase;
 }
 
-/*--- Menu ---*/
-nav ul {
-    margin: 0;
-}
 
-nav li {
-    display: inline-block;
-}
+/*--- Menu ---*/
+
+nav ul { margin: 0 25px 0 0; }
+
+nav li { display: inline-block; }
 
 nav li a {
     text-transform: uppercase;
@@ -114,20 +120,74 @@ nav li a {
 }
 
 nav .active a,
-nav li a:hover {
-     color: #ef5879;
+nav li a:hover { color: #ef5879; }
+
+nav li a.hm-pink-dark:hover { color: #fff; }
+
+/*--- Banner layout ---*/
+
+.layout-banner #header_nav {
+    position: absolute;
+    border: 0;
 }
 
-nav li a.hm-pink-dark:hover {
-     color: #fff;
-}
+.layout-banner nav .active a,
+.layout-banner nav li a:hover { color: #ef5879; }
+
+.layout-banner .navbar-brand,
+.layout-banner nav li a { color: #FFF; }
 
 /*--- Content ---*/
 
+.container { padding: 15px; }
+
+.layout-banner .container { padding: 0; }
+
+.banner-image {
+    max-width: 100%;
+    margin: 0;
+}
+
+
+
 /*--- Footer---*/
+
 footer {
     padding: 20px;
     font-family: Raleway;
+}
+
+.social-box {
+    margin-bottom: 2em;
+    height: 170px;
+    width: 23%;
+    margin-left: 5%;
+    position: relative;
+}
+
+.social-box:first-child {
+    margin-left: 10.5%;
+}
+
+.social-box .bg-text {
+    z-index: 0;
+    position: absolute;
+    font-size: 6em;
+    width: 100%;
+    text-align: center;
+    left: 0;
+    line-height: 125px;
+    opacity: 0.6;
+    font-family: Niconne;
+}
+
+.social-box .front-text {
+    font-family: Roboto;
+    font-weight: bold;
+    margin-top: 80px;
+    line-height: 1.1em;
+    font-size: 1.7em;
+    text-transform: uppercase;
 }
 
 #footer_shop_info {
