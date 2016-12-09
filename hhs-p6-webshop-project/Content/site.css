@@ -43,6 +43,11 @@ body.layout-banner {
     margin-left: 12.5%;
 }
 
+.row {
+/*fucking bootstrap*/
+    margin: 0;
+}
+
 /*--- Main structure ---*/
 header,
 #main_content,
@@ -161,6 +166,7 @@ nav li a.hm-pink-dark:hover {
     color: #ef5879;
 }
 
+.layout-banner nav li a.white-text:hover,
 .layout-banner .navbar-brand,
 .layout-banner nav li a {
     color: #FFF;
@@ -221,7 +227,11 @@ footer {
 
 #footer_shop_info {
     font-size: 1.2em;
-    margin-bottom: 3em;
+    margin-bottom: 4em;
+}
+
+.footer-wedding-show {
+    margin-bottom: 5em;
 }
 
 footer h4 {
