@@ -1,115 +1,116 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>@ViewData["Title"] | Honeymoon Shop</title>
-    <link rel="stylesheet" href="~/Content/bootstrap.css"/>
-    <link rel="stylesheet" href="~/Content/site.css"/>
+     <meta charset="utf-8"/>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+     <title>@ViewData["Title"] | Honeymoon Shop</title>
+     <link rel="stylesheet" href="~/Content/bootstrap.css"/>
+     <link rel="stylesheet" href="~/Content/site.css"/>
 </head>
-<body>
+<body class="@RenderSection("BodyClass", false)">
 <header>
-    <div id="header_top" class="hm-pink">
-        <div id="choose_website">
-            <a id="choice_website" class="hm-pink-dark-text active">Website</a>
-            <a id="choice_webshop" class="hm-pink-dark-text">Webshop</a>
-        </div>
-        <div id="header_contact">
-            <div class="phone-number">
-                <strong>T</strong>
-                <span>(010) 4126143</span>
-            </div>
-            <!-- <input type="search"/> -->
-        </div>
-    </div>
-    <div id="header_nav">
-        <div class="header-nav-logo">
-            @Html.ActionLink("Honeymoon Shop", "Index", "Home", null, new { @class = "navbar-brand" })
-        </div>
-        <nav>
-            <ul>
-                <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
-                <li>@Html.ActionLink("About", "About", "Home")</li>
-                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                <li><a class="hm-pink-dark make-appointment white-text" href="#">Afspraak maken</a></li>
-            </ul>
-        </nav>
-    </div>
+     <div id="header_top" class="hm-pink">
+          <div id="choose_website">
+               <a id="choice_website" class="hm-pink-dark-text active">Website</a>
+               <a id="choice_webshop" class="hm-pink-dark-text">Webshop</a>
+          </div>
+          <div id="header_contact">
+               <div class="phone-number">
+                    <strong>T</strong>
+                    <span>(010) 4126143</span>
+               </div>
+               <!-- <input type="search"/> -->
+          </div>
+     </div>
+     <div id="header_nav">
+          <div class="header-nav-logo">
+               @Html.ActionLink("Honeymoon Shop", "Index", "Home", null, new { @class = "navbar-brand" })
+          </div>
+          <nav>
+               <ul>
+                    <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li><a class="hm-pink-dark make-appointment white-text" href="#">Afspraak maken</a></li>
+               </ul>
+          </nav>
+     </div>
 </header>
-
 <div id="main_content" class="container body-content">
-    @RenderBody()
+     @RenderBody()
 </div>
 
 <footer class="hm-pink-light">
-    <div class="row" id="footer_bottom">
-        <div class="col-md-3 col-sm-12 hm-pink-dark">
-            Maak een pasafspraak
-        </div>
-        <div class="col-md-3 col-sm-12 hm-pink-dark">
-            Volg ons
-            social_media_icons
-        </div>
-        <div class="col-md-3 col-sm-12 hm-pink-dark">
-            Bekijk onze reviews
-        </div>
+     <div class="row" id="footer_bottom">
+          <div class="social-box text-center col-sm-12 white-text hm-pink-dark">
+               <span class="bg-text">Afspraak</span>
+               <div class="front-text">Maak een<br/>pasafspraak</div>
+          </div>
+          <div class="social-box text-center col-sm-12 white-text hm-pink-dark">
+               <span class="bg-text">Social</span>
+               <div class="front-text">Volg ons</div>
+          </div>
+          <div class="social-box text-center col-sm-12 white-text hm-pink-dark">
+               <span class="bg-text">Reviews</span>
+               <div class="front-text">Bekijk onze<br/>reviews</div>
+          </div>
 
-        <div class="col-sm-12">
-            <p id="footer_shop_info" class="text-center">
-                Korte Haagstraat 4, 3011 GL Rotterdam
-                <strong>email</strong> info@honeymoonshop.nl
-                <strong>tel</strong> (010) 412 61 43
-                <strong>whatsapp</strong> (06) 25 19 99 27
-                <br/>
+          <div class="col-sm-12">
+               <p id="footer_shop_info" class="text-center">
+                    Korte Haagstraat 4, 3011 GL Rotterdam
+                    <strong>email</strong> info@honeymoonshop.nl
+                    <strong>tel</strong> (010) 412 61 43
+                    <strong>whatsapp</strong> (06) 25 19 99 27
+                    <br/>
 
-                <strong>Openingstijden</strong>
-                <strong>MA</strong> 12.00-17.00
-                <strong>DI t/m VR</strong> 09.30-18.00
-                <strong>ZA</strong> 09.30-18.00
-                <strong>DI t/m VR</strong> 11.00-17.00
-            </p>
-        </div>
-        <div class="col-md-offset-2 col-md-3 col-sm-12">
-            <h4 class="hm-pink-dark-text">Winkel</h4>
-            <ul>
-                <li><a href="#">Pagina 1</a></li>
-                <li><a href="#">Pagina 2</a></li>
-                <li><a href="#">Pagina 3</a></li>
-                <li><a href="#">Pagina 4</a></li>
-                <li><a href="#">Pagina 5</a></li>
-                <li><a href="#">Pagina 1</a></li>
-            </ul>
-        </div>
-        <div class="col-md-3 col-sm-12">
-            <h4 class="hm-pink-dark-text">Service</h4>
-            <ul>
-                <li><a href="#">Pagina 1</a></li>
-                <li><a href="#">Pagina 2</a></li>
-                <li><a href="#">Pagina 3</a></li>
-                <li><a href="#">Pagina 4</a></li>
-                <li><a href="#">Pagina 5</a></li>
-                <li><a href="#">Pagina 1</a></li>
-            </ul>
-        </div>
-        <div class="col-md-3 col-sm-12">
-            <h4 class="hm-pink-dark-text">Acties</h4>
-            <ul>
-                <li><a href="#">Pagina 1</a></li>
-                <li><a href="#">Pagina 2</a></li>
-                <li><a href="#">Pagina 3</a></li>
-                <li><a href="#">Pagina 4</a></li>
-                <li><a href="#">Pagina 5</a></li>
-                <li><a href="#">Pagina 1</a></li>
-            </ul>
-        </div>
-    </div>
-    <p>&copy; 2016 - Beun IT</p>
+                    <strong>Openingstijden</strong>
+                    <strong>MA</strong> 12.00-17.00
+                    <strong>DI t/m VR</strong> 09.30-18.00
+                    <strong>ZA</strong> 09.30-18.00
+                    <strong>DI t/m VR</strong> 11.00-17.00
+               </p>
+          </div>
+          <div class="col-md-offset-1-5 col-md-3 col-sm-12">
+               <h4 class="hm-pink-dark-text">Winkel</h4>
+               <ul>
+                    <li><a href="#">Pagina 1</a></li>
+                    <li><a href="#">Pagina 2</a></li>
+                    <li><a href="#">Pagina 3</a></li>
+                    <li><a href="#">Pagina 4</a></li>
+                    <li><a href="#">Pagina 5</a></li>
+                    <li><a href="#">Pagina 1</a></li>
+               </ul>
+          </div>
+          <div class="col-md-3 col-sm-12">
+               <h4 class="hm-pink-dark-text">Service</h4>
+               <ul>
+                    <li><a href="#">Pagina 1</a></li>
+                    <li><a href="#">Pagina 2</a></li>
+                    <li><a href="#">Pagina 3</a></li>
+                    <li><a href="#">Pagina 4</a></li>
+                    <li><a href="#">Pagina 5</a></li>
+                    <li><a href="#">Pagina 1</a></li>
+               </ul>
+          </div>
+          <div class="col-md-3 col-sm-12">
+               <h4 class="hm-pink-dark-text">Acties</h4>
+               <ul>
+                    <li><a href="#">Pagina 1</a></li>
+                    <li><a href="#">Pagina 2</a></li>
+                    <li><a href="#">Pagina 3</a></li>
+                    <li><a href="#">Pagina 4</a></li>
+                    <li><a href="#">Pagina 5</a></li>
+                    <li><a href="#">Pagina 1</a></li>
+               </ul>
+          </div>
+     </div>
+     <p>&copy; 2016 - Beun IT</p>
 </footer>
 
 <environment names="Development">
-    <script src="~/Scripts/jquery-1.9.1.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>
-    <script src="~/Scripts/site.js"></script>
+     <script src="~/Scripts/jquery-1.9.1.js"></script>
+     <script src="~/Scripts/bootstrap.js"></script>
+     <script src="~/Scripts/site.js"></script>
 </environment>
 
 @RenderSection("scripts", required: false)
