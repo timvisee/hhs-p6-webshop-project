@@ -178,7 +178,6 @@
     <Content Include="Views\Account\SendCode.cshtml" />
     <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\AboutNew.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\ContactNew.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -212,6 +211,7 @@
     <Folder Include="Content" />
     <Folder Include="Controllers" />
     <Folder Include="Views" />
+    <Folder Include="Views\Home" />
     <Folder Include="Views\Shared" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
