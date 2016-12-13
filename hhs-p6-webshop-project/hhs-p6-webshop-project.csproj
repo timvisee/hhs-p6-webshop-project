@@ -145,9 +145,6 @@
     <Content Include=".gitignore" />
     <Content Include="appsettings.json" />
     <Content Include="bower.json" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\site.css" />
     <Content Include="fontsOld\glyphicons-halflings-regular.eot" />
     <Content Include="fontsOld\glyphicons-halflings-regular.svg" />
     <Content Include="fontsOld\glyphicons-halflings-regular.ttf" />
@@ -208,7 +205,6 @@
     <Content Include="wwwroot\js\site.min.js" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content" />
     <Folder Include="Controllers" />
     <Folder Include="Views" />
     <Folder Include="Views\Home" />
