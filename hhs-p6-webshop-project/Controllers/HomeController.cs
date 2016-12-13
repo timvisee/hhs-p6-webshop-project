@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace hhs_p6_webshop_project.Controllers
 {
-    public class HomeControllerNew : Controller
+    public class HomeController : Controller
     {
         public IActionResult Index()
         {
