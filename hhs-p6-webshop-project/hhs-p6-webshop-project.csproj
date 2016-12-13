@@ -155,13 +155,6 @@
     <Content Include="package.json" />
     <Content Include="project.json" />
     <Content Include="README.md" />
-    <Content Include="ScriptsOld\bootstrap.js" />
-    <Content Include="ScriptsOld\bootstrap.min.js" />
-    <Content Include="ScriptsOld\jquery-1.9.1-vsdoc.js" />
-    <Content Include="ScriptsOld\jquery-1.9.1.js" />
-    <Content Include="ScriptsOld\jquery-1.9.1.min.js" />
-    <Content Include="ScriptsOld\jquery-1.9.1.min.map" />
-    <Content Include="ScriptsOld\site.js" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
