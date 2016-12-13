@@ -145,11 +145,6 @@
     <Content Include=".gitignore" />
     <Content Include="appsettings.json" />
     <Content Include="bower.json" />
-    <Content Include="fontsOld\glyphicons-halflings-regular.eot" />
-    <Content Include="fontsOld\glyphicons-halflings-regular.svg" />
-    <Content Include="fontsOld\glyphicons-halflings-regular.ttf" />
-    <Content Include="fontsOld\glyphicons-halflings-regular.woff" />
-    <Content Include="fontsOld\glyphicons-halflings-regular.woff2" />
     <Content Include="gulpfile.js" />
     <Content Include="hhs-p6-webshop-project.xproj" />
     <Content Include="package.json" />
