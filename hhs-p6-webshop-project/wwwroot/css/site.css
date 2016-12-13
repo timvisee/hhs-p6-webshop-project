@@ -5,7 +5,7 @@ body {
     background-color: #fce8e7;
 }
 
-body.layout-banner {
+body.layout-with-banner {
     background-color: #FFF;
 }
 
@@ -199,19 +199,19 @@ nav li a.hm-pink-dark:hover {
 }
 
 /*--- Banner layout ---*/
-.layout-banner #header_nav {
+.layout-with-banner #header_nav {
     position: absolute;
     border: 0;
 }
 
-.layout-banner nav .active a,
-.layout-banner nav li a:hover {
+.layout-with-banner nav .active a,
+.layout-with-banner nav li a:hover {
     color: #ef5879;
 }
 
-.layout-banner nav li a.white-text:hover,
-.layout-banner .navbar-brand,
-.layout-banner nav li a {
+.layout-with-banner nav li a.white-text:hover,
+.layout-with-banner .navbar-brand,
+.layout-with-banner nav li a {
     color: #FFF;
 }
 
@@ -220,7 +220,7 @@ nav li a.hm-pink-dark:hover {
     padding: 15px;
 }
 
-.layout-banner .container {
+.layout-with-banner .container {
     padding: 0;
 }
 
