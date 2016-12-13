@@ -94,7 +94,6 @@
     <Compile Include="App_StartOld\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\HomeControllerNew.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
     <Compile Include="Data\Migrations\00000000000000_CreateIdentitySchema.cs" />
@@ -160,7 +159,6 @@
     <Content Include="hhs-p6-webshop-project.xproj" />
     <Content Include="package.json" />
     <Content Include="project.json" />
-    <Content Include="project.lock.json" />
     <Content Include="README.md" />
     <Content Include="ScriptsOld\bootstrap.js" />
     <Content Include="ScriptsOld\bootstrap.min.js" />
@@ -216,6 +214,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content" />
+    <Folder Include="Controllers" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
