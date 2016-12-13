@@ -4,10 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace hhs_p6_webshop_project.Models.ManageViewModels
-{
-    public class ConfigureTwoFactorViewModel
-    {
+namespace hhs_p6_webshop_project.Models.ManageViewModels {
+    public class ConfigureTwoFactorViewModel {
         public string SelectedProvider { get; set; }
 
         public ICollection<SelectListItem> Providers { get; set; }

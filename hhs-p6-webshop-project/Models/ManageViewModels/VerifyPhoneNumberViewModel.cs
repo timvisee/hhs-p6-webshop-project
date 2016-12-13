@@ -4,10 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace hhs_p6_webshop_project.Models.ManageViewModels
-{
-    public class VerifyPhoneNumberViewModel
-    {
+namespace hhs_p6_webshop_project.Models.ManageViewModels {
+    public class VerifyPhoneNumberViewModel {
         [Required]
         public string Code { get; set; }
 

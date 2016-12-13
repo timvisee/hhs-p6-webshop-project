@@ -4,10 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace hhs_p6_webshop_project.Models.AccountViewModels
-{
-    public class LoginViewModel
-    {
+namespace hhs_p6_webshop_project.Models.AccountViewModels {
+    public class LoginViewModel {
         [Required]
         [EmailAddress]
         public string Email { get; set; }

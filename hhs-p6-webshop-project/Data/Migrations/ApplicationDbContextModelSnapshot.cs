@@ -5,18 +5,14 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using hhs_p6_webshop_project.Data;
 
-namespace hhs_p6_webshop_project.Data.Migrations
-{
+namespace hhs_p6_webshop_project.Data.Migrations {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
-    {
-        protected override void BuildModel(ModelBuilder modelBuilder)
-        {
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot {
+        protected override void BuildModel(ModelBuilder modelBuilder) {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rc2-20901");
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
-            {
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b => {
                 b.Property<string>("Id");
 
                 b.Property<string>("ConcurrencyStamp")
@@ -36,8 +32,7 @@ namespace hhs_p6_webshop_project.Data.Migrations
                 b.ToTable("AspNetRoles");
             });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
-            {
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b => {
                 b.Property<int>("Id")
                     .ValueGeneratedOnAdd();
 
@@ -55,8 +50,7 @@ namespace hhs_p6_webshop_project.Data.Migrations
                 b.ToTable("AspNetRoleClaims");
             });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>", b =>
-            {
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>", b => {
                 b.Property<int>("Id")
                     .ValueGeneratedOnAdd();
 
@@ -74,8 +68,7 @@ namespace hhs_p6_webshop_project.Data.Migrations
                 b.ToTable("AspNetUserClaims");
             });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b =>
-            {
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b => {
                 b.Property<string>("LoginProvider");
 
                 b.Property<string>("ProviderKey");
@@ -92,8 +85,7 @@ namespace hhs_p6_webshop_project.Data.Migrations
                 b.ToTable("AspNetUserLogins");
             });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<string>", b =>
-            {
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<string>", b => {
                 b.Property<string>("UserId");
 
                 b.Property<string>("RoleId");
@@ -107,8 +99,7 @@ namespace hhs_p6_webshop_project.Data.Migrations
                 b.ToTable("AspNetUserRoles");
             });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserToken<string>", b =>
-            {
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserToken<string>", b => {
                 b.Property<string>("UserId");
 
                 b.Property<string>("LoginProvider");
@@ -122,8 +113,7 @@ namespace hhs_p6_webshop_project.Data.Migrations
                 b.ToTable("AspNetUserTokens");
             });
 
-            modelBuilder.Entity("hhs_p6_webshop_project.Models.ApplicationUser", b =>
-            {
+            modelBuilder.Entity("hhs_p6_webshop_project.Models.ApplicationUser", b => {
                 b.Property<string>("Id");
 
                 b.Property<int>("AccessFailedCount");
@@ -170,32 +160,28 @@ namespace hhs_p6_webshop_project.Data.Migrations
                 b.ToTable("AspNetUsers");
             });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
-            {
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b => {
                 b.HasOne("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole")
                     .WithMany()
                     .HasForeignKey("RoleId")
                     .OnDelete(DeleteBehavior.Cascade);
             });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>", b =>
-            {
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>", b => {
                 b.HasOne("hhs_p6_webshop_project.Models.ApplicationUser")
                     .WithMany()
                     .HasForeignKey("UserId")
                     .OnDelete(DeleteBehavior.Cascade);
             });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b =>
-            {
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b => {
                 b.HasOne("hhs_p6_webshop_project.Models.ApplicationUser")
                     .WithMany()
                     .HasForeignKey("UserId")
                     .OnDelete(DeleteBehavior.Cascade);
             });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<string>", b =>
-            {
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<string>", b => {
                 b.HasOne("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole")
                     .WithMany()
                     .HasForeignKey("RoleId")

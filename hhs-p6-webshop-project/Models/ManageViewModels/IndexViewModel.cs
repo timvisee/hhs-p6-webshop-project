@@ -4,10 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 
-namespace hhs_p6_webshop_project.Models.ManageViewModels
-{
-    public class IndexViewModel
-    {
+namespace hhs_p6_webshop_project.Models.ManageViewModels {
+    public class IndexViewModel {
         public bool HasPassword { get; set; }
 
         public IList<UserLoginInfo> Logins { get; set; }
