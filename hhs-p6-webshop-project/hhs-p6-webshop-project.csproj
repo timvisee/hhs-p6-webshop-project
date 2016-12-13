@@ -90,8 +90,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_StartOld\RouteConfig.cs" />
-    <Compile Include="App_StartOld\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -200,7 +198,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewImports.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\_ViewStartNew.cshtml" />
     <Content Include="web.config" />
     <Content Include="wwwroot\css\site.css" />
     <Content Include="wwwroot\css\site.min.css" />
@@ -215,6 +212,7 @@
   <ItemGroup>
     <Folder Include="Content" />
     <Folder Include="Controllers" />
+    <Folder Include="Views" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
