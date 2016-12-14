@@ -8,4 +8,6 @@ echo "----------------------------------------------------------------"
 echo ""
 
 # Set the proper execution permissions for the scripts
-sudo chmod 777 ./*.sh
+sudo chmod 777 ./setup.sh
+sudo chmod 777 ./build.sh
+sudo chmod 777 ./test.sh
