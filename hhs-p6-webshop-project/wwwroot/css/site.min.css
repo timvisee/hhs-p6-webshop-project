@@ -72,6 +72,33 @@ input.form-control[disabled] {
     cursor: default;
 }
 
+/*--- Admin bar ---*/
+#admin_bar {
+    height: 30px;
+}
+
+#admin_menu {
+    list-style-type: none;
+    margin: 0;
+}
+
+#admin_menu li {
+    display: inline-block;
+}
+
+#admin_menu li a {
+    color: #FFF;
+    line-height: 30px;
+    padding: 0 20px;
+    display: block;
+}
+
+#admin_menu li a:hover {
+    background-color: #fac9c4;
+    color: #f0597c;
+    text-decoration: none;
+}
+
 /*--- Top part of header ---*/
 header {
     position: relative;

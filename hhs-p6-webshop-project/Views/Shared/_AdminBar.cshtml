@@ -1,4 +1,22 @@
-﻿<div id="admin_bar">
-    <!-- Uitloggen werkt nog niet -->
-    @Html.ActionLink("Uitloggen", "LogOff", "Account")
+﻿<div id="admin_bar" class="hm-pink-dark">
+    <ul id="admin_menu">
+        <li>
+            @Html.ActionLink("Maak afspraak", "Create", "Appointments")
+        </li>
+        <li>
+            @Html.ActionLink("Bekijk afspraken", "Index", "Appointments")
+        </li>
+        <li>
+            <!-- Uitloggen werkt nog niet -->
+            @Html.ActionLink("Uitloggen", "LogOff", "Account")
+        </li>
+        <li>
+            <!-- Uitloggen werkt nog niet -->
+            @Html.ActionLink("Uitloggen", "LogOff", "Account")
+        </li>
+        <li>
+            <!-- Uitloggen werkt nog niet -->
+            @Html.ActionLink("Uitloggen", "LogOff", "Account")
+        </li>
+    </ul>
 </div>
