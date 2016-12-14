@@ -3,6 +3,7 @@ machine:
     - docker
 dependencies:
   pre:
+    - sudo chmod 777 ./ci/linux/init.sh && ./ci/linux/init.sh
     - sudo chmod 777 ./ci/linux/setup.sh && ./ci/linux/setup.sh
 test:
   override:
