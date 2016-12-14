@@ -12,6 +12,8 @@ If building and/or running the project fails, you may need to install the follow
 * [Mono](http://www.mono-project.com/) [[Download]](http://www.mono-project.com/download/) (not Windows' default build environment)
 * Additional requirements on Windows:
     * IIS [[Download]](https://www.microsoft.com/en-us/download/details.aspx?id=48264)
+* If you get a HTTP 500 error, you can try the following command:
+	`dotnet ef database update`
 
 ## Build
 The project is currently being built automatically using the CI services in the table below.
