@@ -8,43 +8,45 @@ using Microsoft.EntityFrameworkCore;
 using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models.AppointmentModels;
 
-namespace hhs_p6_webshop_project.Controllers
-{
-    public class AppointmentsController : Controller
-    {
+namespace hhs_p6_webshop_project.Controllers {
+    public class AppointmentsController : Controller {
         private readonly ApplicationDbContext _context;
 
-        public AppointmentsController(ApplicationDbContext context)
-        {
-            _context = context;    
+        public AppointmentsController(ApplicationDbContext context) {
+            _context = context;
         }
 
         // GET: Appointments
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Appointment.ToListAsync());
+        public async Task<IActionResult> Index() {
+            // Check if user is authenticated
+            if (User.Identity.IsAuthenticated) {
+                return View(await _context.Appointment.ToListAsync());
+            } else {
+                return NotFound();
+            }
         }
 
         // GET: Appointments/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
+        public async Task<IActionResult> Details(int? id) {
+            if (id == null) {
                 return NotFound();
             }
 
             var appointment = await _context.Appointment.SingleOrDefaultAsync(m => m.ID == id);
-            if (appointment == null)
-            {
+            if (appointment == null) {
                 return NotFound();
             }
 
-            return View(appointment);
+            // Check if user is authenticated
+            if (User.Identity.IsAuthenticated) {
+                return View(appointment);
+            } else {
+                return NotFound();
+            }
         }
 
         // GET: Appointments/Create
-        public IActionResult Create()
-        {
+        public IActionResult Create() {
             return View();
         }
 
@@ -53,10 +55,8 @@ namespace hhs_p6_webshop_project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Confirmation,DateMarried,Mail,Name,Phone")] Appointment appointment)
-        {
-            if (ModelState.IsValid)
-            {
+        public async Task<IActionResult> Create([Bind("ID,Confirmation,DateMarried,Mail,Name,Phone")] Appointment appointment) {
+            if (ModelState.IsValid) {
                 _context.Add(appointment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -65,19 +65,22 @@ namespace hhs_p6_webshop_project.Controllers
         }
 
         // GET: Appointments/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
+        public async Task<IActionResult> Edit(int? id) {
+            if (id == null) {
                 return NotFound();
             }
 
             var appointment = await _context.Appointment.SingleOrDefaultAsync(m => m.ID == id);
-            if (appointment == null)
-            {
+            if (appointment == null) {
                 return NotFound();
             }
-            return View(appointment);
+
+            // Check if user is authenticated
+            if (User.Identity.IsAuthenticated) {
+                return View(appointment);
+            } else {
+                return NotFound();
+            }
         }
 
         // POST: Appointments/Edit/5
@@ -85,66 +88,63 @@ namespace hhs_p6_webshop_project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Confirmation,DateMarried,Mail,Name,Phone")] Appointment appointment)
-        {
-            if (id != appointment.ID)
-            {
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Confirmation,DateMarried,Mail,Name,Phone")] Appointment appointment) {
+            if (id != appointment.ID) {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
+            if (ModelState.IsValid) {
+                try {
                     _context.Update(appointment);
                     await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!AppointmentExists(appointment.ID))
-                    {
+                } catch (DbUpdateConcurrencyException) {
+                    if (!AppointmentExists(appointment.ID)) {
                         return NotFound();
-                    }
-                    else
-                    {
+                    } else {
                         throw;
                     }
                 }
                 return RedirectToAction("Index");
             }
-            return View(appointment);
+
+            // Check if user is authenticated
+            if (User.Identity.IsAuthenticated) {
+                return View(appointment);
+            } else {
+                return NotFound();
+            }
         }
 
         // GET: Appointments/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
+        public async Task<IActionResult> Delete(int? id) {
+            if (id == null) {
                 return NotFound();
             }
 
             var appointment = await _context.Appointment.SingleOrDefaultAsync(m => m.ID == id);
-            if (appointment == null)
-            {
+            if (appointment == null) {
                 return NotFound();
             }
 
-            return View(appointment);
+            // Check if user is authenticated
+            if (User.Identity.IsAuthenticated) {
+                return View(appointment);
+            } else {
+                return NotFound();
+            }
         }
 
         // POST: Appointments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
+        public async Task<IActionResult> DeleteConfirmed(int id) {
             var appointment = await _context.Appointment.SingleOrDefaultAsync(m => m.ID == id);
             _context.Appointment.Remove(appointment);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
-        private bool AppointmentExists(int id)
-        {
+        private bool AppointmentExists(int id) {
             return _context.Appointment.Any(e => e.ID == id);
         }
     }
