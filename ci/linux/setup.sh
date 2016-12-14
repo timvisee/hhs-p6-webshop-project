@@ -38,6 +38,7 @@ sudo npm install -g bower
 # Install gulp
 log "Installing gulp..."
 sudo npm install -g gulp
+npm install gulp
 
 # Install project dependencies
 log "Installing project dependencies..."
@@ -49,7 +50,7 @@ sudo npm install
 
 # Install bower dependencies
 log "Installing bower dependencies..."
-sudo bower install
+bower install
 
 # Minify using gulp
 log "Cleaning and minifying using gulp..."
