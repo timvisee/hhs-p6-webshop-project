@@ -104,6 +104,7 @@
         "defaultNamespace": "hhs_p6_webshop_project"
     },
     "runtimes": {
-        "win7-x64": {}
+        "win7-x64": {},
+        "ubuntu.14.04-x64": {}
     }
 }
