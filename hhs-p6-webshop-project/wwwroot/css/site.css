@@ -61,10 +61,15 @@ footer {
 /*--- Typography ---*/
 button,
 input[type="submit"],
+input:focus,
 a:focus,
 a:hover,
 a:active {
     outline: 0 !important;
+}
+
+input.form-control[disabled] {
+    cursor: default;
 }
 
 /*--- Top part of header ---*/
