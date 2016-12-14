@@ -23,7 +23,7 @@ namespace hhs_p6_webshop_project.Models.AppointmentModels {
         [DisplayName("Telefoonnummer")]
         public string Phone { get; set; }
 
-        [DisplayName("Bevestiging")]
+        [DisplayName("Bevestigd")]
         public bool Confirmation { get; set; }
     }
 }

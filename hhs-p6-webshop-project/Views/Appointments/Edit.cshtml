@@ -1,16 +1,16 @@
 @model hhs_p6_webshop_project.Models.AppointmentModels.Appointment
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Bewerk afspraak";
 }
 
-<h2>Edit</h2>
+<h2>Afspraak</h2>
 
 
 
 <form asp-action="Edit">
     <div class="form-horizontal">
-        <h4>Appointment</h4>
+        <h4>Bewerk afspraak</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="ID" />
@@ -52,14 +52,14 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Opslaan" class="btn btn-default" />
             </div>
         </div>
     </div>
 </form>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Terug naar overzicht</a>
 </div>
 
 @section Scripts {
