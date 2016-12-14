@@ -6,11 +6,9 @@ log() {
     printf "$1"
     printf "\n%s\n\n" "----------------------------------------------------------------"
 }
-# Set the proper execution permissions for the scripts
+
+# Set the proper execution permissions for the initialization script
 sudo chmod 777 ./init.sh
-sudo chmod 777 ./setup.sh
-sudo chmod 777 ./build.sh
-sudo chmod 777 ./test.sh
 
 # Initialize
 ./init.sh

@@ -4,8 +4,8 @@ machine:
 dependencies:
   pre:
     - sudo chmod 777 ./ci/linux/init.sh && ./ci/linux/init.sh
-    - sudo chmod 777 ./ci/linux/setup.sh && ./ci/linux/setup.sh
+    - ./ci/linux/setup.sh
 test:
   override:
-    - sudo chmod 777 ./ci/linux/build.sh && ./ci/linux/build.sh
-    - sudo chmod 777 ./ci/linux/test.sh && ./ci/linux/test.sh
+    - ./ci/linux/build.sh
+    - ./ci/linux/test.sh
