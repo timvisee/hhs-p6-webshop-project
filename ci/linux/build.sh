@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Fancy logging function
 log() {
     printf "\n\n%s\n" "----------------------------------------------------------------"

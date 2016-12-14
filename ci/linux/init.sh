@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Initialization message
 echo "----------------------------------------------------------------"
 echo "  dotnet core CI build tool for Linux"
