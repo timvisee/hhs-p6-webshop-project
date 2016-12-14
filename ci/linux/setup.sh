@@ -16,6 +16,10 @@ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
 log "Updating all repositories..."
 sudo apt-get update
 
+# Upgrade all packages
+log "Upgrading all packages..."
+sudo apt-get -y upgrade
+
 # Install dotnet
 log "Installing dotnet..."
 sudo apt-get -y install dotnet-dev-1.0.0-preview2.1-003177
