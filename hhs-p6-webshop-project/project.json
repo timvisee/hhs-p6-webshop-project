@@ -1,4 +1,4 @@
-﻿{
+{
     "userSecretsId": "aspnet-hhs_p6_webshop_project-0799fe3e-6eaf-4c5f-b40e-7c6bfd5dfa9a",
     "dependencies": {
       "Microsoft.AspNetCore.Authentication.Cookies": "1.1.0",
@@ -27,7 +27,7 @@
         "Microsoft.Extensions.Logging": "1.1.0",
         "Microsoft.Extensions.Logging.Console": "1.1.0",
         "Microsoft.Extensions.Logging.Debug": "1.1.0",
-        "Microsoft.NETCore.App": { "version": "1.1.0", "type": "platform" },
+      "Microsoft.NETCore.App": "1.1.0",
         "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.1.0",
         "Microsoft.VisualStudio.Web.CodeGeneration.Tools": {
             "version": "1.0.0-preview2-final",
