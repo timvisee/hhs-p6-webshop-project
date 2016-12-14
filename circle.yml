@@ -7,3 +7,4 @@ dependencies:
 test:
   override:
     - sudo chmod 777 ./ci/linux/build.sh && ./ci/linux/build.sh
+    - sudo chmod 777 ./ci/linux/test.sh && ./ci/linux/test.sh

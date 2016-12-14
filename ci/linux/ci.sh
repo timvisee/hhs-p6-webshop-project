@@ -18,5 +18,8 @@ sudo chmod 777 ./build.sh
 # Build the project
 ./build.sh
 
+# Test the project
+./test.sh
+
 # Build finished, show a status message
 log "CI build progress finished."
