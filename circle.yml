@@ -12,4 +12,4 @@ dependencies:
     - dotnet restore
 test:
   override:
-    - dotnet build
+    - dotnet build hhs-p6-webshop-project/project.json
