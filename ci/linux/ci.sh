@@ -5,9 +5,14 @@ log() {
     echo "----------------------------------------------------------------"
 }
 
-# Build the project
-log "Building project..."
-dotnet build ../../hhs-p6-webshop-project/project.json
+# We're starting, show a status message
+log "Starting CI build progress..."
 
-# Build finished
-log "Build finished."
+# Set up the build environment
+./setup.sh
+
+# Build the project
+./build.sh
+
+# Build finished, show a status message
+log "CI build progress finished."
