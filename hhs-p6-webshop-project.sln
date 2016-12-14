@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.0.0
-MinimumVisualStudioVersion = 10.0.0.1
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "hhs_p6_webshop_project", "hhs-p6-webshop-project/hhs-p6-webshop-project.xproj", "{53959C5A-6516-418B-9A56-044728A440DD}"
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "hhs-p6-webshop-project", "hhs-p6-webshop-project\hhs-p6-webshop-project.xproj", "{53959C5A-6516-418B-9A56-044728A440DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

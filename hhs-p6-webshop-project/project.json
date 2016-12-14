@@ -14,6 +14,7 @@
         "Microsoft.AspNetCore.Server.IISIntegration": "1.1.0",
         "Microsoft.AspNetCore.Server.Kestrel": "1.1.0",
         "Microsoft.AspNetCore.StaticFiles": "1.1.0",
+      "Microsoft.DotNet.InternalAbstractions": "1.0.0",
       "Microsoft.EntityFrameworkCore": "1.1.0",
         "Microsoft.EntityFrameworkCore.Sqlite": "1.1.0",
         "Microsoft.EntityFrameworkCore.Tools": {
@@ -29,11 +30,11 @@
         "Microsoft.NETCore.App": { "version": "1.0.1", "type": "platform" },
         "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.1.0",
         "Microsoft.VisualStudio.Web.CodeGeneration.Tools": {
-            "version": "1.0.0-preview2-update1",
+            "version": "1.0.0-preview2-final",
             "type": "build"
         },
         "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": {
-            "version": "1.0.0-preview2-update1",
+            "version": "1.0.0-preview2-final",
             "type": "build"
         }
     },
@@ -47,11 +48,7 @@
             "imports": "portable-net45+win8+dnxcore50"
         },
         "Microsoft.EntityFrameworkCore.Tools": {
-            "version": "1.0.0-preview2-final",
-            "imports": [
-                "portable-net45+win8+dnxcore50",
-                "portable-net45+win8"
-            ]
+            "version": "1.0.0-preview2-final"
         },
         "Microsoft.Extensions.SecretManager.Tools": {
             "version": "1.0.0-preview2-final",
