@@ -9,8 +9,18 @@ using hhs_p6_webshop_project.Models.AppointmentModels;
 
 namespace hhs_p6_webshop_project.Data {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser> {
+        public static bool reset = true;
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options) {}
+            : base(options) {
+
+            if (reset) {
+                //Reset everything
+                Database.EnsureDeleted();
+                Database.EnsureCreated();
+                reset = false;
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder builder) {
             base.OnModelCreating(builder);
