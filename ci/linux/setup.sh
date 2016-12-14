@@ -44,6 +44,9 @@ npm install gulp
 log "Installing project dependencies..."
 dotnet restore
 
+# Move into the project's sources directory
+cd ./hhs-p6-webshop-project
+
 # Installing NPM depenendencies
 log "Installing NPM dependencies..."
 sudo npm install
@@ -56,6 +59,9 @@ bower install
 log "Cleaning and minifying using gulp..."
 gulp clean
 gulp min
+
+# Leave the project's sources directory
+cd ..
 
 # Build environment configured
 log "Build environment configured."
