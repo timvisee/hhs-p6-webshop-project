@@ -12,19 +12,19 @@ If building and/or running the project fails, you may need to install the follow
 * Additional requirements on Windows:
     * IIS [[Download]](https://www.microsoft.com/en-us/download/details.aspx?id=48264)
 * If you get a HTTP 500 error, you can try the following command:
-	`dotnet ef database update`
+    `dotnet ef database update`
 
 ##Commandline Options
 The following command line arguments are supported:
 
 * --always-skip-initialization
-	* Always skips the 3 second grace period in which the database can be reset
+    * Always skips the 3 second grace period in which the database can be reset
 	
 * --force-database-initialization
-	* Forces database initialization every time
+    * Forces database initialization every time
 	
 * --exit-after-initialization
-	* Exits the application after the database has been initialized
+    * Exits the application after the database has been initialized
 
 	
 ## Build
