@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Threading.Tasks;
+using hhs_p6_webshop_project.App.Util;
 using hhs_p6_webshop_project.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -14,22 +11,22 @@ namespace hhs_p6_webshop_project.Data
 
         public static void Initialize(ApplicationDbContext context) {
             if (!Run) {
-                Program.Log("-----------------------------------------------------", ConsoleColor.Green);
-                Program.Log("| Not running database initializer...               |", ConsoleColor.Green);
-                Program.Log("| DATA WILL BE PRESERVED                            |", ConsoleColor.Green);
-                Program.Log("-----------------------------------------------------", ConsoleColor.Green);
+                LogUtils.Log("-----------------------------------------------------", ConsoleColor.Green);
+                LogUtils.Log("| Not running database initializer...               |", ConsoleColor.Green);
+                LogUtils.Log("| DATA WILL BE PRESERVED                            |", ConsoleColor.Green);
+                LogUtils.Log("-----------------------------------------------------", ConsoleColor.Green);
                 return;
             }
 
-            Program.Log("-----------------------------------------------------");
-            Program.Log("| Starting database initialization...               |");
-            Program.Log("| ALL DATA WILL BE LOST!                            |");
-            Program.Log("-----------------------------------------------------");
+            LogUtils.Log("-----------------------------------------------------");
+            LogUtils.Log("| Starting database initialization...               |");
+            LogUtils.Log("| ALL DATA WILL BE LOST!                            |");
+            LogUtils.Log("-----------------------------------------------------");
 
 
-            Program.Log("Deleting database... (please be patient, this may take up to 20 seconds)", ConsoleColor.White);
+            LogUtils.Log("Deleting database... (please be patient, this may take up to 20 seconds)", ConsoleColor.White);
             context.Database.EnsureDeleted();
-            Program.Log("Provisioning new database... (please be patient, this may take up to 60 seconds)", ConsoleColor.White);
+            LogUtils.Log("Provisioning new database... (please be patient, this may take up to 60 seconds)", ConsoleColor.White);
             context.Database.EnsureCreated();
 
             var user = new ApplicationUser
@@ -54,7 +51,7 @@ namespace hhs_p6_webshop_project.Data
 
             result.Wait();
 
-            Program.Log("Seed completed!", ConsoleColor.Green);
+            LogUtils.Log("Seed completed!", ConsoleColor.Green);
             
             context.SaveChanges();
         }
