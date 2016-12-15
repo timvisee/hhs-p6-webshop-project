@@ -27,41 +27,22 @@ namespace hhs_p6_webshop_project.App.Config {
                 // TODO: Clean this section up!
                 // TODO: Move this user input section to a separate method.
 
-                LogUtils.Info("This prompt can be disabled by adding --always-skip-initialization as a startup argument.");
-                LogUtils.Info("Reset all data sources? Press any key to confirm...");
+                LogUtils.Info("This prompt can be disabled using the --always-skip-initialization argument.");
+                LogUtils.Info("Press any key to reset the database...");
 
-                // Number of seconds to wait for user input
-                int waitSeconds = 3;
+                // Ask the user to press a key if the database should be reset
+                // TODO: Move the number of seconds to a constant.
+                if (AskUserPressKey(3)) {
+                    // Show a warning to the user
+                    LogUtils.Warning("");
+                    LogUtils.Warning("-------------------------------");
+                    LogUtils.Warning("| Database will be rebuilt.    |");
+                    LogUtils.Warning("| ALL DATA WILL BE LOST!       |");
+                    LogUtils.Warning("-------------------------------");
 
-                LogUtils.Info("Process will continue in " + waitSeconds);
-
-                while (Console.In != null && waitSeconds > 0) {
-                    // Sleep the thread for a second, to count down once a second
-                    Thread.Sleep(1000);
-
-                    // Check whether a key is pressed by the user
-                    if (Console.KeyAvailable) {
-                        // Show a warning to the user
-                        LogUtils.Warning("");
-                        LogUtils.Warning("-------------------------------");
-                        LogUtils.Warning("| Database will be rebuilt.    |");
-                        LogUtils.Warning("| ALL DATA WILL BE LOST!       |");
-                        LogUtils.Warning("-------------------------------");
-
-                        // Set the database reset flag, and break the waiting loop
-                        config.DatabaseReset = true;
-                        break;
-                    }
-
-                    // Replace
-                    Console.CursorLeft--;
-                    waitSeconds--;
-                    Console.Write(waitSeconds);
+                    // Set the database reset flag, and break the waiting loop
+                    config.DatabaseReset = true;
                 }
-
-                // Show a message when the database won't rebuilt
-                if (!config.DatabaseReset)
-                    LogUtils.Info("\nDatabase will NOT be rebuilt.");
             }
 
             // Set whether to exit the application after the database is reset
@@ -72,6 +53,43 @@ namespace hhs_p6_webshop_project.App.Config {
                 // Set the exit flag
                 config.DatabaseExitAfterReset = true;
             }
+        }
+
+        /// <summary>
+        /// Ask the user to press a key.
+        ///
+        /// Note: False is also returned if no input stream (for key presses) is available.
+        /// </summary>
+        /// <param name="seconds">Number of seconds to allow the user to press a key.</param>
+        /// <returns>True if a key was pressed within the specified time, false if not.</returns>
+        private static bool AskUserPressKey(int seconds) {
+            // Make sure an input stream is available
+            if (Console.In == null)
+                return false;
+
+            // Show a status message
+            Console.Write("Continuing in " + seconds + "...");
+            Console.CursorLeft -= 3;
+
+            // Loop until the number of seconds is passed
+            while (seconds > 0) {
+                // Sleep the thread for a second, to count down once a second
+                Thread.Sleep(1000);
+
+                // Check whether a key is pressed by the user
+                if (Console.KeyAvailable)
+                    return true;
+
+                // Update the time
+                seconds--;
+
+                // Update the time in the console
+                Console.CursorLeft--;
+                Console.Write(seconds);
+            }
+
+            // No key seems to have been pressed, return false
+            return false;
         }
     }
 }
