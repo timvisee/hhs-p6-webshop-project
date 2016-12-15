@@ -21,9 +21,10 @@
             "version": "1.0.0-preview2-final",
             "type": "build"
         },
-        "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.1.0",
+      "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.1.0",
         "Microsoft.Extensions.Configuration.Json": "1.1.0",
         "Microsoft.Extensions.Configuration.UserSecrets": "1.1.0",
+      "Microsoft.Extensions.DependencyInjection": "1.1.0",
         "Microsoft.Extensions.Logging": "1.1.0",
         "Microsoft.Extensions.Logging.Console": "1.1.0",
         "Microsoft.Extensions.Logging.Debug": "1.1.0",
@@ -33,10 +34,11 @@
             "version": "1.0.0-preview2-final",
             "type": "build"
         },
-        "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": {
-            "version": "1.0.0-preview2-final",
-            "type": "build"
-        }
+      "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": {
+        "version": "1.0.0-preview2-final",
+        "type": "build"
+      },
+      "SparkPostDotNet": "0.1.0-*"
     },
     "tools": {
         "Microsoft.AspNetCore.Razor.Tools": {
@@ -63,13 +65,13 @@
         }
     },
     "frameworks": {
-        "netcoreapp1.0": {
-            "imports": [
-                "dotnet5.6",
-                "dnxcore50",
-                "portable-net45+win8"
-            ]
-        }
+      "netcoreapp1.0": {
+        "imports": [
+          "dotnet5.6",
+          "dnxcore50",
+          "portable-net45+win8"
+        ]
+      }
     },
     "buildOptions": {
         "debugType": "portable",
