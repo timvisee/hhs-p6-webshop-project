@@ -13,10 +13,9 @@ dotnet build ./hhs-p6-webshop-project/project.json
 
 # Run the project to set up the test database
 log "Running project to set up the initial database..."
-#cd hhs-p6-webshop-project
-#dotnet run -- --force-database-initialization --exit-after-initialization
-#cd ..
-./hhs-p6-webshop-project/bin/Debug/netcoreapp1.0/ubuntu.14.04-x64/hhs-p6-webshop-project --force-database-initialization --exit-after-initialization
+cd hhs-p6-webshop-project
+dotnet run -- --force-database-initialization --exit-after-initialization
+cd ..
 
 # Build finished
 log "Build finished."
