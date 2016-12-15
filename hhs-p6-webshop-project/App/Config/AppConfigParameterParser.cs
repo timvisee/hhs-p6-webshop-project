@@ -67,7 +67,7 @@ namespace hhs_p6_webshop_project.App.Config {
 
             // Show a status message
             Console.Write("Continuing in " + seconds + "...");
-            Console.CursorLeft -= 4;
+            Console.CursorLeft = Math.Max(Console.CursorLeft - 4, 0);
 
             // Loop until the number of seconds is passed
             while (seconds > 0) {
@@ -83,7 +83,7 @@ namespace hhs_p6_webshop_project.App.Config {
 
                 // Update the time in the console
                 Console.Write(seconds);
-                Console.CursorLeft--;
+                Console.CursorLeft = Math.Max(Console.CursorLeft - 1, 0);
             }
 
             // Remove the timer
