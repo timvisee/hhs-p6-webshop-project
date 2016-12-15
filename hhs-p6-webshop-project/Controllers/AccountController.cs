@@ -39,8 +39,13 @@ namespace hhs_p6_webshop_project.Controllers {
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Login(string returnUrl = null) {
-            ViewData["ReturnUrl"] = returnUrl;
-            return View();
+            if (User.Identity.IsAuthenticated) {
+                return RedirectToAction("Index", "Home");
+            }
+            else {
+                ViewData["ReturnUrl"] = returnUrl;
+                return View();
+            }
         }
 
         //
@@ -62,13 +67,12 @@ namespace hhs_p6_webshop_project.Controllers {
                     return RedirectToLocal(returnUrl);
                 }
                 if (result.RequiresTwoFactor) {
-                    return RedirectToAction(nameof(SendCode), new {ReturnUrl = returnUrl, RememberMe = model.RememberMe});
+                    return RedirectToAction(nameof(SendCode), new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 }
                 if (result.IsLockedOut) {
                     _logger.LogWarning(2, "User account locked out.");
                     return View("Lockout");
-                }
-                else {
+                } else {
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                     return View(model);
                 }
@@ -95,7 +99,7 @@ namespace hhs_p6_webshop_project.Controllers {
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null) {
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid) {
-                var user = new ApplicationUser {UserName = model.Email, Email = model.Email};
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded) {
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=532713
@@ -132,7 +136,7 @@ namespace hhs_p6_webshop_project.Controllers {
         [ValidateAntiForgeryToken]
         public IActionResult ExternalLogin(string provider, string returnUrl = null) {
             // Request a redirect to the external login provider.
-            var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new {ReturnUrl = returnUrl});
+            var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl });
             var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
             return Challenge(properties, provider);
         }
@@ -159,17 +163,16 @@ namespace hhs_p6_webshop_project.Controllers {
                 return RedirectToLocal(returnUrl);
             }
             if (result.RequiresTwoFactor) {
-                return RedirectToAction(nameof(SendCode), new {ReturnUrl = returnUrl});
+                return RedirectToAction(nameof(SendCode), new { ReturnUrl = returnUrl });
             }
             if (result.IsLockedOut) {
                 return View("Lockout");
-            }
-            else {
+            } else {
                 // If the user does not have an account, then ask the user to create an account.
                 ViewData["ReturnUrl"] = returnUrl;
                 ViewData["LoginProvider"] = info.LoginProvider;
                 var email = info.Principal.FindFirstValue(ClaimTypes.Email);
-                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel {Email = email});
+                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = email });
             }
         }
 
@@ -186,7 +189,7 @@ namespace hhs_p6_webshop_project.Controllers {
                 if (info == null) {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser {UserName = model.Email, Email = model.Email};
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded) {
                     result = await _userManager.AddLoginAsync(user, info);
@@ -309,9 +312,9 @@ namespace hhs_p6_webshop_project.Controllers {
             }
             var userFactors = await _userManager.GetValidTwoFactorProvidersAsync(user);
             var factorOptions =
-                userFactors.Select(purpose => new SelectListItem {Text = purpose, Value = purpose}).ToList();
+                userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
             return
-                View(new SendCodeViewModel {Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe});
+                View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
         //
@@ -338,13 +341,12 @@ namespace hhs_p6_webshop_project.Controllers {
             var message = "Your security code is: " + code;
             if (model.SelectedProvider == "Email") {
                 await _emailSender.SendEmailAsync(await _userManager.GetEmailAsync(user), "Security Code", message);
-            }
-            else if (model.SelectedProvider == "Phone") {
+            } else if (model.SelectedProvider == "Phone") {
                 await _smsSender.SendSmsAsync(await _userManager.GetPhoneNumberAsync(user), message);
             }
 
             return RedirectToAction(nameof(VerifyCode),
-                new {Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe});
+                new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
         }
 
         //
@@ -357,7 +359,7 @@ namespace hhs_p6_webshop_project.Controllers {
             if (user == null) {
                 return View("Error");
             }
-            return View(new VerifyCodeViewModel {Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe});
+            return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
         //
@@ -383,8 +385,7 @@ namespace hhs_p6_webshop_project.Controllers {
             if (result.IsLockedOut) {
                 _logger.LogWarning(7, "User account locked out.");
                 return View("Lockout");
-            }
-            else {
+            } else {
                 ModelState.AddModelError(string.Empty, "Invalid code.");
                 return View(model);
             }
@@ -405,8 +406,7 @@ namespace hhs_p6_webshop_project.Controllers {
         private IActionResult RedirectToLocal(string returnUrl) {
             if (Url.IsLocalUrl(returnUrl)) {
                 return Redirect(returnUrl);
-            }
-            else {
+            } else {
                 return RedirectToAction(nameof(HomeController.Index), "Home");
             }
         }
