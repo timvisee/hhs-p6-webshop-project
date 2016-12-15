@@ -11,5 +11,9 @@ log() {
 log "Building project..."
 dotnet build ./hhs-p6-webshop-project/project.json
 
+# Run the project to set up the test database
+log "Running project to set up the initial database..."
+dotnet run -- --force-database-initialization --exit-after-initialization
+
 # Build finished
 log "Build finished."
