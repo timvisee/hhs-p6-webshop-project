@@ -19,10 +19,6 @@ log "Setting up NPM repository..."
 sudo apt-get install python-software-properties
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 
-# Update all repositories
-log "Updating all repositories..."
-sudo apt-get update
-
 # Install dotnet
 log "Installing dotnet..."
 sudo apt-get -y install dotnet-dev-1.0.0-preview2.1-003177
