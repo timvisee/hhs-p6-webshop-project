@@ -26,8 +26,7 @@ namespace hhs_p6_webshop_project.App.Config {
             } else if(args.All(e => e != "--always-skip-initialization")) {
                 // Ask the user to reset the database
                 // TODO: Move this logic to another class. Only parse arguments here.
-                LogUtils.Info("The following prompt can be disabled using the --always-skip-initialization argument.\n");
-                LogUtils.Info("Press any key to reset the database...");
+                LogUtils.Info("Press any key to reset the database... (disable using --always-skip-initialization argument)");
 
                 // Ask the user to press a key if the database should be reset
                 // TODO: Move the number of seconds to a constant.
