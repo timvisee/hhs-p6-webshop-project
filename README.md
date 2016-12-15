@@ -14,16 +14,14 @@ If building and/or running the project fails, you may need to install the follow
 * If you get a HTTP 500 error, you can try the following command:
     `dotnet ef database update`
 
-##Commandline Options
+## Commandline Options
 The following command line arguments are supported:
 
-* --always-skip-initialization
+* `--always-skip-initialization`
     * Always skips the 3 second grace period in which the database can be reset
-	
-* --force-database-initialization
+* `--force-database-initialization`
     * Forces database initialization every time
-	
-* --exit-after-initialization
+* `--exit-after-initialization`
     * Exits the application after the database has been initialized
 
 	
