@@ -1,4 +1,4 @@
-[![Build status on Circle CI](https://img.shields.io/circleci/token/b86ed6918f78b8ae37292aabbcd0afcd381ff7a9/project/github/timvisee/hhs-p6-webshop-project.svg)](https://circleci.com/gh/timvisee/hhs-p6-webshop-project)
+[![Build status on Circle CI](https://img.shields.io/circleci/token/b86ed6918f78b8ae37292aabbcd0afcd381ff7a9/project/github/timvisee/hhs-p6-webshop-project/master.svg)](https://circleci.com/gh/timvisee/hhs-p6-webshop-project)
 
 # HHS P6 Webshop Project
 C#/ASP.NET webshop collaboration project for college (HHS) period 6.
@@ -30,4 +30,4 @@ The project is currently being built automatically using the CI services in the 
 
 |Platform|Build Status|Service||
 |:---|:---:|:---|---|
-|Linux|[![Build status on Circle CI](https://img.shields.io/circleci/token/b86ed6918f78b8ae37292aabbcd0afcd381ff7a9/project/github/timvisee/hhs-p6-webshop-project.svg)](https://circleci.com/gh/timvisee/hhs-p6-webshop-project)|Travis CI|[View Status (private)](https://circleci.com/gh/timvisee/hhs-p6-webshop-project)|
+|Linux|[![Build status on Circle CI](https://img.shields.io/circleci/token/b86ed6918f78b8ae37292aabbcd0afcd381ff7a9/project/github/timvisee/hhs-p6-webshop-project/master.svg)](https://circleci.com/gh/timvisee/hhs-p6-webshop-project)|Travis CI|[View Status (private)](https://circleci.com/gh/timvisee/hhs-p6-webshop-project)|
