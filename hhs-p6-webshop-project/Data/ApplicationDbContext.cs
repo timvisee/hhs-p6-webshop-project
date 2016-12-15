@@ -9,25 +9,8 @@ using hhs_p6_webshop_project.Models.AppointmentModels;
 
 namespace hhs_p6_webshop_project.Data {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser> {
-        public static bool reset = false;
-
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options) {
-
-            if (reset) {
-#if DEBUG
-                //Reset everything, beun maar werkt
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Resetting database! ALL DATA WILL BE LOST!");
-                Console.ForegroundColor = ConsoleColor.White;
-                Database.EnsureDeleted();
-                Database.EnsureCreated();
-#else
-                Console.WriteLine("Not resetting database, system is running in production mode!");
-#endif
-                reset = false;
-            }
-        }
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder builder) {
             base.OnModelCreating(builder);
