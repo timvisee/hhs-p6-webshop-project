@@ -31,11 +31,6 @@ sudo apt-get install -y nodejs
 log "Installing bower..."
 sudo npm install -g bower
 
-# Install gulp
-log "Installing gulp..."
-sudo npm install -g gulp
-npm install gulp
-
 # Install project dependencies
 log "Installing project dependencies..."
 dotnet restore
