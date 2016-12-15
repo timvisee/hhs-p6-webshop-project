@@ -1,6 +1,6 @@
 {
     "name": "hhs_p6_webshop_project",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "private": true,
     "devDependencies": {
         "gulp": "3.9.1",
