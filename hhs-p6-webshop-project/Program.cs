@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using hhs_p6_webshop_project.Data;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace hhs_p6_webshop_project {
     public class Program {
@@ -16,7 +17,16 @@ namespace hhs_p6_webshop_project {
             Console.ForegroundColor = ConsoleColor.White;
         }
 
-        public static void DebugSettings() {
+        public static void DebugInitialize(bool force = false) {
+            if (force) {
+                DbInitializer.Run = true;
+                Program.Log("-------------------------------");
+                Program.Log("| Forcing database rebuild!    |");
+                Program.Log("| ALL DATA WILL BE LOST!       |");
+                Program.Log("-------------------------------");
+                return;
+            }
+
             Console.WriteLine("This prompt can be disabled by adding --always-skip-initialization as a startup argument.");
             Console.WriteLine("Reset all data sources? Press any key to confirm...");
 
@@ -49,11 +59,18 @@ namespace hhs_p6_webshop_project {
 
         public static void Main(string[] args) {
 
-            bool doNotInitialize = args.Length > 0 && args[0] == "--always-skip-initialization";
+            bool force = args.Any(e => e == "--force-database-initialization");
+            if (force) {
+                //Force database migration
+                DebugInitialize(true);
+                
+            }
 
 #if DEBUG
-            if (!doNotInitialize) {
-                DebugSettings();
+            bool doNotInitialize = args.Length > 0 && args[0] == "--always-skip-initialization";
+            
+            if (!doNotInitialize && !force) {
+                DebugInitialize();
             }
 #endif
 
@@ -63,6 +80,14 @@ namespace hhs_p6_webshop_project {
                 .UseIISIntegration()
                 .UseStartup<Startup>()
                 .Build();
+
+            if (args.Any(e => e == "--exit-after-initialization"))
+            {
+                //Database migration only, so kill the process
+                Console.WriteLine("Only a database reconstruction was requested. Terminating application...");
+                return;
+
+            }
 
             host.Run();
 
