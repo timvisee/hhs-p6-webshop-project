@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using hhs_p6_webshop_project.App.Util;
-using hhs_p6_webshop_project.Data;
 
 namespace hhs_p6_webshop_project.App.Config {
     public static class AppConfigParameterParser {
