@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using hhs_p6_webshop_project.App.Config;
 using hhs_p6_webshop_project.App.Util;
