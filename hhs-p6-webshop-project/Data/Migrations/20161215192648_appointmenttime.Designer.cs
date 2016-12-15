@@ -8,13 +8,14 @@ using hhs_p6_webshop_project.Data;
 namespace hhs_p6_webshop_project.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20161214122306_appointment")]
-    partial class appointment
+    [Migration("20161215192648_appointmenttime")]
+    partial class appointmenttime
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.1.0-rtm-22752");
+                .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("hhs_p6_webshop_project.Models.ApplicationUser", b =>
                 {
@@ -70,6 +71,8 @@ namespace hhs_p6_webshop_project.Data.Migrations
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("AppointmentDateTime");
 
                     b.Property<int?>("AppointmentTimeID");
 

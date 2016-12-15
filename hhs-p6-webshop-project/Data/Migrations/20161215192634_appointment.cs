@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace hhs_p6_webshop_project.Data.Migrations
 {
@@ -20,12 +21,24 @@ namespace hhs_p6_webshop_project.Data.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers");
 
+            migrationBuilder.AlterColumn<int>(
+                name: "Id",
+                table: "AspNetUserClaims",
+                nullable: false)
+                .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            migrationBuilder.AlterColumn<int>(
+                name: "Id",
+                table: "AspNetRoleClaims",
+                nullable: false)
+                .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
             migrationBuilder.CreateTable(
                 name: "AppointmentTime",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     DateTime = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
@@ -38,7 +51,8 @@ namespace hhs_p6_webshop_project.Data.Migrations
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AppointmentDateTime = table.Column<DateTime>(nullable: false),
                     AppointmentTimeID = table.Column<int>(nullable: true),
                     Confirmation = table.Column<bool>(nullable: false),
                     DateMarried = table.Column<DateTime>(nullable: false),
@@ -90,6 +104,16 @@ namespace hhs_p6_webshop_project.Data.Migrations
             migrationBuilder.DropIndex(
                 name: "UserNameIndex",
                 table: "AspNetUsers");
+
+            migrationBuilder.AlterColumn<int>(
+                name: "Id",
+                table: "AspNetUserClaims",
+                nullable: false);
+
+            migrationBuilder.AlterColumn<int>(
+                name: "Id",
+                table: "AspNetRoleClaims",
+                nullable: false);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserRoles_UserId",
