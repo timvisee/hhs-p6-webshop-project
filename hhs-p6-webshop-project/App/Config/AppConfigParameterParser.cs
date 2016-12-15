@@ -23,11 +23,10 @@ namespace hhs_p6_webshop_project.App.Config {
                 // Set the database reset flag
                 config.DatabaseReset = true;
 
-            } else if(!args.Any(e => e == "--always-skip-initialization")) {
-                // TODO: Clean this section up!
-                // TODO: Move this user input section to a separate method.
-
-                LogUtils.Info("This prompt can be disabled using the --always-skip-initialization argument.");
+            } else if(args.All(e => e != "--always-skip-initialization")) {
+                // Ask the user to reset the database
+                // TODO: Move this logic to another class. Only parse arguments here.
+                LogUtils.Info("The following prompt can be disabled using the --always-skip-initialization argument.\n");
                 LogUtils.Info("Press any key to reset the database...");
 
                 // Ask the user to press a key if the database should be reset
@@ -69,7 +68,7 @@ namespace hhs_p6_webshop_project.App.Config {
 
             // Show a status message
             Console.Write("Continuing in " + seconds + "...");
-            Console.CursorLeft -= 3;
+            Console.CursorLeft -= 4;
 
             // Loop until the number of seconds is passed
             while (seconds > 0) {
@@ -84,9 +83,13 @@ namespace hhs_p6_webshop_project.App.Config {
                 seconds--;
 
                 // Update the time in the console
-                Console.CursorLeft--;
                 Console.Write(seconds);
+                Console.CursorLeft--;
             }
+
+            // Remove the timer
+            Console.CursorLeft = 0;
+            Console.WriteLine("No user input received in time.\n");
 
             // No key seems to have been pressed, return false
             return false;
