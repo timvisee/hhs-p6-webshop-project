@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models;
 using hhs_p6_webshop_project.Services;
+using Microsoft.AspNetCore.Diagnostics;
 
 namespace hhs_p6_webshop_project {
     public class Startup {
@@ -61,6 +62,7 @@ namespace hhs_p6_webshop_project {
                 app.UseBrowserLink();
             }
             else {
+                app.UseStatusCodePagesWithRedirects("/Home/Error");
                 app.UseExceptionHandler("/Home/Error");
             }
 
