@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -6,12 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using hhs_p6_webshop_project.Data;
-using hhs_p6_webshop_project.Mail;
 using hhs_p6_webshop_project.Models;
 using hhs_p6_webshop_project.Services;
-using Microsoft.AspNetCore.Diagnostics;
-using SparkPostDotNet;
-using SparkPostDotNet.Core;
 
 namespace hhs_p6_webshop_project {
     public class Startup {
