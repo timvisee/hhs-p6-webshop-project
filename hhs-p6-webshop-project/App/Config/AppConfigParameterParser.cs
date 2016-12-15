@@ -65,6 +65,15 @@ namespace hhs_p6_webshop_project.App.Config {
             if (Console.In == null)
                 return false;
 
+            // Test whether checking if a key is available succeeds
+            try {
+                var keyAvailable = Console.KeyAvailable;
+
+            } catch (System.InvalidOperationException ex) {
+                Console.WriteLine("User input not supported in this mode, skipping...");
+                return false;
+            }
+
             // Show a status message
             Console.Write("Continuing in " + seconds + "...");
             Console.CursorLeft = Math.Max(Console.CursorLeft - 4, 0);
