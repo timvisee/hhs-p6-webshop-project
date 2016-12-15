@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "hhs-p6-webshop-project", "hhs-p6-webshop-project\hhs-p6-webshop-project.xproj", "{53959C5A-6516-418B-9A56-044728A440DD}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SparkPostDotNet", "SparkPostDotNet\SparkPostDotNet.xproj", "{4B79FA65-2693-40DD-B62B-6D0D9C04F949}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{53959C5A-6516-418B-9A56-044728A440DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53959C5A-6516-418B-9A56-044728A440DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53959C5A-6516-418B-9A56-044728A440DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B79FA65-2693-40DD-B62B-6D0D9C04F949}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B79FA65-2693-40DD-B62B-6D0D9C04F949}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B79FA65-2693-40DD-B62B-6D0D9C04F949}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B79FA65-2693-40DD-B62B-6D0D9C04F949}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
