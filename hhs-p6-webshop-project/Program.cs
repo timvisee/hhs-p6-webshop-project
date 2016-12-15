@@ -1,10 +1,27 @@
+using System;
 using System.IO;
 using hhs_p6_webshop_project.App.Config;
+using hhs_p6_webshop_project.App.Util;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 
 namespace hhs_p6_webshop_project {
     public class Program {
+
+        /// <summary>
+        /// Application name.
+        /// </summary>
+        public const String APP_NAME = "Honeymoon Serer";
+
+        /// <summary>
+        /// Application version code.
+        /// </summary>
+        public const String APP_VERSION_NAME = "0.0.1-dev";
+
+        /// <summary>
+        /// Application version code.
+        /// </summary>
+        public const int APP_VERSION_CODE = 1;
 
         /// <summary>
         /// Application configuration.
@@ -22,6 +39,9 @@ namespace hhs_p6_webshop_project {
         /// </summary>
         /// <param name="args">Startup arguments.</param>
         public static void Main(string[] args) {
+            // Show a program initialization message
+            LogUtils.Info("Starting " + APP_NAME + " v" + APP_VERSION_NAME + " (" + APP_VERSION_CODE + ")...");
+
             // Initialize the application configuration
             Program.AppConfig = new AppConfig(true);
 
