@@ -79,8 +79,9 @@ namespace hhs_p6_webshop_project {
             });
 
 #if DEBUG
-            //Seed database if not running in production
-            DbInitializer.Initialize(context);
+            // Seed database if not running in production
+            if(Program.AppConfig.DatabaseReset)
+                DbBuilder.Rebuild(context);
 #endif
         }
     }
