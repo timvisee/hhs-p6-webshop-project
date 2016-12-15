@@ -1,29 +1,21 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
+using hhs_p6_webshop_project.App.Util;
 using hhs_p6_webshop_project.Data;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace hhs_p6_webshop_project {
     public class Program {
-        public static void Log(string text, ConsoleColor color = ConsoleColor.Red)
-        {
-            Console.ForegroundColor = color;
-            Console.WriteLine(text);
-            Console.ForegroundColor = ConsoleColor.White;
-        }
 
         public static void DebugInitialize(bool force = false) {
             if (force) {
                 DbInitializer.Run = true;
-                Program.Log("-------------------------------");
-                Program.Log("| Forcing database rebuild!    |");
-                Program.Log("| ALL DATA WILL BE LOST!       |");
-                Program.Log("-------------------------------");
+                LogUtils.Log("-------------------------------");
+                LogUtils.Log("| Forcing database rebuild!    |");
+                LogUtils.Log("| ALL DATA WILL BE LOST!       |");
+                LogUtils.Log("-------------------------------");
                 return;
             }
 
@@ -41,10 +33,10 @@ namespace hhs_p6_webshop_project {
                 if (Console.KeyAvailable) {
                     DbInitializer.Run = true;
                     Console.WriteLine();
-                    Program.Log("-------------------------------");
-                    Program.Log("| Database will be rebuilt.    |");
-                    Program.Log("| ALL DATA WILL BE LOST!       |");
-                    Program.Log("-------------------------------");
+                    LogUtils.Log("-------------------------------");
+                    LogUtils.Log("| Database will be rebuilt.    |");
+                    LogUtils.Log("| ALL DATA WILL BE LOST!       |");
+                    LogUtils.Log("-------------------------------");
                     break;
                 }
 
@@ -90,8 +82,6 @@ namespace hhs_p6_webshop_project {
             }
 
             host.Run();
-
-
         }
     }
 }
