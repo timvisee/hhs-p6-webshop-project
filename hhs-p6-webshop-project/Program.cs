@@ -78,8 +78,7 @@ namespace hhs_p6_webshop_project {
 
             Console.Write("Process will continue in " + count);
 
-            while (count > 0)
-            {
+            while (Console.In != null && count > 0) {
                 Thread.Sleep(1000);
 
                 if (Console.KeyAvailable) {
