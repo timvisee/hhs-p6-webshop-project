@@ -58,6 +58,12 @@ footer {
     background-color: #fff;
 }
 
+#create_appointment {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
 /*--- Typography ---*/
 button,
 input[type="submit"],
@@ -259,6 +265,14 @@ nav li a.hm-pink-dark:hover {
 .banner-image {
     max-width: 100%;
     margin: 0;
+}
+
+/*--- Create Appointment ---*/
+#create_appointment {
+    height: 450px;
+}
+.create-appointment-part {
+    height: 100%;
 }
 
 /*--- Footer---*/
