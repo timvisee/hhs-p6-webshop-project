@@ -20,7 +20,7 @@ namespace hhs_p6_webshop_project {
             Console.WriteLine("This prompt can be disabled by adding --always-skip-initialization as a startup argument.");
             Console.WriteLine("Reset all data sources? Press any key to confirm...");
 
-            int count = 5;
+            int count = 2;
 
             Console.Write("Process will continue in " + count);
 

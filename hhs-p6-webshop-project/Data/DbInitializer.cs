@@ -26,7 +26,10 @@ namespace hhs_p6_webshop_project.Data
             Program.Log("| ALL DATA WILL BE LOST!                            |");
             Program.Log("-----------------------------------------------------");
 
+
+            Program.Log("Deleting database... (please be patient, this may take up to 20 seconds)", ConsoleColor.White);
             context.Database.EnsureDeleted();
+            Program.Log("Provisioning new database... (please be patient, this may take up to 60 seconds)", ConsoleColor.White);
             context.Database.EnsureCreated();
 
             var user = new ApplicationUser
@@ -34,7 +37,7 @@ namespace hhs_p6_webshop_project.Data
                 Email = "beun@beun.it",
                 NormalizedEmail = "BEUN@BEUN.IT",
                 UserName = "beun@beun.it",
-                NormalizedUserName = "BEUN",
+                NormalizedUserName = "BEUN@BEUN.IT",
                 PhoneNumber = "0906-jemoeder",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
@@ -48,6 +51,8 @@ namespace hhs_p6_webshop_project.Data
 
             var userStore = new UserStore<ApplicationUser>(context);
             var result = userStore.CreateAsync(user);
+
+            result.Wait();
 
             Program.Log("Seed completed!", ConsoleColor.Green);
             
