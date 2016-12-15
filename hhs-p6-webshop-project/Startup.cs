@@ -50,7 +50,7 @@ namespace hhs_p6_webshop_project {
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory) {
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ApplicationDbContext context) {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
@@ -74,6 +74,11 @@ namespace hhs_p6_webshop_project {
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+#if DEBUG
+            //Seed database if not running in production
+            DbInitializer.Initialize(context);
+#endif
         }
     }
 }

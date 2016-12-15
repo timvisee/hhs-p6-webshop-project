@@ -9,21 +9,32 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace hhs_p6_webshop_project {
     public class Program {
-        public static void Main(string[] args) {
-#if DEBUG
+        public static void Log(string text, ConsoleColor color = ConsoleColor.Red)
+        {
+            Console.ForegroundColor = color;
+            Console.WriteLine(text);
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+
+        public static void DebugSettings() {
+            Console.WriteLine("This prompt can be disabled by adding --always-skip-initialization as a startup argument.");
             Console.WriteLine("Reset all data sources? Press any key to confirm...");
 
             int count = 5;
 
             Console.Write("Process will continue in " + count);
 
-            while (count > 0) {
+            while (count > 0)
+            {
                 Thread.Sleep(1000);
 
                 if (Console.KeyAvailable) {
-                    ApplicationDbContext.reset = true;
+                    DbInitializer.Run = true;
                     Console.WriteLine();
-                    Console.WriteLine("Database will be rebuilt.");
+                    Program.Log("-------------------------------");
+                    Program.Log("| Database will be rebuilt.    |");
+                    Program.Log("| ALL DATA WILL BE LOST!       |");
+                    Program.Log("-------------------------------");
                     break;
                 }
 
@@ -32,11 +43,19 @@ namespace hhs_p6_webshop_project {
                 Console.Write(count);
             }
 
-            if (!ApplicationDbContext.reset)
-                Console.WriteLine();
+            if (!DbInitializer.Run)
+                Console.WriteLine("\nDatabase will NOT be rebuilt.");
+        }
 
+        public static void Main(string[] args) {
+
+            bool doNotInitialize = args.Length > 0 && args[0] == "--always-skip-initialization";
+
+#if DEBUG
+            if (!doNotInitialize) {
+                DebugSettings();
+            }
 #endif
-
 
             var host = new WebHostBuilder()
                 .UseKestrel()
@@ -46,6 +65,8 @@ namespace hhs_p6_webshop_project {
                 .Build();
 
             host.Run();
+
+
         }
     }
 }
