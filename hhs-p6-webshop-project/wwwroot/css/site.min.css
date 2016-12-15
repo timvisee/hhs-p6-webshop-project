@@ -60,7 +60,7 @@ footer {
 
 #create_appointment {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1150px;
     margin: 0 auto;
 }
 
@@ -273,6 +273,7 @@ nav li a.hm-pink-dark:hover {
 }
 .create-appointment-part {
     height: 100%;
+    padding: 40px;
 }
 
 /*--- Footer---*/
