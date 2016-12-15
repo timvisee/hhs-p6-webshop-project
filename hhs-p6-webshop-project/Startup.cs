@@ -24,14 +24,14 @@ namespace hhs_p6_webshop_project {
             }
 
             builder.AddEnvironmentVariables();
-            Program.Configuration = builder.Build();
+            Program.FileConfig = builder.Build();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlServer(Program.Configuration.GetConnectionString("DefaultConnection")));
+                    options.UseSqlServer(Program.FileConfig.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -53,7 +53,7 @@ namespace hhs_p6_webshop_project {
             //Save reference to the mail client
             //MailClient.Client = serviceProvider.GetService<SparkPostClient>();
 
-            loggerFactory.AddConsole(Program.Configuration.GetSection("Logging"));
+            loggerFactory.AddConsole(Program.FileConfig.GetSection("Logging"));
             loggerFactory.AddDebug();
 
             if (env.IsDevelopment()) {
