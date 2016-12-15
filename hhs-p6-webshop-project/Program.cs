@@ -13,7 +13,7 @@ namespace hhs_p6_webshop_project {
         /// <summary>
         /// Base application configuration.
         /// </summary>
-        public static IConfigurationRoot Configuration { get; set; }
+        public static IConfigurationRoot FileConfig { get; set; }
 
         /// <summary>
         /// Main application entry point.

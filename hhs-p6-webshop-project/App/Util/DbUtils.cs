@@ -8,7 +8,7 @@ namespace hhs_p6_webshop_project.App.Util {
         /// </summary>
         /// <returns>Connection string that should be used for the database connection.</returns>
         public static String getConnectionString() {
-            // return Program.Configuration.GetConnectionString("DefaultConnection");
+            // return Program.FileConfig.GetConnectionString("DefaultConnection");
             throw new Exception("Connection string fetching not implemented yet.");
         }
 

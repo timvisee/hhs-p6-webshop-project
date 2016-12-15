@@ -23,14 +23,14 @@ namespace hhs_p6_webshop_project {
             }
 
             builder.AddEnvironmentVariables();
-            Program.Configuration = builder.Build();
+            Program.FileConfig = builder.Build();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlServer(Program.Configuration.GetConnectionString("DefaultConnection")));
+                    options.UseSqlServer(Program.FileConfig.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -46,7 +46,7 @@ namespace hhs_p6_webshop_project {
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ApplicationDbContext context) {
 
-            loggerFactory.AddConsole(Program.Configuration.GetSection("Logging"));
+            loggerFactory.AddConsole(Program.FileConfig.GetSection("Logging"));
             loggerFactory.AddDebug();
 
             if (env.IsDevelopment()) {
