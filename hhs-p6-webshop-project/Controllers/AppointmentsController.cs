@@ -59,9 +59,13 @@ namespace hhs_p6_webshop_project.Controllers {
             if (ModelState.IsValid) {
                 _context.Add(appointment);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Thanks");
             }
             return View(appointment);
+        }
+
+        public IActionResult Thanks() {
+            return View();
         }
 
         // GET: Appointments/Edit/5
