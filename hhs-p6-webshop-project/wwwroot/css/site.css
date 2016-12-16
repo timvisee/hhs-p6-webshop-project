@@ -213,8 +213,8 @@ input[type="checkbox"] {
     cursor: pointer;
     -moz-appearance: none;
     -webkit-appearance: none;
-    -o-appearance: none;
-    overflow: none;
+    -o-appearance: hidden;
+    overflow: hidden;
 }
 
     input[type="checkbox"]:checked {
