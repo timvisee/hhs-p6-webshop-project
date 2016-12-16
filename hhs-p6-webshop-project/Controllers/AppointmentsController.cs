@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using hhs_p6_webshop_project.Data;
-using hhs_p6_webshop_project.Mail;
 using hhs_p6_webshop_project.Models.AppointmentModels;
 
 namespace hhs_p6_webshop_project.Controllers {
@@ -58,7 +57,7 @@ namespace hhs_p6_webshop_project.Controllers {
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,Confirmation,DateMarried,AppointmentDateTime,Mail,Name,Phone")] Appointment appointment) {
             if (ModelState.IsValid) {
-                MailClient.SendAppointmentEmail(appointment.Name, appointment.Mail, appointment.AppointmentDateTime, "het Armani Pak");
+                Beun.Mail.MailClient.SendAppointmentEmail(appointment.Name, appointment.Mail, appointment.AppointmentDateTime, "het Armani Pak");
 
                 _context.Add(appointment);
 

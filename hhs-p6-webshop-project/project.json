@@ -1,6 +1,7 @@
 {
     "userSecretsId": "aspnet-hhs_p6_webshop_project-0799fe3e-6eaf-4c5f-b40e-7c6bfd5dfa9a",
     "dependencies": {
+      "Beun.Mail": "1.0.0.0",
       "Microsoft.AspNetCore.Authentication.Cookies": "1.1.0",
       "Microsoft.AspNetCore.Diagnostics": "1.1.0",
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "1.1.0",
@@ -37,9 +38,7 @@
       "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": {
         "version": "1.0.0-preview2-final",
         "type": "build"
-      },
-      "SparkPostDotNet": "0.1.0-*"
-    },
+      }   },
     "tools": {
         "Microsoft.AspNetCore.Razor.Tools": {
             "version": "1.0.0-preview2-final",
