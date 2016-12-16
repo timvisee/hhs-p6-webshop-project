@@ -13,7 +13,8 @@ namespace hhs_p6_webshop_project.Data.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.1.0-rtm-22752");
+                .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("hhs_p6_webshop_project.Models.ApplicationUser", b =>
                 {
@@ -69,6 +70,8 @@ namespace hhs_p6_webshop_project.Data.Migrations
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("AppointmentDateTime");
 
                     b.Property<int?>("AppointmentTimeID");
 

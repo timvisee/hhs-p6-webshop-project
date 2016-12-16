@@ -24,7 +24,8 @@
     var bannerPath = "/images/banner.png";
 
     // Set the banner URL from the view data
-    if (ViewData.ContainsKey("BannerPath")) {
+    if (ViewData.ContainsKey("BannerPath"))
+    {
         bannerPath = ViewData["BannerPath"].ToString();
     }
 
@@ -32,15 +33,17 @@
     var bodyClasses = "";
 
     // Determine whether the layout contains a banner, add the proper body class accordingly
-    if (showBanner) {
+    if (showBanner)
+    {
         bodyClasses += "layout-with-banner";
     }
 }
 
 <body class="@bodyClasses">
 
-    @if (User.Identity.IsAuthenticated) {
-    @Html.Partial("_AdminBar")
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.Partial("_AdminBar")
     }
 
     <header>
@@ -50,8 +53,9 @@
                 <a href="#" id="choice_website" class="hm-pink-dark-text active">Website</a>
                 <a href="#" id="choice_webshop" class="hm-pink-dark-text">Webshop</a>
                 -->
-                @if (!User.Identity.IsAuthenticated) {
-                <a asp-controller="Account" asp-action="Login" class="hm-pink-dark-text">Inloggen</a>
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <a asp-controller="Account" asp-action="Login" class="hm-pink-dark-text">Inloggen</a>
                 }
             </div>
             <div id="header_contact">
@@ -82,10 +86,9 @@
                     <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Bruid", "Index", "Home")</li>
                     <li>@Html.ActionLink("Bruidegom", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Pasafspraak", "Create", "Appointments")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>
-                        <a class="hm-pink-dark make-appointment white-text" href="#">Afspraak maken</a>
+                        <a asp-controller="Appointments" asp-action="Create" class="hm-pink-dark make-appointment white-text">Afspraak maken</a>
                     </li>
                 </ul>
             </nav>
@@ -94,8 +97,9 @@
     <div id="main_content" class="container body-content">
 
         @* Banner image *@
-        @if (showBanner) {
-        <img class="banner-image" src="@bannerPath" alt="banner" />
+        @if (showBanner)
+        {
+            <img class="banner-image" src="@bannerPath" alt="banner" />
         }
 
         @* Render the actual page body *@
@@ -105,12 +109,14 @@
 
     <footer class="hm-pink-light">
         <div class="row" id="footer_bottom">
-            <div class="social-box text-center col-sm-12 white-text hm-pink-dark">
-                <span class="bg-text">Afspraak</span>
-                <div class="front-text">
-                    Maak een<br />pasafspraak
+            <a asp-controller="Appointments" asp-action="Create">
+                <div class="social-box text-center col-sm-12 white-text hm-pink-dark">
+                    <span class="bg-text">Afspraak</span>
+                    <div class="front-text">
+                        Maak een<br />pasafspraak
+                    </div>
                 </div>
-            </div>
+            </a>
             <div class="social-box text-center col-sm-12 white-text hm-pink-dark">
                 <span class="bg-text">Social</span>
                 <div class="front-text">Volg ons</div>

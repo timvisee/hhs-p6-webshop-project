@@ -10,9 +10,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using hhs_p6_webshop_project.Data;
+using hhs_p6_webshop_project.Mail;
 using hhs_p6_webshop_project.Models;
 using hhs_p6_webshop_project.Services;
 using Microsoft.AspNetCore.Diagnostics;
+using SparkPostDotNet;
+using SparkPostDotNet.Core;
 
 namespace hhs_p6_webshop_project {
     public class Startup {
@@ -45,13 +48,19 @@ namespace hhs_p6_webshop_project {
 
             services.AddMvc();
 
+            //Add support for SparkPost Transactional Email Service
+            //services.AddSparkPost();
+
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ApplicationDbContext context) {
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ApplicationDbContext context, IServiceProvider serviceProvider) {
+
+            //Save reference to the mail client
+            //MailClient.Client = serviceProvider.GetService<SparkPostClient>();
 
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();

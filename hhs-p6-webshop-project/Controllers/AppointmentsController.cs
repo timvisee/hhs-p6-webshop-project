@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using hhs_p6_webshop_project.Data;
+using hhs_p6_webshop_project.Mail;
 using hhs_p6_webshop_project.Models.AppointmentModels;
 
 namespace hhs_p6_webshop_project.Controllers {
@@ -55,9 +56,14 @@ namespace hhs_p6_webshop_project.Controllers {
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Confirmation,DateMarried,Mail,Name,Phone")] Appointment appointment) {
+        public async Task<IActionResult> Create([Bind("ID,Confirmation,DateMarried,AppointmentDateTime,Mail,Name,Phone")] Appointment appointment) {
             if (ModelState.IsValid) {
+                MailClient.SendAppointmentEmail(appointment.Name, appointment.Mail, appointment.AppointmentDateTime, "het Armani Pak");
+
                 _context.Add(appointment);
+
+                
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Thanks");
             }
@@ -92,7 +98,7 @@ namespace hhs_p6_webshop_project.Controllers {
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Confirmation,DateMarried,Mail,Name,Phone")] Appointment appointment) {
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Confirmation,DateMarried,AppointmentDateTime,Mail,Name,Phone")] Appointment appointment) {
             if (id != appointment.ID) {
                 return NotFound();
             }
