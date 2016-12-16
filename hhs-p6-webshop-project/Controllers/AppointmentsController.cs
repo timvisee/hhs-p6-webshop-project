@@ -55,7 +55,7 @@ namespace hhs_p6_webshop_project.Controllers {
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Confirmation,DateMarried,Mail,Name,Phone")] Appointment appointment) {
+        public async Task<IActionResult> Create([Bind("ID,Confirmation,DateMarried,AppointmentDateTime,Mail,Name,Phone")] Appointment appointment) {
             if (ModelState.IsValid) {
                 Beun.Mail.MailClient.SendAppointmentEmail(appointment.Name, appointment.Mail, DateTime.Now, "het Armani Pak");
 
@@ -97,7 +97,7 @@ namespace hhs_p6_webshop_project.Controllers {
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Confirmation,DateMarried,Mail,Name,Phone")] Appointment appointment) {
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Confirmation,DateMarried,AppointmentDateTime,Mail,Name,Phone")] Appointment appointment) {
             if (id != appointment.ID) {
                 return NotFound();
             }
