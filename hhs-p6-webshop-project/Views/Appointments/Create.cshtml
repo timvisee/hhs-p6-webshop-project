@@ -13,77 +13,80 @@
 
 <form asp-action="Create">
     <div class="row" id="create_appointment">
-        <div class="col-sm-12 col-md-7 box-shadow">
-            <div class="create-appointment-part col-md-4 col-sm-12">
+        <div class="appiontment-wrapper">
+            <div class="col-sm-12 col-md-7 box-shadow appointment-form">
+                <div class="create-appointment-part col-md-3 col-sm-12">
 
-            </div>
-            <div class="create-appointment-part col-md-8 col-sm-12">
-                <h3>Vul hier jouw gegevens in</h3>
-                <div class="form-horizontal">
+                </div>
+                <div class="create-appointment-part col-md-9 col-sm-12">
+                    <h3>Vul hier jouw gegevens in</h3>
+                    <div class="form-horizontal">
 
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group">
-                        <label asp-for="DateMarried" class="col-md-12 control-label"></label>
-                        <div class="col-md-12">
-                            <input asp-for="DateMarried" type="date" class="form-control" />
-                            <span asp-validation-for="DateMarried" class="text-danger" />
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="DateMarried" class="col-md-12 control-label"></label>
+                            <div class="col-md-12">
+                                <input asp-for="DateMarried" type="date" class="form-control" />
+                                <span asp-validation-for="DateMarried" class="text-danger" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Mail" class="col-md-12 control-label"></label>
-                        <div class="col-md-12">
-                            <input asp-for="Mail" type="email" class="form-control" />
-                            <span asp-validation-for="Mail" class="text-danger" />
+                        <div class="form-group">
+                            <label asp-for="Mail" class="col-md-12 control-label"></label>
+                            <div class="col-md-12">
+                                <input asp-for="Mail" type="email" class="form-control" />
+                                <span asp-validation-for="Mail" class="text-danger" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Name" class="col-md-12 control-label"></label>
-                        <div class="col-md-12">
-                            <input asp-for="Name" type="text" class="form-control" />
-                            <span asp-validation-for="Name" class="text-danger" />
+                        <div class="form-group">
+                            <label asp-for="Name" class="col-md-12 control-label"></label>
+                            <div class="col-md-12">
+                                <input asp-for="Name" type="text" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Phone" class="col-md-12 control-label"></label>
-                        <div class="col-md-12">
-                            <input asp-for="Phone" type="tel" class="form-control" />
-                            <span asp-validation-for="Phone" class="text-danger" />
+                        <div class="form-group">
+                            <label asp-for="Phone" class="col-md-12 control-label"></label>
+                            <div class="col-md-12">
+                                <input asp-for="Phone" type="tel" class="form-control" />
+                                <span asp-validation-for="Phone" class="text-danger" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <input type="checkbox" class="form-control" />
-                        Ja, ik wil me graag aanmelden voor de inspirerende nieuwsbrief van Honeymoon Shop
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-12">
-                            <input type="submit" value="Aanmaken" class="btn btn-default" />
+                        <div class="form-group">
+                            <div class="col-md-1">
+                                <input type="checkbox" class="form-control" />
+                            </div>
+                            <div class="col-md-11">
+                                Ja, ik wil me graag aanmelden voor de inspirerende nieuwsbrief van Honeymoon Shop
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <input type="submit" value="Aanmaken" class="btn btn-default" />
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="create-appointment-part col-md-5 col-sm-12 hm-pink-dark white-text">
-            <h3>Selecteer een datum:</h3>
-            <div class="selected-time hm-pink">
-                DO 15 SEPTEMBER 2016 OM 09:30 U
-            </div>
-            <p>
-                Vul je persoonlijke gegevens in om de pasafspraak compleet te maken.
-            </p>
+            <div class="create-appointment-part col-md-5 col-sm-12 hm-pink-dark white-text">
+                <h3>Selecteer een datum:</h3>
+                <p>
+                    Vul je persoonlijke gegevens in om de pasafspraak compleet te maken.
+                </p>
 
-            <div id="calendar">
+                <div id="calendar">
 
-            </div>
+                </div>
+                <input asp-for="AppointmentDateTime" id="date_input" type="datetime" class="form-control" />
 
-            <div class="form-group">
-                <label asp-for="AppointmentDateTime" class="col-md-12 control-label"></label>
-                <div class="col-md-12">
-                    <input asp-for="AppointmentDateTime" type="datetime-local" class="form-control" />
-                    <span asp-validation-for="AppointmentDateTime" class="text-danger" />
+                <p class="selected-time-title">
+                    Je geselecteerde datum is:
+                </p>
+
+                <div class="selected-time">
+                    &nbsp;
                 </div>
             </div>
-
         </div>
     </div>
 </form>
