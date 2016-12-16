@@ -13,7 +13,7 @@ dotnet build ./hhs-p6-webshop-project/project.json
 rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
 
 # Run the project to set up the test database, and validate the exit code
-log "Running project to set up the initial database..."
+log "Running project to set up the initial database...\n$ app --force-database-initialization --exit-after-initialization"
 cd hhs-p6-webshop-project
 
 dotnet run -- --force-database-initialization --exit-after-initialization
