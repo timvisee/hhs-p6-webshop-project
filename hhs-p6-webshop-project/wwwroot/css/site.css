@@ -170,19 +170,26 @@ input[type="reset"]:active,
     }
 
 input[type="checkbox"] {
+    background-color: #f0597c;
     border-radius: 0px;
-    border:2px solid #f0597c;
-    width:15px;
-    height:15px;
+    border: 2px solid #f0597c;
+    width: 15px;
+    height: 15px;
     cursor: pointer;
     -moz-appearance: none;
     -webkit-appearance: none;
     -o-appearance: none;
 }
 
-input[type="checkbox"]:checked{
-    background-color:#f0597c;
-}
+    input[type="checkbox"]:checked {
+        background: url('../images/checkbox.png');
+        background-size: contain;
+        background-color: #f0597c;
+    }
+
+    input[type="checkbox"]:not(:checked) {
+        background-color: #f0597c;
+    }
 
 .form-control:focus {
     border-color: #F0597C;
