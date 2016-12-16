@@ -580,10 +580,16 @@ nav li {
     line-height: 50px;
 }
 
+.ui-datepicker-calendar td span,
 .ui-datepicker-calendar td a {
     color: #fff;
     line-height: 30px;
     font-family: nexa-regular;
+}
+
+.ui-datepicker-calendar td span {
+    cursor: default;
+    opacity: 0.6;
 }
 
 .ui-state-active {

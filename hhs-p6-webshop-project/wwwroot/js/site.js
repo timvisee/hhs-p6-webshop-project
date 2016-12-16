@@ -10,9 +10,11 @@ $(document).ready(function () {
         });
     });
 
-    var monthNames = ["JANUARI", "FEBRUARI", "MAART", "APRIL", "MEI", "JUNI",
-  "JULI", "AUGUSTUS", "SEPTEMBER", "OKTOBER", "NOVEMBER", "DECEMBER"
-    ];
+    /**
+     * Initialize some variables for the datepicker
+     */
+    var monthNames = ["JANUARI", "FEBRUARI", "MAART", "APRIL", "MEI", "JUNI", "JULI", "AUGUSTUS", "SEPTEMBER", "OKTOBER", "NOVEMBER", "DECEMBER"],
+    dateToday = new Date();
 
     $("#calendar").datepicker({
         prevText: "<",
@@ -25,6 +27,7 @@ $(document).ready(function () {
             $('#date_input').val(inputDate);
             $(".selected-time").html(showDate);
         },
+        minDate: dateToday
     });
 
 
