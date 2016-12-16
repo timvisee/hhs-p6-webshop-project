@@ -1,12 +1,12 @@
 @model RegisterViewModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Nieuwe admin";
 }
 
 <h2>@ViewData["Title"].</h2>
 
 <form asp-controller="Account" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
-  <h4>Create a new account.</h4>
+  <h4>Cree&euml;r nieuwe admin</h4>
   <hr/>
   <div asp-validation-summary="All" class="text-danger"></div>
   <div class="form-group">

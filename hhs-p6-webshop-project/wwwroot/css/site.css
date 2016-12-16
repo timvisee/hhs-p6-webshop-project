@@ -179,6 +179,7 @@ input[type="checkbox"] {
     -moz-appearance: none;
     -webkit-appearance: none;
     -o-appearance: none;
+    overflow:none;
 }
 
     input[type="checkbox"]:checked {
@@ -187,9 +188,13 @@ input[type="checkbox"] {
         background-color: #f0597c;
     }
 
-    input[type="checkbox"]:not(:checked) {
-        background-color: #f0597c;
-    }
+input[type=checkbox][disabled] {
+    cursor: default;
+}
+
+input[type="checkbox"]:not(:checked) {
+    background: transparent;
+}
 
 .form-control:focus {
     border-color: #F0597C;
@@ -198,9 +203,9 @@ input[type="checkbox"] {
 }
 
 a, button, input {
-    transition: 0.4s;
-    -webkit-transition: 0.4s;
-    -moz-transition: 0.4s;
+    transition: 0.25s;
+    -webkit-transition: 0.25s;
+    -moz-transition: 0.25s;
 }
 
 /*--- Admin bar ---*/
