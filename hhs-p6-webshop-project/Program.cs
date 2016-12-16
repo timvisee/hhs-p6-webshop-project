@@ -3,7 +3,6 @@ using System.IO;
 using hhs_p6_webshop_project.App.Config;
 using hhs_p6_webshop_project.App.Util;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore.Query.Internal;
 using Microsoft.Extensions.Configuration;
 
 namespace hhs_p6_webshop_project {
@@ -44,7 +43,7 @@ namespace hhs_p6_webshop_project {
             LogUtils.Info("Starting " + APP_NAME + " v" + APP_VERSION_NAME + " (" + APP_VERSION_CODE + ")...");
 
 #if DEBUG
-            //Enable development environment and debugging features
+            // Enable development environment and debugging features
             Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Development");
             LogUtils.Info("Enabled development environment.");
 #endif
