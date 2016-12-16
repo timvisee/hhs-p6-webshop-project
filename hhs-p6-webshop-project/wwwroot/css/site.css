@@ -78,6 +78,39 @@ input.form-control[disabled] {
     cursor: default;
 }
 
+input[type="email"], input[type="number"], input[type="password"],
+input[type="tel"], input[type="url"], input[type="text"],
+input[type="search"], input[type="tel"], input[type="textarea"],
+input[type="datetime"], input[type="date"], input[type="datetime-local"],
+input[type="number"], input[type="week"], input[type="time"], input[type="month"],
+textarea, select,input:-webkit-autofill {
+    border: 2px solid #e5e5e5;
+    border-radius:0px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background-color:#FFF;
+}
+
+.button,
+button,
+input[type="button"],
+input[type="submit"],
+input[type="file"],
+input[type="reset"],
+.button-more-info {
+    border: 2px solid #e5e5e5;
+    border-radius:0px;
+}
+
+.button:hover,
+button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+input[type="file"]:hover,
+input[type="reset"]:hover {
+    border: 2px solid #e5e5e5;
+}
+
 /*--- Admin bar ---*/
 #admin_bar {
     height: 30px;
