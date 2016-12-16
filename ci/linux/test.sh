@@ -11,7 +11,12 @@ log() {
 log "Testing project..."
 echo "Testing is currently disabled for this project."
 #dotnet test ./hhs-p6-webshop-project/project.json
-#rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
+#rc=$?
+#if [[ $rc != 0 ]]
+#then
+#    log "Building project failed! Exited with code $rc"
+#    exit $rc
+#fi
 
 # Test finished
 log "Test finished."
