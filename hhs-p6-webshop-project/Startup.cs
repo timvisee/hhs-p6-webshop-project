@@ -1,4 +1,5 @@
 using System;
+using hhs_p6_webshop_project.App.Util;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -29,9 +30,16 @@ namespace hhs_p6_webshop_project {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
-            // Add framework services.
-            services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlServer(Program.FileConfig.GetConnectionString("DefaultConnection")));
+            // Get the database connection string
+            String dbConStr = DbUtils.GetConnectionString();
+
+            // Add framework services for local or remote databases
+            if(DbUtils.IsRemote())
+                services.AddDbContext<ApplicationDbContext>(options =>
+                        options.UseSqlServer(dbConStr));
+            else
+                services.AddDbContext<ApplicationDbContext>(options =>
+                        options.UseSqlServer(dbConStr));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
