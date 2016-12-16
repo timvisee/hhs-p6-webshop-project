@@ -11,5 +11,8 @@ log() {
 log "Testing project..."
 dotnet test ./hhs-p6-webshop-project/project.json
 
+# Validate the exit code of the application
+rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
+
 # Test finished
 log "Test finished."

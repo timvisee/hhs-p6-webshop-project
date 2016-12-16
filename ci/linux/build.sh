@@ -11,10 +11,16 @@ log() {
 log "Building project..."
 dotnet build ./hhs-p6-webshop-project/project.json
 
+# Validate the exit code of the application
+rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
+
 # Run the project to set up the test database
 log "Running project to set up the initial database..."
 cd hhs-p6-webshop-project
 dotnet run -- --force-database-initialization --exit-after-initialization
+
+# Validate the exit code of the application
+rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
 cd ..
 
 # Build finished
