@@ -35,7 +35,7 @@ namespace hhs_p6_webshop_project.App.Util {
         /// <returns>True if remote, false if not.</returns>
         public static bool IsRemote() {
             // TODO: Do not automatically detect this, as there isn't a rock-solid way to do this.
-            return GetConnectionString().Contains(".db");
+            return !GetConnectionString().Contains(".db");
         }
 
     }
