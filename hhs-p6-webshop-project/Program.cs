@@ -3,7 +3,6 @@ using System.IO;
 using hhs_p6_webshop_project.App.Config;
 using hhs_p6_webshop_project.App.Util;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore.Query.Internal;
 using Microsoft.Extensions.Configuration;
 
 namespace hhs_p6_webshop_project {
