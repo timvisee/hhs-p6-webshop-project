@@ -161,6 +161,8 @@ input[type="reset"]:active,
     background-color: #F0597C;
     color: #FFF;
     text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.1em;
 }
 
     .btn:hover,
