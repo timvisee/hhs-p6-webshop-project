@@ -83,33 +83,39 @@ input[type="tel"], input[type="url"], input[type="text"],
 input[type="search"], input[type="tel"], input[type="textarea"],
 input[type="datetime"], input[type="date"], input[type="datetime-local"],
 input[type="number"], input[type="week"], input[type="time"], input[type="month"],
-textarea, select,input:-webkit-autofill {
+textarea, select, input:-webkit-autofill,
+input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {
     border: 2px solid #e5e5e5;
-    border-radius:0px;
-    -webkit-box-shadow: none;
+    border-radius: 0px;
     box-shadow: none;
-    background-color:#FFF;
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+    background-color: #FFF;
 }
 
-.button,
-button,
+.btn,
 input[type="button"],
 input[type="submit"],
 input[type="file"],
 input[type="reset"],
 .button-more-info {
-    border: 2px solid #e5e5e5;
-    border-radius:0px;
+    border: 3px solid #F0597C;
+    border-radius: 0px;
+    background-color: #F0597C;
+    color: #FFF;
 }
 
-.button:hover,
-button:hover,
-input[type="button"]:hover,
-input[type="submit"]:hover,
-input[type="file"]:hover,
-input[type="reset"]:hover {
-    border: 2px solid #e5e5e5;
-}
+    .btn:hover,
+    .button:hover,
+    button:hover,
+    input[type="button"]:hover,
+    input[type="submit"]:hover,
+    input[type="file"]:hover,
+    input[type="reset"]:hover {
+        border: 3px solid #F0597C;
+        border-radius: 0px;
+        background-color: #FFF;
+        color: #F0597C;
+    }
 
 /*--- Admin bar ---*/
 #admin_bar {
@@ -263,11 +269,27 @@ nav li {
         nav .active a,
         nav li a:hover {
             color: #ef5879;
+            text-decoration:none;
         }
 
         nav li a.hm-pink-dark:hover {
             color: #fff;
         }
+
+        nav li a.make-appointment {
+            border: 3px solid #F0597C;
+            border-radius: 0px;
+            background-color: #F0597C;
+            color: #FFF;
+        }
+
+            nav li a.make-appointment:hover {
+                border: 3px solid #F0597C;
+                border-radius: 0px;
+                background-color: #FFF;
+                color: #F0597C;
+                text-decoration:none;
+            }
 
 /*--- Banner layout ---*/
 .layout-with-banner #header_nav {
