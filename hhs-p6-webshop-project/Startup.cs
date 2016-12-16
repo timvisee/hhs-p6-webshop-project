@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -12,7 +9,6 @@ using Microsoft.Extensions.Logging;
 using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models;
 using hhs_p6_webshop_project.Services;
-using Microsoft.AspNetCore.Diagnostics;
 
 namespace hhs_p6_webshop_project {
     public class Startup {
@@ -28,16 +24,14 @@ namespace hhs_p6_webshop_project {
             }
 
             builder.AddEnvironmentVariables();
-            Configuration = builder.Build();
+            Program.FileConfig = builder.Build();
         }
-
-        public IConfigurationRoot Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                    options.UseSqlServer(Program.FileConfig.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -59,7 +53,7 @@ namespace hhs_p6_webshop_project {
             //Save reference to the mail client
             //MailClient.Client = serviceProvider.GetService<SparkPostClient>();
 
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddConsole(Program.FileConfig.GetSection("Logging"));
             loggerFactory.AddDebug();
 
             if (env.IsDevelopment()) {
@@ -85,8 +79,9 @@ namespace hhs_p6_webshop_project {
             });
 
 #if DEBUG
-            //Seed database if not running in production
-            DbInitializer.Initialize(context);
+            // Seed database if not running in production
+            if(Program.AppConfig.DatabaseReset)
+                DbBuilder.Rebuild(context);
 #endif
         }
     }
