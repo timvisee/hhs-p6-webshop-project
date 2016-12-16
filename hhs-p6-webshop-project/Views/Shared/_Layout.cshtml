@@ -59,8 +59,9 @@
                 <a href="#" id="choice_website" class="hm-pink-dark-text active">Website</a>
                 <a href="#" id="choice_webshop" class="hm-pink-dark-text">Webshop</a>
                 -->
-                @if (!User.Identity.IsAuthenticated) {
-                <a asp-controller="Account" asp-action="Login" class="hm-pink-dark-text">Inloggen</a>
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <a asp-controller="Account" asp-action="Login" class="hm-pink-dark-text loginBtn">Inloggen</a>
                 }
             </div>
             <div id="header_contact">

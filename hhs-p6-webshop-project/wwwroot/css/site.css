@@ -115,28 +115,86 @@ input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofi
 
 .btn,
 input[type="button"],
+input[type="button"]:active,
 input[type="submit"],
+input[type="submit"]:active,
 input[type="file"],
+input[type="file"]:active,
 input[type="reset"],
+input[type="reset"]:active,
 .button-more-info {
     border: 3px solid #F0597C;
     border-radius: 0px;
     background-color: #F0597C;
     color: #FFF;
+    text-transform: uppercase;
 }
 
     .btn:hover,
-    .button:hover,
+    .btn-default:hover,
     button:hover,
     input[type="button"]:hover,
     input[type="submit"]:hover,
     input[type="file"]:hover,
-    input[type="reset"]:hover {
+    input[type="reset"]:hover .btn:focus,
+    .btn-default:focus,
+    button:focus,
+    input[type="button"]:focus,
+    input[type="submit"]:focus,
+    input[type="file"]:focus,
+    input[type="reset"]:focus,
+    .btn:active,
+    .btn-default:active,
+    button:active,
+    input[type="button"]:active,
+    input[type="submit"]:active,
+    input[type="file"]:active,
+    input[type="reset"]:active,
+    .btn-default:active:focus {
         border: 3px solid #F0597C;
         border-radius: 0px;
-        background-color: #FFF;
+        background-color: transparent;
         color: #F0597C;
+        box-shadow: none;
     }
+
+    .btn:focus,
+    .button:focus,
+    button:focus,
+    input[type="button"]:focus,
+    input[type="submit"]:focus,
+    input[type="file"]:focus,
+    input[type="reset"]:focus {
+        padding-top: 8px;
+        padding-bottom: 4px;
+    }
+
+input[type="checkbox"] {
+    border-radius: 0px;
+    border:2px solid #f0597c;
+    width:15px;
+    height:15px;
+    cursor: pointer;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -o-appearance: none;
+}
+
+input[type="checkbox"]:checked{
+    background-color:#f0597c;
+}
+
+.form-control:focus {
+    border-color: #F0597C;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+a, button, input {
+    transition: 0.4s;
+    -webkit-transition: 0.4s;
+    -moz-transition: 0.4s;
+}
 
 /*--- Admin bar ---*/
 #admin_bar {
@@ -178,6 +236,11 @@ header {
 #header_top {
     display: flex;
     justify-content: space-between;
+}
+
+.loginBtn:hover {
+    text-decoration: none;
+    color: #FFF;
 }
 
 #choose_website {
@@ -307,7 +370,7 @@ nav li {
             nav li a.make-appointment:hover {
                 border: 3px solid #F0597C;
                 border-radius: 0px;
-                background-color: #FFF;
+                background-color: transparent;
                 color: #F0597C;
                 text-decoration: none;
             }
