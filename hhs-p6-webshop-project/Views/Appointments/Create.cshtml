@@ -2,11 +2,13 @@
 
 @{
     ViewData["Title"] = "Maak afpsraak";
+    ViewData["ShowBanner"] = false;
+    ViewData["PinkBackground"] = false;
 }
 
 <div class="text-banner">
-    <h1>Trouwjurken</h1>
-    <h2>Maak je pasafspraak</h2>
+    <h1 class="banner-bg-title-text hm-pink-light-text">Trouwjurken</h1>
+    <h2 class="banner-title-text">Maak je pasafspraak</h2>
 </div>
 
 <form asp-action="Create">
