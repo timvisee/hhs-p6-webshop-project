@@ -203,6 +203,7 @@ input[type="reset"]:active,
     }
 
 input[type="checkbox"] {
+    background-color: #f0597c;
     border-radius: 0px;
     border: 2px solid #f0597c;
     width: 15px;
@@ -211,11 +212,26 @@ input[type="checkbox"] {
     -moz-appearance: none;
     -webkit-appearance: none;
     -o-appearance: none;
+    overflow: none;
 }
 
     input[type="checkbox"]:checked {
+        background: url('../images/checkbox.png');
+        background-size: contain;
         background-color: #f0597c;
     }
+
+input[type=checkbox][disabled] {
+    cursor: default;
+}
+
+input[type="checkbox"]:checked {
+    background-color: #f0597c;
+}
+
+input[type="checkbox"]:not(:checked) {
+    background: transparent;
+}
 
 .form-control:focus {
     border-color: #F0597C;
@@ -271,7 +287,7 @@ header {
     justify-content: space-between;
 }
 
-.loginBtn:hover {
+.loginBtn:hover, .loginBtn:focus {
     text-decoration: none;
     color: #FFF;
 }
@@ -480,33 +496,33 @@ nav li {
     padding: 30px 40px;
 }
 
-    .appointment-form {
-        min-height: 650px;
-    }
+.appointment-form {
+    min-height: 650px;
+}
 
-    .create-appointment-part h3 {
-        font-weight: bold;
-        margin-bottom: 25px;
-    }
+.create-appointment-part h3 {
+    font-weight: bold;
+    margin-bottom: 25px;
+}
 
-    .create-appointment-part .selected-time {
-        padding: 10px;
-        margin: 10px 0;
-        text-align: center;
-        font-weight: bold;
-        font-size: 1.3em;
-        background-color: #f27390;
-    }
+.create-appointment-part .selected-time {
+    padding: 10px;
+    margin: 10px 0;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.3em;
+    background-color: #f27390;
+}
 
-    .create-appointment-part .selected-time-title {
-        margin-top: 25px;
-    }
+.create-appointment-part .selected-time-title {
+    margin-top: 25px;
+}
 
-    .create-appointment-part p {
-        font-size: 1.3em;
-        line-height: 1.5em;
-        font-weight: 300;
-    }
+.create-appointment-part p {
+    font-size: 1.3em;
+    line-height: 1.5em;
+    font-weight: 300;
+}
 
 /*--- Datepicker ---*/
 #date_input {
