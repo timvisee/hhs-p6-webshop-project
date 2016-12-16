@@ -59,6 +59,11 @@ namespace hhs_p6_webshop_project {
 
         public static void Main(string[] args) {
 
+#if DEBUG
+
+            //Enable development environment and debugging features
+            Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Development");
+
             bool force = args.Any(e => e == "--force-database-initialization");
             if (force) {
                 //Force database migration
@@ -66,7 +71,7 @@ namespace hhs_p6_webshop_project {
                 
             }
 
-#if DEBUG
+
             bool doNotInitialize = args.Length > 0 && args[0] == "--always-skip-initialization";
             
             if (!doNotInitialize && !force) {
