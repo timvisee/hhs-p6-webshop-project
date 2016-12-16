@@ -57,7 +57,7 @@ namespace hhs_p6_webshop_project.Controllers {
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,Confirmation,DateMarried,AppointmentDateTime,Mail,Name,Phone")] Appointment appointment) {
             if (ModelState.IsValid) {
-                Beun.Mail.MailClient.SendAppointmentEmail(appointment.Name, appointment.Mail, DateTime.Now, "het Armani Pak");
+                Beun.Mail.MailClient.SendAppointmentEmail(appointment.Name, appointment.Mail, appointment.AppointmentDateTime, "het Armani Pak");
 
                 _context.Add(appointment);
 

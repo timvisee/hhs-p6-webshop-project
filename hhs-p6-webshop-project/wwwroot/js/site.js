@@ -9,4 +9,24 @@ $(document).ready(function () {
             $("#header_search").focus();
         });
     });
+
+    var monthNames = ["JANUARI", "FEBRUARI", "MAART", "APRIL", "MEI", "JUNI",
+  "JULI", "AUGUSTUS", "SEPTEMBER", "OKTOBER", "NOVEMBER", "DECEMBER"
+    ];
+
+    $("#calendar").datepicker({
+        prevText: "<",
+        nextText: ">",
+        onSelect: function (date) {
+            var d = new Date(date);
+            var inputDate = d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
+            var showDate = d.getDate() + ' ' + monthNames[d.getMonth()] + ' ' + d.getFullYear();
+
+            $('#date_input').val(inputDate);
+            $(".selected-time").html(showDate);
+        },
+    });
+
+
+
 });

@@ -4,6 +4,7 @@
   "dependencies": {
     "bootstrap": "3.3.6",
     "jquery": "2.2.3",
+    "jquery-ui": "1.12.1",
     "jquery-validation": "1.15.0",
     "jquery-validation-unobtrusive": "3.2.6"
   }
