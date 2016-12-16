@@ -1,101 +1,82 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using hhs_p6_webshop_project.Data;
+using hhs_p6_webshop_project.App.Config;
+using hhs_p6_webshop_project.App.Util;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.EntityFrameworkCore.Query.Internal;
+using Microsoft.Extensions.Configuration;
 
 namespace hhs_p6_webshop_project {
     public class Program {
-        public static void Log(string text, ConsoleColor color = ConsoleColor.Red)
-        {
-            Console.ForegroundColor = color;
-            Console.WriteLine(text);
-            Console.ForegroundColor = ConsoleColor.White;
-        }
 
-        public static void DebugInitialize(bool force = false) {
-            if (force) {
-                DbInitializer.Run = true;
-                Program.Log("-------------------------------");
-                Program.Log("| Forcing database rebuild!    |");
-                Program.Log("| ALL DATA WILL BE LOST!       |");
-                Program.Log("-------------------------------");
-                return;
-            }
+        /// <summary>
+        /// Application name.
+        /// </summary>
+        public const String APP_NAME = "Honeymoon Serer";
 
-            Console.WriteLine("This prompt can be disabled by adding --always-skip-initialization as a startup argument.");
-            Console.WriteLine("Reset all data sources? Press any key to confirm...");
+        /// <summary>
+        /// Application version code.
+        /// </summary>
+        public const String APP_VERSION_NAME = "0.0.1-dev";
 
-            int count = 2;
+        /// <summary>
+        /// Application version code.
+        /// </summary>
+        public const int APP_VERSION_CODE = 1;
 
-            Console.Write("Process will continue in " + count);
+        /// <summary>
+        /// Application configuration.
+        /// This configuration is used throughout the application to define the applications behaviour.
+        /// </summary>
+        public static AppConfig AppConfig;
 
-            while (count > 0)
-            {
-                Thread.Sleep(1000);
+        /// <summary>
+        /// Base application configuration.
+        /// </summary>
+        public static IConfigurationRoot FileConfig { get; set; }
 
-                if (Console.KeyAvailable) {
-                    DbInitializer.Run = true;
-                    Console.WriteLine();
-                    Program.Log("-------------------------------");
-                    Program.Log("| Database will be rebuilt.    |");
-                    Program.Log("| ALL DATA WILL BE LOST!       |");
-                    Program.Log("-------------------------------");
-                    break;
-                }
-
-                Console.CursorLeft--;
-                count--;
-                Console.Write(count);
-            }
-
-            if (!DbInitializer.Run)
-                Console.WriteLine("\nDatabase will NOT be rebuilt.");
-        }
-
+        /// <summary>
+        /// Main application entry point.
+        /// </summary>
+        /// <param name="args">Startup arguments.</param>
         public static void Main(string[] args) {
+            // Show a program initialization message
+            LogUtils.Info("Starting " + APP_NAME + " v" + APP_VERSION_NAME + " (" + APP_VERSION_CODE + ")...");
 
 #if DEBUG
-
             //Enable development environment and debugging features
             Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Development");
-
-            bool force = args.Any(e => e == "--force-database-initialization");
-            if (force) {
-                //Force database migration
-                DebugInitialize(true);
-                
-            }
-
-
-            bool doNotInitialize = args.Length > 0 && args[0] == "--always-skip-initialization";
-            
-            if (!doNotInitialize && !force) {
-                DebugInitialize();
-            }
+            LogUtils.Info("Enabled development environment.");
 #endif
 
-            var host = new WebHostBuilder()
-                .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
-                .UseStartup<Startup>()
-                .Build();
+            try {
+                // Initialize the application configuration
+                Program.AppConfig = new AppConfig(true);
 
-            if (args.Any(e => e == "--exit-after-initialization"))
-            {
-                //Database migration only, so kill the process
-                Console.WriteLine("Only a database reconstruction was requested. Terminating application...");
-                return;
+                // Parse the startup arguments, and apply them to the configuration
+                AppConfigParameterParser.Parse(args, Program.AppConfig);
 
+                // Set up a new webhost
+                var host = new WebHostBuilder()
+                    .UseKestrel()
+                    .UseContentRoot(Directory.GetCurrentDirectory())
+                    .UseIISIntegration()
+                    .UseStartup<Startup>()
+                    .Build();
+
+                // Run the actual web host
+                host.Run();
+
+            } catch (Exception ex) {
+                // Print the exception
+                Console.WriteLine(ex);
+
+                // Show a warning
+                Console.WriteLine("\n\nAn unrecorerable exception occurred.\nThe application will not quit (code: -1).");
+
+                // Exit
+                Environment.Exit(-1);
             }
-
-            host.Run();
-
 
         }
     }

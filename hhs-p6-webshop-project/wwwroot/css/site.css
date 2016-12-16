@@ -1,13 +1,46 @@
-﻿@import url('https://fonts.googleapis.com/css?family=Roboto:400,700,900|Raleway|Sumana|Niconne');
+﻿@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700,900|Raleway|Sumana|Niconne');
+
+@font-face {
+    font-family: 'nexa-regular';
+    src: url('../fonts/nexa/nexa_w01_book.eot');
+    src: url('../fonts/nexa/nexa_w01_book.eot?#iefix') format('embedded-opentype'), url('../fonts/nexa/nexa_w01_book.woff2') format('woff2'), url('../fonts/nexa/nexa_w01_book.woff') format('woff'), url('../fonts/nexa/nexa_w01_book.ttf') format('truetype'), url('../fonts/nexa/nexa_w01_book.svg#nexaw01-bookregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'nexa-light';
+    src: url('../fonts/nexa/nexa_light.eot');
+    src: url('../fonts/nexa/nexa_light.eot?#iefix') format('embedded-opentype'), url('../fonts/nexa/nexa_light.woff2') format('woff2'), url('../fonts/nexa/nexa_light.woff') format('woff'), url('../fonts/nexa/nexa_light.ttf') format('truetype'), url('../fonts/nexa/nexa_light.svg#nexa_lightregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'nexa-bold';
+    src: url('../fonts/nexa/nexa_bold.eot');
+    src: url('../fonts/nexa/nexa_bold.eot?#iefix') format('embedded-opentype'), url('../fonts/nexa/nexa_bold.woff2') format('woff2'), url('../fonts/nexa/nexa_bold.woff') format('woff'), url('../fonts/nexa/nexa_bold.ttf') format('truetype'), url('../fonts/nexa/nexa_bold.svg#nexa_boldregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'nexa-black';
+    src: url('../fonts/nexa/nexa_w01_black.eot');
+    src: url('../fonts/nexa/nexa_w01_black.eot?#iefix') format('embedded-opentype'), url('../fonts/nexa/nexa_w01_black.woff2') format('woff2'), url('../fonts/nexa/nexa_w01_black.woff') format('woff'), url('../fonts/nexa/nexa_w01_black.ttf') format('truetype'), url('../fonts/nexa/nexa_w01_black.svg#nexaw01-blackregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 
 body {
     font-family: roboto;
     background-color: #fce8e7;
 }
 
-body.layout-with-banner {
-    background-color: #FFF;
-}
+    body.white {
+        background-color: #FFF;
+    }
 
 /*--- Colors ---*/
 .white-text {
@@ -64,7 +97,29 @@ footer {
     margin: 0 auto;
 }
 
+.box-shadow {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 6px 6px rgba(0,0,0,0);
+}
+
 /*--- Typography ---*/
+.font-raleway {
+    font-family: Raleway;
+}
+
+.font-sumana {
+    font-family: Sumana;
+}
+
+.font-niconne {
+    font-family: Niconne;
+}
+
+.form-horizontal .control-label {
+    text-align: left;
+}
+
+
+/*--- Buttons and inputs ---*/
 button,
 input[type="submit"],
 input:focus,
@@ -78,6 +133,120 @@ input.form-control[disabled] {
     cursor: default;
 }
 
+input[type="email"], input[type="number"], input[type="password"],
+input[type="tel"], input[type="url"], input[type="text"],
+input[type="search"], input[type="tel"], input[type="textarea"],
+input[type="datetime"], input[type="date"], input[type="datetime-local"],
+input[type="number"], input[type="week"], input[type="time"], input[type="month"],
+textarea, select, input:-webkit-autofill,
+input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {
+    border: 2px solid #e5e5e5;
+    border-radius: 0px;
+    box-shadow: none;
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+.btn,
+input[type="button"],
+input[type="button"]:active,
+input[type="submit"],
+input[type="submit"]:active,
+input[type="file"],
+input[type="file"]:active,
+input[type="reset"],
+input[type="reset"]:active,
+.button-more-info {
+    border: 3px solid #F0597C;
+    border-radius: 0px;
+    background-color: #F0597C;
+    color: #FFF;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+    .btn:hover,
+    .btn-default:hover,
+    button:hover,
+    input[type="button"]:hover,
+    input[type="submit"]:hover,
+    input[type="file"]:hover,
+    input[type="reset"]:hover .btn:focus,
+    .btn-default:focus,
+    button:focus,
+    input[type="button"]:focus,
+    input[type="submit"]:focus,
+    input[type="file"]:focus,
+    input[type="reset"]:focus,
+    .btn:active,
+    .btn-default:active,
+    button:active,
+    input[type="button"]:active,
+    input[type="submit"]:active,
+    input[type="file"]:active,
+    input[type="reset"]:active,
+    .btn-default:active:focus {
+        border: 3px solid #F0597C;
+        border-radius: 0px;
+        background-color: transparent;
+        color: #F0597C;
+        box-shadow: none;
+    }
+
+    .btn:focus,
+    .button:focus,
+    button:focus,
+    input[type="button"]:focus,
+    input[type="submit"]:focus,
+    input[type="file"]:focus,
+    input[type="reset"]:focus {
+        padding-top: 8px;
+        padding-bottom: 4px;
+    }
+
+input[type="checkbox"] {
+    background-color: #f0597c;
+    border-radius: 0px;
+    border: 2px solid #f0597c;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -o-appearance: none;
+    overflow: none;
+}
+
+    input[type="checkbox"]:checked {
+        background: url('../images/checkbox.png');
+        background-size: contain;
+        background-color: #f0597c;
+    }
+
+input[type=checkbox][disabled] {
+    cursor: default;
+}
+
+input[type="checkbox"]:checked {
+    background-color: #f0597c;
+}
+
+input[type="checkbox"]:not(:checked) {
+    background: transparent;
+}
+
+.form-control:focus {
+    border-color: #F0597C;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+a, button, input {
+    transition: 0.25s;
+    -webkit-transition: 0.25s;
+    -moz-transition: 0.25s;
+}
+
 /*--- Admin bar ---*/
 #admin_bar {
     height: 30px;
@@ -88,22 +257,22 @@ input.form-control[disabled] {
     margin: 0;
 }
 
-#admin_menu li {
-    display: inline-block;
-}
+    #admin_menu li {
+        display: inline-block;
+    }
 
-#admin_menu li a {
-    color: #FFF;
-    line-height: 30px;
-    padding: 0 20px;
-    display: block;
-}
+        #admin_menu li a {
+            color: #FFF;
+            line-height: 30px;
+            padding: 0 20px;
+            display: block;
+        }
 
-#admin_menu li a:hover {
-    background-color: #fac9c4;
-    color: #f0597c;
-    text-decoration: none;
-}
+            #admin_menu li a:hover {
+                background-color: #fac9c4;
+                color: #f0597c;
+                text-decoration: none;
+            }
 
 /*--- Top part of header ---*/
 header {
@@ -120,25 +289,30 @@ header {
     justify-content: space-between;
 }
 
+.loginBtn:hover, .loginBtn:focus {
+    text-decoration: none;
+    color: #FFF;
+}
+
 #choose_website {
     margin-left: 20px;
 }
 
-#choose_website a,
-.phone-number {
-    line-height: 60px;
-    font-size: 1.2em;
-}
+    #choose_website a,
+    .phone-number {
+        line-height: 60px;
+        font-size: 1.2em;
+    }
 
-#choose_website a {
-    font-weight: bold;
-    text-transform: uppercase;
-    padding: 0 10px;
-}
+    #choose_website a {
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: 0 10px;
+    }
 
-#choose_website .active {
-    color: #000;
-}
+    #choose_website .active {
+        color: #000;
+    }
 
 #header_contact {
     display: flex;
@@ -200,7 +374,7 @@ header {
     font-family: Sumana;
     font-weight: lighter;
     color: #000;
-    font-size: 3em;
+    font-size: 3.1em;
     line-height: 40px;
     height: auto;
     padding: 0 15px;
@@ -217,24 +391,40 @@ nav li {
     display: inline-block;
 }
 
-nav li a {
-    text-transform: uppercase;
-    color: #000;
-    font-size: 1.2em;
-    display: block;
-    font-weight: bold;
-    padding: 0 20px;
-    line-height: 40px;
-}
+    nav li a {
+        text-transform: uppercase;
+        color: #000;
+        font-size: 1.2em;
+        display: block;
+        font-weight: bold;
+        padding: 0 20px;
+        line-height: 40px;
+    }
 
-nav .active a,
-nav li a:hover {
-    color: #ef5879;
-}
+        nav .active a,
+        nav li a:hover {
+            color: #ef5879;
+            text-decoration: none;
+        }
 
-nav li a.hm-pink-dark:hover {
-    color: #fff;
-}
+        nav li a.hm-pink-dark:hover {
+            color: #fff;
+        }
+
+        nav li a.make-appointment {
+            border: 3px solid #F0597C;
+            border-radius: 0px;
+            background-color: #F0597C;
+            color: #FFF;
+        }
+
+            nav li a.make-appointment:hover {
+                border: 3px solid #F0597C;
+                border-radius: 0px;
+                background-color: transparent;
+                color: #F0597C;
+                text-decoration: none;
+            }
 
 /*--- Banner layout ---*/
 .layout-with-banner #header_nav {
@@ -252,6 +442,32 @@ nav li a.hm-pink-dark:hover {
 .layout-with-banner nav li a {
     color: #FFF;
 }
+
+/*--- Text banner ---*/
+.text-banner {
+    text-align: center;
+    position: relative;
+    min-height: 350px;
+}
+
+    .text-banner .banner-bg-title-text {
+        width: 100%;
+        font-size: 10em;
+        font-family: Niconne;
+        position: absolute;
+        bottom: 10%;
+    }
+
+    .text-banner .banner-title-text {
+        font-family: Raleway;
+        font-size: 3em;
+        text-transform: uppercase;
+        width: 100%;
+        font-weight: bold;
+        position: absolute;
+        bottom: 10%;
+    }
+
 
 /*--- Content ---*/
 .container {
@@ -271,10 +487,120 @@ nav li a.hm-pink-dark:hover {
 #create_appointment {
     height: 450px;
 }
+
+.appiontment-wrapper {
+    float: left;
+    margin-bottom: 50px;
+}
+
 .create-appointment-part {
     height: 100%;
-    padding: 40px;
+    padding: 30px 40px;
 }
+
+.appointment-form {
+    min-height: 650px;
+}
+
+.create-appointment-part h3 {
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+.create-appointment-part .selected-time {
+    padding: 10px;
+    margin: 10px 0;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.3em;
+    background-color: #f27390;
+}
+
+.create-appointment-part .selected-time-title {
+    margin-top: 25px;
+}
+
+.create-appointment-part p {
+    font-size: 1.3em;
+    line-height: 1.5em;
+    font-weight: 300;
+}
+
+/*--- Datepicker ---*/
+#date_input {
+    display: none;
+}
+
+.ui-datepicker-calendar,
+.ui-datepicker-header {
+    width: 100%;
+}
+
+.ui-datepicker-header {
+    background-color: #f27390;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.3em;
+    line-height: 40px;
+    margin-bottom: 20px;
+}
+
+.ui-datepicker-prev,
+.ui-datepicker-next {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    color: #fff;
+    padding: 0 10px;
+}
+
+    .ui-datepicker-prev:hover,
+    .ui-datepicker-next:hover {
+        text-decoration: none;
+        color: #fff;
+    }
+
+.ui-datepicker-prev {
+    float: left;
+}
+
+.ui-datepicker-next {
+    float: right;
+}
+
+.ui-datepicker-title {
+    text-align: center;
+}
+
+.ui-datepicker-calendar thead {
+    font-weight: bold;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    line-height: 50px;
+}
+
+.ui-datepicker-calendar td a {
+    color: #fff;
+    line-height: 30px;
+    font-family: nexa-regular;
+}
+
+.ui-state-active {
+    position: relative;
+}
+
+    .ui-state-active:before {
+        content: "";
+        position: absolute;
+        border: 2px solid #fff;
+        border-radius: 100%;
+        width: 33px;
+        height: 33px;
+        top: -9px;
+        left: -7px;
+        display: block;
+    }
 
 /*--- Footer---*/
 footer {
@@ -290,30 +616,30 @@ footer {
     position: relative;
 }
 
-.social-box:first-child {
-    margin-left: 10.5%;
-}
+    .social-box:first-child {
+        margin-left: 10.5%;
+    }
 
-.social-box .bg-text {
-    z-index: 0;
-    position: absolute;
-    font-size: 6em;
-    width: 100%;
-    text-align: center;
-    left: 0;
-    line-height: 125px;
-    opacity: 0.6;
-    font-family: Niconne;
-}
+    .social-box .bg-text {
+        z-index: 0;
+        position: absolute;
+        font-size: 6em;
+        width: 100%;
+        text-align: center;
+        left: 0;
+        line-height: 125px;
+        opacity: 0.6;
+        font-family: Niconne;
+    }
 
-.social-box .front-text {
-    font-family: Roboto;
-    font-weight: bold;
-    margin-top: 80px;
-    line-height: 1.1em;
-    font-size: 1.7em;
-    text-transform: uppercase;
-}
+    .social-box .front-text {
+        font-family: Roboto;
+        font-weight: bold;
+        margin-top: 80px;
+        line-height: 1.1em;
+        font-size: 1.7em;
+        text-transform: uppercase;
+    }
 
 #footer_shop_info {
     font-size: 1.2em;
@@ -336,7 +662,7 @@ footer ul {
     padding: 0;
 }
 
-footer ul a {
-    color: #696564;
-    line-height: 2em;
-}
+    footer ul a {
+        color: #696564;
+        line-height: 2em;
+    }
