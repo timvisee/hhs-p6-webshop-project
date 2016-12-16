@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/site.css" />
     </environment>
 
 </head>
@@ -24,26 +24,32 @@
     var bannerPath = "/images/banner.png";
 
     // Set the banner URL from the view data
-    if (ViewData.ContainsKey("BannerPath"))
-    {
+    if (ViewData.ContainsKey("BannerPath")) {
         bannerPath = ViewData["BannerPath"].ToString();
     }
+
+    // Determine whether the background is pink or not
+    var pinkBg = ViewData.ContainsKey("PinkBackground") && (bool)ViewData["PinkBackground"];
 
     // Create a variable to build the body classes in
     var bodyClasses = "";
 
     // Determine whether the layout contains a banner, add the proper body class accordingly
-    if (showBanner)
-    {
-        bodyClasses += "layout-with-banner";
+    if (showBanner) {
+        bodyClasses += "layout-with-banner ";
+    }
+
+    if (pinkBg) {
+        bodyClasses += "hm-pink-light ";
+    } else {
+        bodyClasses += "white ";
     }
 }
 
 <body class="@bodyClasses">
 
-    @if (User.Identity.IsAuthenticated)
-    {
-        @Html.Partial("_AdminBar")
+    @if (User.Identity.IsAuthenticated) {
+    @Html.Partial("_AdminBar")
     }
 
     <header>
@@ -97,9 +103,8 @@
     <div id="main_content" class="container body-content">
 
         @* Banner image *@
-        @if (showBanner)
-        {
-            <img class="banner-image" src="@bannerPath" alt="banner" />
+        @if (showBanner) {
+        <img class="banner-image" src="@bannerPath" alt="banner" />
         }
 
         @* Render the actual page body *@
