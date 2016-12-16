@@ -250,7 +250,7 @@ header {
     justify-content: space-between;
 }
 
-.loginBtn:hover {
+.loginBtn:hover, .loginBtn:focus {
     text-decoration: none;
     color: #FFF;
 }
