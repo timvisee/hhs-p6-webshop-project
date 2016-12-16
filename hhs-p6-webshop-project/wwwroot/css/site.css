@@ -5,9 +5,9 @@ body {
     background-color: #fce8e7;
 }
 
-body.layout-with-banner {
-    background-color: #FFF;
-}
+    body.layout-with-banner {
+        background-color: #FFF;
+    }
 
 /*--- Colors ---*/
 .white-text {
@@ -121,22 +121,22 @@ input[type="reset"]:hover {
     margin: 0;
 }
 
-#admin_menu li {
-    display: inline-block;
-}
+    #admin_menu li {
+        display: inline-block;
+    }
 
-#admin_menu li a {
-    color: #FFF;
-    line-height: 30px;
-    padding: 0 20px;
-    display: block;
-}
+        #admin_menu li a {
+            color: #FFF;
+            line-height: 30px;
+            padding: 0 20px;
+            display: block;
+        }
 
-#admin_menu li a:hover {
-    background-color: #fac9c4;
-    color: #f0597c;
-    text-decoration: none;
-}
+            #admin_menu li a:hover {
+                background-color: #fac9c4;
+                color: #f0597c;
+                text-decoration: none;
+            }
 
 /*--- Top part of header ---*/
 header {
@@ -157,21 +157,21 @@ header {
     margin-left: 20px;
 }
 
-#choose_website a,
-.phone-number {
-    line-height: 60px;
-    font-size: 1.2em;
-}
+    #choose_website a,
+    .phone-number {
+        line-height: 60px;
+        font-size: 1.2em;
+    }
 
-#choose_website a {
-    font-weight: bold;
-    text-transform: uppercase;
-    padding: 0 10px;
-}
+    #choose_website a {
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: 0 10px;
+    }
 
-#choose_website .active {
-    color: #000;
-}
+    #choose_website .active {
+        color: #000;
+    }
 
 #header_contact {
     display: flex;
@@ -250,24 +250,24 @@ nav li {
     display: inline-block;
 }
 
-nav li a {
-    text-transform: uppercase;
-    color: #000;
-    font-size: 1.2em;
-    display: block;
-    font-weight: bold;
-    padding: 0 20px;
-    line-height: 40px;
-}
+    nav li a {
+        text-transform: uppercase;
+        color: #000;
+        font-size: 1.2em;
+        display: block;
+        font-weight: bold;
+        padding: 0 20px;
+        line-height: 40px;
+    }
 
-nav .active a,
-nav li a:hover {
-    color: #ef5879;
-}
+        nav .active a,
+        nav li a:hover {
+            color: #ef5879;
+        }
 
-nav li a.hm-pink-dark:hover {
-    color: #fff;
-}
+        nav li a.hm-pink-dark:hover {
+            color: #fff;
+        }
 
 /*--- Banner layout ---*/
 .layout-with-banner #header_nav {
@@ -304,6 +304,7 @@ nav li a.hm-pink-dark:hover {
 #create_appointment {
     height: 450px;
 }
+
 .create-appointment-part {
     height: 100%;
     padding: 40px;
@@ -323,30 +324,30 @@ footer {
     position: relative;
 }
 
-.social-box:first-child {
-    margin-left: 10.5%;
-}
+    .social-box:first-child {
+        margin-left: 10.5%;
+    }
 
-.social-box .bg-text {
-    z-index: 0;
-    position: absolute;
-    font-size: 6em;
-    width: 100%;
-    text-align: center;
-    left: 0;
-    line-height: 125px;
-    opacity: 0.6;
-    font-family: Niconne;
-}
+    .social-box .bg-text {
+        z-index: 0;
+        position: absolute;
+        font-size: 6em;
+        width: 100%;
+        text-align: center;
+        left: 0;
+        line-height: 125px;
+        opacity: 0.6;
+        font-family: Niconne;
+    }
 
-.social-box .front-text {
-    font-family: Roboto;
-    font-weight: bold;
-    margin-top: 80px;
-    line-height: 1.1em;
-    font-size: 1.7em;
-    text-transform: uppercase;
-}
+    .social-box .front-text {
+        font-family: Roboto;
+        font-weight: bold;
+        margin-top: 80px;
+        line-height: 1.1em;
+        font-size: 1.7em;
+        text-transform: uppercase;
+    }
 
 #footer_shop_info {
     font-size: 1.2em;
@@ -369,7 +370,7 @@ footer ul {
     padding: 0;
 }
 
-footer ul a {
-    color: #696564;
-    line-height: 2em;
-}
+    footer ul a {
+        color: #696564;
+        line-height: 2em;
+    }
