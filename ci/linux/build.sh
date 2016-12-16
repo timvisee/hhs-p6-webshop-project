@@ -7,20 +7,18 @@ log() {
     printf "\n%s\n\n" "----------------------------------------------------------------"
 }
 
-# Build the project
+# Build the project, and validate the exit code
 log "Building project..."
 dotnet build ./hhs-p6-webshop-project/project.json
-
-# Validate the exit code of the application
 rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
 
-# Run the project to set up the test database
+# Run the project to set up the test database, and validate the exit code
 log "Running project to set up the initial database..."
 cd hhs-p6-webshop-project
-dotnet run -- --force-database-initialization --exit-after-initialization
 
-# Validate the exit code of the application
+dotnet run -- --force-database-initialization --exit-after-initialization
 rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
+
 cd ..
 
 # Build finished
