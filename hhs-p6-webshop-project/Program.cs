@@ -3,6 +3,7 @@ using System.IO;
 using hhs_p6_webshop_project.App.Config;
 using hhs_p6_webshop_project.App.Util;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 using Microsoft.Extensions.Configuration;
 
 namespace hhs_p6_webshop_project {
@@ -42,22 +43,35 @@ namespace hhs_p6_webshop_project {
             // Show a program initialization message
             LogUtils.Info("Starting " + APP_NAME + " v" + APP_VERSION_NAME + " (" + APP_VERSION_CODE + ")...");
 
-            // Initialize the application configuration
-            Program.AppConfig = new AppConfig(true);
+            try {
+                // Initialize the application configuration
+                Program.AppConfig = new AppConfig(true);
 
-            // Parse the startup arguments, and apply them to the configuration
-            AppConfigParameterParser.Parse(args, Program.AppConfig);
+                // Parse the startup arguments, and apply them to the configuration
+                AppConfigParameterParser.Parse(args, Program.AppConfig);
 
-            // Set up a new webhost
-            var host = new WebHostBuilder()
-                .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
-                .UseStartup<Startup>()
-                .Build();
+                // Set up a new webhost
+                var host = new WebHostBuilder()
+                    .UseKestrel()
+                    .UseContentRoot(Directory.GetCurrentDirectory())
+                    .UseIISIntegration()
+                    .UseStartup<Startup>()
+                    .Build();
 
-            // Run the actual web host
-            host.Run();
+                // Run the actual web host
+                host.Run();
+
+            } catch (Exception ex) {
+                // Print the exception
+                Console.WriteLine(ex);
+
+                // Show a warning
+                Console.WriteLine("\n\nAn unrecorerable exception occurred.\nThe application will not quit (code: -1).");
+
+                // Exit
+                Environment.Exit(-1);
+            }
+
         }
     }
 }
