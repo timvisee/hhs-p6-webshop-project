@@ -18,7 +18,7 @@ namespace hhs_p6_webshop_project.App.Util {
             var dbConStr = Environment.GetEnvironmentVariable(EnvDbConnectionString);
 
             // Return the environment connection string if available
-            if (dbConStr != null && dbConStr.Length > 0)
+            if (!string.IsNullOrEmpty(dbConStr))
                 return dbConStr;
 
             // Make sure the file configuration is available
