@@ -30,16 +30,21 @@ namespace hhs_p6_webshop_project {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
-            // Get the database connection string
+            // Get the database connection string, and check whether it's remote
             String dbConStr = DbUtils.GetConnectionString();
+            bool isRemote = DbUtils.IsRemote();
 
             // Add framework services for local or remote databases
-            if(DbUtils.IsRemote())
+            if(isRemote)
                 services.AddDbContext<ApplicationDbContext>(options =>
                         options.UseSqlServer(dbConStr));
             else
                 services.AddDbContext<ApplicationDbContext>(options =>
-                        options.UseSqlServer(dbConStr));
+                        options.UseSqlite(dbConStr));
+
+            // Print the selected database
+            Console.WriteLine("Selected database: " + dbConStr);
+            Console.WriteLine("Is remote database: " + (isRemote ? "Yes" : "No"));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
