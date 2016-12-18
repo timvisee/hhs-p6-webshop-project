@@ -19,73 +19,139 @@
 
                 </div>
                 <div class="create-appointment-part col-md-9 col-sm-12">
-                    <h3>Vul hier jouw gegevens in</h3>
-                    <div class="form-horizontal">
 
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="form-group">
-                            <label asp-for="DateMarried" class="col-md-12 control-label"></label>
-                            <div class="col-md-12">
-                                <input asp-for="DateMarried" type="date" class="form-control" />
-                                <span asp-validation-for="DateMarried" class="text-danger" />
+                    <!-- Left box - Step 1, Select date and time -->
+                    <div class="left-box step-1" id="left_1">
+                        <h3>Stap 1, datum en tijd selecteren</h3>
+                        <p>
+                            Selecteer eerst een datum en vervolgens een tijdstip dat je wilt komen passen!
+                        </p>
+                        <p>
+                            Openingstijden:
+                            <br />
+                            <label>MA</label>12:00-17:30<br />
+                            <label>DI-VR</label>09:30-17:30<br />
+                            <label>ZA</label>09:30-18:00<br />
+                            <label>ZO</label>11:00-17:00
+                        </p>
+                        <p>
+                            *Op alle werkdagen kunnen er ook schoenen worden gepast. Helaas is dit niet mogelijk in het weekend.
+                        </p>
+                    </div>
+
+                    <!-- Left box - Step 2, fill in form -->
+                    <div class="left-box step-2" id="left_2">
+                        <h3>Stap 2, Gegevens invullen</h3>
+                        <div class="form-horizontal">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="Name" class="col-md-12 control-label"></label>
+                                <div class="col-md-12">
+                                    <input asp-for="Name" type="text" class="form-control" />
+                                    <span asp-validation-for="Name" class="text-danger" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="DateMarried" class="col-md-12 control-label"></label>
+                                <div class="col-md-12">
+                                    <input asp-for="DateMarried" type="date" class="form-control" />
+                                    <span asp-validation-for="DateMarried" class="text-danger" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Phone" class="col-md-12 control-label"></label>
+                                <div class="col-md-12">
+                                    <input asp-for="Phone" type="tel" class="form-control" />
+                                    <span asp-validation-for="Phone" class="text-danger" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Mail" class="col-md-12 control-label"></label>
+                                <div class="col-md-12">
+                                    <input asp-for="Mail" type="email" class="form-control" />
+                                    <span asp-validation-for="Mail" class="text-danger" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                HERHAAL EMAIL ADRES
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-1">
+                                    <input type="checkbox" class="form-control" />
+                                </div>
+                                <div class="col-md-11">
+                                    Ja, ik wil me graag aanmelden voor de inspirerende nieuwsbrief van Honeymoon Shop
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label asp-for="Mail" class="col-md-12 control-label"></label>
-                            <div class="col-md-12">
-                                <input asp-for="Mail" type="email" class="form-control" />
-                                <span asp-validation-for="Mail" class="text-danger" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Name" class="col-md-12 control-label"></label>
-                            <div class="col-md-12">
-                                <input asp-for="Name" type="text" class="form-control" />
-                                <span asp-validation-for="Name" class="text-danger" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Phone" class="col-md-12 control-label"></label>
-                            <div class="col-md-12">
-                                <input asp-for="Phone" type="tel" class="form-control" />
-                                <span asp-validation-for="Phone" class="text-danger" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-1">
-                                <input type="checkbox" class="form-control" />
-                            </div>
-                            <div class="col-md-11">
-                                Ja, ik wil me graag aanmelden voor de inspirerende nieuwsbrief van Honeymoon Shop
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-12">
-                                <input type="submit" value="Maak pasafspraak" class="btn btn-default" />
-                            </div>
-                        </div>
+                    </div>
+
+                    <!-- Left box - Step 3, verify filled in data -->
+                    <div class="left-box step-3" id="left_3">
+                        <h3>Stap 3, Gegevens controleren</h3>
+                        <p>
+                            Controleer alle gegevens voor je pasafspraak bij Honeymoon shop aan de Korte Hoogstraat 4, te Rotterdam.
+                        </p>
+
+                        <input type="submit" value="Maak pasafspraak" class="btn btn-default" />
                     </div>
                 </div>
             </div>
 
             <div class="create-appointment-part col-md-5 col-sm-12 hm-pink-dark white-text">
-                <h3>Selecteer een datum:</h3>
-                <p>
-                    Vul je persoonlijke gegevens in om de pasafspraak compleet te maken.
-                </p>
 
-                <div id="calendar">
+                <!-- Right box - Step 1, Select date -->
+                <div class="right-box step-1" id="right_1">
+                    <h3>HARTJE Selecteer een datum:</h3>
 
+                    <!-- Calendar -->
+                    <div id="calendar"></div>
                 </div>
-                <input asp-for="AppointmentDateTime" id="date_input" type="datetime" class="form-control" />
 
-                <p class="selected-time-title">
-                    Je geselecteerde datum is:
-                </p>
+                <!-- Right box - Step 1.2, Select time -->
+                <div class="right-box step-1-2" id="right_1_2">
+                    <h3>HARTJE Selecteer een tijdstip:</h3>
 
-                <div class="selected-time">
-                    &nbsp;
+                    <ul id="select_time">
+                        <li>
+                            <input class="time-option" type="radio" name="appointment_time" value="09:30" id="time_first">
+                            <label for="time_first">09:30</label>
+                        </li>
+                        <li>
+                            <input class="time-option" type="radio" name="appointment_time" value="12:30" id="time_second">
+                            <label for="time_second">12:30</label>
+                        </li>
+                        <li>
+                            <input class="time-option" type="radio" name="appointment_time" value="15:00" id="time_third">
+                            <label for="time_third">15:00</label>
+                        </li>
+                    </ul>
                 </div>
+
+                <!-- Right box - Step 2, Selected time and date -->
+                <div class="right-box step-2" id="right_2">
+                    <h3>HARTJE Gekozen tijd en datum:</h3>
+
+                    <div class="selected-time">
+                        &nbsp;
+                        <span id="selected_date"></span>
+                        <span id="selected_time"></span>
+                    </div>
+
+                    <p>
+                        Vul je persoonlijke gegevens in om de pasafspraak compleet te maken.
+                    </p>
+                </div>
+
+                <!-- Right box - Step 3, Verify filled in data -->
+                <div class="right-box step-3" id="right_3">
+                    <h3>HARTJE Controleer je gegevens:</h3>
+                    <p>
+                        Overzicht van gegevens.
+                    </p>
+                </div>
+
+                <input asp-for="AppointmentDateTime" id="date_input" value="" type="datetime" class="form-control" />
             </div>
         </div>
     </div>

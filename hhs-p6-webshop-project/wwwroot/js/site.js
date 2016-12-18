@@ -25,11 +25,19 @@ $(document).ready(function () {
             var showDate = d.getDate() + ' ' + monthNames[d.getMonth()] + ' ' + d.getFullYear();
 
             $('#date_input').val(inputDate);
-            $(".selected-time").html(showDate);
+            $("#selected_date").html(showDate);
         },
         minDate: dateToday
     });
 
+    $(".time-option").click(function() {
+        console.log($(this).val());
+
+        var currentValue = $('#date_input').val();
+        console.log(currentValue + $(this).val());
+
+        $('#date_input').val(currentValue + "T" + $(this).val() + ":00");
+    });
 
 
 });

@@ -1,4 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700,900|Raleway|Sumana|Niconne');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700,900|Raleway|Sumana|Niconne');
 
 @font-face {
     font-family: 'nexa-regular';
@@ -447,7 +447,7 @@ nav li {
 .text-banner {
     text-align: center;
     position: relative;
-    min-height: 350px;
+    min-height: 250px;
 }
 
     .text-banner .banner-bg-title-text {
@@ -455,7 +455,7 @@ nav li {
         font-size: 10em;
         font-family: Niconne;
         position: absolute;
-        bottom: 10%;
+        bottom: 20%;
     }
 
     .text-banner .banner-title-text {
@@ -465,7 +465,7 @@ nav li {
         width: 100%;
         font-weight: bold;
         position: absolute;
-        bottom: 10%;
+        bottom: 20%;
     }
 
 
@@ -514,10 +514,6 @@ nav li {
     font-weight: bold;
     font-size: 1.3em;
     background-color: #f27390;
-}
-
-.create-appointment-part .selected-time-title {
-    margin-top: 25px;
 }
 
 .create-appointment-part p {
