@@ -1,4 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700,900|Raleway|Sumana|Niconne');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700,900|Raleway|Sumana|Niconne');
 
 @font-face {
     font-family: 'nexa-regular';
@@ -81,6 +81,10 @@ body {
     margin: 0;
 }
 
+a {
+    cursor: pointer;
+}
+
 /*--- Main structure ---*/
 header,
 #main_content,
@@ -147,6 +151,7 @@ input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofi
 }
 
 .btn,
+button,
 input[type="button"],
 input[type="button"]:active,
 input[type="submit"],
@@ -161,6 +166,8 @@ input[type="reset"]:active,
     background-color: #F0597C;
     color: #FFF;
     text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
     font-weight: bold;
     font-size: 1.1em;
 }
@@ -171,7 +178,8 @@ input[type="reset"]:active,
     input[type="button"]:hover,
     input[type="submit"]:hover,
     input[type="file"]:hover,
-    input[type="reset"]:hover .btn:focus,
+    input[type="reset"]:hover,
+    .btn:focus,
     .btn-default:focus,
     button:focus,
     input[type="button"]:focus,
@@ -189,6 +197,7 @@ input[type="reset"]:active,
         border: 3px solid #F0597C;
         border-radius: 0px;
         background-color: transparent;
+        text-decoration: none;
         color: #F0597C;
         box-shadow: none;
     }
@@ -235,13 +244,20 @@ input[type="checkbox"]:not(:checked) {
     background: transparent;
 }
 
+input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    vertical-align: middle;
+}
+
 .form-control:focus {
     border-color: #F0597C;
     box-shadow: none;
     -webkit-box-shadow: none;
 }
 
-a, button, input {
+*, a, button, input {
     transition: 0.25s;
     -webkit-transition: 0.25s;
     -moz-transition: 0.25s;
@@ -447,7 +463,7 @@ nav li {
 .text-banner {
     text-align: center;
     position: relative;
-    min-height: 350px;
+    min-height: 250px;
 }
 
     .text-banner .banner-bg-title-text {
@@ -455,7 +471,7 @@ nav li {
         font-size: 10em;
         font-family: Niconne;
         position: absolute;
-        bottom: 10%;
+        bottom: 20%;
     }
 
     .text-banner .banner-title-text {
@@ -465,7 +481,7 @@ nav li {
         width: 100%;
         font-weight: bold;
         position: absolute;
-        bottom: 10%;
+        bottom: 20%;
     }
 
 
@@ -500,14 +516,21 @@ nav li {
 
 .appointment-form {
     min-height: 650px;
+    font-family: nexa-regular;
 }
 
 .create-appointment-part h3 {
-    font-weight: bold;
     margin-bottom: 25px;
+    font-family: nexa-bold;
+}
+/*--- Left box ---*/
+.create-appointment-part .left-box .next-button {
+    margin-top: 30px;
 }
 
-.create-appointment-part .selected-time {
+
+/*--- Right box ---*/
+.create-appointment-part .selected-date-time {
     padding: 10px;
     margin: 10px 0;
     text-align: center;
@@ -516,15 +539,59 @@ nav li {
     background-color: #f27390;
 }
 
-.create-appointment-part .selected-time-title {
-    margin-top: 25px;
-}
-
 .create-appointment-part p {
-    font-size: 1.3em;
-    line-height: 1.5em;
+    font-size: 1.4em;
+    line-height: 1.4em;
     font-weight: 300;
 }
+
+
+.create-appointment-part .right-box span.glyphicon {
+    font-size: 0.65em;
+    margin-right: 10px;
+    top: 0;
+    -webkit-transform: rotate(-15deg);
+    -moz-transform: rotate(-15deg);
+    transform: rotate(-15deg);
+}
+
+.create-appointment-part .right-box .toggle-btn {
+    font-size: 1.2em;
+    cursor: pointer;
+    float: right;
+    font-family: nexa-regular;
+    margin: 40px 0 10px 0;
+}
+
+.create-appointment-part .right-box #right_1_time .toggle-btn {
+    float: left;
+}
+
+
+
+/*--- Select time ---*/
+#select_time {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+
+    #select_time input[type="radio"],
+    #select_time label {
+        cursor: pointer;
+    }
+
+    #select_time li {
+        line-height: 35px;
+    }
+
+    #select_time label {
+        font-family: nexa-regular;
+        font-size: 1.2em;
+        margin: 0 0 0 10px;
+        vertical-align: middle;
+    }
 
 /*--- Datepicker ---*/
 #date_input {
@@ -580,10 +647,17 @@ nav li {
     line-height: 50px;
 }
 
+.ui-datepicker-calendar td span,
 .ui-datepicker-calendar td a {
     color: #fff;
     line-height: 30px;
-    font-family: nexa-regular;
+    font-size: 1.1em;
+    font-family: nexa-bold;
+}
+
+.ui-datepicker-calendar td span {
+    cursor: default;
+    opacity: 0.6;
 }
 
 .ui-state-active {
@@ -601,6 +675,7 @@ nav li {
         left: -7px;
         display: block;
     }
+
 
 /*--- Footer---*/
 footer {
