@@ -2,7 +2,7 @@ machine:
   services:
     - docker
   environment:
-    DB_CONNECTION_STRING: 'local.db'
+    DB_CONNECTION_STRING: 'Data Source=db/local.sqlite'
 dependencies:
   pre:
     - sudo chmod 777 ./ci/linux/init.sh && ./ci/linux/init.sh
