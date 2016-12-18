@@ -81,6 +81,10 @@ body {
     margin: 0;
 }
 
+a {
+    cursor: pointer;
+}
+
 /*--- Main structure ---*/
 header,
 #main_content,
@@ -147,6 +151,7 @@ input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofi
 }
 
 .btn,
+button,
 input[type="button"],
 input[type="button"]:active,
 input[type="submit"],
@@ -161,6 +166,8 @@ input[type="reset"]:active,
     background-color: #F0597C;
     color: #FFF;
     text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
     font-weight: bold;
     font-size: 1.1em;
 }
@@ -171,7 +178,8 @@ input[type="reset"]:active,
     input[type="button"]:hover,
     input[type="submit"]:hover,
     input[type="file"]:hover,
-    input[type="reset"]:hover .btn:focus,
+    input[type="reset"]:hover,
+    .btn:focus,
     .btn-default:focus,
     button:focus,
     input[type="button"]:focus,
@@ -189,6 +197,7 @@ input[type="reset"]:active,
         border: 3px solid #F0597C;
         border-radius: 0px;
         background-color: transparent;
+        text-decoration: none;
         color: #F0597C;
         box-shadow: none;
     }
@@ -235,13 +244,20 @@ input[type="checkbox"]:not(:checked) {
     background: transparent;
 }
 
+input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    vertical-align: middle;
+}
+
 .form-control:focus {
     border-color: #F0597C;
     box-shadow: none;
     -webkit-box-shadow: none;
 }
 
-a, button, input {
+*, a, button, input {
     transition: 0.25s;
     -webkit-transition: 0.25s;
     -moz-transition: 0.25s;
@@ -507,8 +523,14 @@ nav li {
     margin-bottom: 25px;
     font-family: nexa-bold;
 }
+/*--- Left box ---*/
+.create-appointment-part .left-box .next-button {
+    margin-top: 30px;
+}
 
-.create-appointment-part .selected-time {
+
+/*--- Right box ---*/
+.create-appointment-part .selected-date-time {
     padding: 10px;
     margin: 10px 0;
     text-align: center;
@@ -523,6 +545,7 @@ nav li {
     font-weight: 300;
 }
 
+
 .create-appointment-part .right-box span.glyphicon {
     font-size: 0.65em;
     margin-right: 10px;
@@ -531,6 +554,44 @@ nav li {
     -moz-transform: rotate(-15deg);
     transform: rotate(-15deg);
 }
+
+.create-appointment-part .right-box .toggle-btn {
+    font-size: 1.2em;
+    cursor: pointer;
+    float: right;
+    font-family: nexa-regular;
+    margin: 40px 0 10px 0;
+}
+
+.create-appointment-part .right-box #right_1_time .toggle-btn {
+    float: left;
+}
+
+
+
+/*--- Select time ---*/
+#select_time {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+
+    #select_time input[type="radio"],
+    #select_time label {
+        cursor: pointer;
+    }
+
+    #select_time li {
+        line-height: 35px;
+    }
+
+    #select_time label {
+        font-family: nexa-regular;
+        font-size: 1.2em;
+        margin: 0 0 0 10px;
+        vertical-align: middle;
+    }
 
 /*--- Datepicker ---*/
 #date_input {
@@ -614,6 +675,7 @@ nav li {
         left: -7px;
         display: block;
     }
+
 
 /*--- Footer---*/
 footer {
