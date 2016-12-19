@@ -1,7 +1,7 @@
 @model hhs_p6_webshop_project.Models.AppointmentModels.Appointment
 
 @{
-    ViewData["Title"] = "Maak afpsraak";
+    ViewData["Title"] = "Maak afspraak";
     ViewData["ShowBanner"] = false;
     ViewData["PinkBackground"] = false;
 }
@@ -86,6 +86,8 @@
                                 </div>
                             </div>
                         </div>
+                        <br />
+                        <span class="btn next-button" id="go_to_third">Naar stap 3</span>
                     </div>
 
                     <!-- Left box - Step 3, verify filled in data -->
@@ -102,8 +104,9 @@
 
             <div class="create-appointment-part col-md-5 col-sm-12 hm-pink-dark white-text">
 
-                <!-- Right box - Step 1, Select date -->
+                <!-- Right box - Step 1, Select date and time -->
                 <div class="right-box step-1" id="right_1">
+                    <!-- Select a date -->
                     <div id="right_1_date" class="time-date-box">
                         <h3>
                             <span class="glyphicon glyphicon-heart"></span>Selecteer een datum:
@@ -112,8 +115,10 @@
                         <!-- Calendar -->
                         <div id="calendar"></div>
 
-                        <span class="toggle-time-date toggle-btn">Selecteer een tijd ></span>
+                        <span class="toggle-time-date toggle-btn toggle-btn-disabled" title="Selecteer eerst een datum">Selecteer een tijd ></span>
                     </div>
+
+                    <!-- Select a time -->
                     <div id="right_1_time" class="time-date-box" style="display: none;">
                         <h3><span class="glyphicon glyphicon-heart"></span>Selecteer een tijdstip:</h3>
 
@@ -162,6 +167,7 @@
                     <p>
                         Overzicht van gegevens.
                     </p>
+                    <span id="back_to_second" class="toggle-btn">< Terug naar stap 2 om gegevens te wijzigen</span>
                 </div>
 
                 <input asp-for="AppointmentDateTime" id="date_input" value="" type="datetime" class="form-control" />

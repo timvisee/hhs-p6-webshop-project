@@ -257,7 +257,7 @@ input[type="radio"] {
     -webkit-box-shadow: none;
 }
 
-*, a, button, input {
+a, button, input {
     transition: 0.25s;
     -webkit-transition: 0.25s;
     -moz-transition: 0.25s;
@@ -515,7 +515,7 @@ nav li {
 }
 
 .appointment-form {
-    min-height: 650px;
+    min-height: 300px;
     font-family: nexa-regular;
 }
 
@@ -561,6 +561,11 @@ nav li {
     float: right;
     font-family: nexa-regular;
     margin: 40px 0 10px 0;
+}
+
+.create-appointment-part .right-box .toggle-btn-disabled {
+    opacity: 0.4;
+    cursor: default;
 }
 
 .create-appointment-part .right-box #right_1_time .toggle-btn {
@@ -640,11 +645,12 @@ nav li {
     text-align: center;
 }
 
-.ui-datepicker-calendar thead {
+.ui-datepicker-calendar thead th {
     font-weight: bold;
     font-size: 1.2em;
     text-transform: uppercase;
     line-height: 50px;
+    text-align: center;
 }
 
 .ui-datepicker-calendar td span,
@@ -653,6 +659,9 @@ nav li {
     line-height: 30px;
     font-size: 1.1em;
     font-family: nexa-bold;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
 }
 
 .ui-datepicker-calendar td span {
@@ -671,8 +680,9 @@ nav li {
         border-radius: 100%;
         width: 33px;
         height: 33px;
-        top: -9px;
-        left: -7px;
+        top: -3px;
+        left: 50%;
+        margin-left: -17px;
         display: block;
     }
 

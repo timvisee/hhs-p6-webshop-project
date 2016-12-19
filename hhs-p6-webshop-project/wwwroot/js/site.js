@@ -27,6 +27,8 @@ $(document).ready(function () {
             var inputDate = d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
             var showDate = d.getDate() + ' ' + monthNames[d.getMonth()] + ' ' + d.getFullYear();
 
+            $(".toggle-time-date").removeClass("toggle-btn-disabled").attr("title", "");
+
             $('#date_input').val(inputDate);
             $(".selected-date").each(function () {
                 $(this).html(showDate);
@@ -34,15 +36,16 @@ $(document).ready(function () {
         }
     });
 
+    // Remove default date class
+    $('.ui-state-active').removeClass('ui-state-active');
+
     $(".time-option").click(function () {
         console.log($(this).val());
 
         var currentValue = $('#date_input').val();
         console.log(currentValue + $(this).val());
 
-        $(".time-option, .time-option-label").click(function() {
-            $(".selected-time").html($(this).val());
-        });
+        $(".selected-time").html(" OM " + $(this).val());
 
 
         // Add data to input box
@@ -50,11 +53,18 @@ $(document).ready(function () {
     });
 
     $(".toggle-time-date").click(function () {
-        $(".time-date-box, #go_to_second").toggle();
+        if (! $(this).hasClass("toggle-btn-disabled")) {
+            $("#go_to_second").show();
+            $(".time-date-box").slideToggle(700, "easeInOutCubic");
+        }
     });
 
     $("#go_to_second, #back_to_first").click(function () {
         $("#left_1, #left_2, #right_1, #right_2").toggle();
+    });
+
+    $("#go_to_third, #back_to_second").click(function () {
+        $("#left_2, #left_3, #right_2, #right_3").toggle();
     });
 
 });
