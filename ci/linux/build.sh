@@ -18,10 +18,10 @@ then
 fi
 
 # Run the project to set up the test database, and validate the exit code
-log "Running project to set up the initial database...\n$ app --force-database-initialization --exit-after-initialization"
+log "Running project to set up the initial database...\n$ app --db-init-force --db-init-exit"
 cd hhs-p6-webshop-project
 
-dotnet run -- --force-database-initialization --exit-after-initialization
+dotnet run -- --db-init-force --db-init-exit
 rc=$?
 if [[ $rc != 0 ]]
 then
