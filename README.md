@@ -17,9 +17,9 @@ If building and/or running the project fails, you may need to install the follow
 
 ## Commandline Options
 The following command line arguments are supported:
-* `--always-skip-initialization`: Always skips the 3 second grace period in which the database can be reset
-* `--force-database-initialization`: Forces database initialization every time
-* `--exit-after-initialization`: Exits the application after the database has been initialized
+* `--db-init-skip`: Always skips the 3 second grace period in which the database can be reset
+* `--db-init-force`: Forces database initialization every time
+* `--db-init-exit`: Exits the application after the database has been initialized
 
 	
 ## Build
