@@ -1,7 +1,7 @@
 @model hhs_p6_webshop_project.Models.AppointmentModels.Appointment
 
 @{
-    ViewData["Title"] = "Maak afpsraak";
+    ViewData["Title"] = "Maak afspraak";
     ViewData["ShowBanner"] = false;
     ViewData["PinkBackground"] = false;
 }
@@ -86,6 +86,8 @@
                                 </div>
                             </div>
                         </div>
+                        <br />
+                        <span class="btn next-button" id="go_to_third">Naar stap 3</span>
                     </div>
 
                     <!-- Left box - Step 3, verify filled in data -->
@@ -165,6 +167,7 @@
                     <p>
                         Overzicht van gegevens.
                     </p>
+                    <span id="back_to_second" class="toggle-btn">< Terug naar stap 2 om gegevens te wijzigen</span>
                 </div>
 
                 <input asp-for="AppointmentDateTime" id="date_input" value="" type="datetime" class="form-control" />
