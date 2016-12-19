@@ -10,23 +10,51 @@ $(document).ready(function () {
         });
     });
 
-    var monthNames = ["JANUARI", "FEBRUARI", "MAART", "APRIL", "MEI", "JUNI",
-  "JULI", "AUGUSTUS", "SEPTEMBER", "OKTOBER", "NOVEMBER", "DECEMBER"
-    ];
+    /**
+     * Initialize some variables for the datepicker
+     */
+    var monthNames = ["JANUARI", "FEBRUARI", "MAART", "APRIL", "MEI", "JUNI", "JULI", "AUGUSTUS", "SEPTEMBER", "OKTOBER", "NOVEMBER", "DECEMBER"],
+    dateToday = new Date();
 
     $("#calendar").datepicker({
         prevText: "<",
         nextText: ">",
+        firstDay: 1,
+        minDate: dateToday,
+
         onSelect: function (date) {
             var d = new Date(date);
             var inputDate = d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
             var showDate = d.getDate() + ' ' + monthNames[d.getMonth()] + ' ' + d.getFullYear();
 
             $('#date_input').val(inputDate);
-            $(".selected-time").html(showDate);
-        },
+            $(".selected-date").each(function () {
+                $(this).html(showDate);
+            });
+        }
     });
 
+    $(".time-option").click(function () {
+        console.log($(this).val());
 
+        var currentValue = $('#date_input').val();
+        console.log(currentValue + $(this).val());
+
+        $(".time-option, .time-option-label").click(function() {
+            $(".selected-time").html($(this).val());
+        });
+
+
+        // Add data to input box
+        //$('#date_input').val(currentValue + "T" + $(this).val() + ":00");
+    });
+
+    $(".toggle-time-date").click(function () {
+        $(".time-date-box, #go_to_second").toggle();
+    });
+
+    $("#go_to_second, #back_to_first").click(function () {
+        $("#left_1, #left_2, #right_1, #right_2").toggle();
+    });
 
 });
