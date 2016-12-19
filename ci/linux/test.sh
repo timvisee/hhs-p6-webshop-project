@@ -9,7 +9,7 @@ log() {
 
 # Test the project, and validate the exit code
 log "Testing project..."
-dotnet test ./hhs-p6-webshop-project/project.json
+dotnet test ./hhs-p6-webshop-project-test/project.json
 rc=$?
 if [[ $rc != 0 ]]
 then
