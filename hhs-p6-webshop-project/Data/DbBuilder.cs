@@ -3,7 +3,6 @@ using hhs_p6_webshop_project.App.Util;
 using hhs_p6_webshop_project.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
 
 namespace hhs_p6_webshop_project.Data {
     public static class DbBuilder {
@@ -26,7 +25,7 @@ namespace hhs_p6_webshop_project.Data {
             Console.Write("Deleting database... (please be patient, this may take up to 20 seconds)", ConsoleColor.White);
             context.Database.EnsureDeleted();
             Console.Write("Provisioning new database... (please be patient, this may take up to 60 seconds)", ConsoleColor.White);
-            context.Database.Migrate();
+            context.Database.EnsureCreated();
 
             var user = new ApplicationUser {
                 Email = "beun@beun.it",
