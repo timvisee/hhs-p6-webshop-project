@@ -102,8 +102,9 @@
 
             <div class="create-appointment-part col-md-5 col-sm-12 hm-pink-dark white-text">
 
-                <!-- Right box - Step 1, Select date -->
+                <!-- Right box - Step 1, Select date and time -->
                 <div class="right-box step-1" id="right_1">
+                    <!-- Select a date -->
                     <div id="right_1_date" class="time-date-box">
                         <h3>
                             <span class="glyphicon glyphicon-heart"></span>Selecteer een datum:
@@ -112,8 +113,10 @@
                         <!-- Calendar -->
                         <div id="calendar"></div>
 
-                        <span class="toggle-time-date toggle-btn">Selecteer een tijd ></span>
+                        <span class="toggle-time-date toggle-btn toggle-btn-disabled" title="Selecteer eerst een datum">Selecteer een tijd ></span>
                     </div>
+
+                    <!-- Select a time -->
                     <div id="right_1_time" class="time-date-box" style="display: none;">
                         <h3><span class="glyphicon glyphicon-heart"></span>Selecteer een tijdstip:</h3>
 
