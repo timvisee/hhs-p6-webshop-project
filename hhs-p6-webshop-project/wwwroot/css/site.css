@@ -686,6 +686,57 @@ nav li {
         display: block;
     }
 
+/*--- Appointment overview ---*/
+.table td:last-child {
+    opacity: 0;
+}
+
+.table tr:hover td:last-child {
+    opacity: 1;
+}
+
+.table tr td a {
+    padding:5px;
+    margin-left:5px;
+    border: 3px solid #F0597C;
+    border-radius: 0px;
+    background-color: #F0597C;
+    color: #FFF;
+}
+
+.table tr td a:hover{    
+    border: 3px solid #F0597C;
+    border-radius: 0px;
+    background-color: transparent;
+    color: #F0597C;
+    text-decoration: none;
+}
+
+.table thead tr th{
+    border-color:#f0597c;
+}
+
+.table tbody tr td {
+    border-color: #f27390;
+}
+
+.detailCard{
+    width:400px;
+    height:auto;
+    display:block;
+    margin:auto;
+    border-radius:4px;
+    padding-bottom:25px;
+}
+
+.detailCard h4{
+    background-color:#f0597c;
+    width:100%;
+    color:#FFF;
+    border-top-left-radius:4px;
+    border-top-right-radius:4px;
+    padding:10px 25px;
+}
 
 /*--- Footer---*/
 footer {
