@@ -4,10 +4,13 @@
     ViewData["Title"] = "Bekijk afspraak";
 }
 
-<h2>Afspraak</h2>
 
 <div class="detailCard box-shadow">
-    <h4>Bekijk afspraak</h4>
+    <div class="detailCardHead">
+        <a asp-action="Index" class="detailCardBack"><</a>
+        <a asp-action="Edit" asp-route-id="@Model.ID" class="detailCardAdd">Edit</a>
+        <h4>Bekijk afspraak</h4>
+    </div>
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Confirmation)
@@ -46,6 +49,4 @@
             @Html.DisplayFor(model => model.Phone)
         </dd>
     </dl>
-    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> 
-    <a asp-action="Index">Terug naar overzicht</a>
 </div>

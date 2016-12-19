@@ -727,15 +727,39 @@ nav li {
     margin:auto;
     border-radius:4px;
     padding-bottom:25px;
+    margin-top:5%;
+    margin-bottom:5%;
 }
 
-.detailCard h4{
+.detailCardHead{
     background-color:#f0597c;
     width:100%;
     color:#FFF;
     border-top-left-radius:4px;
     border-top-right-radius:4px;
-    padding:10px 25px;
+    padding:5px 25px;
+    margin-bottom:20px;
+    text-align:center;
+}
+
+.detailCardHead a{
+    color:#FFF;
+}
+
+.detailCardHead a:hover{
+    text-decoration:none;
+    color:#fce8e7;
+}
+
+.detailCardBack{
+    font-size:25px;
+    float:left;
+}
+
+.detailCardAdd{
+    float:right;
+    line-height: 37px;
+    font-size: 17px;
 }
 
 /*--- Footer---*/
