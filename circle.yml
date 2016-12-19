@@ -2,7 +2,7 @@ machine:
   services:
     - docker
   environment:
-    DB_CONNECTION_STRING: 'Data source=db/local.db'
+    DB_CONNECTION_STRING: 'Data source=local.db'
 dependencies:
   pre:
     - sudo chmod 777 ./ci/linux/init.sh && ./ci/linux/init.sh

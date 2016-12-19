@@ -21,10 +21,6 @@ fi
 log "Running project to set up the initial database...\n$ app --force-database-initialization --exit-after-initialization"
 cd hhs-p6-webshop-project
 
-# Create a directory to store the database file in
-mkdir db
-chmod -R 777 ./db
-
 dotnet run -- --force-database-initialization --exit-after-initialization
 rc=$?
 if [[ $rc != 0 ]]
