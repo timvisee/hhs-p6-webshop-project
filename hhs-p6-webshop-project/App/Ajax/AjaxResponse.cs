@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
-using Remotion.Linq.Parsing.ExpressionVisitors;
-using SparkPost;
 
 namespace hhs_p6_webshop_project.App.Ajax {
     public class AjaxResponse {
