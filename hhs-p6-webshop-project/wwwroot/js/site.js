@@ -1,7 +1,9 @@
 // Run this code when the page is finished loading
 $(document).ready(function () {
 
-    // Toggle the search box when the search button is clicked
+    /**
+     * Toggle the search box when the search button is clicked
+     */
     $("#header_search_toggle").click(function () {
         // Make the search box and field visible
         $("#search_box").animate({ width: 'toggle' }, 350, function () {
@@ -10,10 +12,34 @@ $(document).ready(function () {
         });
     });
 
-    //Scroll down on click
+    /**
+     * Scroll down when you click the scroll down button
+     */
     $(".scrollToggle").click(function () {
-        console.log("TEST");
-        $("html, body").animate({ scrollTop: $(window).height() + 100}, 1200, "easeInOutCubic");
+        $("html, body").animate({ scrollTop: $(window).height() }, 1200, "easeInOutCubic");
+    });
+
+    /**
+     * Function for changing the height of the home banner
+     */
+    function setHomeBannerHeight() {
+        var scrHeight = $(window).height();
+        var headerHeight = $("#header_top").height();
+
+        $("#home_banner").height(scrHeight - headerHeight);
+    }
+    setHomeBannerHeight();
+
+    /**
+     * Resize the height of the banner when you resize your window
+     */
+    $(window).resize(function () {
+        var scrWidth = $(window).width();
+
+        // Check for mobile devices
+        if (scrWidth > 600) {
+            setHomeBannerHeight();
+        }
     });
 
     /**
@@ -22,6 +48,9 @@ $(document).ready(function () {
     var monthNames = ["JANUARI", "FEBRUARI", "MAART", "APRIL", "MEI", "JUNI", "JULI", "AUGUSTUS", "SEPTEMBER", "OKTOBER", "NOVEMBER", "DECEMBER"],
     dateToday = new Date();
 
+    /**
+     * Initialize datepicker
+     */
     $("#calendar").datepicker({
         prevText: "<",
         nextText: ">",
@@ -58,8 +87,12 @@ $(document).ready(function () {
         //$('#date_input').val(currentValue + "T" + $(this).val() + ":00");
     });
 
+
+    /**
+     * Toggle the different sections for creating an appointment
+     */
     $(".toggle-time-date").click(function () {
-        if (! $(this).hasClass("toggle-btn-disabled")) {
+        if (!$(this).hasClass("toggle-btn-disabled")) {
             $("#go_to_second").show();
             $(".time-date-box").slideToggle(700, "easeInOutCubic");
         }
@@ -73,4 +106,15 @@ $(document).ready(function () {
         $("#left_2, #left_3, #right_2, #right_3").toggle();
     });
 
+    /**
+     * Enable validation for the email fields
+     */
+    $('#create_appointment_form').validate({
+        rules: {
+            Mail: 'required',
+            mail_verify: {
+                equalTo: '#Mail'
+            }
+        }
+    });
 });

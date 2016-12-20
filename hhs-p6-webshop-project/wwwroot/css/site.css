@@ -55,12 +55,24 @@ body {
     color: #fac9c4;
 }
 
+.hm-white-text {
+    color: #fff;
+}
+
+.hm-white-light-text {
+    color: rgba(255,255,255,0.75);
+}
+
 .hm-pink-light {
     background-color: #fce8e7;
 }
 
 .hm-pink-light-text {
     color: #fce8e7;
+}
+
+.hm-white-transparent-text {
+    color: rgba(255, 255, 255, 0.4);
 }
 
 .hm-pink-dark {
@@ -105,6 +117,13 @@ footer {
     box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 6px 6px rgba(0,0,0,0);
 }
 
+.no-user-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+
 /*--- Typography ---*/
 .font-raleway {
     font-family: Raleway;
@@ -116,6 +135,10 @@ footer {
 
 .font-niconne {
     font-family: Niconne;
+}
+
+.font-nexa-regular {
+    font-family: nexa-regular;
 }
 
 .form-horizontal .control-label {
@@ -293,6 +316,7 @@ a, button, input {
 /*--- Top part of header ---*/
 header {
     position: relative;
+    z-index: 10;
 }
 
 #header_nav,
@@ -464,6 +488,7 @@ nav li {
     text-align: center;
     position: relative;
     min-height: 250px;
+    z-index: 7;
 }
 
     .text-banner .banner-bg-title-text {
@@ -484,6 +509,130 @@ nav li {
         bottom: 20%;
     }
 
+/*--- Home banner ---*/
+#home_banner {
+    height: 100vh;
+    width: 100%;
+    min-height: 450px;
+    overflow: hidden;
+    position: relative;
+    z-index: 5;
+}
+
+    #home_banner img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translateY(-50%) translateX(-50%);
+        -moz-transform: translateY(-50%) translateX(-50%);
+        transform: translateY(-50%) translateX(-50%);
+        z-index: 0;
+        opacity: 1;
+        transition: opacity 5s ease-in-out;
+        min-width: 100%;
+        max-width: none;
+        min-height: 100%;
+    }
+
+.scrollToggle {
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    font-size: 1.2em;
+    height: 4em;
+}
+
+    .scrollToggle:hover,
+    .scrollToggle:focus,
+    .scrollToggle:active {
+        cursor: pointer;
+        color: #f0597c;
+    }
+
+.home-button-container {
+    width: 40%;
+    height: 65px;
+    margin: auto;
+    display: block;
+    z-index: 7;
+    bottom: 6em;
+    position: absolute;
+    max-width: 100%;
+    left: 50%;
+    margin-left: -20%;
+}
+
+    .home-button-container a {
+        width: 45%;
+        background-color: transparent;
+        color: #fff;
+        border: 5px solid #fff;
+        text-transform: uppercase;
+        display: inline-block;
+        line-height: 55px;
+        font-weight: bold;
+        text-align: center;
+        font-size: 1.7em;
+    }
+
+        .home-button-container a:first-child {
+            margin-right: 9%;
+            border: 5px solid #F0597C;
+            background-color: #F0597C;
+        }
+
+        .home-button-container a:hover,
+        .home-button-container a:active,
+        .home-button-container a:focus {
+            background-color: #fff;
+            color: #f0597c;
+            text-decoration: none;
+        }
+
+        .home-button-container a:first-child:hover,
+        .home-button-container a:first-child:active,
+        .home-button-container a:first-child:focus {
+            background-color: transparent;
+            text-decoration: none;
+        }
+
+/*--- Home banner text ---*/
+.home-text-banner {
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    height: 250px;
+    bottom: 10em;
+    z-index: 7;
+}
+
+    .home-text-banner .banner-bg-title-text {
+        width: 100%;
+        font-size: 13em;
+        font-family: Niconne;
+        position: absolute;
+        bottom: 20%;
+    }
+
+    .home-text-banner .banner-title-text {
+        font-family: Raleway;
+        font-size: 2.5em;
+        width: 100%;
+        position: absolute;
+        bottom: 30%;
+    }
+
+    .home-text-banner .banner-undertitle-text {
+        font-family: Roboto;
+        font-size: 2.6em;
+        text-transform: uppercase;
+        font-weight: bold;
+        width: 100%;
+        position: absolute;
+        bottom: 15%;
+    }
 
 /*--- Content ---*/
 .container {
@@ -497,28 +646,6 @@ nav li {
 .banner-image {
     max-width: 100%;
     margin: 0;
-}
-
-.scrollToggle{
-    margin-left: 35%;
-    width: 20%;
-    position: absolute;
-    bottom: 3%;
-}
-
-.scrollToggle a{    
-    color: #fff;
-    text-align: center;
-    display: block;
-    width:50px;
-    margin:auto;
-}
-
-.scrollToggle a:hover,
-.scrollToggle a:focus,
-.scrollToggle a:active{
-    color:#f0597c;
-    text-decoration:none;
 }
 
 /*--- Create Appointment ---*/
@@ -538,18 +665,17 @@ nav li {
 
 .appointment-form {
     min-height: 300px;
-    font-family: nexa-regular;
 }
 
 .create-appointment-part h3 {
     margin-bottom: 25px;
     font-family: nexa-bold;
 }
+
 /*--- Left box ---*/
 .create-appointment-part .left-box .next-button {
     margin-top: 30px;
 }
-
 
 /*--- Right box ---*/
 .create-appointment-part .selected-date-time {
@@ -581,7 +707,6 @@ nav li {
     font-size: 1.2em;
     cursor: pointer;
     float: right;
-    font-family: nexa-regular;
     margin: 40px 0 10px 0;
 }
 
@@ -718,68 +843,76 @@ nav li {
 }
 
 .table tr td a {
-    padding:5px;
-    margin-left:5px;
+    padding: 5px;
+    margin-left: 5px;
     border: 3px solid #F0597C;
     border-radius: 0px;
     background-color: #F0597C;
     color: #FFF;
+    font-weight: bold;
+    font-size: 1.1em;
+    text-transform: uppercase;
 }
 
-.table tr td a:hover{    
-    border: 3px solid #F0597C;
-    border-radius: 0px;
-    background-color: transparent;
-    color: #F0597C;
-    text-decoration: none;
-}
+    .table tr td a:hover,
+    .table tr td a:active,
+    .table tr td a:focus {
+        border: 3px solid #F0597C;
+        border-radius: 0px;
+        background-color: transparent;
+        color: #F0597C;
+        text-decoration: none;
+    }
 
-.table thead tr th{
-    border-color:#f0597c;
+.table thead tr th {
+    border-color: #f0597c;
 }
 
 .table tbody tr td {
     border-color: #f27390;
 }
 
-.detailCard{
-    width:400px;
-    height:auto;
-    display:block;
-    margin:auto;
-    border-radius:4px;
-    padding-bottom:25px;
-    margin-top:5%;
-    margin-bottom:5%;
+.detailCard {
+    width: 400px;
+    height: auto;
+    display: block;
+    margin: auto;
+    border-radius: 4px;
+    padding-bottom: 25px;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 
-.detailCardHead{
-    background-color:#f0597c;
-    width:100%;
-    color:#FFF;
-    border-top-left-radius:4px;
-    border-top-right-radius:4px;
-    padding:5px 25px;
-    margin-bottom:20px;
-    text-align:center;
+.detailCardHead {
+    background-color: #f0597c;
+    width: 100%;
+    color: #FFF;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    padding: 5px 25px;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
-.detailCardHead a{
-    color:#FFF;
+    .detailCardHead a {
+        color: #FFF;
+        display: block;
+    }
+
+        .detailCardHead a:hover,
+        .detailCardHead a:focus,
+        .detailCardHead a:active {
+            text-decoration: none;
+            color: #fce8e7;
+        }
+
+.detailCardBack {
+    font-size: 25px;
+    float: left;
 }
 
-.detailCardHead a:hover{
-    text-decoration:none;
-    color:#fce8e7;
-}
-
-.detailCardBack{
-    font-size:25px;
-    float:left;
-}
-
-.detailCardAdd{
-    float:right;
+.detailCardAdd {
+    float: right;
     line-height: 37px;
     font-size: 17px;
 }

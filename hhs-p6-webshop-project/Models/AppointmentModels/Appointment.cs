@@ -8,10 +8,10 @@ namespace hhs_p6_webshop_project.Models.AppointmentModels {
     public class Appointment {
         public int ID { get; set; }
 
-        [DisplayName("E-Mail")]
+        [DisplayName("E-Mailadres*")]
         public string Mail { get; set; }
 
-        [DisplayName("Trouwdatum")]
+        [DisplayName("Trouwdatum*")]
         public DateTime DateMarried { get; set; }
 
         [DisplayName("Datum afspraak WERKT NIET")]
@@ -20,7 +20,7 @@ namespace hhs_p6_webshop_project.Models.AppointmentModels {
         [DisplayName("Datum afspraak")]
         public DateTime AppointmentDateTime { get; set; }
 
-        [DisplayName("Voor- en achternaam")]
+        [DisplayName("Voor- en achternaam*")]
         public string Name { get; set; }
 
         [DisplayName("Telefoonnummer")]
