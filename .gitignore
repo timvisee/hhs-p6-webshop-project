@@ -220,3 +220,4 @@ fabric.properties
 project.lock.json
 wwwroot/lib
 TestResult.xml
+sh.exe.stackdump
