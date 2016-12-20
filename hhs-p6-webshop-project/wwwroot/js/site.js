@@ -10,6 +10,12 @@ $(document).ready(function () {
         });
     });
 
+    //Scroll down on click
+    $(".scrollToggle").click(function () {
+        console.log("TEST");
+        $("html, body").animate({ scrollTop: $(window).height() + 100}, 1200, "easeInOutCubic");
+    });
+
     /**
      * Initialize some variables for the datepicker
      */

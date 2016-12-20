@@ -499,6 +499,28 @@ nav li {
     margin: 0;
 }
 
+.scrollToggle{
+    margin-left: 35%;
+    width: 20%;
+    position: absolute;
+    bottom: 3%;
+}
+
+.scrollToggle a{    
+    color: #fff;
+    text-align: center;
+    display: block;
+    width:50px;
+    margin:auto;
+}
+
+.scrollToggle a:hover,
+.scrollToggle a:focus,
+.scrollToggle a:active{
+    color:#f0597c;
+    text-decoration:none;
+}
+
 /*--- Create Appointment ---*/
 #create_appointment {
     height: 450px;
