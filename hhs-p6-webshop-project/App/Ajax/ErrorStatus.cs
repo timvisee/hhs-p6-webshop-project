@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace hhs_p6_webshop_project.App.Ajax {
     public class ErrorStatus {
@@ -32,13 +33,14 @@ namespace hhs_p6_webshop_project.App.Ajax {
         }
 
         /// <summary>
-        /// Get the error as object, to format it using Json.
+        /// Get the error status as dictionary.
         /// </summary>
-        /// <returns>Object.</returns>
-        public Object AsObject() {
-            return new {
-                message = Message,
-                code = Code
+        /// <returns>Dictionary.</returns>
+        public Dictionary<string, object> ToDictionary() {
+            // Create the dictionary, and return it
+            return new Dictionary<string, object>() {
+                { "code", Code },
+                { "message", Message }
             };
         }
     }
