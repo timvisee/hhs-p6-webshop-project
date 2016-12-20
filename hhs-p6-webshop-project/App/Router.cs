@@ -1,10 +1,10 @@
 ﻿using System;
+using hhs_p6_webshop_project.Controllers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 
 namespace hhs_p6_webshop_project.App {
     public class Router {
-
         /// <summary>
         /// Set up the router for MVC.
         /// </summary>
@@ -22,8 +22,13 @@ namespace hhs_p6_webshop_project.App {
             return routes => {
                 // Default router
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    name: "Default",
+                    template: "{controller}/{action}/{id?}",
+                    defaults: new {
+                        controller = "Home",
+                        action = "Index"
+                    }
+                );
             };
         }
     }
