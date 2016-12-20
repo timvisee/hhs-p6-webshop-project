@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
@@ -6,7 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 namespace hhs_p6_webshop_project.App.Ajax {
     public class AjaxResponse {
 
-        // Define the error status
+        /// <summary>
+        /// Response data.
+        /// </summary>
+        public Dictionary<string, object> Data = new Dictionary<string, object>();
+
+        /// <summary>
+        /// Error status, or null if there's no error.
+        /// </summary>
         public ErrorStatus ErrorStatus { get; set; } = null;
 
         /// <summary>
@@ -23,20 +31,19 @@ namespace hhs_p6_webshop_project.App.Ajax {
         }
 
         /// <summary>
-        /// Define a conversion operator to convert the response to the Json format.
+        /// Format the AJAX response to Json data, used to send to the client.
         /// </summary>
-        /// <param name="response">Ajax response object.</param>
-        /// <returns>Json response.</returns>
-        public static implicit operator JsonResult(AjaxResponse response) {
+        /// <returns>Json formatted AJAX result.</returns>
+        public JsonResult FormatJson() {
             // Create a new base object
             // TODO: The base object is empty here. Fill it immediately for better performance.
             Object result = new {
-                status = response.ErrorStatus == null
+                status = ErrorStatus == null
             };
 
             // Add the error response if set
-            if (response.ErrorStatus != null) {
-                CopyValues(result, response.ErrorStatus.AsObject());
+            if (ErrorStatus != null) {
+                MergeObjects(result, ErrorStatus.AsObject());
             }
 
             // TODO: Respond with the actual data here!
@@ -51,7 +58,7 @@ namespace hhs_p6_webshop_project.App.Ajax {
         /// <param name="source">Source object.</param>
         /// <typeparam name="T">Object type.</typeparam>
         /// <returns>Target object, may be used for method chaining.</returns>
-        public static T CopyValues<T>(T target, T source) {
+        public static T MergeObjects<T>(T target, T source) {
             // Get the actual type
             Type t = typeof(T);
 
@@ -67,6 +74,15 @@ namespace hhs_p6_webshop_project.App.Ajax {
 
             // Return the target, for method chaining
             return target;
+        }
+
+        /// <summary>
+        /// Define a conversion operator to convert the response to the Json format.
+        /// </summary>
+        /// <param name="response">Ajax response object.</param>
+        /// <returns>Json response.</returns>
+        public static implicit operator JsonResult(AjaxResponse response) {
+            return response.FormatJson();
         }
     }
 }
