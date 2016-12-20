@@ -31,6 +31,15 @@ namespace hhs_p6_webshop_project.App.Ajax {
         }
 
         /// <summary>
+        /// Set the given data field.
+        /// </summary>
+        /// <param name="field">Field name to set.</param>
+        /// <param name="value">Field value.</param>
+        public void SetDataField(string field, object value) {
+            Data.Add(field, value);
+        }
+
+        /// <summary>
         /// Create a dictionary for this AJAX response.
         /// </summary>
         /// <returns>Dictionary.</returns>
