@@ -1,5 +1,4 @@
 ﻿using System;
-using hhs_p6_webshop_project.Controllers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 
