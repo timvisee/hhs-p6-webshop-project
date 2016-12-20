@@ -11,9 +11,9 @@
     <h2 class="banner-title-text">Maak je pasafspraak</h2>
 </div>
 
-<form asp-action="Create">
+<form asp-action="Create" id="create_appointment_form">
     <div class="row" id="create_appointment">
-        <div class="appiontment-wrapper">
+        <div class="appiontment-wrapper font-nexa-regular">
             <div class="col-sm-12 col-md-7 box-shadow appointment-form">
                 <div class="create-appointment-part col-md-2 col-sm-12">
 
@@ -75,7 +75,11 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                HERHAAL EMAIL ADRES
+                                <label class="col-md-12 control-label">Herhaal E-Mailadres*</label>
+                                <div class="col-md-12">
+                                    <input type="text" equalTo='#Mail' id="mail_verify" name="mail_verify" class="form-control email-verify" equalTo="#Mail" />
+                                    <span data-valmsg-for="mail_verify" data-valmsg-replace="true" class="text-danger" />
+                                </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-1">
