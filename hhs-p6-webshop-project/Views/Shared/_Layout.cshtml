@@ -110,6 +110,15 @@
         @* Home Banner image *@
         @if (showHomeBanner) {
         <div id="home_banner">
+            <div class="home-text-banner">
+                <h1 class="banner-bg-title-text hm-white-transparent-text">Bruidswinkel</h1>
+                <h2 class="banner-title-text hm-white-light-text">Al bijna 50 jaar de grootste bruidszaak van Nederland.</h2>
+                <h2 class="banner-undertitle-text hm-white-text">Hoe kunnen we jou helpen?</h2>
+            </div>
+            <div class="home-button-container">
+                <a asp-controller="Appointments" asp-action="Create">Bruid</a>
+                <a asp-controller="Appointments" asp-action="Create">Bruidegom</a>
+            </div>
             <img class="banner-image" src="@bannerPath" alt="banner" />
             <div class="scrollToggle white-text">
                 <p class="scroll-down-text font-nexa-regular">Scroll</p>

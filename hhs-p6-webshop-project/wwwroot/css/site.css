@@ -55,12 +55,24 @@ body {
     color: #fac9c4;
 }
 
+.hm-white-text {
+    color: #fff;
+}
+
+.hm-white-light-text {
+    color: rgba(255,255,255,0.75);
+}
+
 .hm-pink-light {
     background-color: #fce8e7;
 }
 
 .hm-pink-light-text {
     color: #fce8e7;
+}
+
+.hm-white-transparent-text {
+    color: rgba(255, 255, 255, 0.4);
 }
 
 .hm-pink-dark {
@@ -469,6 +481,7 @@ nav li {
     text-align: center;
     position: relative;
     min-height: 250px;
+    z-index: 7;
 }
 
     .text-banner .banner-bg-title-text {
@@ -489,6 +502,40 @@ nav li {
         bottom: 20%;
     }
 
+
+.home-text-banner {
+    text-align: center;
+    position: relative;
+    min-height: 250px;
+    margin-top: 25vh;
+    z-index: 7;
+}
+
+    .home-text-banner .banner-bg-title-text {
+        width: 100%;
+        font-size: 13em;
+        font-family: Niconne;
+        position: absolute;
+        bottom: 20%;
+    }
+
+    .home-text-banner .banner-title-text {
+        font-family: Raleway;
+        font-size: 2.5em;
+        width: 100%;
+        position: absolute;
+        bottom: 30%;
+    }
+
+    .home-text-banner .banner-undertitle-text {
+        font-family: Roboto;
+        font-size: 2.6em;
+        text-transform: uppercase;
+        font-weight: bold;
+        width: 100%;
+        position: absolute;
+        bottom: 15%;
+    }
 
 /*--- Content ---*/
 .container {
@@ -543,6 +590,51 @@ nav li {
         cursor: pointer;
         color: #f0597c;
     }
+
+.home-button-container {
+    width: 35%;
+    height: 75px;
+    margin: auto;
+    display: block;
+    z-index: 7;
+    top: 0;
+    position: relative;
+}
+
+    .home-button-container a {
+        width: 45%;
+        background-color: transparent;
+        color: #fff;
+        border: 5px solid #fff;
+        text-transform: uppercase;
+        display: inline-block;
+        line-height: 55px;
+        font-weight: bold;
+        text-align: center;
+        font-size: 1.7em;
+    }
+
+        .home-button-container a:first-child {
+            margin-right: 9%;
+            border: 5px solid #F0597C;
+            background-color: #F0597C;
+        }
+
+        .home-button-container a:hover,
+        .home-button-container a:active,
+        .home-button-container a:focus {
+            background-color: #fff;
+            color: #f0597c;
+            text-decoration: none;
+        }
+
+        .home-button-container a:first-child:hover,
+        .home-button-container a:first-child:active,
+        .home-button-container a:first-child:focus {
+            background-color: transparent;
+            text-decoration: none;
+        }
+
 
 /*--- Create Appointment ---*/
 #create_appointment {
@@ -740,27 +832,27 @@ nav li {
     opacity: 1;
 }
 
-.table tr td a{
-    padding:5px;
-    margin-left:5px;
+.table tr td a {
+    padding: 5px;
+    margin-left: 5px;
     border: 3px solid #F0597C;
     border-radius: 0px;
     background-color: #F0597C;
     color: #FFF;
     font-weight: bold;
     font-size: 1.1em;
-    text-transform:uppercase;
+    text-transform: uppercase;
 }
 
-.table tr td a:hover,
-.table tr td a:active,
-.table tr td a:focus{
-    border: 3px solid #F0597C;
-    border-radius: 0px;
-    background-color: transparent;
-    color: #F0597C;
-    text-decoration: none;
-}
+    .table tr td a:hover,
+    .table tr td a:active,
+    .table tr td a:focus {
+        border: 3px solid #F0597C;
+        border-radius: 0px;
+        background-color: transparent;
+        color: #F0597C;
+        text-decoration: none;
+    }
 
 .table thead tr th {
     border-color: #f0597c;
@@ -792,17 +884,17 @@ nav li {
     text-align: center;
 }
 
-.detailCardHead a{
-    color:#FFF;
-    display:block;
-}
+    .detailCardHead a {
+        color: #FFF;
+        display: block;
+    }
 
-.detailCardHead a:hover,
-.detailCardHead a:focus,
-.detailCardHead a:active{
-    text-decoration:none;
-    color:#fce8e7;
-}
+        .detailCardHead a:hover,
+        .detailCardHead a:focus,
+        .detailCardHead a:active {
+            text-decoration: none;
+            color: #fce8e7;
+        }
 
 .detailCardBack {
     font-size: 25px;
