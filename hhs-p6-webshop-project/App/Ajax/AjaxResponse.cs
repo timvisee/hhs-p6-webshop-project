@@ -15,6 +15,14 @@ namespace hhs_p6_webshop_project.App.Ajax {
         public AjaxResponse() {}
 
         /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="errorStatus">Error status.</param>
+        public AjaxResponse(ErrorStatus errorStatus) {
+            ErrorStatus = errorStatus;
+        }
+
+        /// <summary>
         /// Define a conversion operator to convert the response to the Json format.
         /// </summary>
         /// <param name="response">Ajax response object.</param>
