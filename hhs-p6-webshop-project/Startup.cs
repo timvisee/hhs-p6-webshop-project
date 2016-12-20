@@ -1,5 +1,5 @@
 using System;
-using hhs_p6_webshop_project.App;
+using hhs_p6_webshop_project.App.Config;
 using hhs_p6_webshop_project.App.Util;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -18,6 +18,7 @@ namespace hhs_p6_webshop_project {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile("appsettings.secret.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 
             if (env.IsDevelopment()) {
@@ -31,10 +32,18 @@ namespace hhs_p6_webshop_project {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
-            // Get the database connection string, and check whether it's remote
-            String dbConStr = DbUtils.GetConnectionString();
-            bool isRemote = DbUtils.IsRemote();
+            //Initialize configuration options
+            // Adds services required for using options.
+            services.AddOptions();
 
+            // Configure with Microsoft.Extensions.Options.ConfigurationExtensions
+            // Binding the whole configuration should be rare, subsections are more typical.
+            services.Configure<SecureAppConfig>(Program.FileConfig);
+
+            // Get the database connection string, and check whether it's remote
+            String dbConStr = DbUtils.GetAndInjectConnectionString();
+            bool isRemote = DbUtils.IsRemote();
+            
             // Add framework services for local or remote databases
             if(isRemote)
                 services.AddDbContext<ApplicationDbContext>(options =>
@@ -86,8 +95,11 @@ namespace hhs_p6_webshop_project {
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
 
-            // Create a router instance
-            new Router().SetUp(app);
+            app.UseMvc(routes => {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
 
 #if DEBUG
             // Seed database if not running in production

@@ -222,3 +222,4 @@ wwwroot/lib
 hhs-p6-webshop-project/node_modules
 TestResult.xml
 sh.exe.stackdump
+*.secret.json

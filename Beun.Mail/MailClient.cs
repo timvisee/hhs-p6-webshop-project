@@ -9,7 +9,16 @@ namespace Beun.Mail
     public class MailClient
     {
 
+        public static string ApiKey { get; set; }
+
         public static void SendAppointmentEmail(string name, string to, DateTime date, string garment) {
+            if (string.IsNullOrWhiteSpace(ApiKey)) {
+                Console.WriteLine("Cancelling call to email API, ApiKey is not set!");
+                return;
+            }
+
+
+
             var transmission = new Transmission();
 
 
@@ -27,7 +36,7 @@ namespace Beun.Mail
             };
             transmission.Recipients.Add(recipient);
 
-            var client = new Client("195317d791a943fe7052dbd95223bda5bea15b0e");
+            var client = new Client(ApiKey);
             client.CustomSettings.SendingMode = SendingModes.Sync;
 
             try {
