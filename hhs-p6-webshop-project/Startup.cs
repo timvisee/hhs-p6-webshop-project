@@ -1,4 +1,5 @@
 using System;
+using hhs_p6_webshop_project.App;
 using hhs_p6_webshop_project.App.Util;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -85,11 +86,8 @@ namespace hhs_p6_webshop_project {
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
 
-            app.UseMvc(routes => {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            // Create a router instance
+            new Router().SetUp(app);
 
 #if DEBUG
             // Seed database if not running in production
