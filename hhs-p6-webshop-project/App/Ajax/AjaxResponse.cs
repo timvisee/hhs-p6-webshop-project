@@ -10,7 +10,7 @@ namespace hhs_p6_webshop_project.App.Ajax {
         /// <summary>
         /// Response data.
         /// </summary>
-        public Dictionary<string, object> Data = new Dictionary<string, object>();
+        public Dictionary<string, object> Data { get; set; } = new Dictionary<string, object>();
 
         /// <summary>
         /// Error status, or null if there's no error.
