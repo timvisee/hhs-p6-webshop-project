@@ -219,3 +219,4 @@ fabric.properties
 # Project files
 project.lock.json
 wwwroot/lib
+TestResult.xml
