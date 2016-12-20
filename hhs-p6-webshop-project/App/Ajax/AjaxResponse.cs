@@ -35,8 +35,13 @@ namespace hhs_p6_webshop_project.App.Ajax {
         /// </summary>
         /// <param name="field">Field name to set.</param>
         /// <param name="value">Field value.</param>
-        public void SetDataField(string field, object value) {
+        /// <returns>This for method chaining.</returns>
+        public AjaxResponse SetDataField(string field, object value) {
+            // Set the field
             Data.Add(field, value);
+
+            // Return this, for method chaining
+            return this;
         }
 
         /// <summary>

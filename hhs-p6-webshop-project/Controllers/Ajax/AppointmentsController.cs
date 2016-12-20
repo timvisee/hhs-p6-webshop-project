@@ -8,23 +8,18 @@ namespace hhs_p6_webshop_project.Controllers.Ajax {
 
         [HttpGet("")]
         public JsonResult Index() {
-            return Json(new {
-                message = "AJAX appointment endpoint index",
-                status = "ok"
-            });
+            // Respond with a not found error
+            return new AjaxResponse(new NotFoundErrorStatus());
         }
 
         [HttpGet("GetDates")]
-        public JsonResult Blyat() {
-            return Json(new {
-                message = "AJAX appointment date fetch endpoint, not implemented yet",
-                status = "ok"
-            });
-        }
-
-        [HttpGet("Test")]
-        public JsonResult Test() {
-            return new AjaxResponse();
+        public JsonResult GetDates() {
+            // Return the data fields
+            // TODO: Implement this!
+            return new AjaxResponse().SetDataField(
+                "message",
+                "AJAX appointment date fetch endpoint, not implemented yet"
+            );
         }
     }
 }
