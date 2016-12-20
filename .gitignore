@@ -219,6 +219,5 @@ fabric.properties
 # Project files
 project.lock.json
 wwwroot/lib
-
-# NPM
 hhs-p6-webshop-project/node_modules
+TestResult.xml
