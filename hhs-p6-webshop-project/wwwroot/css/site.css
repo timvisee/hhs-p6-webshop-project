@@ -740,22 +740,27 @@ nav li {
     opacity: 1;
 }
 
-.table tr td a {
-    padding: 5px;
-    margin-left: 5px;
+.table tr td a{
+    padding:5px;
+    margin-left:5px;
     border: 3px solid #F0597C;
     border-radius: 0px;
     background-color: #F0597C;
     color: #FFF;
+    font-weight: bold;
+    font-size: 1.1em;
+    text-transform:uppercase;
 }
 
-    .table tr td a:hover {
-        border: 3px solid #F0597C;
-        border-radius: 0px;
-        background-color: transparent;
-        color: #F0597C;
-        text-decoration: none;
-    }
+.table tr td a:hover,
+.table tr td a:active,
+.table tr td a:focus{
+    border: 3px solid #F0597C;
+    border-radius: 0px;
+    background-color: transparent;
+    color: #F0597C;
+    text-decoration: none;
+}
 
 .table thead tr th {
     border-color: #f0597c;
@@ -787,14 +792,17 @@ nav li {
     text-align: center;
 }
 
-    .detailCardHead a {
-        color: #FFF;
-    }
+.detailCardHead a{
+    color:#FFF;
+    display:block;
+}
 
-        .detailCardHead a:hover {
-            text-decoration: none;
-            color: #fce8e7;
-        }
+.detailCardHead a:hover,
+.detailCardHead a:focus,
+.detailCardHead a:active{
+    text-decoration:none;
+    color:#fce8e7;
+}
 
 .detailCardBack {
     font-size: 25px;
