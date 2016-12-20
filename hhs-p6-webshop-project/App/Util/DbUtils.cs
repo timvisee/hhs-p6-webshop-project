@@ -1,5 +1,7 @@
 ﻿using System;
+using hhs_p6_webshop_project.App.Config;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace hhs_p6_webshop_project.App.Util {
     public static class DbUtils {
@@ -27,6 +29,20 @@ namespace hhs_p6_webshop_project.App.Util {
 
             // Return the connection string from the configuration file
             return Program.FileConfig.GetConnectionString("DefaultConnection");
+        }
+
+        public static string GetAndInjectConnectionString() {
+            if (!IsRemote()) //Don't inject anything if we're using a local db
+                return GetConnectionString();
+
+            string connString = GetConnectionString();
+
+            connString = connString.Replace("*|SERVER|*", Program.FileConfig["DbServer"]);
+            connString = connString.Replace("*|DATABASE|*", Program.FileConfig["DbName"]);
+            connString = connString.Replace("*|USER|*", Program.FileConfig["DbUser"]);
+            connString = connString.Replace("*|PASS|*", Program.FileConfig["DbPassword"]);
+
+            return connString;
         }
 
         /// <summary>
