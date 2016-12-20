@@ -36,6 +36,9 @@ $(document).ready(function () {
         }
     });
 
+    // Remove default date class
+    $('.ui-state-active').removeClass('ui-state-active');
+
     $(".time-option").click(function () {
         console.log($(this).val());
 
@@ -58,6 +61,10 @@ $(document).ready(function () {
 
     $("#go_to_second, #back_to_first").click(function () {
         $("#left_1, #left_2, #right_1, #right_2").toggle();
+    });
+
+    $("#go_to_third, #back_to_second").click(function () {
+        $("#left_2, #left_3, #right_2, #right_3").toggle();
     });
 
 });

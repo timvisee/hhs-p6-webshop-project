@@ -13,7 +13,7 @@ namespace hhs_p6_webshop_project.App.Config {
         /// <param name="config">Configuration to apply the parsed parameters to.</param>
         public static void Parse(string[] args, AppConfig config) {
             // Check whether the database should reset
-            if (args.Any(e => e == "--force-database-initialization")) {
+            if (args.Any(e => e == "--db-init-force")) {
                 // Show a status message
                 LogUtils.Warning("-------------------------------");
                 LogUtils.Warning("| Database rebuild is forced!  |");
@@ -23,10 +23,10 @@ namespace hhs_p6_webshop_project.App.Config {
                 // Set the database reset flag
                 config.DatabaseReset = true;
 
-            } else if(args.All(e => e != "--always-skip-initialization")) {
+            } else if(args.All(e => e != "--db-init-skip")) {
                 // Ask the user to reset the database
                 // TODO: Move this logic to another class. Only parse arguments here.
-                LogUtils.Info("Press any key to reset the database... (disable using --always-skip-initialization argument)");
+                LogUtils.Info("Press any key to reset the database... (disable using --db-init-skip argument)");
 
                 // Ask the user to press a key if the database should be reset
                 // TODO: Move the number of seconds to a constant.
@@ -44,7 +44,7 @@ namespace hhs_p6_webshop_project.App.Config {
             }
 
             // Set whether to exit the application after the database is reset
-            if (args.Any(e => e == "--exit-after-initialization")) {
+            if (args.Any(e => e == "--db-init-exit")) {
                 // Tell the user the application will exit after database reset
                 LogUtils.Warning("The application will quit after the database has been reset.");
 
