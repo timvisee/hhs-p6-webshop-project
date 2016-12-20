@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using hhs_p6_webshop_project.App.Ajax;
 using Microsoft.AspNetCore.Mvc;
 
 namespace hhs_p6_webshop_project.Controllers.Ajax {
@@ -23,6 +20,11 @@ namespace hhs_p6_webshop_project.Controllers.Ajax {
                 message = "AJAX appointment date fetch endpoint, not implemented yet",
                 status = "ok"
             });
+        }
+
+        [HttpGet("Test")]
+        public JsonResult Test() {
+            return new AjaxResponse();
         }
     }
 }
