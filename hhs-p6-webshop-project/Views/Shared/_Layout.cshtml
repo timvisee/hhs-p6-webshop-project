@@ -22,11 +22,29 @@
     // Determine whether a banner is shown in the layout
     var showBanner = ViewData.ContainsKey("ShowBanner") && (bool)ViewData["ShowBanner"];
     var showHomeBanner = ViewData.ContainsKey("ShowHomeBanner") && (bool)ViewData["ShowHomeBanner"];
-    var bannerPath = "/images/bannerMaxHeight.jpg";
+    var bannerPath = "/images/mooi-meisje.jpg";
+
 
     // Set the banner URL from the view data
     if (ViewData.ContainsKey("BannerPath")) {
         bannerPath = ViewData["BannerPath"].ToString();
+    }
+
+    // Initialize title variables
+    var showHomeBannerButtons = ViewData.ContainsKey("ShowHomeBannerButtons") && (bool)ViewData["ShowHomeBannerButtons"];
+    var homeBannerBgTitle = "";
+    var homeBannerSmallTitle = "";
+    var homeBannerBoldTitle = "";
+
+    // Set the home banner titles and text
+    if (ViewData.ContainsKey("HomeBannerBgTitle")) {
+        homeBannerBgTitle = ViewData["HomeBannerBgTitle"].ToString();
+    }
+    if (ViewData.ContainsKey("HomeBannerSmallTitle")) {
+        homeBannerSmallTitle = ViewData["HomeBannerSmallTitle"].ToString();
+    }
+    if (ViewData.ContainsKey("HomeBannerBoldTitle")) {
+        homeBannerBoldTitle = ViewData["HomeBannerBoldTitle"].ToString();
     }
 
     // Determine whether the background is pink or not
@@ -110,15 +128,17 @@
         @* Home Banner image *@
         @if (showHomeBanner) {
         <div id="home_banner">
-            <div class="home-text-banner">
-                <h1 class="banner-bg-title-text hm-white-transparent-text">Bruidswinkel</h1>
-                <h2 class="banner-title-text hm-white-light-text">Al bijna 50 jaar de grootste bruidszaak van Nederland.</h2>
-                <h2 class="banner-undertitle-text hm-white-text">Hoe kunnen we jou helpen?</h2>
+            <div class="home-text-banner no-user-select">
+                <h1 class="banner-bg-title-text hm-white-transparent-text">@homeBannerBgTitle</h1>
+                <h2 class="banner-title-text hm-white-light-text">@homeBannerSmallTitle</h2>
+                <h2 class="banner-undertitle-text hm-white-text">@homeBannerBoldTitle</h2>
             </div>
+            @if (showHomeBannerButtons) {
             <div class="home-button-container">
                 <a asp-controller="Appointments" asp-action="Create">Bruid</a>
                 <a asp-controller="Appointments" asp-action="Create">Bruidegom</a>
             </div>
+            }
             <img class="banner-image" src="@bannerPath" alt="banner" />
             <div class="scrollToggle white-text">
                 <p class="scroll-down-text font-nexa-regular">Scroll</p>
