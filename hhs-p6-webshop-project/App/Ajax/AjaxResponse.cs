@@ -38,11 +38,14 @@ namespace hhs_p6_webshop_project.App.Ajax {
             // Create a base dictionary
             Dictionary<string, object> Base = new Dictionary<string, object>();
 
-            // Merge the data
-            MergeDictionary(Base, Data);
-
             // Set the status
             Base.Add("status", ErrorStatus == null ? "ok" : "err");
+
+            // Add the data, if there is any
+            if(Data.Count > 0)
+                Base.Add("data", Data);
+
+            // Add the error status, if any is set
             if (ErrorStatus != null)
                 Base.Add("error", ErrorStatus.ToDictionary());
 
