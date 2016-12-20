@@ -12,8 +12,27 @@ $(document).ready(function () {
 
     //Scroll down on click
     $(".scrollToggle").click(function () {
-        console.log("TEST");
-        $("html, body").animate({ scrollTop: $(window).height() + 100}, 1200, "easeInOutCubic");
+        $("html, body").animate({ scrollTop: $(window).height()}, 1200, "easeInOutCubic");
+    });
+
+    function setHomeBannerHeight() {
+        var scrHeight = $(window).height();
+        var headerHeight = $("#header_top").height();
+
+        console.log(scrHeight);
+        console.log(headerHeight);
+
+        $("#home_banner").height(scrHeight - headerHeight);
+    }
+    setHomeBannerHeight();
+
+    $(window).resize(function () {
+        var scrWidth = $(window).width();
+
+        // Check for mobile devices
+        if (scrWidth > 600) {
+            setHomeBannerHeight();
+        }
     });
 
     /**
