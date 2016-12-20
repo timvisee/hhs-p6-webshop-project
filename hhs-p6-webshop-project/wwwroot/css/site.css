@@ -717,16 +717,21 @@ nav li {
     opacity: 1;
 }
 
-.table tr td a {
+.table tr td a{
     padding:5px;
     margin-left:5px;
     border: 3px solid #F0597C;
     border-radius: 0px;
     background-color: #F0597C;
     color: #FFF;
+    font-weight: bold;
+    font-size: 1.1em;
+    text-transform:uppercase;
 }
 
-.table tr td a:hover{    
+.table tr td a:hover,
+.table tr td a:active,
+.table tr td a:focus{    
     border: 3px solid #F0597C;
     border-radius: 0px;
     background-color: transparent;
@@ -766,9 +771,12 @@ nav li {
 
 .detailCardHead a{
     color:#FFF;
+    display:block;
 }
 
-.detailCardHead a:hover{
+.detailCardHead a:hover,
+.detailCardHead a:focus,
+.detailCardHead a:active{
     text-decoration:none;
     color:#fce8e7;
 }
