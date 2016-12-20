@@ -21,7 +21,7 @@
 @{
     // Determine whether a banner is shown in the layout
     var showBanner = ViewData.ContainsKey("ShowBanner") && (bool)ViewData["ShowBanner"];
-    var bannerPath = "/images/banner.png";
+    var bannerPath = "/images/bannerMaxHeight.jpg";
 
     // Set the banner URL from the view data
     if (ViewData.ContainsKey("BannerPath")) {
@@ -105,6 +105,12 @@
         @* Banner image *@
         @if (showBanner) {
         <img class="banner-image" src="@bannerPath" alt="banner" />
+        <div class="scrollToggle">
+            <a href="#">
+                <p class="scroll-down">Scroll</p>
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </a>
+        </div>
         }
 
         @* Render the actual page body *@
