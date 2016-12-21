@@ -1,3 +1,9 @@
+/**
+ * List of month names.
+ * @const
+ */
+var MONTH_NAMES = ["JANUARI", "FEBRUARI", "MAART", "APRIL", "MEI", "JUNI", "JULI", "AUGUSTUS", "SEPTEMBER", "OKTOBER", "NOVEMBER", "DECEMBER"];
+
 // Run this code when the page is finished loading
 $(document).ready(function () {
 
@@ -45,8 +51,7 @@ $(document).ready(function () {
     /**
      * Initialize some variables for the datepicker
      */
-    var monthNames = ["JANUARI", "FEBRUARI", "MAART", "APRIL", "MEI", "JUNI", "JULI", "AUGUSTUS", "SEPTEMBER", "OKTOBER", "NOVEMBER", "DECEMBER"],
-    dateToday = new Date();
+    var dateToday = new Date();
 
     /**
      * Initialize datepicker
@@ -60,7 +65,7 @@ $(document).ready(function () {
         onSelect: function (date) {
             var d = new Date(date);
             var inputDate = d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
-            var showDate = d.getDate() + ' ' + monthNames[d.getMonth()] + ' ' + d.getFullYear();
+            var showDate = d.getDate() + ' ' + MONTH_NAMES[d.getMonth()] + ' ' + d.getFullYear();
 
             $(".toggle-time-date").removeClass("toggle-btn-disabled").attr("title", "");
 
