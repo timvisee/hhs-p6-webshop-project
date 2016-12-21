@@ -1,3 +1,9 @@
+/**
+ * List of month names.
+ * @const
+ */
+var MONTH_NAMES = ["JANUARI", "FEBRUARI", "MAART", "APRIL", "MEI", "JUNI", "JULI", "AUGUSTUS", "SEPTEMBER", "OKTOBER", "NOVEMBER", "DECEMBER"];
+
 // Run this code when the page is finished loading
 $(document).ready(function () {
 
@@ -52,8 +58,7 @@ $(document).ready(function () {
     /**
      * Initialize some variables for the datepicker
      */
-    var monthNames = ["JANUARI", "FEBRUARI", "MAART", "APRIL", "MEI", "JUNI", "JULI", "AUGUSTUS", "SEPTEMBER", "OKTOBER", "NOVEMBER", "DECEMBER"],
-    dateToday = new Date();
+    var dateToday = new Date();
 
     /**
      * Initialize datepicker
@@ -66,15 +71,27 @@ $(document).ready(function () {
 
         onSelect: function (date) {
             var d = new Date(date);
-            var inputDate = d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
-            var showDate = d.getDate() + ' ' + monthNames[d.getMonth()] + ' ' + d.getFullYear();
+            var inputDate = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
+            var showDate = d.getDate() + " " + MONTH_NAMES[d.getMonth()] + " " + d.getFullYear();
 
             $(".toggle-time-date").removeClass("toggle-btn-disabled").attr("title", "");
 
-            $('#date_input').val(inputDate);
+            $("#date_input").val(inputDate);
             $(".selected-date").each(function () {
                 $(this).html(showDate);
             });
+        },
+
+        beforeShowDay: function (date) {
+            // Determine whether the given date is available
+            // TODO: Fetch unavailable dates through AJAX. Use them here to determine whether a date can be chosen or notb.
+            var isAvailable = true;
+
+            // Return depending on whether the date is avaialble or not
+            if(isAvailable)
+                return [true];
+            else
+                return [false, "", "Deze datum is bezet."];
         }
     });
 
@@ -84,8 +101,7 @@ $(document).ready(function () {
     $(".time-option").click(function () {
         console.log($(this).val());
 
-        var currentValue = $('#date_input').val();
-        console.log(currentValue + $(this).val());
+        console.log($("#date_input").val() + $(this).val());
 
         $(".selected-time").html(" OM " + $(this).val());
 
@@ -142,12 +158,112 @@ $(document).ready(function () {
     /**
      * Enable validation for the email fields
      */
-    $('#create_appointment_form').validate({
-        rules: {
-            Mail: 'required',
-            mail_verify: {
-                equalTo: '#Mail'
-            }
+//    $("#create_appointment_form").validate({
+//        rules: {
+//            Mail: "required",
+//            mail_verify: {
+//                equalTo: "#Mail"
+//            }
+//        }
+//    });
+
+    /**
+     * Fetch data from an AJAX endpoint.
+     * This function automatically handles error reporting.
+     *
+     * @param {string} endpoint Endpoint to request.
+     * @param {fetchDataCallback} callback Callback function.
+     */
+    function fetchData(endpoint, callback) {
+        // Make sure an endpoint and callback is specified
+        if(endpoint == undefined || typeof callback !== "function") {
+            callback(new Error("Endpoint or callback not specified"));
+            return;
         }
-    });
+
+        // Do an AJAX request
+        // TODO: Use inline error notifications.
+        $.ajax({
+            url: "/Ajax/" + endpoint,
+            dataType: "json",
+            method: "GET",
+            error: function(jqXhr, textStatus) {
+                // Define the error message
+                var error = "Failed to fetch data.\n\nError: " + textStatus;
+
+                // Alert the user
+                alert(error);
+
+                // Call back with an error
+                callback(new Error(error));
+            },
+            success: function(data) {
+                // Make sure the status is OK
+                if(data.status !== "ok") {
+                    // Define the error message
+                    var error = "Failed to fetch data. The website returned an error.\n\nError: " + data.error.message;
+
+                    // Alert the user
+                    alert(error);
+
+                    // Call back with an error
+                    callback(new Error(error));
+                }
+
+                // Call back the fetched data
+                callback(null, data.data);
+            }
+        });
+    }
+
+    /**
+     * Fetch data callback function.
+     *
+     * @callback {function} fetchDataCallback
+     * @param {Error|null} error Error instance if an error occurred, null if not.
+     * @param {Object|undefined} response Data response.
+     */
+
+    /**
+     * Fetch the unavailable dates for appointments.
+     *
+     * @param {fetchUnavailableDatesCallback} callback Callback function.
+     */
+    function fetchUnavailableDates(callback) {
+        fetchData("Appointments/GetDates", callback);
+    }
+
+    /**
+     * Called when unavailable dates are fetched.
+     *
+     * @callback {function} fetchUnavailableDatesCallback
+     * @param {Error|null} error Error instance if an error occurred, null otherwise.
+     * @param {array} dates Array of dates that are occupied.
+     */
+
+    /**
+     * Fetch the times that are available at the given date.
+     *
+     * @param {string} date Date to get the times for.
+     * @param {fetchTimesCallback} callback Callback function.
+     */
+    function fetchTimes(date, callback) {
+        fetchData("Appointments/GetTimes", callback);
+    }
+
+    /**
+     * Called when the times are fetched.
+     *
+     * @callback {function} fetchTimesCallback
+     * @param {Error|null} error Error instance if an error occurred, null otherwise.
+     * @param {TimeAvailabilityObject[]} times Array of objects definining available times.
+     */
+
+    /**
+     * Object definining whether the given time is available or not for appointments.
+     *
+     * @typedef {object} TimeAvailabilityObject
+     * @param {string} time The actual time.
+     * @param {boolean} available True if this time is available, false if not.
+     */
 });

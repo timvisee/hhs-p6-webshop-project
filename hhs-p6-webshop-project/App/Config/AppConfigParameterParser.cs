@@ -69,7 +69,7 @@ namespace hhs_p6_webshop_project.App.Config {
             try {
                 var keyAvailable = Console.KeyAvailable;
 
-            } catch (System.InvalidOperationException ex) {
+            } catch (System.InvalidOperationException) {
                 Console.WriteLine("User input not supported in this mode, skipping...");
                 return false;
             }
