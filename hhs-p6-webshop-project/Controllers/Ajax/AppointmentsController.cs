@@ -43,17 +43,16 @@ namespace hhs_p6_webshop_project.Controllers.Ajax {
             DateTime afterDateTime = DateTime.Now;
 
             // TODO: Fetch the actual occupied dates from the database!
-//            // Fetch the occupied dates from the database
-//            var dates = _context.Appointment
-//                .Where(appointment => appointment.AppointmentDateTime > afterDateTime)
-//                .SelectMany(appointment => appointment.AppointmentDateTime);
+            // Fetch the occupied dates from the database
+            var dates = _context.Appointment.Where(appointment => appointment.AppointmentDateTime > afterDateTime);
 
-            // Create a list of dummy dates
-            List<string> occupiedDates = new List<string> {
-                DateTime.Today.ToString("yyyy-MM-dd"),
-                DateTime.Now.AddDays(2).ToString("yyyy-MM-dd"),
-                DateTime.Now.AddDays(5).ToString("yyyy-MM-dd")
-            };
+            // Create a list to put the occupied dates in
+            List<string> occupiedDates = new List<string>();
+
+            // TODO: We should check whether the date is fully occupied!
+            // Fill the list with the occupied dates
+            foreach (var appointment in dates)
+                occupiedDates.Add(appointment.AppointmentDateTime.ToString("yyyy-MM-dd"));
 
             // Return the data fields
             return new AjaxResponse().SetDataField("dates", occupiedDates);
