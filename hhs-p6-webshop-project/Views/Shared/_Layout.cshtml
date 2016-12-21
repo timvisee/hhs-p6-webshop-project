@@ -81,6 +81,7 @@
                 @if (!User.Identity.IsAuthenticated) {
                 <a asp-controller="Account" asp-action="Login" class="hm-pink-dark-text loginBtn">Inloggen</a>
                 }
+                <a href="#" id="comic_sans_button" class="hm-pink-dark-text">Comic sans this website!</a>
             </div>
             <div id="header_contact">
                 <div class="phone-number">
@@ -122,7 +123,14 @@
 
         @* Banner image *@
         @if (showBanner) {
-        <img class="banner-image" src="@bannerPath" alt="banner" />
+        <div id="banner">
+            <img class="banner-image" src="@bannerPath" alt="banner" />
+            <div class="home-text-banner no-user-select">
+                <h1 class="banner-bg-title-text hm-white-transparent-text">@homeBannerBgTitle</h1>
+                <h2 class="banner-title-text hm-white-light-text">@homeBannerSmallTitle</h2>
+                <h2 class="banner-undertitle-text hm-white-text">@homeBannerBoldTitle</h2>
+            </div>
+        </div>
         }
 
         @* Home Banner image *@
@@ -134,10 +142,10 @@
                 <h2 class="banner-undertitle-text hm-white-text">@homeBannerBoldTitle</h2>
             </div>
             @if (showHomeBannerButtons) {
-            <div class="home-button-container">
-                <a asp-controller="Appointments" asp-action="Create">Bruid</a>
-                <a asp-controller="Appointments" asp-action="Create">Bruidegom</a>
-            </div>
+                <div class="home-button-container">
+                    <a asp-controller="Appointments" asp-action="Create">Bruid</a>
+                    <a asp-controller="Appointments" asp-action="Create">Bruidegom</a>
+                </div>
             }
             <img class="banner-image" src="@bannerPath" alt="banner" />
             <div class="scrollToggle white-text">
