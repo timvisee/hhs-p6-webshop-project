@@ -2,18 +2,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using hhs_p6_webshop_project.App.Config;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models.AppointmentModels;
+using Microsoft.Extensions.Options;
 
 namespace hhs_p6_webshop_project.Controllers {
     public class AppointmentsController : Controller {
         private readonly ApplicationDbContext _context;
+        private readonly IOptions<SecureAppConfig> _secretConfig;
 
-        public AppointmentsController(ApplicationDbContext context) {
+        public AppointmentsController(ApplicationDbContext context, IOptions<SecureAppConfig> secretConfig) {
             _context = context;
+            _secretConfig = secretConfig;
         }
 
         // GET: Appointments
@@ -57,6 +61,9 @@ namespace hhs_p6_webshop_project.Controllers {
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,Confirmation,DateMarried,AppointmentDateTime,Mail,Name,Phone")] Appointment appointment) {
             if (ModelState.IsValid) {
+                if (Beun.Mail.MailClient.ApiKey == null)
+                    Beun.Mail.MailClient.ApiKey = _secretConfig.Value.SparkpostApiKey;
+
                 Beun.Mail.MailClient.SendAppointmentEmail(appointment.Name, appointment.Mail, appointment.AppointmentDateTime, "het Armani Pak");
 
                 _context.Add(appointment);
