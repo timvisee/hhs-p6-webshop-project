@@ -101,7 +101,7 @@
                             Controleer alle gegevens voor je pasafspraak bij Honeymoon shop aan de Korte Hoogstraat 4, te Rotterdam.
                         </p>
 
-                        <input type="submit" value="Maak pasafspraak" class="btn btn-default" />
+                        <input type="submit" value="Afspraak bevestigen" class="btn btn-default" />
                     </div>
                 </div>
             </div>
@@ -168,9 +168,31 @@
                 <!-- Right box - Step 3, Verify filled in data -->
                 <div class="right-box step-3" id="right_3" style="display: none;">
                     <h3><span class="glyphicon glyphicon-heart"></span>Controleer je gegevens:</h3>
-                    <p>
-                        Overzicht van gegevens.
-                    </p>
+
+                    <div class="selected-date-time">
+                        <span class="selected-date">Nog geen datum gekozen</span>
+                        <span class="selected-time"></span>
+                    </div>
+
+                    <div class="form-horizontal form-overview">
+                        <div class="form-group">
+                            <strong class="col-md-4 col-sm-12">Naam:</strong>
+                            <span id="overview_name" class="col-md-8 col-sm-12"></span>
+                        </div>
+                        <div class="form-group">
+                            <strong class="col-md-4 col-sm-12">Trouwdatum:</strong>
+                            <span id="overview_datemarried" class="col-md-8 col-sm-12"></span>
+                        </div>
+                        <div class="form-group">
+                            <strong class="col-md-4 col-sm-12">Telefoon:</strong>
+                            <span id="overview_phone" class="col-md-8 col-sm-12"></span>
+                        </div>
+                        <div class="form-group">
+                            <strong class="col-md-4 col-sm-12">E-mail:</strong>
+                            <span id="overview_mail" class="col-md-8 col-sm-12"></span>
+                        </div>
+                    </div>
+
                     <span id="back_to_second" class="toggle-btn">< Terug naar stap 2 om gegevens te wijzigen</span>
                 </div>
 

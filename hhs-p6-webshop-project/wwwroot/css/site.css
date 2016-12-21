@@ -42,6 +42,10 @@ body {
         background-color: #FFF;
     }
 
+    body.comic-sans * {
+        font-family: Comic Sans MS !important;
+    }
+
 /*--- Colors ---*/
 .white-text {
     color: #fff;
@@ -63,16 +67,16 @@ body {
     color: rgba(255,255,255,0.75);
 }
 
+.hm-white-transparent-text {
+    color: rgba(255, 255, 255, 0.4);
+}
+
 .hm-pink-light {
     background-color: #fce8e7;
 }
 
 .hm-pink-light-text {
     color: #fce8e7;
-}
-
-.hm-white-transparent-text {
-    color: rgba(255, 255, 255, 0.4);
 }
 
 .hm-pink-dark {
@@ -125,6 +129,11 @@ footer {
 }
 
 /*--- Typography ---*/
+p {
+    font-size: 1.55em;
+    line-height: 1.4em;
+}
+
 .font-raleway {
     font-family: Raleway;
 }
@@ -143,6 +152,7 @@ footer {
 
 .form-horizontal .control-label {
     text-align: left;
+    font-size: 1.2em;
 }
 
 
@@ -257,6 +267,7 @@ input[type="checkbox"] {
 
 input[type=checkbox][disabled] {
     cursor: default;
+    filter: brightness(2.6);
 }
 
 input[type="checkbox"]:checked {
@@ -487,13 +498,13 @@ nav li {
 .text-banner {
     text-align: center;
     position: relative;
-    min-height: 250px;
+    min-height: 300px;
     z-index: 7;
 }
 
     .text-banner .banner-bg-title-text {
         width: 100%;
-        font-size: 10em;
+        font-size: 12em;
         font-family: Niconne;
         position: absolute;
         bottom: 20%;
@@ -509,6 +520,12 @@ nav li {
         bottom: 20%;
     }
 
+#banner {
+    overflow: hidden;
+    position: relative;
+    height: 485px;
+}
+
 /*--- Home banner ---*/
 #home_banner {
     height: 100vh;
@@ -519,6 +536,7 @@ nav li {
     z-index: 5;
 }
 
+    #banner img,
     #home_banner img {
         position: absolute;
         left: 50%;
@@ -557,7 +575,7 @@ nav li {
     margin: auto;
     display: block;
     z-index: 7;
-    bottom: 6em;
+    bottom: 40%;
     position: absolute;
     max-width: 100%;
     left: 50%;
@@ -604,35 +622,49 @@ nav li {
     position: absolute;
     width: 100%;
     height: 250px;
-    bottom: 10em;
+    bottom: 75px;
     z-index: 7;
 }
 
-    .home-text-banner .banner-bg-title-text {
-        width: 100%;
-        font-size: 13em;
-        font-family: Niconne;
-        position: absolute;
-        bottom: 20%;
-    }
+#home_banner .home-text-banner {
+    bottom: 50%;
+}
 
-    .home-text-banner .banner-title-text {
-        font-family: Raleway;
-        font-size: 2.5em;
-        width: 100%;
-        position: absolute;
+.home-text-banner .banner-bg-title-text {
+    width: 100%;
+    font-size: 13em;
+    font-family: Niconne;
+    position: absolute;
+    bottom: 20%;
+}
+
+.home-text-banner .banner-title-text {
+    font-family: Raleway;
+    font-size: 2.5em;
+    width: 100%;
+    position: absolute;
+    bottom: 30%;
+}
+
+.home-text-banner .banner-undertitle-text {
+    font-family: Roboto;
+    font-size: 2.6em;
+    text-transform: uppercase;
+    font-weight: bold;
+    width: 100%;
+    position: absolute;
+    bottom: 15%;
+}
+
+@media screen and (max-height: 680px) {
+    #home_banner .home-text-banner {
         bottom: 30%;
     }
 
-    .home-text-banner .banner-undertitle-text {
-        font-family: Roboto;
-        font-size: 2.6em;
-        text-transform: uppercase;
-        font-weight: bold;
-        width: 100%;
-        position: absolute;
-        bottom: 15%;
+    .home-button-container {
+        bottom: 20%;
     }
+}
 
 /*--- Content ---*/
 .container {
@@ -687,37 +719,40 @@ nav li {
     background-color: #f27390;
 }
 
-.create-appointment-part p {
-    font-size: 1.4em;
+.create-appointment-part {
     line-height: 1.4em;
     font-weight: 300;
 }
 
+    .create-appointment-part .right-box span.glyphicon {
+        font-size: 0.65em;
+        margin-right: 10px;
+        top: 0;
+        -webkit-transform: rotate(-15deg);
+        -moz-transform: rotate(-15deg);
+        transform: rotate(-15deg);
+    }
 
-.create-appointment-part .right-box span.glyphicon {
-    font-size: 0.65em;
-    margin-right: 10px;
-    top: 0;
-    -webkit-transform: rotate(-15deg);
-    -moz-transform: rotate(-15deg);
-    transform: rotate(-15deg);
-}
+    .create-appointment-part .right-box p {
+        font-size: 1.3em;
+        line-height: 1.4em;
+    }
 
-.create-appointment-part .right-box .toggle-btn {
-    font-size: 1.2em;
-    cursor: pointer;
-    float: right;
-    margin: 40px 0 10px 0;
-}
+    .create-appointment-part .right-box .toggle-btn {
+        font-size: 1.2em;
+        cursor: pointer;
+        float: right;
+        margin: 40px 0 10px 0;
+    }
 
-.create-appointment-part .right-box .toggle-btn-disabled {
-    opacity: 0.4;
-    cursor: default;
-}
+    .create-appointment-part .right-box .toggle-btn-disabled {
+        opacity: 0.4;
+        cursor: default;
+    }
 
-.create-appointment-part .right-box #right_1_time .toggle-btn {
-    float: left;
-}
+    .create-appointment-part .right-box #right_1_time .toggle-btn {
+        float: left;
+    }
 
 
 
@@ -727,7 +762,6 @@ nav li {
     margin: 0;
     list-style-type: none;
 }
-
 
     #select_time input[type="radio"],
     #select_time label {
@@ -833,6 +867,12 @@ nav li {
         display: block;
     }
 
+    /*--- Create appointment form overview ---*/
+    .form-overview {
+        margin: 20px 0 40px;
+        font-size: 1.25em;
+    }
+
 /*--- Appointment overview ---*/
 .table td:last-child {
     opacity: 0;
@@ -872,18 +912,15 @@ nav li {
     border-color: #f27390;
 }
 
-.detailCard {
-    width: 400px;
-    height: auto;
-    display: block;
-    margin: auto;
+/*--- Appointment details ---*/
+.detailcard {
     border-radius: 4px;
-    padding-bottom: 25px;
+    padding: 0 0 25px 0;
     margin-top: 5%;
     margin-bottom: 5%;
 }
 
-.detailCardHead {
+.detailcard-head {
     background-color: #f0597c;
     width: 100%;
     color: #FFF;
@@ -892,27 +929,35 @@ nav li {
     padding: 5px 25px;
     margin-bottom: 20px;
     text-align: center;
+    position: relative;
 }
 
-    .detailCardHead a {
+    .detailcard-head h4 {
+        width: 100%;
+        display: block;
+        text-align: center;
+    }
+
+    .detailcard-head a {
+        position: absolute;
         color: #FFF;
         display: block;
     }
 
-        .detailCardHead a:hover,
-        .detailCardHead a:focus,
-        .detailCardHead a:active {
+        .detailcard-head a:hover,
+        .detailcard-head a:focus,
+        .detailcard-head a:active {
             text-decoration: none;
             color: #fce8e7;
         }
 
-.detailCardBack {
+.detailcard-back {
     font-size: 25px;
-    float: left;
+    left: 20px;
 }
 
-.detailCardAdd {
-    float: right;
+.detailcard-add {
+    right: 20px;
     line-height: 37px;
     font-size: 17px;
 }
@@ -929,6 +974,7 @@ footer {
     width: 23%;
     margin-left: 5%;
     position: relative;
+    overflow: hidden;
 }
 
     .social-box:first-child {

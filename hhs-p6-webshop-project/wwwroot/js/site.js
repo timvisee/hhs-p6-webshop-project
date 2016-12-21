@@ -107,6 +107,23 @@ $(document).ready(function () {
     });
 
     /**
+     * Add Comic Sans font family to the whole body
+     */
+    $("#comic_sans_button").click(function () {
+        $("body").toggleClass("comic-sans");
+    });
+
+    /**
+     * Push the filled in data to the overview
+     */
+    $("#go_to_third").click(function () {
+        $("#overview_name").text($("#Name").val());
+        $("#overview_datemarried").text($("#DateMarried").val());
+        $("#overview_phone").text($("#Phone").val());
+        $("#overview_mail").text($("#Mail").val());
+    });
+
+    /**
      * Enable validation for the email fields
      */
     $('#create_appointment_form').validate({
