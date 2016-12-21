@@ -257,6 +257,7 @@ input[type="checkbox"] {
 
 input[type=checkbox][disabled] {
     cursor: default;
+    filter: brightness(2.6);
 }
 
 input[type="checkbox"]:checked {
@@ -487,7 +488,7 @@ nav li {
 .text-banner {
     text-align: center;
     position: relative;
-    min-height: 250px;
+    min-height: 300px;
     z-index: 7;
 }
 
@@ -872,18 +873,15 @@ nav li {
     border-color: #f27390;
 }
 
-.detailCard {
-    width: 400px;
-    height: auto;
-    display: block;
-    margin: auto;
+/*--- Appointment details ---*/
+.detailcard {
     border-radius: 4px;
-    padding-bottom: 25px;
+    padding: 0 0 25px 0;
     margin-top: 5%;
     margin-bottom: 5%;
 }
 
-.detailCardHead {
+.detailcard-head {
     background-color: #f0597c;
     width: 100%;
     color: #FFF;
@@ -892,27 +890,35 @@ nav li {
     padding: 5px 25px;
     margin-bottom: 20px;
     text-align: center;
+    position: relative;
 }
 
-    .detailCardHead a {
+    .detailcard-head h4 {
+        width: 100%;
+        display: block;
+        text-align: center;
+    }
+
+    .detailcard-head a {
+        position: absolute;
         color: #FFF;
         display: block;
     }
 
-        .detailCardHead a:hover,
-        .detailCardHead a:focus,
-        .detailCardHead a:active {
+        .detailcard-head a:hover,
+        .detailcard-head a:focus,
+        .detailcard-head a:active {
             text-decoration: none;
             color: #fce8e7;
         }
 
-.detailCardBack {
+.detailcard-back {
     font-size: 25px;
-    float: left;
+    left: 20px;
 }
 
-.detailCardAdd {
-    float: right;
+.detailcard-add {
+    right: 20px;
     line-height: 37px;
     font-size: 17px;
 }
