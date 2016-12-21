@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700,900|Raleway|Sumana|Niconne');
+@import url('https://fonts.googleapis.com/css?family=Sumana|Niconne');
 
 @font-face {
     font-family: 'nexa-regular';
@@ -34,7 +34,7 @@
 
 
 body {
-    font-family: roboto;
+    font-family: nexa-regular;
     background-color: #fce8e7;
 }
 
@@ -130,12 +130,13 @@ footer {
 
 /*--- Typography ---*/
 p {
-    font-size: 1.55em;
+    font-size: 1.45em;
     line-height: 1.4em;
 }
 
+/*remove this class*/
 .font-raleway {
-    font-family: Raleway;
+    font-family: nexa-black;
 }
 
 .font-sumana {
@@ -194,6 +195,7 @@ input[type="file"]:active,
 input[type="reset"],
 input[type="reset"]:active,
 .button-more-info {
+    font-family: nexa-black;
     border: 3px solid #F0597C;
     border-radius: 0px;
     background-color: #F0597C;
@@ -371,7 +373,7 @@ header {
 
 .phone-number {
     padding: 0 15px;
-    font-family: Raleway;
+    font-family: nexa-black;
 }
 
 #search_wrapper {
@@ -385,7 +387,7 @@ header {
     padding: 0px 70px 0 25px;
     float: left;
     font-size: 1.2em;
-    font-family: Raleway;
+    font-family: nexa-black;
 }
 
 #search_box {
@@ -450,6 +452,7 @@ nav li {
         font-weight: bold;
         padding: 0 20px;
         line-height: 40px;
+        font-family: nexa-black;
     }
 
         nav .active a,
@@ -511,7 +514,7 @@ nav li {
     }
 
     .text-banner .banner-title-text {
-        font-family: Raleway;
+        font-family: nexa-black;
         font-size: 3em;
         text-transform: uppercase;
         width: 100%;
@@ -553,13 +556,14 @@ nav li {
     }
 
 .scrollToggle {
-    width: 100%;
+    width: 150px;
     bottom: 0;
-    left: 0;
+    left: 50%;
     position: absolute;
     text-align: center;
     font-size: 1.2em;
     height: 4em;
+    margin-left: -75px;
 }
 
     .scrollToggle:hover,
@@ -584,13 +588,13 @@ nav li {
 
     .home-button-container a {
         width: 45%;
+        font-family: nexa-black;
         background-color: transparent;
         color: #fff;
         border: 5px solid #fff;
         text-transform: uppercase;
         display: inline-block;
         line-height: 55px;
-        font-weight: bold;
         text-align: center;
         font-size: 1.7em;
     }
@@ -639,7 +643,7 @@ nav li {
 }
 
 .home-text-banner .banner-title-text {
-    font-family: Raleway;
+    font-family: nexa-regular;
     font-size: 2.5em;
     width: 100%;
     position: absolute;
@@ -647,7 +651,7 @@ nav li {
 }
 
 .home-text-banner .banner-undertitle-text {
-    font-family: Roboto;
+    font-family: nexa-black;
     font-size: 2.6em;
     text-transform: uppercase;
     font-weight: bold;
@@ -714,7 +718,7 @@ nav li {
     padding: 10px;
     margin: 10px 0;
     text-align: center;
-    font-weight: bold;
+    font-family: nexa-black;
     font-size: 1.3em;
     background-color: #f27390;
 }
@@ -965,7 +969,7 @@ nav li {
 /*--- Footer---*/
 footer {
     padding: 20px;
-    font-family: Raleway;
+    font-family: nexa-regular;
 }
 
 .social-box {
@@ -994,7 +998,7 @@ footer {
     }
 
     .social-box .front-text {
-        font-family: Roboto;
+        font-family: nexa-black;
         font-weight: bold;
         margin-top: 80px;
         line-height: 1.1em;
@@ -1013,7 +1017,7 @@ footer {
 
 footer h4 {
     font-weight: bold;
-    font-family: Roboto;
+    font-family: nexa-black;
     margin-bottom: 0px;
     text-transform: uppercase;
 }
@@ -1025,5 +1029,6 @@ footer ul {
 
     footer ul a {
         color: #696564;
-        line-height: 2em;
+        line-height: 1.6em;
+        font-size: 1.2em;
     }
