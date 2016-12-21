@@ -130,7 +130,7 @@ footer {
 
 /*--- Typography ---*/
 p {
-    font-size: 1.55em;
+    font-size: 1.45em;
     line-height: 1.4em;
 }
 
@@ -718,7 +718,7 @@ nav li {
     padding: 10px;
     margin: 10px 0;
     text-align: center;
-    font-weight: bold;
+    font-family: nexa-black;
     font-size: 1.3em;
     background-color: #f27390;
 }
