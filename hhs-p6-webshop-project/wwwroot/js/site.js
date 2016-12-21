@@ -42,6 +42,13 @@ $(document).ready(function () {
         }
     });
 
+    $(window).scroll(function (event) {
+        var scroll = $(window).scrollTop() / -3;
+        var scrollVid = $(window).scrollTop() / 5;
+        $("#home_banner .home-text-banner, #home_banner .home-button-container").css("margin-bottom", scroll);
+        $("#home_banner .banner-image").css("margin-top", scrollVid);
+    });
+
     /**
      * Initialize some variables for the datepicker
      */
