@@ -70,7 +70,7 @@ namespace hhs_p6_webshop_project.Controllers.Ajax {
             // TODO: Fetch the free times from the database!
 //            // Fetch the occupied dates from the database
 //            var dates = _context.Appointment
-//                .Where(appointment => appointment.AppointmentDateTime > afterDateTime)
+//                .Where(appointment => appointment.AppointmentDateTime > date)
 //                .SelectMany(appointment => appointment.AppointmentDateTime);
 
             // Create a list of dummy dates

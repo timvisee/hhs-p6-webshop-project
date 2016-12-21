@@ -80,6 +80,18 @@ $(document).ready(function () {
             $(".selected-date").each(function () {
                 $(this).html(showDate);
             });
+        },
+
+        beforeShowDay: function (date) {
+            // Determine whether the given date is available
+            // TODO: Fetch unavailable dates through AJAX. Use them here to determine whether a date can be chosen or notb.
+            var isAvailable = true;
+
+            // Return depending on whether the date is avaialble or not
+            if(isAvailable)
+                return [true];
+            else
+                return [false, "", "Deze datum is bezet."];
         }
     });
 
