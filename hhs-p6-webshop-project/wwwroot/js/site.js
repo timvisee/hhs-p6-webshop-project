@@ -42,6 +42,13 @@ $(document).ready(function () {
         }
     });
 
+    $(window).scroll(function (event) {
+        var scroll = $(window).scrollTop() / -3;
+        var scrollVid = $(window).scrollTop() / 5;
+        $("#home_banner .home-text-banner, #home_banner .home-button-container").css("margin-bottom", scroll);
+        $("#home_banner .banner-image").css("margin-top", scrollVid);
+    });
+
     /**
      * Initialize some variables for the datepicker
      */
@@ -102,8 +109,34 @@ $(document).ready(function () {
         $("#left_1, #left_2, #right_1, #right_2").toggle();
     });
 
-    $("#go_to_third, #back_to_second").click(function () {
+    $("#back_to_second").click(function () {
         $("#left_2, #left_3, #right_2, #right_3").toggle();
+    });
+
+    /**
+     * Add Comic Sans font family to the whole body
+     */
+    $("#comic_sans_button").click(function () {
+        $("body").toggleClass("comic-sans");
+    });
+
+    /**
+     * Push the filled in data to the overview
+     */
+    $("#go_to_third").click(function () {
+        $("#overview_name").text($("#Name").val());
+        $("#overview_datemarried").text($("#DateMarried").val());
+        $("#overview_phone").text($("#Phone").val());
+        $("#overview_mail").text($("#Mail").val());
+
+        if ($("#Name").val().length === 0 ||
+            $("#DateMarried").val().length === 0 ||
+            $("#Mail").val().length === 0) {
+
+            $("#fill_in_fields_warning").html("Je hebt niet alle verplichte velden ingevuld!");
+        } else {
+            $("#left_2, #left_3, #right_2, #right_3").toggle();
+        }
     });
 
     /**

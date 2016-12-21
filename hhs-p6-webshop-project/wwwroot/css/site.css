@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700,900|Raleway|Sumana|Niconne');
+@import url('https://fonts.googleapis.com/css?family=Sumana|Niconne');
 
 @font-face {
     font-family: 'nexa-regular';
@@ -34,12 +34,16 @@
 
 
 body {
-    font-family: roboto;
+    font-family: nexa-regular;
     background-color: #fce8e7;
 }
 
     body.white {
         background-color: #FFF;
+    }
+
+    body.comic-sans * {
+        font-family: Comic Sans MS !important;
     }
 
 /*--- Colors ---*/
@@ -63,16 +67,16 @@ body {
     color: rgba(255,255,255,0.75);
 }
 
+.hm-white-transparent-text {
+    color: rgba(255, 255, 255, 0.4);
+}
+
 .hm-pink-light {
     background-color: #fce8e7;
 }
 
 .hm-pink-light-text {
     color: #fce8e7;
-}
-
-.hm-white-transparent-text {
-    color: rgba(255, 255, 255, 0.4);
 }
 
 .hm-pink-dark {
@@ -125,8 +129,14 @@ footer {
 }
 
 /*--- Typography ---*/
+p {
+    font-size: 1.45em;
+    line-height: 1.4em;
+}
+
+/*remove this class*/
 .font-raleway {
-    font-family: Raleway;
+    font-family: nexa-black;
 }
 
 .font-sumana {
@@ -143,6 +153,7 @@ footer {
 
 .form-horizontal .control-label {
     text-align: left;
+    font-size: 1.2em;
 }
 
 
@@ -184,6 +195,7 @@ input[type="file"]:active,
 input[type="reset"],
 input[type="reset"]:active,
 .button-more-info {
+    font-family: nexa-black;
     border: 3px solid #F0597C;
     border-radius: 0px;
     background-color: #F0597C;
@@ -257,6 +269,7 @@ input[type="checkbox"] {
 
 input[type=checkbox][disabled] {
     cursor: default;
+    filter: brightness(2.6);
 }
 
 input[type="checkbox"]:checked {
@@ -360,7 +373,7 @@ header {
 
 .phone-number {
     padding: 0 15px;
-    font-family: Raleway;
+    font-family: nexa-black;
 }
 
 #search_wrapper {
@@ -374,7 +387,7 @@ header {
     padding: 0px 70px 0 25px;
     float: left;
     font-size: 1.2em;
-    font-family: Raleway;
+    font-family: nexa-black;
 }
 
 #search_box {
@@ -439,6 +452,7 @@ nav li {
         font-weight: bold;
         padding: 0 20px;
         line-height: 40px;
+        font-family: nexa-black;
     }
 
         nav .active a,
@@ -487,20 +501,20 @@ nav li {
 .text-banner {
     text-align: center;
     position: relative;
-    min-height: 250px;
+    min-height: 300px;
     z-index: 7;
 }
 
     .text-banner .banner-bg-title-text {
         width: 100%;
-        font-size: 10em;
+        font-size: 12em;
         font-family: Niconne;
         position: absolute;
         bottom: 20%;
     }
 
     .text-banner .banner-title-text {
-        font-family: Raleway;
+        font-family: nexa-black;
         font-size: 3em;
         text-transform: uppercase;
         width: 100%;
@@ -509,16 +523,21 @@ nav li {
         bottom: 20%;
     }
 
-    .text-banner .banner-title-text2 {
-        font-family: Raleway;
-        font-size: 3em;
-        text-transform: uppercase;
-        width: 100%;
-        font-weight: bold;
-        position: absolute;
-        bottom: 5%;
-    }
+.text-banner .banner-title-text2 {
+    font-family: Raleway;
+    font-size: 3em;
+    text-transform: uppercase;
+    width: 100%;
+    font-weight: bold;
+    position: absolute;
+    bottom: 5%;
+}
 
+#banner {
+    overflow: hidden;
+    position: relative;
+    height: 485px;
+}
 /*--- Home banner ---*/
 #home_banner {
     height: 100vh;
@@ -529,29 +548,31 @@ nav li {
     z-index: 5;
 }
 
-    #home_banner img {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        -webkit-transform: translateY(-50%) translateX(-50%);
-        -moz-transform: translateY(-50%) translateX(-50%);
-        transform: translateY(-50%) translateX(-50%);
-        z-index: 0;
-        opacity: 1;
-        transition: opacity 5s ease-in-out;
-        min-width: 100%;
-        max-width: none;
-        min-height: 100%;
-    }
+#banner img,
+#home_banner img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translateY(-50%) translateX(-50%);
+    -moz-transform: translateY(-50%) translateX(-50%);
+    transform: translateY(-50%) translateX(-50%);
+    z-index: 0;
+    opacity: 1;
+    transition: opacity 5s ease-in-out;
+    min-width: 100%;
+    max-width: none;
+    min-height: 100%;
+}
 
 .scrollToggle {
-    width: 100%;
+    width: 150px;
     bottom: 0;
-    left: 0;
+    left: 50%;
     position: absolute;
     text-align: center;
     font-size: 1.2em;
     height: 4em;
+    margin-left: -75px;
 }
 
     .scrollToggle:hover,
@@ -567,7 +588,7 @@ nav li {
     margin: auto;
     display: block;
     z-index: 7;
-    bottom: 6em;
+    bottom: 40%;
     position: absolute;
     max-width: 100%;
     left: 50%;
@@ -576,13 +597,13 @@ nav li {
 
     .home-button-container a {
         width: 45%;
+        font-family: nexa-black;
         background-color: transparent;
         color: #fff;
         border: 5px solid #fff;
         text-transform: uppercase;
         display: inline-block;
         line-height: 55px;
-        font-weight: bold;
         text-align: center;
         font-size: 1.7em;
     }
@@ -614,7 +635,7 @@ nav li {
     position: absolute;
     width: 100%;
     height: 250px;
-    bottom: 10em;
+    bottom: 75px;
     z-index: 7;
 }
 
@@ -628,6 +649,22 @@ nav li {
 
 .home-text-banner .banner-title-text {
     font-family: Raleway;
+}
+
+#home_banner .home-text-banner{
+    bottom: 50%;
+}
+
+.home-text-banner .banner-bg-title-text {
+    width: 100%;
+    font-size: 13em;
+    font-family: Niconne;
+    position: absolute;
+    bottom: 20%;
+}
+
+.home-text-banner .banner-title-text {
+    font-family: nexa-regular;
     font-size: 2.5em;
     width: 100%;
     position: absolute;
@@ -644,54 +681,75 @@ nav li {
     bottom: 15%;
 }
 
-.appointmentBannerContainer{
-    width: 85%;
-    min-height:500px;
-    display:block;
-    margin:auto;
+.home-text-banner .banner-undertitle-text {
+    font-family: nexa-black;
+    font-size: 2.6em;
+    text-transform: uppercase;
+    font-weight: bold;
+    width: 100%;
+    position: absolute;
+    bottom: 15%;
 }
 
-    .homeList ol {
-        list-style-type: none;
-        counter-reset: pinkListCounter;
-        margin-left: 0px;
-        background-color: #fff;
-        font-family: nexa-regular;
-        font-weight:bold;
+@media screen and (max-height: 680px) {
+    #home_banner .home-text-banner {
+        bottom: 30%;
     }
 
-        .homeList ol li {
-            color: #000;
-            width: 300px;
-            font-size: 1.5em;
-            padding-top: 30px;
+    .home-button-container {
+        bottom: 20%;
+    }
+}
+
+.appointmentBannerContainer {
+    width: 85%;
+    min-height: 500px;
+    display: block;
+    margin: auto;
+}
+
+.homeList ol {
+    list-style-type: none;
+    counter-reset: pinkListCounter;
+    margin-left: 0px;
+    background-color: #fff;
+    font-family: nexa-regular;
+    font-weight: bold;
+}
+
+
+    .homeList ol li {
+        color: #000;
+        width: 300px;
+        font-size: 1.5em;
+        padding-top: 30px;
+    }
+
+        .homeList ol li:before {
+            position: absolute;
+            margin-left: -50px;
+            content: counter(pinkListCounter);
+            counter-increment: pinkListCounter;
+            margin-top: -5px;
+            color: #fff;
+            font-family: nexa-black;
+            font-size: 1.2em;
+            line-height: normal;
+            background-color: #d1d2d4;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border-radius: 50px;
         }
 
-            .homeList ol li:before {
-                position: absolute;
-                margin-left: -50px;
-                content: counter(pinkListCounter);
-                counter-increment: pinkListCounter;
-                margin-top: -5px;
-                color: #fff;
-                font-family: nexa-black;
-                font-size: 1.2em;
-                line-height: normal;
-                background-color: #d1d2d4;
-                width: 40px;
-                height: 40px;
-                line-height: 40px;
-                text-align: center;
-                border-radius: 50px;
-            }
+    .homeList ol .active {
+        color: #f0597c;
+    }
 
-            .homeList ol .active{
-                color:#f0597c;
-            }
-
-            .homeList ol .active:before{
-                background-color:#f0597c;
-            }
+        .homeList ol .active:before {
+            background-color: #f0597c;
+        }
 
 /*--- Content ---*/
 .container {
@@ -741,42 +799,45 @@ nav li {
     padding: 10px;
     margin: 10px 0;
     text-align: center;
-    font-weight: bold;
+    font-family: nexa-black;
     font-size: 1.3em;
     background-color: #f27390;
 }
 
-.create-appointment-part p {
-    font-size: 1.4em;
+.create-appointment-part {
     line-height: 1.4em;
     font-weight: 300;
 }
 
+    .create-appointment-part .right-box span.glyphicon {
+        font-size: 0.65em;
+        margin-right: 10px;
+        top: 0;
+        -webkit-transform: rotate(-15deg);
+        -moz-transform: rotate(-15deg);
+        transform: rotate(-15deg);
+    }
 
-.create-appointment-part .right-box span.glyphicon {
-    font-size: 0.65em;
-    margin-right: 10px;
-    top: 0;
-    -webkit-transform: rotate(-15deg);
-    -moz-transform: rotate(-15deg);
-    transform: rotate(-15deg);
-}
+    .create-appointment-part .right-box p {
+        font-size: 1.3em;
+        line-height: 1.4em;
+    }
 
-.create-appointment-part .right-box .toggle-btn {
-    font-size: 1.2em;
-    cursor: pointer;
-    float: right;
-    margin: 40px 0 10px 0;
-}
+    .create-appointment-part .right-box .toggle-btn {
+        font-size: 1.2em;
+        cursor: pointer;
+        float: right;
+        margin: 40px 0 10px 0;
+    }
 
-.create-appointment-part .right-box .toggle-btn-disabled {
-    opacity: 0.4;
-    cursor: default;
-}
+    .create-appointment-part .right-box .toggle-btn-disabled {
+        opacity: 0.4;
+        cursor: default;
+    }
 
-.create-appointment-part .right-box #right_1_time .toggle-btn {
-    float: left;
-}
+    .create-appointment-part .right-box #right_1_time .toggle-btn {
+        float: left;
+    }
 
 
 
@@ -786,7 +847,6 @@ nav li {
     margin: 0;
     list-style-type: none;
 }
-
 
     #select_time input[type="radio"],
     #select_time label {
@@ -892,6 +952,12 @@ nav li {
         display: block;
     }
 
+/*--- Create appointment form overview ---*/
+.form-overview {
+    margin: 20px 0 40px;
+    font-size: 1.25em;
+}
+
 /*--- Appointment overview ---*/
 .table td:last-child {
     opacity: 0;
@@ -931,18 +997,15 @@ nav li {
     border-color: #f27390;
 }
 
-.detailCard {
-    width: 400px;
-    height: auto;
-    display: block;
-    margin: auto;
+/*--- Appointment details ---*/
+.detailcard {
     border-radius: 4px;
-    padding-bottom: 25px;
+    padding: 0 0 25px 0;
     margin-top: 5%;
     margin-bottom: 5%;
 }
 
-.detailCardHead {
+.detailcard-head {
     background-color: #f0597c;
     width: 100%;
     color: #FFF;
@@ -951,27 +1014,35 @@ nav li {
     padding: 5px 25px;
     margin-bottom: 20px;
     text-align: center;
+    position: relative;
 }
 
-    .detailCardHead a {
+    .detailcard-head h4 {
+        width: 100%;
+        display: block;
+        text-align: center;
+    }
+
+    .detailcard-head a {
+        position: absolute;
         color: #FFF;
         display: block;
     }
 
-        .detailCardHead a:hover,
-        .detailCardHead a:focus,
-        .detailCardHead a:active {
+        .detailcard-head a:hover,
+        .detailcard-head a:focus,
+        .detailcard-head a:active {
             text-decoration: none;
             color: #fce8e7;
         }
 
-.detailCardBack {
+.detailcard-back {
     font-size: 25px;
-    float: left;
+    left: 20px;
 }
 
-.detailCardAdd {
-    float: right;
+.detailcard-add {
+    right: 20px;
     line-height: 37px;
     font-size: 17px;
 }
@@ -979,7 +1050,7 @@ nav li {
 /*--- Footer---*/
 footer {
     padding: 20px;
-    font-family: Raleway;
+    font-family: nexa-regular;
 }
 
 .social-box {
@@ -988,6 +1059,7 @@ footer {
     width: 23%;
     margin-left: 5%;
     position: relative;
+    overflow: hidden;
 }
 
     .social-box:first-child {
@@ -1007,7 +1079,7 @@ footer {
     }
 
     .social-box .front-text {
-        font-family: Roboto;
+        font-family: nexa-black;
         font-weight: bold;
         margin-top: 80px;
         line-height: 1.1em;
@@ -1026,7 +1098,7 @@ footer {
 
 footer h4 {
     font-weight: bold;
-    font-family: Roboto;
+    font-family: nexa-black;
     margin-bottom: 0px;
     text-transform: uppercase;
 }
@@ -1038,5 +1110,6 @@ footer ul {
 
     footer ul a {
         color: #696564;
-        line-height: 2em;
+        line-height: 1.6em;
+        font-size: 1.2em;
     }
