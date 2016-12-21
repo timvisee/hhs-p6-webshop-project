@@ -1,9 +1,24 @@
 @model hhs_p6_webshop_project.Models.AppointmentModels.Appointment
 
 @{
-    ViewData["Title"] = "Maak afpsraak";
+    ViewData["Title"] = "Bedankt voor je afspraak!";
+
+    ViewData["PinkBackground"] = true;
+    ViewData["BannerPath"] = "/images/appointment-thankyou.jpg";
+    ViewData["ShowBanner"] = true;
+    ViewData["HomeBannerBgTitle"] = "Afspraak maken";
+    ViewData["HomeBannerSmallTitle"] = "(door)Pasafspraak maken voor je jurk of pak";
+    ViewData["HomeBannerBoldTitle"] = "Van begin tot eind kunnen wij je helpen.";
 }
 
-<h2>Afspraak</h2>
+<div class="text-banner">
+    <h1 class="banner-bg-title-text hm-pink-light-text">Voltooid!</h1>
+    <h2 class="banner-title-text">Je pasafspraak is gemaakt</h2>
+</div>
 
-<h4>Bedankt voor je pasafspraak!</h4>
+<p class="text-center font-nexa-regular">
+    Leuk! Je pasafpraak is gemaakt! Er is een bevestiging van je afspraak naar <br />
+    je E-mail gestuurd! Maak ook meteen een afspraak voor je partner!<br/>
+
+    <a href="#" class="btn">Deel dit moment</a>
+</p>
