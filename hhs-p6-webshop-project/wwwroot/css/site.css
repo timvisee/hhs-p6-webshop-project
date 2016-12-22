@@ -523,15 +523,15 @@ nav li {
         bottom: 20%;
     }
 
-.text-banner .banner-title-text2 {
-    font-family: nexa-black;
-    font-size: 3em;
-    text-transform: uppercase;
-    width: 100%;
-    font-weight: bold;
-    position: absolute;
-    bottom: 5%;
-}
+    .text-banner .banner-title-text2 {
+        font-family: nexa-black;
+        font-size: 3em;
+        text-transform: uppercase;
+        width: 100%;
+        font-weight: bold;
+        position: absolute;
+        bottom: 5%;
+    }
 
 #banner {
     overflow: hidden;
@@ -548,21 +548,21 @@ nav li {
     z-index: 5;
 }
 
-#banner img,
-#home_banner img {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    -webkit-transform: translateY(-50%) translateX(-50%);
-    -moz-transform: translateY(-50%) translateX(-50%);
-    transform: translateY(-50%) translateX(-50%);
-    z-index: 0;
-    opacity: 1;
-    transition: opacity 5s ease-in-out;
-    min-width: 100%;
-    max-width: none;
-    min-height: 100%;
-}
+    #banner img,
+    #home_banner img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translateY(-50%) translateX(-50%);
+        -moz-transform: translateY(-50%) translateX(-50%);
+        transform: translateY(-50%) translateX(-50%);
+        z-index: 0;
+        opacity: 1;
+        transition: opacity 5s ease-in-out;
+        min-width: 100%;
+        max-width: none;
+        min-height: 100%;
+    }
 
 .scrollToggle {
     width: 150px;
@@ -581,6 +581,24 @@ nav li {
         cursor: pointer;
         color: #f0597c;
     }
+
+    .scrollToggle:hover .scroll-down-icon,
+    .scrollToggle:focus .scroll-down-icon,
+    .scrollToggle:active .scroll-down-icon{
+        border-top-color:#f0597c;
+    }
+
+.scroll-down-icon {
+    position: absolute;
+    margin-left: -10px;
+    margin-top: -5px;
+    width: 0;
+    height: 0;
+    content: '';
+    border-top: 15px solid #fff;
+    border-right: 11px solid transparent;
+    border-left: 11px solid transparent;
+}
 
 .home-button-container {
     width: 40%;
@@ -651,7 +669,7 @@ nav li {
     font-family: Raleway;
 }
 
-#home_banner .home-text-banner{
+#home_banner .home-text-banner {
     bottom: 50%;
 }
 
@@ -701,14 +719,64 @@ nav li {
     }
 }
 
-.appointmentBannerContainer {
+.appointment-banner-container {
     width: 85%;
-    min-height: 500px;
+    min-height: 550px;
     display: block;
     margin: auto;
+    position: relative;
+    margin-bottom: 50px;
 }
 
-.homeList ol {
+.appointment-banner-image-container img {
+    width: 65%;
+    position: absolute;
+}
+
+.appointment-banner-image-text {
+    display: block;
+    font-family: nexa-black;
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 20%;
+    width: 250px;
+    text-transform: uppercase;
+    font-size: 1.7em;
+    margin-left: 30%;
+    padding-left: 20px;
+}
+
+.appointment-banner-image-counter {
+    position: absolute;
+    bottom: 0;
+    font-size: 4.8em;
+    color: #fff;
+    background-color:#f0597c;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    font-family: nexa-black;
+    border-radius: 50px;
+    margin-left: 10%;
+    margin-bottom: 30px;
+}
+
+.appointment-banner-image-text:before {
+    position: absolute;
+    margin-left: -25px;
+    width: 0;
+    height: 0;
+    content: '';
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 15px solid #f0597c;
+    margin-top: 5px;
+    line-height: 40px;
+    text-align: center;
+}
+
+.home-list ol {
     list-style-type: none;
     counter-reset: pinkListCounter;
     margin-left: 0px;
@@ -718,14 +786,14 @@ nav li {
 }
 
 
-    .homeList ol li {
+    .home-list ol li {
         color: #000;
         width: 300px;
         font-size: 1.5em;
         padding-top: 30px;
     }
 
-        .homeList ol li:before {
+        .home-list ol li:before {
             position: absolute;
             margin-left: -50px;
             content: counter(pinkListCounter);
@@ -743,11 +811,11 @@ nav li {
             border-radius: 50px;
         }
 
-    .homeList ol .active {
+    .home-list ol .active {
         color: #f0597c;
     }
 
-        .homeList ol .active:before {
+        .home-list ol .active:before {
             background-color: #f0597c;
         }
 
