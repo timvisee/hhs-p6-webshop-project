@@ -587,11 +587,11 @@ nav li {
         color: #f0597c;
     }
 
-    .scrollToggle:hover .scroll-down-icon,
-    .scrollToggle:focus .scroll-down-icon,
-    .scrollToggle:active .scroll-down-icon{
-        border-top-color:#f0597c;
-    }
+        .scrollToggle:hover .scroll-down-icon,
+        .scrollToggle:focus .scroll-down-icon,
+        .scrollToggle:active .scroll-down-icon {
+            border-top-color: #f0597c;
+        }
 
 .scroll-down-icon {
     position: absolute;
@@ -728,19 +728,19 @@ nav li {
     margin-bottom: 50px;
 }
 
-.appointment-banner-image-container{
+.appointment-banner-image-container {
     width: 100%;
-    height:550px;
+    height: 550px;
     position: absolute;
 }
 
-.appointment-banner-image-container img {
-    width: 65%;
-    position: absolute;
-}
+    .appointment-banner-image-container img {
+        width: 65%;
+        position: absolute;
+    }
 
-.appointment-banner-text-outer-wrapper{
-    width:100%;
+.appointment-banner-text-outer-wrapper {
+    width: 100%;
     height: 270px;
     position: absolute;
     bottom: 0;
@@ -758,39 +758,39 @@ nav li {
     margin-left: 25px;
 }
 
-.appointment-banner-image-text:before {
-    position: absolute;
-    margin-left: -25px;
-    width: 0;
-    height: 0;
-    content: '';
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    border-left: 15px solid #f0597c;
-    margin-top: 5px;
-    line-height: 40px;
-    text-align: center;
-}
+    .appointment-banner-image-text:before {
+        position: absolute;
+        margin-left: -25px;
+        width: 0;
+        height: 0;
+        content: '';
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-left: 15px solid #f0597c;
+        margin-top: 5px;
+        line-height: 40px;
+        text-align: center;
+    }
 
-.appointment-banner-card{
-    position:absolute;
-    background-color:#fff;
-    width:350px;
-    height:220px;
-    font-size:.9em;
-    padding:30px;
+.appointment-banner-card {
+    position: absolute;
+    background-color: #fff;
+    width: 350px;
+    height: 220px;
+    font-size: .9em;
+    padding: 30px;
     margin-top: 40px;
 }
 
-.appointment-banner-text-wrapper{
+.appointment-banner-text-wrapper {
     height: 260px;
-    width:350px;
+    width: 350px;
     position: absolute;
     bottom: 0;
     margin-left: 27%;
 }
 
-.appointment-banner-counter-wrapper{
+.appointment-banner-counter-wrapper {
     width: 65%;
     height: 100px;
     bottom: 0;
@@ -803,7 +803,7 @@ nav li {
     bottom: 0;
     font-size: 4.8em;
     color: #fff;
-    background-color:#f0597c;
+    background-color: #f0597c;
     width: 100px;
     height: 100px;
     line-height: 100px;
@@ -850,7 +850,7 @@ nav li {
             border-radius: 50px;
         }
 
-        .home-list ol li:hover{
+        .home-list ol li:hover {
             cursor: pointer;
         }
 
@@ -951,11 +951,15 @@ nav li {
     }
 
     .create-appointment-part .right-box .toggle-btn {
-        font-size: 1.2em;
+        font-size: 1.1em;
         cursor: pointer;
         float: right;
         margin: 40px 0 10px 0;
     }
+
+        .create-appointment-part .right-box .toggle-btn.previous-btn {
+            float: left;
+        }
 
     .create-appointment-part .right-box .toggle-btn-disabled {
         opacity: 0.4;
@@ -966,10 +970,10 @@ nav li {
         float: left;
     }
 
-    /*--- Step image---*/
-    #appointment_step_image {
-        margin: 40px 0 30px 0;
-    }
+/*--- Step image---*/
+#appointment_step_image {
+    margin: 40px 0 30px 0;
+}
 
 /*--- Select time ---*/
 #select_time {
