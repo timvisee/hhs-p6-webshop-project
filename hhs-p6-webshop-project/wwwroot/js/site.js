@@ -88,7 +88,7 @@ $(document).ready(function () {
             var isAvailable = true;
 
             // Return depending on whether the date is avaialble or not
-            if(isAvailable)
+            if (isAvailable)
                 return [true];
             else
                 return [false, "", "Deze datum is bezet."];
@@ -99,16 +99,21 @@ $(document).ready(function () {
     $('.ui-state-active').removeClass('ui-state-active');
 
     $(".time-option").click(function () {
-        console.log($(this).val());
-
-        console.log($("#date_input").val() + $(this).val());
-
+        // Show the go to second button
+        $("#go_to_second").show();
         $(".selected-time").html(" OM " + $(this).val());
-
-
-        // Add data to input box
-        //$('#date_input').val(currentValue + "T" + $(this).val() + ":00");
     });
+
+    /**
+     * Change the image based on the current step within the appointment creation
+     */
+    $("#back_to_first").click(function () {
+        $("#appointment_step_image").attr("src", "/images/appointment/step-1.png");
+    });
+    $("#go_to_second, #back_to_second").click(function () {
+        $("#appointment_step_image").attr("src", "/images/appointment/step-2.png");
+    });
+    // Third button needs the check if the fields are filled in correctly
 
 
     /**
@@ -116,7 +121,6 @@ $(document).ready(function () {
      */
     $(".toggle-time-date").click(function () {
         if (!$(this).hasClass("toggle-btn-disabled")) {
-            $("#go_to_second").show();
             $(".time-date-box").slideToggle(700, "easeInOutCubic");
         }
     });
@@ -151,6 +155,7 @@ $(document).ready(function () {
 
             $("#fill_in_fields_warning").html("Je hebt niet alle verplichte velden ingevuld!");
         } else {
+            $("#appointment_step_image").attr("src", "/images/appointment/step-3.png");
             $("#left_2, #left_3, #right_2, #right_3").toggle();
         }
     });
@@ -158,14 +163,14 @@ $(document).ready(function () {
     /**
      * Enable validation for the email fields
      */
-//    $("#create_appointment_form").validate({
-//        rules: {
-//            Mail: "required",
-//            mail_verify: {
-//                equalTo: "#Mail"
-//            }
-//        }
-//    });
+    //    $("#create_appointment_form").validate({
+    //        rules: {
+    //            Mail: "required",
+    //            mail_verify: {
+    //                equalTo: "#Mail"
+    //            }
+    //        }
+    //    });
 
     /**
      * Fetch data from an AJAX endpoint.
@@ -176,7 +181,7 @@ $(document).ready(function () {
      */
     function fetchData(endpoint, callback) {
         // Make sure an endpoint and callback is specified
-        if(endpoint == undefined || typeof callback !== "function") {
+        if (endpoint == undefined || typeof callback !== "function") {
             callback(new Error("Endpoint or callback not specified"));
             return;
         }
@@ -187,7 +192,7 @@ $(document).ready(function () {
             url: "/Ajax/" + endpoint,
             dataType: "json",
             method: "GET",
-            error: function(jqXhr, textStatus) {
+            error: function (jqXhr, textStatus) {
                 // Define the error message
                 var error = "Failed to fetch data.\n\nError: " + textStatus;
 
@@ -197,9 +202,9 @@ $(document).ready(function () {
                 // Call back with an error
                 callback(new Error(error));
             },
-            success: function(data) {
+            success: function (data) {
                 // Make sure the status is OK
-                if(data.status !== "ok") {
+                if (data.status !== "ok") {
                     // Define the error message
                     var error = "Failed to fetch data. The website returned an error.\n\nError: " + data.error.message;
 
@@ -266,4 +271,23 @@ $(document).ready(function () {
      * @param {string} time The actual time.
      * @param {boolean} available True if this time is available, false if not.
      */
+
+
+    /** Appointment banner **/
+
+    $(".home-list>ol>li").click(function () {
+        var counter = $(this).index() + 1;
+        console.log(counter);
+        $(".appointment-banner-image-counter").empty();
+        $(".appointment-banner-image-counter").html(counter);
+        if (counter == 1) {
+            $(".appointment-banner-image-container>img").attr('src', "images/mooi-meisje-3.jpg");
+        } else if (counter == 2) {
+            $(".appointment-banner-image-container>img").attr('src', "images/mooi-meisje-2.jpg");
+        } else if (counter == 3) {
+            $(".appointment-banner-image-container>img").attr('src', "images/mooi-meisje.jpg");
+        } else {
+            $(".appointment-banner-image-container>img").attr('src', "images/mooi-meisje-3.jpg");
+        }
+    });
 });

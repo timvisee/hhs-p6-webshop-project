@@ -204,7 +204,8 @@ input[type="reset"]:active,
     text-decoration: none;
     display: inline-block;
     font-weight: bold;
-    font-size: 1.1em;
+    font-size: 1.4rem;
+    line-height: 30px;
 }
 
     .btn:hover,
@@ -246,6 +247,10 @@ input[type="reset"]:active,
     input[type="reset"]:focus {
         padding-top: 8px;
         padding-bottom: 4px;
+    }
+
+    .btn .glyphicon-right {
+        margin-left: 10px;
     }
 
 input[type="checkbox"] {
@@ -582,11 +587,11 @@ nav li {
         color: #f0597c;
     }
 
-    .scrollToggle:hover .scroll-down-icon,
-    .scrollToggle:focus .scroll-down-icon,
-    .scrollToggle:active .scroll-down-icon{
-        border-top-color:#f0597c;
-    }
+        .scrollToggle:hover .scroll-down-icon,
+        .scrollToggle:focus .scroll-down-icon,
+        .scrollToggle:active .scroll-down-icon {
+            border-top-color: #f0597c;
+        }
 
 .scroll-down-icon {
     position: absolute;
@@ -649,7 +654,6 @@ nav li {
 
 /*--- Home banner text ---*/
 #home_banner .home-text-banner {
-    text-align: center;
     position: absolute;
     width: 100%;
     height: 250px;
@@ -665,10 +669,6 @@ nav li {
     bottom: 20%;
 }
 
-.home-text-banner .banner-title-text {
-    font-family: Raleway;
-}
-
 #home_banner .home-text-banner {
     bottom: 50%;
 }
@@ -678,7 +678,7 @@ nav li {
     font-size: 13em;
     font-family: Niconne;
     position: absolute;
-    bottom: 20%;
+    bottom: 21%;
 }
 
 .home-text-banner .banner-title-text {
@@ -686,7 +686,7 @@ nav li {
     font-size: 2.5em;
     width: 100%;
     position: absolute;
-    bottom: 30%;
+    bottom: 25%;
 }
 
 .home-text-banner .banner-undertitle-text {
@@ -706,7 +706,7 @@ nav li {
     font-weight: bold;
     width: 100%;
     position: absolute;
-    bottom: 15%;
+    bottom: 17%;
 }
 
 @media screen and (max-height: 680px) {
@@ -728,15 +728,23 @@ nav li {
     margin-bottom: 50px;
 }
 
-.appointment-banner-image-container{
+.appointment-banner-image-container {
     width: 100%;
-    height:550px;
+    height: 550px;
     position: absolute;
 }
 
-.appointment-banner-image-container img {
-    width: 65%;
+    .appointment-banner-image-container img {
+        width: 65%;
+        height: 480px;
+        position: absolute;
+    }
+
+.appointment-banner-text-outer-wrapper {
+    width: 100%;
+    height: 270px;
     position: absolute;
+    bottom: 0;
 }
 
 .appointment-banner-image-text {
@@ -751,39 +759,39 @@ nav li {
     margin-left: 25px;
 }
 
-.appointment-banner-image-text:before {
-    position: absolute;
-    margin-left: -25px;
-    width: 0;
-    height: 0;
-    content: '';
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    border-left: 15px solid #f0597c;
-    margin-top: 5px;
-    line-height: 40px;
-    text-align: center;
-}
+    .appointment-banner-image-text:before {
+        position: absolute;
+        margin-left: -25px;
+        width: 0;
+        height: 0;
+        content: '';
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-left: 15px solid #f0597c;
+        margin-top: 5px;
+        line-height: 40px;
+        text-align: center;
+    }
 
-.appointment-banner-card{
-    position:absolute;
-    background-color:#fff;
-    width:350px;
-    height:220px;
-    font-size:.9em;
-    padding:30px;
+.appointment-banner-card {
+    position: absolute;
+    background-color: #fff;
+    width: 350px;
+    height: 220px;
+    font-size: .9em;
+    padding: 30px;
     margin-top: 40px;
 }
 
-.appointment-banner-text-wrapper{
+.appointment-banner-text-wrapper {
     height: 260px;
-    width:350px;
+    width: 350px;
     position: absolute;
     bottom: 0;
     margin-left: 27%;
 }
 
-.appointment-banner-counter-wrapper{
+.appointment-banner-counter-wrapper {
     width: 65%;
     height: 100px;
     bottom: 0;
@@ -796,7 +804,7 @@ nav li {
     bottom: 0;
     font-size: 4.8em;
     color: #fff;
-    background-color:#f0597c;
+    background-color: #f0597c;
     width: 100px;
     height: 100px;
     line-height: 100px;
@@ -814,6 +822,7 @@ nav li {
     background-color: #fff;
     font-family: nexa-regular;
     font-weight: bold;
+    width: 320px;
 }
 
 
@@ -840,6 +849,10 @@ nav li {
             line-height: 40px;
             text-align: center;
             border-radius: 50px;
+        }
+
+        .home-list ol li:hover {
+            cursor: pointer;
         }
 
     .home-list ol .active {
@@ -893,6 +906,22 @@ nav li {
     margin-top: 30px;
 }
 
+.create-appointment-part .left-box .opening-times {
+    font-size: 1.4em;
+    margin-top: 30px;
+}
+
+.opening-times .times {
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.opening-times label {
+    width: 60px;
+    font-family: nexa-black;
+}
+
 /*--- Right box ---*/
 .create-appointment-part .selected-date-time {
     padding: 10px;
@@ -923,11 +952,15 @@ nav li {
     }
 
     .create-appointment-part .right-box .toggle-btn {
-        font-size: 1.2em;
+        font-size: 1.1em;
         cursor: pointer;
         float: right;
         margin: 40px 0 10px 0;
     }
+
+        .create-appointment-part .right-box .toggle-btn.previous-btn {
+            float: left;
+        }
 
     .create-appointment-part .right-box .toggle-btn-disabled {
         opacity: 0.4;
@@ -938,7 +971,10 @@ nav li {
         float: left;
     }
 
-
+/*--- Step image---*/
+#appointment_step_image {
+    margin: 40px 0 30px 0;
+}
 
 /*--- Select time ---*/
 #select_time {
@@ -1008,6 +1044,7 @@ nav li {
 
 .ui-datepicker-title {
     text-align: center;
+    font-family: nexa-black;
 }
 
 .ui-datepicker-calendar thead th {
