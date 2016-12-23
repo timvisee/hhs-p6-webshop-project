@@ -175,12 +175,6 @@ $(document).ready(function () {
     // Remove default date class
     $('.ui-state-active').removeClass('ui-state-active');
 
-    $(".time-option").click(function () {
-        // Show the go to second button
-        $("#go_to_second").show();
-        $(".selected-time").html(" OM " + $(this).val());
-    });
-
     /**
      * Change the image based on the current step within the appointment creation
      */
@@ -220,7 +214,7 @@ $(document).ready(function () {
 
                 // Append the checkbox
                 timeCheckboxContainer.append("<li>" +
-                    "<input class=\"time-option\" type=\"radio\" name=\"appointment_time\" value=\"09:30\" id=\"" + uniqueId + "\">" +
+                    "<input class=\"time-option\" type=\"radio\" name=\"appointment_time\" value=\"" + value + "\" id=\"" + uniqueId + "\">" +
                     "<label class=\"time-option-label\" for=\"" + uniqueId + "\">" + timeString + "</label>" +
                     "</li>");
             }
@@ -250,7 +244,7 @@ $(document).ready(function () {
                         continue;
 
                     // Create the checkbox
-                    createCheckbox(timeEntry.time + " uur", i, timeEntry.available);
+                    createCheckbox(timeEntry.time + " uur", timeEntry.time);
 
                     // Set the has time flag
                     hasTime = true;
@@ -259,6 +253,21 @@ $(document).ready(function () {
                 // Show a message if no time is available
                 if(!hasTime)
                     timeCheckboxContainer.html("<i>Geen tijd beschikbaar op deze dag</i>");
+
+                // Link the checkboxes to the date time field
+                timeCheckboxContainer.find("input").change(function () {
+                    // Get the date input field
+                    var dateField = $("#date_input");
+
+                    // Append the time
+                    dateField.val(dateField.val() + " " + $(this).val());
+                });
+
+                $(".time-option").click(function () {
+                    // Show the go to second button
+                    $("#go_to_second").show();
+                    $(".selected-time").html(" OM " + $(this).val());
+                });
 
                 // Set the loading indicator
                 setLoadingIndicator(timeContainer, false);
@@ -334,7 +343,7 @@ $(document).ready(function () {
         $.ajax({
             url: "/Ajax/" + endpoint,
             dataType: "json",
-            method: "GET",
+            type: "GET",
             data: data,
             error: function(jqXhr, textStatus) {
                 // Define the error message
