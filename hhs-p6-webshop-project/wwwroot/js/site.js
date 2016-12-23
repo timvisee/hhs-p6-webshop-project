@@ -88,7 +88,7 @@ $(document).ready(function () {
             var isAvailable = true;
 
             // Return depending on whether the date is avaialble or not
-            if(isAvailable)
+            if (isAvailable)
                 return [true];
             else
                 return [false, "", "Deze datum is bezet."];
@@ -163,14 +163,14 @@ $(document).ready(function () {
     /**
      * Enable validation for the email fields
      */
-//    $("#create_appointment_form").validate({
-//        rules: {
-//            Mail: "required",
-//            mail_verify: {
-//                equalTo: "#Mail"
-//            }
-//        }
-//    });
+    //    $("#create_appointment_form").validate({
+    //        rules: {
+    //            Mail: "required",
+    //            mail_verify: {
+    //                equalTo: "#Mail"
+    //            }
+    //        }
+    //    });
 
     /**
      * Fetch data from an AJAX endpoint.
@@ -181,7 +181,7 @@ $(document).ready(function () {
      */
     function fetchData(endpoint, callback) {
         // Make sure an endpoint and callback is specified
-        if(endpoint == undefined || typeof callback !== "function") {
+        if (endpoint == undefined || typeof callback !== "function") {
             callback(new Error("Endpoint or callback not specified"));
             return;
         }
@@ -192,7 +192,7 @@ $(document).ready(function () {
             url: "/Ajax/" + endpoint,
             dataType: "json",
             method: "GET",
-            error: function(jqXhr, textStatus) {
+            error: function (jqXhr, textStatus) {
                 // Define the error message
                 var error = "Failed to fetch data.\n\nError: " + textStatus;
 
@@ -202,9 +202,9 @@ $(document).ready(function () {
                 // Call back with an error
                 callback(new Error(error));
             },
-            success: function(data) {
+            success: function (data) {
                 // Make sure the status is OK
-                if(data.status !== "ok") {
+                if (data.status !== "ok") {
                     // Define the error message
                     var error = "Failed to fetch data. The website returned an error.\n\nError: " + data.error.message;
 
@@ -271,4 +271,11 @@ $(document).ready(function () {
      * @param {string} time The actual time.
      * @param {boolean} available True if this time is available, false if not.
      */
+
+
+    /** Appointment banner **/
+
+    $(".home-list>ol>li").click(function () {
+        console.log($(".home-list>ol>li:before").text());
+    });
 });
