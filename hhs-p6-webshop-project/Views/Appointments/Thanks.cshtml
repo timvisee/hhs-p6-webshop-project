@@ -9,6 +9,12 @@
     ViewData["HomeBannerBgTitle"] = "Afspraak maken";
     ViewData["HomeBannerSmallTitle"] = "(door)Pasafspraak maken voor je jurk of pak";
     ViewData["HomeBannerBoldTitle"] = "Van begin tot eind kunnen wij je helpen.";
+
+    // TODO: Fix the text banner so you don't have to pass all data in the ViewData
+    ViewData["AppointmentBannerTitle"] = "Hoe het werkt";
+    ViewData["AppointmentBannerSmallTitle"] = "Hoe verloopt het passen van";
+    ViewData["AppointmentBannerSmallTitle2"] = "een pak of jurk eigenlijk?";
+
 }
 
 <div class="text-banner">
@@ -18,7 +24,10 @@
 
 <p class="text-center font-nexa-regular">
     Leuk! Je pasafpraak is gemaakt! Er is een bevestiging van je afspraak naar <br />
-    je E-mail gestuurd! Maak ook meteen een afspraak voor je partner!<br/>
+    je E-mail gestuurd! Maak ook meteen een afspraak voor je partner!<br />
 
-    <a href="#" class="btn">Deel dit moment</a>
+    <a href="mailto:?subject=Ik%20heb%20een%20pasafspraak%20gemaakt%20bij%20Honeymoon%20Shop!&body=Maak%20ook%20een%20pasafspraak." class="btn">Deel dit moment <span class="glyphicon glyphicon-right glyphicon-share-alt"></span></a>
 </p>
+
+
+@Html.Partial("_AppointmentPartial")
