@@ -92,11 +92,13 @@ $(document).ready(function () {
                 },
 
                 beforeShowDay: function (date) {
-                    // Print the date string, to ensure we're using the correct strings
-                    alert(date.dateString);
+                    // Build the date string
+                    var dateString = date.getFullYear() + "-" +
+                            ("0" + (date.getMonth() + 1)).slice(-2) + "-" +
+                            ("0" + date.getDate()).slice(-2);
 
                     // Determine whether this date is in the list of occupied dates
-                    var isAvailable = unavailableDates.indexOf(date.dateString) < 0;
+                    var isAvailable = unavailableDates.indexOf(dateString) < 0;
 
                     // Return depending on whether the date is avaialble or not
                     if(isAvailable)
@@ -258,7 +260,17 @@ $(document).ready(function () {
      * @param {fetchUnavailableDatesCallback} callback Callback function.
      */
     function fetchUnavailableDates(callback) {
-        fetchData("Appointments/GetDates", callback);
+        // Fetch the data
+        fetchData("Appointments/GetDates", function (err, data) {
+            // Call back errors
+            if(err != null) {
+                callback(err);
+                return;
+            }
+
+            // Call back with the dates
+            callback(null, data.dates);
+        });
     }
 
     /**
