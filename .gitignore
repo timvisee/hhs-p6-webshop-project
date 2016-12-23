@@ -218,7 +218,7 @@ fabric.properties
 
 # Project files
 project.lock.json
-wwwroot/lib
+*/wwwroot/lib
 hhs-p6-webshop-project/node_modules
 TestResult.xml
 sh.exe.stackdump
