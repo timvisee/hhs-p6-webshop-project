@@ -26,6 +26,15 @@ function getUniqueId(prefix) {
     return prefix + "-" + uniqueIdIndex++;
 }
 
+/**
+ * Format a date to ISO.
+ */
+function formatDate(date) {
+    return date.getFullYear() + "-" +
+            ("0" + (date.getMonth() + 1)).slice(-2) + "-" +
+            ("0" + date.getDate()).slice(-2);
+}
+
 // Run this code when the page is finished loading
 $(document).ready(function () {
 
@@ -85,6 +94,8 @@ $(document).ready(function () {
     // Get the calander elements
     var calendarElement = $("#calendar");
 
+    var selectedDate = null;
+
     // Initialize the calendar with a date picker, if any element is selected
     if(calendarElement.length > 0) {
         // Create a date picker render function
@@ -99,9 +110,7 @@ $(document).ready(function () {
             // Check whether the date is available, if the unavailable dates array isn't null
             if(unavailableDates != null) {
                 // Build the date string
-                var dateString = date.getFullYear() + "-" +
-                        ("0" + (date.getMonth() + 1)).slice(-2) + "-" +
-                        ("0" + date.getDate()).slice(-2);
+                var dateString = formatDate(date);
 
                 // Determine whether this date is in the list of occupied dates
                 isAvailable = unavailableDates.indexOf(dateString) < 0;
@@ -121,7 +130,7 @@ $(document).ready(function () {
             firstDay: 1,
             minDate: dateToday,
 
-            onSelect: function (date) {
+            onSelect: function(date) {
                 var d = new Date(date);
                 var inputDate = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
                 var showDate = d.getDate() + " " + MONTH_NAMES[d.getMonth()] + " " + d.getFullYear();
@@ -132,6 +141,9 @@ $(document).ready(function () {
                 $(".selected-date").each(function () {
                     $(this).html(showDate);
                 });
+
+                // Set the selected date
+                selectedDate = d;
             },
 
             beforeShowDay: renderDatePickerDay
@@ -217,7 +229,7 @@ $(document).ready(function () {
             setLoadingIndicator(timeContainer, true);
 
             // Fetch the times
-            fetchTimes(null, function(err, times) {
+            fetchTimes(selectedDate, function(err, times) {
                 // Print errors to the console
                 if (err != null) {
                     console.log(err);
@@ -308,8 +320,9 @@ $(document).ready(function () {
      *
      * @param {string} endpoint Endpoint to request.
      * @param {fetchDataCallback} callback Callback function.
+     * @param {Object} [data] Optional data.
      */
-    function fetchData(endpoint, callback) {
+    function fetchData(endpoint, callback, data) {
         // Make sure an endpoint and callback is specified
         if(endpoint == undefined || typeof callback !== "function") {
             callback(new Error("Endpoint or callback not specified"));
@@ -322,6 +335,7 @@ $(document).ready(function () {
             url: "/Ajax/" + endpoint,
             dataType: "json",
             method: "GET",
+            data: data,
             error: function(jqXhr, textStatus) {
                 // Define the error message
                 var error = "Failed to fetch data.\n\nError: " + textStatus;
@@ -403,6 +417,9 @@ $(document).ready(function () {
 
             // Call back with the time
             callback(null, data.times);
+
+        }, {
+            date: formatDate(date)
         });
     }
 
