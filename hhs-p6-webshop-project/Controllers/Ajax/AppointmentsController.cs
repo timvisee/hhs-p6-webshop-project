@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using hhs_p6_webshop_project.App.Ajax;
 using hhs_p6_webshop_project.Data;
@@ -76,9 +78,42 @@ namespace hhs_p6_webshop_project.Controllers.Ajax {
         /// </summary>
         /// <returns>JSON response.</returns>
         [HttpGet("GetTimes")]
-        public JsonResult GetTimes() {
+        public JsonResult GetTimes(string date) {
             // Determine the date to get the free times for
-            DateTime date = DateTime.Now;
+            DateTime dateObject = DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+
+            var appointments = _context.Appointment.Where(a => a.AppointmentDateTime.Date == dateObject.Date)
+                .Select(a => a.AppointmentDateTime).ToList();
+
+            var timeslots = new List<TimeSpan>();
+            timeslots.Add(TimeSpan.FromHours(9).Add(TimeSpan.FromMinutes(30)));
+            timeslots.Add(TimeSpan.FromHours(12).Add(TimeSpan.FromMinutes(30)));
+            timeslots.Add(TimeSpan.FromHours(15).Add(TimeSpan.FromMinutes(0)));
+
+            //var freeSlots = new List<TimeSpan>();
+
+            List<Object> times = new List<Object>();
+
+            foreach (var slot in timeslots) {
+
+                bool taken = false;
+
+                foreach(var app in appointments) {
+                    if (app.TimeOfDay == slot)
+                        taken = true;
+
+                }
+
+
+                times.Add(new {
+                    available = !taken,
+                    time = slot.ToString()
+                });
+
+
+            }
+
+            //var freeSlots = timeslots.Where(slot => appointments.Any(appointment => appointment.TimeOfDay != slot)).ToList();
 
             // TODO: Fetch the free times from the database!
             //            // Fetch the occupied dates from the database
@@ -86,21 +121,23 @@ namespace hhs_p6_webshop_project.Controllers.Ajax {
             //                .Where(appointment => appointment.AppointmentDateTime > date)
             //                .SelectMany(appointment => appointment.AppointmentDateTime);
 
+            //930 1230 15
+
             // Create a list of dummy dates
-            List<Object> times = new List<Object> {
-                new {
-                    available = true,
-                    time = "13:00:00"
-                },
-                new {
-                    available = false,
-                    time = "15:00:00"
-                },
-                new {
-                    available = true,
-                    time = "17:00:00"
-                },
-            };
+            //List<Object> times = new List<Object> {
+            //    new {
+            //        available = true,
+            //        time = "13:00:00"
+            //    },
+            //    new {
+            //        available = false,
+            //        time = "15:00:00"
+            //    },
+            //    new {
+            //        available = true,
+            //        time = "17:00:00"
+            //    },
+            //};
 
             // Return the list of times
             return new AjaxResponse().SetDataField("times", times);
