@@ -1295,8 +1295,8 @@ footer ul {
 .loading-overlay {
     position: absolute;
     z-index: 99998;
-    background: rgba(0, 0, 0, 0.5);
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.25);
 }
 
 .loading-indicator {
@@ -1305,4 +1305,17 @@ footer ul {
     height: 62px;
     z-index: 99999;
     background: url(/images/loading.gif);
+}
+
+.date-container,
+.time-container {
+    height: 280px !important;
+}
+
+#select_time i {
+    line-height: 50px;
+    text-align: center;
+    font-size: 110%;
+    font-style: italic;
+    font-weight: bold;
 }
