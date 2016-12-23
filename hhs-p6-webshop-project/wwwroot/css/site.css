@@ -649,7 +649,6 @@ nav li {
 
 /*--- Home banner text ---*/
 #home_banner .home-text-banner {
-    text-align: center;
     position: absolute;
     width: 100%;
     height: 250px;
@@ -665,10 +664,6 @@ nav li {
     bottom: 20%;
 }
 
-.home-text-banner .banner-title-text {
-    font-family: Raleway;
-}
-
 #home_banner .home-text-banner {
     bottom: 50%;
 }
@@ -678,7 +673,7 @@ nav li {
     font-size: 13em;
     font-family: Niconne;
     position: absolute;
-    bottom: 20%;
+    bottom: 21%;
 }
 
 .home-text-banner .banner-title-text {
@@ -686,7 +681,7 @@ nav li {
     font-size: 2.5em;
     width: 100%;
     position: absolute;
-    bottom: 30%;
+    bottom: 25%;
 }
 
 .home-text-banner .banner-undertitle-text {
@@ -706,7 +701,7 @@ nav li {
     font-weight: bold;
     width: 100%;
     position: absolute;
-    bottom: 15%;
+    bottom: 17%;
 }
 
 @media screen and (max-height: 680px) {
