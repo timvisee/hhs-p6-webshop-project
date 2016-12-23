@@ -1268,3 +1268,16 @@ footer ul {
     z-index: 99999;
     background: url(/images/loading.gif);
 }
+
+.date-container,
+.time-container {
+    height: 280px !important;
+}
+
+#select_time i {
+    line-height: 50px;
+    text-align: center;
+    font-size: 110%;
+    font-style: italic;
+    font-weight: bold;
+}

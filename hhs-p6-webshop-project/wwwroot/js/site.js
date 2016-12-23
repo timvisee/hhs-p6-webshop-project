@@ -9,6 +9,23 @@ var MONTH_NAMES = ["JANUARI", "FEBRUARI", "MAART", "APRIL", "MEI", "JUNI", "JULI
  */
 var unavailableDates = null;
 
+/**
+ * Unique ID index.
+ */
+var uniqueIdIndex = 0;
+
+/**
+ * Get an unique ID.
+ */
+function getUniqueId(prefix) {
+    // Set the default prefix
+    if(prefix == undefined)
+        prefix = "unique-id";
+
+    // Return an unique ID
+    return prefix + "-" + uniqueIdIndex++;
+}
+
 // Run this code when the page is finished loading
 $(document).ready(function () {
 
@@ -169,8 +186,73 @@ $(document).ready(function () {
      */
     $(".toggle-time-date").click(function () {
         if (!$(this).hasClass("toggle-btn-disabled")) {
-            $(".time-date-box").slideToggle(700, "easeInOutCubic");
+            $(".time-date-box").slideToggle(500, "easeInOutCubic");
         }
+    });
+
+    // Load time data when a date is selected
+    $(".toggle-time-date-to-time").click(function() {
+        // Get the time container, and checkbox
+        var timeContainer = $(".time-container");
+        var timeCheckboxContainer = timeContainer.find("#select_time");
+
+        // Clear the list of checkboxes
+        timeCheckboxContainer.html("<i>Beschikbaarheid laden...</i>");
+
+        // Wait for the animation to complete
+        setTimeout(function() {
+            // Create a function to append a checkbox to the container
+            function createCheckbox(timeString, value) {
+                // Generate an unique ID
+                var uniqueId = getUniqueId("time-checkbox");
+
+                // Append the checkbox
+                timeCheckboxContainer.append("<li>" +
+                    "<input class=\"time-option\" type=\"radio\" name=\"appointment_time\" value=\"09:30\" id=\"" + uniqueId + "\">" +
+                    "<label class=\"time-option-label\" for=\"" + uniqueId + "\">" + timeString + "</label>" +
+                    "</li>");
+            }
+
+            // Set the loading indicator
+            setLoadingIndicator(timeContainer, true);
+
+            // Fetch the times
+            fetchTimes(null, function(err, times) {
+                // Print errors to the console
+                if (err != null) {
+                    console.log(err);
+                    return;
+                }
+
+                // Clear the list of checkboxes
+                timeCheckboxContainer.html("");
+
+                // Loop through the times
+                var hasTime = false;
+                for(var i = 0; i < times.length; i++) {
+                    // Get the time entry
+                    var timeEntry = times[i];
+
+                    // Skip the time if it's not available
+                    if(!timeEntry.available)
+                        continue;
+
+                    // Create the checkbox
+                    createCheckbox(timeEntry.time + " uur", i, timeEntry.available);
+
+                    // Set the has time flag
+                    hasTime = true;
+                }
+
+                // Show a message if no time is available
+                if(!hasTime)
+                    timeCheckboxContainer.html("<i>Geen tijd beschikbaar op deze dag</i>");
+
+                // Set the loading indicator
+                setLoadingIndicator(timeContainer, false);
+            });
+
+        }, 500);
     });
 
     $("#go_to_second, #back_to_first").click(function () {
@@ -311,7 +393,17 @@ $(document).ready(function () {
      * @param {fetchTimesCallback} callback Callback function.
      */
     function fetchTimes(date, callback) {
-        fetchData("Appointments/GetTimes", callback);
+        // Fetch the data
+        fetchData("Appointments/GetTimes", function (err, data) {
+            // Call back errors
+            if(err != null) {
+                callback(err);
+                return;
+            }
+
+            // Call back with the time
+            callback(null, data.times);
+        });
     }
 
     /**
