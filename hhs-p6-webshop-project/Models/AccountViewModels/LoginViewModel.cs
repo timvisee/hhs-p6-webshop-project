@@ -13,7 +13,7 @@ namespace hhs_p6_webshop_project.Models.AccountViewModels {
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-
+        
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
     }

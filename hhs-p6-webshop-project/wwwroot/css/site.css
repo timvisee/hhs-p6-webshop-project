@@ -728,6 +728,12 @@ nav li {
     margin-bottom: 50px;
 }
 
+.appointment-banner-image-container{
+    width: 100%;
+    height:550px;
+    position: absolute;
+}
+
 .appointment-banner-image-container img {
     width: 65%;
     position: absolute;
@@ -737,29 +743,12 @@ nav li {
     display: block;
     font-family: nexa-black;
     position: absolute;
-    bottom: 0;
-    margin-bottom: 20%;
     width: 250px;
+    height: 30px;
     text-transform: uppercase;
     font-size: 1.7em;
-    margin-left: 30%;
     padding-left: 20px;
-}
-
-.appointment-banner-image-counter {
-    position: absolute;
-    bottom: 0;
-    font-size: 4.8em;
-    color: #fff;
-    background-color:#f0597c;
-    width: 100px;
-    height: 100px;
-    line-height: 100px;
-    text-align: center;
-    font-family: nexa-black;
-    border-radius: 50px;
-    margin-left: 10%;
-    margin-bottom: 30px;
+    margin-left: 25px;
 }
 
 .appointment-banner-image-text:before {
@@ -774,6 +763,48 @@ nav li {
     margin-top: 5px;
     line-height: 40px;
     text-align: center;
+}
+
+.appointment-banner-card{
+    position:absolute;
+    background-color:#fff;
+    width:350px;
+    height:220px;
+    font-size:.9em;
+    padding:30px;
+    margin-top: 40px;
+}
+
+.appointment-banner-text-wrapper{
+    height: 260px;
+    width:350px;
+    position: absolute;
+    bottom: 0;
+    margin-left: 27%;
+}
+
+.appointment-banner-counter-wrapper{
+    width: 65%;
+    height: 100px;
+    bottom: 0;
+    position: absolute;
+    margin-bottom: 70px;
+}
+
+.appointment-banner-image-counter-container {
+    position: relative;
+    bottom: 0;
+    font-size: 4.8em;
+    color: #fff;
+    background-color:#f0597c;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    font-family: nexa-black;
+    border-radius: 50px;
+    margin-left: 10%;
+    margin-top: 50px;
 }
 
 .home-list ol {
