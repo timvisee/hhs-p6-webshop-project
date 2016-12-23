@@ -123,7 +123,10 @@
                         <!-- Calendar -->
                         <div id="calendar"></div>
 
-                        <span class="toggle-time-date toggle-btn toggle-btn-disabled" title="Selecteer eerst een datum">Selecteer een tijd ></span>
+                        <span class="toggle-time-date toggle-btn toggle-btn-disabled" title="Selecteer eerst een datum">
+                            Selecteer een tijd
+                            <img src="~/images/appointment/arrow-next.png" />
+                        </span>
                     </div>
 
                     <!-- Select a time -->
@@ -149,7 +152,10 @@
                                 <label class="time-option-label" for="time_third">15:00 uur</label>
                             </li>
                         </ul>
-                        <span class="toggle-time-date toggle-btn">< Terug naar datum selecteren</span>
+                        <span class="toggle-time-date toggle-btn previous-btn">
+                            <img src="~/images/appointment/arrow-back.png" />
+                            Terug naar datum selecteren
+                        </span>
                     </div>
                 </div>
 
@@ -166,7 +172,10 @@
                         Vul je persoonlijke gegevens in om de pasafspraak compleet te maken.
                     </p>
 
-                    <span id="back_to_first" class="toggle-btn">< Terug naar stap 1 om datum te wijzigen</span>
+                    <span id="back_to_first" class="toggle-btn previous-btn">
+                        <img src="~/images/appointment/arrow-back.png" />
+                        Terug naar stap 1 om datum te wijzigen
+                    </span>
                 </div>
 
                 <!-- Right box - Step 3, Verify filled in data -->
@@ -197,7 +206,9 @@
                         </div>
                     </div>
 
-                    <span id="back_to_second" class="toggle-btn">< Terug naar stap 2 om gegevens te wijzigen</span>
+                    <span id="back_to_second" class="toggle-btn previous-btn">
+                        <img src="~/images/appointment/arrow-back.png" /> Terug naar stap 2 om gegevens te wijzigen
+                    </span>
                 </div>
 
                 <input asp-for="AppointmentDateTime" id="date_input" value="" type="datetime" class="form-control" />
