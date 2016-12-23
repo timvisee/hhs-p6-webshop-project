@@ -4,6 +4,11 @@
  */
 var MONTH_NAMES = ["JANUARI", "FEBRUARI", "MAART", "APRIL", "MEI", "JUNI", "JULI", "AUGUSTUS", "SEPTEMBER", "OKTOBER", "NOVEMBER", "DECEMBER"];
 
+/**
+ * List of dates that are unavailable/occupied.
+ */
+var unavailableDates = [];
+
 // Run this code when the page is finished loading
 $(document).ready(function () {
 
@@ -60,40 +65,63 @@ $(document).ready(function () {
      */
     var dateToday = new Date();
 
-    /**
-     * Initialize datepicker
-     */
-    $("#calendar").datepicker({
-        prevText: "<",
-        nextText: ">",
-        firstDay: 1,
-        minDate: dateToday,
+    // Get the calander elements
+    var calendarElement = $("#calendar");
 
-        onSelect: function (date) {
-            var d = new Date(date);
-            var inputDate = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
-            var showDate = d.getDate() + " " + MONTH_NAMES[d.getMonth()] + " " + d.getFullYear();
+    // Initialize the calendar with a date picker, if any element is selected
+    if(calendarElement.length > 0) {
+        // Set up the actual date picker in the element
+        function setUpDatePicker() {
+            calendarElement.datepicker({
+                prevText: "<",
+                nextText: ">",
+                firstDay: 1,
+                minDate: dateToday,
 
-            $(".toggle-time-date").removeClass("toggle-btn-disabled").attr("title", "");
+                onSelect: function (date) {
+                    var d = new Date(date);
+                    var inputDate = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
+                    var showDate = d.getDate() + " " + MONTH_NAMES[d.getMonth()] + " " + d.getFullYear();
 
-            $("#date_input").val(inputDate);
-            $(".selected-date").each(function () {
-                $(this).html(showDate);
+                    $(".toggle-time-date").removeClass("toggle-btn-disabled").attr("title", "");
+
+                    $("#date_input").val(inputDate);
+                    $(".selected-date").each(function () {
+                        $(this).html(showDate);
+                    });
+                },
+
+                beforeShowDay: function (date) {
+                    // Print the date string, to ensure we're using the correct strings
+                    alert(date.dateString);
+
+                    // Determine whether this date is in the list of occupied dates
+                    var isAvailable = unavailableDates.indexOf(date.dateString) < 0;
+
+                    // Return depending on whether the date is avaialble or not
+                    if(isAvailable)
+                        return [true];
+                    else
+                        return [false, "", "Deze datum is bezet."];
+                }
             });
-        },
-
-        beforeShowDay: function (date) {
-            // Determine whether the given date is available
-            // TODO: Fetch unavailable dates through AJAX. Use them here to determine whether a date can be chosen or notb.
-            var isAvailable = true;
-
-            // Return depending on whether the date is avaialble or not
-            if(isAvailable)
-                return [true];
-            else
-                return [false, "", "Deze datum is bezet."];
         }
-    });
+
+        // Fetch the unavailable dates
+        fetchUnavailableDates(function (err, dates) {
+            // Print errors to the console
+            if(err != null) {
+                console.log(err);
+                return ;
+            }
+
+            // Fill the list of unavailable dates
+            unavailableDates = dates;
+
+            // Set up the date picker
+            setUpDatePicker();
+        });
+    }
 
     // Remove default date class
     $('.ui-state-active').removeClass('ui-state-active');
