@@ -1,0 +1,54 @@
+﻿@{ 
+    var AppointmentBannerTitle = "";
+    var AppointmentBannerSmallTitle = "";
+    var AppointmentBannerSmallTitle2 = "";
+
+    if (ViewData.ContainsKey("AppointmentBannerTitle")) {
+        AppointmentBannerTitle = ViewData["AppointmentBannerTitle"].ToString();
+    }
+
+    if (ViewData.ContainsKey("AppointmentBannerSmallTitle")) {
+        AppointmentBannerSmallTitle = ViewData["AppointmentBannerSmallTitle"].ToString();
+    }
+
+    if (ViewData.ContainsKey("AppointmentBannerSmallTitle2")) {
+        AppointmentBannerSmallTitle2 = ViewData["AppointmentBannerSmallTitle2"].ToString();
+    }
+}
+
+
+
+<div class="text-banner">
+    <h1 class="banner-bg-title-text hm-pink-light-text">@AppointmentBannerTitle</h1>
+    <h2 class="banner-title-text">@AppointmentBannerSmallTitle</h2>
+    <h2 class="banner-title-text2">@AppointmentBannerSmallTitle2</h2>
+</div>
+
+<div class="row">
+    <div class="appointment-banner-container">
+        <div class="appointment-banner-image-container">
+            <img src="/images/mooi-meisje-3.jpg" />
+            <div class="appointment-banner-text-wrapper">
+                <div class="appointment-banner-image-text">
+                    <span>bekijk video</span>
+                </div>
+                <div class="appointment-banner-card box-shadow">
+                    <p>Hoe vind je de perfect outfit? Onze specialisten nemen echt de tijd voor je en helpen je met elke stap. Oneindig jurken/pakken passen? Geen probleem! Er kunnen zoveel mensen mee als jij wil.</p>
+                </div>
+            </div>
+            <div class="appointment-banner-counter-wrapper">
+                <div class="appointment-banner-image-counter-container">
+                    <span class="appointment-banner-image-counter">1</span>
+                </div>
+            </div>
+        </div>
+        <div class="pull-right home-list">
+            <ol>
+                <li class="active">De winkel</li>
+                <li>Onze specialisten</li>
+                <li>Naai-atelier</li>
+                <li>Servicepunten</li>
+            </ol>
+        </div>
+    </div>
+</div>
