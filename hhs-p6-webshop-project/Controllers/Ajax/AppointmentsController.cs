@@ -56,7 +56,7 @@ namespace hhs_p6_webshop_project.Controllers.Ajax {
                 var amount = 0;
 
                 foreach (var appointment2 in dates) {
-                    if (appointment.AppointmentDateTime == appointment2.AppointmentDateTime) {
+                    if (appointment.AppointmentDateTime.Date == appointment2.AppointmentDateTime.Date) {
                         amount++;
                     }
 
