@@ -128,15 +128,19 @@ footer {
     cursor: default;
 }
 
+.img-full-width {
+    width: 1400px;
+    height: auto;
+}
+
+body:not(.layout-with-banner) .container > .img-full-width {
+    margin: 40px 0 -15px -15px;
+}
+
 /*--- Typography ---*/
 p {
     font-size: 1.45em;
     line-height: 1.4em;
-}
-
-/*remove this class*/
-.font-raleway {
-    font-family: nexa-black;
 }
 
 .font-sumana {
