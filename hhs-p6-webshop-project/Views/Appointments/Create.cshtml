@@ -15,8 +15,8 @@
     <div class="row" id="create_appointment">
         <div class="appiontment-wrapper font-nexa-regular">
             <div class="col-sm-12 col-md-7 box-shadow appointment-form">
-                <div class="create-appointment-part col-md-2 col-sm-12">
-
+                <div class="col-md-2 col-sm-12">
+                    <img id="appointment_step_image" src="~/images/appointment/step-1.png" />
                 </div>
                 <div class="create-appointment-part col-md-10 col-sm-12">
 
@@ -26,14 +26,16 @@
                         <p>
                             Selecteer eerst een datum en vervolgens een tijdstip dat je wilt komen passen!
                         </p>
-                        <p>
+                        <div class="opening-times">
                             Openingstijden:
                             <br />
-                            <label>MA</label>12:00-17:30<br />
-                            <label>DI-VR</label>09:30-17:30<br />
-                            <label>ZA</label>09:30-18:00<br />
-                            <label>ZO</label>11:00-17:00
-                        </p>
+                            <p class="times">
+                                <label>MA</label>12:00-17:30<br />
+                                <label>DI-VR</label>09:30-17:30<br />
+                                <label>ZA</label>09:30-18:00<br />
+                                <label>ZO</label>11:00-17:00
+                            </p>
+                        </div>
                         <small>
                             *Op alle werkdagen kunnen er ook schoenen worden gepast. Helaas is dit niet mogelijk in het weekend.
                         </small>
@@ -92,7 +94,7 @@
                         </div>
                         <br />
                         <span class="btn next-button" id="go_to_third">Naar stap 3</span>
-                        <br/>
+                        <br />
                         <span id="fill_in_fields_warning"></span>
                     </div>
 

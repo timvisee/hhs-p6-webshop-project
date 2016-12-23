@@ -99,16 +99,21 @@ $(document).ready(function () {
     $('.ui-state-active').removeClass('ui-state-active');
 
     $(".time-option").click(function () {
-        console.log($(this).val());
-
-        console.log($("#date_input").val() + $(this).val());
-
+        // Show the go to second button
+        $("#go_to_second").show();
         $(".selected-time").html(" OM " + $(this).val());
-
-
-        // Add data to input box
-        //$('#date_input').val(currentValue + "T" + $(this).val() + ":00");
     });
+
+    /**
+     * Change the image based on the current step within the appointment creation
+     */
+    $("#back_to_first").click(function () {
+        $("#appointment_step_image").attr("src", "/images/appointment/step-1.png");
+    });
+    $("#go_to_second, #back_to_second").click(function () {
+        $("#appointment_step_image").attr("src", "/images/appointment/step-2.png");
+    });
+    // Third button needs the check if the fields are filled in correctly
 
 
     /**
@@ -116,7 +121,6 @@ $(document).ready(function () {
      */
     $(".toggle-time-date").click(function () {
         if (!$(this).hasClass("toggle-btn-disabled")) {
-            $("#go_to_second").show();
             $(".time-date-box").slideToggle(700, "easeInOutCubic");
         }
     });
@@ -151,6 +155,7 @@ $(document).ready(function () {
 
             $("#fill_in_fields_warning").html("Je hebt niet alle verplichte velden ingevuld!");
         } else {
+            $("#appointment_step_image").attr("src", "/images/appointment/step-3.png");
             $("#left_2, #left_3, #right_2, #right_3").toggle();
         }
     });
