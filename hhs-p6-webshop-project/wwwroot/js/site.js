@@ -174,25 +174,25 @@ $(document).ready(function () {
 
         // Load time data when a date is selected
         $(".toggle-time-date-to-time").click(function() {
-            // Get the time container, and checkbox
+            // Get the time container, and radio buttons
             var timeContainer = $(".time-container");
-            var timeCheckboxContainer = timeContainer.find("#select_time");
+            var timeRadioButtonContainer = timeContainer.find("#select_time");
 
-            // Clear the list of checkboxes
-            timeCheckboxContainer.html("<i>Beschikbaarheid laden...</i>");
+            // Clear the list of radio buttons
+            timeRadioButtonContainer.html("<i>Beschikbaarheid laden...</i>");
 
             // Wait for the slide animation to complete
             setTimeout(function() {
-                // Create a function to append a checkbox to the container
-                function createTimeCheckbox(appointmentTimeObject) {
+                // Create a function to append a radio button to the container
+                function createTimeRadioButton(appointmentTimeObject) {
                     // Generate an unique ID
-                    var uniqueId = getUniqueId("time-checkbox");
+                    var uniqueId = getUniqueId("time-button");
 
                     // Determine the value
                     var value = appointmentTimeObject.time.hour + ":" + appointmentTimeObject.time.minute;
 
-                    // Append the checkbox
-                    timeCheckboxContainer.append("<li>" +
+                    // Append the radio button
+                    timeRadioButtonContainer.append("<li>" +
                         "<input class=\"time-option\" type=\"radio\" name=\"appointment_time\" value=\"" + value + "\" id=\"" + uniqueId + "\">" +
                         "<label class=\"time-option-label\" for=\"" + uniqueId + "\">" + appointmentTimeObject.formattedTime + " uur</label>" +
                         "</li>");
@@ -209,8 +209,8 @@ $(document).ready(function () {
                         return;
                     }
 
-                    // Clear the list of checkboxes
-                    timeCheckboxContainer.html("");
+                    // Clear the list of radio buttons
+                    timeRadioButtonContainer.html("");
 
                     // Loop through the times
                     var hasTime = false;
@@ -222,8 +222,8 @@ $(document).ready(function () {
                         if(!timeEntry.available)
                             continue;
 
-                        // Create the checkbox
-                        createTimeCheckbox(timeEntry);
+                        // Create the radio buttons
+                        createTimeRadioButton(timeEntry);
 
                         // Set the has time flag
                         hasTime = true;
@@ -231,10 +231,10 @@ $(document).ready(function () {
 
                     // Show a message if no time is available
                     if(!hasTime)
-                        timeCheckboxContainer.html("<i>Geen tijd beschikbaar op deze dag</i>");
+                        timeRadioButtonContainer.html("<i>Geen tijd beschikbaar op deze dag</i>");
 
-                    // Link the checkboxes to the date time field
-                    timeCheckboxContainer.find("input").change(function () {
+                    // Link the radio buttons to the date time field
+                    timeRadioButtonContainer.find("input").change(function () {
                         // Get the radio button element, and check whether it's selected
                         var radioButton = $(this);
                         var isSelected = radioButton.is(":checked");
