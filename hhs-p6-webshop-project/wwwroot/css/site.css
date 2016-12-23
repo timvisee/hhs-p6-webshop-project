@@ -1249,3 +1249,22 @@ footer ul {
         line-height: 1.6em;
         font-size: 1.2em;
     }
+
+.titanic .groetjes-tim {
+    float: none;
+}
+
+.loading-overlay {
+    position: absolute;
+    z-index: 99998;
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.loading-indicator {
+    position: absolute;
+    width: 62px;
+    height: 62px;
+    z-index: 99999;
+    background: url(/images/loading.gif);
+}

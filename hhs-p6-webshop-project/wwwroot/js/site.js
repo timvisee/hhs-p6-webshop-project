@@ -4,6 +4,11 @@
  */
 var MONTH_NAMES = ["JANUARI", "FEBRUARI", "MAART", "APRIL", "MEI", "JUNI", "JULI", "AUGUSTUS", "SEPTEMBER", "OKTOBER", "NOVEMBER", "DECEMBER"];
 
+/**
+ * List of dates that are unavailable/occupied.
+ */
+var unavailableDates = null;
+
 // Run this code when the page is finished loading
 $(document).ready(function () {
 
@@ -60,40 +65,85 @@ $(document).ready(function () {
      */
     var dateToday = new Date();
 
-    /**
-     * Initialize datepicker
-     */
-    $("#calendar").datepicker({
-        prevText: "<",
-        nextText: ">",
-        firstDay: 1,
-        minDate: dateToday,
+    // Get the calander elements
+    var calendarElement = $("#calendar");
 
-        onSelect: function (date) {
-            var d = new Date(date);
-            var inputDate = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
-            var showDate = d.getDate() + " " + MONTH_NAMES[d.getMonth()] + " " + d.getFullYear();
+    // Initialize the calendar with a date picker, if any element is selected
+    if(calendarElement.length > 0) {
+        // Create a date picker render function
+        function renderDatePickerDay(date) {
+            // Return if the date is undefined
+            if(date == undefined)
+                return [false];
 
-            $(".toggle-time-date").removeClass("toggle-btn-disabled").attr("title", "");
+            // Define the variable
+            var isAvailable = false;
 
-            $("#date_input").val(inputDate);
-            $(".selected-date").each(function () {
-                $(this).html(showDate);
-            });
-        },
+            // Check whether the date is available, if the unavailable dates array isn't null
+            if(unavailableDates != null) {
+                // Build the date string
+                var dateString = date.getFullYear() + "-" +
+                        ("0" + (date.getMonth() + 1)).slice(-2) + "-" +
+                        ("0" + date.getDate()).slice(-2);
 
-        beforeShowDay: function (date) {
-            // Determine whether the given date is available
-            // TODO: Fetch unavailable dates through AJAX. Use them here to determine whether a date can be chosen or notb.
-            var isAvailable = true;
+                // Determine whether this date is in the list of occupied dates
+                isAvailable = unavailableDates.indexOf(dateString) < 0;
+            }
 
             // Return depending on whether the date is avaialble or not
-            if (isAvailable)
+            if(isAvailable)
                 return [true];
             else
                 return [false, "", "Deze datum is bezet."];
         }
-    });
+
+        // Set up the date picker
+        calendarElement.datepicker({
+            prevText: "<",
+            nextText: ">",
+            firstDay: 1,
+            minDate: dateToday,
+
+            onSelect: function (date) {
+                var d = new Date(date);
+                var inputDate = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
+                var showDate = d.getDate() + " " + MONTH_NAMES[d.getMonth()] + " " + d.getFullYear();
+
+                $(".toggle-time-date").removeClass("toggle-btn-disabled").attr("title", "");
+
+                $("#date_input").val(inputDate);
+                $(".selected-date").each(function () {
+                    $(this).html(showDate);
+                });
+            },
+
+            beforeShowDay: renderDatePickerDay
+        });
+
+        // Disable the loading indicator
+        setLoadingIndicator(calendarElement, true);
+
+        // Fetch the unavailable dates
+        fetchUnavailableDates(function (err, dates) {
+            // Print errors to the console
+            if(err != null) {
+                console.log(err);
+                return ;
+            }
+
+            // Fill the list of unavailable dates
+            unavailableDates = dates;
+
+            // Refresh the date picker to update the unavailable dates
+            calendarElement.datepicker("option", "beforeShowDay", renderDatePickerDay);
+            calendarElement.datepicker("refresh");
+
+            // Disable the loading indicator
+            setTimeout(function() {
+                setLoadingIndicator(calendarElement, false);
+            }, 800);
+        });
+    }
 
     // Remove default date class
     $('.ui-state-active').removeClass('ui-state-active');
@@ -181,7 +231,7 @@ $(document).ready(function () {
      */
     function fetchData(endpoint, callback) {
         // Make sure an endpoint and callback is specified
-        if (endpoint == undefined || typeof callback !== "function") {
+        if(endpoint == undefined || typeof callback !== "function") {
             callback(new Error("Endpoint or callback not specified"));
             return;
         }
@@ -192,7 +242,7 @@ $(document).ready(function () {
             url: "/Ajax/" + endpoint,
             dataType: "json",
             method: "GET",
-            error: function (jqXhr, textStatus) {
+            error: function(jqXhr, textStatus) {
                 // Define the error message
                 var error = "Failed to fetch data.\n\nError: " + textStatus;
 
@@ -202,9 +252,9 @@ $(document).ready(function () {
                 // Call back with an error
                 callback(new Error(error));
             },
-            success: function (data) {
+            success: function(data) {
                 // Make sure the status is OK
-                if (data.status !== "ok") {
+                if(data.status !== "ok") {
                     // Define the error message
                     var error = "Failed to fetch data. The website returned an error.\n\nError: " + data.error.message;
 
@@ -235,7 +285,17 @@ $(document).ready(function () {
      * @param {fetchUnavailableDatesCallback} callback Callback function.
      */
     function fetchUnavailableDates(callback) {
-        fetchData("Appointments/GetDates", callback);
+        // Fetch the data
+        fetchData("Appointments/GetDates", function (err, data) {
+            // Call back errors
+            if(err != null) {
+                callback(err);
+                return;
+            }
+
+            // Call back with the dates
+            callback(null, data.dates);
+        });
     }
 
     /**
@@ -272,6 +332,49 @@ $(document).ready(function () {
      * @param {boolean} available True if this time is available, false if not.
      */
 
+    /**
+     * Show a loading indicator in the div.
+     */
+    function setLoadingIndicator(element, show) {
+        // Get the loading element if there is any
+        var currentOverlay = element.find(".loading-overlay");
+
+        // Add/remove the loading indicator class
+        if (show) {
+            // Make sure a loading element isn't available already
+            if (currentOverlay.length > 0)
+                return;
+
+            // Prepend the overlay and indicator divs
+            element.prepend("<div class=\"loading-overlay\"><div class=\"loading-indicator\"></div></div>");
+
+            // Get the overlay and indicator elements
+            var overlay = element.find(".loading-overlay");
+            var indicator = overlay.find(".loading-indicator");
+
+            // Properly size the overlay
+            overlay.css({
+                width: element.width(),
+                height: element.height()
+            });
+
+            // Center the indicator
+            indicator.css({
+                top: overlay.height() / 2 - indicator.height() / 2,
+                left: overlay.width() / 2 - indicator.width() / 2
+            });
+
+            // Fade the overly in
+            overlay.hide().fadeIn(350);
+
+        } else {
+            // Remove the loading element
+            currentOverlay.fadeOut(350, function () {
+                // Remove the element when fading is complete
+                $(this).remove();
+            });
+        }
+    }
 
     /** Appointment banner **/
 
