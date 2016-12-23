@@ -181,7 +181,7 @@ $(document).ready(function () {
             // Clear the list of checkboxes
             timeCheckboxContainer.html("<i>Beschikbaarheid laden...</i>");
 
-            // Wait for the animation to complete
+            // Wait for the slide animation to complete
             setTimeout(function() {
                 // Create a function to append a checkbox to the container
                 function createTimeCheckbox(appointmentTimeObject) {
@@ -223,7 +223,7 @@ $(document).ready(function () {
                             continue;
 
                         // Create the checkbox
-                        createTimeCheckbox(timeEntry.formattedTime + " uur", timeEntry.time);
+                        createTimeCheckbox(timeEntry);
 
                         // Set the has time flag
                         hasTime = true;
@@ -237,7 +237,7 @@ $(document).ready(function () {
                     timeCheckboxContainer.find("input").change(function () {
                         // Get the radio button element, and check whether it's selected
                         var radioButton = $(this);
-                        var isSelected = radioButton.is(':checked');
+                        var isSelected = radioButton.is(":checked");
 
                         // Return if the radio button isn't selected
                         if(!isSelected)
@@ -251,10 +251,6 @@ $(document).ready(function () {
                         selectedDateTime.setHours(hour);
                         selectedDateTime.setMinutes(minute);
                         selectedDateTime.setSeconds(0);
-
-
-
-
 
                         // Get the date input field
                         var dateField = $("#date_input");
