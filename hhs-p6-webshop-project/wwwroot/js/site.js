@@ -7,7 +7,7 @@ var MONTH_NAMES = ["JANUARI", "FEBRUARI", "MAART", "APRIL", "MEI", "JUNI", "JULI
 /**
  * List of dates that are unavailable/occupied.
  */
-var unavailableDates = [];
+var unavailableDates = null;
 
 // Run this code when the page is finished loading
 $(document).ready(function () {
@@ -70,6 +70,33 @@ $(document).ready(function () {
 
     // Initialize the calendar with a date picker, if any element is selected
     if(calendarElement.length > 0) {
+        // Create a date picker render function
+        function renderDatePickerDay(date) {
+            // Return if the date is undefined
+            if(date == undefined)
+                return [false];
+
+            // Define the variable
+            var isAvailable = false;
+
+            // Check whether the date is available, if the unavailable dates array isn't null
+            if(unavailableDates != null) {
+                // Build the date string
+                var dateString = date.getFullYear() + "-" +
+                        ("0" + (date.getMonth() + 1)).slice(-2) + "-" +
+                        ("0" + date.getDate()).slice(-2);
+
+                // Determine whether this date is in the list of occupied dates
+                isAvailable = unavailableDates.indexOf(dateString) < 0;
+            }
+
+            // Return depending on whether the date is avaialble or not
+            if(isAvailable)
+                return [true];
+            else
+                return [false, "", "Deze datum is bezet."];
+        }
+
         // Set up the date picker
         calendarElement.datepicker({
             prevText: "<",
@@ -90,28 +117,11 @@ $(document).ready(function () {
                 });
             },
 
-            beforeShowDay: function (date) {
-                // Define the variable
-                var isAvailable = false;
-
-                // Check whether the date is available, if the unavailable dates array isn't null
-                if(unavailableDates != null) {
-                    // Build the date string
-                    var dateString = date.getFullYear() + "-" +
-                            ("0" + (date.getMonth() + 1)).slice(-2) + "-" +
-                            ("0" + date.getDate()).slice(-2);
-
-                    // Determine whether this date is in the list of occupied dates
-                    isAvailable = unavailableDates.indexOf(dateString) < 0;
-                }
-
-                // Return depending on whether the date is avaialble or not
-                if(isAvailable)
-                    return [true];
-                else
-                    return [false, "", "Deze datum is bezet."];
-            }
+            beforeShowDay: renderDatePickerDay
         });
+
+        // Disable the loading indicator
+        setLoadingIndicator(calendarElement, true);
 
         // Fetch the unavailable dates
         fetchUnavailableDates(function (err, dates) {
@@ -125,7 +135,13 @@ $(document).ready(function () {
             unavailableDates = dates;
 
             // Refresh the date picker to update the unavailable dates
+            calendarElement.datepicker("option", "beforeShowDay", renderDatePickerDay);
             calendarElement.datepicker("refresh");
+
+            // Disable the loading indicator
+            setTimeout(function() {
+                setLoadingIndicator(calendarElement, false);
+            }, 800);
         });
     }
 
@@ -310,4 +326,48 @@ $(document).ready(function () {
      * @param {string} time The actual time.
      * @param {boolean} available True if this time is available, false if not.
      */
+
+    /**
+     * Show a loading indicator in the div.
+     */
+    function setLoadingIndicator(element, show) {
+        // Get the loading element if there is any
+        var currentOverlay = element.find(".loading-overlay");
+
+        // Add/remove the loading indicator class
+        if (show) {
+            // Make sure a loading element isn't available already
+            if (currentOverlay.length > 0)
+                return;
+
+            // Prepend the overlay and indicator divs
+            element.prepend("<div class=\"loading-overlay\"><div class=\"loading-indicator\"></div></div>");
+
+            // Get the overlay and indicator elements
+            var overlay = element.find(".loading-overlay");
+            var indicator = overlay.find(".loading-indicator");
+
+            // Properly size the overlay
+            overlay.css({
+                width: element.width(),
+                height: element.height()
+            });
+
+            // Center the indicator
+            indicator.css({
+                top: overlay.height() / 2 - indicator.height() / 2,
+                left: overlay.width() / 2 - indicator.width() / 2
+            });
+
+            // Fade the overly in
+            overlay.hide().fadeIn(350);
+
+        } else {
+            // Remove the loading element
+            currentOverlay.fadeOut(350, function () {
+                // Remove the element when fading is complete
+                $(this).remove();
+            });
+        }
+    }
 });
