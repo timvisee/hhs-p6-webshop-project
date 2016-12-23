@@ -44,19 +44,28 @@ namespace hhs_p6_webshop_project.Controllers.Ajax {
 
             // TODO: Fetch the actual occupied dates from the database!
             // Fetch the occupied dates from the database
-            var dates = _context.Appointment.Where(appointment => appointment.AppointmentDateTime > afterDateTime);
+            var dates = _context.Appointment.Where(a => a.AppointmentDateTime > afterDateTime).ToList();
 
             // Create a list to put the occupied dates in
-            List<string> occupiedDates = new List<string>();
+            HashSet<string> occupiedDates = new HashSet<string>();
 
-//            // TODO: We should check whether the date is fully occupied!
-//            // Fill the list with the occupied dates
-//            foreach (var appointment in dates)
-//                occupiedDates.Add(appointment.AppointmentDateTime.ToString("yyyy-MM-dd"));
+            //            // TODO: We should check whether the date is fully occupied!
+            //            // Fill the list with the occupied dates
 
-            // Add dummy dates
-            occupiedDates.Add("2016-12-24");
-            occupiedDates.Add("2016-12-27");
+            foreach (var appointment in dates) {
+                var amount = 0;
+
+                foreach (var appointment2 in dates) {
+                    if (appointment.AppointmentDateTime == appointment2.AppointmentDateTime) {
+                        amount++;
+                    }
+
+                    if (amount >= 3) {
+                        occupiedDates.Add(appointment.AppointmentDateTime.ToString("yyyy-MM-dd"));
+                        break;
+                    }
+                }
+            }
 
             // Return the data fields
             return new AjaxResponse().SetDataField("dates", occupiedDates);
@@ -72,10 +81,10 @@ namespace hhs_p6_webshop_project.Controllers.Ajax {
             DateTime date = DateTime.Now;
 
             // TODO: Fetch the free times from the database!
-//            // Fetch the occupied dates from the database
-//            var dates = _context.Appointment
-//                .Where(appointment => appointment.AppointmentDateTime > date)
-//                .SelectMany(appointment => appointment.AppointmentDateTime);
+            //            // Fetch the occupied dates from the database
+            //            var dates = _context.Appointment
+            //                .Where(appointment => appointment.AppointmentDateTime > date)
+            //                .SelectMany(appointment => appointment.AppointmentDateTime);
 
             // Create a list of dummy dates
             List<Object> times = new List<Object> {
