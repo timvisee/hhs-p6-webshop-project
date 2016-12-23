@@ -49,10 +49,14 @@ namespace hhs_p6_webshop_project.Controllers.Ajax {
             // Create a list to put the occupied dates in
             List<string> occupiedDates = new List<string>();
 
-            // TODO: We should check whether the date is fully occupied!
-            // Fill the list with the occupied dates
-            foreach (var appointment in dates)
-                occupiedDates.Add(appointment.AppointmentDateTime.ToString("yyyy-MM-dd"));
+//            // TODO: We should check whether the date is fully occupied!
+//            // Fill the list with the occupied dates
+//            foreach (var appointment in dates)
+//                occupiedDates.Add(appointment.AppointmentDateTime.ToString("yyyy-MM-dd"));
+
+            // Add dummy dates
+            occupiedDates.Add("2016-12-24");
+            occupiedDates.Add("2016-12-27");
 
             // Return the data fields
             return new AjaxResponse().SetDataField("dates", occupiedDates);
