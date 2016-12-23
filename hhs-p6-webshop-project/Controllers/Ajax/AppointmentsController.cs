@@ -107,37 +107,16 @@ namespace hhs_p6_webshop_project.Controllers.Ajax {
 
                 times.Add(new {
                     available = !taken,
-                    time = slot.ToString()
+                    formattedTime = slot.ToString("hh:mm"),
+                    time = new {
+                        hour = slot.Hours,
+                        minute = slot.Minutes,
+                        second = slot.Seconds
+                    }
                 });
 
 
             }
-
-            //var freeSlots = timeslots.Where(slot => appointments.Any(appointment => appointment.TimeOfDay != slot)).ToList();
-
-            // TODO: Fetch the free times from the database!
-            //            // Fetch the occupied dates from the database
-            //            var dates = _context.Appointment
-            //                .Where(appointment => appointment.AppointmentDateTime > date)
-            //                .SelectMany(appointment => appointment.AppointmentDateTime);
-
-            //930 1230 15
-
-            // Create a list of dummy dates
-            //List<Object> times = new List<Object> {
-            //    new {
-            //        available = true,
-            //        time = "13:00:00"
-            //    },
-            //    new {
-            //        available = false,
-            //        time = "15:00:00"
-            //    },
-            //    new {
-            //        available = true,
-            //        time = "17:00:00"
-            //    },
-            //};
 
             // Return the list of times
             return new AjaxResponse().SetDataField("times", times);
