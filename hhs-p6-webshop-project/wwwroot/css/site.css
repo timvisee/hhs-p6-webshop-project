@@ -204,7 +204,8 @@ input[type="reset"]:active,
     text-decoration: none;
     display: inline-block;
     font-weight: bold;
-    font-size: 1.1em;
+    font-size: 1.4rem;
+    line-height: 30px;
 }
 
     .btn:hover,
@@ -246,6 +247,10 @@ input[type="reset"]:active,
     input[type="reset"]:focus {
         padding-top: 8px;
         padding-bottom: 4px;
+    }
+
+    .btn .glyphicon-right {
+        margin-left: 10px;
     }
 
 input[type="checkbox"] {
@@ -888,6 +893,22 @@ nav li {
     margin-top: 30px;
 }
 
+.create-appointment-part .left-box .opening-times {
+    font-size: 1.4em;
+    margin-top: 30px;
+}
+
+.opening-times .times {
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.opening-times label {
+    width: 60px;
+    font-family: nexa-black;
+}
+
 /*--- Right box ---*/
 .create-appointment-part .selected-date-time {
     padding: 10px;
@@ -933,7 +954,10 @@ nav li {
         float: left;
     }
 
-
+    /*--- Step image---*/
+    #appointment_step_image {
+        margin: 40px 0 30px 0;
+    }
 
 /*--- Select time ---*/
 #select_time {
@@ -1003,6 +1027,7 @@ nav li {
 
 .ui-datepicker-title {
     text-align: center;
+    font-family: nexa-black;
 }
 
 .ui-datepicker-calendar thead th {
