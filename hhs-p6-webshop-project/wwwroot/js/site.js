@@ -70,44 +70,48 @@ $(document).ready(function () {
 
     // Initialize the calendar with a date picker, if any element is selected
     if(calendarElement.length > 0) {
-        // Set up the actual date picker in the element
-        function setUpDatePicker() {
-            calendarElement.datepicker({
-                prevText: "<",
-                nextText: ">",
-                firstDay: 1,
-                minDate: dateToday,
+        // Set up the date picker
+        calendarElement.datepicker({
+            prevText: "<",
+            nextText: ">",
+            firstDay: 1,
+            minDate: dateToday,
 
-                onSelect: function (date) {
-                    var d = new Date(date);
-                    var inputDate = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
-                    var showDate = d.getDate() + " " + MONTH_NAMES[d.getMonth()] + " " + d.getFullYear();
+            onSelect: function (date) {
+                var d = new Date(date);
+                var inputDate = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
+                var showDate = d.getDate() + " " + MONTH_NAMES[d.getMonth()] + " " + d.getFullYear();
 
-                    $(".toggle-time-date").removeClass("toggle-btn-disabled").attr("title", "");
+                $(".toggle-time-date").removeClass("toggle-btn-disabled").attr("title", "");
 
-                    $("#date_input").val(inputDate);
-                    $(".selected-date").each(function () {
-                        $(this).html(showDate);
-                    });
-                },
+                $("#date_input").val(inputDate);
+                $(".selected-date").each(function () {
+                    $(this).html(showDate);
+                });
+            },
 
-                beforeShowDay: function (date) {
+            beforeShowDay: function (date) {
+                // Define the variable
+                var isAvailable = false;
+
+                // Check whether the date is available, if the unavailable dates array isn't null
+                if(unavailableDates != null) {
                     // Build the date string
                     var dateString = date.getFullYear() + "-" +
                             ("0" + (date.getMonth() + 1)).slice(-2) + "-" +
                             ("0" + date.getDate()).slice(-2);
 
                     // Determine whether this date is in the list of occupied dates
-                    var isAvailable = unavailableDates.indexOf(dateString) < 0;
-
-                    // Return depending on whether the date is avaialble or not
-                    if(isAvailable)
-                        return [true];
-                    else
-                        return [false, "", "Deze datum is bezet."];
+                    isAvailable = unavailableDates.indexOf(dateString) < 0;
                 }
-            });
-        }
+
+                // Return depending on whether the date is avaialble or not
+                if(isAvailable)
+                    return [true];
+                else
+                    return [false, "", "Deze datum is bezet."];
+            }
+        });
 
         // Fetch the unavailable dates
         fetchUnavailableDates(function (err, dates) {
@@ -120,8 +124,8 @@ $(document).ready(function () {
             // Fill the list of unavailable dates
             unavailableDates = dates;
 
-            // Set up the date picker
-            setUpDatePicker();
+            // Refresh the date picker to update the unavailable dates
+            calendarElement.datepicker("refresh");
         });
     }
 
