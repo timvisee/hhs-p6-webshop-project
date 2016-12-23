@@ -26,6 +26,15 @@ function getUniqueId(prefix) {
     return prefix + "-" + uniqueIdIndex++;
 }
 
+/**
+ * Format a date to ISO.
+ */
+function formatDate(date) {
+    return date.getFullYear() + "-" +
+            ("0" + (date.getMonth() + 1)).slice(-2) + "-" +
+            ("0" + date.getDate()).slice(-2);
+}
+
 // Run this code when the page is finished loading
 $(document).ready(function () {
 
@@ -85,6 +94,8 @@ $(document).ready(function () {
     // Get the calander elements
     var calendarElement = $("#calendar");
 
+    var selectedDate = null;
+
     // Initialize the calendar with a date picker, if any element is selected
     if(calendarElement.length > 0) {
         // Create a date picker render function
@@ -99,9 +110,7 @@ $(document).ready(function () {
             // Check whether the date is available, if the unavailable dates array isn't null
             if(unavailableDates != null) {
                 // Build the date string
-                var dateString = date.getFullYear() + "-" +
-                        ("0" + (date.getMonth() + 1)).slice(-2) + "-" +
-                        ("0" + date.getDate()).slice(-2);
+                var dateString = formatDate(date);
 
                 // Determine whether this date is in the list of occupied dates
                 isAvailable = unavailableDates.indexOf(dateString) < 0;
@@ -121,7 +130,7 @@ $(document).ready(function () {
             firstDay: 1,
             minDate: dateToday,
 
-            onSelect: function (date) {
+            onSelect: function(date) {
                 var d = new Date(date);
                 var inputDate = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
                 var showDate = d.getDate() + " " + MONTH_NAMES[d.getMonth()] + " " + d.getFullYear();
@@ -132,6 +141,9 @@ $(document).ready(function () {
                 $(".selected-date").each(function () {
                     $(this).html(showDate);
                 });
+
+                // Set the selected date
+                selectedDate = d;
             },
 
             beforeShowDay: renderDatePickerDay
@@ -162,12 +174,6 @@ $(document).ready(function () {
 
     // Remove default date class
     $('.ui-state-active').removeClass('ui-state-active');
-
-    $(".time-option").click(function () {
-        // Show the go to second button
-        $("#go_to_second").show();
-        $(".selected-time").html(" OM " + $(this).val());
-    });
 
     /**
      * Change the image based on the current step within the appointment creation
@@ -208,7 +214,7 @@ $(document).ready(function () {
 
                 // Append the checkbox
                 timeCheckboxContainer.append("<li>" +
-                    "<input class=\"time-option\" type=\"radio\" name=\"appointment_time\" value=\"09:30\" id=\"" + uniqueId + "\">" +
+                    "<input class=\"time-option\" type=\"radio\" name=\"appointment_time\" value=\"" + value + "\" id=\"" + uniqueId + "\">" +
                     "<label class=\"time-option-label\" for=\"" + uniqueId + "\">" + timeString + "</label>" +
                     "</li>");
             }
@@ -217,7 +223,7 @@ $(document).ready(function () {
             setLoadingIndicator(timeContainer, true);
 
             // Fetch the times
-            fetchTimes(null, function(err, times) {
+            fetchTimes(selectedDate, function(err, times) {
                 // Print errors to the console
                 if (err != null) {
                     console.log(err);
@@ -238,7 +244,7 @@ $(document).ready(function () {
                         continue;
 
                     // Create the checkbox
-                    createCheckbox(timeEntry.time + " uur", i, timeEntry.available);
+                    createCheckbox(timeEntry.time + " uur", timeEntry.time);
 
                     // Set the has time flag
                     hasTime = true;
@@ -247,6 +253,21 @@ $(document).ready(function () {
                 // Show a message if no time is available
                 if(!hasTime)
                     timeCheckboxContainer.html("<i>Geen tijd beschikbaar op deze dag</i>");
+
+                // Link the checkboxes to the date time field
+                timeCheckboxContainer.find("input").change(function () {
+                    // Get the date input field
+                    var dateField = $("#date_input");
+
+                    // Append the time
+                    dateField.val(dateField.val() + " " + $(this).val());
+                });
+
+                $(".time-option").click(function () {
+                    // Show the go to second button
+                    $("#go_to_second").show();
+                    $(".selected-time").html(" OM " + $(this).val());
+                });
 
                 // Set the loading indicator
                 setLoadingIndicator(timeContainer, false);
@@ -308,8 +329,9 @@ $(document).ready(function () {
      *
      * @param {string} endpoint Endpoint to request.
      * @param {fetchDataCallback} callback Callback function.
+     * @param {Object} [data] Optional data.
      */
-    function fetchData(endpoint, callback) {
+    function fetchData(endpoint, callback, data) {
         // Make sure an endpoint and callback is specified
         if(endpoint == undefined || typeof callback !== "function") {
             callback(new Error("Endpoint or callback not specified"));
@@ -321,7 +343,8 @@ $(document).ready(function () {
         $.ajax({
             url: "/Ajax/" + endpoint,
             dataType: "json",
-            method: "GET",
+            type: "GET",
+            data: data,
             error: function(jqXhr, textStatus) {
                 // Define the error message
                 var error = "Failed to fetch data.\n\nError: " + textStatus;
@@ -403,6 +426,9 @@ $(document).ready(function () {
 
             // Call back with the time
             callback(null, data.times);
+
+        }, {
+            date: formatDate(date)
         });
     }
 
