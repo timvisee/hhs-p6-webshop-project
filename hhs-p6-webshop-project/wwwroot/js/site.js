@@ -139,9 +139,7 @@ $(document).ready(function () {
             calendarElement.datepicker("refresh");
 
             // Disable the loading indicator
-            setTimeout(function() {
-                setLoadingIndicator(calendarElement, false);
-            }, 800);
+            setLoadingIndicator(calendarElement, false);
         });
     }
 
@@ -365,7 +363,7 @@ $(document).ready(function () {
             });
 
             // Fade the overly in
-            overlay.hide().fadeIn(350);
+            overlay.stop().hide().fadeIn(350);
 
         } else {
             // Remove the loading element
@@ -377,7 +375,6 @@ $(document).ready(function () {
     }
 
     /** Appointment banner **/
-
     $(".home-list>ol>li").click(function () {
         var counter = $(this).index() + 1;
         console.log(counter);
