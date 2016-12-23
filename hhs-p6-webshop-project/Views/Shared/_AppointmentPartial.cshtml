@@ -8,6 +8,12 @@
     var orderdList3 = "";
     var orderdList4 = "";
 
+    var themeClass = "";
+
+
+    // Determine whether the theme is pink or not
+    var pinkTheme = ViewData.ContainsKey("PinkTheme") && (bool)ViewData["PinkTheme"];
+
     if (ViewData.ContainsKey("AppointmentBannerTitle")) {
         AppointmentBannerTitle = ViewData["AppointmentBannerTitle"].ToString();
     }
@@ -36,6 +42,12 @@
         orderdList4 = ViewData["orderdList4"].ToString();
     }
 
+    if (pinkTheme) {
+        themeClass = "pinkTheme";
+    }else {
+        themeClass = "blueTheme";
+    }
+
 }
 
 
@@ -49,10 +61,10 @@
 <div class="row">
     <div class="appointment-banner-container">
         <div class="appointment-banner-image-container">
-            <img src="/images/mooi-meisje-3.jpg" />
+            <img src="/images/mooi-meisje-1.jpg" />
             <div class="appointment-banner-text-outer-wrapper">
                 <div class="appointment-banner-text-wrapper">
-                    <div class="appointment-banner-image-text">
+                    <div class="appointment-banner-image-text @themeClass">
                         <span>bekijk video</span>
                     </div>
                     <div class="appointment-banner-card box-shadow">
@@ -60,14 +72,14 @@
                     </div>
                 </div>
                 <div class="appointment-banner-counter-wrapper">
-                    <div class="appointment-banner-image-counter-container">
+                    <div class="appointment-banner-image-counter-container @themeClass">
                         <div class="appointment-banner-image-counter">1</div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="pull-right home-list">
-            <ol>
+            <ol class="@themeClass">
                 <li class="active home-list-number-1">@orderdList1</li>
                 <li class="home-list-number-2">@orderdList2</li>
                 @if (ViewData.ContainsKey("orderdList3")) {

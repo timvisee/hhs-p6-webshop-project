@@ -759,7 +759,7 @@ nav li {
     margin-left: 25px;
 }
 
-    .appointment-banner-image-text:before {
+    .appointment-banner-image-text.pinkTheme:before {
         position: absolute;
         margin-left: -25px;
         width: 0;
@@ -768,6 +768,20 @@ nav li {
         border-top: 10px solid transparent;
         border-bottom: 10px solid transparent;
         border-left: 15px solid #f0597c;
+        margin-top: 5px;
+        line-height: 40px;
+        text-align: center;
+    }
+
+    .appointment-banner-image-text.blueTheme:before{
+        position: absolute;
+        margin-left: -25px;
+        width: 0;
+        height: 0;
+        content: '';
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-left: 15px solid #1a91be;
         margin-top: 5px;
         line-height: 40px;
         text-align: center;
@@ -799,12 +813,28 @@ nav li {
     margin-bottom: 70px;
 }
 
-.appointment-banner-image-counter-container {
+.appointment-banner-image-counter-container.pinkTheme {
     position: relative;
     bottom: 0;
     font-size: 4.8em;
     color: #fff;
     background-color: #f0597c;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    font-family: nexa-black;
+    border-radius: 50px;
+    margin-left: 10%;
+    margin-top: 50px;
+}
+
+.appointment-banner-image-counter-container.blueTheme {
+    position: relative;
+    bottom: 0;
+    font-size: 4.8em;
+    color: #fff;
+    background-color: #1a91be;
     width: 100px;
     height: 100px;
     line-height: 100px;
@@ -855,12 +885,20 @@ nav li {
             cursor: pointer;
         }
 
-    .home-list ol .active {
+    .home-list .pinkTheme .active {
         color: #f0597c;
     }
 
-        .home-list ol .active:before {
+    .home-list .blueTheme .active{
+        color: #1a91be;
+    }
+
+        .home-list .pinkTheme .active:before {
             background-color: #f0597c;
+        }
+
+        .home-list .blueTheme .active:before{
+            background-color:#1a91be;
         }
 
 /*--- Content ---*/
