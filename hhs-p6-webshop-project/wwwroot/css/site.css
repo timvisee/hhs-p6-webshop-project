@@ -736,6 +736,7 @@ nav li {
 
     .appointment-banner-image-container img {
         width: 65%;
+        height: 480px;
         position: absolute;
     }
 

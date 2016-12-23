@@ -276,6 +276,18 @@ $(document).ready(function () {
     /** Appointment banner **/
 
     $(".home-list>ol>li").click(function () {
-        console.log($(".home-list>ol>li:before").text());
+        var counter = $(this).index() + 1;
+        console.log(counter);
+        $(".appointment-banner-image-counter").empty();
+        $(".appointment-banner-image-counter").html(counter);
+        if (counter == 1) {
+            $(".appointment-banner-image-container>img").attr('src', "images/mooi-meisje-3.jpg");
+        } else if (counter == 2) {
+            $(".appointment-banner-image-container>img").attr('src', "images/mooi-meisje-2.jpg");
+        } else if (counter == 3) {
+            $(".appointment-banner-image-container>img").attr('src', "images/mooi-meisje.jpg");
+        } else {
+            $(".appointment-banner-image-container>img").attr('src', "images/mooi-meisje-3.jpg");
+        }
     });
 });
