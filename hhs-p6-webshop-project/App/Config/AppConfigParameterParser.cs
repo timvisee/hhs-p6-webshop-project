@@ -11,7 +11,7 @@ namespace hhs_p6_webshop_project.App.Config {
         /// <param name="config">Configuration to apply the parsed parameters to.</param>
         public static void Parse(string[] args, AppConfig config) {
             // Check whether the database should reset
-            if (args.Any(e => e == "--db-init-force")) {
+            if (args.Any(e => e == "--db-init")) {
                 // Show a status message
                 LogUtils.Warning("Database initialization is invoked using --db-init");
 
