@@ -6,11 +6,20 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using hhs_p6_webshop_project.Models;
 using hhs_p6_webshop_project.Models.AppointmentModels;
+using Microsoft.Extensions.Configuration;
 
 namespace hhs_p6_webshop_project.Data {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser> {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options) { }
+
+        public ApplicationDbContext() : base(CreateTestContext()) {}
+
+        static DbContextOptions<ApplicationDbContext> CreateTestContext() {
+            var builder = new DbContextOptionsBuilder<ApplicationDbContext>();
+            builder.UseSqlite("test.db");
+            return builder.Options;
+        }
 
         protected override void OnModelCreating(ModelBuilder builder) {
             base.OnModelCreating(builder);
