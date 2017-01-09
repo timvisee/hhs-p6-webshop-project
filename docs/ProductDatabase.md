@@ -46,6 +46,7 @@ Page showing a specific product:
     * **`ID`** : `Int` *(AI)*
     * `Name` : `String`
     * `Description` : `String`
+    * `Values[]` : Foreign keys -> `PropertyValue.ID`
     * *Notice*:
         * *Properties are linked using the PropertyValues table*
 * `PropertyType`
@@ -61,7 +62,6 @@ Page showing a specific product:
     * `Value` : `String`
 * `PropertyValue`
     * **`ID`**: `Int` *(AI)*
-    * `Product` : Foreign key -> `Product.ID`
     * `ProperyType` : Foreign key -> `PropertType.ID`
     * `Value` : `String`
 * `ProductImage`
