@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -107,7 +106,7 @@ namespace hhs_p6_webshop_project.Controllers.Ajax {
 
                 times.Add(new {
                     available = !taken,
-                    formattedTime = slot.ToString("hh:mm"),
+                    formattedTime = slot.ToString(@"hh\:mm"),
                     time = new {
                         hour = slot.Hours,
                         minute = slot.Minutes,
