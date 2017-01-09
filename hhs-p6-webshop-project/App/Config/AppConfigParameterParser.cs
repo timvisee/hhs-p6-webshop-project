@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Threading;
+﻿using System.Linq;
 using hhs_p6_webshop_project.App.Util;
 
 namespace hhs_p6_webshop_project.App.Config {
