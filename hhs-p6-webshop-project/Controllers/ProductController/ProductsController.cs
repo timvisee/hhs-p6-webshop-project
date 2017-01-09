@@ -7,13 +7,16 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models.ProductModels;
+using hhs_p6_webshop_project.Services;
 
 namespace hhs_p6_webshop_project.Controllers.ProductController {
     public class ProductsController : Controller {
         private readonly ApplicationDbContext _context;
+        private readonly ProductFilterService _filterService;
 
-        public ProductsController(ApplicationDbContext context) {
+        public ProductsController(ApplicationDbContext context, ProductFilterService service) {
             _context = context;
+            _filterService = service;
         }
 
         // GET: Products
@@ -23,6 +26,10 @@ namespace hhs_p6_webshop_project.Controllers.ProductController {
 
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id) {
+
+            //Nu kun je hier de service gebruiken
+            //_filterService.AllProductFilterTypesAsList(enz......)
+
             if (id == null) {
                 return NotFound();
             }
