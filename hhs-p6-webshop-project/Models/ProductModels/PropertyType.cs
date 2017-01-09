@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 namespace hhs_p6_webshop_project.Models.ProductModels {
     public class PropertyType {
         public int ID { get; set; }
-        public String Name { get; set; }
-        public String DataType { get; set; }
-        public Boolean Required { get; set; }
-        public Boolean Multiple { get; set; }
-        public Boolean AllowCustom { get; set; }
+        public string Name { get; set; }
+        public string DataType { get; set; }
+        public bool Required { get; set; }
+        public bool Multiple { get; set; }
+        public bool AllowCustom { get; set; }
     }
 }
