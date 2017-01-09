@@ -20,18 +20,16 @@ namespace hhs_p6_webshop_project.Services
             return product.Properties.Select(type => type.PropertyType).Distinct().ToList();
         } 
 
-        public List<PropertyType> AllProductFilterTypesAsList {
-            get {
-                HashSet<PropertyType> types = new HashSet<PropertyType>();
+        public List<PropertyType> AllProductFilterTypesAsList() {
+            HashSet<PropertyType> types = new HashSet<PropertyType>();
 
-                foreach (var product in DatabaseContext.Product) {
-                    foreach (var value in product.Properties) {
-                        types.Add(value.PropertyType);
-                    }
+            foreach (var product in DatabaseContext.Product) {
+                foreach (var value in product.Properties) {
+                    types.Add(value.PropertyType);
                 }
-
-                return types.ToList();
             }
+
+            return types.ToList();
         }
 
     }

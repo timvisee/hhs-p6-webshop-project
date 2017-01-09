@@ -12,9 +12,9 @@ using hhs_p6_webshop_project.Services;
 namespace hhs_p6_webshop_project.Controllers.ProductController {
     public class ProductsController : Controller {
         private readonly ApplicationDbContext _context;
-        private readonly ProductFilterService _filterService;
+        private readonly IProductService _filterService;
 
-        public ProductsController(ApplicationDbContext context, ProductFilterService service) {
+        public ProductsController(ApplicationDbContext context, IProductService service) {
             _context = context;
             _filterService = service;
         }
