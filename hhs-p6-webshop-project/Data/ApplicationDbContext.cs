@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using hhs_p6_webshop_project.Models;
 using hhs_p6_webshop_project.Models.AppointmentModels;
 using Microsoft.Extensions.Configuration;
+using hhs_p6_webshop_project.Models.ProductModels;
 
 namespace hhs_p6_webshop_project.Data {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser> {
@@ -31,5 +32,13 @@ namespace hhs_p6_webshop_project.Data {
         public DbSet<Appointment> Appointment { get; set; }
 
         public DbSet<AppointmentTime> AppointmentTime { get; set; }
+
+        public DbSet<Product> Product { get; set; }
+
+        public DbSet<PropertyType> PropertyType { get; set; }
+
+        public DbSet<ProductImage> ProductImage { get; set; }
+
+        public DbSet<PropertyValue> PropertyValue { get; set; }
     }
 }
