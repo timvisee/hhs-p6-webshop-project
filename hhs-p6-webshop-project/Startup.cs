@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models;
 using hhs_p6_webshop_project.Services;
+using Microsoft.Extensions.Options;
 
 namespace hhs_p6_webshop_project {
     public class Startup {
@@ -71,7 +72,7 @@ namespace hhs_p6_webshop_project {
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ApplicationDbContext context, IServiceProvider serviceProvider) {
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ApplicationDbContext context, IServiceProvider serviceProvider, IOptions<SecureAppConfig> secureConfig) {
 
             //Save reference to the mail client
             //MailClient.Client = serviceProvider.GetService<SparkPostClient>();
@@ -95,15 +96,22 @@ namespace hhs_p6_webshop_project {
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
 
+            app.UseGoogleAuthentication(new GoogleOptions() {
+                ClientId = secureConfig.Value.GoogleClientId,
+                ClientSecret = secureConfig.Value.GoogleClientSecret
+            });
+
+
             app.UseMvc(routes => {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
+
 #if DEBUG
             // Seed database if not running in production
-            if(Program.AppConfig.DatabaseReset)
+            if (Program.AppConfig.DatabaseReset)
                 DbBuilder.Rebuild(context);
 #endif
         }

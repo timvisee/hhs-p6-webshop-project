@@ -17,6 +17,9 @@ namespace hhs_p6_webshop_project.App.Config {
         public string DbUser { get; set; }
         public string DbPassword { get; set; }
         public string DbName { get; set; }
-       
+
+        public string GoogleClientId { get; set; }
+        public string GoogleClientSecret { get; set; }
+
     }
 }
