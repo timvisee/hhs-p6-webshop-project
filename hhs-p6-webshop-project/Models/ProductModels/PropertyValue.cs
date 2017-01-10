@@ -4,31 +4,29 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace hhs_p6_webshop_project.Models.ProductModels {
-    public class PropertyValue {
+    public class PropertyValue : IEquatable<PropertyValue> {
 
         public int ID { get; set; }
         public PropertyType PropertyType { get; set; }
         public string Value { get; set; }
 
         /// <summary>
-        /// Compare this property value to an other property value instance.
+        /// Compare this property value to another property value instance.
         /// </summary>
-        /// <param name="other">Other property value instance.</param>
-        /// <returns>True if the property values are equal (value-wise).</returns>
+        /// <param name="other">Other property value instance to compare to.</param>
+        /// <returns>True if the types are equal, false if not.</returns>
         public override bool Equals(object other) {
-            // Return false if the other object isn't a property value instance
-            if(other.GetType() != typeof(PropertyValue))
-                return false;
+            // Make sure the type is correct, and compare the actual property value if so
+            return other.GetType() == typeof(PropertyValue) && Equals((PropertyValue) other);
+        }
 
-            // Get the property value instance
-            PropertyValue otherValue = (PropertyValue) other;
-
-            // Return true if the IDs equal
-            if(ID == otherValue.ID)
-                return true;
-
-            // Compare the value's and return the result
-            return Value.Equals(otherValue.Value);
+        /// <summary>
+        /// Compare this property value to another property value.
+        /// </summary>
+        /// <param name="other">Other property value.</param>
+        /// <returns>True if they are equal, false if not.</returns>
+        public bool Equals(PropertyValue other) {
+            return ID == other.ID || Value.Equals(other.Value);
         }
 
     }

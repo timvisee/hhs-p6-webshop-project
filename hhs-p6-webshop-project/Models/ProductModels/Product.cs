@@ -5,10 +5,30 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace hhs_p6_webshop_project.Models.ProductModels {
-    public class Product {
+    public class Product : IEquatable<Product> {
+
         public int ID { get; set; }
         public string Name { get; set; }
         public virtual List<PropertyValue> Properties { get; set; }
         public string Description { get; set; }
+
+        /// <summary>
+        /// Compare this product to another product instance.
+        /// </summary>
+        /// <param name="other">Other product instance to compare to.</param>
+        /// <returns>True if the types are equal, false if not.</returns>
+        public override bool Equals(object other) {
+            // Make sure the type is correct, and compare the actual product if so
+            return other.GetType() == typeof(Product) && Equals((Product) other);
+        }
+
+        /// <summary>
+        /// Compare this product to another product.
+        /// </summary>
+        /// <param name="other">Other product.</param>
+        /// <returns>True if they are equal, false if not.</returns>
+        public bool Equals(Product other) {
+            return ID == other.ID;
+        }
     }
 }
