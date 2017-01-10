@@ -1,5 +1,6 @@
+@using Microsoft.CodeAnalysis.CSharp.Syntax
 @model IEnumerable<hhs_p6_webshop_project.Models.ProductModels.Product>
-
+<link href="~/css/products.css" rel="stylesheet" />
 @{
     ViewData["Title"] = "Index";
 }
@@ -9,33 +10,25 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
+
+<ul class="product-overview">
+    @foreach (var item in Model) {
+    <li class="product">
+        <a asp-action="Details" asp-route-id="@item.ID">
+            <img class="product-image" src="~/images/uploads/@Html.DisplayFor(modelItem => item.Description)" alt="@Html.DisplayFor(modelItem => item.Name)" />
+
+            <h5 class="product-title">
                 @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+            </h5>
+
+            @if (User.Identity.IsAuthenticated) {
+            <div class="product-edit-buttons">
+                <a class="btn" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
+                <a class="btn" asp-action="Details" asp-route-id="@item.ID">Details</a>
+                <a class="btn" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </div>
+            }
+        </a>
+    </li>
+    }
+</ul>
