@@ -1346,30 +1346,7 @@ footer ul {
 
 @media (max-width: 991px) {
 
-    /*--- Footer ---*/
-    .social-box:first-child,
-    .social-box {
-        width: 90%;
-        float: left;
-        margin: 10px 5%;
-    }
-
-    .col-md-offset-1-5 {
-        margin-left: 0;
-    }
-
-    footer h4,
-    footer ul {
-        text-align: center;
-    }
-
-    footer h4 {
-        margin-top: 35px
-    }
-}
-
-@media (max-width: 767px) {
-
+    /*--- Header ---*/
     #header_top #choose_website {
         display: none;
     }
@@ -1391,7 +1368,7 @@ footer ul {
         }
 
 
-
+    /*--- Navigation ---*/
     nav ul {
         width: 95%;
         margin: 0 2.5%;
@@ -1402,5 +1379,26 @@ footer ul {
         display: inline-block;
         width: 100%;
         text-align: center;
+    }
+
+    /*--- Footer ---*/
+    .social-box:first-child,
+    .social-box {
+        width: 90%;
+        float: left;
+        margin: 10px 5%;
+    }
+
+    .col-md-offset-1-5 {
+        margin-left: 0;
+    }
+
+    footer h4,
+    footer ul {
+        text-align: center;
+    }
+
+    footer h4 {
+        margin-top: 35px;
     }
 }
