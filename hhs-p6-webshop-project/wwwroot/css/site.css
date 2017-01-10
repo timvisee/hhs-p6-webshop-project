@@ -92,9 +92,10 @@ body {
     margin-left: 12.5%;
 }
 
-.row {
-    /*fucking bootstrap*/
-    margin: 0;
+.col-full-width {
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: -15px;
 }
 
 a {
@@ -129,7 +130,7 @@ footer {
 }
 
 .img-full-width {
-    width: 1400px;
+    width: 100%;
     height: auto;
 }
 
@@ -777,7 +778,7 @@ nav li {
         text-align: center;
     }
 
-    .appointment-banner-image-text.blueTheme:before{
+    .appointment-banner-image-text.blueTheme:before {
         position: absolute;
         margin-left: -25px;
         width: 0;
@@ -889,21 +890,21 @@ nav li {
             cursor: pointer;
         }
 
-    .home-list .pinkTheme .active {
-        color: #f0597c;
-    }
+.home-list .pinkTheme .active {
+    color: #f0597c;
+}
 
-    .home-list .blueTheme .active{
-        color: #1a91be;
-    }
+.home-list .blueTheme .active {
+    color: #1a91be;
+}
 
-        .home-list .pinkTheme .active:before {
-            background-color: #f0597c;
-        }
+.home-list .pinkTheme .active:before {
+    background-color: #f0597c;
+}
 
-        .home-list .blueTheme .active:before{
-            background-color:#1a91be;
-        }
+.home-list .blueTheme .active:before {
+    background-color: #1a91be;
+}
 
 /*--- Content ---*/
 .container {
@@ -1241,9 +1242,11 @@ footer {
     transition: all .15s ease-in-out;
 }
 
-.social-box:hover {
-    transform: scale(1.02);
-}
+    .social-box:hover {
+        transform: scale(1.02);
+        color: #fff;
+        text-decoration: none;
+    }
 
     .social-box:first-child {
         margin-left: 10.5%;
