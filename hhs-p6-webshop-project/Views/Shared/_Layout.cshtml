@@ -103,9 +103,9 @@
             </div>
         </div>
         <div id="header_nav">
-            <div class="header-nav-logo">
-                @Html.ActionLink("Honeymoon Shop", "Index", "Home", null, new { @class = "navbar-brand" })
-            </div>
+            <a asp-controller="Home" asp-action="Index" class="header-nav-logo">
+                <img class="navbar-brand" src="~/images/logo.png" alt="Honeymoon Shop"/>
+            </a>
             <nav>
                 <ul>
                     <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
