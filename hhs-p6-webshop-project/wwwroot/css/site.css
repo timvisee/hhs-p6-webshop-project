@@ -448,8 +448,8 @@ header {
     font-weight: lighter;
     color: #000;
     font-size: 3.1em;
-    line-height: 40px;
-    height: auto;
+    height: 46px;
+    width: auto;
     padding: 0 15px;
     margin-left: 20px;
     text-transform: uppercase;
@@ -1342,4 +1342,65 @@ footer ul {
     font-size: 110%;
     font-style: italic;
     font-weight: bold;
+}
+
+@media (max-width: 991px) {
+
+    /*--- Footer ---*/
+    .social-box:first-child,
+    .social-box {
+        width: 90%;
+        float: left;
+        margin: 10px 5%;
+    }
+
+    .col-md-offset-1-5 {
+        margin-left: 0;
+    }
+
+    footer h4,
+    footer ul {
+        text-align: center;
+    }
+
+    footer h4 {
+        margin-top: 35px
+    }
+}
+
+@media (max-width: 767px) {
+
+    #header_top #choose_website {
+        display: none;
+    }
+
+    #header_nav {
+        display: block;
+    }
+
+        #header_nav .header-nav-logo {
+            width: 100%;
+            float: left;
+            display: block;
+        }
+
+        #header_nav .navbar-brand {
+            width: 80%;
+            height: auto;
+            margin: 0 10% 20px;
+        }
+
+
+
+    nav ul {
+        width: 95%;
+        margin: 0 2.5%;
+        padding: 0;
+    }
+
+    nav li {
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+    }
 }
