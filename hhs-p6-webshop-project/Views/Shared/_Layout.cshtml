@@ -142,10 +142,10 @@
                 <h2 class="banner-undertitle-text hm-white-text">@homeBannerBoldTitle</h2>
             </div>
             @if (showHomeBannerButtons) {
-                <div class="home-button-container">
-                    <a asp-controller="Appointments" asp-action="Create">Bruid</a>
-                    <a asp-controller="Appointments" asp-action="Create">Bruidegom</a>
-                </div>
+            <div class="home-button-container">
+                <a asp-controller="Appointments" asp-action="Create">Bruid</a>
+                <a asp-controller="Appointments" asp-action="Create">Bruidegom</a>
+            </div>
             }
             <img class="banner-image" src="@bannerPath" alt="banner" />
             <div class="scrollToggle white-text">
@@ -162,24 +162,24 @@
 
     <footer class="hm-pink-light">
         <div class="row" id="footer_bottom">
-            <a asp-controller="Appointments" asp-action="Create">
-                <div class="social-box text-center col-sm-12 white-text hm-pink-dark">
-                    <span class="bg-text">Afspraak</span>
-                    <div class="front-text">
-                        Maak een<br />pasafspraak
-                    </div>
+            <a asp-controller="Appointments" asp-action="Create" class="social-box text-center col-sm-12 white-text hm-pink-dark">
+                <span class="bg-text">Afspraak</span>
+                <div class="front-text">
+                    Maak een<br />pasafspraak
                 </div>
             </a>
-            <div class="social-box text-center col-sm-12 white-text hm-pink-dark">
+
+            <a href="#" class="social-box text-center col-sm-12 white-text hm-pink-dark">
                 <span class="bg-text">Social</span>
                 <div class="front-text">Volg ons</div>
-            </div>
-            <div class="social-box text-center col-sm-12 white-text hm-pink-dark">
+            </a>
+
+            <a href="#" class="social-box text-center col-sm-12 white-text hm-pink-dark">
                 <span class="bg-text">Reviews</span>
                 <div class="front-text">
                     Bekijk onze<br />reviews
                 </div>
-            </div>
+            </a>
 
             <div class="col-sm-12">
                 <p id="footer_shop_info" class="text-center">
