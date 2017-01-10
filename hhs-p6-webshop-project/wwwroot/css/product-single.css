@@ -81,4 +81,22 @@
 .product-information h4{
     font-weight: bold;
     font-size: 1.5em;
+    margin-bottom:5px;
+}
+
+.product-information span, .product-information p{
+    font-size:1em;
+    font-weight:normal;
+}
+
+.product-information-undertext{
+    margin-top:25px;
+}
+
+.product-information-attributes{
+    margin-top:25px;
+}
+
+.product-information-attributes a{
+    color:#F0597C;
 }

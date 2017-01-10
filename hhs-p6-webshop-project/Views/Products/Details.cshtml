@@ -1,5 +1,6 @@
 @model hhs_p6_webshop_project.Models.ProductModels.Product
 <link href="~/css/product-single.css" rel="stylesheet" />
+<link href="~/css/products.css" rel="stylesheet" />
 @{
     ViewData["Title"] = Html.DisplayFor(model => model.Name);
     ViewData["PinkBackground"] = true;
@@ -30,6 +31,41 @@
             <div class="product-information-container" ">
                 <div class="product-information">
                     <h4>@Html.DisplayFor(model => model.Name)</h4>
+                    <span>artikel nr. 12294</span>
+                    <div class="product-information-undertext">
+                        <span>Trouwjurk van het merk Maggie Sottero gemaakt van kant. De top kan met- en zonder schouders gedragen worden. De jurk heeft een laag uitgesneden rug en een fishtail model met een sleep.</span>
+                    </div>
+                    <div class="product-information-attributes">
+                        <p>
+                            Merk:
+                            <a asp-action="">Maggie Sottero</a>
+                        </p>
+                        <p>
+                            Kenmerken:
+                            <a asp-action="">Verleidelijk</a>,
+                            <a asp-action="">Kant</a>,
+                            <a asp-action="">Ivoor</a>,
+                            <a asp-action="">Fishtail</a>,
+                            <a asp-action="">Lage rug</a>,
+                            <a asp-action="">Schouderbandjes</a>,
+                            <a asp-action="">Strapless</a>
+                        </p>
+                        <p>
+                            Prijsindicatie:
+                            <span>&euro;7.500,-</span>
+                        </p>
+                        <p>
+                            Beschikbare kleuren:
+                            <div class="product-colors">
+                                <div class="color-circle"></div>
+                                <div class="color-circle hm-pink-dark"></div>
+                                <div class="color-circle hm-pink-light"></div>
+                            </div>
+                        </p>
+                        <br />
+                        <p>Kom deze jurk passen!</p>
+                        <a asp-controller="Appointments" asp-action="Create" class="make-appointment">Afspraak maken</a>
+                    </div>
                 </div>
             </div>
         </div>
