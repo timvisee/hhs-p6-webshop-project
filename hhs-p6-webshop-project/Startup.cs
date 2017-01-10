@@ -12,6 +12,7 @@ using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models;
 using hhs_p6_webshop_project.Services;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 
 namespace hhs_p6_webshop_project {
     public class Startup {
@@ -61,7 +62,10 @@ namespace hhs_p6_webshop_project {
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.SerializerSettings.Formatting = Formatting.Indented;
+            });
 
             //Add support for SparkPost Transactional Email Service
             //services.AddSparkPost();
@@ -69,7 +73,7 @@ namespace hhs_p6_webshop_project {
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
-            services.AddScoped<IProductService, ProductFilterService>();
+            services.AddScoped<IProductService, ProductService>();
 
         }
 

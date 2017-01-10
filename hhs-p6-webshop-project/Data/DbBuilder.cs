@@ -1,6 +1,7 @@
 ﻿using System;
 using hhs_p6_webshop_project.App.Util;
 using hhs_p6_webshop_project.Models;
+using hhs_p6_webshop_project.Models.ProductModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
@@ -45,11 +46,17 @@ namespace hhs_p6_webshop_project.Data {
             // Wait for the actual result
             result.Wait();
 
+            LogUtils.Log("Generating products", ConsoleColor.White);
+
+            GenerateProducts(context);
+
             // Show a success message
             LogUtils.Success("Database built!");
 
             // Save the changes to the database context
             context.SaveChanges();
+
+            
 
             // Exit the application if configured, when the built process is complete
             if (Program.AppConfig.DatabaseExitAfterReset) {
@@ -59,6 +66,16 @@ namespace hhs_p6_webshop_project.Data {
                 // Actually exit the application
                 Environment.Exit(0);
             }
+        }
+
+        private static void GenerateProducts(ApplicationDbContext context) {
+            for (int i = 0; i < 14; i++) {
+                Product p = new Product();
+                p.Name = "Jurk 1";
+                p.Description = "Beschrijving van jurk 1";
+                context.Product.Add(p);
+            }
+            
         }
     }
 }
