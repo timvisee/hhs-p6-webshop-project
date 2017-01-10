@@ -1,0 +1,86 @@
+.product-overview {
+    width: 70%;
+    /*ff testen hoor*/
+    float: right;
+    margin: 0;
+    padding: 0;
+}
+
+    .product-overview .product {
+        width: 32%;
+        margin-right: 2%;
+        margin-bottom: 20px;
+        float: left;
+        display: block;
+        position: relative;
+        z-index: 1;
+    }
+
+        .product-overview .product:nth-child(1),
+        .product-overview .product:nth-child(4n) {
+            clear: left;
+        }
+
+        .product-overview .product:nth-child(3n) {
+            margin-right: 0;
+        }
+
+        .product-overview .product a:hover {
+            text-decoration: none;
+        }
+
+    .product-overview .product-image {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .product-overview .product-title {
+        font-family: nexa-bold;
+        letter-spacing: 1.5px;
+        font-size: 16px;
+        color: #333;
+    }
+
+/*--- Styles when hovering a product ---*/
+.product > a {
+    transition: 0s;
+    -webkit-transition: 0s;
+    -moz-transition: 0s;
+}
+
+.product:hover {
+    z-index: 2;
+}
+
+    .product:hover > a {
+        width: calc(100% + 60px);
+        margin-left: -30px;
+        margin-top: -20px;
+        float: left;
+        background-color: #fff;
+        padding: 20px 30px;
+        z-index: 999;
+        border: 1px solid #e2e2e2;
+    }
+
+/*only for administrators*/
+.product-edit-buttons {
+    position: absolute;
+    top: 20%;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    transition: opacity .2s ease-in-out;
+}
+
+.product:hover .product-edit-buttons {
+    opacity: 1;
+}
+
+.product-edit-buttons a {
+    width: 90%;
+    margin: 5px 5%;
+    display: block;
+    text-align: center;
+}
