@@ -5,37 +5,37 @@
     margin-bottom: 20px;
 }
 
-.product-overview-options .select-label {
-    font-size: 1.2em;
-    margin-right: 10px;
-}
+    .product-overview-options .select-label {
+        font-size: 1.2em;
+        margin-right: 10px;
+    }
 /*--- Product overview ---*/
 .product-overview {
     margin: 0;
     padding: 0;
 }
 
-    .product-overview .product {
-        width: 32%;
-        margin-right: 2%;
-        margin-bottom: 0px;
-        padding: 0;
-        float: left;
-        display: block;
-        position: relative;
-        z-index: 1;
-        /*Edit height when adding elements! Beun!*/
-        height: 432px;
-    }
+.product {
+    width: 32%;
+    margin-right: 2%;
+    margin-bottom: 0px;
+    padding: 0;
+    float: left;
+    display: block;
+    position: relative;
+    z-index: 1;
+    /*Edit height when adding elements! Beun!*/
+    height: 432px;
+}
 
-        .product-overview .product:nth-child(1),
-        .product-overview .product:nth-child(4n) {
-            clear: left;
-        }
+.product-overview .product:nth-child(1),
+.product-overview .product:nth-child(4n) {
+    clear: left;
+}
 
-        .product-overview .product:nth-child(3n) {
-            margin-right: 0;
-        }
+.product-overview .product:nth-child(3n) {
+    margin-right: 0%;
+}
 
 .product a:hover {
     text-decoration: none;
@@ -69,12 +69,6 @@
     .product .vertical-align img {
         max-height: 380px;
     }
-
-.product .product-image {
-    display: block;
-    width: 100%;
-    height: auto;
-}
 
 .product .product-title {
     font-family: nexa-bold;
@@ -154,4 +148,32 @@
     margin: 5px 5%;
     display: block;
     text-align: center;
+}
+
+
+@media (max-width: 991px) {
+    .product-overview .product {
+        width: 48%;
+        margin: 0 0 20px 0;
+    }
+
+        .product-overview .product:nth-child(1), .product-overview .product:nth-child(4n) {
+            clear: none;
+        }
+
+        .product-overview .product:nth-child(odd) {
+            margin: 0 4% 20px 0;
+            clear: left;
+        }
+}
+
+@media (max-width: 767px) {
+    .product-overview .product {
+        width: 100%;
+    }
+
+        .product-overview .product:nth-child(odd) {
+            margin: 0 0 20px 0;
+            clear: none;
+        }
 }
