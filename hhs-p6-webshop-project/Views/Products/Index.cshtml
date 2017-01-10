@@ -3,6 +3,7 @@
 <link href="~/css/products.css" rel="stylesheet" />
 @{
     ViewData["Title"] = "Index";
+    ViewData["PinkBackground"] = true;
 }
 
 <h2>Index</h2>
@@ -47,7 +48,6 @@
                         @if (User.Identity.IsAuthenticated) {
                             <div class="product-edit-buttons">
                                 <a class="btn" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
-                                <a class="btn" asp-action="Details" asp-route-id="@item.ID">Details</a>
                                 <a class="btn" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
                             </div>
                         }
