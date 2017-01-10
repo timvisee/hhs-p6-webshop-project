@@ -181,12 +181,22 @@ input[type="tel"], input[type="url"], input[type="text"],
 input[type="search"], input[type="tel"], input[type="textarea"],
 input[type="datetime"], input[type="date"], input[type="datetime-local"],
 input[type="number"], input[type="week"], input[type="time"], input[type="month"],
-textarea, select, input:-webkit-autofill,
+textarea, input:-webkit-autofill,
 input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {
     border: 2px solid #e5e5e5;
     border-radius: 0px;
     box-shadow: none;
     -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+select {
+    font-size: 1.2em;
+    border: 2px solid #e5e5e5;
+    border-radius: 0px;
+    box-shadow: none;
+    height: 40px;
+    padding: 0 30px 0 10px;
+    cursor: pointer;
 }
 
 .btn,
@@ -1228,7 +1238,7 @@ nav li {
 
 /*--- Footer---*/
 footer {
-    padding: 20px;
+    padding: 70px 20px 20px 20px;
     font-family: nexa-regular;
 }
 
@@ -1242,6 +1252,8 @@ footer {
     transition: all .15s ease-in-out;
 }
 
+    .social-box:active,
+    .social-box:focus,
     .social-box:hover {
         transform: scale(1.02);
         color: #fff;

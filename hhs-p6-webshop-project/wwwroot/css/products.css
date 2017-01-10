@@ -1,3 +1,15 @@
+/*--- Options above the product overview ---*/
+.product-overview-options {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.product-overview-options .select-label {
+    font-size: 1.2em;
+    margin-right: 10px;
+}
+/*--- Product overview ---*/
 .product-overview {
     margin: 0;
     padding: 0;
@@ -81,9 +93,25 @@
     color: #444;
 }
 
+.product .product-colors {
+    margin-top: 10px;
+    display: none;
+}
+
+.product-colors .color-circle {
+    width: 15px;
+    height: 15px;
+    float: left;
+    margin-right: 10px;
+    border-radius: 100%;
+    border: 1px solid #e2e2e2;
+}
+
+.product:hover .product-colors,
 .product:hover .product-sku {
     display: block;
 }
+
 /*--- Styles when hovering a product ---*/
 .product > a {
     transition: 0s;
