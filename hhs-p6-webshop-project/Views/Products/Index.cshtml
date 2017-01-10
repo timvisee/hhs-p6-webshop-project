@@ -20,8 +20,20 @@
         </div>
         <div class="col-md-9 col-sm-12">
             <div class="row ">
-                <div class="col-sm-12">
-
+                <div class="col-sm-12 product-overview-options">
+                    <div>
+                        <!-- TODO: Sorteren met deze button werkt nog niet -->
+                        <strong class="select-label">
+                            Sorteer op:
+                        </strong>
+                        <select>
+                            <option>Prijs Hoog/Laag</option>
+                            <option>Prijs Laag/Hoog</option>
+                            <option>Naam oplopend</option>
+                            <option>Naam aflopend</option>
+                            <option>Populariteit</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             <div class="row product-overview">
@@ -45,16 +57,29 @@
                             Artikel nr. 41704
                         </span>
 
+                        <div class="product-colors">
+                            <div class="color-circle"></div>
+                            <div class="color-circle hm-pink-dark"></div>
+                            <div class="color-circle hm-pink-light"></div>
+                        </div>
+
                         @if (User.Identity.IsAuthenticated) {
-                            <div class="product-edit-buttons">
-                                <a class="btn" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
-                                <a class="btn" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                            </div>
+                        <div class="product-edit-buttons">
+                            <a class="btn" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
+                            <a class="btn" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                        </div>
                         }
                     </a>
                 </div>
                 }
             </div>
         </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col col-md-12 col-full-width">
+        <img class="img-full-width" src="~/images/dressfinder-banner.jpg" />
     </div>
 </div>
