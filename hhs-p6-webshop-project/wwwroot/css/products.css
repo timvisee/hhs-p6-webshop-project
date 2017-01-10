@@ -1,7 +1,4 @@
 .product-overview {
-    width: 70%;
-    /*ff testen hoor*/
-    float: right;
     margin: 0;
     padding: 0;
 }
@@ -9,11 +6,14 @@
     .product-overview .product {
         width: 32%;
         margin-right: 2%;
-        margin-bottom: 20px;
+        margin-bottom: 0px;
+        padding: 0;
         float: left;
         display: block;
         position: relative;
         z-index: 1;
+        /*Edit height when adding elements! Beun!*/
+        height: 432px;
     }
 
         .product-overview .product:nth-child(1),
@@ -25,23 +25,65 @@
             margin-right: 0;
         }
 
-        .product-overview .product a:hover {
-            text-decoration: none;
-        }
+.product a:hover {
+    text-decoration: none;
+}
 
-    .product-overview .product-image {
-        display: block;
-        width: 100%;
-        height: auto;
+.vertical-align {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.horizontal-align {
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.vertical-align img {
+    max-width: 100%;
+    height: auto;
+    width: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.product .horizontal-align,
+.product .vertical-align {
+    height: 380px;
+}
+
+    .product .vertical-align img {
+        max-height: 380px;
     }
 
-    .product-overview .product-title {
-        font-family: nexa-bold;
-        letter-spacing: 1.5px;
-        font-size: 16px;
-        color: #333;
-    }
+.product .product-image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
 
+.product .product-title {
+    font-family: nexa-bold;
+    letter-spacing: 1.5px;
+    font-size: 16px;
+    line-height: 30px;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.product .product-sku {
+    display: none;
+    font-size: 16px;
+    line-height: 22px;
+    color: #444;
+}
+
+.product:hover .product-sku {
+    display: block;
+}
 /*--- Styles when hovering a product ---*/
 .product > a {
     transition: 0s;
@@ -54,9 +96,10 @@
 }
 
     .product:hover > a {
-        width: calc(100% + 60px);
-        margin-left: -30px;
-        margin-top: -20px;
+        position: absolute;
+        width: calc(100% + 62px);
+        margin-left: -31px;
+        margin-top: -21px;
         float: left;
         background-color: #fff;
         padding: 20px 30px;
@@ -71,7 +114,6 @@
     left: 0;
     width: 100%;
     opacity: 0;
-    transition: opacity .2s ease-in-out;
 }
 
 .product:hover .product-edit-buttons {

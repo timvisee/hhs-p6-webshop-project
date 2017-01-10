@@ -10,25 +10,51 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 col-sm-12">
+            <code>
+                Insert product filter here
+            </code>
+        </div>
+        <div class="col-md-9 col-sm-12">
+            <div class="row ">
+                <div class="col-sm-12">
 
-<ul class="product-overview">
-    @foreach (var item in Model) {
-    <li class="product">
-        <a asp-action="Details" asp-route-id="@item.ID">
-            <img class="product-image" src="~/images/uploads/@Html.DisplayFor(modelItem => item.Description)" alt="@Html.DisplayFor(modelItem => item.Name)" />
-
-            <h5 class="product-title">
-                @Html.DisplayFor(modelItem => item.Name)
-            </h5>
-
-            @if (User.Identity.IsAuthenticated) {
-            <div class="product-edit-buttons">
-                <a class="btn" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
-                <a class="btn" asp-action="Details" asp-route-id="@item.ID">Details</a>
-                <a class="btn" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                </div>
             </div>
-            }
-        </a>
-    </li>
-    }
-</ul>
+            <div class="row product-overview">
+                @foreach (var item in Model) {
+                <div class="product col-md-4 col-sm-12">
+                    <a asp-action="Details" asp-route-id="@item.ID">
+                        <!-- Use the description field temporary as image name
+                        TODO: Get the image url -->
+                        <div class="vertical-align">
+                            <div class="horizontal-align">
+                                <img class="product-image" src="~/images/uploads/@Html.DisplayFor(modelItem => item.Description)" alt="@Html.DisplayFor(modelItem => item.Name)" />
+                            </div>
+                        </div>
+
+                        <h5 class="product-title">
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </h5>
+
+                        <span class="product-sku">
+                            <!-- TODO: Get the SKU -->
+                            Artikel nr. 41704
+                        </span>
+
+                        @if (User.Identity.IsAuthenticated) {
+                            <div class="product-edit-buttons">
+                                <a class="btn" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
+                                <a class="btn" asp-action="Details" asp-route-id="@item.ID">Details</a>
+                                <a class="btn" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                            </div>
+                        }
+                    </a>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
