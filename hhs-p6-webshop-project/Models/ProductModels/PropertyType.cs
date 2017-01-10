@@ -1,13 +1,26 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace hhs_p6_webshop_project.Models.ProductModels {
+
+    [DisplayName("Product eigenschap")]
     public class PropertyType : IEquatable<PropertyType> {
 
         public int ID { get; set; }
+
+        [DisplayName("Eigenschap naam")]
         public string Name { get; set; }
+
+        [DisplayName("Data type")]
         public string DataType { get; set; }
+
+        [DisplayName("Vereist")]
         public bool Required { get; set; }
+
+        [DisplayName("Sta meerdere waardes toe")]
         public bool Multiple { get; set; }
+
+        [DisplayName("Sta aangepaste waarde toe")]
         public bool AllowCustom { get; set; }
 
         /// <summary>
