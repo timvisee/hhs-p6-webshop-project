@@ -6,12 +6,12 @@ using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models.ProductModels;
 using Microsoft.CodeAnalysis;
 
-namespace hhs_p6_webshop_project.Services
-{
-    public class ProductFilterService : IProductService
-    {
+namespace hhs_p6_webshop_project.Services {
+
+    public class ProductFilterService : IProductService {
 
         private ApplicationDbContext DatabaseContext { get; set; }
+
         public ProductFilterService(ApplicationDbContext dbContext) {
             DatabaseContext = dbContext;
         }
@@ -20,6 +20,7 @@ namespace hhs_p6_webshop_project.Services
             return product.Properties.Select(type => type.PropertyType).Distinct().ToList();
         } 
 
+        // TODO: Can't we fetch all types from the ProductType model table here?
         public List<PropertyType> AllProductFilterTypesAsList() {
             HashSet<PropertyType> types = new HashSet<PropertyType>();
 
@@ -31,6 +32,5 @@ namespace hhs_p6_webshop_project.Services
 
             return types.ToList();
         }
-
     }
 }
