@@ -17,10 +17,7 @@ namespace hhs_p6_webshop_project.Data {
         /// <param name="context"></param>
         public static void Rebuild(ApplicationDbContext context) {
             // Show a status message to the user
-            LogUtils.Warning("-----------------------------------------------------");
-            LogUtils.Warning("| Starting database initialization...               |");
-            LogUtils.Warning("| ALL DATA WILL BE LOST!                            |");
-            LogUtils.Warning("-----------------------------------------------------");
+            LogUtils.Warning("Starting database initialization...");
 
             Console.Write("Deleting database... (please be patient, this may take up to 20 seconds)", ConsoleColor.White);
             context.Database.EnsureDeleted();
