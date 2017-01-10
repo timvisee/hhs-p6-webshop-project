@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace hhs_p6_webshop_project.Models.ProductModels {
-    public class PropertyType {
+    public class PropertyType : IEquatable<PropertyType> {
 
         public int ID { get; set; }
         public string Name { get; set; }
@@ -18,16 +15,18 @@ namespace hhs_p6_webshop_project.Models.ProductModels {
         /// </summary>
         /// <param name="other">Other property type instance to compare to.</param>
         /// <returns>True if the types are equal, false if not.</returns>
-        public bool Equals(object other) {
-            // Return false if the object isn't a PropertyType isntance
-            if(other.GetType() != typeof(PropertyType))
-                return false;
+        public override bool Equals(object other) {
+            // Make sure the type is correct, and compare the actual property type if so
+            return other.GetType() == typeof(PropertyType) && Equals((PropertyType) other);
+        }
 
-            // Get the other property type
-            PropertyType otherType = (PropertyType) other;
-
-            // Compare the IDs and return the result
-            return ID == otherType.ID;
+        /// <summary>
+        /// Compare this property type to another property type.
+        /// </summary>
+        /// <param name="other">Other property type.</param>
+        /// <returns>True if they are equal, false if not.</returns>
+        public bool Equals(PropertyType other) {
+            return ID == other.ID;
         }
 
     }
