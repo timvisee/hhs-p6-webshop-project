@@ -1238,6 +1238,11 @@ footer {
     margin-left: 5%;
     position: relative;
     overflow: hidden;
+    transition: all .15s ease-in-out;
+}
+
+.social-box:hover {
+    transform: scale(1.02);
 }
 
     .social-box:first-child {
