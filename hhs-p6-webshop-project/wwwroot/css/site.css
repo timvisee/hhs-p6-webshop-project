@@ -92,9 +92,10 @@ body {
     margin-left: 12.5%;
 }
 
-.row {
-    /*fucking bootstrap*/
-    margin: 0;
+.col-full-width {
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: -15px;
 }
 
 a {
@@ -129,7 +130,7 @@ footer {
 }
 
 .img-full-width {
-    width: 1400px;
+    width: 100%;
     height: auto;
 }
 
@@ -180,12 +181,22 @@ input[type="tel"], input[type="url"], input[type="text"],
 input[type="search"], input[type="tel"], input[type="textarea"],
 input[type="datetime"], input[type="date"], input[type="datetime-local"],
 input[type="number"], input[type="week"], input[type="time"], input[type="month"],
-textarea, select, input:-webkit-autofill,
+textarea, input:-webkit-autofill,
 input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {
     border: 2px solid #e5e5e5;
     border-radius: 0px;
     box-shadow: none;
     -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+select {
+    font-size: 1.2em;
+    border: 2px solid #e5e5e5;
+    border-radius: 0px;
+    box-shadow: none;
+    height: 40px;
+    padding: 0 30px 0 10px;
+    cursor: pointer;
 }
 
 .btn,
@@ -437,8 +448,8 @@ header {
     font-weight: lighter;
     color: #000;
     font-size: 3.1em;
-    line-height: 40px;
-    height: auto;
+    height: 46px;
+    width: auto;
     padding: 0 15px;
     margin-left: 20px;
     text-transform: uppercase;
@@ -777,7 +788,7 @@ nav li {
         text-align: center;
     }
 
-    .appointment-banner-image-text.blueTheme:before{
+    .appointment-banner-image-text.blueTheme:before {
         position: absolute;
         margin-left: -25px;
         width: 0;
@@ -889,21 +900,21 @@ nav li {
             cursor: pointer;
         }
 
-    .home-list .pinkTheme .active {
-        color: #f0597c;
-    }
+.home-list .pinkTheme .active {
+    color: #f0597c;
+}
 
-    .home-list .blueTheme .active{
-        color: #1a91be;
-    }
+.home-list .blueTheme .active {
+    color: #1a91be;
+}
 
-        .home-list .pinkTheme .active:before {
-            background-color: #f0597c;
-        }
+.home-list .pinkTheme .active:before {
+    background-color: #f0597c;
+}
 
-        .home-list .blueTheme .active:before{
-            background-color:#1a91be;
-        }
+.home-list .blueTheme .active:before {
+    background-color: #1a91be;
+}
 
 /*--- Content ---*/
 .container {
@@ -1227,7 +1238,7 @@ nav li {
 
 /*--- Footer---*/
 footer {
-    padding: 20px;
+    padding: 70px 20px 20px 20px;
     font-family: nexa-regular;
 }
 
@@ -1238,7 +1249,16 @@ footer {
     margin-left: 5%;
     position: relative;
     overflow: hidden;
+    transition: all .15s ease-in-out;
 }
+
+    .social-box:active,
+    .social-box:focus,
+    .social-box:hover {
+        transform: scale(1.02);
+        color: #fff;
+        text-decoration: none;
+    }
 
     .social-box:first-child {
         margin-left: 10.5%;
@@ -1322,4 +1342,63 @@ footer ul {
     font-size: 110%;
     font-style: italic;
     font-weight: bold;
+}
+
+@media (max-width: 991px) {
+
+    /*--- Header ---*/
+    #header_top #choose_website {
+        display: none;
+    }
+
+    #header_nav {
+        display: block;
+    }
+
+        #header_nav .header-nav-logo {
+            width: 100%;
+            float: left;
+            display: block;
+        }
+
+        #header_nav .navbar-brand {
+            width: 80%;
+            height: auto;
+            margin: 0 10% 20px;
+        }
+
+
+    /*--- Navigation ---*/
+    nav ul {
+        width: 95%;
+        margin: 0 2.5%;
+        padding: 0;
+    }
+
+    nav li {
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+    }
+
+    /*--- Footer ---*/
+    .social-box:first-child,
+    .social-box {
+        width: 90%;
+        float: left;
+        margin: 10px 5%;
+    }
+
+    .col-md-offset-1-5 {
+        margin-left: 0;
+    }
+
+    footer h4,
+    footer ul {
+        text-align: center;
+    }
+
+    footer h4 {
+        margin-top: 35px;
+    }
 }
