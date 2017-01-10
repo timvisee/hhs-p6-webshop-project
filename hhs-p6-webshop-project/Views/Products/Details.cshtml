@@ -1,30 +1,40 @@
 @model hhs_p6_webshop_project.Models.ProductModels.Product
-
+<link href="~/css/product-single.css" rel="stylesheet" />
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = Html.DisplayFor(model => model.Name);
+    ViewData["PinkBackground"] = true;
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Product</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-    </dl>
+<div class="single-container">
+    <div class="row">
+        <div class="back-to-dress-finder">
+            <a asp-action="Index"><img src="/images/products/white-arrow-back.png" alt="<" />Terug naar overzicht</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="product-details">
+            <div class="side-pictures">
+                <div class="small-picture">
+                    <img src="~/images/uploads/@Html.DisplayFor(model => model.Description)" alt="" />
+                </div>
+                <div class="small-picture">
+                    <img src="~/images/uploads/@Html.DisplayFor(model => model.Description)" alt="" />
+                </div>
+                <div class="small-picture">
+                    <img src="~/images/uploads/@Html.DisplayFor(model => model.Description)" alt="" />
+                </div>
+            </div>
+            <div class="big-picture">
+                <img src="~/images/uploads/@Html.DisplayFor(model => model.Description)" alt="" />
+            </div>
+            <div class="product-information-container" ">
+                <div class="product-information">
+                    <h4>@Html.DisplayFor(model => model.Name)</h4>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a>
 </div>
