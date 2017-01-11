@@ -53,7 +53,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductController
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PropertyTypeId,AllowCustom,Multiple,Name,Required,Type")] PropertyType propertyType)
+        public async Task<IActionResult> Create([Bind("PropertyTypeId,AllowCustom,DataType,Multiple,Name,Required")] PropertyType propertyType)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductController
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PropertyTypeId,AllowCustom,Multiple,Name,Required,Type")] PropertyType propertyType)
+        public async Task<IActionResult> Edit(int id, [Bind("PropertyTypeId,AllowCustom,DataType,Multiple,Name,Required")] PropertyType propertyType)
         {
             if (id != propertyType.PropertyTypeId)
             {

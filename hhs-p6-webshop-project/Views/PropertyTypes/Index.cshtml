@@ -16,6 +16,9 @@
                 @Html.DisplayNameFor(model => model.AllowCustom)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.DataType)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Multiple)
             </th>
             <th>
@@ -23,9 +26,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Required)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Type)
             </th>
             <th></th>
         </tr>
@@ -37,6 +37,9 @@
                 @Html.DisplayFor(modelItem => item.AllowCustom)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.DataType)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Multiple)
             </td>
             <td>
@@ -44,9 +47,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Required)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.PropertyTypeId">Edit</a> |
