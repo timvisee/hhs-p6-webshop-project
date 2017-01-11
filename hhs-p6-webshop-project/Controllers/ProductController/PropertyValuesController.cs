@@ -22,8 +22,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductController
         // GET: PropertyValues
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.PropertyValue.Include(p => p.Product).Include(p => p.PropertyType);
-            return View(await applicationDbContext.ToListAsync());
+            return View(await _context.PropertyValue.ToListAsync());
         }
 
         // GET: PropertyValues/Details/5
@@ -46,8 +45,6 @@ namespace hhs_p6_webshop_project.Controllers.ProductController
         // GET: PropertyValues/Create
         public IActionResult Create()
         {
-            ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "Name");
-            ViewData["PropertyTypeId"] = new SelectList(_context.PropertyType, "PropertyTypeId", "Name");
             return View();
         }
 
@@ -56,7 +53,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductController
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PropertyValueId,ProductId,PropertyTypeId,Value")] PropertyValue propertyValue)
+        public async Task<IActionResult> Create([Bind("PropertyValueId,PropertyTypeProductId,Value")] PropertyValue propertyValue)
         {
             if (ModelState.IsValid)
             {
@@ -64,8 +61,6 @@ namespace hhs_p6_webshop_project.Controllers.ProductController
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "Name", propertyValue.ProductId);
-            ViewData["PropertyTypeId"] = new SelectList(_context.PropertyType, "PropertyTypeId", "Name", propertyValue.PropertyTypeId);
             return View(propertyValue);
         }
 
@@ -82,8 +77,6 @@ namespace hhs_p6_webshop_project.Controllers.ProductController
             {
                 return NotFound();
             }
-            ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "Name", propertyValue.ProductId);
-            ViewData["PropertyTypeId"] = new SelectList(_context.PropertyType, "PropertyTypeId", "DataType", propertyValue.PropertyTypeId);
             return View(propertyValue);
         }
 
@@ -92,7 +85,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductController
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PropertyValueId,ProductId,PropertyTypeId,Value")] PropertyValue propertyValue)
+        public async Task<IActionResult> Edit(int id, [Bind("PropertyValueId,PropertyTypeProductId,Value")] PropertyValue propertyValue)
         {
             if (id != propertyValue.PropertyValueId)
             {
@@ -119,8 +112,6 @@ namespace hhs_p6_webshop_project.Controllers.ProductController
                 }
                 return RedirectToAction("Index");
             }
-            ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "Name", propertyValue.ProductId);
-            ViewData["PropertyTypeId"] = new SelectList(_context.PropertyType, "PropertyTypeId", "DataType", propertyValue.PropertyTypeId);
             return View(propertyValue);
         }
 
