@@ -1,30 +1,75 @@
 @model hhs_p6_webshop_project.Models.ProductModels.Product
-
+<link href="~/css/products.css" rel="stylesheet" />
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = Html.DisplayFor(model => model.Name);
+    ViewData["PinkBackground"] = true;
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Product</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-    </dl>
+<div class="single-container">
+    <div class="row">
+        <div class="back-to-dress-finder">
+            <a asp-action="Index"><img src="/images/products/white-arrow-back.png" alt="<" />Terug naar overzicht</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="product-details">
+            <div class="side-pictures">
+                <div class="small-picture">
+                    <img src="~/images/uploads/@Html.DisplayFor(model => model.Description)" alt="" />
+                </div>
+                <div class="small-picture">
+                    <img src="~/images/uploads/@Html.DisplayFor(model => model.Description)" alt="" />
+                </div>
+                <div class="small-picture">
+                    <img src="~/images/uploads/@Html.DisplayFor(model => model.Description)" alt="" />
+                </div>
+            </div>
+            <div class="big-picture">
+                <img src="~/images/uploads/@Html.DisplayFor(model => model.Description)" alt="" />
+            </div>
+            <div class="product-information-container" ">
+                <div class="product-information">
+                    <h4>@Html.DisplayFor(model => model.Name)</h4>
+                    <span>artikel nr. 12294</span>
+                    <div class="product-information-undertext">
+                        <span>Trouwjurk van het merk Maggie Sottero gemaakt van kant. De top kan met- en zonder schouders gedragen worden. De jurk heeft een laag uitgesneden rug en een fishtail model met een sleep.</span>
+                    </div>
+                    <div class="product-information-attributes">
+                        <p>
+                            Merk:
+                            <a asp-action="">Maggie Sottero</a>
+                        </p>
+                        <p>
+                            Kenmerken:
+                            <a asp-action="">Verleidelijk</a>,
+                            <a asp-action="">Kant</a>,
+                            <a asp-action="">Ivoor</a>,
+                            <a asp-action="">Fishtail</a>,
+                            <a asp-action="">Lage rug</a>,
+                            <a asp-action="">Schouderbandjes</a>,
+                            <a asp-action="">Strapless</a>
+                        </p>
+                        <p>
+                            Prijsindicatie:
+                            <span>&euro;7.500,-</span>
+                        </p>
+                        <p>
+                            Beschikbare kleuren:
+                            <div class="product-colors">
+                                <div class="color-circle"></div>
+                                <div class="color-circle hm-pink-dark"></div>
+                                <div class="color-circle hm-pink-light"></div>
+                            </div>
+                        </p>
+                        <br />
+                        <p>Kom deze jurk passen!</p>
+                        <a asp-controller="Appointments" asp-action="Create" class="make-appointment">Afspraak maken</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.ProductId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.ProductId">Edit</a>
 </div>
