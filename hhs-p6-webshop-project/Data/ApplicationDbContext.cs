@@ -35,13 +35,14 @@ namespace hhs_p6_webshop_project.Data {
 
         public DbSet<Product> Product { get; set; }
 
-        public DbSet<ProductImage> ProductImage { get; set; }
+        public DbSet<PropertyValue> PropertyValue { get; set; }
 
         public DbSet<PropertyType> PropertyType { get; set; }
 
         public DbSet<PropertySet> PropertySet { get; set; }
 
-        public DbSet<PropertyValue> PropertyValue { get; set; }
+        public DbSet<ProductImage> ProductImage { get; set; }
+
 
       
     }

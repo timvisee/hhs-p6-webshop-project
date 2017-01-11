@@ -2,134 +2,145 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models.ProductModels;
 
 namespace hhs_p6_webshop_project.Controllers.ProductController
 {
-    [Produces("application/json")]
-    [Route("api/ProductImages")]
     public class ProductImagesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
         public ProductImagesController(ApplicationDbContext context)
         {
-            _context = context;
+            _context = context;    
         }
 
-        // GET: api/ProductImages
-        [HttpGet]
-        public IEnumerable<ProductImage> GetProductImage()
+        // GET: ProductImages
+        public async Task<IActionResult> Index()
         {
-            return _context.ProductImage;
+            return View(await _context.ProductImage.ToListAsync());
         }
 
-        // GET: api/ProductImages/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetProductImage([FromRoute] int id)
+        // GET: ProductImages/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
-            if (!ModelState.IsValid)
+            if (id == null)
             {
-                return BadRequest(ModelState);
+                return NotFound();
             }
 
-            ProductImage productImage = await _context.ProductImage.SingleOrDefaultAsync(m => m.ProductImageId == id);
-
+            var productImage = await _context.ProductImage.SingleOrDefaultAsync(m => m.ProductImageId == id);
             if (productImage == null)
             {
                 return NotFound();
             }
 
-            return Ok(productImage);
+            return View(productImage);
         }
 
-        // PUT: api/ProductImages/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutProductImage([FromRoute] int id, [FromBody] ProductImage productImage)
+        // GET: ProductImages/Create
+        public IActionResult Create()
         {
-            if (!ModelState.IsValid)
+            return View();
+        }
+
+        // POST: ProductImages/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("ProductImageId,Path")] ProductImage productImage)
+        {
+            if (ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                _context.Add(productImage);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View(productImage);
+        }
+
+        // GET: ProductImages/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
             }
 
+            var productImage = await _context.ProductImage.SingleOrDefaultAsync(m => m.ProductImageId == id);
+            if (productImage == null)
+            {
+                return NotFound();
+            }
+            return View(productImage);
+        }
+
+        // POST: ProductImages/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("ProductImageId,Path")] ProductImage productImage)
+        {
             if (id != productImage.ProductImageId)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            _context.Entry(productImage).State = EntityState.Modified;
-
-            try
+            if (ModelState.IsValid)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProductImageExists(id))
+                try
                 {
-                    return NotFound();
+                    _context.Update(productImage);
+                    await _context.SaveChangesAsync();
                 }
-                else
+                catch (DbUpdateConcurrencyException)
                 {
-                    throw;
+                    if (!ProductImageExists(productImage.ProductImageId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
+                return RedirectToAction("Index");
             }
-
-            return NoContent();
+            return View(productImage);
         }
 
-        // POST: api/ProductImages
-        [HttpPost]
-        public async Task<IActionResult> PostProductImage([FromBody] ProductImage productImage)
+        // GET: ProductImages/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
-            if (!ModelState.IsValid)
+            if (id == null)
             {
-                return BadRequest(ModelState);
+                return NotFound();
             }
 
-            _context.ProductImage.Add(productImage);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (ProductImageExists(productImage.ProductImageId))
-                {
-                    return new StatusCodeResult(StatusCodes.Status409Conflict);
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtAction("GetProductImage", new { id = productImage.ProductImageId }, productImage);
-        }
-
-        // DELETE: api/ProductImages/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProductImage([FromRoute] int id)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            ProductImage productImage = await _context.ProductImage.SingleOrDefaultAsync(m => m.ProductImageId == id);
+            var productImage = await _context.ProductImage.SingleOrDefaultAsync(m => m.ProductImageId == id);
             if (productImage == null)
             {
                 return NotFound();
             }
 
+            return View(productImage);
+        }
+
+        // POST: ProductImages/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var productImage = await _context.ProductImage.SingleOrDefaultAsync(m => m.ProductImageId == id);
             _context.ProductImage.Remove(productImage);
             await _context.SaveChangesAsync();
-
-            return Ok(productImage);
+            return RedirectToAction("Index");
         }
 
         private bool ProductImageExists(int id)

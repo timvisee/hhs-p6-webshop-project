@@ -7,10 +7,13 @@ namespace hhs_p6_webshop_project.Models.ProductModels {
         [Key]
         public int PropertyValueId { get; set; }
 
+        public int PropertyTypeId { get; set; }
         [Required]
         [ForeignKey("PropertyTypeId")]
         public virtual PropertyType PropertyType { get; set; }
 
+
+        public int ProductId { get; set; }
         [ForeignKey("ProductId")]
         public virtual Product Product { get; set; }
 
@@ -24,7 +27,7 @@ namespace hhs_p6_webshop_project.Models.ProductModels {
         /// <returns>True if the types are equal, false if not.</returns>
         public override bool Equals(object other) {
             // Make sure the type is correct, and compare the actual property value if so
-            return other.GetType() == typeof(PropertyValue) && Equals((PropertyValue) other);
+            return other.GetType() == typeof(PropertyValue) && Equals((PropertyValue)other);
         }
 
         /// <summary>

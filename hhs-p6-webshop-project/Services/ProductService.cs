@@ -35,7 +35,7 @@ namespace hhs_p6_webshop_project.Services
 
             // Get a list of property types that are used as filters
             HashSet<PropertyType> types = new HashSet<PropertyType>();
-            values.ForEach(value => types.Add(value.PropertyType));
+          //  values.ForEach(value => types.Add(value.PropertyType));
 
             // TODO: Unfinished! Complete this method.
 
