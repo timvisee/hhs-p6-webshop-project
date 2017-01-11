@@ -86,6 +86,15 @@ namespace hhs_p6_webshop_project.App {
         }
 
         /// <summary>
+        /// Test the object for equality.
+        /// </summary>
+        /// <param name="other">Other object.</param>
+        /// <returns>True if they equal, false if not.</returns>
+        public override bool Equals(object other) {
+            return this.GetType() == other.GetType() && this.dataType.Equals(((PropertyDataType) other).dataType);
+        }
+
+        /// <summary>
         /// Get the string representation of this property data type.
         /// </summary>
         /// <returns>String representation.</returns>
