@@ -13,6 +13,7 @@ namespace hhs_p6_webshop_project.Models.ProductModels {
         [Required]
         public string Value { get; set; }
 
+        public int PropertyTypeId { get; set; }
         [ForeignKey("PropertyTypeId")]
         public virtual PropertyType PropertyType { get; set; }
     }

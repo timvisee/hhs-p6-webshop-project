@@ -22,7 +22,8 @@ namespace hhs_p6_webshop_project.Controllers.ProductController
         // GET: PropertySets
         public async Task<IActionResult> Index()
         {
-            return View(await _context.PropertySet.ToListAsync());
+            var applicationDbContext = _context.PropertySet.Include(p => p.PropertyType);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: PropertySets/Details/5
@@ -45,6 +46,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductController
         // GET: PropertySets/Create
         public IActionResult Create()
         {
+            ViewData["PropertyTypeId"] = new SelectList(_context.PropertyType, "PropertyTypeId", "DataType");
             return View();
         }
 
@@ -53,7 +55,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductController
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PropertySetId,Value")] PropertySet propertySet)
+        public async Task<IActionResult> Create([Bind("PropertySetId,PropertyTypeId,Value")] PropertySet propertySet)
         {
             if (ModelState.IsValid)
             {
@@ -61,6 +63,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductController
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+            ViewData["PropertyTypeId"] = new SelectList(_context.PropertyType, "PropertyTypeId", "DataType", propertySet.PropertyTypeId);
             return View(propertySet);
         }
 
@@ -77,6 +80,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductController
             {
                 return NotFound();
             }
+            ViewData["PropertyTypeId"] = new SelectList(_context.PropertyType, "PropertyTypeId", "DataType", propertySet.PropertyTypeId);
             return View(propertySet);
         }
 
@@ -85,7 +89,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductController
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PropertySetId,Value")] PropertySet propertySet)
+        public async Task<IActionResult> Edit(int id, [Bind("PropertySetId,PropertyTypeId,Value")] PropertySet propertySet)
         {
             if (id != propertySet.PropertySetId)
             {
@@ -112,6 +116,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductController
                 }
                 return RedirectToAction("Index");
             }
+            ViewData["PropertyTypeId"] = new SelectList(_context.PropertyType, "PropertyTypeId", "DataType", propertySet.PropertyTypeId);
             return View(propertySet);
         }
 
