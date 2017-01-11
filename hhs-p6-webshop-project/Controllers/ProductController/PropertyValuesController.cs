@@ -47,7 +47,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductController
         public IActionResult Create()
         {
             ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "Name");
-            ViewData["PropertyTypeId"] = new SelectList(_context.PropertyType, "PropertyTypeId", "DataType");
+            ViewData["PropertyTypeId"] = new SelectList(_context.PropertyType, "PropertyTypeId", "Name");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductController
                 return RedirectToAction("Index");
             }
             ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "Name", propertyValue.ProductId);
-            ViewData["PropertyTypeId"] = new SelectList(_context.PropertyType, "PropertyTypeId", "DataType", propertyValue.PropertyTypeId);
+            ViewData["PropertyTypeId"] = new SelectList(_context.PropertyType, "PropertyTypeId", "Name", propertyValue.PropertyTypeId);
             return View(propertyValue);
         }
 
