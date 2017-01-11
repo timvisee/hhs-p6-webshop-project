@@ -11,7 +11,8 @@ namespace hhs_p6_webshop_project.Models.ProductModels {
         public string Name { get; set; }
 
         [Required]
-        public string DataType { get; set; }
+        public DataType Type { get; set; }
+
         public bool Required { get; set; }
         public bool Multiple { get; set; }
         public bool AllowCustom { get; set; }
