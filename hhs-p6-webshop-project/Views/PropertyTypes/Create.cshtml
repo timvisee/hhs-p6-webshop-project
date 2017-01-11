@@ -12,15 +12,14 @@
     <h4>PropertyType</h4>
     <hr/>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
     <div class="form-group">
-      <div class="col-md-offset-2 col-md-10">
-        <div class="checkbox">
-          <input asp-for="AllowCustom"/>
-          <label asp-for="AllowCustom"></label>
-        </div>
+      <label asp-for="Name" class="col-md-2 control-label"></label>
+      <div class="col-md-10">
+        <input asp-for="Name" class="form-control"/>
+        <span asp-validation-for="Name" class="text-danger"/>
       </div>
     </div>
-
     <div class="form-group">
       <label for="data-type" class="col-md-2 control-label">Data type</label>
       <div class="col-md-10">
@@ -33,7 +32,14 @@
         </select>
       </div>
     </div>
-
+    <div class="form-group">
+      <div class="col-md-offset-2 col-md-10">
+        <div class="checkbox">
+          <input asp-for="Required"/>
+          <label asp-for="Required"></label>
+        </div>
+      </div>
+    </div>
     <div class="form-group">
       <div class="col-md-offset-2 col-md-10">
         <div class="checkbox">
@@ -43,20 +49,14 @@
       </div>
     </div>
     <div class="form-group">
-      <label asp-for="Name" class="col-md-2 control-label"></label>
-      <div class="col-md-10">
-        <input asp-for="Name" class="form-control"/>
-        <span asp-validation-for="Name" class="text-danger"/>
-      </div>
-    </div>
-    <div class="form-group">
       <div class="col-md-offset-2 col-md-10">
         <div class="checkbox">
-          <input asp-for="Required"/>
-          <label asp-for="Required"></label>
+          <input asp-for="AllowCustom"/>
+          <label asp-for="AllowCustom"></label>
         </div>
       </div>
     </div>
+
     <div class="form-group">
       <div class="col-md-offset-2 col-md-10">
         <input type="submit" value="Create" class="btn btn-default"/>
