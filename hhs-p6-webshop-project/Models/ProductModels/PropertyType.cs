@@ -2,9 +2,11 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using hhs_p6_webshop_project.App;
 
 namespace hhs_p6_webshop_project.Models.ProductModels {
     public class PropertyType : IEquatable<PropertyType> {
+
         [Key]
         public int PropertyTypeId { get; set; }
 
@@ -22,6 +24,22 @@ namespace hhs_p6_webshop_project.Models.ProductModels {
 
         [DisplayName("Sta custom waarde toe")]
         public bool AllowCustom { get; set; }
+
+        /// <summary>
+        /// Get the property data type by the current data type.
+        /// </summary>
+        /// <returns></returns>
+        public PropertyDataType GetPropertyDataType() {
+            return PropertyDataType.GetByDataType(this.DataType);
+        }
+
+        /// <summary>
+        /// Set the property data type.
+        /// </summary>
+        /// <param name="dataType">Property data type.</param>
+        public void SetPropertyDataType(PropertyDataType dataType) {
+            this.DataType = dataType.dataType;
+        }
 
         /// <summary>
         /// Compare this property type to another property type instance.
