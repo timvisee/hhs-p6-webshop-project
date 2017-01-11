@@ -7,12 +7,12 @@ namespace hhs_p6_webshop_project.App {
         /// <summary>
         /// Data type (as used by C#).
         /// </summary>
-        private readonly String dataType;
+        public String dataType { get; }
 
         /// <summary>
         /// Display name of the type, for the front-end.
         /// </summary>
-        private readonly String displayName;
+        public String displayName { get; }
 
         /// <summary>
         /// String type.
@@ -81,7 +81,7 @@ namespace hhs_p6_webshop_project.App {
         /// Return a list of possible property data type values.
         /// </summary>
         /// <returns>Property data type values.</returns>
-        public PropertyDataType[] GetValues() {
+        public static PropertyDataType[] GetValues() {
             return _VALUES;
         }
 
