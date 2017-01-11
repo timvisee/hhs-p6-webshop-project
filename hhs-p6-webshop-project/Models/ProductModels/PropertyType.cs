@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -7,13 +8,19 @@ namespace hhs_p6_webshop_project.Models.ProductModels {
         [Key]
         public int PropertyTypeId { get; set; }
 
-        [Required]
+        [Required, DisplayName("Eigenschap naam")]
         public string Name { get; set; }
 
-        [Required]
+        [Required, DisplayName("Eigenschap type")]
         public string DataType { get; set; }
+
+        [DisplayName("Vereist")]
         public bool Required { get; set; }
+
+        [DisplayName("Sta meerdere waarden toe")]
         public bool Multiple { get; set; }
+
+        [DisplayName("Sta custom waarde toe")]
         public bool AllowCustom { get; set; }
 
         /// <summary>
