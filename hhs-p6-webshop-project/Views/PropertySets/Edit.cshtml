@@ -1,26 +1,27 @@
-@model hhs_p6_webshop_project.Models.ProductModels.ProductImage
+@model hhs_p6_webshop_project.Models.ProductModels.PropertySet
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
 
-<h2>Create</h2>
+<h2>Edit</h2>
 
-<form asp-action="Create">
+<form asp-action="Edit">
     <div class="form-horizontal">
-        <h4>ProductImage</h4>
+        <h4>PropertySet</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="PropertySetId" />
         <div class="form-group">
-            <label asp-for="Path" class="col-md-2 control-label"></label>
+            <label asp-for="Value" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="Path" class="form-control" />
-                <span asp-validation-for="Path" class="text-danger" />
+                <input asp-for="Value" class="form-control" />
+                <span asp-validation-for="Value" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>

@@ -1,10 +1,16 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace hhs_p6_webshop_project.Models.ProductModels {
     public class PropertyType : IEquatable<PropertyType> {
+        [Key]
+        public int PropertyTypeId { get; set; }
 
-        public int ID { get; set; }
+        [Required]
         public string Name { get; set; }
+
+        [Required]
         public string DataType { get; set; }
         public bool Required { get; set; }
         public bool Multiple { get; set; }
@@ -26,7 +32,7 @@ namespace hhs_p6_webshop_project.Models.ProductModels {
         /// <param name="other">Other property type.</param>
         /// <returns>True if they are equal, false if not.</returns>
         public bool Equals(PropertyType other) {
-            return ID == other.ID;
+            return PropertyTypeId == other.PropertyTypeId;
         }
     }
 }

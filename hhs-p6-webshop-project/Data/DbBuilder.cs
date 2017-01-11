@@ -73,7 +73,7 @@ namespace hhs_p6_webshop_project.Data {
                 Product p = new Product();
                 p.Name = "Jurk 1";
                 p.Description = "Beschrijving van jurk 1";
-                context.Product.Add(p);
+//                context.Product.Add(p);
             }
             
         }
