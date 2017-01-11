@@ -91,6 +91,11 @@ namespace hhs_p6_webshop_project.App {
         /// <param name="other">Other object.</param>
         /// <returns>True if they equal, false if not.</returns>
         public override bool Equals(object other) {
+            // Compare a raw string to the data type
+            if (other is string)
+                return this.dataType.Equals(other.ToString().Trim());
+
+            // Compare the other object against it's data type
             return this.GetType() == other.GetType() && this.dataType.Equals(((PropertyDataType) other).dataType);
         }
 
