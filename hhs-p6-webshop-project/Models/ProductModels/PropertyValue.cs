@@ -1,10 +1,20 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace hhs_p6_webshop_project.Models.ProductModels {
     public class PropertyValue : IEquatable<PropertyValue> {
+        [Key]
+        public int PropertyValueId { get; set; }
 
-        public int ID { get; set; }
-        public PropertyType PropertyType { get; set; }
+        [Required]
+        [ForeignKey("PropertyTypeId")]
+        public virtual PropertyType PropertyType { get; set; }
+
+        [ForeignKey("ProductId")]
+        public virtual Product Product { get; set; }
+
+        [Required]
         public string Value { get; set; }
 
         /// <summary>
@@ -23,7 +33,7 @@ namespace hhs_p6_webshop_project.Models.ProductModels {
         /// <param name="other">Other property value.</param>
         /// <returns>True if they are equal, false if not.</returns>
         public bool Equals(PropertyValue other) {
-            return ID == other.ID || Value.Equals(other.Value);
+            return PropertyValueId == other.PropertyValueId || Value.Equals(other.Value);
         }
 
     }

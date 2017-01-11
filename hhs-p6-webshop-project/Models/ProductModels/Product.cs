@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace hhs_p6_webshop_project.Models.ProductModels {
     public class Product : IEquatable<Product> {
+        [Key]
+        public int ProductId { get; set; }
 
-        public int ID { get; set; }
+        [Required]
         public string Name { get; set; }
-        public virtual List<PropertyValue> Properties { get; set; }
+
         public string Description { get; set; }
 
         /// <summary>
@@ -19,7 +23,7 @@ namespace hhs_p6_webshop_project.Models.ProductModels {
         /// <returns>True if the types are equal, false if not.</returns>
         public override bool Equals(object other) {
             // Make sure the type is correct, and compare the actual product if so
-            return other.GetType() == typeof(Product) && Equals((Product) other);
+            return other.GetType() == typeof(Product) && Equals((Product)other);
         }
 
         /// <summary>
@@ -28,7 +32,7 @@ namespace hhs_p6_webshop_project.Models.ProductModels {
         /// <param name="other">Other product.</param>
         /// <returns>True if they are equal, false if not.</returns>
         public bool Equals(Product other) {
-            return ID == other.ID;
+            return ProductId == other.ProductId;
         }
     }
 }

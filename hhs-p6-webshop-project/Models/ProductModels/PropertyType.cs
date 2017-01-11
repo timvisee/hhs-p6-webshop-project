@@ -1,26 +1,19 @@
 ﻿using System;
-using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace hhs_p6_webshop_project.Models.ProductModels {
-
-    [DisplayName("Product eigenschap")]
     public class PropertyType : IEquatable<PropertyType> {
+        [Key]
+        public int PropertyTypeId { get; set; }
 
-        public int ID { get; set; }
-
-        [DisplayName("Eigenschap naam")]
+        [Required]
         public string Name { get; set; }
 
-        [DisplayName("Data type")]
+        [Required]
         public string DataType { get; set; }
-
-        [DisplayName("Vereist")]
         public bool Required { get; set; }
-
-        [DisplayName("Sta meerdere waardes toe")]
         public bool Multiple { get; set; }
-
-        [DisplayName("Sta aangepaste waarde toe")]
         public bool AllowCustom { get; set; }
 
         /// <summary>
@@ -39,7 +32,7 @@ namespace hhs_p6_webshop_project.Models.ProductModels {
         /// <param name="other">Other property type.</param>
         /// <returns>True if they are equal, false if not.</returns>
         public bool Equals(PropertyType other) {
-            return ID == other.ID;
+            return PropertyTypeId == other.PropertyTypeId;
         }
     }
 }

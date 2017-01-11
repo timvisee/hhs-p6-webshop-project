@@ -1,4 +1,4 @@
-@model IEnumerable<hhs_p6_webshop_project.Models.ProductModels.PropertyValue>
+@model IEnumerable<hhs_p6_webshop_project.Models.ProductModels.PropertySet>
 
 @{
     ViewData["Title"] = "Index";
@@ -25,9 +25,9 @@
                 @Html.DisplayFor(modelItem => item.Value)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.PropertyValueId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PropertyValueId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PropertyValueId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.PropertySetId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.PropertySetId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.PropertySetId">Delete</a>
             </td>
         </tr>
 }
