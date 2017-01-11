@@ -4,21 +4,23 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace hhs_p6_webshop_project.Models.ProductModels {
     public class PropertyValue : IEquatable<PropertyValue> {
+
+        public PropertyValue() {
+            
+        }
+
+        public PropertyValue(object value) {
+            Value = value.ToString();
+        }
+
         [Key]
         public int PropertyValueId { get; set; }
 
-        public int PropertyTypeId { get; set; }
-        [Required]
-        [ForeignKey("PropertyTypeId")]
-        public virtual PropertyType PropertyType { get; set; }
-
-
-        public int ProductId { get; set; }
-        [ForeignKey("ProductId")]
-        public virtual Product Product { get; set; }
-
         [Required]
         public string Value { get; set; }
+
+        public int PropertyTypeProductId { get; set; }
+        public PropertyTypeProduct PropertyTypeProduct { get;set; }
 
         /// <summary>
         /// Compare this property value to another property value instance.

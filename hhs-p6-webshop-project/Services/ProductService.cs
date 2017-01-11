@@ -7,6 +7,7 @@ using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models.ProductModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
+using Microsoft.EntityFrameworkCore;
 
 namespace hhs_p6_webshop_project.Services
 {
@@ -19,8 +20,16 @@ namespace hhs_p6_webshop_project.Services
         }
 
         public List<Product> GetAllProducts() {
-//            return DatabaseContext.Product.ToList();
-            return null;
+            return DatabaseContext.Product
+                .Include(p => p.PropertyTypeProducts)
+                .ThenInclude(ptp => ptp.PropertyType)
+                .Include(p => p.PropertyTypeProducts)
+                .ThenInclude(ptp => ptp.PropertyValue)
+                .ToList();
+        }
+
+        public List<PropertyTypeProduct> Test() {
+            return DatabaseContext.PropertyTypeProducts.ToList();
         }
 
         /// <summary>

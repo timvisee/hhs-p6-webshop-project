@@ -8,6 +8,11 @@ using System.Threading.Tasks;
 
 namespace hhs_p6_webshop_project.Models.ProductModels {
     public class Product : IEquatable<Product> {
+
+        public Product() {
+            PropertyTypeProducts = new List<PropertyTypeProduct>();
+        }
+
         [Key]
         public int ProductId { get; set; }
 
@@ -15,6 +20,8 @@ namespace hhs_p6_webshop_project.Models.ProductModels {
         public string Name { get; set; }
 
         public string Description { get; set; }
+
+        public ICollection<PropertyTypeProduct> PropertyTypeProducts { get; set; }
 
         /// <summary>
         /// Compare this product to another product instance.

@@ -14,8 +14,13 @@ namespace hhs_p6_webshop_project.Api
         }
 
         [HttpGet("product/all")]
-        public JsonResult GetAllProducts(int start, int count) {
+        public JsonResult GetAllProducts() {
             return Json(ProductService.GetAllProducts());
+        }
+
+        [HttpGet("product/test")]
+        public JsonResult GetAll() {
+            return Json(ProductService.Test());
         }
 
         [HttpGet("product/{start}/{count}")]

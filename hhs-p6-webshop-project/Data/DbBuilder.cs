@@ -68,14 +68,54 @@ namespace hhs_p6_webshop_project.Data {
             }
         }
 
+        private static PropertyTypeProduct Couple(Product p, PropertyType pt, object value) {
+            return new PropertyTypeProduct(p, pt, new PropertyValue(value));
+        }
+
         private static void GenerateProducts(ApplicationDbContext context) {
-            for (int i = 0; i < 14; i++) {
-                Product p = new Product();
-                p.Name = "Jurk 1";
-                p.Description = "Beschrijving van jurk 1";
-//                context.Product.Add(p);
-            }
-            
+            PropertyType kleur = new PropertyType();
+            kleur.DataType = typeof(string).FullName;
+            kleur.Multiple = true;
+            kleur.Name = "Kleur";
+            kleur.Required = true;
+            context.PropertyType.Add(kleur);
+
+            PropertyType prijs = new PropertyType();
+            prijs.DataType = typeof(double).FullName;
+            prijs.Multiple = false;
+            prijs.Name = "Prijs";
+            prijs.Required = true;
+            context.PropertyType.Add(prijs);
+
+            context.SaveChanges();
+
+            Product stoel = new Product();
+            stoel.Name = "Stoel";
+            stoel.Description = "Een hele grote stoel";
+            context.Product.Add(stoel);
+
+            Product bank = new Product();
+            bank.Name = "Bank";
+            bank.Description = "Een hele grote bank";
+            context.Product.Add(bank);
+
+            context.SaveChanges();
+
+            context.PropertyTypeProducts.Add(Couple(stoel, prijs, 65.0));
+            context.PropertyTypeProducts.Add(Couple(bank, prijs, 550.0));
+
+            context.SaveChanges();
+
+            context.PropertyTypeProducts.Add(Couple(stoel, kleur, "Blauw"));
+            context.PropertyTypeProducts.Add(Couple(stoel, kleur, "Bruin"));
+            context.PropertyTypeProducts.Add(Couple(stoel, kleur, "Geel"));
+
+            context.PropertyTypeProducts.Add(Couple(bank, kleur, "Grijs"));
+            context.PropertyTypeProducts.Add(Couple(bank, kleur, "Wit"));
+            context.PropertyTypeProducts.Add(Couple(bank, kleur, "Zwart"));
+
+            context.SaveChanges();
+
         }
     }
 }
