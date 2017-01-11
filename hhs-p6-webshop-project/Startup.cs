@@ -65,6 +65,7 @@ namespace hhs_p6_webshop_project {
             services.AddMvc().AddJsonOptions(options =>
             {
                 options.SerializerSettings.Formatting = Formatting.Indented;
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
 
             //Add support for SparkPost Transactional Email Service

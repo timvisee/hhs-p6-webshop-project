@@ -24,9 +24,18 @@ namespace hhs_p6_webshop_project.Data {
 
         protected override void OnModelCreating(ModelBuilder builder) {
             base.OnModelCreating(builder);
-            // Customize the ASP.NET Identity model and override the defaults if needed.
-            // For example, you can rename the ASP.NET Identity table names and more.
-            // Add your customizations after calling base.OnModelCreating(builder);
+
+            builder.Entity<PropertyTypeProduct>()
+                .HasKey(x => new {x.ProductId, x.PropertyTypeId, x.PropertyValueId});
+
+            builder.Entity<PropertyTypeProduct>()
+                .HasOne(ptp => ptp.PropertyValue)
+                .WithOne(pv => pv.PropertyTypeProduct);
+
+            builder.Entity<PropertyTypeProduct>()
+                .HasOne(ptp => ptp.Product)
+                .WithMany(p => p.PropertyTypeProducts)
+                .HasForeignKey(fk => fk.ProductId);
         }
 
         public DbSet<Appointment> Appointment { get; set; }
@@ -39,9 +48,9 @@ namespace hhs_p6_webshop_project.Data {
 
         public DbSet<PropertyType> PropertyType { get; set; }
 
-        public DbSet<PropertySet> PropertySet { get; set; }
+        public DbSet<PropertyTypeProduct> PropertyTypeProducts { get; set; }
 
-        public DbSet<ProductImage> ProductImage { get; set; }
+        //public DbSet<ProductImage> ProductImage { get; set; }
 
 
       
