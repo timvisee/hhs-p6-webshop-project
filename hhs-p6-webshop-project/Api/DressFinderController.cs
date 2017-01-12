@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using hhs_p6_webshop_project.ExtraModels;
 using hhs_p6_webshop_project.Models.ProductModels;
+using hhs_p6_webshop_project.Models.ProductViewModels;
 using hhs_p6_webshop_project.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -19,7 +20,11 @@ namespace hhs_p6_webshop_project.Api
 
         [HttpPost("product/filter/partial")]
         public PartialViewResult FilterPartial([FromBody] FilterRequest request) {
-            return PartialView("ProductContent", ProductService.Filter(ProductService.ParseFilterRequest(request), ProductService.GetAllProducts()));
+            ProductViewModel pvm = new ProductViewModel();
+            pvm.Products = ProductService.Filter(ProductService.ParseFilterRequest(request),
+                ProductService.GetAllProducts());
+
+            return PartialView("~/Views/Products/ProductOverview.cshtml", pvm);
         }
 
         [HttpGet("product/all")]
