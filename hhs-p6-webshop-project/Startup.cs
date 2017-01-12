@@ -21,8 +21,8 @@ namespace hhs_p6_webshop_project {
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile("appsettings.secret.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
-
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile("hosting.json", optional: true);
             if (env.IsDevelopment()) {
                 // For more details on using the user secret store see https://go.microsoft.com/fwlink/?LinkID=532709
                 builder.AddUserSecrets();
@@ -65,6 +65,7 @@ namespace hhs_p6_webshop_project {
             services.AddMvc().AddJsonOptions(options =>
             {
                 options.SerializerSettings.Formatting = Formatting.Indented;
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
 
             //Add support for SparkPost Transactional Email Service
@@ -74,6 +75,13 @@ namespace hhs_p6_webshop_project {
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddScoped<IProductService, ProductService>();
+
+            services.AddCors(o => o.AddPolicy("AllowEverything", builder =>
+             {
+                 builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+             }));
 
         }
 
@@ -107,6 +115,7 @@ namespace hhs_p6_webshop_project {
                 ClientSecret = secureConfig.Value.GoogleClientSecret
             });
 
+            app.UseCors("AllowEverything");
 
             app.UseMvc(routes => {
                 routes.MapRoute(

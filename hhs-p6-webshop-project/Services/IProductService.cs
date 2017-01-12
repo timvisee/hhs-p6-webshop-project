@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using hhs_p6_webshop_project.Api;
+using hhs_p6_webshop_project.ExtraModels;
 using hhs_p6_webshop_project.Models.ProductModels;
 
 namespace hhs_p6_webshop_project.Services
@@ -16,6 +17,18 @@ namespace hhs_p6_webshop_project.Services
         List<Product> GetAllProducts();
 
         /// <summary>
+        /// Returns a list of all PropertyTypes with all possible values.
+        /// </summary>
+        /// <returns></returns>
+        List<ProductFilter> GetAllProductFilters();
+            
+        List<PropertyValueCoupling> Test();
+
+        List<ProductFilter> ParseFilterRequest(FilterRequest req);
+
+        List<Product> Filter(List<ProductFilter> filters, List<Product> products);
+
+            /// <summary>
         /// Returns a list of all products, sorted by Id, ascending.
         /// </summary>
         /// <returns>A <see cref="List{T}"/> of all <see cref="Product"/> product instances.</returns>

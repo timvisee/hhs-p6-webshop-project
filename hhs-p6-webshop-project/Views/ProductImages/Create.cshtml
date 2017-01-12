@@ -2,11 +2,12 @@
 
 @{
     ViewData["Title"] = "Create";
+    
 }
 
 <h2>Create</h2>
 
-<form asp-action="Create">
+<form asp-action="Create" enctype="multipart/form-data">
     <div class="form-horizontal">
         <h4>ProductImage</h4>
         <hr />
@@ -14,8 +15,14 @@
         <div class="form-group">
             <label asp-for="Path" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="Path" class="form-control" />
+                <input type="file" asp-for="Path" class="form-control" name="image"/>
                 <span asp-validation-for="Path" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ProductTypeId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="ProductTypeId" class ="form-control" asp-items="ViewBag.ProductTypeId"></select>
             </div>
         </div>
         <div class="form-group">

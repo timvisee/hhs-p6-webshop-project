@@ -1,22 +1,37 @@
-@using Microsoft.CodeAnalysis.CSharp.Syntax
-@model IEnumerable<hhs_p6_webshop_project.Models.ProductModels.Product>
+@using hhs_p6_webshop_project.Models.ProductViewModels;
+@model ProductViewModel
 <link href="~/css/products.css" rel="stylesheet" />
 @{
     ViewData["Title"] = "Index";
     ViewData["PinkBackground"] = true;
 }
 
-<h2>Index</h2>
+<h2>Dressfinder</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@if (User.Identity.IsAuthenticated) {
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
 <div class="container">
     <div class="row">
-        <div class="col-md-3 col-sm-12">
-            <code>
-                Insert product filter here
-            </code>
+        <div class="col-md-3 col-sm-12 product-filters">
+            <h2>Filteren</h2>
+
+            @foreach (var item in Model.Filters) {
+                <div class="filter">
+                  <input type="hidden" class="field-property-id" value="@item.FilterType.PropertyTypeId" />
+                  <h4>@item.FilterType.Name</h4>
+                  <ul class="filter-list">
+                    @foreach (var value in item.Values) {
+                        <li>
+                          <input type="checkbox" name="@item.FilterType.Name" id="value_@value.PropertyValueId" value="@value.PropertyValueId"/>
+                          <label class="no-user-select" for="value_@value.PropertyValueId">@value.Value</label>
+                        </li>
+                    }
+                  </ul>
+                </div>
+            }
         </div>
         <div class="col-md-9 col-sm-12">
             <div class="row ">
@@ -37,41 +52,7 @@
                 </div>
             </div>
             <div class="row product-overview">
-                @foreach (var item in Model) {
-                <div class="product col-md-4 col-sm-12">
-                    <a asp-action="Details" asp-route-id="@item.ID">
-                        <!-- Use the description field temporary as image name
-                        TODO: Get the image url -->
-                        <div class="vertical-align">
-                            <div class="horizontal-align">
-                                <img class="product-image" src="~/images/uploads/@Html.DisplayFor(modelItem => item.Description)" alt="@Html.DisplayFor(modelItem => item.Name)" />
-                            </div>
-                        </div>
-
-                        <h5 class="product-title">
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </h5>
-
-                        <span class="product-sku">
-                            <!-- TODO: Get the SKU -->
-                            Artikel nr. 41704
-                        </span>
-
-                        <div class="product-colors">
-                            <div class="color-circle"></div>
-                            <div class="color-circle hm-pink-dark"></div>
-                            <div class="color-circle hm-pink-light"></div>
-                        </div>
-
-                        @if (User.Identity.IsAuthenticated) {
-                        <div class="product-edit-buttons">
-                            <a class="btn" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
-                            <a class="btn" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                        </div>
-                        }
-                    </a>
-                </div>
-                }
+@*                @Html.Partial("ProductOverview", Model);*@
             </div>
         </div>
     </div>

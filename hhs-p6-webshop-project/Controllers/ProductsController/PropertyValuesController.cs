@@ -8,27 +8,34 @@ using Microsoft.EntityFrameworkCore;
 using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models.ProductModels;
 
-namespace hhs_p6_webshop_project.Controllers.ProductController {
-    public class PropertyValuesController : Controller {
+namespace hhs_p6_webshop_project.Controllers.ProductsController
+{
+    public class PropertyValuesController : Controller
+    {
         private readonly ApplicationDbContext _context;
 
-        public PropertyValuesController(ApplicationDbContext context) {
-            _context = context;
+        public PropertyValuesController(ApplicationDbContext context)
+        {
+            _context = context;    
         }
 
         // GET: PropertyValues
-        public async Task<IActionResult> Index() {
+        public async Task<IActionResult> Index()
+        {
             return View(await _context.PropertyValue.ToListAsync());
         }
 
         // GET: PropertyValues/Details/5
-        public async Task<IActionResult> Details(int? id) {
-            if (id == null) {
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
                 return NotFound();
             }
 
-            var propertyValue = await _context.PropertyValue.SingleOrDefaultAsync(m => m.ID == id);
-            if (propertyValue == null) {
+            var propertyValue = await _context.PropertyValue.SingleOrDefaultAsync(m => m.PropertyValueId == id);
+            if (propertyValue == null)
+            {
                 return NotFound();
             }
 
@@ -36,7 +43,8 @@ namespace hhs_p6_webshop_project.Controllers.ProductController {
         }
 
         // GET: PropertyValues/Create
-        public IActionResult Create() {
+        public IActionResult Create()
+        {
             return View();
         }
 
@@ -45,8 +53,10 @@ namespace hhs_p6_webshop_project.Controllers.ProductController {
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Value")] PropertyValue propertyValue) {
-            if (ModelState.IsValid) {
+        public async Task<IActionResult> Create([Bind("PropertyValueId,Value")] PropertyValue propertyValue)
+        {
+            if (ModelState.IsValid)
+            {
                 _context.Add(propertyValue);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -55,13 +65,16 @@ namespace hhs_p6_webshop_project.Controllers.ProductController {
         }
 
         // GET: PropertyValues/Edit/5
-        public async Task<IActionResult> Edit(int? id) {
-            if (id == null) {
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
                 return NotFound();
             }
 
-            var propertyValue = await _context.PropertyValue.SingleOrDefaultAsync(m => m.ID == id);
-            if (propertyValue == null) {
+            var propertyValue = await _context.PropertyValue.SingleOrDefaultAsync(m => m.PropertyValueId == id);
+            if (propertyValue == null)
+            {
                 return NotFound();
             }
             return View(propertyValue);
@@ -72,19 +85,28 @@ namespace hhs_p6_webshop_project.Controllers.ProductController {
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Value")] PropertyValue propertyValue) {
-            if (id != propertyValue.ID) {
+        public async Task<IActionResult> Edit(int id, [Bind("PropertyValueId,Value")] PropertyValue propertyValue)
+        {
+            if (id != propertyValue.PropertyValueId)
+            {
                 return NotFound();
             }
 
-            if (ModelState.IsValid) {
-                try {
+            if (ModelState.IsValid)
+            {
+                try
+                {
                     _context.Update(propertyValue);
                     await _context.SaveChangesAsync();
-                } catch (DbUpdateConcurrencyException) {
-                    if (!PropertyValueExists(propertyValue.ID)) {
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!PropertyValueExists(propertyValue.PropertyValueId))
+                    {
                         return NotFound();
-                    } else {
+                    }
+                    else
+                    {
                         throw;
                     }
                 }
@@ -94,13 +116,16 @@ namespace hhs_p6_webshop_project.Controllers.ProductController {
         }
 
         // GET: PropertyValues/Delete/5
-        public async Task<IActionResult> Delete(int? id) {
-            if (id == null) {
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
                 return NotFound();
             }
 
-            var propertyValue = await _context.PropertyValue.SingleOrDefaultAsync(m => m.ID == id);
-            if (propertyValue == null) {
+            var propertyValue = await _context.PropertyValue.SingleOrDefaultAsync(m => m.PropertyValueId == id);
+            if (propertyValue == null)
+            {
                 return NotFound();
             }
 
@@ -110,15 +135,17 @@ namespace hhs_p6_webshop_project.Controllers.ProductController {
         // POST: PropertyValues/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id) {
-            var propertyValue = await _context.PropertyValue.SingleOrDefaultAsync(m => m.ID == id);
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var propertyValue = await _context.PropertyValue.SingleOrDefaultAsync(m => m.PropertyValueId == id);
             _context.PropertyValue.Remove(propertyValue);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
-        private bool PropertyValueExists(int id) {
-            return _context.PropertyValue.Any(e => e.ID == id);
+        private bool PropertyValueExists(int id)
+        {
+            return _context.PropertyValue.Any(e => e.PropertyValueId == id);
         }
     }
 }
