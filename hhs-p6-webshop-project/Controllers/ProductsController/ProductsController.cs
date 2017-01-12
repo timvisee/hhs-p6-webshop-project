@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models.ProductModels;
+using hhs_p6_webshop_project.Models.ProductViewModels;
 using hhs_p6_webshop_project.Services;
 
 namespace hhs_p6_webshop_project.Controllers.ProductsController
@@ -25,7 +26,11 @@ namespace hhs_p6_webshop_project.Controllers.ProductsController
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            return View(_service.GetAllProducts());
+            ProductViewModel pvm = new ProductViewModel();
+            pvm.Filters = _service.GetAllProductFilters();
+            pvm.Products = _service.GetAllProducts();
+
+            return View(pvm);
         }
 
         // GET: Products/Details/5

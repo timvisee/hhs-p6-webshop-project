@@ -1,5 +1,6 @@
 @using Microsoft.CodeAnalysis.CSharp.Syntax
-@model IEnumerable<hhs_p6_webshop_project.Models.ProductModels.Product>
+@using hhs_p6_webshop_project.Models.ProductViewModels;
+@model ProductViewModel
 <link href="~/css/products.css" rel="stylesheet" />
 @{
     ViewData["Title"] = "Index";
@@ -39,7 +40,7 @@
                 </div>
             </div>
             <div class="row product-overview">
-                @foreach (var item in Model) {
+                @foreach (var item in Model.Products) {
                 <div class="product col-md-4 col-sm-12">
                     <a asp-action="Details" asp-route-id="@item.ProductId">
                         <div class="vertical-align">
