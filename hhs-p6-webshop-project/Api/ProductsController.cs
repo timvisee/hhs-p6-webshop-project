@@ -10,19 +10,25 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
 namespace hhs_p6_webshop_project.Api
 {
     [Route("api/dressfinder")]
-    public class DressFinderController : Controller
+    
+    public class ProductsController : Controller
     {
         public IProductService ProductService { get;set; }
 
-        public DressFinderController(IProductService productService) {
+        public ProductsController(IProductService productService) {
             ProductService = productService;
         }
 
         [HttpPost("product/filter/partial")]
         public PartialViewResult FilterPartial([FromBody] FilterRequest request) {
+
+
             ProductViewModel pvm = new ProductViewModel();
-            pvm.Products = ProductService.Filter(ProductService.ParseFilterRequest(request),
-                ProductService.GetAllProducts());
+            if (request.Values.Count == 0)
+                pvm.Products = ProductService.GetAllProducts();
+            else
+                pvm.Products = ProductService.Filter(ProductService.ParseFilterRequest(request),
+                    ProductService.GetAllProducts());
 
             pvm.Filters = ProductService.GetAllProductFilters();
 
