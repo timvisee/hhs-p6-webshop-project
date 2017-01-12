@@ -1,8 +1,60 @@
 @model hhs_p6_webshop_project.Models.ProductModels.Product
+
 <link href="~/css/products.css" rel="stylesheet" />
 @{
-    ViewData["Title"] = Html.DisplayFor(model => model.Name);
+    ViewData["Title"] = Model.Name;
     ViewData["PinkBackground"] = true;
+
+    var details = @Model.ProductTypes;
+
+    foreach (var d in details) {
+        Console.WriteLine("---------------------------------------");
+        Console.WriteLine("-- Name: " + d.NameOverride);
+        Console.WriteLine("-- Descr: " + d.DescriptionOverride);
+        Console.WriteLine("-- ProdId: " + d.ProductId);
+        Console.WriteLine("-- ProdTypeId: " + d.ProductTypeId);
+        Console.WriteLine("------------------ Images: ------------------");
+        foreach (var i in d.Images) {
+            Console.WriteLine("---- Image ----");
+            Console.WriteLine("---- Path: " + i.Path);
+            Console.WriteLine("---- ImgId: " + i.ProductImageId);
+        }
+        Console.WriteLine("---------------- Properties: ----------------");
+        foreach (var p in d.PropertyValueCouplings) {
+            Console.WriteLine("---- PropertyValueCouplings ----");
+            Console.WriteLine("---- ProdTypeId:" + p.ProductTypeId);
+            Console.WriteLine("---- PropTypeId:" + p.PropertyTypeId);
+            Console.WriteLine("---- PropValue:" + p.PropertyValue.Value);
+            Console.WriteLine("---- PropType:" + p.PropertyType.Name);
+            Console.WriteLine("---- ProdName:" + p.ProductType.Product.Name);
+        }
+        Console.WriteLine("---------------------------------------");
+    }
+
+
+    Console.WriteLine("---------------- All Images: ----------------");
+    foreach (var d in details) {
+        foreach (var i in d.Images) {
+            Console.WriteLine("---- Path: " + i.Path);
+        }
+    }
+
+    // TODO alles ff mooi fixen
+    //    var properties = new Dictionary<string, string>();
+
+    List<string> properties = new List<string>();
+
+// Todo:
+// First loop over all the propertytypes (color, price etc)
+// Then loop over the values .where(pt => pt.propertytype = type)
+
+    Console.WriteLine("-------------- All Properties: --------------");
+    foreach (var d in details) {
+        Console.WriteLine("Variatie:");
+        properties.AddRange(d.PropertyValueCouplings.Select(p => p.PropertyValue.ToString()));
+    }
+
+
 
     var ImagePath = "images/default.jpg";
 
@@ -52,6 +104,13 @@
                         <span>Trouwjurk van het merk Maggie Sottero gemaakt van kant. De top kan met- en zonder schouders gedragen worden. De jurk heeft een laag uitgesneden rug en een fishtail model met een sleep.</span>
                     </div>
                     <div class="product-information-attributes">
+                        @{
+                            foreach (var p in properties) {
+                                <span>@p</span>
+                            }
+
+                        }
+
                         <p>
                             Merk:
                             <a asp-action="">Maggie Sottero</a>
