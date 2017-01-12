@@ -24,6 +24,8 @@ namespace hhs_p6_webshop_project.Api
             pvm.Products = ProductService.Filter(ProductService.ParseFilterRequest(request),
                 ProductService.GetAllProducts());
 
+            pvm.Filters = ProductService.GetAllProductFilters();
+
             return PartialView("~/Views/Products/ProductOverview.cshtml", pvm);
         }
 
