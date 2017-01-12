@@ -783,7 +783,7 @@ $(document).ready(function () {
 
                 // Put the checkbox IDs in the array
                 checkedBoxes.each(function() {
-                    filterObject.values[key].push($(this).attr("id"));
+                    filterObject.values[key].push($(this).val());
                 });
             });
 

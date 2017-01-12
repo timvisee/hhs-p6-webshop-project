@@ -26,7 +26,7 @@
                   <ul class="filter-list">
                     @foreach (var value in item.Values) {
                         <li>
-                          <input type="checkbox" name="@item.FilterType.Name" id="value_@value.PropertyValueId"/>
+                          <input type="checkbox" name="@item.FilterType.Name" id="value_@value.PropertyValueId" value="@value.PropertyValueId"/>
                           <label class="no-user-select" for="value_@value.PropertyValueId">@value.Value</label>
                         </li>
                     }
