@@ -745,71 +745,77 @@ $(document).ready(function () {
         $(".appointment-banner-image-container>img").attr('src', "images/mooi-meisje-" + counter + ".jpg");
     });
 
-    /**
-     * Fetch a list of dressesk.
-     * Filters are applied as specified in the sidebar.
-     */
-    function fetchProductsFiltered() {
-        // Find the product overview
-        var productOverviewElement = $(".product-overview");
+    // Find the product overview
+    var productOverviewElement = $(".product-overview");
 
-        // Show a loading indiator
-        setLoadingIndicator(productOverviewElement, true);
+    // Load the filter logic when a product overview is available
+    if(productOverviewElement.length > 0) {
+        /**
+         * Fetch a list of dressesk.
+         * Filters are applied as specified in the sidebar.
+         */
+        function fetchProductsFiltered() {
+            // Show a loading indiator
+            setLoadingIndicator(productOverviewElement, true);
 
-        // Create a filter object
-        var filterObject = {
-            values:{}
-        };
+            // Create a filter object
+            var filterObject = {
+                values: {}
+            };
 
-        // Find the selected checkboxes, and build the filter object
-        $(".filter").each(function() {
-            // Get the filter element
-            var filterElement = $(this);
+            // Find the selected checkboxes, and build the filter object
+            $(".filter").each(function() {
+                // Get the filter element
+                var filterElement = $(this);
 
-            // Get the list of checked checkboxes
-            var checkedBoxes = filterElement.find("input:checked");
+                // Get the list of checked checkboxes
+                var checkedBoxes = filterElement.find("input:checked");
 
-            // Skip if no boxes are selected
-            if(checkedBoxes.length <= 0)
-                return;
+                // Skip if no boxes are selected
+                if(checkedBoxes.length <= 0)
+                    return;
 
-            // Get the product ID for this filter section as key
-            var key = String(filterElement.find("input.field-property-id").val());
+                // Get the product ID for this filter section as key
+                var key = String(filterElement.find("input.field-property-id").val());
 
-            // Create an entry in the filter object
-            filterObject.values[key] = [];
+                // Create an entry in the filter object
+                filterObject.values[key] = [];
 
-            // Put the checkbox IDs in the array
-            checkedBoxes.each(function() {
-                filterObject.values[key].push($(this).attr("id"));
+                // Put the checkbox IDs in the array
+                checkedBoxes.each(function() {
+                    filterObject.values[key].push($(this).attr("id"));
+                });
             });
-        });
 
-        // Filter the dresses and fetch the new list through AJAX
-        $.ajax({
-            url: "/api/dressfinder/product/filter/partial",
-            dataType: "application/json",
-            type: "post",
-            data: {
-                values: filterObject
-            },
-            error: function(jqXhr, textStatus) {
-                // Define the error message
-                var error = "Failed to filter dresses.\n\nError: " + textStatus;
+            // Filter the dresses and fetch the new list through AJAX
+            $.ajax({
+                url: "/api/dressfinder/product/filter/partial",
+                dataType: "application/json",
+                type: "post",
+                data: {
+                    values: filterObject
+                },
+                error: function(jqXhr, textStatus) {
+                    // Define the error message
+                    var error = "Failed to filter dresses.\n\nError: " + textStatus;
 
-                // Alert the user
-                alert(error);
-            },
-            success: function(data) {
-                productOverviewElement.html(data);
-            },
-            complete: function () {
-                // Hide the loading indiator
-                setLoadingIndicator(productOverviewElement, false);
-            }
-        });
+                    // Alert the user
+                    alert(error);
+                },
+                success: function(data) {
+                    productOverviewElement.html(data);
+                },
+                complete: function () {
+                    // Hide the loading indiator
+                    setLoadingIndicator(productOverviewElement, false);
+                }
+            });
+        }
+
+        // Call the product fetch function when a filter is clicked
+        $(".filter").find("input[type=checkbox]").click(fetchProductsFiltered);
+
+        // Filter once on page load
+        fetchProductsFiltered();
     }
-
-    // Call the product fetch function when a filter is clicked
-    $(".filter").find("input[type=checkbox]").click(fetchProductsFiltered);
 });
