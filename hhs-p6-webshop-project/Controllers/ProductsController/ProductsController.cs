@@ -30,7 +30,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductsController {
                 return NotFound();
             }
 
-            var product = await _context.Product.SingleOrDefaultAsync(m => m.ProductId == id);
+            var product = (Product) _productService.GetAllProducts().Where(p => p.ProductId == id).First();
             if (product == null) {
                 return NotFound();
             }
