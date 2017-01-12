@@ -20,16 +20,31 @@ namespace hhs_p6_webshop_project.Services
         }
 
         public List<Product> GetAllProducts() {
-            return DatabaseContext.Product
-                .Include(p => p.PropertyTypeProducts)
-                .ThenInclude(ptp => ptp.PropertyType)
-                .Include(p => p.PropertyTypeProducts)
-                .ThenInclude(ptp => ptp.PropertyValue)
-                .ToList();
+            return
+                DatabaseContext.Product
+                    .Include(p => p.ProductTypes)
+                        .ThenInclude(pt => pt.Images)
+                    .Include(p => p.ProductTypes)
+                        .ThenInclude(pt => pt.PropertyValueCouplings)
+                            .ThenInclude(pvc => pvc.ProductType)
+                    .Include(p => p.ProductTypes)
+                        .ThenInclude(pt => pt.PropertyValueCouplings)
+                            .ThenInclude(pvc => pvc.PropertyType)
+                    .Include(p => p.ProductTypes)
+                        .ThenInclude(pt => pt.PropertyValueCouplings)
+                            .ThenInclude(pvc => pvc.PropertyValue)
+                    .ToList();
+
+            //return DatabaseContext.Product
+            //    .Include(p => p.PropertyTypeProducts)
+            //    .ThenInclude(ptp => ptp.PropertyType)
+            //    .Include(p => p.PropertyTypeProducts)
+            //    .ThenInclude(ptp => ptp.PropertyValue)
+            //    .ToList();
         }
 
-        public List<PropertyTypeProduct> Test() {
-            return DatabaseContext.PropertyTypeProducts.ToList();
+        public List<PropertyValueCoupling> Test() {
+            return DatabaseContext.PropertyValueCouplings.ToList();
         }
 
         /// <summary>

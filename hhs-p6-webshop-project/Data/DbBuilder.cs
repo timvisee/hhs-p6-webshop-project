@@ -68,8 +68,8 @@ namespace hhs_p6_webshop_project.Data {
             }
         }
 
-        private static PropertyTypeProduct Couple(Product p, PropertyType pt, object value) {
-            return new PropertyTypeProduct(p, pt, new PropertyValue(value));
+        private static PropertyValueCoupling Couple(ProductType p, PropertyType pt, object value) {
+            return new PropertyValueCoupling(p, pt, new PropertyValue(value));
         }
 
         private static void GenerateProducts(ApplicationDbContext context) {
@@ -89,33 +89,72 @@ namespace hhs_p6_webshop_project.Data {
 
             context.SaveChanges();
 
+            #region Stoel
+
             Product stoel = new Product();
             stoel.Name = "Stoel";
-            stoel.Description = "Een hele grote stoel";
+            stoel.Description = "Een stoel";
+
+            ProductType stoel_klein = new ProductType();
+            stoel_klein.NameOverride = "Kleine Stoel";
+            stoel_klein.DescriptionOverride = "Een kleine stoel";
+            stoel_klein.Images.Add(new ProductImage("images/stoel/klein.png"));
+
+            context.PropertyValueCouplings.Add(Couple(stoel_klein, prijs, 50.0d));
+            context.PropertyValueCouplings.Add(Couple(stoel_klein, kleur, "Wit"));
+            context.PropertyValueCouplings.Add(Couple(stoel_klein, kleur, "Bruin"));
+
+            stoel.ProductTypes.Add(stoel_klein);
+
+            ProductType stoel_groot = new ProductType();
+            stoel_groot.NameOverride = "Grote Stoel";
+            stoel_groot.DescriptionOverride = "Een grote stoel";
+            stoel_groot.Images.Add(new ProductImage("images/stoel/groot.png"));
+
+            context.PropertyValueCouplings.Add(Couple(stoel_groot, prijs, 75.0d));
+            context.PropertyValueCouplings.Add(Couple(stoel_groot, kleur, "Grijs"));
+            context.PropertyValueCouplings.Add(Couple(stoel_groot, kleur, "Geel"));
+
+            stoel.ProductTypes.Add(stoel_groot);
+
             context.Product.Add(stoel);
+            context.SaveChanges();
+
+            #endregion
+
+            #region Bank
 
             Product bank = new Product();
             bank.Name = "Bank";
-            bank.Description = "Een hele grote bank";
+            bank.Description = "Een bank";
+
+            ProductType bank_klein = new ProductType();
+            bank_klein.NameOverride = "2-persoons bank";
+            bank_klein.DescriptionOverride = "Een kleine bank voor twee personen";
+            bank_klein.Images.Add(new ProductImage("images/bank/klein.png"));
+
+            context.PropertyValueCouplings.Add(Couple(bank_klein, prijs, 500.0d));
+            context.PropertyValueCouplings.Add(Couple(bank_klein, kleur, "Wit Leer"));
+            context.PropertyValueCouplings.Add(Couple(bank_klein, kleur, "Bruin Leer"));
+
+            bank.ProductTypes.Add(bank_klein);
+
+            ProductType bank_groot = new ProductType();
+            bank_groot.NameOverride = "4-persoons bank";
+            bank_groot.DescriptionOverride = "Een grote bank voor vier personen";
+            bank_groot.Images.Add(new ProductImage("images/bank/groot.png"));
+
+            context.PropertyValueCouplings.Add(Couple(bank_groot, prijs, 750.0d));
+            context.PropertyValueCouplings.Add(Couple(bank_groot, kleur, "Grijs Leer"));
+            context.PropertyValueCouplings.Add(Couple(bank_groot, kleur, "Zwart Leer"));
+
+            bank.ProductTypes.Add(bank_groot);
+
             context.Product.Add(bank);
-
             context.SaveChanges();
 
-            context.PropertyTypeProducts.Add(Couple(stoel, prijs, 65.0));
-            context.PropertyTypeProducts.Add(Couple(bank, prijs, 550.0));
-
-            context.SaveChanges();
-
-            context.PropertyTypeProducts.Add(Couple(stoel, kleur, "Blauw"));
-            context.PropertyTypeProducts.Add(Couple(stoel, kleur, "Bruin"));
-            context.PropertyTypeProducts.Add(Couple(stoel, kleur, "Geel"));
-
-            context.PropertyTypeProducts.Add(Couple(bank, kleur, "Grijs"));
-            context.PropertyTypeProducts.Add(Couple(bank, kleur, "Wit"));
-            context.PropertyTypeProducts.Add(Couple(bank, kleur, "Zwart"));
-
-            context.SaveChanges();
-
+            #endregion
+            
         }
     }
 }

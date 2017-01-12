@@ -10,7 +10,7 @@ namespace hhs_p6_webshop_project.Models.ProductModels {
     public class Product : IEquatable<Product> {
 
         public Product() {
-            PropertyTypeProducts = new List<PropertyTypeProduct>();
+            ProductTypes = new List<ProductType>();
         }
 
         [Key]
@@ -21,7 +21,7 @@ namespace hhs_p6_webshop_project.Models.ProductModels {
 
         public string Description { get; set; }
 
-        public ICollection<PropertyTypeProduct> PropertyTypeProducts { get; set; }
+        public List<ProductType> ProductTypes { get; set; }
 
         /// <summary>
         /// Compare this product to another product instance.

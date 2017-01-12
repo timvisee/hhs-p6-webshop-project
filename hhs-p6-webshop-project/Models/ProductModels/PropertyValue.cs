@@ -19,9 +19,6 @@ namespace hhs_p6_webshop_project.Models.ProductModels {
         [Required]
         public string Value { get; set; }
 
-        public int PropertyTypeProductId { get; set; }
-        public PropertyTypeProduct PropertyTypeProduct { get;set; }
-
         /// <summary>
         /// Compare this property value to another property value instance.
         /// </summary>
