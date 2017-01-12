@@ -130,8 +130,13 @@ namespace hhs_p6_webshop_project.Services
 
                         //Now if atleast one filter value is present, the product matches
                         foreach (PropertyValue pv in f.Values) {
-                            if (matchingFields.Any(pppp => pppp.Equals(pv)))
+                            if (matchingFields.Any(pppp => pppp.Equals(pv))) {
                                 isMatch = true;
+
+
+
+                                Console.WriteLine($"Product filter match -> {p.Name} on {f.FilterType.Name}");
+                            }
                         }
                     }
 
