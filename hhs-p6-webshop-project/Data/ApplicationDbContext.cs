@@ -76,6 +76,8 @@ namespace hhs_p6_webshop_project.Data {
 
         public DbSet<ProductImage> ProductImage { get; set; }
 
+        public DbSet<ProductType> ProductType { get; set; }
+
         //public DbSet<ProductImage> ProductImage { get; set; }
 
 
