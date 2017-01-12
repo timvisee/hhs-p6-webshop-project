@@ -151,6 +151,16 @@
     text-align: center;
 }
 
+/*--- Product filter ---*/
+.filter-list {
+    list-style: none;
+    padding: 0 0 0 10px;
+}
+
+.filter-list label {
+    cursor: pointer;
+}
+
 /*--- Single product page ---*/
 .back-to-dress-finder {
     padding: 10px;
