@@ -38,5 +38,8 @@ namespace hhs_p6_webshop_project.Models.ProductModels {
             return PropertyValueId == other.PropertyValueId || Value.Equals(other.Value);
         }
 
+        public override string ToString() {
+            return Value;
+        }
     }
 }
