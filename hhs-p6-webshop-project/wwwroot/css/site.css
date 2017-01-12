@@ -1402,3 +1402,7 @@ footer ul {
         margin-top: 35px;
     }
 }
+
+.product-overview {
+    min-height: 300px;
+}
