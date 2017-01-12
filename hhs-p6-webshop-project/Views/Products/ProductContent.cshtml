@@ -1,11 +1,13 @@
+@using System
+@using System.Linq
 @using hhs_p6_webshop_project.Models.ProductModels
 @model Product
 
 @{
-    var ImagePath = "images/default.jpg";
+    var imagePath = "images/default.jpg";
 
     try {
-        ImagePath = @Model.ProductTypes.FirstOrDefault().Images.FirstOrDefault().Path;
+        imagePath = @Model.ProductTypes.FirstOrDefault().Images.FirstOrDefault().Path;
     } catch (Exception e) {
         // Tering harde beun maar het werkt echt perfect
     }
@@ -15,7 +17,7 @@
     <a asp-action="Details" asp-route-id="@Model.ProductId">
         <div class="vertical-align">
             <div class="horizontal-align">
-                <img class="product-image" src="~/@ImagePath" alt="@Model.Name" />
+                <img class="product-image" src="~/@imagePath" alt="@Model.Name" />
             </div>
         </div>
 

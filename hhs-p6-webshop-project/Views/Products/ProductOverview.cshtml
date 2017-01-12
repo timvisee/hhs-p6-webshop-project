@@ -1,6 +1,5 @@
 @using hhs_p6_webshop_project.Models.ProductModels
-@using Microsoft.CodeAnalysis.CSharp.Syntax
-@using hhs_p6_webshop_project.Models.ProductViewModels;
+@using Microsoft.AspNetCore.Mvc.Rendering
 
 @foreach (Product item in Model.Products) {
     @Html.Partial("~/Views/Products/ProductContent.cshtml", item);
