@@ -52,9 +52,7 @@
                 </div>
             </div>
             <div class="row product-overview">
-                @foreach (var item in Model.Products) {
-                    @Html.Partial("ProductContent", item);
-                }
+                @Html.Partial("ProductOverview", Model.Products);
             </div>
         </div>
     </div>
