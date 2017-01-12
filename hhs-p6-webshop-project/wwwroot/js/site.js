@@ -795,9 +795,9 @@ $(document).ready(function () {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                data: {
+                data: JSON.stringify({
                     values: filterObject
-                },
+                }),
                 error: function(jqXhr, textStatus) {
                     // Define the error message
                     var error = "Failed to filter dresses.\n\nError: " + textStatus;
