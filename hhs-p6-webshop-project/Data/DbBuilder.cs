@@ -89,7 +89,7 @@ namespace hhs_p6_webshop_project.Data {
 
             context.SaveChanges();
 
-            #region Dress
+            #region Jurk
 
             Product dress = new Product();
             dress.Name = "Ladybird";
@@ -135,20 +135,20 @@ namespace hhs_p6_webshop_project.Data {
 
             context.PropertyValueCouplings.Add(Couple(jurk2, prijs, 500.0d));
             context.PropertyValueCouplings.Add(Couple(jurk2, kleur, "Wit kant"));
-            context.PropertyValueCouplings.Add(Couple(jurk2, kleur, "Bruin kant;
+            context.PropertyValueCouplings.Add(Couple(jurk2, kleur, "Bruin Leer"));
 
             jurk.ProductTypes.Add(jurk2);
 
-            ProductType bank_groot = new ProductType();
-            bank_groot.NameOverride = "4-persoons bank";
-            bank_groot.DescriptionOverride = "Een grote bank voor vier personen";
-            bank_groot.Images.Add(new ProductImage("images/bank/groot.png"));
+            ProductType jurk3 = new ProductType();
+            jurk3.NameOverride = "Prachtige jurk, geslaagde bruiloft";
+            jurk3.DescriptionOverride = "Met deze jurk komt alles goed";
+            jurk3.Images.Add(new ProductImage("images/uploads/image-5.jpg"));
 
-            context.PropertyValueCouplings.Add(Couple(bank_groot, prijs, 750.0d));
-            context.PropertyValueCouplings.Add(Couple(bank_groot, kleur, "Grijs Leer"));
-            context.PropertyValueCouplings.Add(Couple(bank_groot, kleur, "Zwart Leer"));
+            context.PropertyValueCouplings.Add(Couple(jurk3, prijs, 750.0d));
+            context.PropertyValueCouplings.Add(Couple(jurk3, kleur, "Grijs Leer"));
+            context.PropertyValueCouplings.Add(Couple(jurk3, kleur, "Zwart Leer"));
 
-            jurk.ProductTypes.Add(bank_groot);
+            jurk.ProductTypes.Add(jurk3);
 
             context.Product.Add(jurk);
             context.SaveChanges();
