@@ -751,7 +751,9 @@ $(document).ready(function () {
      */
     function fetchProductsFiltered() {
         // Create a filter object
-        var filterObject = {};
+        var filterObject = {
+            values:{}
+        };
 
         // Find the selected checkboxes, and build the filter object
         $(".filter").each(function() {
@@ -769,11 +771,11 @@ $(document).ready(function () {
                 return;
 
             // Create an entry in the filter object
-            filterObject[key] = [];
+            filterObject.values[key] = [];
 
             // Put the checkbox IDs in the array
             checkedBoxes.each(function() {
-                filterObject[key].push($(this).attr("id"));
+                filterObject.values[key].push($(this).attr("id"));
             });
         });
 
