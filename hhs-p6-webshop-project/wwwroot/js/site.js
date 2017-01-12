@@ -791,7 +791,6 @@ $(document).ready(function () {
             $.ajax({
                 url: "/api/dressfinder/product/filter/partial",
                 type: "POST",
-                crossDomain: true,
                 headers: {
                     "Content-Type": "application/json"
                 },
