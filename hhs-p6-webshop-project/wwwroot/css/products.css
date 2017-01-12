@@ -180,56 +180,79 @@
     position: relative;
 }
 
+/*--- Product images ---*/
 .side-pictures {
     display: block;
-    width: 15%;
+    width: 20%;
+    float: left;
     height: 750px;
 }
 
-.small-picture {
-    width: 100%;
-    display: block;
-    margin-bottom: 23px;
+.small-picture,
+.big-picture {
+    position: relative;
     overflow: hidden;
+    float: left;
 }
 
-.side-pictures img {
-    width: auto;
-    min-height: 235px;
+    .small-picture img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translateY(-50%) translateX(-50%);
+        -moz-transform: translateY(-50%) translateX(-50%);
+        transform: translateY(-50%) translateX(-50%);
+        z-index: 0;
+        opacity: 1;
+        min-width: 100%;
+        max-width: none;
+        min-height: 100%;
+    }
+
+
+    .small-picture:nth-child(3) img {
+        top: 0;
+        -webkit-transform: translateY(0%) translateX(-50%);
+        -moz-transform: translateY(0%) translateX(-50%);
+        transform: translateY(0%) translateX(-50%);
+    }
+
+    .small-picture:nth-child(1) img {
+        top: 100%;
+        -webkit-transform: translateY(-100%) translateX(-50%);
+        -moz-transform: translateY(-100%) translateX(-50%);
+        transform: translateY(-100%) translateX(-50%);
+    }
+
+
+.small-picture {
+    width: 100%;
     height: 235px;
-    display: block;
-    top: 10%;
-    left: 10%;
-    transform: translateY(-10%);
-    transform: translateX(-10%);
+    margin-bottom: 23px;
 }
 
 .big-picture {
     width: 50%;
+    margin-left: 2%;
     height: 750px;
-    display: block;
-    position: absolute;
-    margin-left: 17%;
-    top: 0;
-    overflow: hidden;
 }
 
-    .big-picture img {
-        min-height: 750px;
-        top: 10%;
-        left: 10%;
-        transform: translateY(-10%);
-        transform: translateX(-10%);
+    .big-picture .horizontal-align,
+    .big-picture .vertical-align {
+        height: 750px;
     }
 
+        .big-picture .vertical-align img {
+            max-height: 750px;
+        }
+
+/*--- Product information ---*/
 .product-information-container {
-    width: 30%;
+    width: 25%;
+    margin-left: 3%;
+    float: left;
     height: 750px;
     display: block;
-    position: absolute;
-    right: 0;
-    top: 0;
-    overflow: hidden;
 }
 
 .product-information h4 {
@@ -279,8 +302,8 @@
 
 .product-make-appointment-container {
     margin-top: 65px;
-    height:150px;
-    width:auto;
+    height: 150px;
+    width: auto;
 }
 
 @media (max-width: 991px) {
@@ -312,16 +335,16 @@
 
 /* Aditions below single product view */
 
-.additions-container{
-    width:100%;
-    height:100px;
-    display:block;
-    position:relative;
+.additions-container {
+    width: 100%;
+    height: 100px;
+    display: block;
+    position: relative;
     margin-top: 80px;
     text-align: center;
 }
 
-.additions{
+.additions {
     display: block;
     line-height: 50px;
     border: 0;
@@ -330,9 +353,9 @@
     padding: 0;
 }
 
-.additions-text{
+.additions-text {
     position: relative;
-    color:#343434;
+    color: #343434;
     /* width: 300px; */
     line-height: 50px;
     /* margin-left: -150px; */
@@ -344,88 +367,88 @@
     font-family: nexa-black;
 }
 
-.addition-images-wrapper{
-    width:100%;
+.addition-images-wrapper {
+    width: 100%;
     height: 520px;
-    display:block;
-    float:left;
-    position:relative;
-    margin-left:30px;
+    display: block;
+    float: left;
+    position: relative;
+    margin-left: 30px;
 }
 
-.addition-item{
-    float:left;
-    display:block;
-    width:280px;
-    height:500px;
+.addition-item {
+    float: left;
+    display: block;
+    width: 280px;
+    height: 500px;
 }
 
-.addition-item span{
-    display:block;
-    float:left;
-    padding:10px;
-    font-family:nexa-regular;
-    font-size:1em;
-    font-weight:bold;
-    transition:all 250ms ease-in-out;
-}
-
-.addition-image{
-    display:inline-block;
-    float:left;
-    border:1px solid #f1f1f1;
-    overflow: hidden;
-    background-color: #fff;
-    transition:all 250ms ease-in-out;
-    padding: 10px;
-    padding-bottom:10px;
-}
-
-.addition-image:hover{
-    border-color:#F0597C;
-    background-color:#F0597C;
-    cursor:pointer;
-}
-
-.addition-image:hover + span{
-    background-color:#F0597C;
-    color:#fff;
-}
-
-.addition-image:first-child{
-    margin-left:0;
-}
-
-.addition-image img{
-    width: 240px;
-    height: 350px;
-}
-
-    .addition-images-wrapper .make-appointment {
-        border: 3px solid #F0597C;
-        border-radius: 0px;
-        background-color: #F0597C;
-        color: #FFF;
-        padding: 10px 15px;
-        text-transform: uppercase;
+    .addition-item span {
+        display: block;
+        float: left;
+        padding: 10px;
+        font-family: nexa-regular;
+        font-size: 1em;
         font-weight: bold;
-        font-size: .9em;
-        font-family: nexa-black;
-        display:block;
-        width:200px;
-        height: 50px;
-        line-height: 25px;
-        text-align: center;
-        bottom: 0;
-        position: absolute;
-        margin-left: 50%;
-        left: -130px;
+        transition: all 250ms ease-in-out;
     }
 
-        .addition-images-wrapper .make-appointment:hover {
-            border: 3px solid #F0597C;
-            border-radius: 0px;
-            background-color: transparent;
-            color: #F0597C;
-            text-decoration: none;
+.addition-image {
+    display: inline-block;
+    float: left;
+    border: 1px solid #f1f1f1;
+    overflow: hidden;
+    background-color: #fff;
+    transition: all 250ms ease-in-out;
+    padding: 10px;
+    padding-bottom: 10px;
+}
+
+    .addition-image:hover {
+        border-color: #F0597C;
+        background-color: #F0597C;
+        cursor: pointer;
+    }
+
+        .addition-image:hover + span {
+            background-color: #F0597C;
+            color: #fff;
         }
+
+    .addition-image:first-child {
+        margin-left: 0;
+    }
+
+    .addition-image img {
+        width: 240px;
+        height: 350px;
+    }
+
+.addition-images-wrapper .make-appointment {
+    border: 3px solid #F0597C;
+    border-radius: 0px;
+    background-color: #F0597C;
+    color: #FFF;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: .9em;
+    font-family: nexa-black;
+    display: block;
+    width: 200px;
+    height: 50px;
+    line-height: 25px;
+    text-align: center;
+    bottom: 0;
+    position: absolute;
+    margin-left: 50%;
+    left: -130px;
+}
+
+    .addition-images-wrapper .make-appointment:hover {
+        border: 3px solid #F0597C;
+        border-radius: 0px;
+        background-color: transparent;
+        color: #F0597C;
+        text-decoration: none;
+    }
