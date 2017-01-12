@@ -16,10 +16,22 @@
 }
 <div class="container">
     <div class="row">
-        <div class="col-md-3 col-sm-12">
-            <code>
-                Insert product filter here
-            </code>
+        <div class="col-md-3 col-sm-12 product-filters">
+            <h2>Filteren</h2>
+
+            @foreach (var item in Model.Filters) {
+            <div class="filter filter-@item.FilterType.Name">
+                <h4>@item.FilterType.Name</h4>
+                <ul class="filter-list">
+                    @foreach (var value in item.Values) {
+                        <li>
+                            <input type="checkbox" name="@item.FilterType.Name" id="value_@value.PropertyValueId" />
+                            <label for="value_@value.PropertyValueId">@value.Value</label>
+                        </li>
+                    }
+                </ul>
+            </div>
+            }
         </div>
         <div class="col-md-9 col-sm-12">
             <div class="row ">
