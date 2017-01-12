@@ -3,6 +3,14 @@
 @{
     ViewData["Title"] = Html.DisplayFor(model => model.Name);
     ViewData["PinkBackground"] = true;
+
+    var ImagePath = "images/default.jpg";
+
+    try {
+        ImagePath = @Model.ProductTypes.FirstOrDefault().Images.FirstOrDefault().Path;
+    } catch (Exception e) {
+        // Tering harde beun maar het werkt echt perfect
+    }
 }
 
 <div class="single-container">
@@ -20,19 +28,19 @@
         <div class="product-details">
             <div class="side-pictures">
                 <div class="small-picture">
-                    <img src="~/@Html.DisplayFor(model => model.ProductTypes.First().Images.First().Path)" alt="" />
+                    <img src="~/@ImagePath" alt="" />
                 </div>
                 <div class="small-picture">
-                    <img src="~/@Html.DisplayFor(model => model.ProductTypes.First().Images.First().Path)" alt="" />
+                    <img src="~/@ImagePath" alt="" />
                 </div>
                 <div class="small-picture">
-                    <img src="~/@Html.DisplayFor(model => model.ProductTypes.First().Images.First().Path)" alt="" />
+                    <img src="~/@ImagePath" alt="" />
                 </div>
             </div>
             <div class="big-picture">
                 <div class="vertical-align">
                     <div class="horizontal-align">
-                        <img src="~/@Html.DisplayFor(model => model.ProductTypes.First().Images.First().Path)" alt="" />
+                        <img src="~/@ImagePath" alt="" />
                     </div>
                 </div>
             </div>
