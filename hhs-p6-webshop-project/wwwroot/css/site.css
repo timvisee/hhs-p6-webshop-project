@@ -362,7 +362,7 @@ header {
     justify-content: space-between;
 }
 
-.loginBtn:hover, .loginBtn:focus {
+#choose_website a:hover, #choose_website a:focus {
     text-decoration: none;
     color: #FFF;
 }
@@ -374,11 +374,11 @@ header {
     #choose_website a,
     .phone-number {
         line-height: 60px;
-        font-size: 1.2em;
+        font-size: 1.15em;
     }
 
     #choose_website a {
-        font-weight: bold;
+        font-family: nexa-black;
         text-transform: uppercase;
         padding: 0 10px;
     }
@@ -721,7 +721,7 @@ nav li {
     font-weight: bold;
     width: 100%;
     position: absolute;
-    bottom: 17%;
+    bottom: 11%;
 }
 
 @media screen and (max-height: 680px) {
