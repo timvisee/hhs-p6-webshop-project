@@ -801,13 +801,12 @@ $(document).ready(function () {
 
                     // Alert the user
                     alert(error);
+
+                    // Hide the loading indiator
+                    setLoadingIndicator(productOverviewElement, false);
                 },
                 success: function(data) {
                     productOverviewElement.html(data);
-                },
-                complete: function () {
-                    // Hide the loading indiator
-                    setLoadingIndicator(productOverviewElement, false);
                 }
             });
         }
