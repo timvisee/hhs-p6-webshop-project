@@ -89,68 +89,68 @@ namespace hhs_p6_webshop_project.Data {
 
             context.SaveChanges();
 
-            #region Stoel
+            #region Jurk
 
-            Product stoel = new Product();
-            stoel.Name = "Stoel";
-            stoel.Description = "Een stoel";
+            Product dress = new Product();
+            dress.Name = "Ladybird";
+            dress.Description = "Een ladybird jurk";
 
-            ProductType stoel_klein = new ProductType();
-            stoel_klein.NameOverride = "Kleine Stoel";
-            stoel_klein.DescriptionOverride = "Een kleine stoel";
-            stoel_klein.Images.Add(new ProductImage("images/stoel/klein.png"));
+            ProductType dress_klein = new ProductType();
+            dress_klein.NameOverride = "Kleine Jurk";
+            dress_klein.DescriptionOverride = "Een kleine jurk";
+            dress_klein.Images.Add(new ProductImage("images//uploads/image-1.jpg"));
 
-            context.PropertyValueCouplings.Add(Couple(stoel_klein, prijs, 50.0d));
-            context.PropertyValueCouplings.Add(Couple(stoel_klein, kleur, "Wit"));
-            context.PropertyValueCouplings.Add(Couple(stoel_klein, kleur, "Bruin"));
+            context.PropertyValueCouplings.Add(Couple(dress_klein, prijs, 50.0d));
+            context.PropertyValueCouplings.Add(Couple(dress_klein, kleur, "Wit"));
+            context.PropertyValueCouplings.Add(Couple(dress_klein, kleur, "Bruin"));
 
-            stoel.ProductTypes.Add(stoel_klein);
+            dress.ProductTypes.Add(dress_klein);
 
-            ProductType stoel_groot = new ProductType();
-            stoel_groot.NameOverride = "Grote Stoel";
-            stoel_groot.DescriptionOverride = "Een grote stoel";
-            stoel_groot.Images.Add(new ProductImage("images/stoel/groot.png"));
+            ProductType jurk_bruin = new ProductType();
+            jurk_bruin.NameOverride = "Bruine jurk";
+            jurk_bruin.DescriptionOverride = "Een bruine ladybird jurk";
+            jurk_bruin.Images.Add(new ProductImage("images/ladybirddress3.jpg"));
 
-            context.PropertyValueCouplings.Add(Couple(stoel_groot, prijs, 75.0d));
-            context.PropertyValueCouplings.Add(Couple(stoel_groot, kleur, "Grijs"));
-            context.PropertyValueCouplings.Add(Couple(stoel_groot, kleur, "Geel"));
+            context.PropertyValueCouplings.Add(Couple(jurk_bruin, prijs, 75.0d));
+            context.PropertyValueCouplings.Add(Couple(jurk_bruin, kleur, "Grijs"));
+            context.PropertyValueCouplings.Add(Couple(jurk_bruin, kleur, "Geel"));
 
-            stoel.ProductTypes.Add(stoel_groot);
+            dress.ProductTypes.Add(jurk_bruin);
 
-            context.Product.Add(stoel);
+            context.Product.Add(dress);
             context.SaveChanges();
 
             #endregion
 
-            #region Bank
+            #region 
 
-            Product bank = new Product();
-            bank.Name = "Bank";
-            bank.Description = "Een bank";
+            Product jurk = new Product();
+            jurk.Name = "Jurk2";
+            jurk.Description = "Nog een jurk";
 
-            ProductType bank_klein = new ProductType();
-            bank_klein.NameOverride = "2-persoons bank";
-            bank_klein.DescriptionOverride = "Een kleine bank voor twee personen";
-            bank_klein.Images.Add(new ProductImage("images/bank/klein.png"));
+            ProductType jurk2 = new ProductType();
+            jurk2.NameOverride = "Prachtige jurk";
+            jurk2.DescriptionOverride = "Een mooie jurk";
+            jurk2.Images.Add(new ProductImage("images/uploads/image-3.jpg"));
 
-            context.PropertyValueCouplings.Add(Couple(bank_klein, prijs, 500.0d));
-            context.PropertyValueCouplings.Add(Couple(bank_klein, kleur, "Wit Leer"));
-            context.PropertyValueCouplings.Add(Couple(bank_klein, kleur, "Bruin Leer"));
+            context.PropertyValueCouplings.Add(Couple(jurk2, prijs, 500.0d));
+            context.PropertyValueCouplings.Add(Couple(jurk2, kleur, "Wit kant"));
+            context.PropertyValueCouplings.Add(Couple(jurk2, kleur, "Bruin Leer"));
 
-            bank.ProductTypes.Add(bank_klein);
+            jurk.ProductTypes.Add(jurk2);
 
-            ProductType bank_groot = new ProductType();
-            bank_groot.NameOverride = "4-persoons bank";
-            bank_groot.DescriptionOverride = "Een grote bank voor vier personen";
-            bank_groot.Images.Add(new ProductImage("images/bank/groot.png"));
+            ProductType jurk3 = new ProductType();
+            jurk3.NameOverride = "Prachtige jurk, geslaagde bruiloft";
+            jurk3.DescriptionOverride = "Met deze jurk komt alles goed";
+            jurk3.Images.Add(new ProductImage("images/uploads/image-5.jpg"));
 
-            context.PropertyValueCouplings.Add(Couple(bank_groot, prijs, 750.0d));
-            context.PropertyValueCouplings.Add(Couple(bank_groot, kleur, "Grijs Leer"));
-            context.PropertyValueCouplings.Add(Couple(bank_groot, kleur, "Zwart Leer"));
+            context.PropertyValueCouplings.Add(Couple(jurk3, prijs, 750.0d));
+            context.PropertyValueCouplings.Add(Couple(jurk3, kleur, "Grijs Leer"));
+            context.PropertyValueCouplings.Add(Couple(jurk3, kleur, "Zwart Leer"));
 
-            bank.ProductTypes.Add(bank_groot);
+            jurk.ProductTypes.Add(jurk3);
 
-            context.Product.Add(bank);
+            context.Product.Add(jurk);
             context.SaveChanges();
 
             #endregion
