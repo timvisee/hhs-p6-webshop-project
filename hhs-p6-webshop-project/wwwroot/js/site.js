@@ -213,8 +213,8 @@ $(document).ready(function () {
 
                     // Append the radio button
                     timeRadioButtonContainer.append("<li>" +
-                        "<input class=\"time-option\" type=\"radio\" name=\"appointment_time\" value=\"" + value + "\" id=\"" + uniqueId + "\">" +
-                        "<label class=\"time-option-label\" for=\"" + uniqueId + "\">" + appointmentTimeObject.formattedTime + " uur</label>" +
+                        "<input class=\"time-option animated fadeInRight\" type=\"radio\" name=\"appointment_time\" value=\"" + value + "\" id=\"" + uniqueId + "\">" +
+                        "<label class=\"time-option-label animated fadeInRight\" for=\"" + uniqueId + "\">" + appointmentTimeObject.formattedTime + " uur</label>" +
                         "</li>");
                 }
 
@@ -294,14 +294,15 @@ $(document).ready(function () {
 
         // Load time data when a date is selected
         $(".toggle-time-time-to-date").click(function() {
-            // Hide the next button
-            $("#go_to_second").fadeOut(350 , function () {
-                $(this).hide();
+            // Fade out the buttons
+            timeRadioButtonContainer.find("li").addClass("animated fadeOutLeft");
 
-            });
+            // Clear the list when the animation is complete
+            setTimeout(function () {
+                // Reset the radio button box contents, to remove the time selection radio buttons
+                timeRadioButtonContainer.html("");
 
-            // Reset the radio button box contents, to remove the time selection radio buttons
-            timeRadioButtonContainer.html("");
+            }, 1000);
         });
     }
 
