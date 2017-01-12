@@ -55,7 +55,17 @@ namespace hhs_p6_webshop_project.Services
                 .Include(pvc => pvc.ProductType);
 
             foreach (PropertyValueCoupling pvc in pvcs) {
-                filters.Find(pf => pf.FilterType.Equals(pvc.PropertyType)).Values.Add(pvc.PropertyValue);
+                var x = filters.Find(pf => pf.FilterType.Equals(pvc.PropertyType));
+
+                bool add = true;
+
+                foreach (PropertyValue v in x.Values) {
+                    if (v.Value == pvc.PropertyValue.Value)
+                        add = false;
+                }
+
+                if (add)
+                    x.Values.Add(pvc.PropertyValue);
             }
 
             return filters;
