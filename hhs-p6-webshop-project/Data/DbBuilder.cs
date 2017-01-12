@@ -68,13 +68,92 @@ namespace hhs_p6_webshop_project.Data {
             }
         }
 
+        private static PropertyValueCoupling Couple(ProductType p, PropertyType pt, object value) {
+            return new PropertyValueCoupling(p, pt, new PropertyValue(value));
+        }
+
         private static void GenerateProducts(ApplicationDbContext context) {
-            for (int i = 0; i < 14; i++) {
-                Product p = new Product();
-                p.Name = "Jurk 1";
-                p.Description = "Beschrijving van jurk 1";
-                context.Product.Add(p);
-            }
+            PropertyType kleur = new PropertyType();
+            kleur.DataType = typeof(string).FullName;
+            kleur.Multiple = true;
+            kleur.Name = "Kleur";
+            kleur.Required = true;
+            context.PropertyType.Add(kleur);
+
+            PropertyType prijs = new PropertyType();
+            prijs.DataType = typeof(double).FullName;
+            prijs.Multiple = false;
+            prijs.Name = "Prijs";
+            prijs.Required = true;
+            context.PropertyType.Add(prijs);
+
+            context.SaveChanges();
+
+            #region Stoel
+
+            Product stoel = new Product();
+            stoel.Name = "Stoel";
+            stoel.Description = "Een stoel";
+
+            ProductType stoel_klein = new ProductType();
+            stoel_klein.NameOverride = "Kleine Stoel";
+            stoel_klein.DescriptionOverride = "Een kleine stoel";
+            stoel_klein.Images.Add(new ProductImage("images/stoel/klein.png"));
+
+            context.PropertyValueCouplings.Add(Couple(stoel_klein, prijs, 50.0d));
+            context.PropertyValueCouplings.Add(Couple(stoel_klein, kleur, "Wit"));
+            context.PropertyValueCouplings.Add(Couple(stoel_klein, kleur, "Bruin"));
+
+            stoel.ProductTypes.Add(stoel_klein);
+
+            ProductType stoel_groot = new ProductType();
+            stoel_groot.NameOverride = "Grote Stoel";
+            stoel_groot.DescriptionOverride = "Een grote stoel";
+            stoel_groot.Images.Add(new ProductImage("images/stoel/groot.png"));
+
+            context.PropertyValueCouplings.Add(Couple(stoel_groot, prijs, 75.0d));
+            context.PropertyValueCouplings.Add(Couple(stoel_groot, kleur, "Grijs"));
+            context.PropertyValueCouplings.Add(Couple(stoel_groot, kleur, "Geel"));
+
+            stoel.ProductTypes.Add(stoel_groot);
+
+            context.Product.Add(stoel);
+            context.SaveChanges();
+
+            #endregion
+
+            #region Bank
+
+            Product bank = new Product();
+            bank.Name = "Bank";
+            bank.Description = "Een bank";
+
+            ProductType bank_klein = new ProductType();
+            bank_klein.NameOverride = "2-persoons bank";
+            bank_klein.DescriptionOverride = "Een kleine bank voor twee personen";
+            bank_klein.Images.Add(new ProductImage("images/bank/klein.png"));
+
+            context.PropertyValueCouplings.Add(Couple(bank_klein, prijs, 500.0d));
+            context.PropertyValueCouplings.Add(Couple(bank_klein, kleur, "Wit Leer"));
+            context.PropertyValueCouplings.Add(Couple(bank_klein, kleur, "Bruin Leer"));
+
+            bank.ProductTypes.Add(bank_klein);
+
+            ProductType bank_groot = new ProductType();
+            bank_groot.NameOverride = "4-persoons bank";
+            bank_groot.DescriptionOverride = "Een grote bank voor vier personen";
+            bank_groot.Images.Add(new ProductImage("images/bank/groot.png"));
+
+            context.PropertyValueCouplings.Add(Couple(bank_groot, prijs, 750.0d));
+            context.PropertyValueCouplings.Add(Couple(bank_groot, kleur, "Grijs Leer"));
+            context.PropertyValueCouplings.Add(Couple(bank_groot, kleur, "Zwart Leer"));
+
+            bank.ProductTypes.Add(bank_groot);
+
+            context.Product.Add(bank);
+            context.SaveChanges();
+
+            #endregion
             
         }
     }

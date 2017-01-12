@@ -1,10 +1,22 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace hhs_p6_webshop_project.Models.ProductModels {
     public class PropertyValue : IEquatable<PropertyValue> {
 
-        public int ID { get; set; }
-        public PropertyType PropertyType { get; set; }
+        public PropertyValue() {
+            
+        }
+
+        public PropertyValue(object value) {
+            Value = value.ToString();
+        }
+
+        [Key]
+        public int PropertyValueId { get; set; }
+
+        [Required]
         public string Value { get; set; }
 
         /// <summary>
@@ -14,7 +26,7 @@ namespace hhs_p6_webshop_project.Models.ProductModels {
         /// <returns>True if the types are equal, false if not.</returns>
         public override bool Equals(object other) {
             // Make sure the type is correct, and compare the actual property value if so
-            return other.GetType() == typeof(PropertyValue) && Equals((PropertyValue) other);
+            return other.GetType() == typeof(PropertyValue) && Equals((PropertyValue)other);
         }
 
         /// <summary>
@@ -23,7 +35,7 @@ namespace hhs_p6_webshop_project.Models.ProductModels {
         /// <param name="other">Other property value.</param>
         /// <returns>True if they are equal, false if not.</returns>
         public bool Equals(PropertyValue other) {
-            return ID == other.ID || Value.Equals(other.Value);
+            return PropertyValueId == other.PropertyValueId || Value.Equals(other.Value);
         }
 
     }

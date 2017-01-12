@@ -15,7 +15,9 @@ namespace hhs_p6_webshop_project.Services
         /// <returns>A <see cref="List{T}"/> of all <see cref="Product"/> product instances.</returns>
         List<Product> GetAllProducts();
 
-        /// <summary>
+        List<PropertyValueCoupling> Test();
+
+            /// <summary>
         /// Returns a list of all products, sorted by Id, ascending.
         /// </summary>
         /// <returns>A <see cref="List{T}"/> of all <see cref="Product"/> product instances.</returns>
