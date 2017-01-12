@@ -98,7 +98,7 @@ namespace hhs_p6_webshop_project.Data {
             ProductType dress_klein = new ProductType();
             dress_klein.NameOverride = "Kleine Jurk";
             dress_klein.DescriptionOverride = "Een kleine jurk";
-            dress_klein.Images.Add(new ProductImage("images/ladybirddress.jpg"));
+            dress_klein.Images.Add(new ProductImage("images//uploads/image-1.jpg"));
 
             context.PropertyValueCouplings.Add(Couple(dress_klein, prijs, 50.0d));
             context.PropertyValueCouplings.Add(Couple(dress_klein, kleur, "Wit"));
@@ -122,22 +122,22 @@ namespace hhs_p6_webshop_project.Data {
 
             #endregion
 
-            #region Bank
+            #region 
 
-            Product bank = new Product();
-            bank.Name = "Bank";
-            bank.Description = "Een bank";
+            Product jurk = new Product();
+            jurk.Name = "Jurk2";
+            jurk.Description = "Nog een jurk";
 
-            ProductType bank_klein = new ProductType();
-            bank_klein.NameOverride = "2-persoons bank";
-            bank_klein.DescriptionOverride = "Een kleine bank voor twee personen";
-            bank_klein.Images.Add(new ProductImage("images/bank/klein.png"));
+            ProductType jurk2 = new ProductType();
+            jurk2.NameOverride = "Prachtige jurk";
+            jurk2.DescriptionOverride = "Een mooie jurk";
+            jurk2.Images.Add(new ProductImage("images/uploads/image-3.jpg"));
 
-            context.PropertyValueCouplings.Add(Couple(bank_klein, prijs, 500.0d));
-            context.PropertyValueCouplings.Add(Couple(bank_klein, kleur, "Wit Leer"));
-            context.PropertyValueCouplings.Add(Couple(bank_klein, kleur, "Bruin Leer"));
+            context.PropertyValueCouplings.Add(Couple(jurk2, prijs, 500.0d));
+            context.PropertyValueCouplings.Add(Couple(jurk2, kleur, "Wit kant"));
+            context.PropertyValueCouplings.Add(Couple(jurk2, kleur, "Bruin kant;
 
-            bank.ProductTypes.Add(bank_klein);
+            jurk.ProductTypes.Add(jurk2);
 
             ProductType bank_groot = new ProductType();
             bank_groot.NameOverride = "4-persoons bank";
@@ -148,9 +148,9 @@ namespace hhs_p6_webshop_project.Data {
             context.PropertyValueCouplings.Add(Couple(bank_groot, kleur, "Grijs Leer"));
             context.PropertyValueCouplings.Add(Couple(bank_groot, kleur, "Zwart Leer"));
 
-            bank.ProductTypes.Add(bank_groot);
+            jurk.ProductTypes.Add(bank_groot);
 
-            context.Product.Add(bank);
+            context.Product.Add(jurk);
             context.SaveChanges();
 
             #endregion
