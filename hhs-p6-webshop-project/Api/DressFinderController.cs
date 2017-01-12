@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
+using hhs_p6_webshop_project.ExtraModels;
+using hhs_p6_webshop_project.Models.ProductModels;
 using hhs_p6_webshop_project.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
 
 namespace hhs_p6_webshop_project.Api
 {
@@ -18,9 +21,36 @@ namespace hhs_p6_webshop_project.Api
             return Json(ProductService.GetAllProducts());
         }
 
-        [HttpGet("product/test")]
+        // POST api/1/image/public/upload
+        [HttpPost("product/filter")]
+        public JsonResult Upload([FromBody] FilterRequest req) {
+            if (req == null || req.Values.Count == 0)
+                return Json(ProductService.GetAllProducts());
+
+            return Json(ProductService.Filter(ProductService.ParseFilterRequest(req), ProductService.GetAllProducts()));
+        }
+
+        [HttpGet("product/filters")]
         public JsonResult GetAll() {
-            return Json(ProductService.Test());
+            return Json(ProductService.GetAllProductFilters());
+        }
+
+        [HttpGet("product/test")]
+        public JsonResult Test() {
+            FilterRequest r = new FilterRequest();
+
+            List<int> a = new List<int>();
+            List<int> b = new List<int>();
+
+            a.Add(1);
+            a.Add(2);
+
+            b.Add(0);
+
+            r.Values.Add(0, b);
+            r.Values.Add(1, b);
+
+            return Json(r);
         }
 
         [HttpGet("product/{start}/{count}")]

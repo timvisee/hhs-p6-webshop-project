@@ -29,5 +29,9 @@ namespace hhs_p6_webshop_project.Models.ProductModels {
         public bool Equals(PropertyValueCoupling other) {
             return ProductTypeId == other.ProductTypeId && PropertyTypeId == other.PropertyTypeId && PropertyValueId == other.PropertyValueId;
         }
+
+        public override string ToString() {
+            return $"(ProductTypeId: {ProductTypeId}, PropertyTypeId: {PropertyTypeId}, PropertyValueId: {PropertyValueId} | {ProductType.NameOverride}, {PropertyType.Name}, {PropertyValue.Value})";
+        }
     }
 }

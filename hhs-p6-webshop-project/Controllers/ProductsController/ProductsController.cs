@@ -7,22 +7,30 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models.ProductModels;
+using hhs_p6_webshop_project.Models.ProductViewModels;
+using hhs_p6_webshop_project.Services;
 
 namespace hhs_p6_webshop_project.Controllers.ProductsController
 {
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IProductService _service;
 
-        public ProductsController(ApplicationDbContext context)
+        public ProductsController(ApplicationDbContext context, IProductService service)
         {
-            _context = context;    
+            _context = context;
+            _service = service;
         }
 
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Product.ToListAsync());
+            ProductViewModel pvm = new ProductViewModel();
+            pvm.Filters = _service.GetAllProductFilters();
+            pvm.Products = _service.GetAllProducts();
+
+            return View(pvm);
         }
 
         // GET: Products/Details/5

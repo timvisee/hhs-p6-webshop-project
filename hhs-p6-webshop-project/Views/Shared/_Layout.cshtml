@@ -79,7 +79,7 @@
                 <a href="#" id="choice_webshop" class="hm-pink-dark-text">Webshop</a>
                 -->
                 @if (!User.Identity.IsAuthenticated) {
-                <a asp-controller="Account" asp-action="Login" class="hm-pink-dark-text loginBtn">Inloggen</a>
+                <a asp-controller="Account" asp-action="Login" class="hm-pink-dark-text">Inloggen</a>
                 }
                 <a href="#" id="comic_sans_button" class="hm-pink-dark-text">Comic sans this website!</a>
             </div>
@@ -104,7 +104,7 @@
         </div>
         <div id="header_nav">
             <a asp-controller="Home" asp-action="Index" class="header-nav-logo">
-                <img class="navbar-brand" src="~/images/logo.png" alt="Honeymoon Shop"/>
+                <img class="navbar-brand" src="~/images/logo.png" alt="Honeymoon Shop" />
             </a>
             <nav>
                 <ul>

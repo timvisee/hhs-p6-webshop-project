@@ -28,11 +28,30 @@ function getUniqueId(prefix) {
 
 /**
  * Format a date to ISO.
+ *
+ * @param {Date} dateTime Date time object.
+ * @param {boolean} formatDate True to format the date, false if not.
+ * @param {boolean} formatTime True to format the time, false if not.
  */
-function formatDate(date) {
-    return date.getFullYear() + "-" +
-            ("0" + (date.getMonth() + 1)).slice(-2) + "-" +
-            ("0" + date.getDate()).slice(-2);
+function formatDateTime(dateTime, formatDate, formatTime) {
+    // Create a variable to store the formatted date time in
+    var formatted = "";
+
+    // Format the date
+    if(formatDate)
+        formatted = dateTime.getFullYear() + "-" +
+                ("0" + (dateTime.getMonth() + 1)).slice(-2) + "-" +
+                ("0" + dateTime.getDate()).slice(-2);
+
+    // Format the time
+    if(formatTime)
+        formatted = (formatDate ? " " : "") +
+                ("0" + dateTime.getHours()).slice(-2) + ":" +
+                ("0" + dateTime.getMinutes()).slice(-2) + ":" +
+                ("0" + dateTime.getSeconds()).slice(-2);
+
+    // Return the formatted string
+    return formatted;
 }
 
 // Run this code when the page is finished loading
@@ -97,7 +116,11 @@ $(document).ready(function () {
     // Initialize the calendar with a date picker, if any element is selected
     if(calendarElement.length > 0) {
         // Create a variable for the selected date and time
-        var selectedDateTime = null;
+        var selectedDateTime = new Date();
+
+        // Get the time container, and radio buttons
+        var timeContainer = $(".time-container");
+        var timeRadioButtonContainer = timeContainer.find("#select_time");
 
         // Create a date picker render function
         function renderDatePickerDay(date) {
@@ -111,7 +134,7 @@ $(document).ready(function () {
             // Check whether the date is available, if the unavailable dates array isn't null
             if(unavailableDates != null) {
                 // Build the date string
-                var dateString = formatDate(date);
+                var dateString = formatDateTime(date, true, false);
 
                 // Determine whether this date is in the list of occupied dates
                 isAvailable = unavailableDates.indexOf(dateString) < 0;
@@ -133,18 +156,19 @@ $(document).ready(function () {
 
             onSelect: function(date) {
                 var dateObj = new Date(date);
-                var inputDate = dateObj.getDate() + "/" + (dateObj.getMonth() + 1) + "/" + dateObj.getFullYear();
                 var showDate = dateObj.getDate() + " " + MONTH_NAMES[dateObj.getMonth()] + " " + dateObj.getFullYear();
 
                 $(".toggle-time-date").removeClass("toggle-btn-disabled").attr("title", "");
 
-                $("#date_input").val(inputDate);
+                // Update the selected date label
                 $(".selected-date").each(function () {
                     $(this).html(showDate);
                 });
 
                 // Set the selected date
-                selectedDateTime = dateObj;
+                selectedDateTime.setFullYear(dateObj.getFullYear());
+                selectedDateTime.setMonth(dateObj.getMonth());
+                selectedDateTime.setDate(dateObj.getDate());
             },
 
             beforeShowDay: renderDatePickerDay
@@ -174,10 +198,6 @@ $(document).ready(function () {
 
         // Load time data when a date is selected
         $(".toggle-time-date-to-time").click(function() {
-            // Get the time container, and radio buttons
-            var timeContainer = $(".time-container");
-            var timeRadioButtonContainer = timeContainer.find("#select_time");
-
             // Clear the list of radio buttons
             timeRadioButtonContainer.html("<i>Beschikbaarheid laden...</i>");
 
@@ -193,8 +213,8 @@ $(document).ready(function () {
 
                     // Append the radio button
                     timeRadioButtonContainer.append("<li>" +
-                        "<input class=\"time-option\" type=\"radio\" name=\"appointment_time\" value=\"" + value + "\" id=\"" + uniqueId + "\">" +
-                        "<label class=\"time-option-label\" for=\"" + uniqueId + "\">" + appointmentTimeObject.formattedTime + " uur</label>" +
+                        "<input class=\"time-option animated fadeInRight\" type=\"radio\" name=\"appointment_time\" value=\"" + value + "\" id=\"" + uniqueId + "\">" +
+                        "<label class=\"time-option-label animated fadeInRight\" for=\"" + uniqueId + "\">" + appointmentTimeObject.formattedTime + " uur</label>" +
                         "</li>");
                 }
 
@@ -234,7 +254,7 @@ $(document).ready(function () {
                         timeRadioButtonContainer.html("<i>Geen tijd beschikbaar op deze dag</i>");
 
                     // Link the radio buttons to the date time field
-                    timeRadioButtonContainer.find("input").change(function () {
+                    timeRadioButtonContainer.find("input.time-option").change(function () {
                         // Get the radio button element, and check whether it's selected
                         var radioButton = $(this);
                         var isSelected = radioButton.is(":checked");
@@ -244,25 +264,25 @@ $(document).ready(function () {
                             return;
 
                         // Parse the time
-                        var hour = parseInt(radioButton.val().split(":")[0]);
-                        var minute = parseInt(radioButton.val().split(":")[1]);
+                        var timeString = radioButton.val();
+                        var hour = parseInt(timeString.split(":")[0]);
+                        var minute = parseInt(timeString.split(":")[1]);
 
                         // Modify the selected date
                         selectedDateTime.setHours(hour);
                         selectedDateTime.setMinutes(minute);
                         selectedDateTime.setSeconds(0);
 
-                        // Get the date input field
-                        var dateField = $("#date_input");
+                        // Set the date input field value
+                        $("#date_input").val(formatDateTime(selectedDateTime, true, true));
 
-                        // Append the time
-                        dateField.val(dateField.val() + " " + $(this).val());
-                    });
-
-                    $(".time-option").click(function () {
                         // Show the go to second button
-                        $("#go_to_second").show();
-                        $(".selected-time").html(" OM " + $(this).val());
+                        $(".selected-time").html(" OM " + timeString);
+
+                        // Show the second button
+                        $("#go_to_second").fadeIn(350 , function () {
+                            $(this).show();
+                        });
                     });
 
                     // Set the loading indicator
@@ -270,6 +290,19 @@ $(document).ready(function () {
                 });
 
             }, 500);
+        });
+
+        // Load time data when a date is selected
+        $(".toggle-time-time-to-date").click(function() {
+            // Fade out the buttons
+            timeRadioButtonContainer.find("li").addClass("animated fadeOutLeft");
+
+            // Clear the list when the animation is complete
+            setTimeout(function () {
+                // Reset the radio button box contents, to remove the time selection radio buttons
+                timeRadioButtonContainer.html("");
+
+            }, 1000);
         });
     }
 
@@ -449,7 +482,7 @@ $(document).ready(function () {
             callback(null, data.times);
 
         }, {
-            date: formatDate(date)
+            date: formatDateTime(date, true, false)
         });
     }
 
