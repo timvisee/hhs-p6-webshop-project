@@ -750,6 +750,12 @@ $(document).ready(function () {
      * Filters are applied as specified in the sidebar.
      */
     function fetchProductsFiltered() {
+        // Find the product overview
+        var productOverviewElement = $(".product-overview");
+
+        // Show a loading indiator
+        setLoadingIndicator(productOverviewElement, true);
+
         // Create a filter object
         var filterObject = {
             values:{}
@@ -760,15 +766,15 @@ $(document).ready(function () {
             // Get the filter element
             var filterElement = $(this);
 
-            // Get the product ID for this filter section as key
-            var key = String(filterElement.find("input.field-property-id").val());
-
             // Get the list of checked checkboxes
             var checkedBoxes = filterElement.find("input:checked");
 
             // Skip if no boxes are selected
             if(checkedBoxes.length <= 0)
                 return;
+
+            // Get the product ID for this filter section as key
+            var key = String(filterElement.find("input.field-property-id").val());
 
             // Create an entry in the filter object
             filterObject.values[key] = [];
@@ -782,7 +788,7 @@ $(document).ready(function () {
         // Filter the dresses and fetch the new list through AJAX
         $.ajax({
             url: "/api/dressfinder/product/filter/partial",
-            dataType: "json",
+            dataType: "application/json",
             type: "post",
             data: {
                 values: filterObject
@@ -795,7 +801,11 @@ $(document).ready(function () {
                 alert(error);
             },
             success: function(data) {
-                $(".product-overview").html(data);
+                productOverviewElement.html(data);
+            },
+            complete: function () {
+                // Hide the loading indiator
+                setLoadingIndicator(productOverviewElement, false);
             }
         });
     }
