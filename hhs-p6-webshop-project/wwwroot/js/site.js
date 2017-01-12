@@ -782,7 +782,7 @@ $(document).ready(function () {
         // Filter the dresses and fetch the new list through AJAX
         $.ajax({
             url: "/api/dressfinder/product/filter/partial",
-            dataType: "html",
+            dataType: "json",
             type: "post",
             data: {
                 values: filterObject
