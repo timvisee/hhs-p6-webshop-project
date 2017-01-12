@@ -89,35 +89,35 @@ namespace hhs_p6_webshop_project.Data {
 
             context.SaveChanges();
 
-            #region Stoel
+            #region Dress
 
-            Product stoel = new Product();
-            stoel.Name = "Stoel";
-            stoel.Description = "Een stoel";
+            Product dress = new Product();
+            dress.Name = "Ladybird";
+            dress.Description = "Een ladybird jurk";
 
-            ProductType stoel_klein = new ProductType();
-            stoel_klein.NameOverride = "Kleine Stoel";
-            stoel_klein.DescriptionOverride = "Een kleine stoel";
-            stoel_klein.Images.Add(new ProductImage("images/stoel/klein.png"));
+            ProductType dress_klein = new ProductType();
+            dress_klein.NameOverride = "Kleine Jurk";
+            dress_klein.DescriptionOverride = "Een kleine jurk";
+            dress_klein.Images.Add(new ProductImage("images/ladybirddress.jpg"));
 
-            context.PropertyValueCouplings.Add(Couple(stoel_klein, prijs, 50.0d));
-            context.PropertyValueCouplings.Add(Couple(stoel_klein, kleur, "Wit"));
-            context.PropertyValueCouplings.Add(Couple(stoel_klein, kleur, "Bruin"));
+            context.PropertyValueCouplings.Add(Couple(dress_klein, prijs, 50.0d));
+            context.PropertyValueCouplings.Add(Couple(dress_klein, kleur, "Wit"));
+            context.PropertyValueCouplings.Add(Couple(dress_klein, kleur, "Bruin"));
 
-            stoel.ProductTypes.Add(stoel_klein);
+            dress.ProductTypes.Add(dress_klein);
 
-            ProductType stoel_groot = new ProductType();
-            stoel_groot.NameOverride = "Grote Stoel";
-            stoel_groot.DescriptionOverride = "Een grote stoel";
-            stoel_groot.Images.Add(new ProductImage("images/stoel/groot.png"));
+            ProductType jurk_bruin = new ProductType();
+            jurk_bruin.NameOverride = "Bruine jurk";
+            jurk_bruin.DescriptionOverride = "Een bruine ladybird jurk";
+            jurk_bruin.Images.Add(new ProductImage("images/ladybirddress3.jpg"));
 
-            context.PropertyValueCouplings.Add(Couple(stoel_groot, prijs, 75.0d));
-            context.PropertyValueCouplings.Add(Couple(stoel_groot, kleur, "Grijs"));
-            context.PropertyValueCouplings.Add(Couple(stoel_groot, kleur, "Geel"));
+            context.PropertyValueCouplings.Add(Couple(jurk_bruin, prijs, 75.0d));
+            context.PropertyValueCouplings.Add(Couple(jurk_bruin, kleur, "Grijs"));
+            context.PropertyValueCouplings.Add(Couple(jurk_bruin, kleur, "Geel"));
 
-            stoel.ProductTypes.Add(stoel_groot);
+            dress.ProductTypes.Add(jurk_bruin);
 
-            context.Product.Add(stoel);
+            context.Product.Add(dress);
             context.SaveChanges();
 
             #endregion
