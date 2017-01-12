@@ -16,12 +16,12 @@
         <div class="appiontment-wrapper font-nexa-regular">
             <div class="col-sm-12 col-md-7 box-shadow appointment-form">
                 <div class="col-md-2 col-sm-12">
-                    <img id="appointment_step_image" src="~/images/appointment/step-1.png" />
+                    <img id="appointment_step_image" class="animated fadeIn" src="~/images/appointment/step-1.png" />
                 </div>
                 <div class="create-appointment-part col-md-10 col-sm-12">
 
                     <!-- Left box - Step 1, Select date and time -->
-                    <div class="left-box step-1" id="left_1">
+                    <div class="left-box step-1 animated fadeIn" id="left_1">
                         <h3>Stap 1, datum en tijd selecteren</h3>
                         <p>
                             Selecteer eerst een datum en vervolgens een tijdstip dat je wilt komen passen!
@@ -40,11 +40,11 @@
                             *Op alle werkdagen kunnen er ook schoenen worden gepast. Helaas is dit niet mogelijk in het weekend.
                         </small>
                         <br />
-                        <span class="btn next-button" id="go_to_second" style="display: none;">Naar stap 2</span>
+                        <span class="btn next-button animated fadeIn" id="go_to_second" style="display: none;">Naar stap 2</span>
                     </div>
 
                     <!-- Left box - Step 2, fill in form -->
-                    <div class="left-box step-2" id="left_2" style="display: none;">
+                    <div class="left-box step-2 animated fadeIn" id="left_2" style="display: none;">
                         <h3>Stap 2, Gegevens invullen</h3>
                         <div class="form-horizontal">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -113,7 +113,7 @@
             <div class="create-appointment-part col-md-5 col-sm-12 hm-pink-dark white-text">
 
                 <!-- Right box - Step 1, Select date and time -->
-                <div class="right-box step-1" id="right_1">
+                <div class="right-box step-1 animated fadeIn" id="right_1">
                     <!-- Select a date -->
                     <div id="right_1_date" class="time-date-box">
                         <h3>
@@ -147,7 +147,7 @@
                             <ul id="select_time"></ul>
                         </div>
 
-                        <span class="toggle-time-date toggle-time-time-to-date toggle-btn previous-btn">
+                        <span class="toggle-time-date toggle-time-time-to-date toggle-btn previous-btn animated pulse">
                             <img src="~/images/appointment/arrow-back.png" />
                             Terug naar datum selecteren
                         </span>
@@ -156,7 +156,7 @@
                 </div>
 
                 <!-- Right box - Step 2, Selected time and date -->
-                <div class="right-box step-2" id="right_2" style="display: none;">
+                <div class="right-box step-2 animated fadeIn" id="right_2" style="display: none;">
                     <h3>
                         <span class="glyphicon glyphicon-heart"></span>Gekozen tijd en datum:
                     </h3>
