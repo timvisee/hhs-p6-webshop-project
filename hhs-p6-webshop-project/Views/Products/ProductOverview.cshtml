@@ -1,0 +1,8 @@
+@using Microsoft.CodeAnalysis.CSharp.Syntax
+@using hhs_p6_webshop_project.Models.ProductViewModels;
+@Model ProductViewModel
+
+@foreach (var item in Model.Products)
+{
+    @Html.Partial("ProductContent", item);
+}
