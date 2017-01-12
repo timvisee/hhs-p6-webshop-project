@@ -177,8 +177,7 @@ $(document).ready(function () {
             toggleToDateButton.addClass("animated fadeOutLeft");
 
             // Hide the second step button
-//            secondStepButton.removeClass("animated fadeIn pulse").delay(1).addClass("animated fadeOut");
-            secondStepButton.show().removeClass("animated");
+            secondStepButton.removeClass("animated fadeIn pulse").delay(1).addClass("animated fadeOut");
 
             // Disable the animations when they complete
             setTimeout(function () {
@@ -189,7 +188,7 @@ $(document).ready(function () {
                 toggleToDateButton.removeClass("animated fadeOutLeft").addClass("toggle-btn-disabled");
 
                 // Hide the second step button
-//                secondStepButton.hide();
+                secondStepButton.hide();
             }, 500);
 
             // Force select the currently selected date
@@ -507,6 +506,8 @@ $(document).ready(function () {
         // Make the position absolute of the first elements
         var bigPanelLeft = leftPanels[0].index() < leftPanels[1].index() ? leftPanels[0] : leftPanels[1];
         var bigPanelRight = rightPanels[0].index() < rightPanels[1].index() ? rightPanels[0] : rightPanels[1];
+//        bigPanelLeft.width(bigPanelLeft.width());
+//        bigPanelLeft.width(bigPanelRight.width());
         bigPanelLeft.css("position", "absolute");
         bigPanelRight.css("position", "absolute");
 
