@@ -744,4 +744,62 @@ $(document).ready(function () {
         $(".home-list>ol>li").eq(counter - 1).addClass("active");
         $(".appointment-banner-image-container>img").attr('src', "images/mooi-meisje-" + counter + ".jpg");
     });
+
+    /**
+     * Fetch a list of dressesk.
+     * Filters are applied as specified in the sidebar.
+     */
+    function fetchProductsFiltered() {
+        // Create a filter object
+        var filterObject = {
+            values:{}
+        };
+
+        // Find the selected checkboxes, and build the filter object
+        $(".filter").each(function() {
+            // Get the filter element
+            var filterElement = $(this);
+
+            // Get the product ID for this filter section as key
+            var key = String(filterElement.find("input.field-property-id").val());
+
+            // Get the list of checked checkboxes
+            var checkedBoxes = filterElement.find("input:checked");
+
+            // Skip if no boxes are selected
+            if(checkedBoxes.length <= 0)
+                return;
+
+            // Create an entry in the filter object
+            filterObject.values[key] = [];
+
+            // Put the checkbox IDs in the array
+            checkedBoxes.each(function() {
+                filterObject.values[key].push($(this).attr("id"));
+            });
+        });
+
+        // Filter the dresses and fetch the new list through AJAX
+        $.ajax({
+            url: "/api/dressfinder/product/filter/partial",
+            dataType: "html",
+            type: "post",
+            data: {
+                values: filterObject
+            },
+            error: function(jqXhr, textStatus) {
+                // Define the error message
+                var error = "Failed to filter dresses.\n\nError: " + textStatus;
+
+                // Alert the user
+                alert(error);
+            },
+            success: function(data) {
+                $(".product-overview").html(data);
+            }
+        });
+    }
+
+    // Call the product fetch function when a filter is clicked
+    $(".filter").find("input[type=checkbox]").click(fetchProductsFiltered);
 });
