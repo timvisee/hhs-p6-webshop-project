@@ -1,0 +1,41 @@
+@model IEnumerable<hhs_p6_webshop_project.Models.ProductModels.ProductType>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DescriptionOverride)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NameOverride)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescriptionOverride)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameOverride)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ProductTypeId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ProductTypeId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ProductTypeId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
