@@ -1008,19 +1008,19 @@ nav li {
         font-size: 1.1em;
         cursor: pointer;
         float: right;
-        margin: 40px 0 10px 0;
-    }
+        margin: 40px 0 10px 0; }
 
         .create-appointment-part .right-box .toggle-btn.previous-btn {
             float: left;
         }
 
     .create-appointment-part .right-box .toggle-btn-disabled {
-        opacity: 0.4;
+        -ms-opacity: 0;
+        opacity: 0;
         cursor: default;
     }
 
-    .create-appointment-part .right-box #right_1_time .toggle-btn {
+.create-appointment-part .right-box #right_1_time .toggle-btn {
         float: left;
     }
 

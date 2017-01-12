@@ -117,10 +117,14 @@ $(document).ready(function () {
     if(calendarElement.length > 0) {
         // Create a variable for the selected date and time
         var selectedDateTime = new Date();
+        selectedDateTime.setTime(selectedDateTime.getTime() + 7 * 24 * 60 * 60 * 1000);
 
         // Get the time container, and radio buttons
         var timeContainer = $(".time-container");
         var timeRadioButtonContainer = timeContainer.find("#select_time");
+
+        // Get the second step button
+        var secondStepButton = $("#go_to_second");
 
         // Create a date picker render function
         function renderDatePickerDay(date) {
@@ -147,6 +151,98 @@ $(document).ready(function () {
                 return [false, "", "Deze datum is bezet."];
         }
 
+        // Get the button to toggle to the time
+        var toggleToTimeButton = $(".toggle-time-date-to-time");
+        var toggleToDateButton = $(".toggle-time-time-to-date");
+
+        /**
+         * Show the date page.
+         *
+         * @param {boolean|undefined} [initial] True if this is the initial page (because a different animation will be used)j.
+         */
+        function showDatePage(initial) {
+            // Animate the pages when we're not on the initial page
+            if(!initial)
+                $(".time-date-box").slideToggle({
+                    "duration": 500,
+                    "easing": "easeInOutCubic"
+                });
+            else
+                $(".time-date-box").addClass("animated fadeIn");
+
+            // Fade out the buttons
+            timeRadioButtonContainer.find("li").addClass("animated fadeOutLeft");
+
+            // Animate the arrow buttons
+            toggleToDateButton.addClass("animated fadeOutLeft");
+
+            // Hide the second step button
+            secondStepButton.removeClass("animated fadeIn pulse").delay(1).addClass("animated fadeOut");
+
+            // Disable the animations when they complete
+            setTimeout(function () {
+                // Reset the radio button box contents, to remove the time selection radio buttons
+                timeRadioButtonContainer.html("");
+
+                // Remove the animations from the toggle to date button
+                toggleToDateButton.removeClass("animated fadeOutLeft").addClass("toggle-btn-disabled");
+
+                // Hide the second step button
+                secondStepButton.hide();
+            }, 500);
+
+            // Force select the currently selected date
+            calendarElement.datepicker("setDate", selectedDateTime);
+            onDateSelect(selectedDateTime);
+        }
+
+        /**
+         * Called when the time page should be shown.
+         */
+        function showTimePage() {
+            // Animate the pages
+            $(".time-date-box").slideToggle({
+                "duration": 500,
+                "easing": "easeInOutCubic"
+            });
+
+            // Hide the second step button
+            secondStepButton.removeClass("animated fadeOut").delay(0).addClass("animated fadeIn pulse");
+
+            // Animate the arrow buttons
+            toggleToTimeButton.addClass("animated fadeOutRight");
+            toggleToDateButton.addClass("animated fadeInRight");
+
+            // Disable the animations when they complete
+            setTimeout(function () {
+                toggleToTimeButton.removeClass("animated fadeOutRight").addClass("toggle-btn-disabled");
+            }, 500);
+        }
+
+        /**
+         * Called when a date is selected.
+         */
+        function onDateSelect(date) {
+            // Format the show date
+            var showDate = date.getDate() + " " + MONTH_NAMES[date.getMonth()] + " " + date.getFullYear();
+
+            // Get the toggle time date button and toggle it's visibility
+            var toggleTimeDateButton = $(".toggle-time-date");
+
+            // Animate the button
+            toggleTimeDateButton.attr("title", "").addClass("animated fadeInLeft");
+
+            // Update the selected date label
+            $(".selected-date").each(function () {
+                $(this).html(showDate);
+            });
+
+            // Set the selected date
+            selectedDateTime.setFullYear(date.getFullYear());
+            selectedDateTime.setMonth(date.getMonth());
+            selectedDateTime.setDate(date.getDate());
+        }
+
         // Set up the date picker
         calendarElement.datepicker({
             prevText: "<",
@@ -155,24 +251,15 @@ $(document).ready(function () {
             minDate: dateToday,
 
             onSelect: function(date) {
-                var dateObj = new Date(date);
-                var showDate = dateObj.getDate() + " " + MONTH_NAMES[dateObj.getMonth()] + " " + dateObj.getFullYear();
-
-                $(".toggle-time-date").removeClass("toggle-btn-disabled").attr("title", "");
-
-                // Update the selected date label
-                $(".selected-date").each(function () {
-                    $(this).html(showDate);
-                });
-
-                // Set the selected date
-                selectedDateTime.setFullYear(dateObj.getFullYear());
-                selectedDateTime.setMonth(dateObj.getMonth());
-                selectedDateTime.setDate(dateObj.getDate());
+                // Direct the function to onDateSelect with a proper date object
+                onDateSelect(new Date(date));
             },
 
             beforeShowDay: renderDatePickerDay
         });
+
+        // Show the date page
+        showDatePage(true);
 
         // Disable the loading indicator
         setLoadingIndicator(calendarElement, true);
@@ -198,6 +285,9 @@ $(document).ready(function () {
 
         // Load time data when a date is selected
         $(".toggle-time-date-to-time").click(function() {
+            // Show the time page
+            showTimePage();
+
             // Clear the list of radio buttons
             timeRadioButtonContainer.html("<i>Beschikbaarheid laden...</i>");
 
@@ -280,9 +370,12 @@ $(document).ready(function () {
                         $(".selected-time").html(" OM " + timeString);
 
                         // Show the second button
-                        $("#go_to_second").fadeIn(350 , function () {
-                            $(this).show();
-                        });
+                        secondStepButton.show();
+
+                        // Pulse the button once
+                        setTimeout(function () {
+                            secondStepButton.removeClass("animated fadeIn").delay(0).addClass("animated pulse");
+                        }, 750);
                     });
 
                     // Set the loading indicator
@@ -294,15 +387,8 @@ $(document).ready(function () {
 
         // Load time data when a date is selected
         $(".toggle-time-time-to-date").click(function() {
-            // Fade out the buttons
-            timeRadioButtonContainer.find("li").addClass("animated fadeOutLeft");
-
-            // Clear the list when the animation is complete
-            setTimeout(function () {
-                // Reset the radio button box contents, to remove the time selection radio buttons
-                timeRadioButtonContainer.html("");
-
-            }, 1000);
+            // Show the date page
+            showDatePage();
         });
     }
 
@@ -316,26 +402,128 @@ $(document).ready(function () {
         $("#appointment_step_image").attr("src", "/images/appointment/step-1.png");
     });
     $("#go_to_second, #back_to_second").click(function () {
+        // TODO: Possibly fade this
         $("#appointment_step_image").attr("src", "/images/appointment/step-2.png");
     });
+
     // Third button needs the check if the fields are filled in correctly
+    var leftOffsetHeight;
+    var rightOffsetHeight;
 
+    function switchStep(fromElements, toElements) {
+        // Get the list of panels
+        var panels = $(fromElements + ", " + toElements);
 
-    /**
-     * Toggle the different sections for creating an appointment
-     */
-    $(".toggle-time-date").click(function () {
-        if (!$(this).hasClass("toggle-btn-disabled")) {
-            $(".time-date-box").slideToggle(500, "easeInOutCubic");
-        }
-    });
+        // Create a variable for the left and right container
+        var leftContainer;
+        var rightContainer;
+
+        // Get the left and right panels
+        var leftPanels = [];
+        var rightPanels = [];
+
+        // Loop through each panel to handle it manually
+        panels.each(function() {
+            var panel = $(this);
+            var isLeft = !panel.hasClass("right-box");
+            var container = panel.parent();
+            if(isLeft)
+                container = container.parent();
+
+            // Update the left and right container instances, give the containers a fixed width, and update the offset
+            if(isLeft) {
+                if(leftOffsetHeight == undefined && panel.is(":visible"))
+                    leftOffsetHeight = container.height() - panel.height();
+
+                if(leftContainer == undefined) {
+                    leftContainer = container;
+
+//                    container.width(container.width());
+                    container.height(container.height());
+                }
+
+                leftPanels.push(panel);
+
+            } else {
+                if(rightOffsetHeight == undefined && panel.is(":visible"))
+                    rightOffsetHeight = container.height() - panel.height();
+
+                if(rightContainer == undefined) {
+                    rightContainer = container;
+
+//                    container.width(container.outerWidth());
+                    container.height(container.height());
+                }
+
+                rightPanels.push(panel);
+            }
+        });
+
+        // Store the current position state to revert it to after animating
+        var wasPos = panels.eq(0).css("position");
+
+        // Define the target height
+        var targetHeight = 0;
+
+        // Loop through the panels to update their visibility
+        panels.each(function() {
+            var panel = $(this);
+            var isLeft = !panel.hasClass("right-box");
+            var container = panel.parent();
+            if(isLeft)
+                container = container.parent();
+
+            // Check whether the component is visible
+            if(panel.is(":visible")) {
+                // Toggle the fadeIn class to fadeOut
+                panel.removeClass("fadeIn animated").delay(0).addClass("animated fadeOut");
+
+                // Hide the panel when done
+                setTimeout(function() {
+                    panel.removeClass("fadeOut").addClass("fadeIn").hide();
+                    panel.css("position", wasPos);
+                }, 1000);
+
+            } else {
+                // Update the target height
+                var height = panel.height() + (isLeft ? leftOffsetHeight : rightOffsetHeight);
+                if(height > targetHeight)
+                    targetHeight = height;
+
+                // Show the panel, this will animate using CSS
+                panel.show();
+            }
+        });
+
+        // Properly resize the parent panel
+        leftContainer.animate({
+                "height": targetHeight
+        }, 500);
+        rightContainer.animate({
+                "height": targetHeight
+        }, 500);
+
+        // Make the position absolute of the first elements
+        var bigPanelLeft = leftPanels[0].index() < leftPanels[1].index() ? leftPanels[0] : leftPanels[1];
+        var bigPanelRight = rightPanels[0].index() < rightPanels[1].index() ? rightPanels[0] : rightPanels[1];
+//        bigPanelLeft.width(bigPanelLeft.width());
+//        bigPanelLeft.width(bigPanelRight.width());
+        bigPanelLeft.css("position", "absolute");
+        bigPanelRight.css("position", "absolute");
+
+        // Reset the position of the element
+        setTimeout(function() {
+            bigPanelLeft.css("position", wasPos);
+            bigPanelRight.css("position", wasPos);
+        }, 1000);
+    }
 
     $("#go_to_second, #back_to_first").click(function () {
-        $("#left_1, #left_2, #right_1, #right_2").toggle();
+        switchStep("#left_1, #right_1", "#left_2, #right_2");
     });
 
     $("#back_to_second").click(function () {
-        $("#left_2, #left_3, #right_2, #right_3").toggle();
+        switchStep("#left_2, #right_2", "#left_3, #right_3");
     });
 
     /**
@@ -361,7 +549,7 @@ $(document).ready(function () {
             $("#fill_in_fields_warning").html("Je hebt niet alle verplichte velden ingevuld!");
         } else {
             $("#appointment_step_image").attr("src", "/images/appointment/step-3.png");
-            $("#left_2, #left_3, #right_2, #right_3").toggle();
+            switchStep("#left_2, #right_2", "#left_3, #right_3");
         }
     });
 

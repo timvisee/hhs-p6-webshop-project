@@ -20,17 +20,18 @@
             <h2>Filteren</h2>
 
             @foreach (var item in Model.Filters) {
-            <div class="filter filter-@item.FilterType.Name">
-                <h4>@item.FilterType.Name</h4>
-                <ul class="filter-list">
+                <div class="filter">
+                  <input type="hidden" class="field-property-id" value="@item.FilterType.PropertyTypeId" />
+                  <h4>@item.FilterType.Name</h4>
+                  <ul class="filter-list">
                     @foreach (var value in item.Values) {
                         <li>
-                            <input type="checkbox" name="@item.FilterType.Name" id="value_@value.PropertyValueId" />
-                            <label for="value_@value.PropertyValueId">@value.Value</label>
+                          <input type="checkbox" name="@item.FilterType.Name" id="value_@value.PropertyValueId"/>
+                          <label class="no-user-select" for="value_@value.PropertyValueId">@value.Value</label>
                         </li>
                     }
-                </ul>
-            </div>
+                  </ul>
+                </div>
             }
         </div>
         <div class="col-md-9 col-sm-12">
@@ -52,39 +53,7 @@
                 </div>
             </div>
             <div class="row product-overview">
-                @foreach (var item in Model.Products) {
-                <div class="product col-md-4 col-sm-12">
-                    <a asp-action="Details" asp-route-id="@item.ProductId">
-                        <div class="vertical-align">
-                            <div class="horizontal-align">
-                                <img class="product-image" src="~/@Html.DisplayFor(modelItem => item.ProductTypes.First().Images.First().Path)" alt="@Html.DisplayFor(modelItem => item.Name)" />
-                            </div>
-                        </div>
-
-                        <h5 class="product-title">
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </h5>
-
-                        <span class="product-sku">
-                            <!-- TODO: Get the SKU -->
-                            Artikel nr. 41704
-                        </span>
-
-                        <div class="product-colors">
-                            <div class="color-circle"></div>
-                            <div class="color-circle hm-pink-dark"></div>
-                            <div class="color-circle hm-pink-light"></div>
-                        </div>
-
-                        @if (User.Identity.IsAuthenticated) {
-                        <div class="product-edit-buttons">
-                            <a class="btn" asp-action="Edit" asp-route-id="@item.ProductId">Edit</a>
-                            <a class="btn" asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
-                        </div>
-                        }
-                    </a>
-                </div>
-                }
+                @Html.Partial("ProductOverview", Model);
             </div>
         </div>
     </div>

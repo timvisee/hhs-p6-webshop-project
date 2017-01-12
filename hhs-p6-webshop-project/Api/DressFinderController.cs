@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using hhs_p6_webshop_project.ExtraModels;
 using hhs_p6_webshop_project.Models.ProductModels;
+using hhs_p6_webshop_project.Models.ProductViewModels;
 using hhs_p6_webshop_project.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
 
 namespace hhs_p6_webshop_project.Api
@@ -14,6 +16,17 @@ namespace hhs_p6_webshop_project.Api
 
         public DressFinderController(IProductService productService) {
             ProductService = productService;
+        }
+
+        [HttpPost("product/filter/partial")]
+        public PartialViewResult FilterPartial([FromBody] FilterRequest request) {
+            ProductViewModel pvm = new ProductViewModel();
+            pvm.Products = ProductService.Filter(ProductService.ParseFilterRequest(request),
+                ProductService.GetAllProducts());
+
+            pvm.Filters = ProductService.GetAllProductFilters();
+
+            return PartialView("~/Views/Products/ProductOverview.cshtml", pvm);
         }
 
         [HttpGet("product/all")]
