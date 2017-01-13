@@ -1,3 +1,6 @@
+@using System.Collections
+@using System.Threading.Tasks
+@using hhs_p6_webshop_project.Models.ProductModels
 @model hhs_p6_webshop_project.Models.ProductModels.Product
 
 <link href="~/css/products.css" rel="stylesheet" />
@@ -40,9 +43,12 @@
     }
 
     // TODO alles ff mooi fixen
-    //    var properties = new Dictionary<string, string>();
+    //var properties = new Dictionary<string, string>();
 
-    List<string> properties = new List<string>();
+    //List<string> properties = new List<string>();
+    //string[] propertyTypes;
+    HashSet<PropertyType> propertyTypes = new HashSet<PropertyType>();
+
 
     // Todo:
     // First loop over all the propertytypes (color, price etc)
@@ -50,8 +56,9 @@
 
     Console.WriteLine("-------------- All Properties: --------------");
     foreach (var d in details) {
-        Console.WriteLine("Variatie:");
-        properties.AddRange(d.PropertyValueCouplings.Select(p => p.PropertyValue.ToString()));
+        foreach (var p in d.PropertyValueCouplings) {
+            propertyTypes.Add(p.PropertyType);
+        }
     }
 
 
@@ -107,38 +114,39 @@
                     </div>
                     <div class="product-information-attributes">
                         @{
-                            foreach (var p in properties) {
-                        <span>@p</span>
-                            }
+                            foreach (var p in propertyTypes) {
+                        <div class="property-wrap">
+                            <span class="property-name">@p.Name</span>
+                            <div class="property-field property-@p.Name">
+                                @{
+                                    foreach (var d in details) {
+                                        foreach (var s in d.PropertyValueCouplings) {
+                                            if (p.PropertyTypeId == s.PropertyTypeId) {
+                                                if (s.PropertyType.Name == "Prijs") {
+                                <span>
+                                    &euro;
+                                    @Html.DisplayFor(model => s.PropertyValue.Value)
+                                </span>
+                                                } else if (s.PropertyType.Name == "Kleur") {
+                                <span class="color-circle @s.PropertyValue.Value">
+                                </span>
+                                                } else {
+                                <span>
+                                    @Html.DisplayFor(model => s.PropertyValue.Value)
+                                </span>
+                                                }
 
-                        }
-
-                        <p>
-                            Merk:
-                            <a asp-action="">Maggie Sottero</a>
-                        </p>
-                        <p>
-                            Kenmerken:
-                            <a asp-action="">Verleidelijk</a>,
-                            <a asp-action="">Kant</a>,
-                            <a asp-action="">Ivoor</a>,
-                            <a asp-action="">Fishtail</a>,
-                            <a asp-action="">Lage rug</a>,
-                            <a asp-action="">Schouderbandjes</a>,
-                            <a asp-action="">Strapless</a>
-                        </p>
-                        <p>
-                            Prijsindicatie:
-                            <span>&euro;7.500,-</span>
-                        </p>
-                        <p>
-                            Beschikbare kleuren:
-                            <div class="product-colors">
-                                <div class="color-circle"></div>
-                                <div class="color-circle hm-pink-dark"></div>
-                                <div class="color-circle hm-pink-light"></div>
+                                            }
+                                        }
+                                    }
+                                }
                             </div>
-                        </p>
+                        </div>
+                                    }
+                        }
+                        <Br />
+                        <Br />
+                        <Br/>
                         <div class="product-make-appointment-container">
                             <p>Kom deze jurk passen!</p>
                             <a asp-controller="Appointments" asp-action="Create" class="make-appointment">Pasafspraak maken</a>
