@@ -803,7 +803,14 @@ $(document).ready(function () {
                     alert(error);
                 },
                 success: function(data) {
-                    productOverviewElement.html(data);
+                    // Fade out the current elements
+                    productOverviewElement.find('.product').removeClass('animate-product-catalog-enter').addClass('animate-product-catalog-leave');
+
+                    // Show the new elements when the previous animation is complete
+                    setTimeout(function() {
+                        // Set the new products
+                        productOverviewElement.html(data);
+                    }, 300);
                 },
                 complete: function() {
                     // Hide the loading indiator

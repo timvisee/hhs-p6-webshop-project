@@ -1406,3 +1406,95 @@ footer ul {
 .product-overview {
     min-height: 300px;
 }
+
+@-webkit-keyframes productCatalogEnter {
+  from {
+    opacity: 0;
+    -webkit-transform: scale3d(.9, .9, .9) translate3d(0, -50px, 0);
+    transform: scale3d(.9, .9, .9) translate3d(0, -50px, 0);
+    -webkit-animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+    animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+  }
+
+  60% {
+    opacity: 1;
+    -webkit-transform: scale3d(.95, .95, .95) translate3d(0, -10px, 0);
+    transform: scale3d(.95, .95, .95) translate3d(0, -10px, 0);
+    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
+    animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
+  }
+}
+
+@keyframes productCatalogEnter {
+  from {
+    opacity: 0;
+    -webkit-transform: scale3d(.9, .9, .9) translate3d(0, -50px, 0);
+    transform: scale3d(.9, .9, .9) translate3d(0, -50px, 0);
+    -webkit-animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+    animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+  }
+
+  60% {
+    opacity: 1;
+    -webkit-transform: scale3d(.95, .95, .95) translate3d(0, -10px, 0);
+    transform: scale3d(.95, .95, .95) translate3d(0, -10px, 0);
+    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
+    animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
+  }
+}
+
+.animate-product-catalog-enter {
+  -webkit-animation-duration: 0.3s;
+  animation-duration: 0.3s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+
+  -webkit-animation-name: productCatalogEnter;
+  animation-name: productCatalogEnter;
+}
+
+@-webkit-keyframes productCatalogLeave {
+  40% {
+    opacity: 1;
+    -webkit-transform: scale3d(.95, .95, .95) translate3d(0, 10px, 0);
+    transform: scale3d(.95, .95, .95) translate3d(0, 10px, 0);
+    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
+    animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
+  }
+
+  to {
+    opacity: 0;
+    -webkit-transform: scale3d(.9, .9, .9) translate3d(0, 50px, 0);
+    transform: scale3d(.9, .9, .9) translate3d(0, 50px, 0);
+    -webkit-animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+    animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+  }
+}
+
+@keyframes productCatalogLeave {
+  40% {
+    opacity: 1;
+    -webkit-transform: scale3d(.95, .95, .95) translate3d(0, 10px, 0);
+    transform: scale3d(.95, .95, .95) translate3d(0, 10px, 0);
+    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
+    animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
+  }
+
+  to {
+    opacity: 0;
+    -webkit-transform: scale3d(.9, .9, .9) translate3d(0, 50px, 0);
+    transform: scale3d(.9, .9, .9) translate3d(0, 50px, 0);
+    -webkit-animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+    animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+  }
+}
+
+.animate-product-catalog-leave {
+  -webkit-animation-duration: 0.3s;
+  animation-duration: 0.3s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+
+  -webkit-animation-name: productCatalogLeave;
+  animation-name: productCatalogLeave;
+}
