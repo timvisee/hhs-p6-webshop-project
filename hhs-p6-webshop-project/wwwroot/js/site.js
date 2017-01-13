@@ -57,6 +57,14 @@ function formatDateTime(dateTime, formatDate, formatTime) {
 // Run this code when the page is finished loading
 $(document).ready(function () {
 
+    // Initialize WOW
+    new WOW({
+            boxClass:     'wow',
+            animateClass: 'animated',
+            offset:       0,
+            live:         true
+    }).init();
+
     /**
      * Toggle the search box when the search button is clicked
      */
