@@ -11,7 +11,7 @@
     <h2 class="banner-title-text">Maak je pasafspraak</h2>
 </div>
 
-<form asp-action="Create" id="create_appointment_form">
+<form asp-action="Create" id="create_appointment_form" onkeypress="return event.keyCode != 13;">
     <div class="row" id="create_appointment">
         <div class="appiontment-wrapper font-nexa-regular">
             <div class="col-sm-12 col-md-7 box-shadow appointment-form">
