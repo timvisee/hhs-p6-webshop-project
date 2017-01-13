@@ -718,7 +718,7 @@ $(document).ready(function () {
 
             // Center the indicator
             indicator.css({
-                top: overlay.height() / 2 - indicator.height() / 2,
+                top: Math.min(overlay.height() / 2 - indicator.height() / 2, 225),
                 left: overlay.width() / 2 - indicator.width() / 2
             });
 
@@ -803,13 +803,19 @@ $(document).ready(function () {
                     alert(error);
                 },
                 success: function(data) {
+                    // Find the product elements
+                    var productElements = productOverviewElement.find('.product');
+
                     // Fade out the current elements
-                    productOverviewElement.find('.product').removeClass('animate-product-catalog-enter').addClass('animate-product-catalog-leave');
+                    productElements.toggleClass('animate-product-catalog-enter animate-product-catalog-leave');
 
                     // Show the new elements when the previous animation is complete
                     setTimeout(function() {
+                        // Remove the current list of products (that is already faded away)
+                        productElements.remove();
+
                         // Set the new products
-                        productOverviewElement.html(data);
+                        productOverviewElement.append(data);
                     }, 300);
                 },
                 complete: function() {
