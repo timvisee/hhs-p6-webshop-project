@@ -5,16 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] | Honeymoon Shop</title>
 
-    <environment names="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/lib/animate.css/animate.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
-    </environment>
-    <environment names="Staging,Production">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/lib/animate.css/animate.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
-    </environment>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/lib/animate.css/animate.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <script src="~/js/site.js"></script>
+    <script src="~/js/wow.min.js"></script>
 
 </head>
 
@@ -292,8 +288,6 @@
         <script src="~/js/bootstrap.min.js"></script>
         <script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
     </environment>
-
-    <script src="~/js/site.js"></script>
 
     @RenderSection("scripts", required: false)
 </body>
