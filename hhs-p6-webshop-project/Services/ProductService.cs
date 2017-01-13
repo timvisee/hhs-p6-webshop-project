@@ -20,38 +20,56 @@ namespace hhs_p6_webshop_project.Services
         }
 
         public List<Product> GetAllProducts() {
-            return DatabaseContext.Product
-                .Include(p => p.PropertyTypeProducts)
-                .ThenInclude(ptp => ptp.PropertyType)
-                .Include(p => p.PropertyTypeProducts)
-                .ThenInclude(ptp => ptp.PropertyValue)
+            return DatabaseContext.Products
+                .Include(p => p.ColorOptions)
+                .ThenInclude(co => co.Images)
                 .ToList();
+            
         }
 
-        public List<PropertyTypeProduct> Test() {
-            return DatabaseContext.PropertyTypeProducts.ToList();
+        public List<ColorOption> GetColorOptions() {
+            return DatabaseContext.ColorOptions.Distinct().ToList();
         }
+
+        public Dictionary<string, HashSet<object>> GetFilters() {
+            Dictionary<string, HashSet<object>> val = new Dictionary<string, HashSet<object>>();
+
+            val.Add("Prijs", new HashSet<object>());
+
+            val["Prijs"].Add(DatabaseContext.Products.Min(p => p.Price));
+            val["Prijs"].Add(DatabaseContext.Products.Max(p => p.Price));
+
+            val.Add("Kleur", new HashSet<object>());
+
+            val["Kleur"].Add(DatabaseContext.ColorOptions.Select(co => co.Color).Distinct());
+
+            return val;
+        } 
+
+        //public List<PropertyTypeProduct> Test() {
+        //    return DatabaseContext.PropertyTypeProducts.ToList();
+        //}
 
         /// <summary>
         /// Get a list of products filtered by the given property values.
         /// </summary>
         /// <param name="values">Property values to filter on.</param>
         /// <returns>List of products. An empty list of products might be returned if the filters aren't consistent.</returns>
-        public List<Product> GetProductsFiltered(List<PropertyValue> values) {
-            // Get the queryable products
-//            IQueryable<Product> queryable = DatabaseContext.Product.AsQueryable();
-//            IQueryable<PropertyValue> queryableValue = DatabaseContext.PropertyValue.AsQueryable();
+//        public List<Product> GetProductsFiltered(List<PropertyValue> values) {
+//            // Get the queryable products
+////            IQueryable<Product> queryable = DatabaseContext.Product.AsQueryable();
+////            IQueryable<PropertyValue> queryableValue = DatabaseContext.PropertyValue.AsQueryable();
 
-            // Get a list of property types that are used as filters
-            HashSet<PropertyType> types = new HashSet<PropertyType>();
-          //  values.ForEach(value => types.Add(value.PropertyType));
+//            // Get a list of property types that are used as filters
+//            HashSet<PropertyType> types = new HashSet<PropertyType>();
+//          //  values.ForEach(value => types.Add(value.PropertyType));
 
-            // TODO: Unfinished! Complete this method.
+//            // TODO: Unfinished! Complete this method.
 
-            // Return the list of products
-//            return queryable.ToList();
-            return null;
-        }
+//            // Return the list of products
+////            return queryable.ToList();
+//            return null;
+//        }
 
         public PagedResponse GetAllProductsPaged(int start, int count) {
             PagedResponse response = new PagedResponse();
@@ -81,28 +99,28 @@ namespace hhs_p6_webshop_project.Services
             return response;
         }
 
-        public List<PropertyValue> GetAllAvailableFiltersForProducts(List<Product> products) {
-            return null;
-//            return products.Select(product => product.Properties).Distinct().ToList().SelectMany(item => item).ToList();
-        }
+//        public List<PropertyValue> GetAllAvailableFiltersForProducts(List<Product> products) {
+//            return null;
+////            return products.Select(product => product.Properties).Distinct().ToList().SelectMany(item => item).ToList();
+//        }
 
-        public List<PropertyType> GetPropertyTypesForProduct(Product product) {
-//            return product.Properties.Select(type => type.PropertyType).Distinct().ToList();
-            return null;
-        } 
+//        public List<PropertyType> GetPropertyTypesForProduct(Product product) {
+////            return product.Properties.Select(type => type.PropertyType).Distinct().ToList();
+//            return null;
+//        } 
 
-        public List<PropertyType> AllProductFilterTypesAsList() {
-            HashSet<PropertyType> types = new HashSet<PropertyType>();
+//        public List<PropertyType> AllProductFilterTypesAsList() {
+//            HashSet<PropertyType> types = new HashSet<PropertyType>();
 
-//            foreach (var product in DatabaseContext.Product) {
-//                foreach (var value in product.Properties) {
-//                    types.Add(value.PropertyType);
-//                }
-//            }
+////            foreach (var product in DatabaseContext.Product) {
+////                foreach (var value in product.Properties) {
+////                    types.Add(value.PropertyType);
+////                }
+////            }
 
-//            return types.ToList();
-            return null;
-        }
+////            return types.ToList();
+//            return null;
+//        }
 
     }
 }

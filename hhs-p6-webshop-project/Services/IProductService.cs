@@ -15,7 +15,9 @@ namespace hhs_p6_webshop_project.Services
         /// <returns>A <see cref="List{T}"/> of all <see cref="Product"/> product instances.</returns>
         List<Product> GetAllProducts();
 
-        List<PropertyTypeProduct> Test();
+        List<ColorOption> GetColorOptions();
+
+        Dictionary<string, HashSet<object>> GetFilters();
 
             /// <summary>
         /// Returns a list of all products, sorted by Id, ascending.
@@ -28,9 +30,9 @@ namespace hhs_p6_webshop_project.Services
         /// </summary>
         /// <param name="products">the <see cref="Product"/> instances to return the available filters for</param>
         /// <returns>A <see cref="List{T}"/> of available filters for a given <see cref="Product"/> range</returns>
-        List<PropertyValue> GetAllAvailableFiltersForProducts(List<Product> products);
+        //List<PropertyValue> GetAllAvailableFiltersForProducts(List<Product> products);
 
-        List<PropertyType> GetPropertyTypesForProduct(Product product);
-        List<PropertyType> AllProductFilterTypesAsList();
+        //List<PropertyType> GetPropertyTypesForProduct(Product product);
+        //List<PropertyType> AllProductFilterTypesAsList();
     }
 }

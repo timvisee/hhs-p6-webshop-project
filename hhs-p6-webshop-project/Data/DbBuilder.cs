@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using hhs_p6_webshop_project.App.Util;
 using hhs_p6_webshop_project.Models;
 using hhs_p6_webshop_project.Models.ProductModels;
@@ -66,55 +67,104 @@ namespace hhs_p6_webshop_project.Data {
                 // Actually exit the application
                 Environment.Exit(0);
             }
+
+            
         }
 
-        private static PropertyTypeProduct Couple(Product p, PropertyType pt, object value) {
-            return new PropertyTypeProduct(p, pt, new PropertyValue(value));
+        private static Product GenerateProduct(string name, string description, double price) {
+            return new Product() {
+                Name = name,
+                Description = description,
+                Price = price
+            };
         }
 
+        private static ColorOption GenerateColor(string color, string[] images) {
+            var co = new ColorOption() {
+                Color = color
+            };
+
+            foreach(string img in images)
+            {
+                co.Images.Add(new ProductImage(img));
+            }
+
+            return co;
+        }
+
+        
         private static void GenerateProducts(ApplicationDbContext context) {
-            PropertyType kleur = new PropertyType();
-            kleur.DataType = typeof(string).FullName;
-            kleur.Multiple = true;
-            kleur.Name = "Kleur";
-            kleur.Required = true;
-            context.PropertyType.Add(kleur);
+            Product p = GenerateProduct("Orea Sposa",
+                "Trouwjurk van het merk Orea Sposa gemaakt van kant. De top is strapless met een sweetheart lijn. De taille wordt geaccentueerd door een bies. De rok heeft een A-lijn met een sleep.",
+                500.0d);
 
-            PropertyType prijs = new PropertyType();
-            prijs.DataType = typeof(double).FullName;
-            prijs.Multiple = false;
-            prijs.Name = "Prijs";
-            prijs.Required = true;
-            context.PropertyType.Add(prijs);
+            p.ColorOptions.Add(GenerateColor("Roze", new string[] {"images/dress/orea_sposa/roze/1.jpg","images/dress/orea_sposa/roze/2.jpg","images/dress/orea_sposa/roze/3.jpg"}));
+            p.ColorOptions.Add(GenerateColor("Grijs", new string[] {"images/dress/orea_sposa/grijs/1.jpg","images/dress/orea_sposa/grijs/2.jpg","images/dress/orea_sposa/grijs/3.jpg"}));
 
+            context.Products.Add(p);
             context.SaveChanges();
 
-            Product stoel = new Product();
-            stoel.Name = "Stoel";
-            stoel.Description = "Een hele grote stoel";
-            context.Product.Add(stoel);
 
-            Product bank = new Product();
-            bank.Name = "Bank";
-            bank.Description = "Een hele grote bank";
-            context.Product.Add(bank);
+            p = GenerateProduct("Ladybird",
+                "Trouwjurk van het merk Ladybird gemaakt van kant. De top is strapless met een sweetheart lijn. De rok heeft een A-lijn met een sleep.",
+                1500.0d);
 
+            p.ColorOptions.Add(GenerateColor("Ivoor", new string[] {"images/dress/ladybird/ivoor/1.jpg","images/dress/ladybird/ivoor/2.jpg","images/dress/ladybird/ivoor/3.jpg"}));
+            p.ColorOptions.Add(GenerateColor("Grijs", new string[] {"images/dress/ladybird/grijs/1.jpg","images/dress/ladybird/grijs/2.jpg","images/dress/ladybird/grijs/3.jpg"}));
+
+            context.Products.Add(p);
             context.SaveChanges();
 
-            context.PropertyTypeProducts.Add(Couple(stoel, prijs, 65.0));
-            context.PropertyTypeProducts.Add(Couple(bank, prijs, 550.0));
+            //Product p = GenerateProduct("Orea Sposa",
+            //    "Trouwjurk van het merk Orea Sposa gemaakt van kant. De top is strapless met een sweetheart lijn. De taille wordt geaccentueerd door een bies. De rok heeft een A-lijn met een sleep.",
+            //    500.0d);
 
-            context.SaveChanges();
+            //p.ColorOptions.Add(GenerateColor("Roze", new string[] {"images/dress/orea_sposa/roze/1.jpg","images/dress/roze/2.jpg","images/dress/roze/3.jpg"}));
+            //p.ColorOptions.Add(GenerateColor("Grijs", new string[] {"images/dress/orea_sposa/grijs/1.jpg","images/dress/grijs/2.jpg","images/dress/grijs/3.jpg"}));
 
-            context.PropertyTypeProducts.Add(Couple(stoel, kleur, "Blauw"));
-            context.PropertyTypeProducts.Add(Couple(stoel, kleur, "Bruin"));
-            context.PropertyTypeProducts.Add(Couple(stoel, kleur, "Geel"));
 
-            context.PropertyTypeProducts.Add(Couple(bank, kleur, "Grijs"));
-            context.PropertyTypeProducts.Add(Couple(bank, kleur, "Wit"));
-            context.PropertyTypeProducts.Add(Couple(bank, kleur, "Zwart"));
+            //PropertyType kleur = new PropertyType();
+            //kleur.DataType = typeof(string).FullName;
+            //kleur.Multiple = true;
+            //kleur.Name = "Kleur";
+            //kleur.Required = true;
+            //context.PropertyType.Add(kleur);
 
-            context.SaveChanges();
+            //PropertyType prijs = new PropertyType();
+            //prijs.DataType = typeof(double).FullName;
+            //prijs.Multiple = false;
+            //prijs.Name = "Prijs";
+            //prijs.Required = true;
+            //context.PropertyType.Add(prijs);
+
+            //context.SaveChanges();
+
+            //Product stoel = new Product();
+            //stoel.Name = "Stoel";
+            //stoel.Description = "Een hele grote stoel";
+            //context.Product.Add(stoel);
+
+            //Product bank = new Product();
+            //bank.Name = "Bank";
+            //bank.Description = "Een hele grote bank";
+            //context.Product.Add(bank);
+
+            //context.SaveChanges();
+
+            //context.PropertyTypeProducts.Add(Couple(stoel, prijs, 65.0));
+            //context.PropertyTypeProducts.Add(Couple(bank, prijs, 550.0));
+
+            //context.SaveChanges();
+
+            //context.PropertyTypeProducts.Add(Couple(stoel, kleur, "Blauw"));
+            //context.PropertyTypeProducts.Add(Couple(stoel, kleur, "Bruin"));
+            //context.PropertyTypeProducts.Add(Couple(stoel, kleur, "Geel"));
+
+            //context.PropertyTypeProducts.Add(Couple(bank, kleur, "Grijs"));
+            //context.PropertyTypeProducts.Add(Couple(bank, kleur, "Wit"));
+            //context.PropertyTypeProducts.Add(Couple(bank, kleur, "Zwart"));
+
+            //context.SaveChanges();
 
         }
     }

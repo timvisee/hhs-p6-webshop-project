@@ -1,45 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace hhs_p6_webshop_project.Models.ProductModels {
-    public class Product : IEquatable<Product> {
-
+namespace hhs_p6_webshop_project.Models.ProductModels
+{
+    public class Product
+    {
         public Product() {
-            PropertyTypeProducts = new List<PropertyTypeProduct>();
+            ColorOptions = new List<ColorOption>();
         }
 
-        [Key]
         public int ProductId { get; set; }
-
-        [Required]
         public string Name { get; set; }
-
         public string Description { get; set; }
+        public double Price { get; set; }
 
-        public ICollection<PropertyTypeProduct> PropertyTypeProducts { get; set; }
+        public List<ColorOption> ColorOptions { get; set; } 
 
-        /// <summary>
-        /// Compare this product to another product instance.
-        /// </summary>
-        /// <param name="other">Other product instance to compare to.</param>
-        /// <returns>True if the types are equal, false if not.</returns>
-        public override bool Equals(object other) {
-            // Make sure the type is correct, and compare the actual product if so
-            return other.GetType() == typeof(Product) && Equals((Product)other);
-        }
-
-        /// <summary>
-        /// Compare this product to another product.
-        /// </summary>
-        /// <param name="other">Other product.</param>
-        /// <returns>True if they are equal, false if not.</returns>
-        public bool Equals(Product other) {
-            return ProductId == other.ProductId;
-        }
     }
 }

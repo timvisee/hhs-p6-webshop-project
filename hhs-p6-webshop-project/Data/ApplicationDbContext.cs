@@ -25,34 +25,28 @@ namespace hhs_p6_webshop_project.Data {
         protected override void OnModelCreating(ModelBuilder builder) {
             base.OnModelCreating(builder);
 
-            builder.Entity<PropertyTypeProduct>()
-                .HasKey(x => new {x.ProductId, x.PropertyTypeId, x.PropertyValueId});
+            builder.Entity<Product>()
+                .HasMany(p => p.ColorOptions)
+                .WithOne(co => co.Product)
+                .HasForeignKey(co => co.ProductId);
+            
 
-            builder.Entity<PropertyTypeProduct>()
-                .HasOne(ptp => ptp.PropertyValue)
-                .WithOne(pv => pv.PropertyTypeProduct);
+            builder.Entity<ColorOption>()
+                .HasMany(co => co.Images)
+                .WithOne(pi => pi.ColorOption)
+                .HasForeignKey(pi => pi.ColorOptionId);
 
-            builder.Entity<PropertyTypeProduct>()
-                .HasOne(ptp => ptp.Product)
-                .WithMany(p => p.PropertyTypeProducts)
-                .HasForeignKey(fk => fk.ProductId);
-        }
+         }
 
         public DbSet<Appointment> Appointment { get; set; }
 
         public DbSet<AppointmentTime> AppointmentTime { get; set; }
 
-        public DbSet<Product> Product { get; set; }
+        public DbSet<Product> Products { get; set; }
 
-        public DbSet<PropertyValue> PropertyValue { get; set; }
+        public DbSet<ColorOption> ColorOptions { get; set; }
 
-        public DbSet<PropertyType> PropertyType { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
 
-        public DbSet<PropertyTypeProduct> PropertyTypeProducts { get; set; }
-
-        //public DbSet<ProductImage> ProductImage { get; set; }
-
-
-      
     }
 }

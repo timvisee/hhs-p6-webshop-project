@@ -18,9 +18,14 @@ namespace hhs_p6_webshop_project.Api
             return Json(ProductService.GetAllProducts());
         }
 
+        [HttpGet("product/filters")]
+        public JsonResult GetAllFilters() {
+            return Json(ProductService.GetFilters());
+        }
+
         [HttpGet("product/test")]
         public JsonResult GetAll() {
-            return Json(ProductService.Test());
+            return Json(ProductService.GetColorOptions());
         }
 
         [HttpGet("product/{start}/{count}")]
