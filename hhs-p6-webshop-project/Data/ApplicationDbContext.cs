@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using hhs_p6_webshop_project.Models;
 using hhs_p6_webshop_project.Models.AppointmentModels;
+using hhs_p6_webshop_project.Models.BlogModels;
 using Microsoft.Extensions.Configuration;
 using hhs_p6_webshop_project.Models.ProductModels;
 
@@ -14,7 +15,7 @@ namespace hhs_p6_webshop_project.Data {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options) { }
 
-        public ApplicationDbContext() : base(CreateTestContext()) {}
+        public ApplicationDbContext() : base(CreateTestContext()) { }
 
         static DbContextOptions<ApplicationDbContext> CreateTestContext() {
             var builder = new DbContextOptionsBuilder<ApplicationDbContext>();
@@ -26,7 +27,7 @@ namespace hhs_p6_webshop_project.Data {
             base.OnModelCreating(builder);
 
             builder.Entity<PropertyValueCoupling>()
-                .HasKey(x => new {x.ProductTypeId, x.PropertyTypeId, x.PropertyValueId});
+                .HasKey(x => new { x.ProductTypeId, x.PropertyTypeId, x.PropertyValueId });
 
             builder.Entity<Product>()
                 .HasMany(p => p.ProductTypes)
@@ -42,6 +43,9 @@ namespace hhs_p6_webshop_project.Data {
                 .HasMany(pt => pt.PropertyValueCouplings)
                 .WithOne(pvc => pvc.ProductType)
                 .HasForeignKey(fk => fk.ProductTypeId);
+
+            builder.Entity<BlogArticleCategory>().HasKey(x => new { x.BlogArticleId, x.BlogCategoryId });
+
 
             //builder.Entity<PropertyValue>()
             //    .HasOne(pv => pv.)
@@ -78,9 +82,15 @@ namespace hhs_p6_webshop_project.Data {
 
         public DbSet<ProductType> ProductType { get; set; }
 
+        public DbSet<BlogCategory> BlogCategory { get; set; }
+
+        public DbSet<BlogArticle> BlogArticle { get; set; }
+
+        public DbSet<BlogArticleCategory> BlogArticleCategory { get; set; }
+
         //public DbSet<ProductImage> ProductImage { get; set; }
 
 
-      
+
     }
 }
