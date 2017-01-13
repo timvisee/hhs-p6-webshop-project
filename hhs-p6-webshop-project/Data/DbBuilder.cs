@@ -48,7 +48,7 @@ namespace hhs_p6_webshop_project.Data {
 
             LogUtils.Log("Generating products", ConsoleColor.White);
 
-            GenerateProducts(context);
+            GenerateProducts2(context);
 
             // Show a success message
             LogUtils.Success("Database built!");
@@ -70,6 +70,23 @@ namespace hhs_p6_webshop_project.Data {
 
         private static PropertyValueCoupling Couple(ProductType p, PropertyType pt, object value) {
             return new PropertyValueCoupling(p, pt, new PropertyValue(value));
+        }
+
+        private static void GenerateProducts2(ApplicationDbContext context) {
+
+                        DressBuilder.Build(context, "Orea Sposa", "Trouwjurk van het merk Orea Sposa gemaakt van kant. De top is strapless met een sweetheart lijn. De taille wordt geaccentueerd door een bies. De rok heeft een A-lijn met een sleep.", "images/dress/roze.jpg", 500.0d, "Roze");
+                        DressBuilder.Build(context, "Orea Sposa Rustica", "Trouwjurk van het merk Orea Sposa gemaakt van organza. De top heeft een one shoulder afgewerkt met kanten applicaties. De taille wordt geaccentueerd door drapperie en applicaties. De jurk heeft een A-lijn met een sleep.", "images/dress/grijs.jpg", 1000.0d, "Grijs");
+                        DressBuilder.Build(context, "Ladybird Rustic", "Bruidsjapon van Ladybird in taft en tule. De japon is met een grote tule rok. Het lijfje is met baleinen en afgezet met kant. De japon is verkrijgbaar met jasje met korte mouwen.", "images/dress/bruin.jpg", 1250.0d, "Bruin");
+
+
+            DressBuilder.Build(context, "Ladybird 12972", "Trouwjurk van het merk Ladybird gemaakt van kant. De top heeft een hoge doorzichtige neklijn en een laag uitgesneden rug. De rok heeft een fishtail model met een sleep.", "images/dress/ivoor-1.jpg", 1250.0d, "Ivoor");
+
+
+            DressBuilder.Build(context, "Ladybird French", "Trouwjurk van het merk Ladybird gemaakt van ivoorkleurig kant met daaronder satijn in de kleur french blue. De top is strapless en afgewerkt met kant. De taille wordt geaccentueerd door een belt met bloem. De rok is wijdvallend met sleep.", "images/dress/french-blue.jpg", 1500.0d, "Blauw");
+
+            DressBuilder.Build(context, "Ladybird 12638", "Trouwjurk van het merk Ladybird gemaakt van kant. De top heeft een V-hals met schouderbanden en een laag uitgesneden rug, afgewerkt met kanten applicaties. De rok heeft een fishtail model en de sleep is verwerkt in verschillende lagen.", "images/dress/ivoor-2.jpg", 1750.0d, "Ivoor");
+            DressBuilder.Build(context, "Ladyvird 12649", "Trouwjurk van het merk Ladybird gemaakt van kant. De top is strapless met een sweetheart lijn. De rok heeft een A-lijn met een sleep.", "images/dress/ivoor-3.jpg", 1750.0d, "Ivoor");
+
         }
 
         private static void GenerateProducts(ApplicationDbContext context) {
