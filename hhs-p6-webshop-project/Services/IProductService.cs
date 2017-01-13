@@ -19,6 +19,8 @@ namespace hhs_p6_webshop_project.Services
 
         Dictionary<string, HashSet<object>> GetFilters();
 
+        List<Product> Filter(Dictionary<string, HashSet<object>> filterSet);
+
             /// <summary>
         /// Returns a list of all products, sorted by Id, ascending.
         /// </summary>
