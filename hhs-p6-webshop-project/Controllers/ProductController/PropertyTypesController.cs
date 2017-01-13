@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models.ProductModels;
 
-namespace hhs_p6_webshop_project.Controllers.ProductsController
+namespace hhs_p6_webshop_project.Controllers.ProductController
 {
     public class PropertyTypesController : Controller
     {

@@ -55,14 +55,9 @@ namespace hhs_p6_webshop_project {
                 // Parse the startup arguments, and apply them to the configuration
                 AppConfigParameterParser.Parse(args, Program.AppConfig);
 
-                var builder = new ConfigurationBuilder().AddJsonFile("hosting.json", optional: true);
- 
-                var config = builder.Build();
-
                 // Set up a new webhost
                 var host = new WebHostBuilder()
                     .UseKestrel()
-                    .UseConfiguration(config)
                     .UseContentRoot(Directory.GetCurrentDirectory())
                     .UseIISIntegration()
                     .UseStartup<Startup>()

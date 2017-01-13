@@ -60,9 +60,5 @@ namespace hhs_p6_webshop_project.Models.ProductModels {
         public bool Equals(PropertyType other) {
             return PropertyTypeId == other.PropertyTypeId;
         }
-
-        public override string ToString() {
-            return Name;
-        }
     }
 }

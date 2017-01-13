@@ -48,7 +48,7 @@ namespace hhs_p6_webshop_project.Data {
 
             LogUtils.Log("Generating products", ConsoleColor.White);
 
-            GenerateProducts2(context);
+            GenerateProducts(context);
 
             // Show a success message
             LogUtils.Success("Database built!");
@@ -68,25 +68,8 @@ namespace hhs_p6_webshop_project.Data {
             }
         }
 
-        private static PropertyValueCoupling Couple(ProductType p, PropertyType pt, object value) {
-            return new PropertyValueCoupling(p, pt, new PropertyValue(value));
-        }
-
-        private static void GenerateProducts2(ApplicationDbContext context) {
-
-                        DressBuilder.Build(context, "Orea Sposa", "Trouwjurk van het merk Orea Sposa gemaakt van kant. De top is strapless met een sweetheart lijn. De taille wordt geaccentueerd door een bies. De rok heeft een A-lijn met een sleep.", "images/dress/roze.jpg", 500.0d, "Roze");
-                        DressBuilder.Build(context, "Orea Sposa Rustica", "Trouwjurk van het merk Orea Sposa gemaakt van organza. De top heeft een one shoulder afgewerkt met kanten applicaties. De taille wordt geaccentueerd door drapperie en applicaties. De jurk heeft een A-lijn met een sleep.", "images/dress/grijs.jpg", 1000.0d, "Grijs");
-                        DressBuilder.Build(context, "Ladybird Rustic", "Bruidsjapon van Ladybird in taft en tule. De japon is met een grote tule rok. Het lijfje is met baleinen en afgezet met kant. De japon is verkrijgbaar met jasje met korte mouwen.", "images/dress/bruin.jpg", 1250.0d, "Bruin");
-
-
-            DressBuilder.Build(context, "Ladybird 12972", "Trouwjurk van het merk Ladybird gemaakt van kant. De top heeft een hoge doorzichtige neklijn en een laag uitgesneden rug. De rok heeft een fishtail model met een sleep.", "images/dress/ivoor-1.jpg", 1250.0d, "Ivoor");
-
-
-            DressBuilder.Build(context, "Ladybird French", "Trouwjurk van het merk Ladybird gemaakt van ivoorkleurig kant met daaronder satijn in de kleur french blue. De top is strapless en afgewerkt met kant. De taille wordt geaccentueerd door een belt met bloem. De rok is wijdvallend met sleep.", "images/dress/french-blue.jpg", 1500.0d, "Blauw");
-
-            DressBuilder.Build(context, "Ladybird 12638", "Trouwjurk van het merk Ladybird gemaakt van kant. De top heeft een V-hals met schouderbanden en een laag uitgesneden rug, afgewerkt met kanten applicaties. De rok heeft een fishtail model en de sleep is verwerkt in verschillende lagen.", "images/dress/ivoor-2.jpg", 1750.0d, "Ivoor");
-            DressBuilder.Build(context, "Ladyvird 12649", "Trouwjurk van het merk Ladybird gemaakt van kant. De top is strapless met een sweetheart lijn. De rok heeft een A-lijn met een sleep.", "images/dress/ivoor-3.jpg", 1750.0d, "Ivoor");
-
+        private static PropertyTypeProduct Couple(Product p, PropertyType pt, object value) {
+            return new PropertyTypeProduct(p, pt, new PropertyValue(value));
         }
 
         private static void GenerateProducts(ApplicationDbContext context) {
@@ -106,176 +89,33 @@ namespace hhs_p6_webshop_project.Data {
 
             context.SaveChanges();
 
-            #region dress
+            Product stoel = new Product();
+            stoel.Name = "Stoel";
+            stoel.Description = "Een hele grote stoel";
+            context.Product.Add(stoel);
 
-            Product dress = new Product();
-            dress.Name = "Ladybird";
-            dress.Description = "Een ladybird jurk";
+            Product bank = new Product();
+            bank.Name = "Bank";
+            bank.Description = "Een hele grote bank";
+            context.Product.Add(bank);
 
-            ProductType dress_klein = new ProductType();
-            dress_klein.NameOverride = "Kleine Jurk";
-            dress_klein.DescriptionOverride = "Een kleine jurk";
-            dress_klein.Images.Add(new ProductImage("images//uploads/image-1.jpg"));
-
-            context.PropertyValueCouplings.Add(Couple(dress_klein, prijs, 50.0d));
-            context.PropertyValueCouplings.Add(Couple(dress_klein, kleur, "Wit"));
-            context.PropertyValueCouplings.Add(Couple(dress_klein, kleur, "Bruin"));
-
-            dress.ProductTypes.Add(dress_klein);
-
-            context.Product.Add(dress);
             context.SaveChanges();
 
-            #endregion
+            context.PropertyTypeProducts.Add(Couple(stoel, prijs, 65.0));
+            context.PropertyTypeProducts.Add(Couple(bank, prijs, 550.0));
 
-            #region dresss 
-
-            Product dresss = new Product();
-            dresss.Name = "Ladybird";
-            dresss.Description = "Een ladybird jurk";
-
-            ProductType jurk_bruin = new ProductType();
-            jurk_bruin.NameOverride = "Bruine jurk";
-            jurk_bruin.DescriptionOverride = "Een bruine ladybird jurk";
-            jurk_bruin.Images.Add(new ProductImage("images/ladybirddress3.jpg"));
-
-            context.PropertyValueCouplings.Add(Couple(jurk_bruin, prijs, 75.0d));
-            context.PropertyValueCouplings.Add(Couple(jurk_bruin, kleur, "Grijs"));
-            context.PropertyValueCouplings.Add(Couple(jurk_bruin, kleur, "Geel"));
-
-            dresss.ProductTypes.Add(jurk_bruin);
-
-            context.Product.Add(dresss);
             context.SaveChanges();
 
-            #endregion
+            context.PropertyTypeProducts.Add(Couple(stoel, kleur, "Blauw"));
+            context.PropertyTypeProducts.Add(Couple(stoel, kleur, "Bruin"));
+            context.PropertyTypeProducts.Add(Couple(stoel, kleur, "Geel"));
 
-            #region jurk 
+            context.PropertyTypeProducts.Add(Couple(bank, kleur, "Grijs"));
+            context.PropertyTypeProducts.Add(Couple(bank, kleur, "Wit"));
+            context.PropertyTypeProducts.Add(Couple(bank, kleur, "Zwart"));
 
-            Product jurk = new Product();
-            jurk.Name = "Manbird";
-            jurk.Description = "Nog een jurk";
-
-            ProductType jurkType2 = new ProductType();
-            jurkType2.NameOverride = "Prachtige jurk";
-            jurkType2.DescriptionOverride = "Een mooie jurk";
-            jurkType2.Images.Add(new ProductImage("images/uploads/image-3.jpg"));
-
-            context.PropertyValueCouplings.Add(Couple(jurkType2, prijs, 500.0d));
-            context.PropertyValueCouplings.Add(Couple(jurkType2, kleur, "Wit kant"));
-            context.PropertyValueCouplings.Add(Couple(jurkType2, kleur, "Bruin Leer"));
-
-            jurk.ProductTypes.Add(jurkType2);
-
-            context.Product.Add(jurk);
-            context.SaveChanges();
-            #endregion
-
-            #region jurkk
-
-            Product jurkk = new Product();
-            jurkk.Name = "Manbird";
-            jurkk.Description = "Nog een jurk";
-
-            ProductType jurkType3 = new ProductType();
-            jurkType3.NameOverride = "Prachtige jurk, geslaagde bruiloft";
-            jurkType3.DescriptionOverride = "Met deze jurk komt alles goed";
-            jurkType3.Images.Add(new ProductImage("images/uploads/image-5.jpg"));
-
-            context.PropertyValueCouplings.Add(Couple(jurkType3, prijs, 750.0d));
-            context.PropertyValueCouplings.Add(Couple(jurkType3, kleur, "Grijs Leer"));
-            context.PropertyValueCouplings.Add(Couple(jurkType3, kleur, "Zwart Leer"));
-
-            jurkk.ProductTypes.Add(jurkType3);
-
-            context.Product.Add(jurkk);
             context.SaveChanges();
 
-            #endregion
-
-            #region jurk1
-
-            Product jurk1 = new Product();
-            jurk1.Name = "Ladybird 1";
-            jurk1.Description = "Een ladybird jurk";
-
-            ProductType dress1 = new ProductType();
-            dress1.NameOverride = "Kleine Jurk";
-            dress1.DescriptionOverride = "Een kleine jurk";
-            dress1.Images.Add(new ProductImage("images/uploads/image-1.jpg"));
-
-            context.PropertyValueCouplings.Add(Couple(dress1, prijs, 50.0d));
-            context.PropertyValueCouplings.Add(Couple(dress1, kleur, "Wit"));
-            context.PropertyValueCouplings.Add(Couple(dress1, kleur, "Bruin"));
-
-            jurk1.ProductTypes.Add(dress1);
-            context.Product.Add(jurk1);
-            #endregion
-
-            #region jurk2
-
-            Product jurk2 = new Product();
-            jurk2.Name = "Ladybird 2";
-            jurk2.Description = "Een ladybird jurk";
-
-            ProductType dress2 = new ProductType();
-            dress2.NameOverride = "Bruine jurk";
-            dress2.DescriptionOverride = "Een bruine ladybird jurk";
-            dress2.Images.Add(new ProductImage("images/uploads/image-2.jpg"));
-
-            context.PropertyValueCouplings.Add(Couple(dress2, prijs, 65.0d));
-            context.PropertyValueCouplings.Add(Couple(dress2, kleur, "Grijs"));
-            context.PropertyValueCouplings.Add(Couple(dress2, kleur, "Geel"));
-
-            jurk2.ProductTypes.Add(dress2);
-
-            context.Product.Add(jurk2);
-
-            #endregion
-
-            #region jurk3
-
-            Product jurk3 = new Product();
-            jurk3.Name = "Ladybird 3";
-            jurk3.Description = "Een ladybird jurk";
-
-            ProductType dress3 = new ProductType();
-            dress3.NameOverride = "Witte jurk";
-            dress3.DescriptionOverride = "Een witte ladybird jurk";
-            dress3.Images.Add(new ProductImage("images/uploads/image-3.jpg"));
-
-            context.PropertyValueCouplings.Add(Couple(dress3, prijs, 95.0d));
-            context.PropertyValueCouplings.Add(Couple(dress3, kleur, "Grijs"));
-            context.PropertyValueCouplings.Add(Couple(dress3, kleur, "Geel"));
-
-            jurk3.ProductTypes.Add(dress3);
-
-            context.Product.Add(jurk3);
-
-            #endregion
-
-            #region jurk4
-
-            Product jurk4 = new Product();
-            jurk4.Name = "Ladybird 4";
-            jurk4.Description = "Een ladybird jurk";
-
-            ProductType dress4 = new ProductType();
-            dress4.NameOverride = "Blauwe jurk";
-            dress4.DescriptionOverride = "Een blauwe ladybird jurk";
-            dress4.Images.Add(new ProductImage("images/uploads/image-4.jpg"));
-
-            context.PropertyValueCouplings.Add(Couple(dress4, prijs, 80.0d));
-            context.PropertyValueCouplings.Add(Couple(dress4, kleur, "Grijs"));
-            context.PropertyValueCouplings.Add(Couple(dress4, kleur, "Geel"));
-
-            jurk4.ProductTypes.Add(dress4);
-
-            context.Product.Add(jurk4);
-            context.SaveChanges();
-
-            #endregion
-            
         }
     }
 }

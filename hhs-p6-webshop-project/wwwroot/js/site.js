@@ -28,30 +28,11 @@ function getUniqueId(prefix) {
 
 /**
  * Format a date to ISO.
- *
- * @param {Date} dateTime Date time object.
- * @param {boolean} formatDate True to format the date, false if not.
- * @param {boolean} formatTime True to format the time, false if not.
  */
-function formatDateTime(dateTime, formatDate, formatTime) {
-    // Create a variable to store the formatted date time in
-    var formatted = "";
-
-    // Format the date
-    if(formatDate)
-        formatted = dateTime.getFullYear() + "-" +
-                ("0" + (dateTime.getMonth() + 1)).slice(-2) + "-" +
-                ("0" + dateTime.getDate()).slice(-2);
-
-    // Format the time
-    if(formatTime)
-        formatted = (formatDate ? " " : "") +
-                ("0" + dateTime.getHours()).slice(-2) + ":" +
-                ("0" + dateTime.getMinutes()).slice(-2) + ":" +
-                ("0" + dateTime.getSeconds()).slice(-2);
-
-    // Return the formatted string
-    return formatted;
+function formatDate(date) {
+    return date.getFullYear() + "-" +
+            ("0" + (date.getMonth() + 1)).slice(-2) + "-" +
+            ("0" + date.getDate()).slice(-2);
 }
 
 // Run this code when the page is finished loading
@@ -116,15 +97,7 @@ $(document).ready(function () {
     // Initialize the calendar with a date picker, if any element is selected
     if(calendarElement.length > 0) {
         // Create a variable for the selected date and time
-        var selectedDateTime = new Date();
-        selectedDateTime.setTime(selectedDateTime.getTime() + 7 * 24 * 60 * 60 * 1000);
-
-        // Get the time container, and radio buttons
-        var timeContainer = $(".time-container");
-        var timeRadioButtonContainer = timeContainer.find("#select_time");
-
-        // Get the second step button
-        var secondStepButton = $("#go_to_second");
+        var selectedDateTime = null;
 
         // Create a date picker render function
         function renderDatePickerDay(date) {
@@ -138,7 +111,7 @@ $(document).ready(function () {
             // Check whether the date is available, if the unavailable dates array isn't null
             if(unavailableDates != null) {
                 // Build the date string
-                var dateString = formatDateTime(date, true, false);
+                var dateString = formatDate(date);
 
                 // Determine whether this date is in the list of occupied dates
                 isAvailable = unavailableDates.indexOf(dateString) < 0;
@@ -151,98 +124,6 @@ $(document).ready(function () {
                 return [false, "", "Deze datum is bezet."];
         }
 
-        // Get the button to toggle to the time
-        var toggleToTimeButton = $(".toggle-time-date-to-time");
-        var toggleToDateButton = $(".toggle-time-time-to-date");
-
-        /**
-         * Show the date page.
-         *
-         * @param {boolean|undefined} [initial] True if this is the initial page (because a different animation will be used)j.
-         */
-        function showDatePage(initial) {
-            // Animate the pages when we're not on the initial page
-            if(!initial)
-                $(".time-date-box").slideToggle({
-                    "duration": 500,
-                    "easing": "easeInOutCubic"
-                });
-            else
-                $(".time-date-box").addClass("animated fadeIn");
-
-            // Fade out the buttons
-            timeRadioButtonContainer.find("li").addClass("animated fadeOutLeft");
-
-            // Animate the arrow buttons
-            toggleToDateButton.addClass("animated fadeOutLeft");
-
-            // Hide the second step button
-            secondStepButton.removeClass("animated fadeIn pulse").delay(1).addClass("animated fadeOut");
-
-            // Disable the animations when they complete
-            setTimeout(function () {
-                // Reset the radio button box contents, to remove the time selection radio buttons
-                timeRadioButtonContainer.html("");
-
-                // Remove the animations from the toggle to date button
-                toggleToDateButton.removeClass("animated fadeOutLeft").addClass("toggle-btn-disabled");
-
-                // Hide the second step button
-                secondStepButton.hide();
-            }, 500);
-
-            // Force select the currently selected date
-            calendarElement.datepicker("setDate", selectedDateTime);
-            onDateSelect(selectedDateTime);
-        }
-
-        /**
-         * Called when the time page should be shown.
-         */
-        function showTimePage() {
-            // Animate the pages
-            $(".time-date-box").slideToggle({
-                "duration": 500,
-                "easing": "easeInOutCubic"
-            });
-
-            // Hide the second step button
-            secondStepButton.removeClass("animated fadeOut").delay(0).addClass("animated fadeIn pulse");
-
-            // Animate the arrow buttons
-            toggleToTimeButton.addClass("animated fadeOutRight");
-            toggleToDateButton.addClass("animated fadeInRight");
-
-            // Disable the animations when they complete
-            setTimeout(function () {
-                toggleToTimeButton.removeClass("animated fadeOutRight").addClass("toggle-btn-disabled");
-            }, 500);
-        }
-
-        /**
-         * Called when a date is selected.
-         */
-        function onDateSelect(date) {
-            // Format the show date
-            var showDate = date.getDate() + " " + MONTH_NAMES[date.getMonth()] + " " + date.getFullYear();
-
-            // Get the toggle time date button and toggle it's visibility
-            var toggleTimeDateButton = $(".toggle-time-date");
-
-            // Animate the button
-            toggleTimeDateButton.attr("title", "").addClass("animated fadeInLeft");
-
-            // Update the selected date label
-            $(".selected-date").each(function () {
-                $(this).html(showDate);
-            });
-
-            // Set the selected date
-            selectedDateTime.setFullYear(date.getFullYear());
-            selectedDateTime.setMonth(date.getMonth());
-            selectedDateTime.setDate(date.getDate());
-        }
-
         // Set up the date picker
         calendarElement.datepicker({
             prevText: "<",
@@ -251,15 +132,23 @@ $(document).ready(function () {
             minDate: dateToday,
 
             onSelect: function(date) {
-                // Direct the function to onDateSelect with a proper date object
-                onDateSelect(new Date(date));
+                var dateObj = new Date(date);
+                var inputDate = dateObj.getDate() + "/" + (dateObj.getMonth() + 1) + "/" + dateObj.getFullYear();
+                var showDate = dateObj.getDate() + " " + MONTH_NAMES[dateObj.getMonth()] + " " + dateObj.getFullYear();
+
+                $(".toggle-time-date").removeClass("toggle-btn-disabled").attr("title", "");
+
+                $("#date_input").val(inputDate);
+                $(".selected-date").each(function () {
+                    $(this).html(showDate);
+                });
+
+                // Set the selected date
+                selectedDateTime = dateObj;
             },
 
             beforeShowDay: renderDatePickerDay
         });
-
-        // Show the date page
-        showDatePage(true);
 
         // Disable the loading indicator
         setLoadingIndicator(calendarElement, true);
@@ -285,8 +174,9 @@ $(document).ready(function () {
 
         // Load time data when a date is selected
         $(".toggle-time-date-to-time").click(function() {
-            // Show the time page
-            showTimePage();
+            // Get the time container, and radio buttons
+            var timeContainer = $(".time-container");
+            var timeRadioButtonContainer = timeContainer.find("#select_time");
 
             // Clear the list of radio buttons
             timeRadioButtonContainer.html("<i>Beschikbaarheid laden...</i>");
@@ -303,8 +193,8 @@ $(document).ready(function () {
 
                     // Append the radio button
                     timeRadioButtonContainer.append("<li>" +
-                        "<input class=\"time-option animated fadeInRight\" type=\"radio\" name=\"appointment_time\" value=\"" + value + "\" id=\"" + uniqueId + "\">" +
-                        "<label class=\"time-option-label animated fadeInRight\" for=\"" + uniqueId + "\">" + appointmentTimeObject.formattedTime + " uur</label>" +
+                        "<input class=\"time-option\" type=\"radio\" name=\"appointment_time\" value=\"" + value + "\" id=\"" + uniqueId + "\">" +
+                        "<label class=\"time-option-label\" for=\"" + uniqueId + "\">" + appointmentTimeObject.formattedTime + " uur</label>" +
                         "</li>");
                 }
 
@@ -344,7 +234,7 @@ $(document).ready(function () {
                         timeRadioButtonContainer.html("<i>Geen tijd beschikbaar op deze dag</i>");
 
                     // Link the radio buttons to the date time field
-                    timeRadioButtonContainer.find("input.time-option").change(function () {
+                    timeRadioButtonContainer.find("input").change(function () {
                         // Get the radio button element, and check whether it's selected
                         var radioButton = $(this);
                         var isSelected = radioButton.is(":checked");
@@ -354,28 +244,25 @@ $(document).ready(function () {
                             return;
 
                         // Parse the time
-                        var timeString = radioButton.val();
-                        var hour = parseInt(timeString.split(":")[0]);
-                        var minute = parseInt(timeString.split(":")[1]);
+                        var hour = parseInt(radioButton.val().split(":")[0]);
+                        var minute = parseInt(radioButton.val().split(":")[1]);
 
                         // Modify the selected date
                         selectedDateTime.setHours(hour);
                         selectedDateTime.setMinutes(minute);
                         selectedDateTime.setSeconds(0);
 
-                        // Set the date input field value
-                        $("#date_input").val(formatDateTime(selectedDateTime, true, true));
+                        // Get the date input field
+                        var dateField = $("#date_input");
 
+                        // Append the time
+                        dateField.val(dateField.val() + " " + $(this).val());
+                    });
+
+                    $(".time-option").click(function () {
                         // Show the go to second button
-                        $(".selected-time").html(" OM " + timeString);
-
-                        // Show the second button
-                        secondStepButton.show();
-
-                        // Pulse the button once
-                        setTimeout(function () {
-                            secondStepButton.removeClass("animated fadeIn").delay(0).addClass("animated pulse");
-                        }, 750);
+                        $("#go_to_second").show();
+                        $(".selected-time").html(" OM " + $(this).val());
                     });
 
                     // Set the loading indicator
@@ -383,12 +270,6 @@ $(document).ready(function () {
                 });
 
             }, 500);
-        });
-
-        // Load time data when a date is selected
-        $(".toggle-time-time-to-date").click(function() {
-            // Show the date page
-            showDatePage();
         });
     }
 
@@ -402,128 +283,26 @@ $(document).ready(function () {
         $("#appointment_step_image").attr("src", "/images/appointment/step-1.png");
     });
     $("#go_to_second, #back_to_second").click(function () {
-        // TODO: Possibly fade this
         $("#appointment_step_image").attr("src", "/images/appointment/step-2.png");
     });
-
     // Third button needs the check if the fields are filled in correctly
-    var leftOffsetHeight;
-    var rightOffsetHeight;
 
-    function switchStep(fromElements, toElements) {
-        // Get the list of panels
-        var panels = $(fromElements + ", " + toElements);
 
-        // Create a variable for the left and right container
-        var leftContainer;
-        var rightContainer;
-
-        // Get the left and right panels
-        var leftPanels = [];
-        var rightPanels = [];
-
-        // Loop through each panel to handle it manually
-        panels.each(function() {
-            var panel = $(this);
-            var isLeft = !panel.hasClass("right-box");
-            var container = panel.parent();
-            if(isLeft)
-                container = container.parent();
-
-            // Update the left and right container instances, give the containers a fixed width, and update the offset
-            if(isLeft) {
-                if(leftOffsetHeight == undefined && panel.is(":visible"))
-                    leftOffsetHeight = container.height() - panel.height();
-
-                if(leftContainer == undefined) {
-                    leftContainer = container;
-
-//                    container.width(container.width());
-                    container.height(container.height());
-                }
-
-                leftPanels.push(panel);
-
-            } else {
-                if(rightOffsetHeight == undefined && panel.is(":visible"))
-                    rightOffsetHeight = container.height() - panel.height();
-
-                if(rightContainer == undefined) {
-                    rightContainer = container;
-
-//                    container.width(container.outerWidth());
-                    container.height(container.height());
-                }
-
-                rightPanels.push(panel);
-            }
-        });
-
-        // Store the current position state to revert it to after animating
-        var wasPos = panels.eq(0).css("position");
-
-        // Define the target height
-        var targetHeight = 0;
-
-        // Loop through the panels to update their visibility
-        panels.each(function() {
-            var panel = $(this);
-            var isLeft = !panel.hasClass("right-box");
-            var container = panel.parent();
-            if(isLeft)
-                container = container.parent();
-
-            // Check whether the component is visible
-            if(panel.is(":visible")) {
-                // Toggle the fadeIn class to fadeOut
-                panel.removeClass("fadeIn animated").delay(0).addClass("animated fadeOut");
-
-                // Hide the panel when done
-                setTimeout(function() {
-                    panel.removeClass("fadeOut").addClass("fadeIn").hide();
-                    panel.css("position", wasPos);
-                }, 1000);
-
-            } else {
-                // Update the target height
-                var height = panel.height() + (isLeft ? leftOffsetHeight : rightOffsetHeight);
-                if(height > targetHeight)
-                    targetHeight = height;
-
-                // Show the panel, this will animate using CSS
-                panel.show();
-            }
-        });
-
-        // Properly resize the parent panel
-        leftContainer.animate({
-                "height": targetHeight
-        }, 500);
-        rightContainer.animate({
-                "height": targetHeight
-        }, 500);
-
-        // Make the position absolute of the first elements
-        var bigPanelLeft = leftPanels[0].index() < leftPanels[1].index() ? leftPanels[0] : leftPanels[1];
-        var bigPanelRight = rightPanels[0].index() < rightPanels[1].index() ? rightPanels[0] : rightPanels[1];
-//        bigPanelLeft.width(bigPanelLeft.width());
-//        bigPanelLeft.width(bigPanelRight.width());
-        bigPanelLeft.css("position", "absolute");
-        bigPanelRight.css("position", "absolute");
-
-        // Reset the position of the element
-        setTimeout(function() {
-            bigPanelLeft.css("position", wasPos);
-            bigPanelRight.css("position", wasPos);
-        }, 1000);
-    }
+    /**
+     * Toggle the different sections for creating an appointment
+     */
+    $(".toggle-time-date").click(function () {
+        if (!$(this).hasClass("toggle-btn-disabled")) {
+            $(".time-date-box").slideToggle(500, "easeInOutCubic");
+        }
+    });
 
     $("#go_to_second, #back_to_first").click(function () {
-        switchStep("#left_1, #right_1", "#left_2, #right_2");
+        $("#left_1, #left_2, #right_1, #right_2").toggle();
     });
 
     $("#back_to_second").click(function () {
-        switchStep("#left_2, #right_2", "#left_3, #right_3");
+        $("#left_2, #left_3, #right_2, #right_3").toggle();
     });
 
     /**
@@ -549,7 +328,7 @@ $(document).ready(function () {
             $("#fill_in_fields_warning").html("Je hebt niet alle verplichte velden ingevuld!");
         } else {
             $("#appointment_step_image").attr("src", "/images/appointment/step-3.png");
-            switchStep("#left_2, #right_2", "#left_3, #right_3");
+            $("#left_2, #left_3, #right_2, #right_3").toggle();
         }
     });
 
@@ -670,7 +449,7 @@ $(document).ready(function () {
             callback(null, data.times);
 
         }, {
-            date: formatDateTime(date, true, false)
+            date: formatDate(date)
         });
     }
 
@@ -744,106 +523,4 @@ $(document).ready(function () {
         $(".home-list>ol>li").eq(counter - 1).addClass("active");
         $(".appointment-banner-image-container>img").attr('src', "images/mooi-meisje-" + counter + ".jpg");
     });
-
-    // Find the product overview
-    var productOverviewElement = $(".product-overview");
-
-    // Load the filter logic when a product overview is available
-    if(productOverviewElement.length > 0) {
-        /**
-         * Fetch a list of dressesk.
-         * Filters are applied as specified in the sidebar.
-         */
-        function fetchProductsFiltered() {
-            // Show a loading indiator
-            setLoadingIndicator(productOverviewElement, true);
-
-            // Create a filter object
-            var filterObject = {
-                values: {}
-            };
-
-            // Find the selected checkboxes, and build the filter object
-            $(".filter").each(function() {
-                // Get the filter element
-                var filterElement = $(this);
-
-                // Get the list of checked checkboxes
-                var checkedBoxes = filterElement.find("input:checked");
-
-                // Skip if no boxes are selected
-                if(checkedBoxes.length <= 0)
-                    return;
-
-                // Get the product ID for this filter section as key
-                var key = String(filterElement.find("input.field-property-id").val());
-
-                // Create an entry in the filter object
-                filterObject.values[key] = [];
-
-                // Put the checkbox IDs in the array
-                checkedBoxes.each(function() {
-                    filterObject.values[key].push($(this).val());
-                });
-            });
-
-            // Filter the dresses and fetch the new list through AJAX
-            $.ajax({
-                url: "/api/dressfinder/product/filter/partial",
-                type: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                data: JSON.stringify(filterObject),
-                error: function(jqXhr, textStatus) {
-                    // Define the error message
-                    var error = "Failed to filter dresses.\n\nError: " + textStatus;
-
-                    // Alert the user
-                    alert(error);
-                },
-                success: function(data) {
-                    productOverviewElement.html(data);
-                },
-                complete: function() {
-                    // Hide the loading indiator
-                    setLoadingIndicator(productOverviewElement, false);
-                }
-            });
-        }
-
-        // Call the product fetch function when a filter is clicked
-        $(".filter").find("input[type=checkbox]").click(fetchProductsFiltered);
-
-        // Filter once on page load
-        fetchProductsFiltered();
-    }
-
-    // Get the appointment creation form
-    var createAppointmentFormElement = $("#create_appointment_form");
-
-    // Execute the appointment creation form logic when it's available on the page
-    if(createAppointmentFormElement.length > 0) {
-        // Get the button element to go to step 3
-        var stepThreeButton = $("#go_to_third");
-
-        // Handle key press events, and prevent the enter key from submitting the form
-        createAppointmentFormElement.keypress(function(event) {
-            // Continue if this wasn't the enter key that is pressed
-            if(event.keyCode !== 13)
-                return true;
-
-            // Validate the form
-            createAppointmentFormElement.validate();
-            var isValid = createAppointmentFormElement.valid();
-
-            // Go to step 3 if the form is valid
-            if(isValid)
-                stepThreeButton.click();
-
-            // The enter key is pressed, prevent the default action
-            event.preventDefault();
-            return false;
-        });
-    }
 });

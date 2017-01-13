@@ -8,25 +8,24 @@ using Microsoft.EntityFrameworkCore;
 using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models.ProductModels;
 
-namespace hhs_p6_webshop_project.Controllers.ProductsController
+namespace hhs_p6_webshop_project.Controllers.ProductController
 {
-    public class ProductTypesController : Controller
+    public class PropertyValuesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ProductTypesController(ApplicationDbContext context)
+        public PropertyValuesController(ApplicationDbContext context)
         {
             _context = context;    
         }
 
-        // GET: ProductTypes
+        // GET: PropertyValues
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.ProductType.Include(p => p.Product);
-            return View(await applicationDbContext.ToListAsync());
+            return View(await _context.PropertyValue.ToListAsync());
         }
 
-        // GET: ProductTypes/Details/5
+        // GET: PropertyValues/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,40 +33,38 @@ namespace hhs_p6_webshop_project.Controllers.ProductsController
                 return NotFound();
             }
 
-            var productType = await _context.ProductType.SingleOrDefaultAsync(m => m.ProductTypeId == id);
-            if (productType == null)
+            var propertyValue = await _context.PropertyValue.SingleOrDefaultAsync(m => m.PropertyValueId == id);
+            if (propertyValue == null)
             {
                 return NotFound();
             }
 
-            return View(productType);
+            return View(propertyValue);
         }
 
-        // GET: ProductTypes/Create
+        // GET: PropertyValues/Create
         public IActionResult Create()
         {
-            ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "Name");
             return View();
         }
 
-        // POST: ProductTypes/Create
+        // POST: PropertyValues/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductTypeId,DescriptionOverride,NameOverride,ProductId")] ProductType productType)
+        public async Task<IActionResult> Create([Bind("PropertyValueId,PropertyTypeProductId,Value")] PropertyValue propertyValue)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(productType);
+                _context.Add(propertyValue);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "Name", productType.ProductId);
-            return View(productType);
+            return View(propertyValue);
         }
 
-        // GET: ProductTypes/Edit/5
+        // GET: PropertyValues/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -75,23 +72,22 @@ namespace hhs_p6_webshop_project.Controllers.ProductsController
                 return NotFound();
             }
 
-            var productType = await _context.ProductType.SingleOrDefaultAsync(m => m.ProductTypeId == id);
-            if (productType == null)
+            var propertyValue = await _context.PropertyValue.SingleOrDefaultAsync(m => m.PropertyValueId == id);
+            if (propertyValue == null)
             {
                 return NotFound();
             }
-            ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "Name", productType.ProductId);
-            return View(productType);
+            return View(propertyValue);
         }
 
-        // POST: ProductTypes/Edit/5
+        // POST: PropertyValues/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductTypeId,DescriptionOverride,NameOverride,ProductId")] ProductType productType)
+        public async Task<IActionResult> Edit(int id, [Bind("PropertyValueId,PropertyTypeProductId,Value")] PropertyValue propertyValue)
         {
-            if (id != productType.ProductTypeId)
+            if (id != propertyValue.PropertyValueId)
             {
                 return NotFound();
             }
@@ -100,12 +96,12 @@ namespace hhs_p6_webshop_project.Controllers.ProductsController
             {
                 try
                 {
-                    _context.Update(productType);
+                    _context.Update(propertyValue);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProductTypeExists(productType.ProductTypeId))
+                    if (!PropertyValueExists(propertyValue.PropertyValueId))
                     {
                         return NotFound();
                     }
@@ -116,11 +112,10 @@ namespace hhs_p6_webshop_project.Controllers.ProductsController
                 }
                 return RedirectToAction("Index");
             }
-            ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "Name", productType.ProductId);
-            return View(productType);
+            return View(propertyValue);
         }
 
-        // GET: ProductTypes/Delete/5
+        // GET: PropertyValues/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -128,29 +123,29 @@ namespace hhs_p6_webshop_project.Controllers.ProductsController
                 return NotFound();
             }
 
-            var productType = await _context.ProductType.SingleOrDefaultAsync(m => m.ProductTypeId == id);
-            if (productType == null)
+            var propertyValue = await _context.PropertyValue.SingleOrDefaultAsync(m => m.PropertyValueId == id);
+            if (propertyValue == null)
             {
                 return NotFound();
             }
 
-            return View(productType);
+            return View(propertyValue);
         }
 
-        // POST: ProductTypes/Delete/5
+        // POST: PropertyValues/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var productType = await _context.ProductType.SingleOrDefaultAsync(m => m.ProductTypeId == id);
-            _context.ProductType.Remove(productType);
+            var propertyValue = await _context.PropertyValue.SingleOrDefaultAsync(m => m.PropertyValueId == id);
+            _context.PropertyValue.Remove(propertyValue);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
-        private bool ProductTypeExists(int id)
+        private bool PropertyValueExists(int id)
         {
-            return _context.ProductType.Any(e => e.ProductTypeId == id);
+            return _context.PropertyValue.Any(e => e.PropertyValueId == id);
         }
     }
 }

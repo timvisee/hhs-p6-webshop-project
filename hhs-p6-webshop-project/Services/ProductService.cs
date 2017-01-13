@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using hhs_p6_webshop_project.Api;
 using hhs_p6_webshop_project.Data;
-using hhs_p6_webshop_project.ExtraModels;
 using hhs_p6_webshop_project.Models.ProductModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
-using Microsoft.DotNet.Tools.Compiler;
 using Microsoft.EntityFrameworkCore;
 
 namespace hhs_p6_webshop_project.Services
@@ -23,131 +20,16 @@ namespace hhs_p6_webshop_project.Services
         }
 
         public List<Product> GetAllProducts() {
-            return
-                DatabaseContext.Product
-                    .Include(p => p.ProductTypes)
-                        .ThenInclude(pt => pt.Images)
-                    .Include(p => p.ProductTypes)
-                        .ThenInclude(pt => pt.PropertyValueCouplings)
-                            .ThenInclude(pvc => pvc.ProductType)
-                    .Include(p => p.ProductTypes)
-                        .ThenInclude(pt => pt.PropertyValueCouplings)
-                            .ThenInclude(pvc => pvc.PropertyType)
-                    .Include(p => p.ProductTypes)
-                        .ThenInclude(pt => pt.PropertyValueCouplings)
-                            .ThenInclude(pvc => pvc.PropertyValue)
-                    .ToList();
+            return DatabaseContext.Product
+                .Include(p => p.PropertyTypeProducts)
+                .ThenInclude(ptp => ptp.PropertyType)
+                .Include(p => p.PropertyTypeProducts)
+                .ThenInclude(ptp => ptp.PropertyValue)
+                .ToList();
         }
 
-        public List<ProductFilter> GetAllProductFilters() {
-            List<ProductFilter> filters = new List<ProductFilter>();
-
-            foreach (PropertyType pt in DatabaseContext.PropertyType) {
-                var f = new ProductFilter();
-                f.FilterType = pt;
-                filters.Add(f);
-            }
-
-            var pvcs =
-                DatabaseContext.PropertyValueCouplings
-                .Include(pvc => pvc.PropertyType)
-                .Include(pvc => pvc.PropertyValue)
-                .Include(pvc => pvc.ProductType);
-
-            foreach (PropertyValueCoupling pvc in pvcs) {
-                var x = filters.Find(pf => pf.FilterType.Equals(pvc.PropertyType));
-
-                bool add = true;
-
-                foreach (PropertyValue v in x.Values) {
-                    if (v.Value == pvc.PropertyValue.Value)
-                        add = false;
-                }
-
-                if (add)
-                    x.Values.Add(pvc.PropertyValue);
-            }
-
-            return filters;
-
-        }
-
-        public List<PropertyValueCoupling> Test() {
-            return DatabaseContext.PropertyValueCouplings.ToList();
-        }
-
-        public List<ProductFilter> ParseFilterRequest(FilterRequest req) {
-
-            //reconstruct filters
-            var pvcs =
-                DatabaseContext.PropertyValueCouplings
-                .Include(pvc => pvc.PropertyType)
-                .Include(pvc => pvc.PropertyValue)
-                .Include(pvc => pvc.ProductType);
-
-            var suppliedFilters = new List<ProductFilter>();
-
-            foreach (PropertyValueCoupling pvc in pvcs) {
-                if (req.Values.ContainsKey(pvc.PropertyTypeId)) {
-                    if (req.Values[pvc.PropertyTypeId].Contains(pvc.PropertyValueId)) {
-                        ProductFilter f = suppliedFilters.FirstOrDefault(pf => pf.FilterType.PropertyTypeId == pvc.PropertyTypeId);
-                        if (f == null) {
-                            f = new ProductFilter();
-                            f.FilterType = pvc.PropertyType;
-                            suppliedFilters.Add(f);
-                        }
-                        f.Values.Add(pvc.PropertyValue);
-                    }
-                }
-            }
-            
-
-            foreach (var filter in suppliedFilters) {
-                Console.WriteLine($"Selected filter: {filter.ToString()}");
-            }
-
-            return suppliedFilters;
-        }
-
-        public List<Product> Filter(List<ProductFilter> filters, List<Product> products) {
-            List<Product> results = new List<Product>();
-
-            foreach (Product p in products) {
-                bool isMatch = false;
-                foreach (ProductType pt in p.ProductTypes) {
-
-                    //Get a list of all PropertyValues for the current ProductType
-                    var pvcs =
-                        DatabaseContext.PropertyValueCouplings
-                        .Include(pvc => pvc.PropertyType)
-                        .Include(pvc => pvc.PropertyValue)
-                        .Include(pvc => pvc.ProductType)
-                        .Where(pvc => pvc.ProductType == pt);
-
-                    //Check if they match the filter
-                    foreach (ProductFilter f in filters) {
-                        var matchingFields = pvcs.Where(pvc => pvc.PropertyType.Equals(f.FilterType)).Select(pvc => pvc.PropertyValue);
-
-                        //Now if atleast one filter value is present, the product matches
-                        foreach (PropertyValue pv in f.Values) {
-                            if (matchingFields.Any(pppp => pppp.Equals(pv))) {
-                                isMatch = true;
-
-
-
-                                Console.WriteLine($"Product filter match -> {p.Name} on {f.FilterType.Name}");
-                            }
-                        }
-                    }
-
-                    if (isMatch)
-                        break;
-                }
-                if (isMatch)
-                    results.Add(p);
-            }
-
-            return results;
+        public List<PropertyTypeProduct> Test() {
+            return DatabaseContext.PropertyTypeProducts.ToList();
         }
 
         /// <summary>

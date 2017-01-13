@@ -19,6 +19,9 @@ namespace hhs_p6_webshop_project.Models.ProductModels {
         [Required]
         public string Value { get; set; }
 
+        public int PropertyTypeProductId { get; set; }
+        public PropertyTypeProduct PropertyTypeProduct { get;set; }
+
         /// <summary>
         /// Compare this property value to another property value instance.
         /// </summary>
@@ -38,8 +41,5 @@ namespace hhs_p6_webshop_project.Models.ProductModels {
             return PropertyValueId == other.PropertyValueId || Value.Equals(other.Value);
         }
 
-        public override string ToString() {
-            return Value;
-        }
     }
 }
