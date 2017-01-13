@@ -718,7 +718,7 @@ $(document).ready(function () {
 
             // Center the indicator
             indicator.css({
-                top: overlay.height() / 2 - indicator.height() / 2,
+                top: Math.min(overlay.height() / 2 - indicator.height() / 2, 225),
                 left: overlay.width() / 2 - indicator.width() / 2
             });
 
