@@ -46,12 +46,15 @@ namespace hhs_p6_webshop_project.Services
             return val;
         }
 
-        //public List<Product> Filter(Dictionary<string, HashSet<object>> filterSet) {
-        //    List<Product> products = GetAllProducts();
+        public List<Product> Filter(Dictionary<string, HashSet<object>> filterSet)
+        {
+            List<Product> products = GetAllProducts();
 
-        //    foreach()
 
-        //}
+            return null;
+            //foreach ()
+
+        }
 
         public PagedResponse GetAllProductsPaged(int start, int count) {
             PagedResponse response = new PagedResponse();
