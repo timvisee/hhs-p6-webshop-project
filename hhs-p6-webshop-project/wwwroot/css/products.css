@@ -92,6 +92,7 @@
     display: none;
 }
 
+.property-Kleur .color-circle,
 .product-colors .color-circle {
     width: 15px;
     height: 15px;
@@ -99,6 +100,38 @@
     margin-right: 10px;
     border-radius: 100%;
     border: 1px solid #e2e2e2;
+}
+
+.color-circle.Wit {
+    background-color: white;
+}
+
+.color-circle.Geel {
+    background-color: yellow;
+}
+
+.color-circle.Bruin {
+    background-color: brown;
+}
+
+.color-circle.Grijs {
+    background-color: gray;
+}
+
+.color-circle.Blauw {
+    background-color: blue;
+}
+
+.color-circle.Roze {
+    background-color: pink;
+}
+
+.color-circle.Ivoor {
+    background-color: ivory;
+}
+
+.color-circle.Zwart {
+    background-color: black;
 }
 
 .product:hover .product-colors,
@@ -285,44 +318,47 @@
     margin-bottom: 5px;
 }
 
-.product-information span, .product-information p {
-    font-size: 1em;
-    font-weight: normal;
+.property-wrap {
+    margin-top: 20px;
+    float: left;
+    width: 100%;
+    font-size: 1.2em;
 }
 
-.product-information-undertext {
-    margin-top: 25px;
+.property-name {
+    float: left;
+    margin-right: 5px;
 }
 
-.product-information-attributes {
-    margin-top: 25px;
+.property-field {
+    float: left;
 }
 
-    .product-information-attributes a {
-        color: #F0597C;
-    }
+.product-information-attributes a {
+    color: #F0597C;
+}
 
-    .product-information-attributes .make-appointment {
+.product-information-attributes .make-appointment {
+    border: 3px solid #F0597C;
+    border-radius: 0px;
+    background-color: #F0597C;
+    color: #FFF;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: .9em;
+    font-family: nexa-black;
+    position: absolute;
+    margin-top: 15px;
+}
+
+    .product-information-attributes .make-appointment:hover {
         border: 3px solid #F0597C;
         border-radius: 0px;
-        background-color: #F0597C;
-        color: #FFF;
-        padding: 10px 15px;
-        text-transform: uppercase;
-        font-weight: bold;
-        font-size: .9em;
-        font-family: nexa-black;
-        position: absolute;
-        margin-top: 15px;
+        background-color: transparent;
+        color: #F0597C;
+        text-decoration: none;
     }
-
-        .product-information-attributes .make-appointment:hover {
-            border: 3px solid #F0597C;
-            border-radius: 0px;
-            background-color: transparent;
-            color: #F0597C;
-            text-decoration: none;
-        }
 
 .product-make-appointment-container {
     margin-top: 65px;
