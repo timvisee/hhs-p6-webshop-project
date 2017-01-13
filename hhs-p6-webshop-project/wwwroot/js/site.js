@@ -818,4 +818,32 @@ $(document).ready(function () {
         // Filter once on page load
         fetchProductsFiltered();
     }
+
+    // Get the appointment creation form
+    var createAppointmentFormElement = $("#create_appointment_form");
+
+    // Execute the appointment creation form logic when it's available on the page
+    if(createAppointmentFormElement.length > 0) {
+        // Get the button element to go to step 3
+        var stepThreeButton = $("#go_to_third");
+
+        // Handle key press events, and prevent the enter key from submitting the form
+        createAppointmentFormElement.keypress(function(event) {
+            // Continue if this wasn't the enter key that is pressed
+            if(event.keyCode !== 13)
+                return true;
+
+            // Validate the form
+            createAppointmentFormElement.validate();
+            var isValid = createAppointmentFormElement.valid();
+
+            // Go to step 3 if the form is valid
+            if(isValid)
+                stepThreeButton.click();
+
+            // The enter key is pressed, prevent the default action
+            event.preventDefault();
+            return false;
+        });
+    }
 });
