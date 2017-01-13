@@ -44,9 +44,9 @@
 
     List<string> properties = new List<string>();
 
-// Todo:
-// First loop over all the propertytypes (color, price etc)
-// Then loop over the values .where(pt => pt.propertytype = type)
+    // Todo:
+    // First loop over all the propertytypes (color, price etc)
+    // Then loop over the values .where(pt => pt.propertytype = type)
 
     Console.WriteLine("-------------- All Properties: --------------");
     foreach (var d in details) {
@@ -98,15 +98,17 @@
             </div>
             <div class="product-information-container">
                 <div class="product-information">
-                    <h4>@Html.DisplayFor(model => model.Name)</h4>
-                    <span>artikel nr. 12294</span>
+                    <h4>@Model.Name</h4>
+                    <span>artikel nr. @Model.ProductId</span>
                     <div class="product-information-undertext">
-                        <span>Trouwjurk van het merk Maggie Sottero gemaakt van kant. De top kan met- en zonder schouders gedragen worden. De jurk heeft een laag uitgesneden rug en een fishtail model met een sleep.</span>
+                        <p>
+                            @Model.Description
+                        </p>
                     </div>
                     <div class="product-information-attributes">
                         @{
                             foreach (var p in properties) {
-                                <span>@p</span>
+                        <span>@p</span>
                             }
 
                         }
