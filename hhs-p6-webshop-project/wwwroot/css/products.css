@@ -29,8 +29,7 @@
     height: 432px;
 }
 
-.product-overview .product:nth-child(1),
-.product-overview .product:nth-child(4n) {
+.product-overview .product:nth-child(1 + 3n) {
     clear: left;
 }
 
