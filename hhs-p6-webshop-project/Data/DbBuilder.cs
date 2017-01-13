@@ -106,6 +106,17 @@ namespace hhs_p6_webshop_project.Data {
 
             dress.ProductTypes.Add(dress_klein);
 
+            context.Product.Add(dress);
+            context.SaveChanges();
+
+            #endregion
+
+            #region dresss 
+
+            Product dresss = new Product();
+            dresss.Name = "Ladybird";
+            dresss.Description = "Een ladybird jurk";
+
             ProductType jurk_bruin = new ProductType();
             jurk_bruin.NameOverride = "Bruine jurk";
             jurk_bruin.DescriptionOverride = "Een bruine ladybird jurk";
@@ -115,9 +126,9 @@ namespace hhs_p6_webshop_project.Data {
             context.PropertyValueCouplings.Add(Couple(jurk_bruin, kleur, "Grijs"));
             context.PropertyValueCouplings.Add(Couple(jurk_bruin, kleur, "Geel"));
 
-            dress.ProductTypes.Add(jurk_bruin);
+            dresss.ProductTypes.Add(jurk_bruin);
 
-            context.Product.Add(dress);
+            context.Product.Add(dresss);
             context.SaveChanges();
 
             #endregion
@@ -125,7 +136,7 @@ namespace hhs_p6_webshop_project.Data {
             #region jurk 
 
             Product jurk = new Product();
-            jurk.Name = "Jurk2";
+            jurk.Name = "Manbird";
             jurk.Description = "Nog een jurk";
 
             ProductType jurkType2 = new ProductType();
@@ -139,6 +150,16 @@ namespace hhs_p6_webshop_project.Data {
 
             jurk.ProductTypes.Add(jurkType2);
 
+            context.Product.Add(jurk);
+            context.SaveChanges();
+            #endregion
+
+            #region jurkk
+
+            Product jurkk = new Product();
+            jurkk.Name = "Manbird";
+            jurkk.Description = "Nog een jurk";
+
             ProductType jurkType3 = new ProductType();
             jurkType3.NameOverride = "Prachtige jurk, geslaagde bruiloft";
             jurkType3.DescriptionOverride = "Met deze jurk komt alles goed";
@@ -148,9 +169,9 @@ namespace hhs_p6_webshop_project.Data {
             context.PropertyValueCouplings.Add(Couple(jurkType3, kleur, "Grijs Leer"));
             context.PropertyValueCouplings.Add(Couple(jurkType3, kleur, "Zwart Leer"));
 
-            jurk.ProductTypes.Add(jurkType3);
+            jurkk.ProductTypes.Add(jurkType3);
 
-            context.Product.Add(jurk);
+            context.Product.Add(jurkk);
             context.SaveChanges();
 
             #endregion
