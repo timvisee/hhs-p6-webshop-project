@@ -1,6 +1,14 @@
 @using hhs_p6_webshop_project.Models.ProductModels
 @using Microsoft.AspNetCore.Mvc.Rendering
 
+@{
+    var index = 0;
+}
+
 @foreach (Product item in Model.Products) {
+    ViewData["itemIndex"] = index;
+
     @Html.Partial("~/Views/Products/ProductContent.cshtml", item);
+
+    index += 1;
 }

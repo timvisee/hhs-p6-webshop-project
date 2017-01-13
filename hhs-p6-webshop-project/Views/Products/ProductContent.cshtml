@@ -13,7 +13,7 @@
     }
 }
 
-<div class="product col-md-4 col-sm-12 animate-product-catalog-enter">
+<div class="product col-md-4 col-sm-12 wow animate-product-catalog-enter" data-wow-delay="@((Int32.Parse(ViewData["itemIndex"].ToString()) * 0.04) + "s")">
     <a asp-action="Details" asp-route-id="@Model.ProductId">
         <div class="vertical-align">
             <div class="horizontal-align">
