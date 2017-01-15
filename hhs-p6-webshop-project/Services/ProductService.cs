@@ -8,6 +8,7 @@ using hhs_p6_webshop_project.Models.ProductModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 
 namespace hhs_p6_webshop_project.Services
 {
@@ -25,6 +26,18 @@ namespace hhs_p6_webshop_project.Services
                 .ThenInclude(co => co.Images)
                 .ToList();
             
+        }
+
+        private List<object>
+            ParseFuckingAnoyingJsonArrayOfArraysToJustAFuckingListGodFuckingDamnitIHateThisFuckingBullshit(HashSet<object> objects) {
+            List<object> values  = new List<object>();
+
+            foreach (JArray value in objects) {
+                for (int i = 0; i < value.Count; i++) {
+                    values.Add(value[i].Value<string>());
+                }
+            }
+            return values;
         }
 
         public List<ColorOption> GetColorOptions() {
@@ -49,11 +62,25 @@ namespace hhs_p6_webshop_project.Services
         public List<Product> Filter(Dictionary<string, HashSet<object>> filterSet)
         {
             List<Product> products = GetAllProducts();
+            List<Product> results = new List<Product>();
 
+            Dictionary<string, List<object>> betterList = new Dictionary<string, List<object>>();
 
-            return null;
-            //foreach ()
+            foreach (KeyValuePair<string, HashSet<object>> pair in filterSet) {
+                if (pair.Key == "Kleur")
+                    betterList.Add(pair.Key, ParseFuckingAnoyingJsonArrayOfArraysToJustAFuckingListGodFuckingDamnitIHateThisFuckingBullshit(pair.Value));
+            }
 
+            foreach (Product product in products) {
+                if (product.IsMatch(filterSet)) {
+
+                    var temp = betterList.Where(kv => kv.Key == "Kleur").Select(kv => kv.Value).SelectMany(x => x).Cast<string>().ToList();
+                    product.Sort(temp);
+                    results.Add(product);
+                }
+            }
+            
+            return results;
         }
 
         public PagedResponse GetAllProductsPaged(int start, int count) {

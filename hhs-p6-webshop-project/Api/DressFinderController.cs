@@ -23,6 +23,11 @@ namespace hhs_p6_webshop_project.Api
             return Json(ProductService.GetFilters());
         }
 
+        [HttpPost("product/filter")]
+        public JsonResult Filter([FromBody] Dictionary<string, HashSet<object>> filters) {
+            return Json(ProductService.Filter(filters));
+        }
+
         [HttpGet("product/test")]
         public JsonResult GetAll() {
             return Json(ProductService.GetColorOptions());

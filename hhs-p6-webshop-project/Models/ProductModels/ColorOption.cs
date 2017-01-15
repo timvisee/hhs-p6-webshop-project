@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace hhs_p6_webshop_project.Models.ProductModels
 {
-    public class ColorOption : IEquatable<ColorOption>
+    public class ColorOption : IEquatable<ColorOption>, IComparable<List<string>> 
     {
         public ColorOption() {
             Images = new List<ProductImage>();
@@ -26,6 +26,13 @@ namespace hhs_p6_webshop_project.Models.ProductModels
 
         public bool Equals(ColorOption other) {
             return Color == other.Color;
+        }
+
+        public int CompareTo(List<string> list) {
+            if (list.Contains(Color))
+                return 1;
+
+            return 0;
         }
     }
 }
