@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using hhs_p6_webshop_project.Models;
 using hhs_p6_webshop_project.Models.AppointmentModels;
+using hhs_p6_webshop_project.Models.BlogModels;
 using Microsoft.Extensions.Configuration;
 using hhs_p6_webshop_project.Models.ProductModels;
 
@@ -14,7 +15,7 @@ namespace hhs_p6_webshop_project.Data {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options) { }
 
-        public ApplicationDbContext() : base(CreateTestContext()) {}
+        public ApplicationDbContext() : base(CreateTestContext()) { }
 
         static DbContextOptions<ApplicationDbContext> CreateTestContext() {
             var builder = new DbContextOptionsBuilder<ApplicationDbContext>();
@@ -36,7 +37,9 @@ namespace hhs_p6_webshop_project.Data {
                 .WithOne(pi => pi.ColorOption)
                 .HasForeignKey(pi => pi.ColorOptionId);
 
-         }
+
+            builder.Entity<BlogArticleCategory>().HasKey(x => new { x.BlogArticleId, x.BlogCategoryId });
+        }
 
         public DbSet<Appointment> Appointment { get; set; }
 
@@ -48,5 +51,10 @@ namespace hhs_p6_webshop_project.Data {
 
         public DbSet<ProductImage> ProductImages { get; set; }
 
+        public DbSet<BlogArticleCategory> BlogArticleCategory { get; set; }
+
+        public DbSet<BlogArticle> BlogArticle { get; set; }
+
+        public DbSet<BlogCategory> BlogCategory { get; set; }
     }
 }

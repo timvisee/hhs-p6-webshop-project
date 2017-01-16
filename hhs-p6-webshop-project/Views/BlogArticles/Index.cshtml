@@ -1,0 +1,47 @@
+@model IEnumerable<hhs_p6_webshop_project.Models.BlogModels.BlogArticle>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ArticleText)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImagePath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArticleText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImagePath)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.BlogArticleId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.BlogArticleId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.BlogArticleId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
