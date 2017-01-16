@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using hhs_p6_webshop_project.Api;
-using hhs_p6_webshop_project.ExtraModels;
 using hhs_p6_webshop_project.Models.ProductModels;
 
 namespace hhs_p6_webshop_project.Services
@@ -16,17 +15,11 @@ namespace hhs_p6_webshop_project.Services
         /// <returns>A <see cref="List{T}"/> of all <see cref="Product"/> product instances.</returns>
         List<Product> GetAllProducts();
 
-        /// <summary>
-        /// Returns a list of all PropertyTypes with all possible values.
-        /// </summary>
-        /// <returns></returns>
-        List<ProductFilter> GetAllProductFilters();
-            
-        List<PropertyValueCoupling> Test();
+        List<ColorOption> GetColorOptions();
 
-        List<ProductFilter> ParseFilterRequest(FilterRequest req);
+        Dictionary<string, HashSet<object>> GetFilters();
 
-        List<Product> Filter(List<ProductFilter> filters, List<Product> products);
+        List<Product> Filter(Dictionary<string, HashSet<object>> filterSet);
 
             /// <summary>
         /// Returns a list of all products, sorted by Id, ascending.
@@ -39,9 +32,9 @@ namespace hhs_p6_webshop_project.Services
         /// </summary>
         /// <param name="products">the <see cref="Product"/> instances to return the available filters for</param>
         /// <returns>A <see cref="List{T}"/> of available filters for a given <see cref="Product"/> range</returns>
-        List<PropertyValue> GetAllAvailableFiltersForProducts(List<Product> products);
+        //List<PropertyValue> GetAllAvailableFiltersForProducts(List<Product> products);
 
-        List<PropertyType> GetPropertyTypesForProduct(Product product);
-        List<PropertyType> AllProductFilterTypesAsList();
+        //List<PropertyType> GetPropertyTypesForProduct(Product product);
+        //List<PropertyType> AllProductFilterTypesAsList();
     }
 }

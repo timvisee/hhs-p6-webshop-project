@@ -25,62 +25,28 @@ namespace hhs_p6_webshop_project.Data {
         protected override void OnModelCreating(ModelBuilder builder) {
             base.OnModelCreating(builder);
 
-            builder.Entity<PropertyValueCoupling>()
-                .HasKey(x => new {x.ProductTypeId, x.PropertyTypeId, x.PropertyValueId});
-
             builder.Entity<Product>()
-                .HasMany(p => p.ProductTypes)
-                .WithOne(pt => pt.Product)
-                .HasForeignKey(fk => fk.ProductId);
+                .HasMany(p => p.ColorOptions)
+                .WithOne(co => co.Product)
+                .HasForeignKey(co => co.ProductId);
+            
 
-            builder.Entity<ProductType>()
-                .HasMany(pt => pt.Images)
-                .WithOne(pi => pi.ProductType)
-                .HasForeignKey(fk => fk.ProductTypeId);
+            builder.Entity<ColorOption>()
+                .HasMany(co => co.Images)
+                .WithOne(pi => pi.ColorOption)
+                .HasForeignKey(pi => pi.ColorOptionId);
 
-            builder.Entity<ProductType>()
-                .HasMany(pt => pt.PropertyValueCouplings)
-                .WithOne(pvc => pvc.ProductType)
-                .HasForeignKey(fk => fk.ProductTypeId);
-
-            //builder.Entity<PropertyValue>()
-            //    .HasOne(pv => pv.)
-            //    .WithOne(pt => pt.)
-            //    .HasForeignKey<PropertyValueCoupling>(fk => fk.PropertyValueId);
-
-            //builder.Entity<PropertyValueCoupling>()
-            //    .HasOne(pvc => pvc.PropertyValue)
-            //    .WithOne(pv => pv.PropertyValueCoupling);
-
-            //builder.Entity<PropertyTypeProduct>()
-            //    .HasOne(ptp => ptp.PropertyValue)
-            //    .WithOne(pv => pv.PropertyTypeProduct);
-
-            //builder.Entity<PropertyTypeProduct>()
-            //    .HasOne(ptp => ptp.Product)
-            //    .WithMany(p => p.PropertyTypeProducts)
-            //    .HasForeignKey(fk => fk.ProductId);
-        }
+         }
 
         public DbSet<Appointment> Appointment { get; set; }
 
         public DbSet<AppointmentTime> AppointmentTime { get; set; }
 
-        public DbSet<Product> Product { get; set; }
+        public DbSet<Product> Products { get; set; }
 
-        public DbSet<PropertyValue> PropertyValue { get; set; }
+        public DbSet<ColorOption> ColorOptions { get; set; }
 
-        public DbSet<PropertyType> PropertyType { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
 
-        public DbSet<PropertyValueCoupling> PropertyValueCouplings { get; set; }
-
-        public DbSet<ProductImage> ProductImage { get; set; }
-
-        public DbSet<ProductType> ProductType { get; set; }
-
-        //public DbSet<ProductImage> ProductImage { get; set; }
-
-
-      
     }
 }

@@ -1,228 +1,30 @@
-@using System.Collections
-@using System.Threading.Tasks
-@using hhs_p6_webshop_project.Models.ProductModels
 @model hhs_p6_webshop_project.Models.ProductModels.Product
 
-<link href="~/css/products.css" rel="stylesheet" />
 @{
-    ViewData["Title"] = Model.Name;
-    ViewData["PinkBackground"] = true;
-
-    var details = @Model.ProductTypes;
-
-    foreach (var d in details) {
-        Console.WriteLine("---------------------------------------");
-        Console.WriteLine("-- Name: " + d.NameOverride);
-        Console.WriteLine("-- Descr: " + d.DescriptionOverride);
-        Console.WriteLine("-- ProdId: " + d.ProductId);
-        Console.WriteLine("-- ProdTypeId: " + d.ProductTypeId);
-        Console.WriteLine("------------------ Images: ------------------");
-        foreach (var i in d.Images) {
-            Console.WriteLine("---- Image ----");
-            Console.WriteLine("---- Path: " + i.Path);
-            Console.WriteLine("---- ImgId: " + i.ProductImageId);
-        }
-        Console.WriteLine("---------------- Properties: ----------------");
-        foreach (var p in d.PropertyValueCouplings) {
-            Console.WriteLine("---- PropertyValueCouplings ----");
-            Console.WriteLine("---- ProdTypeId:" + p.ProductTypeId);
-            Console.WriteLine("---- PropTypeId:" + p.PropertyTypeId);
-            Console.WriteLine("---- PropValue:" + p.PropertyValue.Value);
-            Console.WriteLine("---- PropType:" + p.PropertyType.Name);
-            Console.WriteLine("---- ProdName:" + p.ProductType.Product.Name);
-        }
-        Console.WriteLine("---------------------------------------");
-    }
-
-
-    Console.WriteLine("---------------- All Images: ----------------");
-    foreach (var d in details) {
-        foreach (var i in d.Images) {
-            Console.WriteLine("---- Path: " + i.Path);
-        }
-    }
-
-    // TODO alles ff mooi fixen
-    //var properties = new Dictionary<string, string>();
-
-    //List<string> properties = new List<string>();
-    //string[] propertyTypes;
-    HashSet<PropertyType> propertyTypes = new HashSet<PropertyType>();
-
-
-    // Todo:
-    // First loop over all the propertytypes (color, price etc)
-    // Then loop over the values .where(pt => pt.propertytype = type)
-
-    Console.WriteLine("-------------- All Properties: --------------");
-    foreach (var d in details) {
-        foreach (var p in d.PropertyValueCouplings) {
-            propertyTypes.Add(p.PropertyType);
-        }
-    }
-
-
-
-    var ImagePath = "images/default.jpg";
-
-    try {
-        ImagePath = @Model.ProductTypes.FirstOrDefault().Images.FirstOrDefault().Path;
-    } catch (Exception e) {
-        // Tering harde beun maar het werkt echt perfect
-    }
+    ViewData["Title"] = "Details";
 }
 
-<div class="single-container">
-    @if (User.Identity.IsAuthenticated) {
-    <div>
-        <a asp-action="Edit" asp-route-id="@Model.ProductId">Edit</a>
-    </div>
-    }
-    <div class="row">
-        <div class="back-to-dress-finder">
-            <a asp-action="Index"><img src="/images/products/white-arrow-back.png" alt="<" />Terug naar overzicht</a>
-        </div>
-    </div>
-    <div class="row">
-        <div class="product-details">
-            <div class="side-pictures">
-                <div class="small-picture">
-                    <img src="~/@ImagePath" alt="" />
-                </div>
-                <div class="small-picture">
-                    <img src="~/@ImagePath" alt="" />
-                </div>
-                <div class="small-picture">
-                    <img src="~/@ImagePath" alt="" />
-                </div>
-            </div>
-            <div class="big-picture">
-                <div class="vertical-align">
-                    <div class="horizontal-align">
-                        <img src="~/@ImagePath" alt="" />
-                    </div>
-                </div>
-            </div>
-            <div class="product-information-container">
-                <div class="product-information">
-                    <h4>@Model.Name</h4>
-                    <span>artikel nr. @Model.ProductId</span>
-                    <div class="product-information-undertext">
-                        <p>
-                            @Model.Description
-                        </p>
-                    </div>
-                    <div class="product-information-attributes">
-                        @{
-                            foreach (var p in propertyTypes) {
-                        <div class="property-wrap">
-                            <span class="property-name">@p.Name</span>
-                            <div class="property-field property-@p.Name">
-                                @{
-                                    foreach (var d in details) {
-                                        foreach (var s in d.PropertyValueCouplings) {
-                                            if (p.PropertyTypeId == s.PropertyTypeId) {
-                                                if (s.PropertyType.Name == "Prijs") {
-                                <span>
-                                    &euro;
-                                    @Html.DisplayFor(model => s.PropertyValue.Value)
-                                </span>
-                                                } else if (s.PropertyType.Name == "Kleur") {
-                                <span class="color-circle @s.PropertyValue.Value">
-                                </span>
-                                                } else {
-                                <span>
-                                    @Html.DisplayFor(model => s.PropertyValue.Value)
-                                </span>
-                                                }
+<h2>Details</h2>
 
-                                            }
-                                        }
-                                    }
-                                }
-                            </div>
-                        </div>
-                                    }
-                        }
-                        <Br />
-                        <Br />
-                        <Br/>
-                        <div class="product-make-appointment-container">
-                            <p>Kom deze jurk passen!</p>
-                            <a asp-controller="Appointments" asp-action="Create" class="make-appointment">Pasafspraak maken</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="additions-container">
-            <hr class="additions" />
-            <span class="additions-text">Bijpassende sieraden</span>
-        </div>
-    </div>
-    <div class="row">
-        <div class="addition-images-wrapper">
-            <div class="addition-item">
-                <div class="addition-image">
-                    <img src="~/images/uploads/addition-picture.jpg" alt="" />
-                </div>
-                <span>Abrazi</span>
-            </div>
-            <div class="addition-item">
-                <div class="addition-image">
-                    <img src="~/images/uploads/addition-picture.jpg" alt="" />
-                </div>
-                <span>Abrazi</span>
-            </div>
-            <div class="addition-item">
-                <div class="addition-image">
-                    <img src="~/images/uploads/addition-picture.jpg" alt="" />
-                </div>
-                <span>Abrazi</span>
-            </div>
-            <div class="addition-item">
-                <div class="addition-image">
-                    <img src="~/images/uploads/addition-picture.jpg" alt="" />
-                </div>
-                <span>Abrazi</span>
-            </div>
-            <a asp-action="Index" class="make-appointment">Bezoek de webshop</a>
-        </div>
-    </div>
-    <div class="row">
-        <div class="additions-container">
-            <hr class="additions" />
-            <span class="additions-text">Of zijn deze jurken meer iets voor jou?</span>
-        </div>
-    </div>
-    <div class="row">
-        <div class="addition-images-wrapper">
-            <div class="addition-item">
-                <div class="addition-image">
-                    <img src="~/images/uploads/image-1.jpg" alt="" />
-                </div>
-                <span>Maggie Sottero</span>
-            </div>
-            <div class="addition-item">
-                <div class="addition-image">
-                    <img src="~/images/uploads/image-2.jpg" alt="" />
-                </div>
-                <span>Beautiful by Enzoani</span>
-            </div>
-            <div class="addition-item">
-                <div class="addition-image">
-                    <img src="~/images/uploads/image-3.jpg" alt="" />
-                </div>
-                <span>Ladybird</span>
-            </div>
-            <div class="addition-item">
-                <div class="addition-image">
-                    <img src="~/images/uploads/image-6.jpg" alt="" />
-                </div>
-                <span>Tres chic</span>
-            </div>
-        </div>
-    </div>
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ProductId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
 </div>

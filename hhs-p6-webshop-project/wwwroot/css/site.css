@@ -362,7 +362,7 @@ header {
     justify-content: space-between;
 }
 
-#choose_website a:hover, #choose_website a:focus {
+.loginBtn:hover, .loginBtn:focus {
     text-decoration: none;
     color: #FFF;
 }
@@ -374,11 +374,11 @@ header {
     #choose_website a,
     .phone-number {
         line-height: 60px;
-        font-size: 1.15em;
+        font-size: 1.2em;
     }
 
     #choose_website a {
-        font-family: nexa-black;
+        font-weight: bold;
         text-transform: uppercase;
         padding: 0 10px;
     }
@@ -721,7 +721,7 @@ nav li {
     font-weight: bold;
     width: 100%;
     position: absolute;
-    bottom: 11%;
+    bottom: 17%;
 }
 
 @media screen and (max-height: 680px) {
@@ -1008,19 +1008,19 @@ nav li {
         font-size: 1.1em;
         cursor: pointer;
         float: right;
-        margin: 40px 0 10px 0; }
+        margin: 40px 0 10px 0;
+    }
 
         .create-appointment-part .right-box .toggle-btn.previous-btn {
             float: left;
         }
 
     .create-appointment-part .right-box .toggle-btn-disabled {
-        -ms-opacity: 0;
-        opacity: 0;
+        opacity: 0.4;
         cursor: default;
     }
 
-.create-appointment-part .right-box #right_1_time .toggle-btn {
+    .create-appointment-part .right-box #right_1_time .toggle-btn {
         float: left;
     }
 
@@ -1319,8 +1319,8 @@ footer ul {
 .loading-overlay {
     position: absolute;
     z-index: 99998;
-    background: rgba(180, 180, 180, 0.25);
-    box-shadow: 0 0 5px rgba(180, 180, 180, 0.25);
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.25);
 }
 
 .loading-indicator {
@@ -1401,10 +1401,6 @@ footer ul {
     footer h4 {
         margin-top: 35px;
     }
-}
-
-.product-overview {
-    min-height: 300px;
 }
 
 @-webkit-keyframes productCatalogEnter {
