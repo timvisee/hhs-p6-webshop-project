@@ -14,7 +14,6 @@ namespace hhs_p6_webshop_project.Models.BlogModels {
         public string ImagePath { get; set; }
 
         // Multiple categories per article
-        public ICollection<BlogArticleCategory> BlogArticleCategories { get; set; }
-
+       // public ICollection<BlogArticleCategory> BlogArticleCategories { get; set; }
     }
 }
