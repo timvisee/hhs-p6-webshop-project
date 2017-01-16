@@ -9,10 +9,13 @@ namespace hhs_p6_webshop_project.Models.BlogModels {
         public BlogArticleViewModel() {
             BlogCategories = new List<BlogCategory>();
             BlogArticle = new BlogArticle();
+            ActiveBlogCategories = new List<BlogCategory>();
         }
 
         public List<BlogCategory> BlogCategories { get; set; }
-        public BlogArticle BlogArticle { get; set; }
 
+        public List<BlogCategory> ActiveBlogCategories { get; set; }
+
+        public BlogArticle BlogArticle { get; set; }
     }
 }

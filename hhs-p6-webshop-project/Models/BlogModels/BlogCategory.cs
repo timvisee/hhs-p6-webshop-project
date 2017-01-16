@@ -13,6 +13,6 @@ namespace hhs_p6_webshop_project.Models.BlogModels {
         public string Description { get; set; }
 
         // Multiple articles per category
-        public ICollection<BlogArticleCategory> BlogArticleCategories { get; set; }
+        //public ICollection<BlogArticleCategory> BlogArticleCategories { get; set; }
     }
 }
