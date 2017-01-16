@@ -55,50 +55,30 @@ namespace hhs_p6_webshop_project.Controllers.BlogController {
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("BlogArticleId,ArticleText,ImagePath,Title")] BlogArticle blogArticle, List<int> CategoryList) {
 
-            //            blogArticle.BlogArticleCategories
+            Console.WriteLine(ModelState.IsValid);
 
-            // if (ModelState.IsValid)
-            //            {
-            _context.Add(blogArticle);
 
-            List<BlogCategory> categories = new List<BlogCategory>();
+            if (ModelState.IsValid) {
+                _context.Add(blogArticle);
 
-            foreach(int num in CategoryList)
-            {
-                categories.Add(_context.BlogCategory.First(bc => bc.BlogCategoryId == num));
+                List<BlogCategory> categories = new List<BlogCategory>();
+
+                foreach (int num in CategoryList) {
+                    categories.Add(_context.BlogCategory.First(bc => bc.BlogCategoryId == num));
+                }
+
+                foreach (var cat in categories) {
+                    var coupling = new BlogArticleCategory();
+                    coupling.BlogArticle = blogArticle;
+                    coupling.BlogCategory = cat;
+                    _context.BlogArticleCategory.Add(coupling);
+                }
+
+                _context.SaveChanges();
+                return RedirectToAction("Index");
             }
 
-            foreach (var cat in categories) {
-                var coupling = new BlogArticleCategory();
-                coupling.BlogArticle = blogArticle;
-                coupling.BlogCategory = cat;
-                _context.BlogArticleCategory.Add(coupling);
-            }
-
-            _context.SaveChanges();
-
-           //// var CurrentArticleId = _context.BlogArticle.Last().BlogArticleId
-           // var Couple = new BlogArticleCategory();
-
-           // foreach (var bc in blogArticle.BlogArticleCategories) {
-
-           //     foreach (var i in CategoryList) {
-           //         if (bc.BlogCategoryId == i) {
-           //             Couple.BlogCategoryId = i;
-           //             // Add new category
-           //         } else {
-
-           //             // Remove category from list
-           //         }
-           //     }
-           // }
-
-
-           // _context.Add(Couple);
-           // await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
-            //  }
-            //return View(blogArticle);
+            return View(blogArticle);
         }
 
         // GET: BlogArticles/Edit/5
