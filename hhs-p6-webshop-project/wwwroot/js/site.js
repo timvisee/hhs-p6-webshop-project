@@ -35,6 +35,34 @@ function formatDate(date) {
             ("0" + date.getDate()).slice(-2);
 }
 
+/**
+ * Format a date to ISO.
+ *
+ * @param {Date} dateTime Date time object.
+ * @param {boolean} formatDate True to format the date, false if not.
+ * @param {boolean} formatTime True to format the time, false if not.
+ */
+function formatDateTime(dateTime, formatDate, formatTime) {
+    // Create a variable to store the formatted date time in
+    var formatted = "";
+
+    // Format the date
+    if (formatDate)
+        formatted = dateTime.getFullYear() + "-" +
+                ("0" + (dateTime.getMonth() + 1)).slice(-2) + "-" +
+                ("0" + dateTime.getDate()).slice(-2);
+
+    // Format the time
+    if (formatTime)
+        formatted = (formatDate ? " " : "") +
+                ("0" + dateTime.getHours()).slice(-2) + ":" +
+                ("0" + dateTime.getMinutes()).slice(-2) + ":" +
+                ("0" + dateTime.getSeconds()).slice(-2);
+
+    // Return the formatted string
+    return formatted;
+}
+
 // Run this code when the page is finished loading
 $(document).ready(function () {
 
@@ -497,7 +525,7 @@ $(document).ready(function () {
 
             // Center the indicator
             indicator.css({
-                top: overlay.height() / 2 - indicator.height() / 2,
+                top: Math.min(overlay.height() / 2 - indicator.height() / 2, 225),
                 left: overlay.width() / 2 - indicator.width() / 2
             });
 
@@ -523,4 +551,119 @@ $(document).ready(function () {
         $(".home-list>ol>li").eq(counter - 1).addClass("active");
         $(".appointment-banner-image-container>img").attr('src', "images/mooi-meisje-" + counter + ".jpg");
     });
+
+    // Find the product overview
+    var productOverviewElement = $(".product-overview");
+
+    // Load the filter logic when a product overview is available
+    if(productOverviewElement.length > 0) {
+        /**
+         * Fetch a list of dressesk.
+         * Filters are applied as specified in the sidebar.
+         */
+        function fetchProductsFiltered() {
+            // Show a loading indiator
+            setLoadingIndicator(productOverviewElement, true);
+
+            // Create a filter object
+            var filterObject = {
+                values: {}
+            };
+
+            // Find the selected checkboxes, and build the filter object
+            $(".filter").each(function() {
+                // Get the filter element
+                var filterElement = $(this);
+
+                // Get the list of checked checkboxes
+                var checkedBoxes = filterElement.find("input:checked");
+
+                // Skip if no boxes are selected
+                if(checkedBoxes.length <= 0)
+                    return;
+
+                // Get the product ID for this filter section as key
+                var key = String(filterElement.find("input.field-property-id").val());
+
+                // Create an entry in the filter object
+                filterObject.values[key] = [];
+
+                // Put the checkbox IDs in the array
+                checkedBoxes.each(function() {
+                    filterObject.values[key].push($(this).val());
+                });
+            });
+
+            // Filter the dresses and fetch the new list through AJAX
+            $.ajax({
+                url: "/api/dressfinder/product/filter/partial",
+                type: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                data: JSON.stringify(filterObject),
+                error: function(jqXhr, textStatus) {
+                    // Define the error message
+                    var error = "Failed to filter dresses.\n\nError: " + textStatus;
+
+                    // Alert the user
+                    alert(error);
+                },
+                success: function(data) {
+                    // Find the product elements
+                    var productElements = productOverviewElement.find('.product');
+
+                    // Fade out the current elements
+                    productElements.toggleClass('animate-product-catalog-enter animate-product-catalog-leave');
+
+                    // Show the new elements when the previous animation is complete
+                    setTimeout(function() {
+                        // Remove the current list of products (that is already faded away)
+                        productElements.remove();
+
+                        // Set the new products
+                        productOverviewElement.append(data);
+                    }, 300);
+                },
+                complete: function() {
+                    // Hide the loading indiator
+                    setLoadingIndicator(productOverviewElement, false);
+                }
+            });
+        }
+
+        // Call the product fetch function when a filter is clicked
+        $(".filter").find("input[type=checkbox]").click(fetchProductsFiltered);
+
+        // Filter once on page load
+        fetchProductsFiltered();
+    }
+
+    // Get the appointment creation form
+    var createAppointmentFormElement = $("#create_appointment_form");
+
+    // Execute the appointment creation form logic when it's available on the page
+    if(createAppointmentFormElement.length > 0) {
+        // Get the button element to go to step 3
+        var stepThreeButton = $("#go_to_third");
+
+        // Handle key press events, and prevent the enter key from submitting the form
+        createAppointmentFormElement.keypress(function(event) {
+            // Continue if this wasn't the enter key that is pressed
+            if(event.keyCode !== 13)
+                return true;
+
+            // Validate the form
+            createAppointmentFormElement.validate();
+            var isValid = createAppointmentFormElement.valid();
+
+            // Go to step 3 if the form is valid
+            if(isValid)
+                stepThreeButton.click();
+
+            // The enter key is pressed, prevent the default action
+            event.preventDefault();
+            return false;
+        });
+    }
 });
