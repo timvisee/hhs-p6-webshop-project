@@ -30,9 +30,9 @@ namespace hhs_p6_webshop_project.Models.ProductModels
 
         public int CompareTo(List<string> list) {
             if (list.Contains(Color))
-                return 1;
+                return 5;
 
-            return 0;
+            return -1;
         }
     }
 }

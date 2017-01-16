@@ -29,7 +29,8 @@ namespace hhs_p6_webshop_project.Models.ProductModels
         }
 
         public void Sort(List<string> colors) {
-            ColorOptions.Sort((x, y) => x.CompareTo(colors) + y.CompareTo(colors));
+            ColorOptions = ColorOptions.OrderByDescending(obj => obj.CompareTo(colors)).ToList();
+            //ColorOptions.Sort((x, y) => x.CompareTo(colors) + y.CompareTo(colors));
         }
 
         public bool IsMatch(Dictionary<string, HashSet<object>> filterSet) {
