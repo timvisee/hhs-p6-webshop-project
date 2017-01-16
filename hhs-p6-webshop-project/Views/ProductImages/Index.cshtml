@@ -16,7 +16,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Path)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.ColorOption.Color)
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -24,6 +26,9 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Path)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ColorOption.Color)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ProductImageId">Edit</a> |

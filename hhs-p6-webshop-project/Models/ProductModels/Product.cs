@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using System.ComponentModel;
 
 namespace hhs_p6_webshop_project.Models.ProductModels
 {
@@ -13,6 +14,7 @@ namespace hhs_p6_webshop_project.Models.ProductModels
         }
 
         public int ProductId { get; set; }
+        [DisplayName("Product")]
         public string Name { get; set; }
         public string Description { get; set; }
         public double Price { get; set; }

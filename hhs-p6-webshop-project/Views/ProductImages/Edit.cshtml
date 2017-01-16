@@ -7,7 +7,7 @@
 
 <h2>Edit</h2>
 
-<form asp-action="Edit">
+<form asp-action="Edit" enctype="multipart/form-data">
     <div class="form-horizontal">
         <h4>ProductImage</h4>
         <hr />
@@ -23,7 +23,8 @@
         <div class="form-group">
             <label asp-for="Path" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="Path" class="form-control" />
+                <input type="file" asp-for="Path" class="inputfile" accept="image/gif, image/jpeg, image/png" name="image" id="image"/>
+                <label for="image" class="upload-image">Kies Afbeelding</label>
                 <span asp-validation-for="Path" class="text-danger" />
             </div>
         </div>

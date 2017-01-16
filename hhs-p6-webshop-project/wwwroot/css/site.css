@@ -189,6 +189,13 @@ input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofi
     -webkit-box-shadow: 0 0 0px 1000px white inset;
 }
 
+input[type="file"]{
+    opacity:0;
+    position:absolute;
+    overflow:hidden;
+    z-index:-1;
+}
+
 select {
     font-size: 1.2em;
     border: 2px solid #e5e5e5;
@@ -201,12 +208,11 @@ select {
 
 .btn,
 button,
+.upload-image,
 input[type="button"],
 input[type="button"]:active,
 input[type="submit"],
 input[type="submit"]:active,
-input[type="file"],
-input[type="file"]:active,
 input[type="reset"],
 input[type="reset"]:active,
 .button-more-info {
@@ -223,26 +229,31 @@ input[type="reset"]:active,
     line-height: 30px;
 }
 
+.upload-image{
+    width:150px;
+    line-height:40px;
+    cursor:pointer;
+    text-align:center;
+}
+
     .btn:hover,
     .btn-default:hover,
     button:hover,
+    .upload-image:hover,
     input[type="button"]:hover,
     input[type="submit"]:hover,
-    input[type="file"]:hover,
     input[type="reset"]:hover,
     .btn:focus,
     .btn-default:focus,
     button:focus,
     input[type="button"]:focus,
     input[type="submit"]:focus,
-    input[type="file"]:focus,
     input[type="reset"]:focus,
     .btn:active,
     .btn-default:active,
     button:active,
     input[type="button"]:active,
     input[type="submit"]:active,
-    input[type="file"]:active,
     input[type="reset"]:active,
     .btn-default:active:focus {
         border: 3px solid #F0597C;
@@ -258,7 +269,6 @@ input[type="reset"]:active,
     button:focus,
     input[type="button"]:focus,
     input[type="submit"]:focus,
-    input[type="file"]:focus,
     input[type="reset"]:focus {
         padding-top: 8px;
         padding-bottom: 4px;

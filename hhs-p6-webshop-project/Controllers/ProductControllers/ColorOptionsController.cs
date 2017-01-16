@@ -46,7 +46,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
         // GET: ColorOptions/Create
         public IActionResult Create()
         {
-            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId");
+            ViewData["Name"] = new SelectList(_context.Products, "ProductId", "Name");
             return View();
         }
 
