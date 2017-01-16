@@ -192,7 +192,7 @@ namespace hhs_p6_webshop_project.Controllers.BlogController {
 //                }
 //Console.WriteLine("test");
 
-//                _context.Update(blogArticle);
+                _context.Update(blogArticle);
 
                 _context.SaveChanges();
 
