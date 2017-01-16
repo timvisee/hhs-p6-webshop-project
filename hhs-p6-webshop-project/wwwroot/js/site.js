@@ -66,6 +66,14 @@ function formatDateTime(dateTime, formatDate, formatTime) {
 // Run this code when the page is finished loading
 $(document).ready(function () {
 
+    // Initialize WOW
+    new WOW({
+            boxClass:     'wow',
+            animateClass: 'animated',
+            offset:       0,
+            live:         true
+    }).init();
+
     /**
      * Toggle the search box when the search button is clicked
      */
@@ -614,6 +622,7 @@ $(document).ready(function () {
                     var productElements = productOverviewElement.find('.product');
 
                     // Fade out the current elements
+                    productElements.attr("data-wow-delay", "0s");
                     productElements.toggleClass('animate-product-catalog-enter animate-product-catalog-leave');
 
                     // Show the new elements when the previous animation is complete
@@ -623,6 +632,7 @@ $(document).ready(function () {
 
                         // Set the new products
                         productOverviewElement.append(data);
+
                     }, 300);
                 },
                 complete: function() {
