@@ -51,5 +51,10 @@ namespace hhs_p6_webshop_project.Data {
 
         public DbSet<ProductImage> ProductImages { get; set; }
 
+        public DbSet<BlogArticleCategory> BlogArticleCategory { get; set; }
+
+        public DbSet<BlogArticle> BlogArticle { get; set; }
+
+        public DbSet<BlogCategory> BlogCategory { get; set; }
     }
 }
