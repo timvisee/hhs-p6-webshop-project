@@ -1,29 +1,29 @@
 ﻿@{
-    var AppointmentBannerTitle = "";
-    var AppointmentBannerSmallTitle = "";
-    var AppointmentBannerSmallTitle2 = "";
+    var appointmentBannerTitle = "";
+    var appointmentBannerSmallTitle = "";
+    var appointmentBannerSmallTitle2 = "";
 
     var orderdList1 = "";
     var orderdList2 = "";
     var orderdList3 = "";
     var orderdList4 = "";
 
-    var themeClass = "";
+    string themeClass;
 
 
     // Determine whether the theme is pink or not
     var pinkTheme = ViewData.ContainsKey("PinkTheme") && (bool)ViewData["PinkTheme"];
 
     if (ViewData.ContainsKey("AppointmentBannerTitle")) {
-        AppointmentBannerTitle = ViewData["AppointmentBannerTitle"].ToString();
+        appointmentBannerTitle = ViewData["AppointmentBannerTitle"].ToString();
     }
 
     if (ViewData.ContainsKey("AppointmentBannerSmallTitle")) {
-        AppointmentBannerSmallTitle = ViewData["AppointmentBannerSmallTitle"].ToString();
+        appointmentBannerSmallTitle = ViewData["AppointmentBannerSmallTitle"].ToString();
     }
 
     if (ViewData.ContainsKey("AppointmentBannerSmallTitle2")) {
-        AppointmentBannerSmallTitle2 = ViewData["AppointmentBannerSmallTitle2"].ToString();
+        appointmentBannerSmallTitle2 = ViewData["AppointmentBannerSmallTitle2"].ToString();
     }
 
     if (ViewData.ContainsKey("orderdList1")) {
@@ -53,9 +53,9 @@
 
 
 <div class="text-banner">
-    <h1 class="banner-bg-title-text hm-pink-light-text">@AppointmentBannerTitle</h1>
-    <h2 class="banner-title-text">@AppointmentBannerSmallTitle</h2>
-    <h2 class="banner-title-text2">@AppointmentBannerSmallTitle2</h2>
+    <h1 class="banner-bg-title-text hm-pink-light-text">@appointmentBannerTitle</h1>
+    <h2 class="banner-title-text">@appointmentBannerSmallTitle</h2>
+    <h2 class="banner-title-text2">@appointmentBannerSmallTitle2</h2>
 </div>
 
 <div class="row">
