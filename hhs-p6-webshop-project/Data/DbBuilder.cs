@@ -6,8 +6,10 @@ using hhs_p6_webshop_project.Models.ProductModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-namespace hhs_p6_webshop_project.Data {
-    public static class DbBuilder {
+namespace hhs_p6_webshop_project.Data
+{
+    public static class DbBuilder
+    {
 
         // TODO: Clean this class!
 
@@ -17,7 +19,8 @@ namespace hhs_p6_webshop_project.Data {
         /// Warning: This overrides the current data available in the database.
         /// </summary>
         /// <param name="context"></param>
-        public static void Rebuild(ApplicationDbContext context) {
+        public static void Rebuild(ApplicationDbContext context)
+        {
             // Show a status message to the user
             LogUtils.Warning("Starting database initialization...");
 
@@ -26,7 +29,8 @@ namespace hhs_p6_webshop_project.Data {
             Console.Write("Provisioning new database... (please be patient, this may take up to 60 seconds)", ConsoleColor.White);
             context.Database.EnsureCreated();
 
-            var user = new ApplicationUser {
+            var user = new ApplicationUser
+            {
                 Email = "beun@beun.it",
                 NormalizedEmail = "BEUN@BEUN.IT",
                 UserName = "beun@beun.it",
@@ -57,10 +61,11 @@ namespace hhs_p6_webshop_project.Data {
             // Save the changes to the database context
             context.SaveChanges();
 
-            
+
 
             // Exit the application if configured, when the built process is complete
-            if (Program.AppConfig.DatabaseExitAfterReset) {
+            if (Program.AppConfig.DatabaseExitAfterReset)
+            {
                 // Tell the user the application will exit
                 LogUtils.Warning("The database has been built. The application will now exit.");
 
@@ -68,23 +73,27 @@ namespace hhs_p6_webshop_project.Data {
                 Environment.Exit(0);
             }
 
-            
+
         }
 
-        private static Product GenerateProduct(string name, string description, double price) {
-            return new Product() {
+        private static Product GenerateProduct(string name, string description, double price)
+        {
+            return new Product()
+            {
                 Name = name,
                 Description = description,
                 Price = price
             };
         }
 
-        private static ColorOption GenerateColor(string color, string[] images) {
-            var co = new ColorOption() {
+        private static ColorOption GenerateColor(string color, string[] images)
+        {
+            var co = new ColorOption()
+            {
                 Color = color
             };
 
-            foreach(string img in images)
+            foreach (string img in images)
             {
                 co.Images.Add(new ProductImage(img));
             }
@@ -92,80 +101,74 @@ namespace hhs_p6_webshop_project.Data {
             return co;
         }
 
-        
-        private static void GenerateProducts(ApplicationDbContext context) {
-            Product p = GenerateProduct("Orea Sposa",
-                "Trouwjurk van het merk Orea Sposa gemaakt van kant. De top is strapless met een sweetheart lijn. De taille wordt geaccentueerd door een bies. De rok heeft een A-lijn met een sleep.",
-                500.0d);
 
-            p.ColorOptions.Add(GenerateColor("Roze", new string[] {"images/dress/orea_sposa/roze/1.jpg","images/dress/orea_sposa/roze/2.jpg","images/dress/orea_sposa/roze/3.jpg"}));
-            p.ColorOptions.Add(GenerateColor("Grijs", new string[] {"images/dress/orea_sposa/grijs/1.jpg","images/dress/orea_sposa/grijs/2.jpg","images/dress/orea_sposa/grijs/3.jpg"}));
+        private static void GenerateProducts(ApplicationDbContext context)
+        {
+            #region Annabelle
+            Product annabelle = GenerateProduct(
+                "Annabelle Badgley Mischka",
+                "Trouwjurk van het merk Badgley & Mischka gemaakt satijn. De top heeft een V-hals en een laag uitgesneden rug, beide afgewerkt met beading. De jurk kan gedragen worden met een cape. De rok heeft een fishtail model met een sleep. De sleep is afgewerkt met tule en is verdeeld in lagen.",
+                2500.0d);
 
-            context.Products.Add(p);
+            annabelle.ColorOptions.Add(
+                GenerateColor(
+                    "Ivoor",
+                    new string[] { "images/uploads/default/annabelle-1.jpg", "images/uploads/default/annabelle-2.jpg", "images/uploads/default/annabelle-3.jpg" }));
+
+            context.Products.Add(annabelle);
+            #endregion
+
+            #region Ladybird
+            Product ladybird = GenerateProduct(
+                "Ladybird",
+                "Trouwjurk van het merk Ladybird gemaakt van kant. De top heeft een hoge doorzichtige neklijn en een laag uitgesneden rug. De rok heeft een fishtail model met een sleep.",
+                1250.0d);
+
+            ladybird.ColorOptions.Add(
+                GenerateColor(
+                    "Ivoor",
+                    new string[] { "images/uploads/default/ladybird-ivoor-1.jpg", "images/uploads/default/ladybird-ivoor-2.jpg", "images/uploads/default/ladybird-ivoor-3.jpg" }));
+
+            ladybird.ColorOptions.Add(
+                GenerateColor(
+                    "Blauw",
+                    new string[] { "images/uploads/default/ladybird-blauw-1.jpg"}));
+
+            ladybird.ColorOptions.Add(
+                GenerateColor(
+                    "Wit",
+                    new string[] { "images/uploads/default/ladybird-1.jpg", "images/uploads/default/ladybird-2.jpg", "images/uploads/default/ladybird-3.jpg" }));
+
+            ladybird.ColorOptions.Add(
+                GenerateColor(
+                    "Roze",
+                    new string[] { "images/uploads/default/ladybird-nude-1.jpg", "images/uploads/default/ladybird-nude-2.jpg", "images/uploads/default/ladybird-nude-3.jpg" }));
+
+            context.Products.Add(ladybird);
+            #endregion
+
+            #region Pronovias
+            Product pronovias = GenerateProduct(
+                "Pronovias",
+                "Trouwjurk van het merk Pronovias gemaakt van kant. De top is hooggesloten en heeft een laag uitgesneden rug, met lange mouwen. De rok heeft een fishtail model met een sleep.",
+                2250.0d);
+
+            pronovias.ColorOptions.Add(
+                GenerateColor(
+                    "Ivoor",
+                    new string[] { "images/uploads/default/pronovias-ivoor-1.jpg", "images/uploads/default/pronovias-ivoor-2.jpg", "images/uploads/default/pronovias-ivoor-3.jpg" }));
+
+            pronovias.ColorOptions.Add(
+                GenerateColor(
+                    "Wit",
+                    new string[] { "images/uploads/default/pronovias-wit-1.jpg", "images/uploads/default/pronovias-wit-2.jpg", "images/uploads/default/pronovias-wit-3.jpg" }));
+
+            context.Products.Add(pronovias);
+            #endregion
+
+
+
             context.SaveChanges();
-
-
-            p = GenerateProduct("Ladybird",
-                "Trouwjurk van het merk Ladybird gemaakt van kant. De top is strapless met een sweetheart lijn. De rok heeft een A-lijn met een sleep.",
-                1500.0d);
-
-            p.ColorOptions.Add(GenerateColor("Ivoor", new string[] {"images/dress/ladybird/ivoor/1.jpg","images/dress/ladybird/ivoor/2.jpg","images/dress/ladybird/ivoor/3.jpg"}));
-            p.ColorOptions.Add(GenerateColor("Grijs", new string[] {"images/dress/ladybird/grijs/1.jpg","images/dress/ladybird/grijs/2.jpg","images/dress/ladybird/grijs/3.jpg"}));
-
-            context.Products.Add(p);
-            context.SaveChanges();
-
-            //Product p = GenerateProduct("Orea Sposa",
-            //    "Trouwjurk van het merk Orea Sposa gemaakt van kant. De top is strapless met een sweetheart lijn. De taille wordt geaccentueerd door een bies. De rok heeft een A-lijn met een sleep.",
-            //    500.0d);
-
-            //p.ColorOptions.Add(GenerateColor("Roze", new string[] {"images/dress/orea_sposa/roze/1.jpg","images/dress/roze/2.jpg","images/dress/roze/3.jpg"}));
-            //p.ColorOptions.Add(GenerateColor("Grijs", new string[] {"images/dress/orea_sposa/grijs/1.jpg","images/dress/grijs/2.jpg","images/dress/grijs/3.jpg"}));
-
-
-            //PropertyType kleur = new PropertyType();
-            //kleur.DataType = typeof(string).FullName;
-            //kleur.Multiple = true;
-            //kleur.Name = "Kleur";
-            //kleur.Required = true;
-            //context.PropertyType.Add(kleur);
-
-            //PropertyType prijs = new PropertyType();
-            //prijs.DataType = typeof(double).FullName;
-            //prijs.Multiple = false;
-            //prijs.Name = "Prijs";
-            //prijs.Required = true;
-            //context.PropertyType.Add(prijs);
-
-            //context.SaveChanges();
-
-            //Product stoel = new Product();
-            //stoel.Name = "Stoel";
-            //stoel.Description = "Een hele grote stoel";
-            //context.Product.Add(stoel);
-
-            //Product bank = new Product();
-            //bank.Name = "Bank";
-            //bank.Description = "Een hele grote bank";
-            //context.Product.Add(bank);
-
-            //context.SaveChanges();
-
-            //context.PropertyTypeProducts.Add(Couple(stoel, prijs, 65.0));
-            //context.PropertyTypeProducts.Add(Couple(bank, prijs, 550.0));
-
-            //context.SaveChanges();
-
-            //context.PropertyTypeProducts.Add(Couple(stoel, kleur, "Blauw"));
-            //context.PropertyTypeProducts.Add(Couple(stoel, kleur, "Bruin"));
-            //context.PropertyTypeProducts.Add(Couple(stoel, kleur, "Geel"));
-
-            //context.PropertyTypeProducts.Add(Couple(bank, kleur, "Grijs"));
-            //context.PropertyTypeProducts.Add(Couple(bank, kleur, "Wit"));
-            //context.PropertyTypeProducts.Add(Couple(bank, kleur, "Zwart"));
-
-            //context.SaveChanges();
-
         }
     }
 }
