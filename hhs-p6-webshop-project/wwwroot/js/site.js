@@ -879,6 +879,8 @@ $(document).ready(function () {
         });
     }
 
+    // scheet
+
     //File uploading custom button
     $('.inputfile').change(function (e) {
         var inputs = document.querySelectorAll('.inputfile');
