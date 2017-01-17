@@ -199,7 +199,7 @@
     display:block;
     top: 10%;
     left: 10%;
-    transform: translateY(-10%); 
+    transform: translateY(-10%);
     transform: translateX(-10%);
 }
 
@@ -217,7 +217,7 @@
     min-height:750px;
     top: 10%;
     left: 10%;
-    transform: translateY(-10%); 
+    transform: translateY(-10%);
     transform: translateX(-10%);
 }
 
