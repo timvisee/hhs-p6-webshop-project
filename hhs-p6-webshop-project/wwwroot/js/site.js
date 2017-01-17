@@ -86,10 +86,17 @@ $(document).ready(function () {
     });
 
     /**
+     * Toggle the menu when the toggle menu button is clicked
+     */
+    $("#menu_toggle").click(function() {
+        $("#header_nav").slideToggle();
+    });
+
+    /**
      * Scroll down when you click the scroll down button
      */
     $(".scrollToggle").click(function () {
-        $("html, body").animate({ scrollTop: $(window).height() }, 1200, "easeInOutCubic");
+        $("html, body").animate({ scrollTop: $(window).height() - 90 }, 1200, "easeInOutCubic");
     });
 
     /**
@@ -99,7 +106,7 @@ $(document).ready(function () {
         var scrHeight = $(window).height();
         var headerHeight = $("#header_top").height();
 
-        $("#home_banner").height(scrHeight - headerHeight);
+        $("#home_banner").height(scrHeight - 150);
     }
     setHomeBannerHeight();
 
@@ -116,8 +123,8 @@ $(document).ready(function () {
     });
 
     $(window).scroll(function (event) {
-        var scroll = $(window).scrollTop() / -3;
-        var scrollVid = $(window).scrollTop() / 5;
+        var scroll = $(window).scrollTop() / -2;
+        var scrollVid = $(window).scrollTop() / 3;
         $("#home_banner .home-text-banner, #home_banner .home-button-container").css("margin-bottom", scroll);
         $("#home_banner .banner-image").css("margin-top", scrollVid);
     });

@@ -4,6 +4,7 @@
 
     ViewData["ShowHomeBanner"] = true;
     ViewData["ShowHomeBannerButtons"] = true;
+    ViewData["PinkBackground"] = true;
     ViewData["pinkTheme"] = true;
     ViewData["HomeBannerBgTitle"] = "Bruidswinkel";
     ViewData["HomeBannerSmallTitle"] = "Al bijna 50 jaar de grootste bruidszaak van Nederland.";
@@ -18,3 +19,10 @@
 }
 
 @Html.Partial("_AppointmentPartial")
+
+
+<div class="row">
+    <div class="col col-md-12">
+        <img class="img-full-width" src="~/images/home-banner-footer.jpg" />
+    </div>
+</div>

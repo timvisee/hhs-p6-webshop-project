@@ -189,11 +189,11 @@ input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofi
     -webkit-box-shadow: 0 0 0px 1000px white inset;
 }
 
-input[type="file"]{
-    opacity:0;
-    position:absolute;
-    overflow:hidden;
-    z-index:-1;
+input[type="file"] {
+    opacity: 0;
+    position: absolute;
+    overflow: hidden;
+    z-index: -1;
 }
 
 select {
@@ -229,11 +229,11 @@ input[type="reset"]:active,
     line-height: 30px;
 }
 
-.upload-image{
-    width:150px;
-    line-height:40px;
-    cursor:pointer;
-    text-align:center;
+.upload-image {
+    width: 150px;
+    line-height: 40px;
+    cursor: pointer;
+    text-align: center;
 }
 
     .btn:hover,
@@ -264,19 +264,19 @@ input[type="reset"]:active,
         box-shadow: none;
     }
 
-    .btn:focus,
-    .button:focus,
-    button:focus,
-    input[type="button"]:focus,
-    input[type="submit"]:focus,
-    input[type="reset"]:focus {
-        padding-top: 8px;
-        padding-bottom: 4px;
-    }
+.btn:focus,
+.button:focus,
+button:focus,
+input[type="button"]:focus,
+input[type="submit"]:focus,
+input[type="reset"]:focus {
+    padding-top: 8px;
+    padding-bottom: 4px;
+}
 
-    .btn .glyphicon-right {
-        margin-left: 10px;
-    }
+.btn .glyphicon-right {
+    margin-left: 10px;
+}
 
 input[type="checkbox"] {
     background-color: #f0597c;
@@ -399,6 +399,7 @@ header {
 
 #header_contact {
     display: flex;
+    justify-content: space-between;
 }
 
 .phone-number {
@@ -417,7 +418,7 @@ header {
     padding: 0px 70px 0 25px;
     float: left;
     font-size: 1.2em;
-    font-family: nexa-black;
+    font-family: nexa-regular;
 }
 
 #search_box {
@@ -433,6 +434,7 @@ header {
     line-height: 60px;
     background-color: transparent;
     border: 0;
+    padding: 0 !important;
 }
 
 #header_search_submit {
@@ -516,8 +518,8 @@ nav li {
     border: 0;
 }
 
-.layout-with-banner nav .active a,
-.layout-with-banner nav li a:hover {
+.layout-with-banner nav li.active a:not(.make-appointment),
+.layout-with-banner nav li a:not(.make-appointment):hover {
     color: #ef5879;
 }
 
@@ -792,24 +794,17 @@ nav li {
         content: '';
         border-top: 10px solid transparent;
         border-bottom: 10px solid transparent;
-        border-left: 15px solid #f0597c;
         margin-top: 5px;
         line-height: 40px;
         text-align: center;
     }
 
+    .appointment-banner-image-text.pinkTheme:before {
+        border-left: 15px solid #f0597c;
+    }
+
     .appointment-banner-image-text.blueTheme:before {
-        position: absolute;
-        margin-left: -25px;
-        width: 0;
-        height: 0;
-        content: '';
-        border-top: 10px solid transparent;
-        border-bottom: 10px solid transparent;
         border-left: 15px solid #1a91be;
-        margin-top: 5px;
-        line-height: 40px;
-        text-align: center;
     }
 
 .appointment-banner-card {
@@ -838,12 +833,11 @@ nav li {
     margin-bottom: 70px;
 }
 
-.appointment-banner-image-counter-container.pinkTheme {
+.appointment-banner-image-counter-container {
     position: relative;
     bottom: 0;
     font-size: 4.8em;
     color: #fff;
-    background-color: #f0597c;
     width: 100px;
     height: 100px;
     line-height: 100px;
@@ -854,21 +848,13 @@ nav li {
     margin-top: 50px;
 }
 
-.appointment-banner-image-counter-container.blueTheme {
-    position: relative;
-    bottom: 0;
-    font-size: 4.8em;
-    color: #fff;
-    background-color: #1a91be;
-    width: 100px;
-    height: 100px;
-    line-height: 100px;
-    text-align: center;
-    font-family: nexa-black;
-    border-radius: 50px;
-    margin-left: 10%;
-    margin-top: 50px;
-}
+    .appointment-banner-image-counter-container.pinkTheme {
+        background-color: #f0597c;
+    }
+
+    .appointment-banner-image-counter-container.blueTheme {
+        background-color: #1a91be;
+    }
 
 .home-list ol {
     list-style-type: none;
@@ -1357,26 +1343,47 @@ footer ul {
 @media (max-width: 991px) {
 
     /*--- Header ---*/
-    #header_top #choose_website {
+    #header_top #choose_website,
+    #header_top #search_wrapper {
         display: none;
     }
 
-    #header_nav {
+    .layout-with-banner #header_nav {
+        position: relative;
+        display: none;
+    }
+
+    .layout-with-banner nav li a:not(.make-appointment) {
+        color: #333;
+    }
+
+    #header_nav .header-nav-logo {
+        width: 100%;
+        float: left;
         display: block;
     }
 
-        #header_nav .header-nav-logo {
-            width: 100%;
-            float: left;
-            display: block;
-        }
+    #header_nav .navbar-brand {
+        width: 80%;
+        max-width: 400px;
+        height: auto;
+        margin: 0 auto 20px;
+        float: none;
+        display: block;
+    }
 
-        #header_nav .navbar-brand {
-            width: 80%;
-            height: auto;
-            margin: 0 10% 20px;
-        }
+    #header_contact {
+        width: 100%;
+    }
 
+    #menu_toggle {
+        line-height: 60px;
+        width: 60px;
+        font-size: 30px;
+        color: #FFF;
+        text-align: center;
+        cursor: pointer;
+    }
 
     /*--- Navigation ---*/
     nav ul {
@@ -1389,6 +1396,26 @@ footer ul {
         display: inline-block;
         width: 100%;
         text-align: center;
+    }
+
+    /*--- Bannert ---*/
+    .home-button-container {
+        width: 60%;
+        margin-left: -30%;
+    }
+
+    .home-button-container a {
+        width: 100%;
+        margin: 10px 0 0;
+    }
+
+    .text-banner {
+        min-height: 250px;
+        font-size: 1rem;
+    }
+
+    .text-banner .banner-bg-title-text {
+        font-size: 9em;
     }
 
     /*--- Footer ---*/
@@ -1413,94 +1440,105 @@ footer ul {
     }
 }
 
-@-webkit-keyframes productCatalogEnter {
-  from {
-    opacity: 0;
-    -webkit-transform: scale3d(.95, .95, .95) translate3d(0, -25px, 0);
-    transform: scale3d(.95, .95, .95) translate3d(0, -25px, 0);
-    -webkit-animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
-    animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
-  }
 
-  60% {
-    opacity: 1;
-    -webkit-transform: scale3d(.98, .98, .98) translate3d(0, -8px, 0);
-    transform: scale3d(.98, .98, .98) translate3d(0, -8px, 0);
-    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
-    animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
-  }
+@media (min-width: 992px) {
+    #menu_toggle {
+        display: none;
+    }
+
+    /*Make sure the nav is always displaying on deskop, even after toggling on a small screen*/
+    #header_nav {
+        display: flex !important;
+    }
+}
+
+/*--- CSS Animations for the product catalog ---*/
+@-webkit-keyframes productCatalogEnter {
+    from {
+        opacity: 0;
+        -webkit-transform: scale3d(.95, .95, .95) translate3d(0, -25px, 0);
+        transform: scale3d(.95, .95, .95) translate3d(0, -25px, 0);
+        -webkit-animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+        animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+    }
+
+    60% {
+        opacity: 1;
+        -webkit-transform: scale3d(.98, .98, .98) translate3d(0, -8px, 0);
+        transform: scale3d(.98, .98, .98) translate3d(0, -8px, 0);
+        -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
+        animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
+    }
 }
 
 @keyframes productCatalogEnter {
-  from {
-    opacity: 0;
-    -webkit-transform: scale3d(.95, .95, .95) translate3d(0, -25px, 0);
-    transform: scale3d(.95, .95, .95) translate3d(0, -25px, 0);
-    -webkit-animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
-    animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
-  }
+    from {
+        opacity: 0;
+        -webkit-transform: scale3d(.95, .95, .95) translate3d(0, -25px, 0);
+        transform: scale3d(.95, .95, .95) translate3d(0, -25px, 0);
+        -webkit-animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+        animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+    }
 
-  60% {
-    opacity: 1;
-    -webkit-transform: scale3d(.98, .98, .98) translate3d(0, -8px, 0);
-    transform: scale3d(.98, .98, .98) translate3d(0, -8px, 0);
-    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
-    animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
-  }
+    60% {
+        opacity: 1;
+        -webkit-transform: scale3d(.98, .98, .98) translate3d(0, -8px, 0);
+        transform: scale3d(.98, .98, .98) translate3d(0, -8px, 0);
+        -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
+        animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
+    }
 }
 
 .animate-product-catalog-enter {
-  -webkit-animation-duration: 0.3s;
-  animation-duration: 0.3s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-
-  -webkit-animation-name: productCatalogEnter;
-  animation-name: productCatalogEnter;
+    -webkit-animation-duration: 0.3s;
+    animation-duration: 0.3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: productCatalogEnter;
+    animation-name: productCatalogEnter;
 }
 
 @-webkit-keyframes productCatalogLeave {
-  40% {
-    opacity: 1;
-    -webkit-transform: scale3d(.95, .95, .95) translate3d(0, 10px, 0);
-    transform: scale3d(.95, .95, .95) translate3d(0, 10px, 0);
-    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
-    animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
-  }
+    40% {
+        opacity: 1;
+        -webkit-transform: scale3d(.95, .95, .95) translate3d(0, 10px, 0);
+        transform: scale3d(.95, .95, .95) translate3d(0, 10px, 0);
+        -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
+        animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
+    }
 
-  to {
-    opacity: 0;
-    -webkit-transform: scale3d(.9, .9, .9) translate3d(0, 50px, 0);
-    transform: scale3d(.9, .9, .9) translate3d(0, 50px, 0);
-    -webkit-animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
-    animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
-  }
+    to {
+        opacity: 0;
+        -webkit-transform: scale3d(.9, .9, .9) translate3d(0, 50px, 0);
+        transform: scale3d(.9, .9, .9) translate3d(0, 50px, 0);
+        -webkit-animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+        animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+    }
 }
 
 @keyframes productCatalogLeave {
-  40% {
-    opacity: 1;
-    -webkit-transform: scale3d(.95, .95, .95) translate3d(0, 10px, 0);
-    transform: scale3d(.95, .95, .95) translate3d(0, 10px, 0);
-    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
-    animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
-  }
+    40% {
+        opacity: 1;
+        -webkit-transform: scale3d(.95, .95, .95) translate3d(0, 10px, 0);
+        transform: scale3d(.95, .95, .95) translate3d(0, 10px, 0);
+        -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
+        animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
+    }
 
-  to {
-    opacity: 0;
-    -webkit-transform: scale3d(.9, .9, .9) translate3d(0, 50px, 0);
-    transform: scale3d(.9, .9, .9) translate3d(0, 50px, 0);
-    -webkit-animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
-    animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
-  }
+    to {
+        opacity: 0;
+        -webkit-transform: scale3d(.9, .9, .9) translate3d(0, 50px, 0);
+        transform: scale3d(.9, .9, .9) translate3d(0, 50px, 0);
+        -webkit-animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+        animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+    }
 }
 
 .animate-product-catalog-leave {
-  -webkit-animation-duration: 0.3s;
-  animation-duration: 0.3s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-
-  -webkit-animation-name: productCatalogLeave;
-  animation-name: productCatalogLeave;
+    -webkit-animation-duration: 0.3s;
+    animation-duration: 0.3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: productCatalogLeave;
+    animation-name: productCatalogLeave;
 }
