@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using hhs_p6_webshop_project.Api;
+using hhs_p6_webshop_project.Models.FilterModel;
 using hhs_p6_webshop_project.Models.ProductModels;
 
 namespace hhs_p6_webshop_project.Services
@@ -19,7 +20,9 @@ namespace hhs_p6_webshop_project.Services
 
         Dictionary<string, HashSet<object>> GetFilters();
 
-        List<Product> Filter(Dictionary<string, HashSet<object>> filterSet);
+        List<Product> Filter(List<FilterBase> filters);
+
+        List<FilterBase> ParseFilters(Dictionary<string, HashSet<object>> filters);
 
             /// <summary>
         /// Returns a list of all products, sorted by Id, ascending.

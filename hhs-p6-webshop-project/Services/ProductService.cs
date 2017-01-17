@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using hhs_p6_webshop_project.Api;
 using hhs_p6_webshop_project.Data;
+using hhs_p6_webshop_project.Models.FilterModel;
 using hhs_p6_webshop_project.Models.ProductModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
@@ -59,28 +60,45 @@ namespace hhs_p6_webshop_project.Services
             return val;
         }
 
-        public List<Product> Filter(Dictionary<string, HashSet<object>> filterSet)
-        {
+        public List<Product> Filter(List<FilterBase> filters) {
             List<Product> products = GetAllProducts();
             List<Product> results = new List<Product>();
-
-            Dictionary<string, List<object>> betterList = new Dictionary<string, List<object>>();
-
-            foreach (KeyValuePair<string, HashSet<object>> pair in filterSet) {
-                if (pair.Key == "Kleur")
-                    betterList.Add(pair.Key, ParseFuckingAnoyingJsonArrayOfArraysToJustAFuckingListGodFuckingDamnitIHateThisFuckingBullshit(pair.Value));
-            }
-
+            
             foreach (Product product in products) {
-                if (product.IsMatch(filterSet)) {
-
-                    var temp = betterList.Where(kv => kv.Key == "Kleur").Select(kv => kv.Value).SelectMany(x => x).Cast<string>().ToList();
+                if (product.IsMatch(filters)) {
+                    var temp = filters.Where(f => f.Name == "Kleur").Cast<ColorFilter>().SelectMany(cf => cf.Colors).Distinct().ToList();
                     product.Sort(temp);
                     results.Add(product);
                 }
             }
             
             return results;
+        }
+
+        public List<FilterBase> ParseFilters(Dictionary<string, HashSet<object>> filters) {
+
+            List<FilterBase> f = new List<FilterBase>();
+
+            foreach (var pair in filters) {
+                if (pair.Key == "Kleur") {
+                    ColorFilter filt = new ColorFilter();
+                    filt.Colors.AddRange(ParseFuckingAnoyingJsonArrayOfArraysToJustAFuckingListGodFuckingDamnitIHateThisFuckingBullshit(pair.Value).Cast<string>());
+                    f.Add(filt);
+                }
+
+                if (pair.Key == "Price") {
+                    var vals =
+                        ParseFuckingAnoyingJsonArrayOfArraysToJustAFuckingListGodFuckingDamnitIHateThisFuckingBullshit(
+                            pair.Value).Cast<double>();
+
+                    PriceFilter filt = new PriceFilter();
+                    filt.Min = vals.Min();
+                    filt.Max = vals.Max();
+                    f.Add(filt);
+                }
+            }
+
+            return f;
         }
 
         public PagedResponse GetAllProductsPaged(int start, int count) {

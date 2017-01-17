@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel;
+using hhs_p6_webshop_project.Models.FilterModel;
 
 namespace hhs_p6_webshop_project.Models.ProductModels
 {
@@ -31,6 +32,41 @@ namespace hhs_p6_webshop_project.Models.ProductModels
         public void Sort(List<string> colors) {
             ColorOptions = ColorOptions.OrderByDescending(obj => obj.CompareTo(colors)).ToList();
             //ColorOptions.Sort((x, y) => x.CompareTo(colors) + y.CompareTo(colors));
+        }
+
+        public bool IsMatch(List<FilterBase> filters) {
+            bool isMatch = true;
+
+            foreach (FilterBase filter in filters) {
+                if (filter is ColorFilter) {
+                    ColorFilter filt = filter as ColorFilter;
+                    bool colorMatch = false;
+
+                    foreach (ColorOption co in ColorOptions) {
+                        if (filt.Colors.Contains(co.Color))
+                            colorMatch = true;
+                    }
+
+                    if (!colorMatch)
+                        isMatch = false;
+
+                } else if (filter is PriceFilter) {
+                    PriceFilter filt = filter as PriceFilter;
+                    isMatch = Price >= filt.Min && Price <= filt.Max;
+                }
+
+                if (!isMatch) {
+                    Console.WriteLine(
+                        $"Filter mismatch for {this} on {filter.Name} with values ({string.Join(", ", filters)})!");
+                    return false;
+                }
+                else {
+                    Console.WriteLine($"Filter MATCH for {this} on {filter.Name} with values ({string.Join(", ", filters)})!");
+                }
+            }
+
+            Console.WriteLine($"Filter MATCH on product {this}");
+            return true;
         }
 
         public bool IsMatch(Dictionary<string, HashSet<object>> filterSet) {

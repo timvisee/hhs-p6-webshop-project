@@ -25,7 +25,7 @@ namespace hhs_p6_webshop_project.Api
 
         [HttpPost("product/filter")]
         public JsonResult Filter([FromBody] Dictionary<string, HashSet<object>> filters) {
-            return Json(ProductService.Filter(filters));
+            return Json(ProductService.Filter(ProductService.ParseFilters(filters)));
         }
 
         [HttpGet("product/test")]
