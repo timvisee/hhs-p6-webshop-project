@@ -380,7 +380,9 @@ $(document).ready(function () {
 
                         // Set the date input field value
                         $("#date_input").val(formatDateTime(selectedDateTime, true, true));
+                    });
 
+                    $(".time-option").click(function () {
                         // Show the go to second button
                         $(".selected-time").html(" OM " + timeString);
 
