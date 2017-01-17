@@ -46,6 +46,8 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
         // GET: ColorOptions/Create
         public IActionResult Create()
         {
+            string[] coloroptions = { "Ivoor/Wit", "Ivoor met kleur", "Gekleurd" };
+            ViewData["ColorOption"] = coloroptions.Select(r => new SelectListItem { Text = r, Value = r });
             ViewData["Name"] = new SelectList(_context.Products, "ProductId", "Name");
             return View();
         }
@@ -80,6 +82,9 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
             {
                 return NotFound();
             }
+
+            string[] coloroptions = { "Ivoor/Wit", "Ivoor met kleur", "Gekleurd" };
+            ViewData["ColorOption"] = coloroptions.Select(r => new SelectListItem { Text = r, Value = r });
             ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", colorOption.ProductId);
             return View(colorOption);
         }

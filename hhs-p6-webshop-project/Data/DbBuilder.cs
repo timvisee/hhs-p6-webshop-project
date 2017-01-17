@@ -98,8 +98,8 @@ namespace hhs_p6_webshop_project.Data {
                 "Trouwjurk van het merk Orea Sposa gemaakt van kant. De top is strapless met een sweetheart lijn. De taille wordt geaccentueerd door een bies. De rok heeft een A-lijn met een sleep.",
                 500.0d);
 
-            p.ColorOptions.Add(GenerateColor("Roze", new string[] {"images/dress/orea_sposa/roze/1.jpg","images/dress/orea_sposa/roze/2.jpg","images/dress/orea_sposa/roze/3.jpg"}));
-            p.ColorOptions.Add(GenerateColor("Grijs", new string[] {"images/dress/orea_sposa/grijs/1.jpg","images/dress/orea_sposa/grijs/2.jpg","images/dress/orea_sposa/grijs/3.jpg"}));
+            p.ColorOptions.Add(GenerateColor("Gekleurd", new string[] {"images/dress/orea_sposa/roze/1.jpg","images/dress/orea_sposa/roze/2.jpg","images/dress/orea_sposa/roze/3.jpg"}));
+            p.ColorOptions.Add(GenerateColor("Ivoor/Wit", new string[] {"images/dress/orea_sposa/grijs/1.jpg","images/dress/orea_sposa/grijs/2.jpg","images/dress/orea_sposa/grijs/3.jpg"}));
 
             context.Products.Add(p);
             context.SaveChanges();
@@ -109,8 +109,8 @@ namespace hhs_p6_webshop_project.Data {
                 "Trouwjurk van het merk Ladybird gemaakt van kant. De top is strapless met een sweetheart lijn. De rok heeft een A-lijn met een sleep.",
                 1500.0d);
 
-            p.ColorOptions.Add(GenerateColor("Ivoor", new string[] {"images/dress/ladybird/ivoor/1.jpg","images/dress/ladybird/ivoor/2.jpg","images/dress/ladybird/ivoor/3.jpg"}));
-            p.ColorOptions.Add(GenerateColor("Grijs", new string[] {"images/dress/ladybird/grijs/1.jpg","images/dress/ladybird/grijs/2.jpg","images/dress/ladybird/grijs/3.jpg"}));
+            p.ColorOptions.Add(GenerateColor("Ivoor/Wit", new string[] {"images/dress/ladybird/ivoor/1.jpg","images/dress/ladybird/ivoor/2.jpg","images/dress/ladybird/ivoor/3.jpg"}));
+            p.ColorOptions.Add(GenerateColor("Ivoor met kleur", new string[] {"images/dress/ladybird/grijs/1.jpg","images/dress/ladybird/grijs/2.jpg","images/dress/ladybird/grijs/3.jpg"}));
 
             context.Products.Add(p);
             context.SaveChanges();

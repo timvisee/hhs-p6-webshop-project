@@ -39,8 +39,11 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers {
         }
 
         // GET: ProductImages/Create
-        public IActionResult Create() {
-            ViewData["ColorOptionId"] = new SelectList(_context.ColorOptions, "ColorOptionId", "Color");
+        public IActionResult Create()
+        {
+            var dressPerColor = _context.ColorOptions.Join(_context.Products, c => c.ProductId, o => o.ProductId, (c, o) => new { c.ColorOptionId, c.Color, o.Name }).ToList();
+            IEnumerable<SelectListItem> selectList = from d in dressPerColor select new SelectListItem { Value = d.ColorOptionId.ToString(), Text = d.Name + " - " + d.Color };
+            ViewData["ColorOptionId"] = new SelectList(selectList, "Value", "Text");
             return View();
         }
 

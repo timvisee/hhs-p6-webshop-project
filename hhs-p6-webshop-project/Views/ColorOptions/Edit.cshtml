@@ -16,8 +16,7 @@
         <div class="form-group">
             <label asp-for="Color" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="Color" class="form-control" />
-                <span asp-validation-for="Color" class="text-danger" />
+                <select asp-for="Color" class="form-control" asp-items="ViewBag.ColorOption"></select>
             </div>
         </div>
         <div class="form-group">
