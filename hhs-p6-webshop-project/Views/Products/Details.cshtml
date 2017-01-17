@@ -1,37 +1,169 @@
-@using Microsoft.AspNetCore.Mvc.Rendering
 @model hhs_p6_webshop_project.Models.ProductModels.Product
-
+<link href="~/css/products.css" rel="stylesheet" />
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = Html.DisplayFor(model => model.Name);
+    ViewData["PinkBackground"] = true;
+
+    var ImagePath = "images/default.jpg";
+
+    try
+    {
+        ImagePath = Model.ColorOptions.FirstOrDefault().Images.FirstOrDefault().Path;
+    }
+    catch (Exception e)
+    {
+        // Tering harde beun maar het werkt echt perfect
+    }
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Product</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.ProductId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="single-container container">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.ProductId">Edit</a>
+        </div>
+    }
+    <div class="row">
+        <div class="back-to-dress-finder">
+            <a asp-action="Index"><img src="/images/products/white-arrow-back.png" alt="<" />Terug naar overzicht</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="product-details">
+            <div class="side-pictures">
+                <div class="small-picture">
+                    <img src="~/@ImagePath" alt="" />
+                </div>
+                <div class="small-picture">
+                    <img src="~/@ImagePath" alt="" />
+                </div>
+                <div class="small-picture">
+                    <img src="~/@ImagePath" alt="" />
+                </div>
+            </div>
+            <div class="big-picture">
+                <div class="vertical-align">
+                    <div class="horizontal-align">
+                        <img src="~/@ImagePath" alt="" />
+                    </div>
+                </div>
+            </div>
+            <div class="product-information-container">
+                <div class="product-information">
+                    <h4>@Model.Name</h4>
+                    <span>artikel nr. @Model.ProductId</span>
+                    <div class="product-information-undertext">
+                        <p>
+                            @Model.Description
+                        </p>
+                    </div>
+                    <div class="product-information-attributes">
+                        <p>
+                            Merk:
+                            <a asp-action="">Maggie Sottero</a>
+                        </p>
+                        <p>
+                            Kenmerken:
+                            <a asp-action="">Verleidelijk</a>,
+                            <a asp-action="">Kant</a>,
+                            <a asp-action="">Ivoor</a>,
+                            <a asp-action="">Fishtail</a>,
+                            <a asp-action="">Lage rug</a>,
+                            <a asp-action="">Schouderbandjes</a>,
+                            <a asp-action="">Strapless</a>
+                        </p>
+                        <p>
+                            Prijsindicatie:
+                            <span>&euro; @Model.Price</span>
+                        </p>
+                        <p>
+                            Beschikbare kleuren:
+                            <div class="product-colors">
+                                @{
+                                    foreach (var color in Model.ColorOptions)
+                                    {
+                                        // Todo fixen
+                                        @color.Color
+                                    }
+                                }
+                            </div>
+                        </p>
+                        <div class="product-make-appointment-container">
+                            <p>Kom deze jurk passen!</p>
+                            <a asp-controller="Appointments" asp-action="Create" class="make-appointment">Pasafspraak maken</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="additions-container">
+            <hr class="additions" />
+            <span class="additions-text">Bijpassende sieraden</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="addition-images-wrapper">
+            <div class="addition-item">
+                <div class="addition-image">
+                    <img src="~/images/uploads/addition-picture.jpg" alt="" />
+                </div>
+                <span>Abrazi</span>
+            </div>
+            <div class="addition-item">
+                <div class="addition-image">
+                    <img src="~/images/uploads/addition-picture.jpg" alt="" />
+                </div>
+                <span>Abrazi</span>
+            </div>
+            <div class="addition-item">
+                <div class="addition-image">
+                    <img src="~/images/uploads/addition-picture.jpg" alt="" />
+                </div>
+                <span>Abrazi</span>
+            </div>
+            <div class="addition-item">
+                <div class="addition-image">
+                    <img src="~/images/uploads/addition-picture.jpg" alt="" />
+                </div>
+                <span>Abrazi</span>
+            </div>
+            <a asp-action="Index" class="make-appointment">Bezoek de webshop</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="additions-container">
+            <hr class="additions" />
+            <span class="additions-text">Of zijn deze jurken meer iets voor jou?</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="addition-images-wrapper">
+            <div class="addition-item">
+                <div class="addition-image">
+                    <img src="~/images/uploads/image-1.jpg" alt="" />
+                </div>
+                <span>Maggie Sottero</span>
+            </div>
+            <div class="addition-item">
+                <div class="addition-image">
+                    <img src="~/images/uploads/image-2.jpg" alt="" />
+                </div>
+                <span>Beautiful by Enzoani</span>
+            </div>
+            <div class="addition-item">
+                <div class="addition-image">
+                    <img src="~/images/uploads/image-3.jpg" alt="" />
+                </div>
+                <span>Ladybird</span>
+            </div>
+            <div class="addition-item">
+                <div class="addition-image">
+                    <img src="~/images/uploads/image-6.jpg" alt="" />
+                </div>
+                <span>Tres chic</span>
+            </div>
+        </div>
+    </div>
 </div>

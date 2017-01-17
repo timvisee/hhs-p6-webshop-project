@@ -1,48 +1,53 @@
-@using System.Collections.Generic
-@model IEnumerable<hhs_p6_webshop_project.Models.ProductModels.Product>
+@using hhs_p6_webshop_project.Models.ProductModels
+@model hhs_p6_webshop_project.Models.ProductModels.ProductView
+
+<link href="~/css/products.css" rel="stylesheet" />
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Dressfinder";
+    ViewData["PinkBackground"] = true;
 }
 
 <h2>Dressfinder</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ProductId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ProductId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
-            </td>
-        </tr>
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
 }
-    </tbody>
-</table>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 col-sm-12 product-filters">
+            <h2>Filteren</h2>
+            <code>Insert filters here</code>
+        </div>
+        <div class="col-md-9 col-sm-12">
+            <div class="row ">
+                <div class="col-sm-12 product-overview-options">
+                    <!-- TODO: Sorteren met deze button werkt nog niet -->
+                    <strong class="select-label">
+                        Sorteer op:
+                    </strong>
+                    <select>
+                        <option>Prijs Hoog/Laag</option>
+                        <option>Prijs Laag/Hoog</option>
+                        <option>Naam oplopend</option>
+                        <option>Naam aflopend</option>
+                        <option>Populariteit</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row product-overview">
+                @Html.Partial("ProductOverview", Model);
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col col-md-12 col-full-width">
+        <img class="img-full-width" src="~/images/dressfinder-banner.jpg" />
+    </div>
+</div>
