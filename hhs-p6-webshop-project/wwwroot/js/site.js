@@ -890,12 +890,9 @@ $(document).ready(function () {
             // Get the file name of the selected input (file)
             var fileName = e.target.value.split('\\').pop();
 
-            // Print the file name to the console
-            // TODO: Remove this debug code?
-            console.log('Upload file name: ' + fileName);
-
             // Append the file name to the upload image box
-            $('.upload-image').html(fileName);
+            if(fileName !== null)
+                $('.upload-image').html(fileName);
         }
     });
 });
