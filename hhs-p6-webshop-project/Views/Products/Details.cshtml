@@ -82,7 +82,7 @@
                                 @{
                                     foreach (var color in Model.ColorOptions)
                                     {
-                                        <span class="color-circle @color.Color"></span>
+                                        <div id="color_@color.ColorOptionId" class="color-circle @color.Color" title="@color.Color"></div>
                                     }
                                 }
                             </div>
