@@ -44,11 +44,16 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
         }
 
         // GET: ColorOptions/Create
-        public IActionResult Create()
+        public IActionResult Create(int? id)
         {
+            int? selectedItem = 0;
+            if(id != null)
+            {
+                selectedItem = id;
+            }
             string[] coloroptions = { "Ivoor/Wit", "Ivoor met kleur", "Gekleurd" };
             ViewData["ColorOption"] = coloroptions.Select(r => new SelectListItem { Text = r, Value = r });
-            ViewData["Name"] = new SelectList(_context.Products, "ProductId", "Name");
+            ViewData["Name"] = new SelectList(_context.Products, "ProductId", "Name", selectedItem);
             return View();
         }
 
@@ -64,8 +69,8 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
                 _context.Add(colorOption);
                 await _context.SaveChangesAsync();
                 if (again)
-                    return RedirectToAction("Create");
-                return RedirectToAction("Create", "ProductImages");
+                    return RedirectToAction("Create", "ColorOptions", new { id = colorOption.ProductId });
+                return RedirectToAction("Create", "ProductImages", new { id = colorOption.ColorOptionId });
             }
             ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", colorOption.ProductId);
             return View(colorOption);

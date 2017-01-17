@@ -61,7 +61,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
                 await _context.SaveChangesAsync();
                 if (again)
                     return RedirectToAction("Create");
-                return RedirectToAction("Create", "ColorOptions");
+                return RedirectToAction("Create", "ColorOptions", new { id = product.ProductId });
             }
             return View(product);
         }

@@ -39,11 +39,17 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers {
         }
 
         // GET: ProductImages/Create
-        public IActionResult Create()
+        public IActionResult Create(int? id)
         {
+            int? selectedItem = 0;
+            if(id != null)
+            {
+                selectedItem = id;
+            }
+
             var dressPerColor = _context.ColorOptions.Join(_context.Products, c => c.ProductId, o => o.ProductId, (c, o) => new { c.ColorOptionId, c.Color, o.Name }).ToList();
             IEnumerable<SelectListItem> selectList = from d in dressPerColor select new SelectListItem { Value = d.ColorOptionId.ToString(), Text = d.Name + " - " + d.Color };
-            ViewData["ColorOptionId"] = new SelectList(selectList, "Value", "Text");
+            ViewData["ColorOptionId"] = new SelectList(selectList, "Value", "Text", selectedItem);
             return View();
         }
 
@@ -68,7 +74,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers {
                 _context.Add(productImage);
                 await _context.SaveChangesAsync();
                 if (again)
-                    return RedirectToAction("Create");
+                    return RedirectToAction("Create", "ProductImages", productImage.ColorOptionId);
 
                 return RedirectToAction("Index", "Products");
             }
