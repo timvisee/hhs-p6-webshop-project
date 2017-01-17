@@ -101,6 +101,30 @@
     border: 1px solid #e2e2e2;
 }
 
+.color-circle.Grijs {
+    background-color: gray;
+}
+
+.color-circle.Roze {
+    background-color: pink;
+}
+
+.color-circle.Ivoor {
+    background-color: ivory;
+}
+
+.color-circle.Rood {
+    background-color: red;
+}
+
+.color-circle.Zwart {
+    background-color: black;
+}
+
+.color-circle.Wit {
+    background-color: white;
+}
+
 .product:hover .product-colors,
 .product:hover .product-sku {
     display: block;
