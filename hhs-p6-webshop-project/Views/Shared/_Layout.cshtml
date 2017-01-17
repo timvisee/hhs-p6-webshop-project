@@ -26,7 +26,7 @@
     // Determine whether a banner is shown in the layout
     var showBanner = ViewData.ContainsKey("ShowBanner") && (bool)ViewData["ShowBanner"];
     var showHomeBanner = ViewData.ContainsKey("ShowHomeBanner") && (bool)ViewData["ShowHomeBanner"];
-    var bannerPath = "/images/mooi-meisje.jpg";
+    var bannerPath = "/images/home-banner-main.jpg";
 
 
     // Set the banner URL from the view data
@@ -104,6 +104,7 @@
                         </button>
                     </div>
                 </div>
+                <span class="no-user-select glyphicon glyphicon-menu-hamburger" id="menu_toggle"></span>
             </div>
         </div>
         <div id="header_nav">
