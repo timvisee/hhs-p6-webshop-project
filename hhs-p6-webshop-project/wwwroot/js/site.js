@@ -14,6 +14,8 @@ var unavailableDates = null;
  */
 var uniqueIdIndex = 0;
 
+// Poep
+
 /**
  * Get an unique ID.
  */
