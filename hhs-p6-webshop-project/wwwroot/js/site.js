@@ -14,8 +14,6 @@ var unavailableDates = null;
  */
 var uniqueIdIndex = 0;
 
-// Poep
-
 /**
  * Get an unique ID.
  */
@@ -878,8 +876,6 @@ $(document).ready(function () {
             return false;
         });
     }
-
-    // scheet
 
     //File uploading custom button
     $('.inputfile').change(function (e) {
