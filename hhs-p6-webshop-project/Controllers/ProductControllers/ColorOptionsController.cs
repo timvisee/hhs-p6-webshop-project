@@ -91,7 +91,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
                 return NotFound();
             }
 
-            string[] coloroptions = { "Ivoor/Wit", "Ivoor met kleur", "Gekleurd" };
+            string[] coloroptions = { "Wit", "Ivoor", "Roze", "Rood", "Grijs", "Zwart" };
             ViewData["ColorOption"] = coloroptions.Select(r => new SelectListItem { Text = r, Value = r });
             ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", colorOption.ProductId);
             return View(colorOption);
