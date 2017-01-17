@@ -74,7 +74,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers {
                 _context.Add(productImage);
                 await _context.SaveChangesAsync();
                 if (again)
-                    return RedirectToAction("Create");
+                    return RedirectToAction("Create", "ProductImages", productImage.ColorOptionId);
 
                 return RedirectToAction("Index", "Products");
             }

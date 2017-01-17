@@ -69,7 +69,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
                 _context.Add(colorOption);
                 await _context.SaveChangesAsync();
                 if (again)
-                    return RedirectToAction("Create");
+                    return RedirectToAction("Create", "ColorOptions", new { id = colorOption.ProductId });
                 return RedirectToAction("Create", "ProductImages", new { id = colorOption.ColorOptionId });
             }
             ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", colorOption.ProductId);
