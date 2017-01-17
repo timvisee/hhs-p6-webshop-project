@@ -19,20 +19,11 @@ var uniqueIdIndex = 0;
  */
 function getUniqueId(prefix) {
     // Set the default prefix
-    if (prefix == undefined)
+    if(prefix == undefined)
         prefix = "unique-id";
 
     // Return an unique ID
     return prefix + "-" + uniqueIdIndex++;
-}
-
-/**
- * Format a date to ISO.
- */
-function formatDate(date) {
-    return date.getFullYear() + "-" +
-            ("0" + (date.getMonth() + 1)).slice(-2) + "-" +
-            ("0" + date.getDate()).slice(-2);
 }
 
 /**
@@ -131,30 +122,30 @@ $(document).ready(function () {
     var calendarElement = $("#calendar");
 
     // Initialize the calendar with a date picker, if any element is selected
-    if (calendarElement.length > 0) {
+    if(calendarElement.length > 0) {
         // Create a variable for the selected date and time
         var selectedDateTime = null;
 
         // Create a date picker render function
         function renderDatePickerDay(date) {
             // Return if the date is undefined
-            if (date == undefined)
+            if(date == undefined)
                 return [false];
 
             // Define the variable
             var isAvailable = false;
 
             // Check whether the date is available, if the unavailable dates array isn't null
-            if (unavailableDates != null) {
+            if(unavailableDates != null) {
                 // Build the date string
-                var dateString = formatDate(date);
+                var dateString = formatDateTime(date, true, false);
 
                 // Determine whether this date is in the list of occupied dates
                 isAvailable = unavailableDates.indexOf(dateString) < 0;
             }
 
             // Return depending on whether the date is avaialble or not
-            if (isAvailable)
+            if(isAvailable)
                 return [true];
             else
                 return [false, "", "Deze datum is bezet."];
@@ -167,24 +158,16 @@ $(document).ready(function () {
             firstDay: 1,
             minDate: dateToday,
 
-            onSelect: function (date) {
-                var dateObj = new Date(date);
-                var inputDate = dateObj.getDate() + "/" + (dateObj.getMonth() + 1) + "/" + dateObj.getFullYear();
-                var showDate = dateObj.getDate() + " " + MONTH_NAMES[dateObj.getMonth()] + " " + dateObj.getFullYear();
-
-                $(".toggle-time-date").removeClass("toggle-btn-disabled").attr("title", "");
-
-                $("#date_input").val(inputDate);
-                $(".selected-date").each(function () {
-                    $(this).html(showDate);
-                });
-
-                // Set the selected date
-                selectedDateTime = dateObj;
+            onSelect: function(date) {
+                // Direct the function to onDateSelect with a proper date object
+                onDateSelect(new Date(date));
             },
 
             beforeShowDay: renderDatePickerDay
         });
+
+        // Show the date page
+        showDatePage(true);
 
         // Disable the loading indicator
         setLoadingIndicator(calendarElement, true);
@@ -192,7 +175,7 @@ $(document).ready(function () {
         // Fetch the unavailable dates
         fetchUnavailableDates(function (err, dates) {
             // Print errors to the console
-            if (err != null) {
+            if(err != null) {
                 console.log(err);
                 return;
             }
@@ -209,16 +192,15 @@ $(document).ready(function () {
         });
 
         // Load time data when a date is selected
-        $(".toggle-time-date-to-time").click(function () {
-            // Get the time container, and radio buttons
-            var timeContainer = $(".time-container");
-            var timeRadioButtonContainer = timeContainer.find("#select_time");
+        $(".toggle-time-date-to-time").click(function() {
+            // Show the time page
+            showTimePage();
 
             // Clear the list of radio buttons
             timeRadioButtonContainer.html("<i>Beschikbaarheid laden...</i>");
 
             // Wait for the slide animation to complete
-            setTimeout(function () {
+            setTimeout(function() {
                 // Create a function to append a radio button to the container
                 function createTimeRadioButton(appointmentTimeObject) {
                     // Generate an unique ID
@@ -229,8 +211,8 @@ $(document).ready(function () {
 
                     // Append the radio button
                     timeRadioButtonContainer.append("<li>" +
-                        "<input class=\"time-option\" type=\"radio\" name=\"appointment_time\" value=\"" + value + "\" id=\"" + uniqueId + "\">" +
-                        "<label class=\"time-option-label\" for=\"" + uniqueId + "\">" + appointmentTimeObject.formattedTime + " uur</label>" +
+                        "<input class=\"time-option animated fadeInRight\" type=\"radio\" name=\"appointment_time\" value=\"" + value + "\" id=\"" + uniqueId + "\">" +
+                        "<label class=\"time-option-label animated fadeInRight\" for=\"" + uniqueId + "\">" + appointmentTimeObject.formattedTime + " uur</label>" +
                         "</li>");
                 }
 
@@ -238,7 +220,7 @@ $(document).ready(function () {
                 setLoadingIndicator(timeContainer, true);
 
                 // Fetch the times
-                fetchTimes(selectedDateTime, function (err, times) {
+                fetchTimes(selectedDateTime, function(err, times) {
                     // Print errors to the console
                     if (err != null) {
                         console.log(err);
@@ -250,12 +232,12 @@ $(document).ready(function () {
 
                     // Loop through the times
                     var hasTime = false;
-                    for (var i = 0; i < times.length; i++) {
+                    for(var i = 0; i < times.length; i++) {
                         // Get the time entry
                         var timeEntry = times[i];
 
                         // Skip the time if it's not available
-                        if (!timeEntry.available)
+                        if(!timeEntry.available)
                             continue;
 
                         // Create the radio buttons
@@ -266,39 +248,44 @@ $(document).ready(function () {
                     }
 
                     // Show a message if no time is available
-                    if (!hasTime)
+                    if(!hasTime)
                         timeRadioButtonContainer.html("<i>Geen tijd beschikbaar op deze dag</i>");
 
                     // Link the radio buttons to the date time field
-                    timeRadioButtonContainer.find("input").change(function () {
+                    timeRadioButtonContainer.find("input.time-option").change(function () {
                         // Get the radio button element, and check whether it's selected
                         var radioButton = $(this);
                         var isSelected = radioButton.is(":checked");
 
                         // Return if the radio button isn't selected
-                        if (!isSelected)
+                        if(!isSelected)
                             return;
 
                         // Parse the time
-                        var hour = parseInt(radioButton.val().split(":")[0]);
-                        var minute = parseInt(radioButton.val().split(":")[1]);
+                        var timeString = radioButton.val();
+                        var hour = parseInt(timeString.split(":")[0]);
+                        var minute = parseInt(timeString.split(":")[1]);
 
                         // Modify the selected date
                         selectedDateTime.setHours(hour);
                         selectedDateTime.setMinutes(minute);
                         selectedDateTime.setSeconds(0);
 
-                        // Get the date input field
-                        var dateField = $("#date_input");
-
-                        // Append the time
-                        dateField.val(dateField.val() + " " + $(this).val());
+                        // Set the date input field value
+                        $("#date_input").val(formatDateTime(selectedDateTime, true, true));
                     });
 
                     $(".time-option").click(function () {
                         // Show the go to second button
-                        $("#go_to_second").show();
-                        $(".selected-time").html(" OM " + $(this).val());
+                        $(".selected-time").html(" OM " + timeString);
+
+                        // Show the second button
+                        secondStepButton.show();
+
+                        // Pulse the button once
+                        setTimeout(function () {
+                            secondStepButton.removeClass("animated fadeIn").delay(0).addClass("animated pulse");
+                        }, 750);
                     });
 
                     // Set the loading indicator
@@ -306,6 +293,12 @@ $(document).ready(function () {
                 });
 
             }, 500);
+        });
+
+        // Load time data when a date is selected
+        $(".toggle-time-time-to-date").click(function() {
+            // Show the date page
+            showDatePage();
         });
     }
 
@@ -322,23 +315,123 @@ $(document).ready(function () {
         $("#appointment_step_image").attr("src", "/images/appointment/step-2.png");
     });
     // Third button needs the check if the fields are filled in correctly
+    var leftOffsetHeight;
+    var rightOffsetHeight;
 
+    function switchStep(fromElements, toElements) {
+        // Get the list of panels
+        var panels = $(fromElements + ", " + toElements);
 
-    /**
-     * Toggle the different sections for creating an appointment
-     */
-    $(".toggle-time-date").click(function () {
-        if (!$(this).hasClass("toggle-btn-disabled")) {
-            $(".time-date-box").slideToggle(500, "easeInOutCubic");
-        }
-    });
+        // Create a variable for the left and right container
+        var leftContainer;
+        var rightContainer;
+
+        // Get the left and right panels
+        var leftPanels = [];
+        var rightPanels = [];
+
+        // Loop through each panel to handle it manually
+        panels.each(function() {
+            var panel = $(this);
+            var isLeft = !panel.hasClass("right-box");
+            var container = panel.parent();
+            if(isLeft)
+                container = container.parent();
+
+            // Update the left and right container instances, give the containers a fixed width, and update the offset
+            if(isLeft) {
+                if(leftOffsetHeight == undefined && panel.is(":visible"))
+                    leftOffsetHeight = container.height() - panel.height();
+
+                if(leftContainer == undefined) {
+                    leftContainer = container;
+
+//                    container.width(container.width());
+                    container.height(container.height());
+                }
+
+                leftPanels.push(panel);
+
+            } else {
+                if(rightOffsetHeight == undefined && panel.is(":visible"))
+                    rightOffsetHeight = container.height() - panel.height();
+
+                if(rightContainer == undefined) {
+                    rightContainer = container;
+
+//                    container.width(container.outerWidth());
+                    container.height(container.height());
+                }
+
+                rightPanels.push(panel);
+            }
+        });
+
+        // Store the current position state to revert it to after animating
+        var wasPos = panels.eq(0).css("position");
+
+        // Define the target height
+        var targetHeight = 0;
+
+        // Loop through the panels to update their visibility
+        panels.each(function() {
+            var panel = $(this);
+            var isLeft = !panel.hasClass("right-box");
+            var container = panel.parent();
+            if(isLeft)
+                container = container.parent();
+
+            // Check whether the component is visible
+            if(panel.is(":visible")) {
+                // Toggle the fadeIn class to fadeOut
+                panel.removeClass("fadeIn animated").delay(0).addClass("animated fadeOut");
+
+                // Hide the panel when done
+                setTimeout(function() {
+                    panel.removeClass("fadeOut").addClass("fadeIn").hide();
+                    panel.css("position", wasPos);
+                }, 1000);
+
+            } else {
+                // Update the target height
+                var height = panel.height() + (isLeft ? leftOffsetHeight : rightOffsetHeight);
+                if(height > targetHeight)
+                    targetHeight = height;
+
+                // Show the panel, this will animate using CSS
+                panel.show();
+            }
+        });
+
+        // Properly resize the parent panel
+        leftContainer.animate({
+                "height": targetHeight
+        }, 500);
+        rightContainer.animate({
+                "height": targetHeight
+        }, 500);
+
+        // Make the position absolute of the first elements
+        var bigPanelLeft = leftPanels[0].index() < leftPanels[1].index() ? leftPanels[0] : leftPanels[1];
+        var bigPanelRight = rightPanels[0].index() < rightPanels[1].index() ? rightPanels[0] : rightPanels[1];
+//        bigPanelLeft.width(bigPanelLeft.width());
+//        bigPanelLeft.width(bigPanelRight.width());
+        bigPanelLeft.css("position", "absolute");
+        bigPanelRight.css("position", "absolute");
+
+        // Reset the position of the element
+        setTimeout(function() {
+            bigPanelLeft.css("position", wasPos);
+            bigPanelRight.css("position", wasPos);
+        }, 1000);
+    }
 
     $("#go_to_second, #back_to_first").click(function () {
-        $("#left_1, #left_2, #right_1, #right_2").toggle();
+        switchStep("#left_1, #right_1", "#left_2, #right_2");
     });
 
     $("#back_to_second").click(function () {
-        $("#left_2, #left_3, #right_2, #right_3").toggle();
+        switchStep("#left_2, #right_2", "#left_3, #right_3");
     });
 
     /**
@@ -364,7 +457,7 @@ $(document).ready(function () {
             $("#fill_in_fields_warning").html("Je hebt niet alle verplichte velden ingevuld!");
         } else {
             $("#appointment_step_image").attr("src", "/images/appointment/step-3.png");
-            $("#left_2, #left_3, #right_2, #right_3").toggle();
+            switchStep("#left_2, #right_2", "#left_3, #right_3");
         }
     });
 
@@ -390,7 +483,7 @@ $(document).ready(function () {
      */
     function fetchData(endpoint, callback, data) {
         // Make sure an endpoint and callback is specified
-        if (endpoint == undefined || typeof callback !== "function") {
+        if(endpoint == undefined || typeof callback !== "function") {
             callback(new Error("Endpoint or callback not specified"));
             return;
         }
@@ -402,7 +495,7 @@ $(document).ready(function () {
             dataType: "json",
             type: "GET",
             data: data,
-            error: function (jqXhr, textStatus) {
+            error: function(jqXhr, textStatus) {
                 // Define the error message
                 var error = "Failed to fetch data.\n\nError: " + textStatus;
 
@@ -412,9 +505,9 @@ $(document).ready(function () {
                 // Call back with an error
                 callback(new Error(error));
             },
-            success: function (data) {
+            success: function(data) {
                 // Make sure the status is OK
-                if (data.status !== "ok") {
+                if(data.status !== "ok") {
                     // Define the error message
                     var error = "Failed to fetch data. The website returned an error.\n\nError: " + data.error.message;
 
@@ -448,7 +541,7 @@ $(document).ready(function () {
         // Fetch the data
         fetchData("Appointments/GetDates", function (err, data) {
             // Call back errors
-            if (err != null) {
+            if(err != null) {
                 callback(err);
                 return;
             }
@@ -476,7 +569,7 @@ $(document).ready(function () {
         // Fetch the data
         fetchData("Appointments/GetTimes", function (err, data) {
             // Call back errors
-            if (err != null) {
+            if(err != null) {
                 callback(err);
                 return;
             }
@@ -485,7 +578,7 @@ $(document).ready(function () {
             callback(null, data.times);
 
         }, {
-            date: formatDate(date)
+            date: formatDateTime(date, true, false)
         });
     }
 
