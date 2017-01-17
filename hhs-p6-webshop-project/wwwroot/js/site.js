@@ -877,14 +877,25 @@ $(document).ready(function () {
         });
     }
 
-    //File uploading custom button
+    // File uploading custom button
     $('.inputfile').change(function (e) {
+        // Get the input file selectors
         var inputs = document.querySelectorAll('.inputfile');
-        Array.prototype.forEach.call(inputs, function (input) {
-            var fileName = '';
-            fileName = e.target.value.split('\\').pop();
-            console.log(fileName);
+
+        // Loop through the selected inputs
+        for(var i = 0; i < inputs.length; i++) {
+            // Get the current entry
+            var input = inputs[i];
+
+            // Get the file name of the selected input (file)
+            var fileName = e.target.value.split('\\').pop();
+
+            // Print the file name to the console
+            // TODO: Remove this debug code?
+            console.log('Upload file name: ' + fileName);
+
+            // Append the file name to the upload image box
             $('.upload-image').html(fileName);
-        });
+        }
     });
 });
