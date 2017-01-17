@@ -9,6 +9,7 @@ using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models.ProductModels;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using hhs_p6_webshop_project.App.Ajax;
 
 namespace hhs_p6_webshop_project.Controllers.ProductControllers {
     public class ProductImagesController : Controller {
@@ -173,6 +174,30 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers {
             GuidString = GuidString.Replace("/", "");
 
             return GuidString;
+        }
+
+
+
+        // GET: ProductImages/GetImagePaths/5
+        public JsonResult GetImagePaths(int? id)
+        {
+            if (id == null)
+            {
+                //return not found
+            }
+
+            // Get all the images where the color id is the same as requested
+            var colorOptions = _context.ProductImages.Where(pi => pi.ColorOptionId == id);
+
+            List<string> paths = new List<string>();
+
+            // Add the paths from all the images to an list
+            foreach (var color in colorOptions) {
+                paths.Add(color.Path);
+            }
+
+            // Return the list of image paths
+            return new AjaxResponse().SetDataField("paths", paths);
         }
     }
 }
