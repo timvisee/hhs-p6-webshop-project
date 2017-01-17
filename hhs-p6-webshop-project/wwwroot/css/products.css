@@ -110,7 +110,7 @@
 }
 
 .color-circle.Ivoor {
-    background-color: ivory;
+    background-color: #fdeeee;
 }
 
 .color-circle.Rood {
@@ -119,6 +119,10 @@
 
 .color-circle.Zwart {
     background-color: black;
+}
+
+.color-circle.Blauw {
+    background-color: aqua;
 }
 
 .color-circle.Wit {
