@@ -53,13 +53,15 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductId,Description,Name,Price")] Product product)
+        public async Task<IActionResult> Create([Bind("ProductId,Description,Name,Price")] Product product, bool again)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(product);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                if (again)
+                    return RedirectToAction("Create");
+                return RedirectToAction("Create", "ColorOptions");
             }
             return View(product);
         }

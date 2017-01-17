@@ -13,16 +13,21 @@
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            <label asp-for="Color" class="col-md-2 control-label"></label>
+            <label asp-for="Product.Name" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="Color" class="form-control" />
-                <span asp-validation-for="Color" class="text-danger" />
+                <select asp-for="ProductId" class="form-control" asp-items="ViewBag.Name"></select>
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="Product.Name" class="col-md-2 control-label"></label>
+            <label asp-for="Color" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <select asp-for="ProductId" class ="form-control" asp-items="ViewBag.Name"></select>
+                <select asp-for="Color" class="form-control" asp-items="ViewBag.ColorOption"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <input name="again" type="checkbox" value="true" id="again">
+                <label for="again">Nog een kleur toevoegen?</label>
             </div>
         </div>
         <div class="form-group">

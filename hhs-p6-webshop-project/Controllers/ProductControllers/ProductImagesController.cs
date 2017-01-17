@@ -39,8 +39,11 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers {
         }
 
         // GET: ProductImages/Create
-        public IActionResult Create() {
-            ViewData["ColorOptionId"] = new SelectList(_context.ColorOptions, "ColorOptionId", "Color");
+        public IActionResult Create()
+        {
+            var dressPerColor = _context.ColorOptions.Join(_context.Products, c => c.ProductId, o => o.ProductId, (c, o) => new { c.ColorOptionId, c.Color, o.Name }).ToList();
+            IEnumerable<SelectListItem> selectList = from d in dressPerColor select new SelectListItem { Value = d.ColorOptionId.ToString(), Text = d.Name + " - " + d.Color };
+            ViewData["ColorOptionId"] = new SelectList(selectList, "Value", "Text");
             return View();
         }
 
@@ -49,7 +52,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers {
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductImageId,ColorOptionId,Path")] ProductImage productImage, IFormFile image) {
+        public async Task<IActionResult> Create([Bind("ProductImageId,ColorOptionId,Path")] ProductImage productImage, IFormFile image, bool again) {
             if (ModelState.IsValid || image != null) {
 
                 string filename = ChangePathName(productImage.Path);
@@ -64,7 +67,10 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers {
 
                 _context.Add(productImage);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                if (again)
+                    return RedirectToAction("Create");
+
+                return RedirectToAction("Index", "Products");
             }
             ViewData["ColorOptionId"] = new SelectList(_context.ColorOptions, "ColorOptionId", "Color", productImage.ColorOptionId);
             return View(productImage);
@@ -80,7 +86,9 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers {
             if (productImage == null) {
                 return NotFound();
             }
-            ViewData["ColorOptionId"] = new SelectList(_context.ColorOptions, "ColorOptionId", "Color", productImage.ColorOptionId);
+            var dressPerColor = _context.ColorOptions.Join(_context.Products, c => c.ProductId, o => o.ProductId, (c, o) => new { c.ColorOptionId, c.Color, o.Name }).ToList();
+            IEnumerable<SelectListItem> selectList = from d in dressPerColor select new SelectListItem { Value = d.ColorOptionId.ToString(), Text = d.Name + " - " + d.Color };
+            ViewData["ColorOptionId"] = new SelectList(selectList, "Value", "Text");
             return View(productImage);
         }
 
@@ -116,6 +124,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers {
                         throw;
                     }
                 }
+
                 return RedirectToAction("Index");
             }
             ViewData["ColorOptionId"] = new SelectList(_context.ColorOptions, "ColorOptionId", "Color", productImage.ColorOptionId);
