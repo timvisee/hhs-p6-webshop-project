@@ -38,13 +38,13 @@ function formatDateTime(dateTime, formatDate, formatTime) {
     var formatted = "";
 
     // Format the date
-    if (formatDate)
+    if(formatDate)
         formatted = dateTime.getFullYear() + "-" +
                 ("0" + (dateTime.getMonth() + 1)).slice(-2) + "-" +
                 ("0" + dateTime.getDate()).slice(-2);
 
     // Format the time
-    if (formatTime)
+    if(formatTime)
         formatted = (formatDate ? " " : "") +
                 ("0" + dateTime.getHours()).slice(-2) + ":" +
                 ("0" + dateTime.getMinutes()).slice(-2) + ":" +
@@ -59,10 +59,10 @@ $(document).ready(function () {
 
     // Initialize WOW
     new WOW({
-        boxClass: 'wow',
-        animateClass: 'animated',
-        offset: 0,
-        live: true
+            boxClass:     'wow',
+            animateClass: 'animated',
+            offset:       0,
+            live:         true
     }).init();
 
     /**
@@ -124,7 +124,15 @@ $(document).ready(function () {
     // Initialize the calendar with a date picker, if any element is selected
     if(calendarElement.length > 0) {
         // Create a variable for the selected date and time
-        var selectedDateTime = null;
+        var selectedDateTime = new Date();
+        selectedDateTime.setTime(selectedDateTime.getTime() + 7 * 24 * 60 * 60 * 1000);
+
+        // Get the time container, and radio buttons
+        var timeContainer = $(".time-container");
+        var timeRadioButtonContainer = timeContainer.find("#select_time");
+
+        // Get the second step button
+        var secondStepButton = $("#go_to_second");
 
         // Create a date picker render function
         function renderDatePickerDay(date) {
@@ -149,6 +157,98 @@ $(document).ready(function () {
                 return [true];
             else
                 return [false, "", "Deze datum is bezet."];
+        }
+
+        // Get the button to toggle to the time
+        var toggleToTimeButton = $(".toggle-time-date-to-time");
+        var toggleToDateButton = $(".toggle-time-time-to-date");
+
+        /**
+         * Show the date page.
+         *
+         * @param {boolean|undefined} [initial] True if this is the initial page (because a different animation will be used)j.
+         */
+        function showDatePage(initial) {
+            // Animate the pages when we're not on the initial page
+            if(!initial)
+                $(".time-date-box").slideToggle({
+                    "duration": 500,
+                    "easing": "easeInOutCubic"
+                });
+            else
+                $(".time-date-box").addClass("animated fadeIn");
+
+            // Fade out the buttons
+            timeRadioButtonContainer.find("li").addClass("animated fadeOutLeft");
+
+            // Animate the arrow buttons
+            toggleToDateButton.addClass("animated fadeOutLeft");
+
+            // Hide the second step button
+            secondStepButton.removeClass("animated fadeIn pulse").delay(1).addClass("animated fadeOut");
+
+            // Disable the animations when they complete
+            setTimeout(function () {
+                // Reset the radio button box contents, to remove the time selection radio buttons
+                timeRadioButtonContainer.html("");
+
+                // Remove the animations from the toggle to date button
+                toggleToDateButton.removeClass("animated fadeOutLeft").addClass("toggle-btn-disabled");
+
+                // Hide the second step button
+                secondStepButton.hide();
+            }, 500);
+
+            // Force select the currently selected date
+            calendarElement.datepicker("setDate", selectedDateTime);
+            onDateSelect(selectedDateTime);
+        }
+
+        /**
+         * Called when the time page should be shown.
+         */
+        function showTimePage() {
+            // Animate the pages
+            $(".time-date-box").slideToggle({
+                "duration": 500,
+                "easing": "easeInOutCubic"
+            });
+
+            // Hide the second step button
+            secondStepButton.removeClass("animated fadeOut").delay(0).addClass("animated fadeIn pulse");
+
+            // Animate the arrow buttons
+            toggleToTimeButton.addClass("animated fadeOutRight");
+            toggleToDateButton.addClass("animated fadeInRight");
+
+            // Disable the animations when they complete
+            setTimeout(function () {
+                toggleToTimeButton.removeClass("animated fadeOutRight").addClass("toggle-btn-disabled");
+            }, 500);
+        }
+
+        /**
+         * Called when a date is selected.
+         */
+        function onDateSelect(date) {
+            // Format the show date
+            var showDate = date.getDate() + " " + MONTH_NAMES[date.getMonth()] + " " + date.getFullYear();
+
+            // Get the toggle time date button and toggle it's visibility
+            var toggleTimeDateButton = $(".toggle-time-date");
+
+            // Animate the button
+            toggleTimeDateButton.attr("title", "").addClass("animated fadeInLeft");
+
+            // Update the selected date label
+            $(".selected-date").each(function () {
+                $(this).html(showDate);
+            });
+
+            // Set the selected date
+            selectedDateTime.setFullYear(date.getFullYear());
+            selectedDateTime.setMonth(date.getMonth());
+            selectedDateTime.setDate(date.getDate());
         }
 
         // Set up the date picker
@@ -177,7 +277,7 @@ $(document).ready(function () {
             // Print errors to the console
             if(err != null) {
                 console.log(err);
-                return;
+                return ;
             }
 
             // Fill the list of unavailable dates
@@ -273,9 +373,7 @@ $(document).ready(function () {
 
                         // Set the date input field value
                         $("#date_input").val(formatDateTime(selectedDateTime, true, true));
-                    });
 
-                    $(".time-option").click(function () {
                         // Show the go to second button
                         $(".selected-time").html(" OM " + timeString);
 
@@ -312,8 +410,10 @@ $(document).ready(function () {
         $("#appointment_step_image").attr("src", "/images/appointment/step-1.png");
     });
     $("#go_to_second, #back_to_second").click(function () {
+        // TODO: Possibly fade this
         $("#appointment_step_image").attr("src", "/images/appointment/step-2.png");
     });
+
     // Third button needs the check if the fields are filled in correctly
     var leftOffsetHeight;
     var rightOffsetHeight;
@@ -657,7 +757,7 @@ $(document).ready(function () {
     var productOverviewElement = $(".product-overview");
 
     // Load the filter logic when a product overview is available
-    if (productOverviewElement.length > 0) {
+    if(productOverviewElement.length > 0) {
         /**
          * Fetch a list of dressesk.
          * Filters are applied as specified in the sidebar.
@@ -672,7 +772,7 @@ $(document).ready(function () {
             };
 
             // Find the selected checkboxes, and build the filter object
-            $(".filter").each(function () {
+            $(".filter").each(function() {
                 // Get the filter element
                 var filterElement = $(this);
 
@@ -680,7 +780,7 @@ $(document).ready(function () {
                 var checkedBoxes = filterElement.find("input:checked");
 
                 // Skip if no boxes are selected
-                if (checkedBoxes.length <= 0)
+                if(checkedBoxes.length <= 0)
                     return;
 
                 // Get the product ID for this filter section as key
@@ -690,7 +790,7 @@ $(document).ready(function () {
                 filterObject.values[key] = [];
 
                 // Put the checkbox IDs in the array
-                checkedBoxes.each(function () {
+                checkedBoxes.each(function() {
                     filterObject.values[key].push($(this).val());
                 });
             });
@@ -703,14 +803,14 @@ $(document).ready(function () {
                     "Content-Type": "application/json"
                 },
                 data: JSON.stringify(filterObject),
-                error: function (jqXhr, textStatus) {
+                error: function(jqXhr, textStatus) {
                     // Define the error message
                     var error = "Failed to filter dresses.\n\nError: " + textStatus;
 
                     // Alert the user
                     alert(error);
                 },
-                success: function (data) {
+                success: function(data) {
                     // Find the product elements
                     var productElements = productOverviewElement.find('.product');
 
@@ -719,7 +819,7 @@ $(document).ready(function () {
                     productElements.toggleClass('animate-product-catalog-enter animate-product-catalog-leave');
 
                     // Show the new elements when the previous animation is complete
-                    setTimeout(function () {
+                    setTimeout(function() {
                         // Remove the current list of products (that is already faded away)
                         productElements.remove();
 
@@ -728,7 +828,7 @@ $(document).ready(function () {
 
                     }, 300);
                 },
-                complete: function () {
+                complete: function() {
                     // Hide the loading indiator
                     setLoadingIndicator(productOverviewElement, false);
                 }
@@ -746,14 +846,14 @@ $(document).ready(function () {
     var createAppointmentFormElement = $("#create_appointment_form");
 
     // Execute the appointment creation form logic when it's available on the page
-    if (createAppointmentFormElement.length > 0) {
+    if(createAppointmentFormElement.length > 0) {
         // Get the button element to go to step 3
         var stepThreeButton = $("#go_to_third");
 
         // Handle key press events, and prevent the enter key from submitting the form
-        createAppointmentFormElement.keypress(function (event) {
+        createAppointmentFormElement.keypress(function(event) {
             // Continue if this wasn't the enter key that is pressed
-            if (event.keyCode !== 13)
+            if(event.keyCode !== 13)
                 return true;
 
             // Validate the form
@@ -761,7 +861,7 @@ $(document).ready(function () {
             var isValid = createAppointmentFormElement.valid();
 
             // Go to step 3 if the form is valid
-            if (isValid)
+            if(isValid)
                 stepThreeButton.click();
 
             // The enter key is pressed, prevent the default action
