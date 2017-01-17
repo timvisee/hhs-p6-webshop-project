@@ -41,7 +41,8 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
                 return NotFound();
             }
 
-            var product = await _context.Products.SingleOrDefaultAsync(m => m.ProductId == id);
+            var product = _service.GetAllProducts().FirstOrDefault(pr => pr.ProductId == id);
+
             if (product == null)
             {
                 return NotFound();
