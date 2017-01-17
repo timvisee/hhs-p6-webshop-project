@@ -1,7 +1,5 @@
 ﻿using System;
-using hhs_p6_webshop_project;
 using hhs_p6_webshop_project.Data;
-using Microsoft.EntityFrameworkCore.Storage;
 
 namespace hhs_p6_webshop_project_test {
     public class DatabaseFixture : IDisposable {
