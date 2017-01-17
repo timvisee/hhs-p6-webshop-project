@@ -1,5 +1,11 @@
+@using System.Threading.Tasks
+@using hhs_p6_webshop_project.Models.ProductModels
 @model hhs_p6_webshop_project.Models.ProductModels.Product
+
+
 <link href="~/css/products.css" rel="stylesheet" />
+<script src="~/js/product-details.js"></script>
+
 @{
     ViewData["Title"] = Html.DisplayFor(model => model.Name);
     ViewData["PinkBackground"] = true;
@@ -14,6 +20,7 @@
     {
         // Tering harde beun maar het werkt echt perfect
     }
+}
 }
 
 <div class="single-container container">
@@ -31,15 +38,7 @@
     <div class="row">
         <div class="product-details">
             <div class="side-pictures">
-                <div class="small-picture">
-                    <img src="~/@ImagePath" alt="" />
-                </div>
-                <div class="small-picture">
-                    <img src="~/@ImagePath" alt="" />
-                </div>
-                <div class="small-picture">
-                    <img src="~/@ImagePath" alt="" />
-                </div>
+                <!-- Placeholder -->
             </div>
             <div class="big-picture">
                 <div class="vertical-align">
@@ -82,7 +81,7 @@
                                 @{
                                     foreach (var color in Model.ColorOptions)
                                     {
-                                        <div id="color_@color.ColorOptionId" class="color-circle @color.Color" title="@color.Color"></div>
+                                        <div id="color_@color.ColorOptionId" value="@color.ColorOptionId" class="color-circle @color.Color" title="@color.Color"></div>
                                     }
                                 }
                             </div>
