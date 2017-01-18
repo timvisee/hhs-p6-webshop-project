@@ -4,6 +4,14 @@
     ViewData["Title"] = "Edit";
 }
 
+
+<script src="~/lib/tinymce-dist/tinymce.min.js"></script>
+<script type="text/javascript">
+    tinymce.init({
+        selector: '.tinymce',  // change this value according to your HTML
+    });
+</script>
+
 <h2>Edit</h2>
 
 <form asp-action="Edit">
@@ -19,10 +27,33 @@
                 <span asp-validation-for="@Model.NewsArticle.Name" class="text-danger" />
             </div>
         </div>
-        <label asp-for="@Model.SelectedNewsCategories" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <select asp-for="@Model.SelectedNewsCategories" class="form-control" asp-items="@Model.NewsCategoriesList"></select>
-            <span asp-validation-for="@Model.SelectedNewsCategories" class="text-danger" />
+        <div class="form-group">
+            <label asp-for="@Model.NewsArticle.ImagePath" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="@Model.NewsArticle.ImagePath" class="form-control" />
+                <span asp-validation-for="@Model.NewsArticle.ImagePath" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.NewsArticle.Excerpt" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <textarea asp-for="@Model.NewsArticle.Excerpt" class="form-control tinymce"></textarea>
+                <span asp-validation-for="@Model.NewsArticle.Excerpt" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.NewsArticle.Content" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <textarea asp-for="@Model.NewsArticle.Content" class="form-control tinymce"></textarea>
+                <span asp-validation-for="@Model.NewsArticle.Content" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.SelectedNewsCategories" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="@Model.SelectedNewsCategories" class="form-control" asp-items="@Model.NewsCategoriesList"></select>
+                <span asp-validation-for="@Model.SelectedNewsCategories" class="text-danger" />
+            </div>
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

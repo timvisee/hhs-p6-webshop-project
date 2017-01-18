@@ -4,19 +4,40 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>NewsArticle</h4>
+<div class="row">
+    <h1>@Html.DisplayFor(model => model.NewsArticle.Name)</h1>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.NewsArticle.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.NewsArticle.Name)
-        </dd>
-    </dl>
+    <div class="col-md-8 col-sm-12">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.NewsArticle.Excerpt)
+            </dt>
+            <dd>
+                @*Display raw HTML so you can edit it with the tinymce editor*@
+                @Html.Raw(Model.NewsArticle.Excerpt)
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.NewsArticle.Content)
+            </dt>
+            <dd>
+                @*Display raw HTML so you can edit it with the tinymce editor*@
+                @Html.Raw(Model.NewsArticle.Content)
+            </dd>
+        </dl>
+        <div class="form-group">
+            <label asp-for="@Model.SelectedNewsCategories" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select disabled asp-for="@Model.SelectedNewsCategories" class="form-control" asp-items="@Model.NewsCategoriesList"></select>
+                <span asp-validation-for="@Model.SelectedNewsCategories" class="text-danger" />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-12">
+        <img src="@Html.DisplayFor(model => model.NewsArticle.ImagePath)" alt="@Html.DisplayFor(model => model.NewsArticle.Name)" />
+    </div>
+
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.NewsArticle.NewsArticleID">Edit</a> |

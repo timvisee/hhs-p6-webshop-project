@@ -17,12 +17,40 @@
                 <input asp-for="@Model.NewsArticle.Name" class="form-control" />
                 <span asp-validation-for="@Model.NewsArticle.Name" class="text-danger" />
             </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.NewsArticle.ImagePath" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="@Model.NewsArticle.ImagePath" class="form-control" />
+                <span asp-validation-for="@Model.NewsArticle.ImagePath" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.NewsArticle.Excerpt" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <textarea asp-for="@Model.NewsArticle.Excerpt" class="form-control"></textarea>
+                <span asp-validation-for="@Model.NewsArticle.Excerpt" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.NewsArticle.Content" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <textarea asp-for="@Model.NewsArticle.Content" class="form-control"></textarea>
+                <span asp-validation-for="@Model.NewsArticle.Content" class="text-danger" />
+            </div>
+        </div>
+
+        <div class="form-group">
             <label asp-for="@Model.SelectedNewsCategories" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <select asp-for="@Model.SelectedNewsCategories" class="form-control" asp-items="@Model.NewsCategoriesList"></select>
                 <span asp-validation-for="@Model.SelectedNewsCategories" class="text-danger" />
             </div>
         </div>
+
+
+
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />

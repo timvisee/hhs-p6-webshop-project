@@ -1,23 +1,36 @@
+@using System.Threading.Tasks
+@using hhs_p6_webshop_project.Models.NewsModels
 @model hhs_p6_webshop_project.Models.NewsModels.NewsCategoryVM
 
 @{
     ViewData["Title"] = "Details";
+    ViewData["PinkBackground"] = true;
+
+    var random = new Random();
 }
 
-<h2>Details</h2>
+<h1>@Html.DisplayFor(model => model.NewsCategory.Name)</h1>
 
-<div>
-    <h4>NewsCategory</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.NewsCategory.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.NewsCategory.Name)
-        </dd>
-    </dl>
+<div class="container">
+    <div class="row">
+        @{
+            foreach (var na in Model.NewsArticles)
+            {
+                <div class="news-article-wrap col-sm-12 col-md-3-5">
+                    <div class="news-article">
+                        <div class="news-article-top">
+                            <h2>@na.Name <img src="~/images/heart-icon.png" /></h2>
+                            <hr style="border-color: @(String.Format("#{0:X6}", random.Next(0x1000000)));" />
+                            <p>@Html.Raw(na.Excerpt)</p>
+                        </div>
+                        <img src="@na.ImagePath" />
+                    </div>
+                </div>
+            }
+        }
+    </div>
 </div>
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model.NewsCategory.NewsCategoryID">Edit</a> |
     <a asp-action="Index">Back to List</a>
