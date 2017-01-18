@@ -1,7 +1,8 @@
-﻿@{
+﻿@model hhs_p6_webshop_project.Models.ContactModels
+@{
     ViewData["Title"] = "Contact";
 
-    ViewData["ShowHomeBanner"] = true;
+    ViewData["ShowHomeBanner"] = false;
     ViewData["BannerPath"] = "/images/mooi-meisje-2.jpg";
     ViewData["HomeBannerBgTitle"] = "Bruid";
     ViewData["HomeBannerSmallTitle"] = "Op zoek naar de perfecte jurk";
@@ -10,3 +11,39 @@
 
 <h2>@ViewData["Title"].</h2>
 <h3>@ViewData["Message"]</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <div class="row">
+        @Html.LabelFor(model => model.Name, "Name:")
+        @Html.EditorFor(model => model.Name)
+        @Html.ValidationMessageFor(model => model.Name)
+    </div>
+    <div class="row">
+        @Html.LabelFor(model => model.Phone, "Phone:")
+        @Html.EditorFor(model => model.Phone)
+        @Html.ValidationMessageFor(model => model.Phone)
+    </div>
+    <div class="row">
+        @Html.LabelFor(model => model.Email, "Email:")
+        @Html.EditorFor(model => model.Email)
+        @Html.ValidationMessageFor(model => model.Email)
+    </div>
+    <div class="row">
+        @Html.LabelFor(model => model.Comment, "Comments:")
+        @Html.TextAreaFor(model => model.Comment)
+        @Html.ValidationMessageFor(model => model.Comment)
+    </div>    
+    <div class="row">
+        @Html.LabelFor(model => model.Reference, "Reference:")
+        @Html.TextAreaFor(model => model.Reference)
+        @Html.ValidationMessageFor(model => model.Reference)
+    </div>
+    <div class="buttons">
+        <div class="row">
+            <input type="submit" value="submit" />
+            <input type="reset" value="reset" />
+        </div>
+    </div>
+}
