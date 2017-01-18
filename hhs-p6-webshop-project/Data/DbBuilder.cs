@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using hhs_p6_webshop_project.App.Util;
 using hhs_p6_webshop_project.Models;
+using hhs_p6_webshop_project.Models.NewsModels;
 using hhs_p6_webshop_project.Models.ProductModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -55,6 +56,8 @@ namespace hhs_p6_webshop_project.Data
 
             GenerateProducts(context);
 
+            GenerateNews(context);
+
             // Show a success message
             LogUtils.Success("Database built!");
 
@@ -101,6 +104,75 @@ namespace hhs_p6_webshop_project.Data
             return co;
         }
 
+        private static void GenerateNews(ApplicationDbContext context) {
+            #region Template newsarticle
+            NewsArticle template = new NewsArticle()
+            {
+                Name = "",
+                ImagePath = "",
+                Excerpt = "",
+                Content = "",
+            };
+            #endregion
+
+            NewsArticle article1 = new NewsArticle()
+            {
+                Name = "Collectie",
+                ImagePath = "/images/uploads/default/ladybird-1.jpg",
+                Excerpt = "De super sexy collectie van Martina Liana is gearriveerd",
+                Content = "De super sexy collectie van Martina Liana is gearriveerd",
+            };
+
+            NewsArticle article2 = new NewsArticle()
+            {
+                Name = "Lovely real brides",
+                ImagePath = "/images/appointment-thankyou.jpg",
+                Excerpt = "Rachelle & Matthew",
+                Content = "",
+            };
+
+            NewsArticle article3 = new NewsArticle()
+            {
+                Name = "Nieuws",
+                ImagePath = "/images/home-banner-main.jpg",
+                Excerpt = "Het nieuwe magazine is uit! Vraag hem gratis aan.",
+                Content = "",
+            };
+
+            NewsArticle article4 = new NewsArticle()
+            {
+                Name = "Artikel",
+                ImagePath = "/images/home-banner-footer.jpg",
+                Excerpt = "Van pinterest droom naar werkelijkheid",
+                Content = "",
+            };
+
+            NewsCategory cat1 = new NewsCategory()
+            {
+                Name = "Collectie"
+            };
+
+            NewsCategory cat2 = new NewsCategory()
+            {
+                Name = "Evenement"
+            };
+
+            NewsCategory cat3 = new NewsCategory()
+            {
+                Name = "Nieuws"
+            };
+
+            context.NewsArticle.Add(article1);
+            context.NewsArticle.Add(article2);
+            context.NewsArticle.Add(article3);
+            context.NewsArticle.Add(article4);
+
+            context.NewsCategory.Add(cat1);
+            context.NewsCategory.Add(cat2);
+            context.NewsCategory.Add(cat3);
+
+            context.SaveChanges();
+        }
 
         private static void GenerateProducts(ApplicationDbContext context)
         {
