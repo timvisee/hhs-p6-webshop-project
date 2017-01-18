@@ -17,9 +17,11 @@
                 <input asp-for="@Model.NewsCategory.Name" class="form-control" />
                 <span asp-validation-for="@Model.NewsCategory.Name" class="text-danger" />
             </div>
+        </div>
+        <div class="form-group">
             <label asp-for="@Model.SelectedNewsArticles" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <select asp-for="@Model.SelectedNewsArticles" class="form-control" asp-items="@Model.SelectedNewsArticles"></select>
+                <select asp-for="@Model.SelectedNewsArticles" class="form-control" asp-items="@Model.NewsArticleList"></select>
                 <span asp-validation-for="@Model.SelectedNewsArticles" class="text-danger" />
             </div>
         </div>
