@@ -11,11 +11,15 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using hhs_p6_webshop_project.App.Ajax;
 
-namespace hhs_p6_webshop_project.Controllers.ProductControllers {
-    public class ProductImagesController : Controller {
+namespace hhs_p6_webshop_project.Controllers.ProductControllers
+{
+    public class ProductImagesController : Controller
+    {
         private readonly ApplicationDbContext _context;
+        private readonly string basepath = "images/uploads/";
 
-        public ProductImagesController(ApplicationDbContext context) {
+        public ProductImagesController(ApplicationDbContext context)
+        {
             _context = context;
         }
 
@@ -98,7 +102,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers {
                     string filename = ChangePathName(productImage.Path);
                     FileInfo fi = new FileInfo(image.FileName);
                     string extension = fi.Extension;
-                    string path = "images/uploads/" + filename + extension;
+                    string path = basepath + filename + extension;
                     productImage.Path = path;
                     using (FileStream fs = System.IO.File.Create("wwwroot/" + path))
                     {
@@ -250,11 +254,13 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers {
             }
         }
 
-        private bool ProductImageExists(int id) {
+        private bool ProductImageExists(int id)
+        {
             return _context.ProductImages.Any(e => e.ProductImageId == id);
         }
 
-        public string ChangePathName(string input) {
+        public string ChangePathName(string input)
+        {
             Guid g = Guid.NewGuid();
             string GuidString = Convert.ToBase64String(g.ToByteArray());
             GuidString = GuidString.Replace("=", "");
@@ -280,7 +286,8 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers {
             List<string> paths = new List<string>();
 
             // Add the paths from all the images to an list
-            foreach (var color in colorOptions) {
+            foreach (var color in colorOptions)
+            {
                 paths.Add(color.Path);
             }
 

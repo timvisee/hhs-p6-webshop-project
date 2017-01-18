@@ -65,6 +65,15 @@ $(document).ready(function () {
             live:         true
     }).init();
 
+    // Create an accordion of the filters container
+    $('.filters-container').accordion({
+        collapsible: true,
+        icons: {
+            "header": "glyphicon glyphicon-chevron-right",
+            "activeHeader": "glyphicon glyphicon-chevron-right active"
+        }
+    });
+
     /**
      * Toggle the search box when the search button is clicked
      */
@@ -314,7 +323,7 @@ $(document).ready(function () {
                     var uniqueId = getUniqueId("time-button");
 
                     // Determine the value
-                    var value = appointmentTimeObject.time.hour + ":" + appointmentTimeObject.time.minute;
+                    var value = appointmentTimeObject.time.hour + ":" + ("0" + appointmentTimeObject.time.minute).slice(-2);
 
                     // Append the radio button
                     timeRadioButtonContainer.append("<li>" +

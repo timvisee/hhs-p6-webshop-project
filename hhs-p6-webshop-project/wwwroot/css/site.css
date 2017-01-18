@@ -1128,11 +1128,11 @@ nav li {
     opacity: 0.6;
 }
 
-.ui-state-active {
+.create-appointment-part .ui-state-active {
     position: relative;
 }
 
-    .ui-state-active:before {
+    .create-appointment-part .ui-state-active:before {
         content: "";
         position: absolute;
         border: 2px solid #fff;
@@ -1549,4 +1549,25 @@ footer ul {
     animation-fill-mode: both;
     -webkit-animation-name: productCatalogLeave;
     animation-name: productCatalogLeave;
+}
+
+.filters-container h3 {
+    outline: none;
+}
+
+.filters-container .glyphicon {
+    margin-right: 6px;
+    -ms-transition: transform 0.35s;
+    -o-transition: transform 0.35s;
+    -webkit-transition: transform 0.35s;
+    transition: transform 0.35s;
+    -ms-transform: scale(0.75);
+    -webkit-transform: scale(0.75);
+    transform: scale(0.75);
+}
+
+.filters-container .glyphicon.active {
+    -ms-transform: rotate(90deg) scale(0.75);
+    -webkit-transform: rotate(90deg) scale(0.75);
+    transform: rotate(90deg) scale(0.75);
 }

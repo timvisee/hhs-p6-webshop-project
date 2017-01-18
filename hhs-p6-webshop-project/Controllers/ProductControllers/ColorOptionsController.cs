@@ -13,6 +13,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
     public class ColorOptionsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly string[] _coloroptions = { "Wit", "Ivoor", "Roze", "Rood", "Grijs", "Zwart" };
 
         public ColorOptionsController(ApplicationDbContext context)
         {
