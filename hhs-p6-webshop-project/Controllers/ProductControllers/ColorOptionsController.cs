@@ -13,7 +13,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
     public class ColorOptionsController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly string[] _coloroptions = { "Wit", "Ivoor", "Roze", "Rood", "Grijs", "Zwart" };
+        private string[] _coloroptions = { "Wit", "Ivoor", "Roze", "Rood", "Grijs", "Zwart" };
 
         public ColorOptionsController(ApplicationDbContext context)
         {
@@ -71,17 +71,16 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
                 {
                     selectedItem = id;
                 }
-                string[] coloroptions = { "Wit", "Ivoor", "Roze", "Rood", "Grijs", "Zwart" };
 
                 var color = _context.ColorOptions.Where(c => c.ProductId == id).Select(c => c.Color).ToList();
-                foreach(string colorOption in coloroptions)
+                foreach(string colorOption in _coloroptions)
                 {
                     bool exists = color.Contains(colorOption);
                     if (exists)
-                        coloroptions = coloroptions.Where(c => c != colorOption).ToArray();
+                        _coloroptions = _coloroptions.Where(c => c != colorOption).ToArray();
                 }
 
-                ViewData["ColorOption"] = coloroptions.Select(r => new SelectListItem { Text = r, Value = r });
+                ViewData["ColorOption"] = _coloroptions.Select(r => new SelectListItem { Text = r, Value = r });
                 var dress = _context.Products.Where(c => c.ProductId == id).Select(o => new { Value = o.ProductId, Text = o.Name }).ToList();
                 ViewData["Name"] = new SelectList(dress, "Value", "Text", selectedItem);
                 return View();
@@ -135,9 +134,8 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
                 {
                     return NotFound();
                 }
-
-                string[] coloroptions = { "Wit", "Ivoor", "Roze", "Rood", "Grijs", "Zwart" };
-                ViewData["ColorOption"] = coloroptions.Select(r => new SelectListItem { Text = r, Value = r });
+                
+                ViewData["ColorOption"] = _coloroptions.Select(r => new SelectListItem { Text = r, Value = r });
                 ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", colorOption.ProductId);
                 return View(colorOption);
             }
