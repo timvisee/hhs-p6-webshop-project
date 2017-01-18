@@ -1348,6 +1348,7 @@ footer ul {
         display: none;
     }
 
+    #header_nav,
     .layout-with-banner #header_nav {
         position: relative;
         display: none;
