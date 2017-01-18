@@ -37,7 +37,7 @@
                     <div class="horizontal-align">
                         <a href="" data-lightbox="dress-images">
                             @*src is loaded with ajax*@
-                            <img src="" alt=""/>
+                            <img src="" alt="" />
                         </a>
                     </div>
                 </div>
@@ -83,7 +83,7 @@
                         </p>
                         <div class="product-make-appointment-container">
                             <p>Kom deze jurk passen!</p>
-                            <a asp-controller="Appointments" asp-action="Create" class="make-appointment">Pasafspraak maken</a>
+                            <a asp-controller="Appointments" asp-action="Create" class="btn">Pasafspraak maken</a>
                         </div>
                     </div>
                 </div>
@@ -91,72 +91,70 @@
         </div>
     </div>
     <div class="row">
-        <div class="additions-container">
+        <div class="additions-container col-sm-12">
             <hr class="additions" />
             <span class="additions-text">Bijpassende sieraden</span>
         </div>
     </div>
     <div class="row">
-        <div class="addition-images-wrapper">
-            <div class="addition-item">
-                <div class="addition-image">
-                    <img src="~/images/uploads/addition-picture.jpg" alt="" />
-                </div>
-                <span>Abrazi</span>
+        <div class="col-md-3 col-sm-12 addition-item">
+            <div class="addition-image">
+                <img src="~/images/uploads/addition-picture.jpg" alt="" />
             </div>
-            <div class="addition-item">
-                <div class="addition-image">
-                    <img src="~/images/uploads/addition-picture.jpg" alt="" />
-                </div>
-                <span>Abrazi</span>
+            <span>Abrazi</span>
+        </div>
+        <div class="col-md-3 col-sm-12 addition-item">
+            <div class="addition-image">
+                <img src="~/images/uploads/addition-picture.jpg" alt="" />
             </div>
-            <div class="addition-item">
-                <div class="addition-image">
-                    <img src="~/images/uploads/addition-picture.jpg" alt="" />
-                </div>
-                <span>Abrazi</span>
+            <span>Abrazi</span>
+        </div>
+        <div class="col-md-3 col-sm-12 addition-item">
+            <div class="addition-image">
+                <img src="~/images/uploads/addition-picture.jpg" alt="" />
             </div>
-            <div class="addition-item">
-                <div class="addition-image">
-                    <img src="~/images/uploads/addition-picture.jpg" alt="" />
-                </div>
-                <span>Abrazi</span>
+            <span>Abrazi</span>
+        </div>
+        <div class="col-md-3 col-sm-12 addition-item">
+            <div class="addition-image">
+                <img src="~/images/uploads/addition-picture.jpg" alt="" />
             </div>
-            <a asp-action="Index" class="make-appointment">Bezoek de webshop</a>
+            <span>Abrazi</span>
+        </div>
+        <div class="col-sm-12 addition-button-wrap">
+            <a asp-action="Index" class="btn addition-button">Bezoek de webshop</a>
         </div>
     </div>
     <div class="row">
-        <div class="additions-container">
+        <div class="additions-container col-sm-12">
             <hr class="additions" />
             <span class="additions-text">Of zijn deze jurken meer iets voor jou?</span>
         </div>
     </div>
     <div class="row">
-        <div class="addition-images-wrapper">
-            <div class="addition-item">
-                <div class="addition-image">
-                    <img src="~/images/uploads/image-1.jpg" alt="" />
-                </div>
-                <span>Maggie Sottero</span>
+        <div class="col-md-3 col-sm-12 addition-item">
+            <div class="addition-image">
+                <img src="~/images/uploads/addition-picture.jpg" alt="" />
             </div>
-            <div class="addition-item">
-                <div class="addition-image">
-                    <img src="~/images/uploads/image-2.jpg" alt="" />
-                </div>
-                <span>Beautiful by Enzoani</span>
+            <span>Maggie Sottero</span>
+        </div>
+        <div class="col-md-3 col-sm-12 addition-item">
+            <div class="addition-image">
+                <img src="~/images/uploads/addition-picture.jpg" alt="" />
             </div>
-            <div class="addition-item">
-                <div class="addition-image">
-                    <img src="~/images/uploads/image-3.jpg" alt="" />
-                </div>
-                <span>Ladybird</span>
+            <span>Beautiful by Ensoani</span>
+        </div>
+        <div class="col-md-3 col-sm-12 addition-item">
+            <div class="addition-image">
+                <img src="~/images/uploads/addition-picture.jpg" alt="" />
             </div>
-            <div class="addition-item">
-                <div class="addition-image">
-                    <img src="~/images/uploads/image-6.jpg" alt="" />
-                </div>
-                <span>Tres chic</span>
+            <span>Ladybird</span>
+        </div>
+        <div class="col-md-3 col-sm-12 addition-item">
+            <div class="addition-image">
+                <img src="~/images/uploads/addition-picture.jpg" alt="" />
             </div>
+            <span>Tres Chic</span>
         </div>
     </div>
 </div>
