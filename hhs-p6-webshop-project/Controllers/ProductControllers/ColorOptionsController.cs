@@ -73,7 +73,8 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
                 string[] coloroptions = { "Wit", "Ivoor", "Roze", "Rood", "Grijs", "Zwart" };
 
                 ViewData["ColorOption"] = coloroptions.Select(r => new SelectListItem { Text = r, Value = r });
-                ViewData["Name"] = new SelectList(_context.Products, "ProductId", "Name", selectedItem);
+                var dress = _context.Products.Where(c => c.ProductId == id).Select(o => new { Value = o.ProductId, Text = o.Name }).ToList();
+                ViewData["Name"] = new SelectList(dress, "Value", "Text", selectedItem);
                 return View();
             }
             else
@@ -98,7 +99,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
                     await _context.SaveChangesAsync();
                     if (again)
                         return RedirectToAction("Create", "ColorOptions", new { id = colorOption.ProductId });
-                    return RedirectToAction("Create", "ProductImages", new { id = colorOption.ColorOptionId });
+                    return RedirectToAction("Create", "ProductImages", new { id = colorOption.ProductId });
                 }
                 ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", colorOption.ProductId);
                 return View(colorOption);

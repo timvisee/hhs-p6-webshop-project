@@ -24,6 +24,9 @@
         <div>
             @Html.ActionLink("Nog een kleur toevoegen", "Create", "ColorOptions", new { id =  Model.ProductId})
         </div>
+        <div>
+            @Html.ActionLink("Nog een foto toevoegen", "Create", "ProductImages", new { id = Model.ProductId })
+        </div>
     }
     <div class="row">
         <div class="back-to-dress-finder">
