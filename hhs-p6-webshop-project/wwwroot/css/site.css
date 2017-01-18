@@ -1461,7 +1461,12 @@ footer ul {
     }
 }
 
-/*--- Product Edit Buttons ---*/
+/*--- Product Buttons ---*/
+
+.create-btn{
+    margin-top:-50px;
+    margin-bottom:50px;
+}
 
 .product-button{
     display:inline-block;
