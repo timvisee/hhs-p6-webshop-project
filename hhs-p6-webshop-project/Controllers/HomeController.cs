@@ -1,8 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using hhs_p6_webshop_project.Models;
 using System.Text;
-using System.Net.Mail;
-using mail
+using MailKit;
+using System;
+using System.Collections.Generic;
+using MimeKit;
+using MailKit.Security;
+using MailKit.Net.Smtp;
 namespace hhs_p6_webshop_project.Controllers {
     public class HomeController : Controller {
         public IActionResult Index() {
@@ -28,49 +32,51 @@ namespace hhs_p6_webshop_project.Controllers {
         [HttpPost]
         public ActionResult Contact(ContactModels c)
         {
-            // if (ModelState.IsValid)
-            //  {
-            //  try
-            //  {
+            if (ModelState.IsValid)
+              {
+                try
+                {
+
+                    using (var client = new SmtpClient(new ProtocolLogger("smtp.log")))
+                    {
+
+                        client.Connect("smtp.gmail.com", 465, SecureSocketOptions.SslOnConnect);
+
+                        client.Authenticate("miladintjuh@gmail.com", "Scouting1");
+
+                        MimeMessage msg = new MimeMessage();
+                        var from = c.Email.ToString();
+                        StringBuilder sb = new StringBuilder();
+                        msg.To.Add(new MailboxAddress("Honeymoonshop", "miladin@live.nl"));
+                        msg.From.Add(new MailboxAddress("Contactformulier", from));
+
+                        msg.Subject = "Contactformulier";
+                        sb.Append("First name: " + c.Name);
+                        sb.Append(Environment.NewLine);
+                        sb.Append("Last name: " + c.Phone);
+                        sb.Append(Environment.NewLine);
+                        sb.Append("Email: " + c.Email);
+                        sb.Append(Environment.NewLine);
+                        sb.Append("Reference:" + c.Reference);
+                        sb.Append(Environment.NewLine);
+                        sb.Append("Comments: " + c.Comment);
+                        msg.Body = new TextPart("plain")
+                        {
+                            Text = sb.ToString()
+                        };
+                        Console.WriteLine("The message is: " + sb);
+                        client.Send(msg);
+                        return View("Success");
+                    }
+                }
 
 
-            SmtpClient client = new SmtpClient();
-            // We use gmail as our smtp client
-            client.Host = "smtp.gmail.com";
-            client.Port = 587;
-            client.EnableSsl = true;
-            client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            client.Credentials = new System.Net.NetworkCredential("miladintjuh@gmail.com", "Scouting1");
-            MailMessage msg = new MailMessage();
-            MailAddress from = new MailAddress(c.Email.ToString());
-            StringBuilder sb = new StringBuilder();
-            msg.IsBodyHtml = false;
-            msg.To.Add("miladin@live.nl");
-            msg.From = from;
-            msg.Subject = "Contact Us";
-            sb.Append("First name: " + c.Name);
-            sb.Append(Environment.NewLine);
-            sb.Append("Last name: " + c.Phone);
-            sb.Append(Environment.NewLine);
-            sb.Append("Email: " + c.Email);
-            sb.Append(Environment.NewLine);
-            sb.Append("Reference:" + c.Reference);
-            sb.Append(Environment.NewLine);
-            sb.Append("Comments: " + c.Comment);
-            msg.Body = sb.ToString();
-            Console.WriteLine("The message is: " + sb);
-            client.Send(msg);
-            msg.Dispose();
-            return View("Success");
-        }
-        //  catch (Exception)
-        //   {
-        //       return View("Error");
-        //    }
+                catch (Exception)
+                {
+                    return View("Error");
+                }
     }
-    // return View();
+     return View();
 }
-   // }
-//}
     }
 }

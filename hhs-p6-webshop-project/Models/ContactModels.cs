@@ -8,13 +8,15 @@ namespace hhs_p6_webshop_project.Models
 {
         public class ContactModels
         {
-        [Required(ErrorMessage = "First Name is required")]
-        public string FirstName { get; set; }
+        [Required(ErrorMessage = "Name is required")]
+        public string Name { get; set; }
         [Required(ErrorMessage = "Last Name is required")]
-        public string LastName { get; set; }
+        public string Phone { get; set; }
         [Required(ErrorMessage = "Email is required")]
         public string Email { get; set; }
         [Required(ErrorMessage = "Comment is required")]
         public string Comment { get; set; }
+        [Required(ErrorMessage = "Reference is required")]
+        public string Reference { get; set; }
     }
     }

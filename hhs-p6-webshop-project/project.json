@@ -41,7 +41,9 @@
     "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": {
       "version": "1.0.0-preview2-final",
       "type": "build"
-    }
+    },
+    "MimeKit": "1.10.0",
+    "NETCore.MailKit": "1.0.1"
   },
   "tools": {
     "Microsoft.AspNetCore.Razor.Tools": {

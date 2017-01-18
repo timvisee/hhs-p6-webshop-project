@@ -16,14 +16,14 @@
 {
     @Html.ValidationSummary(true)
     <div class="row">
-        @Html.LabelFor(model => model.FirstName, "First Name:")
-        @Html.EditorFor(model => model.FirstName)
-        @Html.ValidationMessageFor(model => model.FirstName)
+        @Html.LabelFor(model => model.Name, "Name:")
+        @Html.EditorFor(model => model.Name)
+        @Html.ValidationMessageFor(model => model.Name)
     </div>
     <div class="row">
-        @Html.LabelFor(model => model.LastName, "Last Name:")
-        @Html.EditorFor(model => model.LastName)
-        @Html.ValidationMessageFor(model => model.LastName)
+        @Html.LabelFor(model => model.Phone, "Phone:")
+        @Html.EditorFor(model => model.Phone)
+        @Html.ValidationMessageFor(model => model.Phone)
     </div>
     <div class="row">
         @Html.LabelFor(model => model.Email, "Email:")
@@ -34,6 +34,11 @@
         @Html.LabelFor(model => model.Comment, "Comments:")
         @Html.TextAreaFor(model => model.Comment)
         @Html.ValidationMessageFor(model => model.Comment)
+    </div>    
+    <div class="row">
+        @Html.LabelFor(model => model.Reference, "Reference:")
+        @Html.TextAreaFor(model => model.Reference)
+        @Html.ValidationMessageFor(model => model.Reference)
     </div>
     <div class="buttons">
         <div class="row">
