@@ -68,11 +68,45 @@ $(document).ready(function () {
     // Create an accordion of the filters container
     $('.filters-container').accordion({
         collapsible: true,
-        icons: {
-            "header": "glyphicon glyphicon-chevron-right",
-            "activeHeader": "glyphicon glyphicon-chevron-right active"
+//        icons: {
+//            "header": "glyphicon glyphicon-chevron-right",
+//            "activeHeader": "glyphicon glyphicon-chevron-right active"
+//        }
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+    $( "#filter-price-slider" ).slider({
+        range: true,
+        min: 0,
+        max: 500,
+        values: [ 75, 300 ],
+        slide: function( event, ui ) {
+            $( "#filter-price-amount" ).val( "€" + ui.values[ 0 ] + " tot €" + ui.values[ 1 ] );
         }
     });
+    $( "#filter-price-amount" ).val( "€" + $( "#filter-price-slider" ).slider( "values", 0 ) +
+        " tot €" + $( "#filter-price-slider" ).slider( "values", 1 ) );
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Toggle the search box when the search button is clicked
