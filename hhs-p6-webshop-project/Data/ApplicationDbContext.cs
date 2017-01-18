@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using hhs_p6_webshop_project.Models;
 using hhs_p6_webshop_project.Models.AppointmentModels;
 using hhs_p6_webshop_project.Models.BlogModels;
+using hhs_p6_webshop_project.Models.NewsModels;
 using Microsoft.Extensions.Configuration;
 using hhs_p6_webshop_project.Models.ProductModels;
 
@@ -38,6 +39,20 @@ namespace hhs_p6_webshop_project.Data {
                 .HasForeignKey(pi => pi.ColorOptionId);
 
 
+            builder.Entity<NewsArticleCategory>()
+                .HasKey(sc => new { sc.NewsArticleID, sc.NewsCategoryID });
+
+            builder.Entity<NewsArticleCategory>()
+                .HasOne(sc => sc.NewsArticle)
+                .WithMany(s => s.NewsArticleCategories)
+                .HasForeignKey(sc => sc.NewsArticleID);
+
+            builder.Entity<NewsArticleCategory>()
+                .HasOne(sc => sc.NewsCategory)
+                .WithMany(c => c.NewsArticleCategories)
+                .HasForeignKey(sc => sc.NewsCategoryID);
+
+
             builder.Entity<BlogArticleCategory>().HasKey(x => new { x.BlogArticleId, x.BlogCategoryId });
         }
 
@@ -56,5 +71,11 @@ namespace hhs_p6_webshop_project.Data {
         public DbSet<BlogArticle> BlogArticle { get; set; }
 
         public DbSet<BlogCategory> BlogCategory { get; set; }
+
+        public DbSet<NewsArticle> NewsArticle { get; set; }
+
+        public DbSet<NewsCategory> NewsCategory { get; set; }
+
+        public DbSet<NewsArticleCategory> NewsArticleCategory { get; set; }
     }
 }
