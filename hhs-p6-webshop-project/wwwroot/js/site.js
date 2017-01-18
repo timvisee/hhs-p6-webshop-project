@@ -66,7 +66,7 @@ $(document).ready(function () {
     }).init();
 
     // Create an accordion of the filters container
-    $('#filters-container').accordion({
+    $('.filters-container').accordion({
         collapsible: true,
         icons: {
             "header": "glyphicon glyphicon-chevron-right",

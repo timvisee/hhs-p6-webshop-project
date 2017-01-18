@@ -1543,12 +1543,12 @@ footer ul {
     animation-name: productCatalogLeave;
 }
 
-#filters-container h3 {
+.filters-container h3 {
     outline: none;
 }
 
-#filters-container .glyphicon {
-    margin-right: 10px;
+.filters-container .glyphicon {
+    margin-right: 6px;
     -ms-transition: transform 0.35s;
     -o-transition: transform 0.35s;
     -webkit-transition: transform 0.35s;
@@ -1558,7 +1558,7 @@ footer ul {
     transform: scale(0.75);
 }
 
-#filters-container .glyphicon.active {
+.filters-container .glyphicon.active {
     -ms-transform: rotate(90deg) scale(0.75);
     -webkit-transform: rotate(90deg) scale(0.75);
     transform: rotate(90deg) scale(0.75);
