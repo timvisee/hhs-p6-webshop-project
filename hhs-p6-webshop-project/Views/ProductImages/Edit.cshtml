@@ -16,7 +16,7 @@
         <div class="form-group">
             <label asp-for="ColorOptionId" class="control-label col-md-2"></label>
             <div class="col-md-10">
-                <select asp-for="ColorOptionId" class="form-control" asp-items="ViewBag.ColorOptionId"></select>
+                <select asp-for="ColorOptionId" asp-items="ViewBag.ColorOptionId"></select>
                 <span asp-validation-for="ColorOptionId" class="text-danger" />
             </div>
         </div>
