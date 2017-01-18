@@ -33,64 +33,63 @@
             <a asp-action="Index"><img src="/images/products/white-arrow-back.png" alt="<" />Terug naar overzicht</a>
         </div>
     </div>
-    <div class="row">
-        <div class="product-details">
-            <div class="side-pictures">
-                <!-- Placeholder -->
-            </div>
-            <div class="big-picture">
-                <div class="vertical-align">
-                    <div class="horizontal-align">
-                        <a href="" data-lightbox="dress-images">
-                            @*src is loaded with ajax*@
-                            <img src="" alt="" />
-                        </a>
-                    </div>
+    <div class="row product-details">
+        <div class="col-sm-12 col-md-3">
+            <div class="side-pictures row"></div>
+            <!-- Placeholder -->
+        </div>
+        <div class="big-picture col-sm-12 col-md-6">
+            <div class="vertical-align">
+                <div class="horizontal-align">
+                    <a href="" data-lightbox="dress-images">
+                        @*src is loaded with ajax*@
+                        <img src="" alt="" />
+                    </a>
                 </div>
             </div>
-            <div class="product-information-container">
-                <div class="product-information">
-                    <h4>@Model.Name</h4>
-                    <span>artikel nr. @Model.ProductId</span>
-                    <div class="product-information-undertext">
-                        <p>
-                            @Model.Description
-                        </p>
-                    </div>
-                    <div class="product-information-attributes">
-                        <p>
-                            Merk:
-                            <a asp-action="">Maggie Sottero</a>
-                        </p>
-                        <p>
-                            Kenmerken:
-                            <a asp-action="">Verleidelijk</a>,
-                            <a asp-action="">Kant</a>,
-                            <a asp-action="">Ivoor</a>,
-                            <a asp-action="">Fishtail</a>,
-                            <a asp-action="">Lage rug</a>,
-                            <a asp-action="">Schouderbandjes</a>,
-                            <a asp-action="">Strapless</a>
-                        </p>
-                        <p>
-                            Prijsindicatie:
-                            <span>&euro; @Model.Price</span>
-                        </p>
-                        <p>
-                            Beschikbare kleuren:
-                            <div class="product-colors">
-                                @{
-                                    foreach (var color in Model.ColorOptions)
-                                    {
-                                        <div id="color_@color.ColorOptionId" value="@color.ColorOptionId" class="color-circle @color.Color" title="@color.Color"></div>
-                                    }
+        </div>
+        <div class="product-information-container col-sm-12 col-md-3">
+            <div class="product-information">
+                <h4>@Model.Name</h4>
+                <span>artikel nr. @Model.ProductId</span>
+                <div class="product-information-undertext">
+                    <p>
+                        @Model.Description
+                    </p>
+                </div>
+                <div class="product-information-attributes">
+                    <p>
+                        Merk:
+                        <a asp-action="">Maggie Sottero</a>
+                    </p>
+                    <p>
+                        Kenmerken:
+                        <a asp-action="">Verleidelijk</a>,
+                        <a asp-action="">Kant</a>,
+                        <a asp-action="">Ivoor</a>,
+                        <a asp-action="">Fishtail</a>,
+                        <a asp-action="">Lage rug</a>,
+                        <a asp-action="">Schouderbandjes</a>,
+                        <a asp-action="">Strapless</a>
+                    </p>
+                    <p>
+                        Prijsindicatie:
+                        <span>&euro; @Model.Price</span>
+                    </p>
+                    <p>
+                        Beschikbare kleuren:
+                        <div class="product-colors">
+                            @{
+                                foreach (var color in Model.ColorOptions)
+                                {
+                                    <div id="color_@color.ColorOptionId" value="@color.ColorOptionId" class="color-circle @color.Color" title="@color.Color"></div>
                                 }
-                            </div>
-                        </p>
-                        <div class="product-make-appointment-container">
-                            <p>Kom deze jurk passen!</p>
-                            <a asp-controller="Appointments" asp-action="Create" class="btn">Pasafspraak maken</a>
+                            }
                         </div>
+                    </p>
+                    <div class="product-make-appointment-container">
+                        <p>Kom deze jurk passen!</p>
+                        <a asp-controller="Appointments" asp-action="Create" class="btn">Pasafspraak maken</a>
                     </div>
                 </div>
             </div>

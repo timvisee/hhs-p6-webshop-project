@@ -42,7 +42,7 @@ $(document).ready(function () {
             $(".big-picture a").attr("href", "/" + element);
         }
 
-        $(".side-pictures").append("<div class='small-picture'><a data-lightbox='dress-images' href='/" + element + "'><img src='/" + element + "' /></a></div>")
+        $(".side-pictures").append("<div class='small-picture col-md-12 col-xs-4'><a data-lightbox='dress-images' href='/" + element + "'><img src='/" + element + "' /></a></div>")
     }
 
 
