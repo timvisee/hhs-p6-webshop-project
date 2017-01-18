@@ -50,7 +50,13 @@ namespace hhs_p6_webshop_project.Controllers {
                         msg.To.Add(new MailboxAddress("Honeymoonshop", "miladin@live.nl"));
                         msg.From.Add(new MailboxAddress("Contactformulier", from));
 
+
                         msg.Subject = "Contactformulier";
+                        var msgBody = "Bedankt dat u contact heeft opgenomen met de Honeymoon Shop."
+                                     + "Wij zullen uw vraag zo spoedig mogelijk beantwoorden"
+                                     + "Hier onder vindt u een kopie van het bericht dat naar ons is gestuurd.";
+                        sb.Append(msgBody);
+                        sb.Append(Environment.NewLine);
                         sb.Append("First name: " + c.Name);
                         sb.Append(Environment.NewLine);
                         sb.Append("Last name: " + c.Phone);
