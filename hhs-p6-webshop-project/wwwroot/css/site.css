@@ -1461,6 +1461,19 @@ footer ul {
     }
 }
 
+/*--- Product Edit Buttons ---*/
+
+.product-button{
+    display:inline-block;
+    float:left;
+    margin-left:25px;
+    height:75px;
+}
+
+.product-button:first-child{
+    margin-left:0;
+}
+
 /*--- CSS Animations for the product catalog ---*/
 @-webkit-keyframes productCatalogEnter {
     from {

@@ -16,19 +16,21 @@
 }
 
 <div class="single-container container">
-    @if (User.Identity.IsAuthenticated)
-    {
-        <div>
-            <a asp-action="Edit" asp-route-id="@Model.ProductId">Edit</a>
-        </div>
-        <div>
-            @Html.ActionLink("Nog een kleur toevoegen", "Create", "ColorOptions", new { id =  Model.ProductId})
-        </div>
-        <div>
-            @Html.ActionLink("Nog een foto toevoegen", "Create", "ProductImages", new { id = Model.ProductId })
-        </div>
-    }
     <div class="row">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="pull-right">
+                <div class="product-button">
+                    @Html.ActionLink("Nog een kleur toevoegen", "Create", "ColorOptions", new { id = Model.ProductId }, new { @class = "btn" })
+                </div>
+                <div class="product-button">
+                    <a asp-action="Edit" asp-route-id="@Model.ProductId" class="btn">Edit</a>
+                </div>
+                <div class="product-button">
+                    @Html.ActionLink("Nog een foto toevoegen", "Create", "ProductImages", new { id = Model.ProductId }, new { @class = "btn" })
+                </div>
+            </div>
+        }
         <div class="back-to-dress-finder">
             <a asp-action="Index"><img src="/images/products/white-arrow-back.png" alt="<" />Terug naar overzicht</a>
         </div>
