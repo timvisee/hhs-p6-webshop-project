@@ -15,13 +15,13 @@
         <div class="form-group">
             <label asp-for="Product.Name" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <select asp-for="ProductId" class="form-control" asp-items="ViewBag.Name"></select>
+                <select asp-for="ProductId" asp-items="ViewBag.Name"></select>
             </div>
         </div>
         <div class="form-group">
             <label asp-for="Color" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <select asp-for="Color" class="form-control" asp-items="ViewBag.ColorOption"></select>
+                <select asp-for="Color" asp-items="ViewBag.ColorOption"></select>
             </div>
         </div>
         <div class="form-group">

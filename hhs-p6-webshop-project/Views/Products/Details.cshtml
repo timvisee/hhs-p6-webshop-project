@@ -14,13 +14,15 @@
     ViewData["Title"] = Html.DisplayFor(model => model.Name);
     ViewData["PinkBackground"] = true;
 }
-}
 
 <div class="single-container container">
     @if (User.Identity.IsAuthenticated)
     {
         <div>
             <a asp-action="Edit" asp-route-id="@Model.ProductId">Edit</a>
+        </div>
+        <div>
+            @Html.ActionLink("Nog een kleur toevoegen", "Create", "ColorOptions", new { id =  Model.ProductId})
         </div>
     }
     <div class="row">

@@ -22,40 +22,64 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
         // GET: ColorOptions
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.ColorOptions.Include(c => c.Product);
-            return View(await applicationDbContext.ToListAsync());
+            // Check if user is authenticated
+            if (User.Identity.IsAuthenticated)
+            {
+                var applicationDbContext = _context.ColorOptions.Include(c => c.Product);
+                return View(await applicationDbContext.ToListAsync());
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         // GET: ColorOptions/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            // Check if user is authenticated
+            if (User.Identity.IsAuthenticated)
+            {
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var colorOption = await _context.ColorOptions.SingleOrDefaultAsync(m => m.ColorOptionId == id);
+                if (colorOption == null)
+                {
+                    return NotFound();
+                }
+
+                return View(colorOption);
+            }
+            else
             {
                 return NotFound();
             }
-
-            var colorOption = await _context.ColorOptions.SingleOrDefaultAsync(m => m.ColorOptionId == id);
-            if (colorOption == null)
-            {
-                return NotFound();
-            }
-
-            return View(colorOption);
         }
 
         // GET: ColorOptions/Create
         public IActionResult Create(int? id)
         {
-            int? selectedItem = 0;
-            if (id != null)
+            // Check if user is authenticated
+            if (User.Identity.IsAuthenticated)
             {
-                selectedItem = id;
-            }
-            string[] coloroptions = { "Wit", "Ivoor", "Roze", "Rood", "Grijs", "Zwart" };
+                int? selectedItem = 0;
+                if (id != null)
+                {
+                    selectedItem = id;
+                }
+                string[] coloroptions = { "Wit", "Ivoor", "Roze", "Rood", "Grijs", "Zwart" };
 
-            ViewData["ColorOption"] = coloroptions.Select(r => new SelectListItem { Text = r, Value = r });
-            ViewData["Name"] = new SelectList(_context.Products, "ProductId", "Name", selectedItem);
-            return View();
+                ViewData["ColorOption"] = coloroptions.Select(r => new SelectListItem { Text = r, Value = r });
+                ViewData["Name"] = new SelectList(_context.Products, "ProductId", "Name", selectedItem);
+                return View();
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         // POST: ColorOptions/Create
@@ -65,36 +89,52 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ColorOptionId,Color,ProductId")] ColorOption colorOption, bool again)
         {
-            if (ModelState.IsValid)
+            // Check if user is authenticated
+            if (User.Identity.IsAuthenticated)
             {
-                _context.Add(colorOption);
-                await _context.SaveChangesAsync();
-                if (again)
-                    return RedirectToAction("Create", "ColorOptions", new { id = colorOption.ProductId });
-                return RedirectToAction("Create", "ProductImages", new { id = colorOption.ColorOptionId });
+                if (ModelState.IsValid)
+                {
+                    _context.Add(colorOption);
+                    await _context.SaveChangesAsync();
+                    if (again)
+                        return RedirectToAction("Create", "ColorOptions", new { id = colorOption.ProductId });
+                    return RedirectToAction("Create", "ProductImages", new { id = colorOption.ColorOptionId });
+                }
+                ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", colorOption.ProductId);
+                return View(colorOption);
             }
-            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", colorOption.ProductId);
-            return View(colorOption);
+            else
+            {
+                return NotFound();
+            }
         }
 
         // GET: ColorOptions/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            // Check if user is authenticated
+            if (User.Identity.IsAuthenticated)
+            {
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var colorOption = await _context.ColorOptions.SingleOrDefaultAsync(m => m.ColorOptionId == id);
+                if (colorOption == null)
+                {
+                    return NotFound();
+                }
+
+                string[] coloroptions = { "Wit", "Ivoor", "Roze", "Rood", "Grijs", "Zwart" };
+                ViewData["ColorOption"] = coloroptions.Select(r => new SelectListItem { Text = r, Value = r });
+                ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", colorOption.ProductId);
+                return View(colorOption);
+            }
+            else
             {
                 return NotFound();
             }
-
-            var colorOption = await _context.ColorOptions.SingleOrDefaultAsync(m => m.ColorOptionId == id);
-            if (colorOption == null)
-            {
-                return NotFound();
-            }
-
-            string[] coloroptions = { "Wit", "Ivoor", "Roze", "Rood", "Grijs", "Zwart" };
-            ViewData["ColorOption"] = coloroptions.Select(r => new SelectListItem { Text = r, Value = r });
-            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", colorOption.ProductId);
-            return View(colorOption);
         }
 
         // POST: ColorOptions/Edit/5
@@ -104,50 +144,66 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ColorOptionId,Color,ProductId")] ColorOption colorOption)
         {
-            if (id != colorOption.ColorOptionId)
+            // Check if user is authenticated
+            if (User.Identity.IsAuthenticated)
+            {
+                if (id != colorOption.ColorOptionId)
+                {
+                    return NotFound();
+                }
+
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        _context.Update(colorOption);
+                        await _context.SaveChangesAsync();
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        if (!ColorOptionExists(colorOption.ColorOptionId))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
+                    return RedirectToAction("Index");
+                }
+                ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", colorOption.ProductId);
+                return View(colorOption);
+            }
+            else
             {
                 return NotFound();
             }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(colorOption);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ColorOptionExists(colorOption.ColorOptionId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction("Index");
-            }
-            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", colorOption.ProductId);
-            return View(colorOption);
         }
 
         // GET: ColorOptions/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            // Check if user is authenticated
+            if (User.Identity.IsAuthenticated)
+            {
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var colorOption = await _context.ColorOptions.SingleOrDefaultAsync(m => m.ColorOptionId == id);
+                if (colorOption == null)
+                {
+                    return NotFound();
+                }
+
+                return View(colorOption);
+            }
+            else
             {
                 return NotFound();
             }
-
-            var colorOption = await _context.ColorOptions.SingleOrDefaultAsync(m => m.ColorOptionId == id);
-            if (colorOption == null)
-            {
-                return NotFound();
-            }
-
-            return View(colorOption);
         }
 
         // POST: ColorOptions/Delete/5
@@ -155,10 +211,18 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var colorOption = await _context.ColorOptions.SingleOrDefaultAsync(m => m.ColorOptionId == id);
-            _context.ColorOptions.Remove(colorOption);
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            // Check if user is authenticated
+            if (User.Identity.IsAuthenticated)
+            {
+                var colorOption = await _context.ColorOptions.SingleOrDefaultAsync(m => m.ColorOptionId == id);
+                _context.ColorOptions.Remove(colorOption);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         private bool ColorOptionExists(int id)

@@ -20,38 +20,66 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers {
         }
 
         // GET: ProductImages
-        public async Task<IActionResult> Index() {
-            var applicationDbContext = _context.ProductImages.Include(p => p.ColorOption);
-            return View(await applicationDbContext.ToListAsync());
+        public async Task<IActionResult> Index()
+        {
+            // Check if user is authenticated
+            if (User.Identity.IsAuthenticated)
+            {
+                var applicationDbContext = _context.ProductImages.Include(p => p.ColorOption);
+                return View(await applicationDbContext.ToListAsync());
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         // GET: ProductImages/Details/5
-        public async Task<IActionResult> Details(int? id) {
-            if (id == null) {
+        public async Task<IActionResult> Details(int? id)
+        {
+            // Check if user is authenticated
+            if (User.Identity.IsAuthenticated)
+            {
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var productImage = await _context.ProductImages.SingleOrDefaultAsync(m => m.ProductImageId == id);
+                if (productImage == null)
+                {
+                    return NotFound();
+                }
+
+                return View(productImage);
+            }
+            else
+            {
                 return NotFound();
             }
-
-            var productImage = await _context.ProductImages.SingleOrDefaultAsync(m => m.ProductImageId == id);
-            if (productImage == null) {
-                return NotFound();
-            }
-
-            return View(productImage);
         }
 
         // GET: ProductImages/Create
         public IActionResult Create(int? id)
         {
-            int? selectedItem = 0;
-            if(id != null)
+            // Check if user is authenticated
+            if (User.Identity.IsAuthenticated)
             {
-                selectedItem = id;
-            }
+                int? selectedItem = 0;
+                if (id != null)
+                {
+                    selectedItem = id;
+                }
 
-            var dressPerColor = _context.ColorOptions.Join(_context.Products, c => c.ProductId, o => o.ProductId, (c, o) => new { c.ColorOptionId, c.Color, o.Name }).ToList();
-            IEnumerable<SelectListItem> selectList = from d in dressPerColor select new SelectListItem { Value = d.ColorOptionId.ToString(), Text = d.Name + " - " + d.Color };
-            ViewData["ColorOptionId"] = new SelectList(selectList, "Value", "Text", selectedItem);
-            return View();
+                var dressPerColor = _context.ColorOptions.Join(_context.Products, c => c.ProductId, o => o.ProductId, (c, o) => new { c.ColorOptionId, c.Color, o.Name }).ToList();
+                IEnumerable<SelectListItem> selectList = from d in dressPerColor select new SelectListItem { Value = d.ColorOptionId.ToString(), Text = d.Name + " - " + d.Color };
+                ViewData["ColorOptionId"] = new SelectList(selectList, "Value", "Text", selectedItem);
+                return View();
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         // POST: ProductImages/Create
@@ -59,44 +87,66 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers {
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductImageId,ColorOptionId,Path")] ProductImage productImage, IFormFile image, bool again) {
-            if (ModelState.IsValid || image != null) {
+        public async Task<IActionResult> Create([Bind("ProductImageId,ColorOptionId,Path")] ProductImage productImage, IFormFile image, bool again)
+        {
+            // Check if user is authenticated
+            if (User.Identity.IsAuthenticated)
+            {
+                if (ModelState.IsValid || image != null)
+                {
 
-                string filename = ChangePathName(productImage.Path);
-                FileInfo fi = new FileInfo(image.FileName);
-                string extension = fi.Extension;
-                string path = "images/dress/" + filename + extension;
-                productImage.Path = path;
-                using (FileStream fs = System.IO.File.Create("wwwroot/" + path)) {
-                    image.CopyTo(fs);
-                    fs.Flush();
+                    string filename = ChangePathName(productImage.Path);
+                    FileInfo fi = new FileInfo(image.FileName);
+                    string extension = fi.Extension;
+                    string path = "images/uploads/" + filename + extension;
+                    productImage.Path = path;
+                    using (FileStream fs = System.IO.File.Create("wwwroot/" + path))
+                    {
+                        image.CopyTo(fs);
+                        fs.Flush();
+                    }
+
+                    _context.Add(productImage);
+                    await _context.SaveChangesAsync();
+                    if (again)
+                        return RedirectToAction("Create", "ProductImages", productImage.ColorOptionId);
+
+                    return RedirectToAction("Index", "Products");
                 }
-
-                _context.Add(productImage);
-                await _context.SaveChangesAsync();
-                if (again)
-                    return RedirectToAction("Create", "ProductImages", productImage.ColorOptionId);
-
-                return RedirectToAction("Index", "Products");
+                ViewData["ColorOptionId"] = new SelectList(_context.ColorOptions, "ColorOptionId", "Color", productImage.ColorOptionId);
+                return View(productImage);
             }
-            ViewData["ColorOptionId"] = new SelectList(_context.ColorOptions, "ColorOptionId", "Color", productImage.ColorOptionId);
-            return View(productImage);
+            else
+            {
+                return NotFound();
+            }
         }
 
         // GET: ProductImages/Edit/5
-        public async Task<IActionResult> Edit(int? id) {
-            if (id == null) {
-                return NotFound();
-            }
+        public async Task<IActionResult> Edit(int? id)
+        {
+            // Check if user is authenticated
+            if (User.Identity.IsAuthenticated)
+            {
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var productImage = await _context.ProductImages.SingleOrDefaultAsync(m => m.ProductImageId == id);
-            if (productImage == null) {
+                var productImage = await _context.ProductImages.SingleOrDefaultAsync(m => m.ProductImageId == id);
+                if (productImage == null)
+                {
+                    return NotFound();
+                }
+                var dressPerColor = _context.ColorOptions.Join(_context.Products, c => c.ProductId, o => o.ProductId, (c, o) => new { c.ColorOptionId, c.Color, o.Name }).ToList();
+                IEnumerable<SelectListItem> selectList = from d in dressPerColor select new SelectListItem { Value = d.ColorOptionId.ToString(), Text = d.Name + " - " + d.Color };
+                ViewData["ColorOptionId"] = new SelectList(selectList, "Value", "Text");
+                return View(productImage);
+            }
+            else
+            {
                 return NotFound();
             }
-            var dressPerColor = _context.ColorOptions.Join(_context.Products, c => c.ProductId, o => o.ProductId, (c, o) => new { c.ColorOptionId, c.Color, o.Name }).ToList();
-            IEnumerable<SelectListItem> selectList = from d in dressPerColor select new SelectListItem { Value = d.ColorOptionId.ToString(), Text = d.Name + " - " + d.Color };
-            ViewData["ColorOptionId"] = new SelectList(selectList, "Value", "Text");
-            return View(productImage);
         }
 
         // POST: ProductImages/Edit/5
@@ -104,62 +154,100 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers {
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductImageId,ColorOptionId,Path")] ProductImage productImage, IFormFile image) {
-            if (id != productImage.ProductImageId) {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid || image != null) {
-                try {
-
-                    string filename = ChangePathName(productImage.Path);
-                    FileInfo fi = new FileInfo(image.FileName);
-                    string extension = fi.Extension;
-                    string path = "images/dress/" + filename + extension;
-                    productImage.Path = path;
-                    using (FileStream fs = System.IO.File.Create("wwwroot/" + path)) {
-                        image.CopyTo(fs);
-                        fs.Flush();
-                    }
-
-                    _context.Update(productImage);
-                    await _context.SaveChangesAsync();
-                } catch (DbUpdateConcurrencyException) {
-                    if (!ProductImageExists(productImage.ProductImageId)) {
-                        return NotFound();
-                    } else {
-                        throw;
-                    }
+        public async Task<IActionResult> Edit(int id, [Bind("ProductImageId,ColorOptionId,Path")] ProductImage productImage, IFormFile image)
+        {
+            // Check if user is authenticated
+            if (User.Identity.IsAuthenticated)
+            {
+                if (id != productImage.ProductImageId)
+                {
+                    return NotFound();
                 }
 
-                return RedirectToAction("Index");
+                if (ModelState.IsValid || image != null)
+                {
+                    try
+                    {
+
+                        string filename = ChangePathName(productImage.Path);
+                        FileInfo fi = new FileInfo(image.FileName);
+                        string extension = fi.Extension;
+                        string path = "images/uploads/" + filename + extension;
+                        productImage.Path = path;
+                        using (FileStream fs = System.IO.File.Create("wwwroot/" + path))
+                        {
+                            image.CopyTo(fs);
+                            fs.Flush();
+                        }
+
+                        _context.Update(productImage);
+                        await _context.SaveChangesAsync();
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        if (!ProductImageExists(productImage.ProductImageId))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
+
+                    return RedirectToAction("Index");
+                }
+                ViewData["ColorOptionId"] = new SelectList(_context.ColorOptions, "ColorOptionId", "Color", productImage.ColorOptionId);
+                return View(productImage);
             }
-            ViewData["ColorOptionId"] = new SelectList(_context.ColorOptions, "ColorOptionId", "Color", productImage.ColorOptionId);
-            return View(productImage);
+            else
+            {
+                return NotFound();
+            }
         }
 
         // GET: ProductImages/Delete/5
-        public async Task<IActionResult> Delete(int? id) {
-            if (id == null) {
+        public async Task<IActionResult> Delete(int? id)
+        {
+            // Check if user is authenticated
+            if (User.Identity.IsAuthenticated)
+            {
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var productImage = await _context.ProductImages.SingleOrDefaultAsync(m => m.ProductImageId == id);
+                if (productImage == null)
+                {
+                    return NotFound();
+                }
+
+                return View(productImage);
+            }
+            else
+            {
                 return NotFound();
             }
-
-            var productImage = await _context.ProductImages.SingleOrDefaultAsync(m => m.ProductImageId == id);
-            if (productImage == null) {
-                return NotFound();
-            }
-
-            return View(productImage);
         }
 
         // POST: ProductImages/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id) {
-            var productImage = await _context.ProductImages.SingleOrDefaultAsync(m => m.ProductImageId == id);
-            _context.ProductImages.Remove(productImage);
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            // Check if user is authenticated
+            if (User.Identity.IsAuthenticated)
+            {
+                var productImage = await _context.ProductImages.SingleOrDefaultAsync(m => m.ProductImageId == id);
+                _context.ProductImages.Remove(productImage);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         private bool ProductImageExists(int id) {
