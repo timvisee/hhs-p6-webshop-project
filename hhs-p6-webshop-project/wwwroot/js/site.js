@@ -314,7 +314,7 @@ $(document).ready(function () {
                     var uniqueId = getUniqueId("time-button");
 
                     // Determine the value
-                    var value = appointmentTimeObject.time.hour + ":" + appointmentTimeObject.time.minute;
+                    var value = appointmentTimeObject.time.hour + ":" + ("0" + appointmentTimeObject.time.minute).slice(-2);
 
                     // Append the radio button
                     timeRadioButtonContainer.append("<li>" +
