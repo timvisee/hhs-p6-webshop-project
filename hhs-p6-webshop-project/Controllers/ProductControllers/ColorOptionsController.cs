@@ -13,6 +13,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
     public class ColorOptionsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly string[] _coloroptions = { "Wit", "Ivoor", "Roze", "Rood", "Grijs", "Zwart" };
 
         public ColorOptionsController(ApplicationDbContext context)
         {
@@ -51,9 +52,8 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
             {
                 selectedItem = id;
             }
-            string[] coloroptions = { "Wit", "Ivoor", "Roze", "Rood", "Grijs", "Zwart" };
 
-            ViewData["ColorOption"] = coloroptions.Select(r => new SelectListItem { Text = r, Value = r });
+            ViewData["ColorOption"] = _coloroptions.Select(r => new SelectListItem { Text = r, Value = r });
             ViewData["Name"] = new SelectList(_context.Products, "ProductId", "Name", selectedItem);
             return View();
         }
@@ -73,6 +73,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
                     return RedirectToAction("Create", "ColorOptions", new { id = colorOption.ProductId });
                 return RedirectToAction("Create", "ProductImages", new { id = colorOption.ColorOptionId });
             }
+
             ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", colorOption.ProductId);
             return View(colorOption);
         }
@@ -91,8 +92,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
                 return NotFound();
             }
 
-            string[] coloroptions = { "Wit", "Ivoor", "Roze", "Rood", "Grijs", "Zwart" };
-            ViewData["ColorOption"] = coloroptions.Select(r => new SelectListItem { Text = r, Value = r });
+            ViewData["ColorOption"] = _coloroptions.Select(r => new SelectListItem { Text = r, Value = r });
             ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", colorOption.ProductId);
             return View(colorOption);
         }
