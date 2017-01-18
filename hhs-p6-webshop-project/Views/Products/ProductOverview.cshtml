@@ -37,7 +37,7 @@
                 @{
                     foreach (var color in item.ColorOptions)
                     {
-                        <span class="color-circle @color.Color"></span>
+                        <span value="@color.ColorOptionId" class="color-circle @color.Color"></span>
                     }
                 }
             </div>
