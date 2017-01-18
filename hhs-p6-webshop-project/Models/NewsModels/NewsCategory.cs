@@ -27,6 +27,8 @@ namespace hhs_p6_webshop_project.Models.NewsModels
     {
         public NewsCategory NewsCategory { get; set; }
 
+        public List<NewsArticle> NewsArticles { get; set; }
+
         [Display(Name = "Nieuwsartikelen")]
         public IEnumerable<SelectListItem> NewsArticleList { get; set; }
 

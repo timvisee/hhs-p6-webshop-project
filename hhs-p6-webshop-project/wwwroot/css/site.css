@@ -1348,6 +1348,18 @@ footer ul {
     font-weight: bold;
 }
 
+
+/*--- News ---*/
+.news-article {
+    border: 1px solid #e2e2e2;
+    padding: 10px;
+}
+
+.news-article img {
+    max-width: 100%;
+}
+
+
 @media (max-width: 991px) {
 
     /*--- Header ---*/

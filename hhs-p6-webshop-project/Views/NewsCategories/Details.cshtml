@@ -1,23 +1,32 @@
+@using System.Threading.Tasks
+@using hhs_p6_webshop_project.Models.NewsModels
 @model hhs_p6_webshop_project.Models.NewsModels.NewsCategoryVM
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+<h1>@Html.DisplayFor(model => model.NewsCategory.Name)</h1>
 
-<div>
-    <h4>NewsCategory</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.NewsCategory.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.NewsCategory.Name)
-        </dd>
-    </dl>
+
+
+<div class="container">
+    <div class="row">
+        @{
+            foreach (var na in Model.NewsArticles)
+            {
+                <div class="col-sm-12 col-md-4">
+                    <div class="news-article">
+                        <h2>@na.Name</h2>
+                        <p>@na.Excerpt</p>
+                        <img src="@na.ImagePath" />
+                    </div>
+                </div>
+            }
+        }
+    </div>
 </div>
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model.NewsCategory.NewsCategoryID">Edit</a> |
     <a asp-action="Index">Back to List</a>

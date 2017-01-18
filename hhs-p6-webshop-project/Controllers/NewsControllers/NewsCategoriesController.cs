@@ -35,12 +35,24 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers
 
             var nc = getNewsCategory(id);
 
+            var nac = _context.NewsArticleCategory.Where(sc => sc.NewsCategoryID == id);
+            List<NewsArticle> naObjects = new List<NewsArticle>();
+
+
+            foreach (var naId in nac) {
+                naObjects.Add(_context.NewsArticle.FirstOrDefault(n => n.NewsArticleID == naId.NewsArticleID));
+            }
+
             if (nc == null)
             {
                 return NotFound();
             }
 
-            return View(getNewsCategoryVM(nc, new SelectList(_context.NewsArticle, "NewsArticleID", "Name")));
+            var ncvm = getNewsCategoryVM(nc, new SelectList(_context.NewsArticle, "NewsArticleID", "Name"));
+
+            ncvm.NewsArticles = naObjects;
+
+            return View(ncvm);
         }
 
         // GET: NewsCategories/Create
@@ -110,8 +122,8 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers
 
             if (ModelState.IsValid)
             {
-                var teVerwijderenLijst = _context.NewsArticleCategory.Where(sc => sc.NewsCategoryID == id);
-                _context.RemoveRange(teVerwijderenLijst);
+                var rml = _context.NewsArticleCategory.Where(sc => sc.NewsCategoryID == id);
+                _context.RemoveRange(rml);
                 _context.SaveChanges();
 
                 updatedNewsCategory.NewsCategory.NewsArticleCategories = new List<NewsArticleCategory>();
