@@ -15,13 +15,13 @@
         <div class="form-group">
             <label asp-for="ColorOptionId" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <select asp-for="ColorOptionId" class="form-control" asp-items="ViewBag.ColorOptionId"></select>
+                <select asp-for="ColorOptionId" asp-items="ViewBag.ColorOptionId"></select>
             </div>
         </div>
         <div class="form-group">
             <label asp-for="Path" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input type="file" asp-for="Path" class="inputfile" accept="image/gif, image/jpeg, image/png" name="image" id="image" />
+                <input type="file" asp-for="Path" class="inputfile" accept="image/gif, image/jpeg, image/png" name="image" id="image"/>
                 <label for="image" class="upload-image">Kies Afbeelding</label>
                 <span asp-validation-for="Path" class="text-danger" />
             </div>

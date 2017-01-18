@@ -54,7 +54,14 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
         // GET: Products/Create
         public IActionResult Create()
         {
-            return View();
+            // Check if user is authenticated
+            if (User.Identity.IsAuthenticated)
+            {
+                return View();
+            }
+            else {
+                return NotFound();
+            }
         }
 
         // POST: Products/Create
@@ -64,31 +71,48 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ProductId,Description,Name,Price")] Product product, bool again)
         {
-            if (ModelState.IsValid)
+            // Check if user is authenticated
+            if (User.Identity.IsAuthenticated)
             {
-                _context.Add(product);
-                await _context.SaveChangesAsync();
-                if (again)
-                    return RedirectToAction("Create");
-                return RedirectToAction("Create", "ColorOptions", new { id = product.ProductId });
+                if (ModelState.IsValid)
+                {
+                    _context.Add(product);
+                    await _context.SaveChangesAsync();
+                    if (again)
+                        return RedirectToAction("Create");
+                    return RedirectToAction("Create", "ColorOptions", new { id = product.ProductId });
+                }
+                return View(product);
             }
-            return View(product);
+            else
+            {
+                return NotFound();
+            }
         }
 
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var product = await _context.Products.SingleOrDefaultAsync(m => m.ProductId == id);
-            if (product == null)
+            // Check if user is authenticated
+            if (User.Identity.IsAuthenticated)
+            {
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var product = await _context.Products.SingleOrDefaultAsync(m => m.ProductId == id);
+                if (product == null)
+                {
+                    return NotFound();
+                }
+                return View(product);
+            }
+            else
             {
                 return NotFound();
             }
-            return View(product);
         }
 
         // POST: Products/Edit/5
@@ -98,49 +122,65 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ProductId,Description,Name,Price")] Product product)
         {
-            if (id != product.ProductId)
+            // Check if user is authenticated
+            if (User.Identity.IsAuthenticated)
+            {
+                if (id != product.ProductId)
+                {
+                    return NotFound();
+                }
+
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        _context.Update(product);
+                        await _context.SaveChangesAsync();
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        if (!ProductExists(product.ProductId))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
+                    return RedirectToAction("Index");
+                }
+                return View(product);
+            }
+            else
             {
                 return NotFound();
             }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(product);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProductExists(product.ProductId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction("Index");
-            }
-            return View(product);
         }
 
         // GET: Products/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            // Check if user is authenticated
+            if (User.Identity.IsAuthenticated)
+            {
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var product = await _context.Products.SingleOrDefaultAsync(m => m.ProductId == id);
+                if (product == null)
+                {
+                    return NotFound();
+                }
+
+                return View(product);
+            }
+            else
             {
                 return NotFound();
             }
-
-            var product = await _context.Products.SingleOrDefaultAsync(m => m.ProductId == id);
-            if (product == null)
-            {
-                return NotFound();
-            }
-
-            return View(product);
         }
 
         // POST: Products/Delete/5
@@ -148,10 +188,18 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var product = await _context.Products.SingleOrDefaultAsync(m => m.ProductId == id);
-            _context.Products.Remove(product);
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            // Check if user is authenticated
+            if (User.Identity.IsAuthenticated)
+            {
+                var product = await _context.Products.SingleOrDefaultAsync(m => m.ProductId == id);
+                _context.Products.Remove(product);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         private bool ProductExists(int id)
