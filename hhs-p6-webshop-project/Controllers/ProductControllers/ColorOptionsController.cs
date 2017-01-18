@@ -73,6 +73,14 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
                 }
                 string[] coloroptions = { "Wit", "Ivoor", "Roze", "Rood", "Grijs", "Zwart" };
 
+                var color = _context.ColorOptions.Where(c => c.ProductId == id).Select(c => c.Color).ToList();
+                foreach(string colorOption in coloroptions)
+                {
+                    bool exists = color.Contains(colorOption);
+                    if (exists)
+                        coloroptions = coloroptions.Where(c => c != colorOption).ToArray();
+                }
+
                 ViewData["ColorOption"] = coloroptions.Select(r => new SelectListItem { Text = r, Value = r });
                 var dress = _context.Products.Where(c => c.ProductId == id).Select(o => new { Value = o.ProductId, Text = o.Name }).ToList();
                 ViewData["Name"] = new SelectList(dress, "Value", "Text", selectedItem);
