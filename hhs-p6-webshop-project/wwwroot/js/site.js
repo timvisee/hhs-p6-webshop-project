@@ -67,46 +67,29 @@ $(document).ready(function () {
 
     // Create an accordion of the filters container
     $('.filters-container').accordion({
-        collapsible: true,
-//        icons: {
-//            "header": "glyphicon glyphicon-chevron-right",
-//            "activeHeader": "glyphicon glyphicon-chevron-right active"
-//        }
+        collapsible: true
     });
 
+    /**
+     * Update the price range label in the filters for products.
+     */
+    function updateSelectedPriceRange(min, max) {
+        $( "#filter-price-amount" ).val( "€" + min + " tot €" + max);
+    }
 
-
-
-
-
-
-
-
-
-
-
-    $( "#filter-price-slider" ).slider({
+    // Create the price filter range slider
+    $("#filter-price-slider").slider({
         range: true,
         min: 0,
         max: 500,
         values: [ 75, 300 ],
-        slide: function( event, ui ) {
-            $( "#filter-price-amount" ).val( "€" + ui.values[ 0 ] + " tot €" + ui.values[ 1 ] );
+        slide: function(event, ui) {
+            updateSelectedPriceRange(ui.values[0], ui.values[1]);
         }
     });
-    $( "#filter-price-amount" ).val( "€" + $( "#filter-price-slider" ).slider( "values", 0 ) +
-        " tot €" + $( "#filter-price-slider" ).slider( "values", 1 ) );
 
-
-
-
-
-
-
-
-
-
-
+    // Render the label when loading the page
+    updateSelectedPriceRange($("#filter-price-slider").slider("values", 0), $("#filter-price-slider").slider("values", 1));
 
     /**
      * Toggle the search box when the search button is clicked
