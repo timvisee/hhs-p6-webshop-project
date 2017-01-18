@@ -1553,10 +1553,13 @@ footer ul {
     -o-transition: transform 0.35s;
     -webkit-transition: transform 0.35s;
     transition: transform 0.35s;
+    -ms-transform: scale(0.75);
+    -webkit-transform: scale(0.75);
+    transform: scale(0.75);
 }
 
 #filters-container .glyphicon.active {
-    -ms-transform: rotate(90deg);
-    -webkit-transform: rotate(90deg);
-    transform: rotate(90deg);
+    -ms-transform: rotate(90deg) scale(0.75);
+    -webkit-transform: rotate(90deg) scale(0.75);
+    transform: rotate(90deg) scale(0.75);
 }
