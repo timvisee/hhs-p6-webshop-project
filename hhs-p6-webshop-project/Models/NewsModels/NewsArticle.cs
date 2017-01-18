@@ -15,9 +15,20 @@ namespace hhs_p6_webshop_project.Models.NewsModels
         }
 
         public int NewsArticleID { get; set; }
+
+        [Display(Name = "Titel")]
         public string Name { get; set; }
 
-        [Display(Name = "NewsArticleCategories")]
+        [Display(Name = "Afbeelding")]
+        public string ImagePath { get; set; }
+
+        [Display(Name = "Samenvatting")]
+        public string Excerpt { get; set; }
+
+        [Display(Name = "Bericht")]
+        public string Content { get; set; }
+
+        [Display(Name = "Categorieen")]
         public virtual ICollection<NewsArticleCategory> NewsArticleCategories { get; set; }
     }
 
@@ -25,10 +36,10 @@ namespace hhs_p6_webshop_project.Models.NewsModels
     {
         public NewsArticle NewsArticle { get; set; }
 
-        [Display(Name = "Studenten")]
+        [Display(Name = "Nieuwsartikelen")]
         public IEnumerable<SelectListItem> NewsCategoriesList { get; set; }
 
-        [Display(Name = "Studenten")]
+        [Display(Name = "Nieuwsartikelen")]
         public IEnumerable<int> SelectedNewsCategories { get; set; }
     }
 }
