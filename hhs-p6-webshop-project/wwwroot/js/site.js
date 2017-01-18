@@ -65,6 +65,15 @@ $(document).ready(function () {
             live:         true
     }).init();
 
+    // Create an accordion of the filters container
+    $('.filters-container').accordion({
+        collapsible: true,
+        icons: {
+            "header": "glyphicon glyphicon-chevron-right",
+            "activeHeader": "glyphicon glyphicon-chevron-right active"
+        }
+    });
+
     /**
      * Toggle the search box when the search button is clicked
      */
