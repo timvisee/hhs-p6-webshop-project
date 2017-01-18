@@ -14,6 +14,7 @@ using hhs_p6_webshop_project.App.Ajax;
 namespace hhs_p6_webshop_project.Controllers.ProductControllers {
     public class ProductImagesController : Controller {
         private readonly ApplicationDbContext _context;
+        private readonly string basepath = "images/uploads/";
 
         public ProductImagesController(ApplicationDbContext context) {
             _context = context;
@@ -65,7 +66,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers {
                 string filename = ChangePathName(productImage.Path);
                 FileInfo fi = new FileInfo(image.FileName);
                 string extension = fi.Extension;
-                string path = "images/dress/" + filename + extension;
+                string path = basepath + filename + extension;
                 productImage.Path = path;
                 using (FileStream fs = System.IO.File.Create("wwwroot/" + path)) {
                     image.CopyTo(fs);
@@ -115,7 +116,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers {
                     string filename = ChangePathName(productImage.Path);
                     FileInfo fi = new FileInfo(image.FileName);
                     string extension = fi.Extension;
-                    string path = "images/dress/" + filename + extension;
+                    string path = basepath + filename + extension;
                     productImage.Path = path;
                     using (FileStream fs = System.IO.File.Create("wwwroot/" + path)) {
                         image.CopyTo(fs);
