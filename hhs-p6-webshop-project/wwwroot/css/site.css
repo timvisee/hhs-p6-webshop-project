@@ -1120,11 +1120,11 @@ nav li {
     opacity: 0.6;
 }
 
-.ui-state-active {
+.create-appointment-part .ui-state-active {
     position: relative;
 }
 
-    .ui-state-active:before {
+    .create-appointment-part .ui-state-active:before {
         content: "";
         position: absolute;
         border: 2px solid #fff;
