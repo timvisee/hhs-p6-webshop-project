@@ -39,9 +39,10 @@ $(document).ready(function () {
     function renderImages(element, index, array) {
         if (index == 0) {
             $(".big-picture img").attr("src", "/" + element);
+            $(".big-picture a").attr("href", "/" + element);
         }
 
-        $(".side-pictures").append("<div class='small-picture'><img src='/" + element + "' /></div>")
+        $(".side-pictures").append("<div class='small-picture'><a data-lightbox='dress-images' href='/" + element + "'><img src='/" + element + "' /></a></div>")
     }
 
 

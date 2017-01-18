@@ -16,7 +16,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
 
         public ColorOptionsController(ApplicationDbContext context)
         {
-            _context = context;    
+            _context = context;
         }
 
         // GET: ColorOptions
@@ -47,7 +47,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
         public IActionResult Create(int? id)
         {
             int? selectedItem = 0;
-            if(id != null)
+            if (id != null)
             {
                 selectedItem = id;
             }
