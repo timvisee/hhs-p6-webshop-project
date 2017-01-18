@@ -4,21 +4,25 @@
 
 @{
     ViewData["Title"] = "Details";
+    ViewData["PinkBackground"] = true;
+
+    var random = new Random();
 }
 
 <h1>@Html.DisplayFor(model => model.NewsCategory.Name)</h1>
-
-
 
 <div class="container">
     <div class="row">
         @{
             foreach (var na in Model.NewsArticles)
             {
-                <div class="col-sm-12 col-md-4">
+                <div class="news-article-wrap col-sm-12 col-md-3-5">
                     <div class="news-article">
-                        <h2>@na.Name</h2>
-                        <p>@na.Excerpt</p>
+                        <div class="news-article-top">
+                            <h2>@na.Name <img src="~/images/heart-icon.png" /></h2>
+                            <hr style="border-color: @(String.Format("#{0:X6}", random.Next(0x1000000)));" />
+                            <p>@Html.Raw(na.Excerpt)</p>
+                        </div>
                         <img src="@na.ImagePath" />
                     </div>
                 </div>

@@ -88,6 +88,10 @@ body {
 }
 
 /*--- Custom beun bootstrap ---*/
+.col-md-3-5 {
+    width: 29.166666%;
+}
+
 .col-md-offset-1-5 {
     margin-left: 12.5%;
 }
@@ -202,17 +206,17 @@ select {
     border-radius: 0px;
     box-shadow: none;
     height: 40px;
-    width:80%;
+    width: 80%;
     padding: 0 30px 0 10px;
     cursor: pointer;
 }
 
-select:active, select:focus{
-    border: 2px solid #F0597C;
-    border-radius: 0px;
-    box-shadow: none;
-    outline: -webkit-focus-ring-color auto 0px;
-}
+    select:active, select:focus {
+        border: 2px solid #F0597C;
+        border-radius: 0px;
+        box-shadow: none;
+        outline: -webkit-focus-ring-color auto 0px;
+    }
 
 .btn,
 button,
@@ -1350,9 +1354,42 @@ footer ul {
 
 
 /*--- News ---*/
+.news-article-wrap {
+    margin: 0 0 50px 3%;
+}
+
 .news-article {
-    border: 1px solid #e2e2e2;
-    padding: 10px;
+    -webkit-box-shadow: 0px 0px 20px 0px rgba(200,200,200, 0.6);
+    -moz-box-shadow: 0px 0px 20px 0px rgba(200,200,200, 0.6);
+    box-shadow: 0px 0px 20px 0px rgba(200,200,200, 0.6);
+}
+
+.news-article-top {
+    padding: 10px 30px;
+}
+
+.news-article h2 {
+    font-family: nexa-black;
+    font-size: 1.15em;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0;
+}
+
+    .news-article h2 img {
+        margin: -9px 0 0 10px;
+    }
+
+.news-article hr {
+    width: 45%;
+    margin-right: 53%;
+    float: left;
+    border: 2px solid #ba55d3;
+}
+
+.news-article p {
+    font-size: 1.7em;
+    font-family: nexa-light;
 }
 
 .news-article img {
@@ -1425,19 +1462,19 @@ footer ul {
         margin-left: -30%;
     }
 
-    .home-button-container a {
-        width: 100%;
-        margin: 10px 0 0;
-    }
+        .home-button-container a {
+            width: 100%;
+            margin: 10px 0 0;
+        }
 
     .text-banner {
         min-height: 250px;
         font-size: 1rem;
     }
 
-    .text-banner .banner-bg-title-text {
-        font-size: 9em;
-    }
+        .text-banner .banner-bg-title-text {
+            font-size: 9em;
+        }
 
     /*--- Footer ---*/
     .social-box:first-child,
@@ -1475,21 +1512,21 @@ footer ul {
 
 /*--- Product Buttons ---*/
 
-.create-btn{
-    margin-top:-50px;
-    margin-bottom:50px;
+.create-btn {
+    margin-top: -50px;
+    margin-bottom: 50px;
 }
 
-.product-button{
-    display:inline-block;
-    float:left;
-    margin-left:25px;
-    height:75px;
+.product-button {
+    display: inline-block;
+    float: left;
+    margin-left: 25px;
+    height: 75px;
 }
 
-.product-button:first-child{
-    margin-left:0;
-}
+    .product-button:first-child {
+        margin-left: 0;
+    }
 
 /*--- CSS Animations for the product catalog ---*/
 @-webkit-keyframes productCatalogEnter {
@@ -1597,11 +1634,11 @@ footer ul {
     transform: scale(0.75);
 }
 
-.filters-container .glyphicon.active {
-    -ms-transform: rotate(90deg) scale(0.75);
-    -webkit-transform: rotate(90deg) scale(0.75);
-    transform: rotate(90deg) scale(0.75);
-}
+    .filters-container .glyphicon.active {
+        -ms-transform: rotate(90deg) scale(0.75);
+        -webkit-transform: rotate(90deg) scale(0.75);
+        transform: rotate(90deg) scale(0.75);
+    }
 
 .filters-container #filter-price-slider {
     margin-bottom: 12px;
@@ -1619,7 +1656,7 @@ footer ul {
     padding-left: 0;
 }
 
-.filters-container ul li {
-    list-style: none;
-    margin-left: 0;
-}
+    .filters-container ul li {
+        list-style: none;
+        margin-left: 0;
+    }
