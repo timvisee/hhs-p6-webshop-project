@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using hhs_p6_webshop_project.Models;
 using hhs_p6_webshop_project.Models.AppointmentModels;
-using hhs_p6_webshop_project.Models.BlogModels;
 using hhs_p6_webshop_project.Models.NewsModels;
 using Microsoft.Extensions.Configuration;
 using hhs_p6_webshop_project.Models.ProductModels;
@@ -51,9 +50,6 @@ namespace hhs_p6_webshop_project.Data {
                 .HasOne(sc => sc.NewsCategory)
                 .WithMany(c => c.NewsArticleCategories)
                 .HasForeignKey(sc => sc.NewsCategoryID);
-
-
-            builder.Entity<BlogArticleCategory>().HasKey(x => new { x.BlogArticleId, x.BlogCategoryId });
         }
 
         public DbSet<Appointment> Appointment { get; set; }
@@ -65,13 +61,7 @@ namespace hhs_p6_webshop_project.Data {
         public DbSet<ColorOption> ColorOptions { get; set; }
 
         public DbSet<ProductImage> ProductImages { get; set; }
-
-        public DbSet<BlogArticleCategory> BlogArticleCategory { get; set; }
-
-        public DbSet<BlogArticle> BlogArticle { get; set; }
-
-        public DbSet<BlogCategory> BlogCategory { get; set; }
-
+        
         public DbSet<NewsArticle> NewsArticle { get; set; }
 
         public DbSet<NewsCategory> NewsCategory { get; set; }
