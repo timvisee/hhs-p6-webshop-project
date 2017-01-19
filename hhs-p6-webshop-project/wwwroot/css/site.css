@@ -1641,7 +1641,7 @@ footer ul {
     }
 
 .filters-container #filter-price-slider {
-    margin-bottom: 12px;
+    margin-top: 12px;
 }
 
 .filters-container #filter-price-amount {
@@ -1649,7 +1649,7 @@ footer ul {
     border: 0;
     font-weight: normal;
     text-align: center;
-    margin-bottom: 12px;
+    margin-top: 12px;
 }
 
 .filters-container ul {
@@ -1660,3 +1660,38 @@ footer ul {
         list-style: none;
         margin-left: 0;
     }
+
+.ui-accordion-header {
+    border-left: none !important;
+    border-right: none !important;
+    -ms-border-radius: 0 !important;
+    border-radius: 0 !important;
+}
+
+.ui-accordion-content-active {
+    border: none !important;
+    overflow-y: scroll;
+    max-height: 560px;
+}
+
+.ui-slider-handle {
+    margin-top: -4px;
+    width: 22px !important;
+    height: 22px !important;
+    -ms-border-radius: 11px !important;
+    border-radius: 11px !important;
+    -ms-border-color: #FAC9C4 !important;
+    border-color: #FAC9C4 !important;
+}
+
+.ui-slider-horizontal {
+    height: 4px !important;
+    background-color: #D1D2D4 !important;
+    border: none !important;
+}
+
+.ui-slider-range {
+    height: 4px !important;
+    background-color: #FAC9C4 !important;
+    border: none !important;
+}
