@@ -91,7 +91,7 @@
                     </p>
                     <div class="product-make-appointment-container">
                         <p>Kom deze jurk passen!</p>
-                        <a asp-controller="Appointments" asp-action="Create" class="btn">Pasafspraak maken</a>
+                        @Html.ActionLink("Pasafspraak maken", "Create", "Appointments", new { id = Model.ProductId }, new { @class = "btn" })
                     </div>
                 </div>
             </div>
