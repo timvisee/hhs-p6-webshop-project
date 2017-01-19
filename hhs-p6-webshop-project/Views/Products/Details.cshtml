@@ -24,7 +24,7 @@
                     @Html.ActionLink("Nog een kleur toevoegen", "Create", "ColorOptions", new { id = Model.ProductId }, new { @class = "btn" })
                 </div>
                 <div class="product-button">
-                    <a asp-action="Edit" asp-route-id="@Model.ProductId" class="btn">Edit</a>
+                    <a asp-action="Edit" asp-route-id="@Model.ProductId" class="btn">Bewerk</a>
                 </div>
                 <div class="product-button">
                     @Html.ActionLink("Nog een foto toevoegen", "Create", "ProductImages", new { id = Model.ProductId }, new { @class = "btn" })

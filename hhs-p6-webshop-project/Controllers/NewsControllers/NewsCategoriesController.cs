@@ -32,26 +32,29 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers
             {
                 return NotFound();
             }
-
+            
             var nc = getNewsCategory(id);
-
-            var nac = _context.NewsArticleCategory.Where(sc => sc.NewsCategoryID == id);
-            List<NewsArticle> naObjects = new List<NewsArticle>();
-
-
-            foreach (var naId in nac) {
-                naObjects.Add(_context.NewsArticle.FirstOrDefault(n => n.NewsArticleID == naId.NewsArticleID));
-            }
-
+            
             if (nc == null)
             {
                 return NotFound();
             }
 
+            var nac = _context.NewsArticleCategory.Where(sc => sc.NewsCategoryID == id);
+            List<NewsArticle> naObjects = new List<NewsArticle>();
+            
+
+            foreach (var naId in nac) {
+                naObjects.Add(_context.NewsArticle.FirstOrDefault(n => n.NewsArticleID == naId.NewsArticleID));
+            }
+            
             var ncvm = getNewsCategoryVM(nc, new SelectList(_context.NewsArticle, "NewsArticleID", "Name"));
+            
+            ncvm.NewsCategories = new List<NewsCategory>(_context.NewsCategory);
+
 
             ncvm.NewsArticles = naObjects;
-
+            
             return View(ncvm);
         }
 

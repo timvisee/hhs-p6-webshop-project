@@ -104,7 +104,8 @@ namespace hhs_p6_webshop_project.Data
             return co;
         }
 
-        private static void GenerateNews(ApplicationDbContext context) {
+        private static void GenerateNews(ApplicationDbContext context)
+        {
             #region Template newsarticle
             NewsArticle template = new NewsArticle()
             {
@@ -120,15 +121,15 @@ namespace hhs_p6_webshop_project.Data
                 Name = "Collectie",
                 ImagePath = "/images/uploads/default/ladybird-1.jpg",
                 Excerpt = "De super sexy collectie van Martina Liana is gearriveerd",
-                Content = "De super sexy collectie van Martina Liana is gearriveerd",
+                Content = "<p>Wat is Lorem Ipsum?\r\nLorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren \'60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.</p>",
             };
 
             NewsArticle article2 = new NewsArticle()
             {
-                Name = "Lovely real brides",
+                Name = "Lovely brides",
                 ImagePath = "/images/appointment-thankyou.jpg",
                 Excerpt = "Rachelle & Matthew",
-                Content = "",
+                Content = "<p>Wat is Lorem Ipsum?\r\nLorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren \'60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.</p>",
             };
 
             NewsArticle article3 = new NewsArticle()
@@ -136,7 +137,7 @@ namespace hhs_p6_webshop_project.Data
                 Name = "Nieuws",
                 ImagePath = "/images/home-banner-main.jpg",
                 Excerpt = "Het nieuwe magazine is uit! Vraag hem gratis aan.",
-                Content = "",
+                Content = "<p>Wat is Lorem Ipsum?\r\nLorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren \'60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.</p>",
             };
 
             NewsArticle article4 = new NewsArticle()
@@ -144,7 +145,23 @@ namespace hhs_p6_webshop_project.Data
                 Name = "Artikel",
                 ImagePath = "/images/home-banner-footer.jpg",
                 Excerpt = "Van pinterest droom naar werkelijkheid",
-                Content = "",
+                Content = "<p>Wat is Lorem Ipsum?\r\nLorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren \'60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.</p><p>Wat is Lorem Ipsum?\r\nLorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren \'60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.</p>",
+            };
+
+            NewsArticle article5 = new NewsArticle()
+            {
+                Name = "Een nieuwe dressfinder",
+                ImagePath = "/images/dressfinder-banner.jpg",
+                Excerpt = "Bekijk nu onze nieuwe dressfinder!",
+                Content = "<p>Wat is Lorem Ipsum?\r\nLorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren \'60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.</p><p>Wat is Lorem Ipsum?\r\nLorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren \'60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.</p>",
+            };
+
+            NewsArticle article6 = new NewsArticle()
+            {
+                Name = "Bem de CSS Koning",
+                ImagePath = "/images/appointment/appointment-banner.png",
+                Excerpt = "Donderdag 19 januari 2017 is Bem verkozen tot CSS koning",
+                Content = "<p>Wat is Lorem Ipsum?\r\nLorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren \'60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.</p><p>Wat is Lorem Ipsum?\r\nLorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren \'60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.</p>",
             };
 
             NewsCategory cat1 = new NewsCategory()
@@ -162,14 +179,72 @@ namespace hhs_p6_webshop_project.Data
                 Name = "Nieuws"
             };
 
+            NewsCategory cat4 = new NewsCategory()
+            {
+                Name = "Lovely real brides"
+            };
+
+            NewsArticleCategory nac1 = new NewsArticleCategory()
+            {
+                NewsCategory = cat1,
+                NewsArticle = article1
+            };
+
+            NewsArticleCategory nac2 = new NewsArticleCategory()
+            {
+                NewsCategory = cat2,
+                NewsArticle = article1
+            };
+
+            NewsArticleCategory nac3 = new NewsArticleCategory()
+            {
+                NewsCategory = cat1,
+                NewsArticle = article2
+            };
+
+            NewsArticleCategory nac4 = new NewsArticleCategory()
+            {
+                NewsCategory = cat1,
+                NewsArticle = article3
+            };
+
+            NewsArticleCategory nac5 = new NewsArticleCategory()
+            {
+                NewsCategory = cat1,
+                NewsArticle = article4
+            };
+
+            NewsArticleCategory nac6 = new NewsArticleCategory()
+            {
+                NewsCategory = cat1,
+                NewsArticle = article5
+            };
+
+            NewsArticleCategory nac7 = new NewsArticleCategory()
+            {
+                NewsCategory = cat1,
+                NewsArticle = article6
+            };
+
             context.NewsArticle.Add(article1);
             context.NewsArticle.Add(article2);
             context.NewsArticle.Add(article3);
             context.NewsArticle.Add(article4);
+            context.NewsArticle.Add(article5);
+            context.NewsArticle.Add(article6);
 
             context.NewsCategory.Add(cat1);
             context.NewsCategory.Add(cat2);
             context.NewsCategory.Add(cat3);
+            context.NewsCategory.Add(cat4);
+
+            context.NewsArticleCategory.Add(nac1);
+            context.NewsArticleCategory.Add(nac2);
+            context.NewsArticleCategory.Add(nac3);
+            context.NewsArticleCategory.Add(nac4);
+            context.NewsArticleCategory.Add(nac5);
+            context.NewsArticleCategory.Add(nac6);
+            context.NewsArticleCategory.Add(nac7);
 
             context.SaveChanges();
         }
@@ -204,7 +279,7 @@ namespace hhs_p6_webshop_project.Data
             ladybird.ColorOptions.Add(
                 GenerateColor(
                     "Blauw",
-                    new string[] { "images/uploads/default/ladybird-blauw-1.jpg"}));
+                    new string[] { "images/uploads/default/ladybird-blauw-1.jpg" }));
 
             ladybird.ColorOptions.Add(
                 GenerateColor(

@@ -45,8 +45,8 @@
             @if (User.Identity.IsAuthenticated)
             {
                 <div class="product-edit-buttons">
-                    <a class="btn" asp-action="Edit" asp-route-id="@item.ProductId">Edit</a>
-                    <a class="btn" asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
+                    <a class="btn" asp-action="Edit" asp-route-id="@item.ProductId">Bewerk</a>
+                    <a class="btn" asp-action="Delete" asp-route-id="@item.ProductId">Verwijder</a>
                 </div>
             }
         </a>
