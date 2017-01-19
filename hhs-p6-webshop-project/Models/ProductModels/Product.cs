@@ -34,6 +34,12 @@ namespace hhs_p6_webshop_project.Models.ProductModels
             //ColorOptions.Sort((x, y) => x.CompareTo(colors) + y.CompareTo(colors));
         }
 
+        public void Sort(string color) {
+            Sort(new List<String> {
+                color
+            });
+        }
+
         public bool IsMatch(List<FilterBase> filters) {
             bool isMatch = true;
 
