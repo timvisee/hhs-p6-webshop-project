@@ -826,7 +826,7 @@ $(document).ready(function () {
             };
 
             // Define the API endpoint URL
-            var endpointUrl = "/api/dressfinder/product/filter";
+            var endpointUrl = "/api/dressfinder/product/filter/partial";
 
             // Find the selected checkboxes, and build the filter object
             $("#filter-color").each(function() {
