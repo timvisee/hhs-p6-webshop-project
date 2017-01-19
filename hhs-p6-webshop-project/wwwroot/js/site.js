@@ -94,19 +94,32 @@ $(document).ready(function () {
         return result;
     }
 
-    // Create the price filter range slider
-    $("#filter-price-slider").slider({
-        range: true,
-        min: 0,
-        max: 500,
-        values: [ 75, 300 ],
-        slide: function(event, ui) {
-            updateSelectedPriceRange(ui.values[0], ui.values[1]);
-        }
-    });
+    // Get the filter price slider element
+    var filterPriceSliderElement = $("#filter-price-slider");
 
-    // Render the label when loading the page
-    updateSelectedPriceRange($("#filter-price-slider").slider("values", 0), $("#filter-price-slider").slider("values", 1));
+    // Configure the slider if any is found on the page
+    if(filterPriceSliderElement.length > 0) {
+        // Get the minimum and maximum of the range
+        var rangeMin = parseInt(filterPriceSliderElement.find("input[type='hidden'][name='range-min']").val());
+        var rangeMax = parseInt(filterPriceSliderElement.find("input[type='hidden'][name='range-max']").val());
+
+        // Create the price filter range slider
+        filterPriceSliderElement.slider({
+            range: true,
+            min: rangeMin,
+            max: rangeMax,
+            values: [
+                rangeMin,
+                rangeMax
+            ],
+            slide: function(event, ui) {
+                updateSelectedPriceRange(ui.values[0], ui.values[1]);
+            }
+        });
+
+        // Render the label when loading the page
+        updateSelectedPriceRange($("#filter-price-slider").slider("values", 0), $("#filter-price-slider").slider("values", 1));
+    }
 
     /**
      * Toggle the search box when the search button is clicked
