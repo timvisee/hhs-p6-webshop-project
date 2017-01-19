@@ -77,6 +77,23 @@ $(document).ready(function () {
         $( "#filter-price-amount" ).val( "€" + min + " tot €" + max);
     }
 
+    /**
+     * Get the selected price range values.
+     *
+     * @return {int[]} Array with the lowest and highest values in the range, in order.
+     */
+    function getPriceRangeSliderValues() {
+        // Create an array to return
+        var result = [];
+
+        // Put the values in the result array
+        for(var i = 0; i < 2; i++)
+            result.push($("#filter-price-slider").slider("values", i));
+
+        // Return the result array
+        return result;
+    }
+
     // Create the price filter range slider
     $("#filter-price-slider").slider({
         range: true,
@@ -791,6 +808,9 @@ $(document).ready(function () {
 
     // Load the filter logic when a product overview is available
     if(productOverviewElement.length > 0) {
+        // Get the sort selection box
+        var sortElement = $("#filters-sort");
+
         /**
          * Fetch a list of dressesk.
          * Filters are applied as specified in the sidebar.
@@ -801,11 +821,15 @@ $(document).ready(function () {
 
             // Create a filter object
             var filterObject = {
-                values: {}
+                Prijs: getPriceRangeSliderValues(),
+                Kleur: [[]]
             };
 
+            // Define the API endpoint URL
+            var endpointUrl = "/api/dressfinder/product/filter";
+
             // Find the selected checkboxes, and build the filter object
-            $(".filter").each(function() {
+            $("#filter-color").each(function() {
                 // Get the filter element
                 var filterElement = $(this);
 
@@ -816,17 +840,14 @@ $(document).ready(function () {
                 if(checkedBoxes.length <= 0)
                     return;
 
-                // Get the product ID for this filter section as key
-                var key = String(filterElement.find("input.field-property-id").val());
-
-                // Create an entry in the filter object
-                filterObject.values[key] = [];
-
                 // Put the checkbox IDs in the array
                 checkedBoxes.each(function() {
-                    filterObject.values[key].push($(this).val());
+                    filterObject.Kleur[0].push($(this).val());
                 });
             });
+
+            // Set the sorting parameter on the API endpoint URL
+            endpointUrl += "/sort/" + sortElement.find("option:selected").val();
 
             // Filter the dresses and fetch the new list through AJAX
             $.ajax({
@@ -868,8 +889,10 @@ $(document).ready(function () {
             });
         }
 
-        // Call the product fetch function when a filter is clicked
-        $(".filter").find("input[type=checkbox]").click(fetchProductsFiltered);
+        // Call the product fetch function when a filter is clicked, or when the sorting is changed
+        $("#filter-color").find("input[type=checkbox]").click(fetchProductsFiltered);
+        $("#filter-price-slider").on("slidestop", fetchProductsFiltered);
+        sortElement.change(fetchProductsFiltered);
 
         // Filter once on page load
         fetchProductsFiltered();
