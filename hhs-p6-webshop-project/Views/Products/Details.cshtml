@@ -91,7 +91,12 @@
                     </p>
                     <div class="product-make-appointment-container">
                         <p>Kom deze jurk passen!</p>
-                        @Html.ActionLink("Pasafspraak maken", "Create", "Appointments", new { id = Model.ProductId }, new { @class = "btn" })
+                        @Html.ActionLink("Pasafspraak maken", "Create", "Appointments", new {
+                                id = Model.ProductId
+                        }, new {
+                               @id = "appointment-create-button",
+                               @class = "btn"
+                        })
                     </div>
                 </div>
             </div>

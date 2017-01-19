@@ -36,7 +36,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
         }
 
         // GET: Products/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id, string color)
         {
             if (id == null)
             {
@@ -49,6 +49,8 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
             {
                 return NotFound();
             }
+
+            product.Sort(color);
 
             return View(product);
         }

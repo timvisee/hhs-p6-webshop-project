@@ -21,7 +21,11 @@
                     <!-- Left box - Step 1, Select date and time -->
                     <div class="left-box step-1" id="left_1">
                         <h3>Stap 1, datum en tijd selecteren</h3>
-                        <h3>@ViewBag.selectedDress</h3>
+                        @if(ViewBag.dressColor != null) {
+                            <h3>@ViewBag.selectedDress <span style="color: gray;">(@ViewBag.dressColor)</span></h3>
+                        } else {
+                            <h3>@ViewBag.selectedDress</h3>
+                        }
                         <p>
                             Selecteer eerst een datum en vervolgens een tijdstip dat je wilt komen passen!
                         </p>
@@ -105,7 +109,8 @@
                         <p>
                             Controleer alle gegevens voor je pasafspraak bij Honeymoon shop aan de Korte Hoogstraat 4, te Rotterdam.
                         </p>
-                        <inut type="hidden" value="@ViewBag.selectedDress" name="dress"/>
+                        <input type="hidden" value="@ViewBag.selectedDress" name="dressName"/>
+                        <input type="hidden" name="dressColor" value="@ViewBag.dressColor" />
                         <input type="submit" value="Afspraak bevestigen" class="btn btn-default" />
                     </div>
                 </div>
