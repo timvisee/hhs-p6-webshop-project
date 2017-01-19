@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models.AppointmentModels;
 using Microsoft.Extensions.Options;
+using System;
 
 namespace hhs_p6_webshop_project.Controllers {
     public class AppointmentsController : Controller {
@@ -47,7 +48,11 @@ namespace hhs_p6_webshop_project.Controllers {
         }
 
         // GET: Appointments/Create
-        public IActionResult Create() {
+        public IActionResult Create(int? id) {
+            if(id != null)
+            {
+                ViewBag.selectedDress = _context.Products.Where(p => p.ProductId == id).Select(p => p.Name).ToList().First();
+            }
             return View();
         }
 
@@ -56,12 +61,12 @@ namespace hhs_p6_webshop_project.Controllers {
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Confirmation,DateMarried,AppointmentDateTime,Mail,Name,Phone")] Appointment appointment) {
+        public async Task<IActionResult> Create([Bind("ID,Confirmation,DateMarried,AppointmentDateTime,Mail,Name,Phone")] Appointment appointment, string dress) {
             if (ModelState.IsValid) {
                 if (Beun.Mail.MailClient.ApiKey == null)
                     Beun.Mail.MailClient.ApiKey = _secretConfig.Value.SparkpostApiKey;
 
-                Beun.Mail.MailClient.SendAppointmentEmail(appointment.Name, appointment.Mail, appointment.AppointmentDateTime, "het Armani Pak");
+                Beun.Mail.MailClient.SendAppointmentEmail(appointment.Name, appointment.Mail, appointment.AppointmentDateTime, dress);
 
                 _context.Add(appointment);
 
