@@ -822,7 +822,7 @@ $(document).ready(function () {
             // Create a filter object
             var filterObject = {
                 Prijs: getPriceRangeSliderValues(),
-                Kleur: [[]]
+                Kleur: []
             };
 
             // Define the API endpoint URL
@@ -842,7 +842,7 @@ $(document).ready(function () {
 
                 // Put the checkbox IDs in the array
                 checkedBoxes.each(function() {
-                    filterObject.Kleur[0].push($(this).val());
+                    filterObject.Kleur.push($(this).val());
                 });
             });
 
