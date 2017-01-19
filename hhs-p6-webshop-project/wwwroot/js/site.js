@@ -77,6 +77,23 @@ $(document).ready(function () {
         $( "#filter-price-amount" ).val( "€" + min + " tot €" + max);
     }
 
+    /**
+     * Get the selected price range values.
+     *
+     * @return {int[]} Array with the lowest and highest values in the range, in order.
+     */
+    function getPriceRangeSliderValues() {
+        // Create an array to return
+        var result = [];
+
+        // Put the values in the result array
+        for(var i = 0; i < 2; i++)
+            result.push($("#filter-price-slider").slider("values", i));
+
+        // Return the result array
+        return result;
+    }
+
     // Create the price filter range slider
     $("#filter-price-slider").slider({
         range: true,
@@ -804,7 +821,7 @@ $(document).ready(function () {
 
             // Create a filter object
             var filterObject = {
-                Prijs: [0, 99999],
+                Prijs: getPriceRangeSliderValues(),
                 Kleur: [[]]
             };
 
