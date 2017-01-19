@@ -804,11 +804,15 @@ $(document).ready(function () {
 
             // Create a filter object
             var filterObject = {
-                values: {}
+                Prijs: [0, 99999],
+                Kleur: [[]]
             };
 
+            // Define the API endpoint URL
+            var endpointUrl = "/api/dressfinder/product/filter";
+
             // Find the selected checkboxes, and build the filter object
-            $(".filter").each(function() {
+            $("#filter-color").each(function() {
                 // Get the filter element
                 var filterElement = $(this);
 
@@ -819,20 +823,14 @@ $(document).ready(function () {
                 if(checkedBoxes.length <= 0)
                     return;
 
-                // Get the product ID for this filter section as key
-                var key = String(filterElement.find("input.field-property-id").val());
-
-                // Create an entry in the filter object
-                filterObject.values[key] = [];
-
                 // Put the checkbox IDs in the array
                 checkedBoxes.each(function() {
-                    filterObject.values[key].push($(this).val());
+                    filterObject.Kleur[0].push($(this).val());
                 });
             });
 
-            // Get the sorting mode and set itar in the filter object
-            filterObject.sort = sortElement.find("option:selected").val();
+            // Set the sorting parameter on the API endpoint URL
+            endpointUrl += "/sort/" + sortElement.find("option:selected").val();
 
             // Filter the dresses and fetch the new list through AJAX
             $.ajax({
@@ -875,7 +873,7 @@ $(document).ready(function () {
         }
 
         // Call the product fetch function when a filter is clicked, or when the sorting is changed
-        $(".filter").find("input[type=checkbox]").click(fetchProductsFiltered);
+        $("#filter-color").find("input[type=checkbox]").click(fetchProductsFiltered);
         sortElement.change(fetchProductsFiltered);
 
         // Filter once on page load
