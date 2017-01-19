@@ -4,6 +4,13 @@
     ViewData["Title"] = "Nieuw Artikel";
 }
 
+<script src="~/lib/tinymce-dist/tinymce.min.js"></script>
+<script type="text/javascript">
+    tinymce.init({
+        selector: '.tinymce'
+    });
+</script>
+
 <h2>Maak een nieuw artikel aan</h2>
 
 <form asp-action="Create">
@@ -34,7 +41,7 @@
         <div class="form-group">
             <label asp-for="@Model.NewsArticle.Content" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <textarea asp-for="@Model.NewsArticle.Content" class="form-control"></textarea>
+                <textarea asp-for="@Model.NewsArticle.Content" class="form-control tinymce"></textarea>
                 <span asp-validation-for="@Model.NewsArticle.Content" class="text-danger" />
             </div>
         </div>
