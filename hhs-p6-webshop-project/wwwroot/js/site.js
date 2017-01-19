@@ -891,6 +891,7 @@ $(document).ready(function () {
 
         // Call the product fetch function when a filter is clicked, or when the sorting is changed
         $("#filter-color").find("input[type=checkbox]").click(fetchProductsFiltered);
+        $("#filter-price-slider").on("slidestop", fetchProductsFiltered);
         sortElement.change(fetchProductsFiltered);
 
         // Filter once on page load
