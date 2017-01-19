@@ -1390,7 +1390,15 @@ footer ul {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    transition: .2s;
 }
+
+    .news-article:hover {
+        transform: scale(1.008);
+        -webkit-box-shadow: 0px 0px 25px 0px rgba(200,200,200, 0.6);
+        -moz-box-shadow: 0px 0px 25px 0px rgba(200,200,200, 0.6);
+        box-shadow: 0px 0px 25px 0px rgba(200,200,200, 0.6);
+    }
 
 .news-article-top {
     padding: 10px 30px;
