@@ -1,15 +1,18 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using hhs_p6_webshop_project.Models.ProductModels;
 using hhs_p6_webshop_project.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace hhs_p6_webshop_project.Api
 {
     [Route("api/dressfinder")]
-    public class DressFinderController : Controller
+    public class ProductsController : Controller
     {
         public IProductService ProductService { get; }
 
-        public DressFinderController(IProductService productService) {
+        public ProductsController(IProductService productService) {
             ProductService = productService;
         }
 
@@ -24,21 +27,38 @@ namespace hhs_p6_webshop_project.Api
         }
 
         [HttpPost("product/filter/partial")]
-        public JsonResult FilterPartial([FromBody] Dictionary<string, HashSet<object>> filters) {
-            // TODO: Used in previous implementation, should be upgraded to new models.
-//            ProductViewModel pvm = new ProductViewModel();
-//            if (request.Values.Count == 0)
-//                pvm.Products = ProductService.GetAllProducts();
-//            else
-//                pvm.Products = ProductService.Filter(ProductService.ParseFilterRequest(request),
-//                    ProductService.GetAllProducts());
-//
-//            pvm.Filters = ProductService.GetAllProductFilters();
-//
-//            return PartialView("~/Views/Products/ProductOverview.cshtml", pvm);
+        public PartialViewResult FilterPartial([FromBody] Dictionary<string, HashSet<object>> filters) {
+            
+            ProductView view = new ProductView();
+            view.Products = ProductService.Filter(ProductService.ParseFilters(filters));
 
-            // TODO: Temporary return here
-            return Json(ProductService.Filter(ProductService.ParseFilters(filters)));
+            return PartialView("~/Views/Products/PRoductOverview.cshtml", view);
+
+        }
+
+        [HttpPost("product/filter/partial/sort/{id}")]
+        public PartialViewResult FilterPartialSort([FromBody] Dictionary<string, HashSet<object>> filters, int id) {
+            var p = ProductService.Filter(ProductService.ParseFilters(filters));
+
+            switch (id) {
+                case 0: //prijs laag->hoog
+                    p = p.OrderBy(o => o.Price).ToList();
+                    break; 
+                case 1: //prijs hoog->laag
+                    p = p.OrderByDescending(o => o.Price).ToList();
+                    break;
+                case 2: //naam oplopend
+                    p = p.OrderBy(o => o.Name).ToList();
+                    break;
+                case 3: //naam aflopend
+                    p = p.OrderByDescending(o => o.Name).ToList();
+                    break;
+            }
+            
+            ProductView view = new ProductView();
+            view.Products = p;
+
+            return PartialView("~/Views/Products/PRoductOverview.cshtml", view);
         }
 
         [HttpPost("product/filter")]
