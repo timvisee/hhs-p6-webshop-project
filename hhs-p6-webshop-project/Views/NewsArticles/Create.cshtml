@@ -13,7 +13,7 @@
 
 <h2>Maak een nieuw artikel aan</h2>
 
-<form asp-action="Create">
+<form asp-action="Create"  enctype="multipart/form-data">
     <div class="form-horizontal">
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -27,7 +27,8 @@
         <div class="form-group">
             <label asp-for="@Model.NewsArticle.ImagePath" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="@Model.NewsArticle.ImagePath" class="form-control" />
+                <input type="file" asp-for="@Model.NewsArticle.ImagePath" class="inputfile" accept="image/gif, image/jpeg, image/png" name="image" id="image" />
+                <label for="image" class="upload-image">Kies Afbeelding</label>
                 <span asp-validation-for="@Model.NewsArticle.ImagePath" class="text-danger" />
             </div>
         </div>
