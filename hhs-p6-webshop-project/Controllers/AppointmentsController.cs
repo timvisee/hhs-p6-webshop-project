@@ -48,11 +48,16 @@ namespace hhs_p6_webshop_project.Controllers {
         }
 
         // GET: Appointments/Create
-        public IActionResult Create(int? id) {
+        public IActionResult Create(int? id, [FromQuery] string color) {
             if(id != null)
             {
                 ViewBag.selectedDress = _context.Products.Where(p => p.ProductId == id).Select(p => p.Name).ToList().First();
             }
+
+            // Set the color parameter if any is given
+            if(color != null)
+                ViewBag.dressColor = color;
+
             return View();
         }
 

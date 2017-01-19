@@ -21,7 +21,11 @@
                     <!-- Left box - Step 1, Select date and time -->
                     <div class="left-box step-1" id="left_1">
                         <h3>Stap 1, datum en tijd selecteren</h3>
-                        <h3>@ViewBag.selectedDress</h3>
+                        @if(ViewBag.dressColor != null) {
+                            <h3>@ViewBag.selectedDress <span style="color: gray;">(@ViewBag.dressColor)</span></h3>
+                        } else {
+                            <h3>@ViewBag.selectedDress</h3>
+                        }
                         <p>
                             Selecteer eerst een datum en vervolgens een tijdstip dat je wilt komen passen!
                         </p>
@@ -215,6 +219,9 @@
             </div>
         </div>
     </div>
+
+    <input type="hidden" name="dress-name" value="@ViewBag.selectedDress" />
+    <input type="hidden" name="dress-color" value="@ViewBag.dressColor" />
 </form>
 
 <div class="row">
