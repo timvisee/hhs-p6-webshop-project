@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models.NewsModels;
+using Microsoft.AspNetCore.Http;
 
 namespace hhs_p6_webshop_project.Controllers.NewsControllers
 {
@@ -56,10 +58,21 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(NewsArticleVM newNewsArticle)
+        public IActionResult Create(NewsArticleVM newNewsArticle, IFormFile image)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid || image != null)
             {
+                string filename = ChangePathName(newNewsArticle.NewsArticle.ImagePath);
+                FileInfo fi = new FileInfo(image.FileName);
+                string extension = fi.Extension;
+                string path = "/images/uploads/" + filename + extension;
+                newNewsArticle.NewsArticle.ImagePath = path;
+                using (FileStream fs = System.IO.File.Create("wwwroot/" + path))
+                {
+                    image.CopyTo(fs);
+                    fs.Flush();
+                }
+
                 _context.Add(newNewsArticle.NewsArticle);
                 _context.SaveChanges();
 
@@ -102,7 +115,7 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, NewsArticleVM updatedNewsArticle)
+        public IActionResult Edit(int id, NewsArticleVM updatedNewsArticle, IFormFile image)
         {
             if (id != updatedNewsArticle.NewsArticle.NewsArticleID)
             {
@@ -122,6 +135,20 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers
                     foreach (int newsCategoryID in updatedNewsArticle.SelectedNewsCategories)
                     {
                         _context.NewsArticleCategory.Add(new NewsArticleCategory() { NewsArticleID = updatedNewsArticle.NewsArticle.NewsArticleID, NewsCategoryID = newsCategoryID });
+                    }
+                }
+
+                if (image != null)
+                {
+                    string filename = ChangePathName(updatedNewsArticle.NewsArticle.ImagePath);
+                    FileInfo fi = new FileInfo(image.FileName);
+                    string extension = fi.Extension;
+                    string path = "/images/uploads/" + filename + extension;
+                    updatedNewsArticle.NewsArticle.ImagePath = path;
+                    using (FileStream fs = System.IO.File.Create("wwwroot/" + path))
+                    {
+                        image.CopyTo(fs);
+                        fs.Flush();
                     }
                 }
 
@@ -200,6 +227,17 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers
                 .Include(x => x.NewsArticleCategories)
                 .ThenInclude(y => y.NewsCategory)
                 .SingleOrDefault(m => m.NewsArticleID == id);
+        }
+
+        public string ChangePathName(string input)
+        {
+            Guid g = Guid.NewGuid();
+            string GuidString = Convert.ToBase64String(g.ToByteArray());
+            GuidString = GuidString.Replace("=", "");
+            GuidString = GuidString.Replace("+", "");
+            GuidString = GuidString.Replace("/", "");
+
+            return GuidString;
         }
     }
 
