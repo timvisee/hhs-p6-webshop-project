@@ -82,13 +82,17 @@ $(document).ready(function () {
      *
      * @return {int[]} Array with the lowest and highest values in the range, in order.
      */
-    function getPriceRangeSliderValues() {
+    function getPriceRangeSliderValues(asDouble) {
+        // Parse the parameter
+        if(asDouble == undefined)
+            asDouble = false;
+
         // Create an array to return
         var result = [];
 
         // Put the values in the result array
         for(var i = 0; i < 2; i++)
-            result.push($("#filter-price-slider").slider("values", i));
+            result.push($("#filter-price-slider").slider("values", i).toFixed(asDouble ? 1 : 0));
 
         // Return the result array
         return result;
@@ -821,7 +825,7 @@ $(document).ready(function () {
 
             // Create a filter object
             var filterObject = {
-                Prijs: getPriceRangeSliderValues(),
+                Prijs: getPriceRangeSliderValues(true),
                 Kleur: []
             };
 
