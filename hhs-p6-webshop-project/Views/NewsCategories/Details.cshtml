@@ -3,7 +3,7 @@
 @model hhs_p6_webshop_project.Models.NewsModels.NewsCategoryVM
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = Model.NewsCategory.Name;
     ViewData["PinkBackground"] = true;
 
     var random = new Random();
@@ -32,6 +32,6 @@
 </div>
 
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.NewsCategory.NewsCategoryID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.NewsCategory.NewsCategoryID">Bewerk</a> |
+    <a asp-action="Index">Terug naar overzicht</a>
 </div>

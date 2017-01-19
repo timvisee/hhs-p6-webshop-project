@@ -1,13 +1,13 @@
 @model IEnumerable<hhs_p6_webshop_project.Models.NewsModels.NewsCategoryVM>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Blog - Categorieen";
 }
 
 <h2>Index</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Maak nieuwe aan</a>
 </p>
 <table class="table">
     <thead>
@@ -26,9 +26,9 @@
                     @Html.DisplayFor(modelItem => item.NewsCategory.Name)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.NewsCategory.NewsCategoryID">Edit</a> |
+                    <a asp-action="Edit" asp-route-id="@item.NewsCategory.NewsCategoryID">Bewerk</a> |
                     <a asp-action="Details" asp-route-id="@item.NewsCategory.NewsCategoryID">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.NewsCategory.NewsCategoryID">Delete</a>
+                    <a asp-action="Delete" asp-route-id="@item.NewsCategory.NewsCategoryID">Verwijder</a>
                 </td>
             </tr>
         }
