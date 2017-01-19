@@ -190,39 +190,70 @@ namespace hhs_p6_webshop_project.Data
                 NewsArticle = article1
             };
 
-            NewsArticleCategory nac2 = new NewsArticleCategory()
-            {
-                NewsCategory = cat2,
-                NewsArticle = article1
-            };
 
-            NewsArticleCategory nac3 = new NewsArticleCategory()
+            NewsArticleCategory nac2 = new NewsArticleCategory()
             {
                 NewsCategory = cat1,
                 NewsArticle = article2
             };
 
-            NewsArticleCategory nac4 = new NewsArticleCategory()
+            NewsArticleCategory nac3 = new NewsArticleCategory()
             {
                 NewsCategory = cat1,
                 NewsArticle = article3
             };
 
-            NewsArticleCategory nac5 = new NewsArticleCategory()
+            NewsArticleCategory nac4 = new NewsArticleCategory()
             {
                 NewsCategory = cat1,
                 NewsArticle = article4
             };
 
-            NewsArticleCategory nac6 = new NewsArticleCategory()
+            NewsArticleCategory nac5 = new NewsArticleCategory()
             {
                 NewsCategory = cat1,
                 NewsArticle = article5
             };
 
-            NewsArticleCategory nac7 = new NewsArticleCategory()
+            NewsArticleCategory nac6 = new NewsArticleCategory()
             {
                 NewsCategory = cat1,
+                NewsArticle = article6
+            };
+
+            NewsArticleCategory nac7 = new NewsArticleCategory()
+            {
+                NewsCategory = cat2,
+                NewsArticle = article6
+            };
+
+            NewsArticleCategory nac8 = new NewsArticleCategory()
+            {
+                NewsCategory = cat3,
+                NewsArticle = article6
+            };
+
+            NewsArticleCategory nac9 = new NewsArticleCategory()
+            {
+                NewsCategory = cat3,
+                NewsArticle = article2
+            };
+
+            NewsArticleCategory nac10 = new NewsArticleCategory()
+            {
+                NewsCategory = cat3,
+                NewsArticle = article3
+            };
+
+            NewsArticleCategory nac11 = new NewsArticleCategory()
+            {
+                NewsCategory = cat4,
+                NewsArticle = article4
+            };
+
+            NewsArticleCategory nac12 = new NewsArticleCategory()
+            {
+                NewsCategory = cat4,
                 NewsArticle = article6
             };
 
@@ -245,6 +276,11 @@ namespace hhs_p6_webshop_project.Data
             context.NewsArticleCategory.Add(nac5);
             context.NewsArticleCategory.Add(nac6);
             context.NewsArticleCategory.Add(nac7);
+            context.NewsArticleCategory.Add(nac8);
+            context.NewsArticleCategory.Add(nac9);
+            context.NewsArticleCategory.Add(nac10);
+            context.NewsArticleCategory.Add(nac11);
+            context.NewsArticleCategory.Add(nac12);
 
             context.SaveChanges();
         }
@@ -312,9 +348,7 @@ namespace hhs_p6_webshop_project.Data
 
             context.Products.Add(pronovias);
             #endregion
-
-
-
+            
             context.SaveChanges();
         }
     }
