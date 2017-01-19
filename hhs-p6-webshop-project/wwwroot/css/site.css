@@ -1719,3 +1719,12 @@ footer ul {
     -ms-background-position: 0px -16px !important;
     background-position: 0px -16px !important;
 }
+
+.product-overview-options .select-label {
+    line-height: 40px;
+    margin-right: 14px !important;
+}
+
+.product-overview-options #filters-sort {
+    width: 220px;
+}
