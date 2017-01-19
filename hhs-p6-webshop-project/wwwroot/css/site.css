@@ -1661,9 +1661,19 @@ footer ul {
         margin-left: 0;
     }
 
+.product-filters h4 {
+    font-weight: bold;
+}
+
 .ui-accordion-header {
+    color: inherit !important;
+    background-color: #F6F6F6 !important;
+    -ms-border-left: none !important;
     border-left: none !important;
+    -ms-border-right: none !important;
     border-right: none !important;
+    -ms-border-color: #D2D1D6 !important;
+    border-color: #D2D1D6 !important;
     -ms-border-radius: 0 !important;
     border-radius: 0 !important;
 }
@@ -1675,13 +1685,13 @@ footer ul {
 }
 
 .ui-slider-handle {
-    margin-top: -4px;
+    margin-top: -5px;
     width: 22px !important;
     height: 22px !important;
-    -ms-border-radius: 11px !important;
-    border-radius: 11px !important;
     -ms-border-color: #FAC9C4 !important;
     border-color: #FAC9C4 !important;
+    -ms-border-radius: 11px !important;
+    border-radius: 11px !important;
 }
 
 .ui-slider-horizontal {
@@ -1694,4 +1704,18 @@ footer ul {
     height: 4px !important;
     background-color: #FAC9C4 !important;
     border: none !important;
+}
+
+.ui-accordion-header .ui-accordion-header-icon {
+    top: 3px;
+    right: 3px;
+    float: right;
+    background-image: url("http://code.jquery.com/ui/1.12.1/themes/base/images/ui-icons_555555_256x240.png") !important;
+    -ms-background-position: -64px -16px !important;
+    background-position: -64px -16px !important;
+}
+
+.ui-accordion-header-active .ui-accordion-header-icon {
+    -ms-background-position: 0px -16px !important;
+    background-position: 0px -16px !important;
 }
