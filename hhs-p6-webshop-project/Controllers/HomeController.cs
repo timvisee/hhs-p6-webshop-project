@@ -48,6 +48,7 @@ namespace hhs_p6_webshop_project.Controllers {
                         var from = c.Email.ToString();
                         StringBuilder sb = new StringBuilder();
                         msg.To.Add(new MailboxAddress("Honeymoonshop", "miladin@live.nl"));
+                        msg.To.Add(new MailboxAddress(c.Name, c.Email));
                         msg.From.Add(new MailboxAddress("Contactformulier", from));
 
 

@@ -10,7 +10,7 @@ namespace hhs_p6_webshop_project.Models
         {
         [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "Last Name is required")]
+        [Required(ErrorMessage = "Phone is required")]
         public string Phone { get; set; }
         [Required(ErrorMessage = "Email is required")]
         public string Email { get; set; }
