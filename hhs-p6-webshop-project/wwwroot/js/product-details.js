@@ -61,4 +61,16 @@ $(document).ready(function () {
         // Prevent the default event function
         event.preventDefault();
     });
+
+    // Update the color hash when a color parameter is given
+    if(window.location.search.includes("color=")) {
+        // Make sure no color is set in the hash
+        if (window.location.hash.length <= 1) {
+            // Fetch the selected color
+            var selectedColor = location.search.split('color=')[1];
+
+            // Set the color hash
+            window.location.hash = selectedColor;
+        }
+    }
 });
