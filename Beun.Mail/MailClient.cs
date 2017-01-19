@@ -84,7 +84,8 @@ namespace Beun.Mail
             transmission.SubstitutionData["FNAME"] = name;
             transmission.SubstitutionData["DATE_AND_TIME"] = $"{date:dddd d MMMM} om {date:H:mm}";
             transmission.SubstitutionData["CURRENT_YEAR"] = DateTime.Now.Year;
-            
+            transmission.SubstitutionData["GARMENT"] = garment;
+
 
 
             var recipient = new Recipient
