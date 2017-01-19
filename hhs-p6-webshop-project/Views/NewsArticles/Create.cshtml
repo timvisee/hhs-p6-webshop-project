@@ -1,14 +1,13 @@
 @model hhs_p6_webshop_project.Models.NewsModels.NewsArticleVM
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Nieuw Artikel";
 }
 
-<h2>Create</h2>
+<h2>Maak een nieuw artikel aan</h2>
 
 <form asp-action="Create">
     <div class="form-horizontal">
-        <h4>NewsArticle</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
@@ -28,7 +27,7 @@
         <div class="form-group">
             <label asp-for="@Model.NewsArticle.Excerpt" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <textarea asp-for="@Model.NewsArticle.Excerpt" class="form-control"></textarea>
+                <input asp-for="@Model.NewsArticle.Excerpt" class="form-control" />
                 <span asp-validation-for="@Model.NewsArticle.Excerpt" class="text-danger" />
             </div>
         </div>
@@ -53,14 +52,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Aanmaken" class="btn btn-default" />
             </div>
         </div>
     </div>
 </form>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Terug naar overzicht</a>
 </div>
 
 @section Scripts {

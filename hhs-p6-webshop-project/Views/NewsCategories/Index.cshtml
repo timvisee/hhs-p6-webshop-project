@@ -1,36 +1,31 @@
 @model IEnumerable<hhs_p6_webshop_project.Models.NewsModels.NewsCategoryVM>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Blog - Categorieen";
+    ViewData["PinkBackground"] = true;
 }
 
-<h2>Index</h2>
+@if (User.Identity.IsAuthenticated)
+{
+    <a class="btn" asp-action="Create">Maak nieuwe categorie aan</a>
+    <a class="btn" asp-action="Create" asp-controller="NewsArticles">Maak nieuw artikel aan</a>
+}
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NewsCategory.Name)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
+<div class="text-banner">
+    <h1 class="banner-bg-title-text hm-pink-light-text">Blog</h1>
+    <h2 class="banner-title-text">Blijf op de hoogte over</h2>
+    <h2 class="banner-title-text2">de bruidswereld</h2>
+</div>
+
+<div class="category-buttons">
+    @{
+        foreach (var nc in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NewsCategory.Name)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.NewsCategory.NewsCategoryID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.NewsCategory.NewsCategoryID">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.NewsCategory.NewsCategoryID">Delete</a>
-                </td>
-            </tr>
+            <a class="category-button" asp-action="Details" asp-route-id="@nc.NewsCategory.NewsCategoryID">
+                @nc.NewsCategory.Name
+            </a>
         }
-    </tbody>
-</table>
+    }
+</div>
+
+<h2 class="text-center">Kies hierboven een van de categorie&euml;n</h2>

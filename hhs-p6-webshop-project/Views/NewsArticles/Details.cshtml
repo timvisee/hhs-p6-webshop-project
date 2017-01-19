@@ -2,44 +2,42 @@
 
 @{
     ViewData["Title"] = "Details";
+    ViewData["PinkBackground"] = true;
 }
 
-<div class="row">
-    <h1>@Html.DisplayFor(model => model.NewsArticle.Name)</h1>
-    <hr />
-    <div class="col-md-8 col-sm-12">
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.NewsArticle.Excerpt)
-            </dt>
-            <dd>
-                @*Display raw HTML so you can edit it with the tinymce editor*@
-                @Html.Raw(Model.NewsArticle.Excerpt)
-            </dd>
-        </dl>
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.NewsArticle.Content)
-            </dt>
-            <dd>
-                @*Display raw HTML so you can edit it with the tinymce editor*@
-                @Html.Raw(Model.NewsArticle.Content)
-            </dd>
-        </dl>
-        <div class="form-group">
-            <label asp-for="@Model.SelectedNewsCategories" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <select disabled asp-for="@Model.SelectedNewsCategories" class="form-control" asp-items="@Model.NewsCategoriesList"></select>
-                <span asp-validation-for="@Model.SelectedNewsCategories" class="text-danger" />
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4 col-sm-12">
-        <img src="@Html.DisplayFor(model => model.NewsArticle.ImagePath)" alt="@Html.DisplayFor(model => model.NewsArticle.Name)" />
-    </div>
+@*TODO Beun maar werkt*@
+<a href="#" onclick="window.history.back()">Terug naar overzicht </a> 
 
+<div class="text-banner">
+    <h1 class="banner-bg-title-text hm-pink-light-text">@Model.NewsArticle.Name</h1>
+    <h2 class="banner-title-text">@Model.NewsArticle.Excerpt</h2>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.NewsArticle.NewsArticleID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+<div class="container single-article">
+    <div class="col-xs-12">
+        <img class="single-article-image" src="@Html.DisplayFor(model => model.NewsArticle.ImagePath)" alt="@Html.DisplayFor(model => model.NewsArticle.Name)" />
+    </div>
+    <div class="col-xs-12 col-md-offset-3 col-md-6 single-article-content">
+        <h1>@Model.NewsArticle.Name</h1>
+        <hr />
+        <p>
+            <i>@Model.NewsArticle.Excerpt</i>
+        </p>
+        <hr />
+        @Html.Raw(Model.NewsArticle.Content)
+    </div>
+</div>
+
+@if (User.Identity.IsAuthenticated) {
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.NewsArticle.NewsArticleID">Bewerk</a> |
+        <a asp-action="Index">Terug naar overzicht</a>
+    </div>
+}
+
+
+<div class="row">
+    <div class="col col-full-width">
+        <img class="img-full-width" src="~/images/home-banner-footer.jpg" />
+    </div>
 </div>

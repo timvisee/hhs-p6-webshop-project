@@ -88,10 +88,6 @@ body {
 }
 
 /*--- Custom beun bootstrap ---*/
-.col-md-3-5 {
-    width: 29.166666%;
-}
-
 .col-md-offset-1-5 {
     margin-left: 12.5%;
 }
@@ -251,6 +247,7 @@ input[type="reset"]:active,
     .btn:hover,
     .btn-default:hover,
     button:hover,
+    .category-button:hover,
     .upload-image:hover,
     input[type="button"]:hover,
     input[type="submit"]:hover,
@@ -491,10 +488,10 @@ nav li {
     nav li a {
         text-transform: uppercase;
         color: #000;
-        font-size: 1.2em;
+        font-size: 1.15em;
         display: block;
         font-weight: bold;
-        padding: 0 20px;
+        padding: 0 13px;
         line-height: 40px;
         font-family: nexa-black;
     }
@@ -1354,18 +1351,50 @@ footer ul {
 
 
 /*--- News ---*/
+
+/*--- Category buttons ---*/
+.category-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.category-button {
+    display: block;
+    color: #000;
+    border: 3px solid #333;
+    padding: 0 15px;
+    margin: 0 5px;
+    line-height: 35px;
+    font-family: nexa-bold;
+    font-size: 1.6em;
+}
+
+/*--- Articles overview ---*/
 .news-article-wrap {
     margin: 0 0 50px 3%;
 }
+
+    .news-article-wrap a {
+        color: #333;
+        text-decoration: none;
+    }
 
 .news-article {
     -webkit-box-shadow: 0px 0px 20px 0px rgba(200,200,200, 0.6);
     -moz-box-shadow: 0px 0px 20px 0px rgba(200,200,200, 0.6);
     box-shadow: 0px 0px 20px 0px rgba(200,200,200, 0.6);
+    height: 470px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .news-article-top {
     padding: 10px 30px;
+    width: 100%;
 }
 
 .news-article h2 {
@@ -1378,6 +1407,7 @@ footer ul {
 
     .news-article h2 img {
         margin: -9px 0 0 10px;
+        text-align: left;
     }
 
 .news-article hr {
@@ -1392,10 +1422,26 @@ footer ul {
     font-family: nexa-light;
 }
 
-.news-article img {
+.news-article .img-box {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    align-self: flex-end;
+}
+
+/*--- Single Article ---*/
+.single-article-image {
+    display: block;
+    margin: 0 auto;
+    max-height: 600px;
     max-width: 100%;
 }
 
+.single-article-content {
+    margin-top: 30px;
+    font-size: .9em;
+    font-family: nexa-light;
+}
 
 @media (max-width: 991px) {
 
@@ -1507,6 +1553,10 @@ footer ul {
     /*Make sure the nav is always displaying on deskop, even after toggling on a small screen*/
     #header_nav {
         display: flex !important;
+    }
+
+    .col-md-3-5 {
+        width: 29.166666%;
     }
 }
 

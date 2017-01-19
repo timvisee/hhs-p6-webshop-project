@@ -37,7 +37,7 @@
         <div class="form-group">
             <label asp-for="@Model.NewsArticle.Excerpt" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <textarea asp-for="@Model.NewsArticle.Excerpt" class="form-control tinymce"></textarea>
+                <input asp-for="@Model.NewsArticle.Excerpt" class="form-control" />
                 <span asp-validation-for="@Model.NewsArticle.Excerpt" class="text-danger" />
             </div>
         </div>
@@ -64,7 +64,7 @@
 </form>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Terug naar overzicht</a>
 </div>
 
 @section Scripts {

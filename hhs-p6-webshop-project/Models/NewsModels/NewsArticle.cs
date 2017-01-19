@@ -36,10 +36,10 @@ namespace hhs_p6_webshop_project.Models.NewsModels
     {
         public NewsArticle NewsArticle { get; set; }
 
-        [Display(Name = "Nieuwsartikelen")]
+        [Display(Name = "Categorieen")]
         public IEnumerable<SelectListItem> NewsCategoriesList { get; set; }
 
-        [Display(Name = "Nieuwsartikelen")]
+        [Display(Name = "Categorieen")]
         public IEnumerable<int> SelectedNewsCategories { get; set; }
     }
 }

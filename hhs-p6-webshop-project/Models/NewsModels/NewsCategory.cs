@@ -27,12 +27,13 @@ namespace hhs_p6_webshop_project.Models.NewsModels
     {
         public NewsCategory NewsCategory { get; set; }
 
+        public List<NewsCategory> NewsCategories { get; set; }
         public List<NewsArticle> NewsArticles { get; set; }
 
-        [Display(Name = "Nieuwsartikelen")]
+        [Display(Name = "Artikelen")]
         public IEnumerable<SelectListItem> NewsArticleList { get; set; }
 
-        [Display(Name = "Nieuwsartikelen")]
+        [Display(Name = "Artikelen")]
         public IEnumerable<int> SelectedNewsArticles { get; set; }
     }
 }
