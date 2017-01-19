@@ -5,6 +5,9 @@
     ViewData["PinkBackground"] = true;
 }
 
+@*TODO Beun maar werkt*@
+<a href="#" onclick="window.history.back()">Terug naar overzicht </a> 
+
 <div class="text-banner">
     <h1 class="banner-bg-title-text hm-pink-light-text">@Model.NewsArticle.Name</h1>
     <h2 class="banner-title-text">@Model.NewsArticle.Excerpt</h2>
@@ -15,6 +18,12 @@
         <img class="single-article-image" src="@Html.DisplayFor(model => model.NewsArticle.ImagePath)" alt="@Html.DisplayFor(model => model.NewsArticle.Name)" />
     </div>
     <div class="col-xs-12 col-md-offset-3 col-md-6 single-article-content">
+        <h1>@Model.NewsArticle.Name</h1>
+        <hr />
+        <p>
+            <i>@Model.NewsArticle.Excerpt</i>
+        </p>
+        <hr />
         @Html.Raw(Model.NewsArticle.Content)
     </div>
 </div>
@@ -25,3 +34,10 @@
         <a asp-action="Index">Terug naar overzicht</a>
     </div>
 }
+
+
+<div class="row">
+    <div class="col col-full-width">
+        <img class="img-full-width" src="~/images/home-banner-footer.jpg" />
+    </div>
+</div>

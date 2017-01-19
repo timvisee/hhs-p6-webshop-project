@@ -41,7 +41,9 @@
                                 <hr style="border-color: @(String.Format("#{0:X6}", random.Next(0x1000000)));" />
                                 <p>@Html.Raw(na.Excerpt)</p>
                             </div>
-                            <img src="@na.ImagePath" />
+                            <div class="img-box">
+                                <img src="@na.ImagePath" />
+                            </div>
                         </div>
                     </a>
                 </div>
