@@ -819,6 +819,9 @@ $(document).ready(function () {
     // Find the product overview
     var productOverviewElement = $(".product-overview");
 
+    // Define a variable to hold a pending AJAX call for filters
+    var ajaxFilterRequest;
+
     // Load the filter logic when a product overview is available
     if(productOverviewElement.length > 0) {
         // Get the sort selection box
@@ -862,8 +865,12 @@ $(document).ready(function () {
             // Set the sorting parameter on the API endpoint URL
             endpointUrl += "/sort/" + sortElement.find("option:selected").val();
 
+            // Abort pending AJAX calls for filtering
+            if(ajaxFilterRequest != undefined)
+                ajaxFilterRequest.abort();
+
             // Filter the dresses and fetch the new list through AJAX
-            $.ajax({
+            ajaxFilterRequest = $.ajax({
                 url: endpointUrl,
                 type: "POST",
                 headers: {
@@ -898,6 +905,9 @@ $(document).ready(function () {
                 complete: function() {
                     // Hide the loading indiator
                     setLoadingIndicator(productOverviewElement, false);
+
+                    // Remove the request as pending
+                    ajaxFilterRequest = undefined;
                 }
             });
         }
