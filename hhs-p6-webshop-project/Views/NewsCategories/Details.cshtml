@@ -9,6 +9,13 @@
     var random = new Random();
 }
 
+@if (User.Identity.IsAuthenticated)
+{
+    <a class="btn" asp-action="Create">Maak nieuwe categorie aan</a>
+    <a class="btn" asp-action="Create" asp-controller="NewsArticles">Maak nieuw artikel aan</a>
+    <a class="btn" asp-action="Index" asp-controller="NewsArticles">Bekijk alle artikelen in lijst</a>
+}
+
 <div class="text-banner">
     <h1 class="banner-bg-title-text hm-pink-light-text">Blog</h1>
     <h2 class="banner-title-text">Blijf op de hoogte over</h2>

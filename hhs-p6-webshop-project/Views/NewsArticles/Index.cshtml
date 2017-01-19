@@ -4,16 +4,22 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+@if (User.Identity.IsAuthenticated)
+{
+    <a class="btn" asp-action="Create">Maak nieuwe categorie aan</a>
+    <a class="btn" asp-action="Create" asp-controller="NewsArticles">Maak nieuw artikel aan</a>
+    <a class="btn" asp-action="Index" asp-controller="NewsArticles">Bekijk alle artikelen in lijst</a>
+}
 
-<p>
-    <a asp-action="Create">Maak nieuwe aan</a>
-</p>
+<h1>Alle artikelen</h1>
 <table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.NewsArticle.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NewsArticle.Excerpt)
             </th>
             <th></th>
         </tr>
@@ -24,6 +30,9 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.NewsArticle.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NewsArticle.Excerpt)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.NewsArticle.NewsArticleID">Bewerk</a> |
