@@ -32,7 +32,7 @@ namespace hhs_p6_webshop_project.Api
             ProductView view = new ProductView();
             view.Products = ProductService.Filter(ProductService.ParseFilters(filters));
 
-            return PartialView("~/Views/Products/PRoductOverview.cshtml", view);
+            return PartialView("~/Views/Products/ProductOverview.cshtml", view);
 
         }
 
@@ -58,7 +58,7 @@ namespace hhs_p6_webshop_project.Api
             ProductView view = new ProductView();
             view.Products = p;
 
-            return PartialView("~/Views/Products/PRoductOverview.cshtml", view);
+            return PartialView("~/Views/Products/ProductOverview.cshtml", view);
         }
 
         [HttpPost("product/filter")]

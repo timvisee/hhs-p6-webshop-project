@@ -20,6 +20,8 @@ namespace hhs_p6_webshop_project.Services
 
         Dictionary<string, HashSet<object>> GetFilters();
 
+        List<FilterBase> GetAllFilters();
+
         List<Product> Filter(List<FilterBase> filters);
 
         List<FilterBase> ParseFilters(Dictionary<string, HashSet<object>> filters);

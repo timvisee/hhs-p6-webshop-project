@@ -32,11 +32,13 @@ namespace hhs_p6_webshop_project.Services
         private List<object>
             ParseFuckingAnoyingJsonArrayOfArraysToJustAFuckingListGodFuckingDamnitIHateThisFuckingBullshit(HashSet<object> objects) {
             List<object> values  = new List<object>();
+            
+            foreach (object value in objects) {
 
-            foreach (JArray value in objects) {
-                for (int i = 0; i < value.Count; i++) {
-                    values.Add(value[i].Value<string>());
-                }
+                if (value is Int64)
+                    values.Add(Convert.ToDouble(value));
+                else
+                    values.Add(value);
             }
             return values;
         }
@@ -58,6 +60,22 @@ namespace hhs_p6_webshop_project.Services
             val["Kleur"].Add(DatabaseContext.ColorOptions.Select(co => co.Color).Distinct());
 
             return val;
+        }
+
+        public List<FilterBase> GetAllFilters() {
+            List<FilterBase> filters = new List<FilterBase>();
+
+            PriceFilter pf = new PriceFilter();
+            pf.Min = DatabaseContext.Products.Min(p => p.Price);
+            pf.Max = DatabaseContext.Products.Max(p => p.Price);
+
+            ColorFilter cf = new ColorFilter();
+
+            cf.Colors.AddRange(DatabaseContext.ColorOptions.Select(co => co.Color).Distinct());
+            filters.Add(pf);
+            filters.Add(cf);
+            
+            return filters;
         }
 
         public List<Product> Filter(List<FilterBase> filters) {
@@ -83,10 +101,12 @@ namespace hhs_p6_webshop_project.Services
                 if (pair.Key == "Kleur") {
                     ColorFilter filt = new ColorFilter();
                     filt.Colors.AddRange(ParseFuckingAnoyingJsonArrayOfArraysToJustAFuckingListGodFuckingDamnitIHateThisFuckingBullshit(pair.Value).Cast<string>());
-                    f.Add(filt);
+
+                    if (filt.Colors.Count > 0)
+                        f.Add(filt);
                 }
 
-                if (pair.Key == "Price") {
+                if (pair.Key == "Prijs") {
                     var vals =
                         ParseFuckingAnoyingJsonArrayOfArraysToJustAFuckingListGodFuckingDamnitIHateThisFuckingBullshit(
                             pair.Value).Cast<double>();
