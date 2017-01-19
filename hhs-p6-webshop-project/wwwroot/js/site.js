@@ -791,6 +791,9 @@ $(document).ready(function () {
 
     // Load the filter logic when a product overview is available
     if(productOverviewElement.length > 0) {
+        // Get the sort selection box
+        var sortElement = $("#filters-sort");
+
         /**
          * Fetch a list of dressesk.
          * Filters are applied as specified in the sidebar.
@@ -827,6 +830,9 @@ $(document).ready(function () {
                     filterObject.values[key].push($(this).val());
                 });
             });
+
+            // Get the sorting mode and set itar in the filter object
+            filterObject.sort = sortElement.find("option:selected").val();
 
             // Filter the dresses and fetch the new list through AJAX
             $.ajax({
@@ -868,8 +874,9 @@ $(document).ready(function () {
             });
         }
 
-        // Call the product fetch function when a filter is clicked
+        // Call the product fetch function when a filter is clicked, or when the sorting is changed
         $(".filter").find("input[type=checkbox]").click(fetchProductsFiltered);
+        sortElement.change(fetchProductsFiltered);
 
         // Filter once on page load
         fetchProductsFiltered();
