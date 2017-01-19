@@ -10,7 +10,6 @@
     <h1 class="banner-bg-title-text hm-pink-light-text">Trouwjurken</h1>
     <h2 class="banner-title-text">Maak je pasafspraak</h2>
 </div>
-
 <form asp-action="Create" id="create_appointment_form">
     <div class="row" id="create_appointment">
         <div class="appiontment-wrapper font-nexa-regular">
@@ -19,10 +18,10 @@
                     <img id="appointment_step_image" src="~/images/appointment/step-1.png" />
                 </div>
                 <div class="create-appointment-part col-md-10 col-sm-12">
-
                     <!-- Left box - Step 1, Select date and time -->
                     <div class="left-box step-1" id="left_1">
                         <h3>Stap 1, datum en tijd selecteren</h3>
+                        <h3>@ViewBag.selectedDress</h3>
                         <p>
                             Selecteer eerst een datum en vervolgens een tijdstip dat je wilt komen passen!
                         </p>
@@ -46,6 +45,7 @@
                     <!-- Left box - Step 2, fill in form -->
                     <div class="left-box step-2" id="left_2" style="display: none;">
                         <h3>Stap 2, Gegevens invullen</h3>
+                        <h3>@ViewBag.selectedDress</h3>
                         <div class="form-horizontal">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="form-group">
@@ -101,10 +101,11 @@
                     <!-- Left box - Step 3, verify filled in data -->
                     <div class="left-box step-3" id="left_3" style="display: none;">
                         <h3>Stap 3, Gegevens controleren</h3>
+                        <h3>@ViewBag.selectedDress</h3>
                         <p>
                             Controleer alle gegevens voor je pasafspraak bij Honeymoon shop aan de Korte Hoogstraat 4, te Rotterdam.
                         </p>
-
+                        <inut type="hidden" value="@ViewBag.selectedDress" name="dress"/>
                         <input type="submit" value="Afspraak bevestigen" class="btn btn-default" />
                     </div>
                 </div>
