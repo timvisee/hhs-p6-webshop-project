@@ -7,7 +7,7 @@ namespace hhs_p6_webshop_project.Api
     [Route("api/dressfinder")]
     public class DressFinderController : Controller
     {
-        public IProductService ProductService { get;set; }
+        public IProductService ProductService { get; }
 
         public DressFinderController(IProductService productService) {
             ProductService = productService;

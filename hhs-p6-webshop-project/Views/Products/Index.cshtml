@@ -25,7 +25,7 @@
 
             <div class="filters-container">
                 <h3>Prijs</h3>
-                <div>
+                <div class="filter-price">
                     <input type="text" id="filter-price-amount" readonly />
                     <div id="filter-price-slider"></div>
                 </div>
@@ -33,7 +33,7 @@
 
             <div class="filters-container">
                 <h3>Kleur</h3>
-                <div>
+                <div class="filter-color">
                     <ul>
                         <li>
                             <input id="filter-color-1" type="checkbox" />
@@ -60,11 +60,10 @@
                         Sorteer op:
                     </strong>
                     <select id="filters-sort">
-                        <option value="-price">Prijs Laag/Hoog</option>
-                        <option value="+price">Prijs Hoog/Laag</option>
-                        <option value="+name">Naam oplopend</option>
-                        <option value="-name">Naam aflopend</option>
-                        <option value="popularity">Populariteit</option>
+                        <option value="0">Prijs Laag/Hoog</option>
+                        <option value="1">Prijs Hoog/Laag</option>
+                        <option value="3">Naam oplopend</option>
+                        <option value="2">Naam aflopend</option>
                     </select>
                 </div>
             </div>
