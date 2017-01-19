@@ -8,6 +8,9 @@
     ViewData["Title"] = "Dressfinder";
     ViewData["PinkBackground"] = true;
 }
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 <div class="row">
     <h2 class="col-lg-offset-1 col-sm-offset-1 col-xs-offset-1">Dressfinder</h2>
 
@@ -21,31 +24,27 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3 col-sm-12 product-filters">
-            <h2>Filters</h2>
+            <h4>Filter op:</h4>
 
             <div class="filters-container">
                 <h3>Prijs</h3>
-                <div>
-                    <input type="text" id="filter-price-amount" readonly />
+                <div id="filter-price">
                     <div id="filter-price-slider"></div>
+                    <input type="text" id="filter-price-amount" readonly />
                 </div>
             </div>
 
             <div class="filters-container">
                 <h3>Kleur</h3>
-                <div>
+                <div id="filter-color">
                     <ul>
                         <li>
-                            <input id="filter-color-1" type="checkbox" />
-                            <label for="filter-color-1">Kleur #1</label>
+                            <input id="filter-color-1" type="checkbox" value="Roze" />
+                            <label for="filter-color-1">Roze (?)</label>
                         </li>
                         <li>
-                            <input id="filter-color-2" type="checkbox" />
-                            <label for="filter-color-2">Kleur #2</label>
-                        </li>
-                        <li>
-                            <input id="filter-color-3" type="checkbox" />
-                            <label for="filter-color-3">Kleur #3</label>
+                            <input id="filter-color-2" type="checkbox" value="Grijs" />
+                            <label for="filter-color-2">Grijs (?)</label>
                         </li>
                     </ul>
                 </div>
@@ -59,17 +58,16 @@
                     <strong class="select-label">
                         Sorteer op:
                     </strong>
-                    <select>
-                        <option>Prijs Hoog/Laag</option>
-                        <option>Prijs Laag/Hoog</option>
-                        <option>Naam oplopend</option>
-                        <option>Naam aflopend</option>
-                        <option>Populariteit</option>
+                    <select id="filters-sort">
+                        <option value="0">Prijs Laag/Hoog</option>
+                        <option value="1">Prijs Hoog/Laag</option>
+                        <option value="3">Naam oplopend</option>
+                        <option value="2">Naam aflopend</option>
                     </select>
                 </div>
             </div>
             <div class="row product-overview">
-                @Html.Partial("ProductOverview", Model)
+                @* @Html.Partial("ProductOverview", Model) *@
             </div>
         </div>
     </div>
