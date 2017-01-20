@@ -9,9 +9,9 @@
     var random = new Random();
 }
 
-@if (User.Identity.IsAuthenticated)
-{
-    <a class="btn" asp-action="Create">Maak nieuwe categorie aan</a>
+@if (User.Identity.IsAuthenticated) {
+    <a class="btn" asp-action="Delete" asp-route-id="@Model.NewsCategory.NewsCategoryID">Verwijder deze categorie</a>
+    <a class="btn" asp-action="Edit" asp-route-id="@Model.NewsCategory.NewsCategoryID">Bewerk deze categorie</a>
     <a class="btn" asp-action="Create" asp-controller="NewsArticles">Maak nieuw artikel aan</a>
     <a class="btn" asp-action="Index" asp-controller="NewsArticles">Bekijk alle artikelen in lijst</a>
 }
@@ -56,9 +56,4 @@
             }
         }
     </div>
-</div>
-
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.NewsCategory.NewsCategoryID">Bewerk</a> |
-    <a asp-action="Index">Terug naar overzicht</a>
 </div>
