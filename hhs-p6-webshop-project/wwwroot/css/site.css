@@ -87,6 +87,11 @@ body {
     color: #f0597c;
 }
 
+*::selection {
+    background-color: #f0597c;
+    color: #fff
+}
+
 /*--- Custom beun bootstrap ---*/
 .col-md-offset-1-5 {
     margin-left: 12.5%;
@@ -1435,6 +1440,8 @@ footer ul {
     height: 250px;
     overflow: hidden;
     align-self: flex-end;
+    background-size: cover;
+    background-position: center;
 }
 
 /*--- Single Article ---*/
@@ -1528,6 +1535,16 @@ footer ul {
 
         .text-banner .banner-bg-title-text {
             font-size: 9em;
+        }
+
+        /*--- Category overview ---*/
+        .category-buttons {
+            flex-direction: column;
+        }
+
+        .category-button {
+            margin: 5px 0;
+            width: 100%;
         }
 
     /*--- Footer ---*/
