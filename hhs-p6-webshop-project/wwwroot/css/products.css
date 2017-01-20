@@ -417,6 +417,10 @@
     background-color: #fcfcfc;
 }
 
+    .ui-accordion .ui-accordion-content input {
+        background-color: #fcfcfc;
+    }
+
     .ui-accordion .ui-accordion-content::-webkit-scrollbar {
         width: 7px;
         background-color: #fff;
