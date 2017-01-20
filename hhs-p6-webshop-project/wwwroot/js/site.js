@@ -869,6 +869,11 @@ $(document).ready(function () {
             if(ajaxFilterRequest != undefined)
                 ajaxFilterRequest.abort();
 
+            // Get the product filters element
+            var productFiltersElement = $('.product-filters');
+
+            productFiltersElement.find(":input").prop("disabled", true);
+
             // Filter the dresses and fetch the new list through AJAX
             ajaxFilterRequest = $.ajax({
                 url: endpointUrl,
@@ -908,6 +913,9 @@ $(document).ready(function () {
 
                     // Remove the request as pending
                     ajaxFilterRequest = undefined;
+
+                    // Re-enable the buttons
+                    productFiltersElement.find(":input").prop("disabled", false);
                 }
             });
         }
