@@ -92,6 +92,10 @@ body {
     color: #fff
 }
 
+.extra-padding{
+    padding:20px 0px;
+}
+
 /*--- Custom beun bootstrap ---*/
 .col-md-offset-1-5 {
     margin-left: 12.5%;
@@ -350,6 +354,10 @@ a, button, input {
     transition: 0.25s;
     -webkit-transition: 0.25s;
     -moz-transition: 0.25s;
+}
+
+.pull-right{
+    margin-right:10%;
 }
 
 /*--- Admin bar ---*/
