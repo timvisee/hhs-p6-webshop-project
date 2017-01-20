@@ -553,6 +553,8 @@ nav li {
 
     .text-banner .banner-bg-title-text {
         width: 100%;
+        height: 1em;
+        overflow: hidden;
         font-size: 12em;
         font-family: Niconne;
         position: absolute;
