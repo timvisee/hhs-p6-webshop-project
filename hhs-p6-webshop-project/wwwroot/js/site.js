@@ -914,8 +914,12 @@ $(document).ready(function () {
                     // Remove the request as pending
                     ajaxFilterRequest = undefined;
 
-                    // Re-enable the buttons
-                    productFiltersElement.find(":input").prop("disabled", false);
+                    // Show the new elements when the previous animation is complete
+                    setTimeout(function() {
+                        // Re-enable the buttons
+                        productFiltersElement.find(":input").prop("disabled", false);
+
+                    }, 300);
                 }
             });
         }
