@@ -92,6 +92,10 @@ body {
     color: #fff
 }
 
+.extra-padding{
+    padding:20px 0px;
+}
+
 /*--- Custom beun bootstrap ---*/
 .col-md-offset-1-5 {
     margin-left: 12.5%;
