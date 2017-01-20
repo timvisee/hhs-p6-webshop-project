@@ -9,41 +9,57 @@
     ViewData["HomeBannerBoldTitle"] = "Van begin tot eind kunnen wij jou helpen.";
 }
 
-<h2>@ViewData["Title"].</h2>
-<h3>@ViewData["Message"]</h3>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <h2>Neem contact op</h2>
+        @using (Html.BeginForm()) {
+        <div class="form-horizontal">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @Html.ValidationSummary(true)
+            <div class="form-group">
+                <label asp-for="@Model.Name" class="col-md-4 control-label"></label>
+                <div class="col-md-8">
+                    <input asp-for="@Model.Name" class="form-control" />
+                    <span asp-validation-for="@Model.Name" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Phone" class="col-md-4 control-label"></label>
+                <div class="col-md-8">
+                    <input asp-for="@Model.Phone" class="form-control" />
+                    <span asp-validation-for="@Model.Phone" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Email" class="col-md-4 control-label"></label>
+                <div class="col-md-8">
+                    <input asp-for="@Model.Email" class="form-control" />
+                    <span asp-validation-for="@Model.Email" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Comment" class="col-md-4 control-label"></label>
+                <div class="col-md-8">
+                    <textarea asp-for="@Model.Comment" class="form-control"></textarea>
+                    <span asp-validation-for="@Model.Comment" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Reference" class="col-md-4 control-label"></label>
+                <div class="col-md-8">
+                    <input asp-for="@Model.Reference" class="form-control" />
+                    <span asp-validation-for="@Model.Reference" class="text-danger" />
+                </div>
+            </div>
 
-@using (Html.BeginForm())
-{
-    @Html.ValidationSummary(true)
-    <div class="row">
-        @Html.LabelFor(model => model.Name, "Name:")
-        @Html.EditorFor(model => model.Name)
-        @Html.ValidationMessageFor(model => model.Name)
-    </div>
-    <div class="row">
-        @Html.LabelFor(model => model.Phone, "Phone:")
-        @Html.EditorFor(model => model.Phone)
-        @Html.ValidationMessageFor(model => model.Phone)
-    </div>
-    <div class="row">
-        @Html.LabelFor(model => model.Email, "Email:")
-        @Html.EditorFor(model => model.Email)
-        @Html.ValidationMessageFor(model => model.Email)
-    </div>
-    <div class="row">
-        @Html.LabelFor(model => model.Comment, "Comments:")
-        @Html.TextAreaFor(model => model.Comment)
-        @Html.ValidationMessageFor(model => model.Comment)
-    </div>    
-    <div class="row">
-        @Html.LabelFor(model => model.Reference, "Reference:")
-        @Html.TextAreaFor(model => model.Reference)
-        @Html.ValidationMessageFor(model => model.Reference)
-    </div>
-    <div class="buttons">
-        <div class="row">
-            <input type="submit" value="submit" />
-            <input type="reset" value="reset" />
+            <div class="buttons">
+                <div class="row">
+                    <input class="btn" type="submit" value="submit" />
+                    <input class="btn" type="reset" value="reset" />
+                </div>
+            </div>
         </div>
+        }
+
     </div>
-}
+</div>
