@@ -21,7 +21,8 @@ namespace hhs_p6_webshop_project {
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile("appsettings.secret.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile("hosting.json", optional: true);
 
             if (env.IsDevelopment()) {
                 // For more details on using the user secret store see https://go.microsoft.com/fwlink/?LinkID=532709
