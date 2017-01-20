@@ -177,6 +177,15 @@ a:active {
     outline: 0 !important;
 }
 
+textarea.form-control{
+    resize:none;
+    border: 2px solid #e5e5e5;
+    border-radius: 0px;
+    box-shadow: none;
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+    height:100px;
+}
+
 input.form-control[disabled] {
     cursor: default;
 }
@@ -553,6 +562,8 @@ nav li {
 
     .text-banner .banner-bg-title-text {
         width: 100%;
+        height: 1em;
+        overflow: hidden;
         font-size: 12em;
         font-family: Niconne;
         position: absolute;
@@ -652,7 +663,7 @@ nav li {
     margin: auto;
     display: block;
     z-index: 7;
-    bottom: 40%;
+    bottom: 25%;
     position: absolute;
     max-width: 100%;
     left: 50%;
@@ -711,7 +722,7 @@ nav li {
 }
 
 #home_banner .home-text-banner {
-    bottom: 50%;
+    bottom: 40%;
 }
 
 .home-text-banner .banner-bg-title-text {
@@ -747,7 +758,7 @@ nav li {
     font-weight: bold;
     width: 100%;
     position: absolute;
-    bottom: 17%;
+    bottom: 12%;
 }
 
 @media screen and (max-height: 680px) {
