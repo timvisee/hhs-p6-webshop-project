@@ -1817,3 +1817,7 @@ footer ul {
 .social-buttons a:hover {
     transform: scale(1.05);
 }
+
+.cursor-pointer {
+    cursor: pointer !important;
+}
