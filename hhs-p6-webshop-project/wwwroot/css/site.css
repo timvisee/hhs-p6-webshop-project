@@ -1813,3 +1813,7 @@ footer ul {
 .social-buttons a {
     margin: 0 10px;
 }
+
+.social-buttons a:hover {
+    transform: scale(1.05);
+}
