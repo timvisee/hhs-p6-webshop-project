@@ -1,0 +1,25 @@
+@using Microsoft.AspNetCore.Mvc.Rendering
+@model hhs_p6_webshop_project.Models.ProductModels.ColorOption
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ColorOption</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Color)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Color)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ColorOptionId">Bewerk</a> |
+    <a asp-action="Index">Terug naar overzicht</a>
+</div>

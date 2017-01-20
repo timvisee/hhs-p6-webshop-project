@@ -1,20 +1,23 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] | Honeymoon Shop</title>
 
-    <environment names="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/lib/animate.css/animate.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
-    </environment>
-    <environment names="Staging,Production">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/lib/animate.css/animate.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
-    </environment>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/lib/animate.css/animate.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <script src="~/js/jquery-1.9.1.js"></script>
+    <script src="~/js/bootstrap.js"></script>
+    <script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
+    <script src="~/js/site.js"></script>
+    <script src="~/js/wow.min.js"></script>
+
+    @* TODO: This section does not seem to be used. *@
+    @RenderSection("scripts", required: false)
 
 </head>
 
@@ -22,7 +25,7 @@
     // Determine whether a banner is shown in the layout
     var showBanner = ViewData.ContainsKey("ShowBanner") && (bool)ViewData["ShowBanner"];
     var showHomeBanner = ViewData.ContainsKey("ShowHomeBanner") && (bool)ViewData["ShowHomeBanner"];
-    var bannerPath = "/images/mooi-meisje.jpg";
+    var bannerPath = "/images/home-banner-main.jpg";
 
 
     // Set the banner URL from the view data
@@ -79,7 +82,7 @@
                 <a href="#" id="choice_webshop" class="hm-pink-dark-text">Webshop</a>
                 -->
                 @if (!User.Identity.IsAuthenticated) {
-                <a asp-controller="Account" asp-action="Login" class="hm-pink-dark-text">Inloggen</a>
+                <a asp-controller="Account" asp-action="Login" class="hm-pink-dark-text loginBtn">Inloggen</a>
                 }
                 <a href="#" id="comic_sans_button" class="hm-pink-dark-text">Comic sans this website!</a>
             </div>
@@ -100,11 +103,12 @@
                         </button>
                     </div>
                 </div>
+                <span class="no-user-select glyphicon glyphicon-menu-hamburger" id="menu_toggle"></span>
             </div>
         </div>
         <div id="header_nav">
             <a asp-controller="Home" asp-action="Index" class="header-nav-logo">
-                <img class="navbar-brand" src="~/images/logo.png" alt="Honeymoon Shop" />
+                <img class="navbar-brand" src="~/images/logo.png" alt="Honeymoon Shop"/>
             </a>
             <nav>
                 <ul>
@@ -112,6 +116,7 @@
                     <li>@Html.ActionLink("Bruid", "Index", "Home")</li>
                     <li>@Html.ActionLink("Bruidegom", "Index", "Home")</li>
                     <li>@Html.ActionLink("De winkel", "Index", "Products")</li>
+                    <li>@Html.ActionLink("Blog", "Index", "NewsCategories")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>
                         <a asp-controller="Appointments" asp-action="Create" class="make-appointment">Afspraak maken</a>
@@ -281,20 +286,5 @@
         </div>
         <p>&copy; 2016 - Beun IT</p>
     </footer>
-
-    <environment names="Development">
-        <script src="~/js/jquery-1.9.1.js"></script>
-        <script src="~/js/bootstrap.js"></script>
-        <script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
-    </environment>
-    <environment names="Staging,Production">
-        <script src="~/js/jquery-1.9.1.min.js"></script>
-        <script src="~/js/bootstrap.min.js"></script>
-        <script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
-    </environment>
-
-    <script src="~/js/site.js"></script>
-
-    @RenderSection("scripts", required: false)
 </body>
 </html>

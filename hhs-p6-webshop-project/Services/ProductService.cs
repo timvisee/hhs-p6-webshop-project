@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using hhs_p6_webshop_project.Api;
 using hhs_p6_webshop_project.Data;
-using hhs_p6_webshop_project.ExtraModels;
+using hhs_p6_webshop_project.Models.FilterModel;
 using hhs_p6_webshop_project.Models.ProductModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
-using Microsoft.DotNet.Tools.Compiler;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 
 namespace hhs_p6_webshop_project.Services
 {
@@ -23,152 +22,103 @@ namespace hhs_p6_webshop_project.Services
         }
 
         public List<Product> GetAllProducts() {
-            return
-                DatabaseContext.Product
-                    .Include(p => p.ProductTypes)
-                        .ThenInclude(pt => pt.Images)
-                    .Include(p => p.ProductTypes)
-                        .ThenInclude(pt => pt.PropertyValueCouplings)
-                            .ThenInclude(pvc => pvc.ProductType)
-                    .Include(p => p.ProductTypes)
-                        .ThenInclude(pt => pt.PropertyValueCouplings)
-                            .ThenInclude(pvc => pvc.PropertyType)
-                    .Include(p => p.ProductTypes)
-                        .ThenInclude(pt => pt.PropertyValueCouplings)
-                            .ThenInclude(pvc => pvc.PropertyValue)
-                    .ToList();
+            return DatabaseContext.Products
+                .Include(p => p.ColorOptions)
+                .ThenInclude(co => co.Images)
+                .ToList();
+            
         }
 
-        public List<ProductFilter> GetAllProductFilters() {
-            List<ProductFilter> filters = new List<ProductFilter>();
+        private List<object>
+            ParseFuckingAnoyingJsonArrayOfArraysToJustAFuckingListGodFuckingDamnitIHateThisFuckingBullshit(HashSet<object> objects) {
+            List<object> values  = new List<object>();
+            
+            foreach (object value in objects) {
 
-            foreach (PropertyType pt in DatabaseContext.PropertyType) {
-                var f = new ProductFilter();
-                f.FilterType = pt;
-                filters.Add(f);
+                if (value is Int64)
+                    values.Add(Convert.ToDouble(value));
+                else
+                    values.Add(value);
             }
+            return values;
+        }
 
-            var pvcs =
-                DatabaseContext.PropertyValueCouplings
-                .Include(pvc => pvc.PropertyType)
-                .Include(pvc => pvc.PropertyValue)
-                .Include(pvc => pvc.ProductType);
+        public List<ColorOption> GetColorOptions() {
+            return DatabaseContext.ColorOptions.Distinct().ToList();
+        }
 
-            foreach (PropertyValueCoupling pvc in pvcs) {
-                var x = filters.Find(pf => pf.FilterType.Equals(pvc.PropertyType));
+        public Dictionary<string, HashSet<object>> GetFilters() {
+            Dictionary<string, HashSet<object>> val = new Dictionary<string, HashSet<object>>();
 
-                bool add = true;
+            val.Add("Prijs", new HashSet<object>());
 
-                foreach (PropertyValue v in x.Values) {
-                    if (v.Value == pvc.PropertyValue.Value)
-                        add = false;
-                }
+            val["Prijs"].Add(DatabaseContext.Products.Min(p => p.Price));
+            val["Prijs"].Add(DatabaseContext.Products.Max(p => p.Price));
 
-                if (add)
-                    x.Values.Add(pvc.PropertyValue);
-            }
+            val.Add("Kleur", new HashSet<object>());
 
+            val["Kleur"].Add(DatabaseContext.ColorOptions.Select(co => co.Color).Distinct());
+
+            return val;
+        }
+
+        public List<FilterBase> GetAllFilters() {
+            List<FilterBase> filters = new List<FilterBase>();
+
+            PriceFilter pf = new PriceFilter();
+            pf.Min = DatabaseContext.Products.Min(p => p.Price);
+            pf.Max = DatabaseContext.Products.Max(p => p.Price);
+
+            ColorFilter cf = new ColorFilter();
+
+            cf.Colors.AddRange(DatabaseContext.ColorOptions.Select(co => co.Color).Distinct());
+            filters.Add(pf);
+            filters.Add(cf);
+            
             return filters;
-
         }
 
-        public List<PropertyValueCoupling> Test() {
-            return DatabaseContext.PropertyValueCouplings.ToList();
-        }
-
-        public List<ProductFilter> ParseFilterRequest(FilterRequest req) {
-
-            //reconstruct filters
-            var pvcs =
-                DatabaseContext.PropertyValueCouplings
-                .Include(pvc => pvc.PropertyType)
-                .Include(pvc => pvc.PropertyValue)
-                .Include(pvc => pvc.ProductType);
-
-            var suppliedFilters = new List<ProductFilter>();
-
-            foreach (PropertyValueCoupling pvc in pvcs) {
-                if (req.Values.ContainsKey(pvc.PropertyTypeId)) {
-                    if (req.Values[pvc.PropertyTypeId].Contains(pvc.PropertyValueId)) {
-                        ProductFilter f = suppliedFilters.FirstOrDefault(pf => pf.FilterType.PropertyTypeId == pvc.PropertyTypeId);
-                        if (f == null) {
-                            f = new ProductFilter();
-                            f.FilterType = pvc.PropertyType;
-                            suppliedFilters.Add(f);
-                        }
-                        f.Values.Add(pvc.PropertyValue);
-                    }
+        public List<Product> Filter(List<FilterBase> filters) {
+            List<Product> products = GetAllProducts();
+            List<Product> results = new List<Product>();
+            
+            foreach (Product product in products) {
+                if (product.IsMatch(filters)) {
+                    var temp = filters.Where(f => f.Name == "Kleur").Cast<ColorFilter>().SelectMany(cf => cf.Colors).Distinct().ToList();
+                    product.Sort(temp);
+                    results.Add(product);
                 }
             }
             
-
-            foreach (var filter in suppliedFilters) {
-                Console.WriteLine($"Selected filter: {filter.ToString()}");
-            }
-
-            return suppliedFilters;
-        }
-
-        public List<Product> Filter(List<ProductFilter> filters, List<Product> products) {
-            List<Product> results = new List<Product>();
-
-            foreach (Product p in products) {
-                bool isMatch = false;
-                foreach (ProductType pt in p.ProductTypes) {
-
-                    //Get a list of all PropertyValues for the current ProductType
-                    var pvcs =
-                        DatabaseContext.PropertyValueCouplings
-                        .Include(pvc => pvc.PropertyType)
-                        .Include(pvc => pvc.PropertyValue)
-                        .Include(pvc => pvc.ProductType)
-                        .Where(pvc => pvc.ProductType == pt);
-
-                    //Check if they match the filter
-                    foreach (ProductFilter f in filters) {
-                        var matchingFields = pvcs.Where(pvc => pvc.PropertyType.Equals(f.FilterType)).Select(pvc => pvc.PropertyValue);
-
-                        //Now if atleast one filter value is present, the product matches
-                        foreach (PropertyValue pv in f.Values) {
-                            if (matchingFields.Any(pppp => pppp.Equals(pv))) {
-                                isMatch = true;
-
-
-
-                                Console.WriteLine($"Product filter match -> {p.Name} on {f.FilterType.Name}");
-                            }
-                        }
-                    }
-
-                    if (isMatch)
-                        break;
-                }
-                if (isMatch)
-                    results.Add(p);
-            }
-
             return results;
         }
 
-        /// <summary>
-        /// Get a list of products filtered by the given property values.
-        /// </summary>
-        /// <param name="values">Property values to filter on.</param>
-        /// <returns>List of products. An empty list of products might be returned if the filters aren't consistent.</returns>
-        public List<Product> GetProductsFiltered(List<PropertyValue> values) {
-            // Get the queryable products
-//            IQueryable<Product> queryable = DatabaseContext.Product.AsQueryable();
-//            IQueryable<PropertyValue> queryableValue = DatabaseContext.PropertyValue.AsQueryable();
+        public List<FilterBase> ParseFilters(Dictionary<string, HashSet<object>> filters) {
 
-            // Get a list of property types that are used as filters
-            HashSet<PropertyType> types = new HashSet<PropertyType>();
-          //  values.ForEach(value => types.Add(value.PropertyType));
+            List<FilterBase> f = new List<FilterBase>();
 
-            // TODO: Unfinished! Complete this method.
+            foreach (var pair in filters) {
+                if (pair.Key == "Kleur") {
+                    ColorFilter filt = new ColorFilter();
+                    filt.Colors.AddRange(ParseFuckingAnoyingJsonArrayOfArraysToJustAFuckingListGodFuckingDamnitIHateThisFuckingBullshit(pair.Value).Cast<string>());
 
-            // Return the list of products
-//            return queryable.ToList();
-            return null;
+                    if (filt.Colors.Count > 0)
+                        f.Add(filt);
+                }
+
+                if (pair.Key == "Prijs") {
+                    var vals =
+                        ParseFuckingAnoyingJsonArrayOfArraysToJustAFuckingListGodFuckingDamnitIHateThisFuckingBullshit(
+                            pair.Value).Cast<double>();
+
+                    PriceFilter filt = new PriceFilter();
+                    filt.Min = vals.Min();
+                    filt.Max = vals.Max();
+                    f.Add(filt);
+                }
+            }
+
+            return f;
         }
 
         public PagedResponse GetAllProductsPaged(int start, int count) {
@@ -197,29 +147,6 @@ namespace hhs_p6_webshop_project.Services
                 
             }
             return response;
-        }
-
-        public List<PropertyValue> GetAllAvailableFiltersForProducts(List<Product> products) {
-            return null;
-//            return products.Select(product => product.Properties).Distinct().ToList().SelectMany(item => item).ToList();
-        }
-
-        public List<PropertyType> GetPropertyTypesForProduct(Product product) {
-//            return product.Properties.Select(type => type.PropertyType).Distinct().ToList();
-            return null;
-        } 
-
-        public List<PropertyType> AllProductFilterTypesAsList() {
-            HashSet<PropertyType> types = new HashSet<PropertyType>();
-
-//            foreach (var product in DatabaseContext.Product) {
-//                foreach (var value in product.Properties) {
-//                    types.Add(value.PropertyType);
-//                }
-//            }
-
-//            return types.ToList();
-            return null;
         }
 
     }

@@ -1,0 +1,65 @@
+@using System.Threading.Tasks
+@using hhs_p6_webshop_project.Models.NewsModels
+@model hhs_p6_webshop_project.Models.NewsModels.NewsCategoryVM
+
+@{
+    ViewData["Title"] = Model.NewsCategory.Name;
+    ViewData["PinkBackground"] = true;
+
+    var random = new Random();
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <a class="btn" asp-action="Create">Maak nieuwe categorie aan</a>
+    <a class="btn" asp-action="Create" asp-controller="NewsArticles">Maak nieuw artikel aan</a>
+    <a class="btn" asp-action="Index" asp-controller="NewsArticles">Bekijk alle artikelen in lijst</a>
+}
+
+<div class="text-banner">
+    <h1 class="banner-bg-title-text hm-pink-light-text">Blog</h1>
+    <h2 class="banner-title-text">Blijf op de hoogte over</h2>
+    <h2 class="banner-title-text2">de bruidswereld</h2>
+</div>
+
+<div class="category-buttons">
+    @{
+        foreach (var nc in Model.NewsCategories)
+        {
+            <a class="category-button" asp-action="Details" asp-route-id="@nc.NewsCategoryID">
+                @nc.Name
+            </a>
+        }
+    }
+</div>
+
+<div class="container">
+    <div class="row">
+        @{
+            foreach (var na in Model.NewsArticles)
+            {
+                <div class="news-article-wrap col-sm-12 col-md-3-5">
+                    <a asp-action="Details" asp-controller="NewsArticles" asp-route-id="@na.NewsArticleID">
+                        <div class="news-article">
+                            <div class="news-article-top">
+                                <h2>
+                                    @na.Name <img src="~/images/heart-icon.png" />
+                                </h2>
+                                <hr style="border-color: @(String.Format("#{0:X6}", random.Next(0x1000000)));" />
+                                <p>@Html.Raw(na.Excerpt)</p>
+                            </div>
+                            <div class="img-box">
+                                <img src="@na.ImagePath" />
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.NewsCategory.NewsCategoryID">Bewerk</a> |
+    <a asp-action="Index">Terug naar overzicht</a>
+</div>

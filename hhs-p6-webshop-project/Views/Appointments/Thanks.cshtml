@@ -1,3 +1,4 @@
+@using Microsoft.AspNetCore.Mvc.Rendering
 @model hhs_p6_webshop_project.Models.AppointmentModels.Appointment
 
 @{
@@ -26,7 +27,54 @@
     Leuk! Je pasafpraak is gemaakt! Er is een bevestiging van je afspraak naar <br />
     je E-mail gestuurd! Maak ook meteen een afspraak voor je partner!<br />
 
+    <br />
     <a href="mailto:?subject=Ik%20heb%20een%20pasafspraak%20gemaakt%20bij%20Honeymoon%20Shop!&body=Maak%20ook%20een%20pasafspraak." class="btn">Deel dit moment <span class="glyphicon glyphicon-right glyphicon-share-alt"></span></a>
+</p>
+
+<p>
+    <div class="social-buttons">
+        <center>
+            <!-- Email -->
+            <a href="mailto:?Subject=Afspraak bij de Honeymoon Shop&amp;Body=Ik%20heb%20een%20afspraak%20gemaakt%20bij%20de%20Honeymoon%20Shop%20om%20een%20jurk%20te%20passen!%20https://www.honeymoonshop.nl">
+                <img src="~/images/socials/email.png" alt="Email" />
+            </a>
+
+            <!-- Facebook -->
+            <a href="http://www.facebook.com/sharer.php?u=https://www.honeymoonshop.nl" target="_blank">
+                <img src="~/images/socials/facebook.png" alt="Facebook" />
+            </a>
+
+            <!-- Google+ -->
+            <a href="https://plus.google.com/share?url=https://www.honeymoonshop.nl" target="_blank">
+                <img src="~/images/socials/google.png" alt="Google" />
+            </a>
+
+            <!-- LinkedIn -->
+            <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.honeymoonshop.nl" target="_blank">
+                <img src="~/images/socials/linkedin.png" alt="LinkedIn" />
+            </a>
+
+            <!-- Print -->
+            <a href="javascript:;" onclick="window.print()">
+                <img src="~/images/socials/print.png" alt="Print" />
+            </a>
+
+            <!-- Reddit -->
+            <a href="http://reddit.com/submit?url=https://www.honeymoonshop.nl&amp;title=Ik heb een afspraak gemaakt bij de Honeymoon Shop om een jurk te passen!" target="_blank">
+                <img src="~/images/socials/reddit.png" alt="Reddit" />
+            </a>
+
+            <!-- Tumblr-->
+            <a href="http://www.tumblr.com/share/link?url=https://www.honeymoonshop.nl&amp;title=Ik heb een afspraak gemaakt bij de Honeymoon Shop om een jurk te passen!" target="_blank">
+                <img src="~/images/socials/tumblr.png" alt="Tumblr" />
+            </a>
+
+            <!-- Twitter -->
+            <a href="https://twitter.com/share?url=https://www.honeymoonshop.nl&amp;text=Ik%20heb%20een%20afspraak%20gemaakt%20bij%20de%20Honeymoon%20Shop%20om%20een%20jurk%20te%20passen!%20&amp;hashtags=HMS" target="_blank">
+                <img src="~/images/socials/twitter.png" alt="Twitter" />
+            </a>
+        </center>
+    </div>
 </p>
 
 

@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using hhs_p6_webshop_project.App.Util;
 using hhs_p6_webshop_project.Models;
+using hhs_p6_webshop_project.Models.NewsModels;
 using hhs_p6_webshop_project.Models.ProductModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-namespace hhs_p6_webshop_project.Data {
-    public static class DbBuilder {
+namespace hhs_p6_webshop_project.Data
+{
+    public static class DbBuilder
+    {
 
         // TODO: Clean this class!
 
@@ -16,7 +20,8 @@ namespace hhs_p6_webshop_project.Data {
         /// Warning: This overrides the current data available in the database.
         /// </summary>
         /// <param name="context"></param>
-        public static void Rebuild(ApplicationDbContext context) {
+        public static void Rebuild(ApplicationDbContext context)
+        {
             // Show a status message to the user
             LogUtils.Warning("Starting database initialization...");
 
@@ -25,7 +30,8 @@ namespace hhs_p6_webshop_project.Data {
             Console.Write("Provisioning new database... (please be patient, this may take up to 60 seconds)", ConsoleColor.White);
             context.Database.EnsureCreated();
 
-            var user = new ApplicationUser {
+            var user = new ApplicationUser
+            {
                 Email = "beun@beun.it",
                 NormalizedEmail = "BEUN@BEUN.IT",
                 UserName = "beun@beun.it",
@@ -50,215 +56,300 @@ namespace hhs_p6_webshop_project.Data {
 
             GenerateProducts(context);
 
+            GenerateNews(context);
+
             // Show a success message
             LogUtils.Success("Database built!");
 
             // Save the changes to the database context
             context.SaveChanges();
 
-            
+
 
             // Exit the application if configured, when the built process is complete
-            if (Program.AppConfig.DatabaseExitAfterReset) {
+            if (Program.AppConfig.DatabaseExitAfterReset)
+            {
                 // Tell the user the application will exit
                 LogUtils.Warning("The database has been built. The application will now exit.");
 
                 // Actually exit the application
                 Environment.Exit(0);
             }
+
+
         }
 
-        private static PropertyValueCoupling Couple(ProductType p, PropertyType pt, object value) {
-            return new PropertyValueCoupling(p, pt, new PropertyValue(value));
+        private static Product GenerateProduct(string name, string description, double price)
+        {
+            return new Product()
+            {
+                Name = name,
+                Description = description,
+                Price = price
+            };
         }
 
-        private static void GenerateProducts(ApplicationDbContext context) {
-            PropertyType kleur = new PropertyType();
-            kleur.DataType = typeof(string).FullName;
-            kleur.Multiple = true;
-            kleur.Name = "Kleur";
-            kleur.Required = true;
-            context.PropertyType.Add(kleur);
+        private static ColorOption GenerateColor(string color, string[] images)
+        {
+            var co = new ColorOption()
+            {
+                Color = color
+            };
 
-            PropertyType prijs = new PropertyType();
-            prijs.DataType = typeof(double).FullName;
-            prijs.Multiple = false;
-            prijs.Name = "Prijs";
-            prijs.Required = true;
-            context.PropertyType.Add(prijs);
+            foreach (string img in images)
+            {
+                co.Images.Add(new ProductImage(img));
+            }
+
+            return co;
+        }
+
+        private static void GenerateNews(ApplicationDbContext context)
+        {
+            #region Template newsarticle
+            NewsArticle template = new NewsArticle()
+            {
+                Name = "",
+                ImagePath = "",
+                Excerpt = "",
+                Content = "",
+            };
+            #endregion
+
+            NewsArticle article1 = new NewsArticle()
+            {
+                Name = "Collectie",
+                ImagePath = "/images/uploads/default/ladybird-1.jpg",
+                Excerpt = "De super sexy collectie van Martina Liana is gearriveerd",
+                Content = "<p>Wat is Lorem Ipsum?\r\nLorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren \'60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.</p>",
+            };
+
+            NewsArticle article2 = new NewsArticle()
+            {
+                Name = "Lovely brides",
+                ImagePath = "/images/appointment-thankyou.jpg",
+                Excerpt = "Rachelle & Matthew",
+                Content = "<p>Wat is Lorem Ipsum?\r\nLorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren \'60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.</p>",
+            };
+
+            NewsArticle article3 = new NewsArticle()
+            {
+                Name = "Nieuws",
+                ImagePath = "/images/home-banner-main.jpg",
+                Excerpt = "Het nieuwe magazine is uit! Vraag hem gratis aan.",
+                Content = "<p>Wat is Lorem Ipsum?\r\nLorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren \'60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.</p>",
+            };
+
+            NewsArticle article4 = new NewsArticle()
+            {
+                Name = "Artikel",
+                ImagePath = "/images/home-banner-footer.jpg",
+                Excerpt = "Van pinterest droom naar werkelijkheid",
+                Content = "<p>Wat is Lorem Ipsum?\r\nLorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren \'60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.</p><p>Wat is Lorem Ipsum?\r\nLorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren \'60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.</p>",
+            };
+
+            NewsArticle article5 = new NewsArticle()
+            {
+                Name = "Een nieuwe dressfinder",
+                ImagePath = "/images/dressfinder-banner.jpg",
+                Excerpt = "Bekijk nu onze nieuwe dressfinder!",
+                Content = "<p>Wat is Lorem Ipsum?\r\nLorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren \'60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.</p><p>Wat is Lorem Ipsum?\r\nLorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren \'60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.</p>",
+            };
+
+            NewsArticle article6 = new NewsArticle()
+            {
+                Name = "Bem de CSS Koning",
+                ImagePath = "/images/appointment/appointment-banner.png",
+                Excerpt = "Donderdag 19 januari 2017 is Bem verkozen tot CSS koning",
+                Content = "<p>Wat is Lorem Ipsum?\r\nLorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren \'60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.</p><p>Wat is Lorem Ipsum?\r\nLorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren \'60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.</p>",
+            };
+
+            NewsCategory cat1 = new NewsCategory()
+            {
+                Name = "Collectie"
+            };
+
+            NewsCategory cat2 = new NewsCategory()
+            {
+                Name = "Evenement"
+            };
+
+            NewsCategory cat3 = new NewsCategory()
+            {
+                Name = "Nieuws"
+            };
+
+            NewsCategory cat4 = new NewsCategory()
+            {
+                Name = "Lovely real brides"
+            };
+
+            NewsArticleCategory nac1 = new NewsArticleCategory()
+            {
+                NewsCategory = cat1,
+                NewsArticle = article1
+            };
+
+
+            NewsArticleCategory nac2 = new NewsArticleCategory()
+            {
+                NewsCategory = cat1,
+                NewsArticle = article2
+            };
+
+            NewsArticleCategory nac3 = new NewsArticleCategory()
+            {
+                NewsCategory = cat1,
+                NewsArticle = article3
+            };
+
+            NewsArticleCategory nac4 = new NewsArticleCategory()
+            {
+                NewsCategory = cat1,
+                NewsArticle = article4
+            };
+
+            NewsArticleCategory nac5 = new NewsArticleCategory()
+            {
+                NewsCategory = cat1,
+                NewsArticle = article5
+            };
+
+            NewsArticleCategory nac6 = new NewsArticleCategory()
+            {
+                NewsCategory = cat1,
+                NewsArticle = article6
+            };
+
+            NewsArticleCategory nac7 = new NewsArticleCategory()
+            {
+                NewsCategory = cat2,
+                NewsArticle = article6
+            };
+
+            NewsArticleCategory nac8 = new NewsArticleCategory()
+            {
+                NewsCategory = cat3,
+                NewsArticle = article6
+            };
+
+            NewsArticleCategory nac9 = new NewsArticleCategory()
+            {
+                NewsCategory = cat3,
+                NewsArticle = article2
+            };
+
+            NewsArticleCategory nac10 = new NewsArticleCategory()
+            {
+                NewsCategory = cat3,
+                NewsArticle = article3
+            };
+
+            NewsArticleCategory nac11 = new NewsArticleCategory()
+            {
+                NewsCategory = cat4,
+                NewsArticle = article4
+            };
+
+            NewsArticleCategory nac12 = new NewsArticleCategory()
+            {
+                NewsCategory = cat4,
+                NewsArticle = article6
+            };
+
+            context.NewsArticle.Add(article1);
+            context.NewsArticle.Add(article2);
+            context.NewsArticle.Add(article3);
+            context.NewsArticle.Add(article4);
+            context.NewsArticle.Add(article5);
+            context.NewsArticle.Add(article6);
+
+            context.NewsCategory.Add(cat1);
+            context.NewsCategory.Add(cat2);
+            context.NewsCategory.Add(cat3);
+            context.NewsCategory.Add(cat4);
+
+            context.NewsArticleCategory.Add(nac1);
+            context.NewsArticleCategory.Add(nac2);
+            context.NewsArticleCategory.Add(nac3);
+            context.NewsArticleCategory.Add(nac4);
+            context.NewsArticleCategory.Add(nac5);
+            context.NewsArticleCategory.Add(nac6);
+            context.NewsArticleCategory.Add(nac7);
+            context.NewsArticleCategory.Add(nac8);
+            context.NewsArticleCategory.Add(nac9);
+            context.NewsArticleCategory.Add(nac10);
+            context.NewsArticleCategory.Add(nac11);
+            context.NewsArticleCategory.Add(nac12);
 
             context.SaveChanges();
+        }
 
-            #region dress
+        private static void GenerateProducts(ApplicationDbContext context)
+        {
+            #region Annabelle
+            Product annabelle = GenerateProduct(
+                "Annabelle Badgley Mischka",
+                "Trouwjurk van het merk Badgley & Mischka gemaakt satijn. De top heeft een V-hals en een laag uitgesneden rug, beide afgewerkt met beading. De jurk kan gedragen worden met een cape. De rok heeft een fishtail model met een sleep. De sleep is afgewerkt met tule en is verdeeld in lagen.",
+                2500.0d);
 
-            Product dress = new Product();
-            dress.Name = "Ladybird";
-            dress.Description = "Een ladybird jurk";
+            annabelle.ColorOptions.Add(
+                GenerateColor(
+                    "Ivoor",
+                    new string[] { "images/uploads/default/annabelle-1.jpg", "images/uploads/default/annabelle-2.jpg", "images/uploads/default/annabelle-3.jpg" }));
 
-            ProductType dress_klein = new ProductType();
-            dress_klein.NameOverride = "Kleine Jurk";
-            dress_klein.DescriptionOverride = "Een kleine jurk";
-            dress_klein.Images.Add(new ProductImage("images//uploads/image-1.jpg"));
-
-            context.PropertyValueCouplings.Add(Couple(dress_klein, prijs, 50.0d));
-            context.PropertyValueCouplings.Add(Couple(dress_klein, kleur, "Wit"));
-            context.PropertyValueCouplings.Add(Couple(dress_klein, kleur, "Bruin"));
-
-            dress.ProductTypes.Add(dress_klein);
-
-            context.Product.Add(dress);
-            context.SaveChanges();
-
+            context.Products.Add(annabelle);
             #endregion
 
-            #region dresss 
+            #region Ladybird
+            Product ladybird = GenerateProduct(
+                "Ladybird",
+                "Trouwjurk van het merk Ladybird gemaakt van kant. De top heeft een hoge doorzichtige neklijn en een laag uitgesneden rug. De rok heeft een fishtail model met een sleep.",
+                1250.0d);
 
-            Product dresss = new Product();
-            dresss.Name = "Ladybird";
-            dresss.Description = "Een ladybird jurk";
+            ladybird.ColorOptions.Add(
+                GenerateColor(
+                    "Ivoor",
+                    new string[] { "images/uploads/default/ladybird-ivoor-1.jpg", "images/uploads/default/ladybird-ivoor-2.jpg", "images/uploads/default/ladybird-ivoor-3.jpg" }));
 
-            ProductType jurk_bruin = new ProductType();
-            jurk_bruin.NameOverride = "Bruine jurk";
-            jurk_bruin.DescriptionOverride = "Een bruine ladybird jurk";
-            jurk_bruin.Images.Add(new ProductImage("images/ladybirddress3.jpg"));
+            ladybird.ColorOptions.Add(
+                GenerateColor(
+                    "Blauw",
+                    new string[] { "images/uploads/default/ladybird-blauw-1.jpg" }));
 
-            context.PropertyValueCouplings.Add(Couple(jurk_bruin, prijs, 75.0d));
-            context.PropertyValueCouplings.Add(Couple(jurk_bruin, kleur, "Grijs"));
-            context.PropertyValueCouplings.Add(Couple(jurk_bruin, kleur, "Geel"));
+            ladybird.ColorOptions.Add(
+                GenerateColor(
+                    "Wit",
+                    new string[] { "images/uploads/default/ladybird-1.jpg", "images/uploads/default/ladybird-2.jpg", "images/uploads/default/ladybird-3.jpg" }));
 
-            dresss.ProductTypes.Add(jurk_bruin);
+            ladybird.ColorOptions.Add(
+                GenerateColor(
+                    "Roze",
+                    new string[] { "images/uploads/default/ladybird-nude-1.jpg", "images/uploads/default/ladybird-nude-2.jpg", "images/uploads/default/ladybird-nude-3.jpg" }));
 
-            context.Product.Add(dresss);
-            context.SaveChanges();
-
+            context.Products.Add(ladybird);
             #endregion
 
-            #region jurk 
+            #region Pronovias
+            Product pronovias = GenerateProduct(
+                "Pronovias",
+                "Trouwjurk van het merk Pronovias gemaakt van kant. De top is hooggesloten en heeft een laag uitgesneden rug, met lange mouwen. De rok heeft een fishtail model met een sleep.",
+                2250.0d);
 
-            Product jurk = new Product();
-            jurk.Name = "Manbird";
-            jurk.Description = "Nog een jurk";
+            pronovias.ColorOptions.Add(
+                GenerateColor(
+                    "Ivoor",
+                    new string[] { "images/uploads/default/pronovias-ivoor-1.jpg", "images/uploads/default/pronovias-ivoor-2.jpg", "images/uploads/default/pronovias-ivoor-3.jpg" }));
 
-            ProductType jurkType2 = new ProductType();
-            jurkType2.NameOverride = "Prachtige jurk";
-            jurkType2.DescriptionOverride = "Een mooie jurk";
-            jurkType2.Images.Add(new ProductImage("images/uploads/image-3.jpg"));
+            pronovias.ColorOptions.Add(
+                GenerateColor(
+                    "Wit",
+                    new string[] { "images/uploads/default/pronovias-wit-1.jpg", "images/uploads/default/pronovias-wit-2.jpg", "images/uploads/default/pronovias-wit-3.jpg" }));
 
-            context.PropertyValueCouplings.Add(Couple(jurkType2, prijs, 500.0d));
-            context.PropertyValueCouplings.Add(Couple(jurkType2, kleur, "Wit kant"));
-            context.PropertyValueCouplings.Add(Couple(jurkType2, kleur, "Bruin Leer"));
-
-            jurk.ProductTypes.Add(jurkType2);
-
-            context.Product.Add(jurk);
-            context.SaveChanges();
-            #endregion
-
-            #region jurkk
-
-            Product jurkk = new Product();
-            jurkk.Name = "Manbird";
-            jurkk.Description = "Nog een jurk";
-
-            ProductType jurkType3 = new ProductType();
-            jurkType3.NameOverride = "Prachtige jurk, geslaagde bruiloft";
-            jurkType3.DescriptionOverride = "Met deze jurk komt alles goed";
-            jurkType3.Images.Add(new ProductImage("images/uploads/image-5.jpg"));
-
-            context.PropertyValueCouplings.Add(Couple(jurkType3, prijs, 750.0d));
-            context.PropertyValueCouplings.Add(Couple(jurkType3, kleur, "Grijs Leer"));
-            context.PropertyValueCouplings.Add(Couple(jurkType3, kleur, "Zwart Leer"));
-
-            jurkk.ProductTypes.Add(jurkType3);
-
-            context.Product.Add(jurkk);
-            context.SaveChanges();
-
-            #endregion
-
-            #region jurk1
-
-            Product jurk1 = new Product();
-            jurk1.Name = "Ladybird 1";
-            jurk1.Description = "Een ladybird jurk";
-
-            ProductType dress1 = new ProductType();
-            dress1.NameOverride = "Kleine Jurk";
-            dress1.DescriptionOverride = "Een kleine jurk";
-            dress1.Images.Add(new ProductImage("images/uploads/image-1.jpg"));
-
-            context.PropertyValueCouplings.Add(Couple(dress1, prijs, 50.0d));
-            context.PropertyValueCouplings.Add(Couple(dress1, kleur, "Wit"));
-            context.PropertyValueCouplings.Add(Couple(dress1, kleur, "Bruin"));
-
-            jurk1.ProductTypes.Add(dress1);
-            context.Product.Add(jurk1);
-            #endregion
-
-            #region jurk2
-
-            Product jurk2 = new Product();
-            jurk2.Name = "Ladybird 2";
-            jurk2.Description = "Een ladybird jurk";
-
-            ProductType dress2 = new ProductType();
-            dress2.NameOverride = "Bruine jurk";
-            dress2.DescriptionOverride = "Een bruine ladybird jurk";
-            dress2.Images.Add(new ProductImage("images/uploads/image-2.jpg"));
-
-            context.PropertyValueCouplings.Add(Couple(dress2, prijs, 65.0d));
-            context.PropertyValueCouplings.Add(Couple(dress2, kleur, "Grijs"));
-            context.PropertyValueCouplings.Add(Couple(dress2, kleur, "Geel"));
-
-            jurk2.ProductTypes.Add(dress2);
-
-            context.Product.Add(jurk2);
-
-            #endregion
-
-            #region jurk3
-
-            Product jurk3 = new Product();
-            jurk3.Name = "Ladybird 3";
-            jurk3.Description = "Een ladybird jurk";
-
-            ProductType dress3 = new ProductType();
-            dress3.NameOverride = "Witte jurk";
-            dress3.DescriptionOverride = "Een witte ladybird jurk";
-            dress3.Images.Add(new ProductImage("images/uploads/image-3.jpg"));
-
-            context.PropertyValueCouplings.Add(Couple(dress3, prijs, 95.0d));
-            context.PropertyValueCouplings.Add(Couple(dress3, kleur, "Grijs"));
-            context.PropertyValueCouplings.Add(Couple(dress3, kleur, "Geel"));
-
-            jurk3.ProductTypes.Add(dress3);
-
-            context.Product.Add(jurk3);
-
-            #endregion
-
-            #region jurk4
-
-            Product jurk4 = new Product();
-            jurk4.Name = "Ladybird 4";
-            jurk4.Description = "Een ladybird jurk";
-
-            ProductType dress4 = new ProductType();
-            dress4.NameOverride = "Blauwe jurk";
-            dress4.DescriptionOverride = "Een blauwe ladybird jurk";
-            dress4.Images.Add(new ProductImage("images/uploads/image-4.jpg"));
-
-            context.PropertyValueCouplings.Add(Couple(dress4, prijs, 80.0d));
-            context.PropertyValueCouplings.Add(Couple(dress4, kleur, "Grijs"));
-            context.PropertyValueCouplings.Add(Couple(dress4, kleur, "Geel"));
-
-            jurk4.ProductTypes.Add(dress4);
-
-            context.Product.Add(jurk4);
-            context.SaveChanges();
-
+            context.Products.Add(pronovias);
             #endregion
             
+            context.SaveChanges();
         }
     }
 }

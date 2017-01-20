@@ -57,6 +57,70 @@ function formatDateTime(dateTime, formatDate, formatTime) {
 // Run this code when the page is finished loading
 $(document).ready(function () {
 
+    // Initialize WOW
+    new WOW({
+            boxClass:     'wow',
+            animateClass: 'animated',
+            offset:       0,
+            live:         true
+    }).init();
+
+    // Create an accordion of the filters container
+    $('.filters-container').accordion({
+        collapsible: true
+    });
+
+    /**
+     * Update the price range label in the filters for products.
+     */
+    function updateSelectedPriceRange(min, max) {
+        $( "#filter-price-amount" ).val( "€" + min + " tot €" + max);
+    }
+
+    /**
+     * Get the selected price range values.
+     *
+     * @return {int[]} Array with the lowest and highest values in the range, in order.
+     */
+    function getPriceRangeSliderValues() {
+        // Create an array to return
+        var result = [];
+
+        // Put the values in the result array
+        for(var i = 0; i < 2; i++)
+            result.push($("#filter-price-slider").slider("values", i));
+
+        // Return the result array
+        return result;
+    }
+
+    // Get the filter price slider element
+    var filterPriceSliderElement = $("#filter-price-slider");
+
+    // Configure the slider if any is found on the page
+    if(filterPriceSliderElement.length > 0) {
+        // Get the minimum and maximum of the range
+        var rangeMin = parseInt(filterPriceSliderElement.find("input[type='hidden'][name='range-min']").val());
+        var rangeMax = parseInt(filterPriceSliderElement.find("input[type='hidden'][name='range-max']").val());
+
+        // Create the price filter range slider
+        filterPriceSliderElement.slider({
+            range: true,
+            min: rangeMin,
+            max: rangeMax,
+            values: [
+                rangeMin,
+                rangeMax
+            ],
+            slide: function(event, ui) {
+                updateSelectedPriceRange(ui.values[0], ui.values[1]);
+            }
+        });
+
+        // Render the label when loading the page
+        updateSelectedPriceRange($("#filter-price-slider").slider("values", 0), $("#filter-price-slider").slider("values", 1));
+    }
+
     /**
      * Toggle the search box when the search button is clicked
      */
@@ -69,10 +133,17 @@ $(document).ready(function () {
     });
 
     /**
+     * Toggle the menu when the toggle menu button is clicked
+     */
+    $("#menu_toggle").click(function() {
+        $("#header_nav").slideToggle();
+    });
+
+    /**
      * Scroll down when you click the scroll down button
      */
     $(".scrollToggle").click(function () {
-        $("html, body").animate({ scrollTop: $(window).height() }, 1200, "easeInOutCubic");
+        $("html, body").animate({ scrollTop: $(window).height() - 90 }, 1200, "easeInOutCubic");
     });
 
     /**
@@ -82,7 +153,7 @@ $(document).ready(function () {
         var scrHeight = $(window).height();
         var headerHeight = $("#header_top").height();
 
-        $("#home_banner").height(scrHeight - headerHeight);
+        $("#home_banner").height(scrHeight - 150);
     }
     setHomeBannerHeight();
 
@@ -99,8 +170,8 @@ $(document).ready(function () {
     });
 
     $(window).scroll(function (event) {
-        var scroll = $(window).scrollTop() / -3;
-        var scrollVid = $(window).scrollTop() / 5;
+        var scroll = $(window).scrollTop() / -2;
+        var scrollVid = $(window).scrollTop() / 3;
         $("#home_banner .home-text-banner, #home_banner .home-button-container").css("margin-bottom", scroll);
         $("#home_banner .banner-image").css("margin-top", scrollVid);
     });
@@ -299,7 +370,7 @@ $(document).ready(function () {
                     var uniqueId = getUniqueId("time-button");
 
                     // Determine the value
-                    var value = appointmentTimeObject.time.hour + ":" + appointmentTimeObject.time.minute;
+                    var value = appointmentTimeObject.time.hour + ":" + ("0" + appointmentTimeObject.time.minute).slice(-2);
 
                     // Append the radio button
                     timeRadioButtonContainer.append("<li>" +
@@ -718,7 +789,7 @@ $(document).ready(function () {
 
             // Center the indicator
             indicator.css({
-                top: overlay.height() / 2 - indicator.height() / 2,
+                top: Math.min(overlay.height() / 2 - indicator.height() / 2, 225),
                 left: overlay.width() / 2 - indicator.width() / 2
             });
 
@@ -748,8 +819,14 @@ $(document).ready(function () {
     // Find the product overview
     var productOverviewElement = $(".product-overview");
 
+    // Define a variable to hold a pending AJAX call for filters
+    var ajaxFilterRequest;
+
     // Load the filter logic when a product overview is available
     if(productOverviewElement.length > 0) {
+        // Get the sort selection box
+        var sortElement = $("#filters-sort");
+
         /**
          * Fetch a list of dressesk.
          * Filters are applied as specified in the sidebar.
@@ -760,11 +837,15 @@ $(document).ready(function () {
 
             // Create a filter object
             var filterObject = {
-                values: {}
+                Prijs: getPriceRangeSliderValues(),
+                Kleur: []
             };
 
+            // Define the API endpoint URL
+            var endpointUrl = "/api/dressfinder/product/filter/partial";
+
             // Find the selected checkboxes, and build the filter object
-            $(".filter").each(function() {
+            $("#filter-color").each(function() {
                 // Get the filter element
                 var filterElement = $(this);
 
@@ -775,21 +856,22 @@ $(document).ready(function () {
                 if(checkedBoxes.length <= 0)
                     return;
 
-                // Get the product ID for this filter section as key
-                var key = String(filterElement.find("input.field-property-id").val());
-
-                // Create an entry in the filter object
-                filterObject.values[key] = [];
-
                 // Put the checkbox IDs in the array
                 checkedBoxes.each(function() {
-                    filterObject.values[key].push($(this).val());
+                    filterObject.Kleur.push($(this).val());
                 });
             });
 
+            // Set the sorting parameter on the API endpoint URL
+            endpointUrl += "/sort/" + sortElement.find("option:selected").val();
+
+            // Abort pending AJAX calls for filtering
+            if(ajaxFilterRequest != undefined)
+                ajaxFilterRequest.abort();
+
             // Filter the dresses and fetch the new list through AJAX
-            $.ajax({
-                url: "/api/dressfinder/product/filter/partial",
+            ajaxFilterRequest = $.ajax({
+                url: endpointUrl,
                 type: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -803,19 +885,86 @@ $(document).ready(function () {
                     alert(error);
                 },
                 success: function(data) {
-                    productOverviewElement.html(data);
+                    // Find the product elements
+                    var productElements = productOverviewElement.find('.product');
+
+                    // Fade out the current elements
+                    productElements.attr("data-wow-delay", "0s");
+                    productElements.toggleClass('animate-product-catalog-enter animate-product-catalog-leave');
+
+                    // Show the new elements when the previous animation is complete
+                    setTimeout(function() {
+                        // Remove the current list of products (that is already faded away)
+                        productElements.remove();
+
+                        // Set the new products
+                        productOverviewElement.append(data);
+
+                    }, 300);
                 },
                 complete: function() {
                     // Hide the loading indiator
                     setLoadingIndicator(productOverviewElement, false);
+
+                    // Remove the request as pending
+                    ajaxFilterRequest = undefined;
                 }
             });
         }
 
-        // Call the product fetch function when a filter is clicked
-        $(".filter").find("input[type=checkbox]").click(fetchProductsFiltered);
+        // Call the product fetch function when a filter is clicked, or when the sorting is changed
+        $("#filter-color").find("input[type=checkbox]").click(fetchProductsFiltered);
+        $("#filter-price-slider").on("slidestop", fetchProductsFiltered);
+        sortElement.change(fetchProductsFiltered);
 
         // Filter once on page load
         fetchProductsFiltered();
     }
+
+    // Get the appointment creation form
+    var createAppointmentFormElement = $("#create_appointment_form");
+
+    // Execute the appointment creation form logic when it's available on the page
+    if(createAppointmentFormElement.length > 0) {
+        // Get the button element to go to step 3
+        var stepThreeButton = $("#go_to_third");
+
+        // Handle key press events, and prevent the enter key from submitting the form
+        createAppointmentFormElement.keypress(function(event) {
+            // Continue if this wasn't the enter key that is pressed
+            if(event.keyCode !== 13)
+                return true;
+
+            // Validate the form
+            createAppointmentFormElement.validate();
+            var isValid = createAppointmentFormElement.valid();
+
+            // Go to step 3 if the form is valid
+            if(isValid)
+                stepThreeButton.click();
+
+            // The enter key is pressed, prevent the default action
+            event.preventDefault();
+            return false;
+        });
+    }
+
+    // File uploading custom button
+    $('.inputfile').change(function (e) {
+        // Get the input file selectors
+        var inputs = document.querySelectorAll('.inputfile');
+
+        // Loop through the selected inputs
+        for(var i = 0; i < inputs.length; i++) {
+            // Get the current entry
+            var input = inputs[i];
+
+            // Get the file name of the selected input (file)
+            var fileName = e.target.value.split('\\').pop();
+
+            // Append the file name to the upload image box
+            if(fileName !== null)
+                $('.upload-image').html(fileName);
+        }
+    });
 });

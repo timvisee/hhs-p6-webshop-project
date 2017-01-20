@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using hhs_p6_webshop_project.Models;
 using hhs_p6_webshop_project.Models.AppointmentModels;
+using hhs_p6_webshop_project.Models.NewsModels;
 using Microsoft.Extensions.Configuration;
 using hhs_p6_webshop_project.Models.ProductModels;
 
@@ -14,7 +15,7 @@ namespace hhs_p6_webshop_project.Data {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options) { }
 
-        public ApplicationDbContext() : base(CreateTestContext()) {}
+        public ApplicationDbContext() : base(CreateTestContext()) { }
 
         static DbContextOptions<ApplicationDbContext> CreateTestContext() {
             var builder = new DbContextOptionsBuilder<ApplicationDbContext>();
@@ -25,62 +26,46 @@ namespace hhs_p6_webshop_project.Data {
         protected override void OnModelCreating(ModelBuilder builder) {
             base.OnModelCreating(builder);
 
-            builder.Entity<PropertyValueCoupling>()
-                .HasKey(x => new {x.ProductTypeId, x.PropertyTypeId, x.PropertyValueId});
-
             builder.Entity<Product>()
-                .HasMany(p => p.ProductTypes)
-                .WithOne(pt => pt.Product)
-                .HasForeignKey(fk => fk.ProductId);
+                .HasMany(p => p.ColorOptions)
+                .WithOne(co => co.Product)
+                .HasForeignKey(co => co.ProductId);
+            
 
-            builder.Entity<ProductType>()
-                .HasMany(pt => pt.Images)
-                .WithOne(pi => pi.ProductType)
-                .HasForeignKey(fk => fk.ProductTypeId);
+            builder.Entity<ColorOption>()
+                .HasMany(co => co.Images)
+                .WithOne(pi => pi.ColorOption)
+                .HasForeignKey(pi => pi.ColorOptionId);
 
-            builder.Entity<ProductType>()
-                .HasMany(pt => pt.PropertyValueCouplings)
-                .WithOne(pvc => pvc.ProductType)
-                .HasForeignKey(fk => fk.ProductTypeId);
 
-            //builder.Entity<PropertyValue>()
-            //    .HasOne(pv => pv.)
-            //    .WithOne(pt => pt.)
-            //    .HasForeignKey<PropertyValueCoupling>(fk => fk.PropertyValueId);
+            builder.Entity<NewsArticleCategory>()
+                .HasKey(sc => new { sc.NewsArticleID, sc.NewsCategoryID });
 
-            //builder.Entity<PropertyValueCoupling>()
-            //    .HasOne(pvc => pvc.PropertyValue)
-            //    .WithOne(pv => pv.PropertyValueCoupling);
+            builder.Entity<NewsArticleCategory>()
+                .HasOne(sc => sc.NewsArticle)
+                .WithMany(s => s.NewsArticleCategories)
+                .HasForeignKey(sc => sc.NewsArticleID);
 
-            //builder.Entity<PropertyTypeProduct>()
-            //    .HasOne(ptp => ptp.PropertyValue)
-            //    .WithOne(pv => pv.PropertyTypeProduct);
-
-            //builder.Entity<PropertyTypeProduct>()
-            //    .HasOne(ptp => ptp.Product)
-            //    .WithMany(p => p.PropertyTypeProducts)
-            //    .HasForeignKey(fk => fk.ProductId);
+            builder.Entity<NewsArticleCategory>()
+                .HasOne(sc => sc.NewsCategory)
+                .WithMany(c => c.NewsArticleCategories)
+                .HasForeignKey(sc => sc.NewsCategoryID);
         }
 
         public DbSet<Appointment> Appointment { get; set; }
 
         public DbSet<AppointmentTime> AppointmentTime { get; set; }
 
-        public DbSet<Product> Product { get; set; }
+        public DbSet<Product> Products { get; set; }
 
-        public DbSet<PropertyValue> PropertyValue { get; set; }
+        public DbSet<ColorOption> ColorOptions { get; set; }
 
-        public DbSet<PropertyType> PropertyType { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
+        
+        public DbSet<NewsArticle> NewsArticle { get; set; }
 
-        public DbSet<PropertyValueCoupling> PropertyValueCouplings { get; set; }
+        public DbSet<NewsCategory> NewsCategory { get; set; }
 
-        public DbSet<ProductImage> ProductImage { get; set; }
-
-        public DbSet<ProductType> ProductType { get; set; }
-
-        //public DbSet<ProductImage> ProductImage { get; set; }
-
-
-      
+        public DbSet<NewsArticleCategory> NewsArticleCategory { get; set; }
     }
 }
