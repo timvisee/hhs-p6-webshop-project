@@ -356,6 +356,10 @@ a, button, input {
     -moz-transition: 0.25s;
 }
 
+.pull-right{
+    margin-right:10%;
+}
+
 /*--- Admin bar ---*/
 #admin_bar {
     height: 30px;
