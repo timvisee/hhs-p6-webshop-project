@@ -1786,3 +1786,11 @@ footer ul {
 .product-overview-options #filters-sort {
     width: 220px;
 }
+
+.social-buttons {
+    margin: 50px 0 25px 0;
+}
+
+.social-buttons a {
+    margin: 0 10px;
+}
