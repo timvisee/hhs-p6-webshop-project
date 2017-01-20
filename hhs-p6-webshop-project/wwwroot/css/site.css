@@ -1806,6 +1806,8 @@ footer ul {
 
 .social-buttons {
     margin: 50px 0 25px 0;
+    display: flex;
+    justify-content: center;
 }
 
 .social-buttons a {
