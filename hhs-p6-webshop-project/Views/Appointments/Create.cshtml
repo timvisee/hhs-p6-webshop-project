@@ -49,7 +49,11 @@
                     <!-- Left box - Step 2, fill in form -->
                     <div class="left-box step-2" id="left_2" style="display: none;">
                         <h3>Stap 2, Gegevens invullen</h3>
+                        @if(ViewBag.dressColor != null) {
+                        <h3>@ViewBag.selectedDress <span style="color: gray;">(@ViewBag.dressColor)</span></h3>
+                        } else {
                         <h3>@ViewBag.selectedDress</h3>
+                        }
                         <div class="form-horizontal">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="form-group">
@@ -105,7 +109,11 @@
                     <!-- Left box - Step 3, verify filled in data -->
                     <div class="left-box step-3" id="left_3" style="display: none;">
                         <h3>Stap 3, Gegevens controleren</h3>
+                        @if(ViewBag.dressColor != null) {
+                        <h3>@ViewBag.selectedDress <span style="color: gray;">(@ViewBag.dressColor)</span></h3>
+                        } else {
                         <h3>@ViewBag.selectedDress</h3>
+                        }
                         <p>
                             Controleer alle gegevens voor je pasafspraak bij Honeymoon shop aan de Korte Hoogstraat 4, te Rotterdam.
                         </p>
