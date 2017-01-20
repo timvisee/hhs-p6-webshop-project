@@ -5,8 +5,11 @@
     ViewData["PinkBackground"] = true;
 }
 
-@*TODO Beun maar werkt*@
-<a href="#" onclick="window.history.back()">Terug naar overzicht </a> 
+@if (User.Identity.IsAuthenticated) {
+    <a class="btn" onclick="window.history.back()">Terug naar overzicht</a>
+    <a class="btn" asp-action="Edit" asp-route-id="@Model.NewsArticle.NewsArticleID">Bewerk</a>
+    <a class="btn" asp-action="Delete" asp-route-id="@Model.NewsArticle.NewsArticleID">Verwijder</a>
+}
 
 <div class="text-banner">
     <h1 class="banner-bg-title-text hm-pink-light-text">@Model.NewsArticle.Name</h1>
@@ -27,14 +30,6 @@
         @Html.Raw(Model.NewsArticle.Content)
     </div>
 </div>
-
-@if (User.Identity.IsAuthenticated) {
-    <div>
-        <a asp-action="Edit" asp-route-id="@Model.NewsArticle.NewsArticleID">Bewerk</a> |
-        <a asp-action="Index">Terug naar overzicht</a>
-    </div>
-}
-
 
 <div class="row">
     <div class="col col-full-width">

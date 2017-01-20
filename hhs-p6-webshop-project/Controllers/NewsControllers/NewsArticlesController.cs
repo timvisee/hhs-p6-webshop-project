@@ -10,35 +10,28 @@ using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models.NewsModels;
 using Microsoft.AspNetCore.Http;
 
-namespace hhs_p6_webshop_project.Controllers.NewsControllers
-{
-    public class NewsArticlesController : Controller
-    {
+namespace hhs_p6_webshop_project.Controllers.NewsControllers {
+    public class NewsArticlesController : Controller {
         private readonly ApplicationDbContext _context;
 
-        public NewsArticlesController(ApplicationDbContext context)
-        {
+        public NewsArticlesController(ApplicationDbContext context) {
             _context = context;
         }
 
         // GET: NewsArticles
-        public async Task<IActionResult> Index()
-        {
+        public async Task<IActionResult> Index() {
             return View(getNewsArticlesVM());
         }
 
         // GET: NewsArticles/Details/5
-        public IActionResult Details(int? id)
-        {
-            if (id == null)
-            {
+        public IActionResult Details(int? id) {
+            if (id == null) {
                 return NotFound();
             }
 
             var newsArticle = getNewsArticle(id);
 
-            if (newsArticle == null)
-            {
+            if (newsArticle == null) {
                 return NotFound();
             }
 
@@ -46,8 +39,11 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers
         }
 
         // GET: NewsArticles/Create
-        public IActionResult Create()
-        {
+        public IActionResult Create() {
+            if (!User.Identity.IsAuthenticated) {
+                return NotFound();
+            }
+
             NewsArticle na = new NewsArticle();
             return View(getNewsArticlesVM(na, new SelectList(_context.NewsCategory, "NewsCategoryID", "Name")));
         }
@@ -58,17 +54,14 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(NewsArticleVM newNewsArticle, IFormFile image)
-        {
-            if (ModelState.IsValid || image != null)
-            {
+        public IActionResult Create(NewsArticleVM newNewsArticle, IFormFile image) {
+            if (ModelState.IsValid || image != null) {
                 string filename = ChangePathName(newNewsArticle.NewsArticle.ImagePath);
                 FileInfo fi = new FileInfo(image.FileName);
                 string extension = fi.Extension;
                 string path = "/images/uploads/" + filename + extension;
                 newNewsArticle.NewsArticle.ImagePath = path;
-                using (FileStream fs = System.IO.File.Create("wwwroot/" + path))
-                {
+                using (FileStream fs = System.IO.File.Create("wwwroot/" + path)) {
                     image.CopyTo(fs);
                     fs.Flush();
                 }
@@ -76,10 +69,8 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers
                 _context.Add(newNewsArticle.NewsArticle);
                 _context.SaveChanges();
 
-                if (newNewsArticle.SelectedNewsCategories != null)
-                {
-                    foreach (int id in newNewsArticle.SelectedNewsCategories)
-                    {
+                if (newNewsArticle.SelectedNewsCategories != null) {
+                    foreach (int id in newNewsArticle.SelectedNewsCategories) {
                         _context.NewsArticleCategory.Add(new NewsArticleCategory() { NewsArticleID = newNewsArticle.NewsArticle.NewsArticleID, NewsCategoryID = id });
                     }
                 }
@@ -93,17 +84,18 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers
         }
 
         // GET: NewsArticles/Edit/5
-        public IActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
+        public IActionResult Edit(int? id) {
+            if (!User.Identity.IsAuthenticated) {
+                return NotFound();
+            }
+
+            if (id == null) {
                 return NotFound();
             }
 
             var newsArticle = getNewsArticle(id);
 
-            if (newsArticle == null)
-            {
+            if (newsArticle == null) {
                 return NotFound();
             }
 
@@ -115,38 +107,31 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, NewsArticleVM updatedNewsArticle, IFormFile image)
-        {
-            if (id != updatedNewsArticle.NewsArticle.NewsArticleID)
-            {
+        public IActionResult Edit(int id, NewsArticleVM updatedNewsArticle, IFormFile image) {
+            if (id != updatedNewsArticle.NewsArticle.NewsArticleID) {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
+            if (ModelState.IsValid) {
                 var rml = _context.NewsArticleCategory.Where(sc => sc.NewsArticleID == id);
                 _context.RemoveRange(rml);
                 _context.SaveChanges();
 
                 updatedNewsArticle.NewsArticle.NewsArticleCategories = new List<NewsArticleCategory>();
 
-                if (updatedNewsArticle.SelectedNewsCategories != null)
-                {
-                    foreach (int newsCategoryID in updatedNewsArticle.SelectedNewsCategories)
-                    {
+                if (updatedNewsArticle.SelectedNewsCategories != null) {
+                    foreach (int newsCategoryID in updatedNewsArticle.SelectedNewsCategories) {
                         _context.NewsArticleCategory.Add(new NewsArticleCategory() { NewsArticleID = updatedNewsArticle.NewsArticle.NewsArticleID, NewsCategoryID = newsCategoryID });
                     }
                 }
 
-                if (image != null)
-                {
+                if (image != null) {
                     string filename = ChangePathName(updatedNewsArticle.NewsArticle.ImagePath);
                     FileInfo fi = new FileInfo(image.FileName);
                     string extension = fi.Extension;
                     string path = "/images/uploads/" + filename + extension;
                     updatedNewsArticle.NewsArticle.ImagePath = path;
-                    using (FileStream fs = System.IO.File.Create("wwwroot/" + path))
-                    {
+                    using (FileStream fs = System.IO.File.Create("wwwroot/" + path)) {
                         image.CopyTo(fs);
                         fs.Flush();
                     }
@@ -162,17 +147,18 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers
         }
 
         // GET: NewsArticles/Delete/5
-        public IActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
+        public IActionResult Delete(int? id) {
+            if (!User.Identity.IsAuthenticated) {
+                return NotFound();
+            }
+
+            if (id == null) {
                 return NotFound();
             }
 
             var na = getNewsArticle(id);
 
-            if (na == null)
-            {
+            if (na == null) {
                 return NotFound();
             }
 
@@ -182,37 +168,31 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers
         // POST: NewsArticles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
-        {
+        public IActionResult DeleteConfirmed(int id) {
             var na = _context.NewsArticle.FirstOrDefault(s => s.NewsArticleID == id);
             _context.NewsArticle.Remove(na);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
 
-        private bool NewsArticleExists(int id)
-        {
+        private bool NewsArticleExists(int id) {
             return _context.NewsArticle.Any(e => e.NewsArticleID == id);
         }
 
 
-        private List<NewsArticleVM> getNewsArticlesVM()
-        {
+        private List<NewsArticleVM> getNewsArticlesVM() {
             List<NewsArticleVM> lijst = new List<NewsArticleVM>();
             SelectList categoryList = new SelectList(_context.NewsCategory, "NewsCategoryID", "Name");
 
-            foreach (int id in _context.NewsArticle.Select(x => x.NewsArticleID))
-            {
+            foreach (int id in _context.NewsArticle.Select(x => x.NewsArticleID)) {
                 lijst.Add(getNewsArticlesVM(getNewsArticle(id), categoryList));
             }
 
             return lijst;
         }
 
-        private NewsArticleVM getNewsArticlesVM(NewsArticle newsArticle, SelectList newsCategoriesList)
-        {
-            NewsArticleVM NewsArticleVM = new NewsArticleVM()
-            {
+        private NewsArticleVM getNewsArticlesVM(NewsArticle newsArticle, SelectList newsCategoriesList) {
+            NewsArticleVM NewsArticleVM = new NewsArticleVM() {
                 NewsArticle = newsArticle,
                 NewsCategoriesList = newsCategoriesList,
                 SelectedNewsCategories = newsArticle.NewsArticleCategories.Select(sc => sc.NewsCategoryID)
@@ -221,16 +201,14 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers
             return NewsArticleVM;
         }
 
-        private NewsArticle getNewsArticle(int? id)
-        {
+        private NewsArticle getNewsArticle(int? id) {
             return _context.NewsArticle
                 .Include(x => x.NewsArticleCategories)
                 .ThenInclude(y => y.NewsCategory)
                 .SingleOrDefault(m => m.NewsArticleID == id);
         }
 
-        public string ChangePathName(string input)
-        {
+        public string ChangePathName(string input) {
             Guid g = Guid.NewGuid();
             string GuidString = Convert.ToBase64String(g.ToByteArray());
             GuidString = GuidString.Replace("=", "");
