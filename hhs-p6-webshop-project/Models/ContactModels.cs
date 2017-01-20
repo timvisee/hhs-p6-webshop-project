@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
@@ -8,15 +9,24 @@ namespace hhs_p6_webshop_project.Models
 {
         public class ContactModels
         {
-        [Required(ErrorMessage = "Name is required")]
+        [DisplayName("Naam")]
+        [Required(ErrorMessage = "Naam is verplicht")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "Phone is required")]
+
+        [DisplayName("Telefoonnummer")]
+        [Required(ErrorMessage = "Phone is verplicht")]
         public string Phone { get; set; }
-        [Required(ErrorMessage = "Email is required")]
+
+        [DisplayName("E-Mail")]
+        [Required(ErrorMessage = "Email is verplicht")]
         public string Email { get; set; }
-        [Required(ErrorMessage = "Comment is required")]
+
+        [DisplayName("Bericht")]
+        [Required(ErrorMessage = "Comment is verplicht")]
         public string Comment { get; set; }
-        [Required(ErrorMessage = "Reference is required")]
+
+        [DisplayName("Referentie")]
+        [Required(ErrorMessage = "Reference is verplicht")]
         public string Reference { get; set; }
     }
     }
