@@ -4,7 +4,7 @@ using Xunit;
 namespace hhs_p6_webshop_project_test {
 
     [Collection("main")]
-    public class DemoTests {
+    public class SampleTests {
 
         /// <summary>
         /// Database fixture instance, used for testing.
@@ -15,14 +15,11 @@ namespace hhs_p6_webshop_project_test {
         /// Constructor.
         /// </summary>
         /// <param name="databaseFixture">Database fixture.</param>
-        public DemoTests(DatabaseFixture databaseFixture) {
+        public SampleTests(DatabaseFixture databaseFixture) {
             this._databaseFixture = databaseFixture;
         }
 
         [Fact]
-        public void SampleTest() {
-            Console.WriteLine("GETTING DATA FROM DB: ");
-//            Console.WriteLine(this._databaseFixture.Context.Appointment.ToList());
-        }
+        public void SampleTest() {}
     }
 }
