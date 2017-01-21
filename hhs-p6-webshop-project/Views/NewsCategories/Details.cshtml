@@ -3,7 +3,7 @@
 @model hhs_p6_webshop_project.Models.NewsModels.NewsCategoryView
 
 @{
-    ViewData["Title"] = Model.NewsCategory.Name;
+    ViewData["Title"] = "Blog - " + @Model.NewsCategory.Name;
     ViewData["PinkBackground"] = true;
 
     var random = new Random();
