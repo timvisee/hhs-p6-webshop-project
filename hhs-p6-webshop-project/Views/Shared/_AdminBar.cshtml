@@ -2,22 +2,19 @@
 <div id="admin_bar" class="hm-pink-dark">
     <ul id="admin_menu">
         <li>
-            @Html.ActionLink("Maak afspraak", "Create", "Appointments")
+            @Html.ActionLink("Bekijk pasafspraken", "Index", "Appointments")
         </li>
         <li>
-            @Html.ActionLink("Bekijk afspraken", "Index", "Appointments")
-        </li>
-        <li>
-            @Html.ActionLink("Nieuwe admin", "Register", "Account")
+            @Html.ActionLink("Nieuwe beheerder", "Register", "Account")
         </li>
         <li>
             @Html.ActionLink("Nieuw product", "Create", "Products")
         </li>
         <li>
-            @Html.ActionLink("Nieuw Artikel", "Create", "NewsArticles")
+            @Html.ActionLink("Nieuw Blogartikel", "Create", "NewsArticles")
         </li>
         <li>
-            @Html.ActionLink("Nieuwe Categorie", "Create", "NewsCategories")
+            @Html.ActionLink("Nieuwe Blogcategorie", "Create", "NewsCategories")
         </li>
         <li>
             @Html.ActionLink("Uitloggen", "LogOut", "Account")

@@ -13,6 +13,7 @@ namespace hhs_p6_webshop_project.Models.NewsModels {
 
         public int NewsArticleID { get; set; }
 
+        [Required]
         [Display(Name = "Titel")]
         public string Name { get; set; }
 
@@ -29,7 +30,7 @@ namespace hhs_p6_webshop_project.Models.NewsModels {
         public virtual ICollection<NewsArticleCategory> NewsArticleCategories { get; set; }
     }
 
-    public class NewsArticleVM {
+    public class NewsArticleView {
         public NewsArticle NewsArticle { get; set; }
 
         [Display(Name = "Categorieen")]

@@ -48,7 +48,7 @@
             {
                 <div class="product-edit-buttons">
                     <a class="btn" asp-action="Edit" asp-route-id="@item.ProductId">Bewerk</a>
-                    <a class="btn" asp-action="Delete" asp-route-id="@item.ProductId">Verwijder</a>
+                    <a class="btn" asp-action="Delete" asp-route-id="@item.ProductId" asp-controller="Products">Verwijder</a>
                 </div>
             }
         </a>

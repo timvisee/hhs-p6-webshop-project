@@ -53,9 +53,7 @@ namespace hhs_p6_webshop_project.Data {
         }
 
         public DbSet<Appointment> Appointment { get; set; }
-
-        public DbSet<AppointmentTime> AppointmentTime { get; set; }
-
+        
         public DbSet<Product> Products { get; set; }
 
         public DbSet<ColorOption> ColorOptions { get; set; }

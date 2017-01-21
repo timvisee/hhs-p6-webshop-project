@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Http;
 namespace hhs_p6_webshop_project.Controllers.NewsControllers {
     public class NewsArticlesController : Controller {
         private readonly ApplicationDbContext _context;
+        private const string Basepath = "/images/uploads/";
 
         public NewsArticlesController(ApplicationDbContext context) {
             _context = context;
@@ -20,7 +21,7 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers {
 
         // GET: NewsArticles
         public async Task<IActionResult> Index() {
-            return View(getNewsArticlesVM());
+            return View(getNewsArticlesView());
         }
 
         // GET: NewsArticles/Details/5
@@ -35,7 +36,7 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers {
                 return NotFound();
             }
 
-            return View(getNewsArticlesVM(newsArticle, new SelectList(_context.NewsCategory, "NewsCategoryID", "Name")));
+            return View(getNewsArticlesView(newsArticle, new SelectList(_context.NewsCategory, "NewsCategoryID", "Name")));
         }
 
         // GET: NewsArticles/Create
@@ -45,7 +46,7 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers {
             }
 
             NewsArticle na = new NewsArticle();
-            return View(getNewsArticlesVM(na, new SelectList(_context.NewsCategory, "NewsCategoryID", "Name")));
+            return View(getNewsArticlesView(na, new SelectList(_context.NewsCategory, "NewsCategoryID", "Name")));
         }
 
 
@@ -54,12 +55,13 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers {
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(NewsArticleVM newNewsArticle, IFormFile image) {
-            if (ModelState.IsValid || image != null) {
+        public IActionResult Create(NewsArticleView newNewsArticle, IFormFile image) {
+            if (ModelState.IsValid && image != null) {
+                // Upload an image and add the path to the article object
                 string filename = ChangePathName(newNewsArticle.NewsArticle.ImagePath);
                 FileInfo fi = new FileInfo(image.FileName);
                 string extension = fi.Extension;
-                string path = "/images/uploads/" + filename + extension;
+                string path = Basepath + filename + extension;
                 newNewsArticle.NewsArticle.ImagePath = path;
                 using (FileStream fs = System.IO.File.Create("wwwroot/" + path)) {
                     image.CopyTo(fs);
@@ -99,7 +101,7 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers {
                 return NotFound();
             }
 
-            return View(getNewsArticlesVM(newsArticle, new SelectList(_context.NewsCategory, "NewsCategoryID", "Name")));
+            return View(getNewsArticlesView(newsArticle, new SelectList(_context.NewsCategory, "NewsCategoryID", "Name")));
         }
 
         // POST: NewsArticles/Edit/5
@@ -107,16 +109,18 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers {
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, NewsArticleVM updatedNewsArticle, IFormFile image) {
+        public IActionResult Edit(int id, NewsArticleView updatedNewsArticle, IFormFile image) {
             if (id != updatedNewsArticle.NewsArticle.NewsArticleID) {
                 return NotFound();
             }
 
             if (ModelState.IsValid) {
+                // First remove all the current couplings between this article and categories
                 var rml = _context.NewsArticleCategory.Where(sc => sc.NewsArticleID == id);
                 _context.RemoveRange(rml);
                 _context.SaveChanges();
 
+                // Add all the selected categories to the current article
                 updatedNewsArticle.NewsArticle.NewsArticleCategories = new List<NewsArticleCategory>();
 
                 if (updatedNewsArticle.SelectedNewsCategories != null) {
@@ -125,11 +129,12 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers {
                     }
                 }
 
+                // Update the image path if an image is selected
                 if (image != null) {
                     string filename = ChangePathName(updatedNewsArticle.NewsArticle.ImagePath);
                     FileInfo fi = new FileInfo(image.FileName);
                     string extension = fi.Extension;
-                    string path = "/images/uploads/" + filename + extension;
+                    string path = Basepath + filename + extension;
                     updatedNewsArticle.NewsArticle.ImagePath = path;
                     using (FileStream fs = System.IO.File.Create("wwwroot/" + path)) {
                         image.CopyTo(fs);
@@ -162,7 +167,7 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers {
                 return NotFound();
             }
 
-            return View(getNewsArticlesVM(na, new SelectList(_context.NewsCategory, "NewsCategoryID", "Name")));
+            return View(getNewsArticlesView(na, new SelectList(_context.NewsCategory, "NewsCategoryID", "Name")));
         }
 
         // POST: NewsArticles/Delete/5
@@ -180,25 +185,25 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers {
         }
 
 
-        private List<NewsArticleVM> getNewsArticlesVM() {
-            List<NewsArticleVM> lijst = new List<NewsArticleVM>();
+        private List<NewsArticleView> getNewsArticlesView() {
+            List<NewsArticleView> avl = new List<NewsArticleView>();
             SelectList categoryList = new SelectList(_context.NewsCategory, "NewsCategoryID", "Name");
 
             foreach (int id in _context.NewsArticle.Select(x => x.NewsArticleID)) {
-                lijst.Add(getNewsArticlesVM(getNewsArticle(id), categoryList));
+                avl.Add(getNewsArticlesView(getNewsArticle(id), categoryList));
             }
 
-            return lijst;
+            return avl;
         }
 
-        private NewsArticleVM getNewsArticlesVM(NewsArticle newsArticle, SelectList newsCategoriesList) {
-            NewsArticleVM NewsArticleVM = new NewsArticleVM() {
+        private NewsArticleView getNewsArticlesView(NewsArticle newsArticle, SelectList newsCategoriesList) {
+            NewsArticleView newsArticleView = new NewsArticleView() {
                 NewsArticle = newsArticle,
                 NewsCategoriesList = newsCategoriesList,
                 SelectedNewsCategories = newsArticle.NewsArticleCategories.Select(sc => sc.NewsCategoryID)
             };
 
-            return NewsArticleVM;
+            return newsArticleView;
         }
 
         private NewsArticle getNewsArticle(int? id) {
@@ -208,14 +213,19 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers {
                 .SingleOrDefault(m => m.NewsArticleID == id);
         }
 
+        /**
+         * Change the pathname from the image to a random generated string
+         */
         public string ChangePathName(string input) {
             Guid g = Guid.NewGuid();
-            string GuidString = Convert.ToBase64String(g.ToByteArray());
-            GuidString = GuidString.Replace("=", "");
-            GuidString = GuidString.Replace("+", "");
-            GuidString = GuidString.Replace("/", "");
+            string guidString = Convert.ToBase64String(g.ToByteArray());
 
-            return GuidString;
+            // replace some characters for a valid filename
+            guidString = guidString.Replace("=", "");
+            guidString = guidString.Replace("+", "");
+            guidString = guidString.Replace("/", "");
+
+            return guidString;
         }
     }
 

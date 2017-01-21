@@ -135,7 +135,8 @@ $(document).ready(function () {
     /**
      * Toggle the menu when the toggle menu button is clicked
      */
-    $("#menu_toggle").click(function() {
+    $("#menu_toggle").click(function () {
+        $(this).toggleClass("glyphicon-remove glyphicon-menu-hamburger");
         $("#header_nav").slideToggle();
     });
 
@@ -224,7 +225,7 @@ $(document).ready(function () {
 
         // Get the button to toggle to the time
         var toggleToTimeButton = $(".toggle-time-date-to-time");
-        var toggleToDateButton = $(".toggle-time-time-to-date");
+        var toggleToDateButton = $(".toggle-time-date-to-date");
 
         /**
          * Show the date page.

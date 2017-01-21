@@ -2,13 +2,12 @@
 @model hhs_p6_webshop_project.Models.ProductModels.ColorOption
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Details voor " + @Model.Color;
 }
 
-<h2>Details</h2>
+<h2>Details voor @Model.Color</h2>
 
 <div>
-    <h4>ColorOption</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>

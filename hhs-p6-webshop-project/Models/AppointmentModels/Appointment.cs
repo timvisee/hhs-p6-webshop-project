@@ -13,10 +13,7 @@ namespace hhs_p6_webshop_project.Models.AppointmentModels {
 
         [DisplayName("Trouwdatum*")]
         public DateTime DateMarried { get; set; }
-
-        [DisplayName("Datum afspraak WERKT NIET")]
-        public AppointmentTime AppointmentTime { get; set; }
-
+        
         [DisplayName("Datum afspraak")]
         public DateTime AppointmentDateTime { get; set; }
 
