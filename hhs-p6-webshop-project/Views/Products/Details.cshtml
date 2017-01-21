@@ -61,18 +61,18 @@
                 </div>
                 <div class="product-information-attributes">
                     <!--<p>-->
-                        <!--Merk:-->
-                        <!--<a asp-action="">Maggie Sottero</a>-->
+                    <!--Merk:-->
+                    <!--<a asp-action="">Maggie Sottero</a>-->
                     <!--</p>-->
                     <!--<p>-->
-                        <!--Kenmerken:-->
-                        <!--<a asp-action="">Verleidelijk</a>,-->
-                        <!--<a asp-action="">Kant</a>,-->
-                        <!--<a asp-action="">Ivoor</a>,-->
-                        <!--<a asp-action="">Fishtail</a>,-->
-                        <!--<a asp-action="">Lage rug</a>,-->
-                        <!--<a asp-action="">Schouderbandjes</a>,-->
-                        <!--<a asp-action="">Strapless</a>-->
+                    <!--Kenmerken:-->
+                    <!--<a asp-action="">Verleidelijk</a>,-->
+                    <!--<a asp-action="">Kant</a>,-->
+                    <!--<a asp-action="">Ivoor</a>,-->
+                    <!--<a asp-action="">Fishtail</a>,-->
+                    <!--<a asp-action="">Lage rug</a>,-->
+                    <!--<a asp-action="">Schouderbandjes</a>,-->
+                    <!--<a asp-action="">Strapless</a>-->
                     <!--</p>-->
                     <p>
                         Prijsindicatie:
@@ -91,12 +91,14 @@
                     </p>
                     <div class="product-make-appointment-container">
                         <p>Kom deze jurk passen!</p>
-                        @Html.ActionLink("Pasafspraak maken", "Create", "Appointments", new {
-                                id = Model.ProductId
-                        }, new {
-                               @id = "appointment-create-button",
-                               @class = "btn"
-                        })
+                        @Html.ActionLink("Pasafspraak maken", "Create", "Appointments", new
+                   {
+                       id = Model.ProductId
+                   }, new
+                   {
+                       @id = "appointment-create-button",
+                       @class = "btn"
+                   })
                     </div>
                 </div>
             </div>
@@ -111,25 +113,33 @@
     <div class="row">
         <div class="col-md-3 col-sm-12 addition-item">
             <div class="addition-image">
-                <img src="~/images/uploads/addition-picture.jpg" alt="" />
+                <div class="image-wrapper">
+                    <img src="~/images/products/accessoire-1.jpg" alt="" />
+                </div>
             </div>
             <span>Abrazi</span>
         </div>
         <div class="col-md-3 col-sm-12 addition-item">
             <div class="addition-image">
-                <img src="~/images/uploads/addition-picture.jpg" alt="" />
+                <div class="image-wrapper">
+                    <img src="~/images/products/accessoire-2.jpg" alt="" />
+                </div>
             </div>
             <span>Abrazi</span>
         </div>
         <div class="col-md-3 col-sm-12 addition-item">
             <div class="addition-image">
-                <img src="~/images/uploads/addition-picture.jpg" alt="" />
+                <div class="image-wrapper">
+                    <img src="~/images/products/accessoire-1.jpg" alt="" />
+                </div>
             </div>
             <span>Abrazi</span>
         </div>
         <div class="col-md-3 col-sm-12 addition-item">
             <div class="addition-image">
-                <img src="~/images/uploads/addition-picture.jpg" alt="" />
+                <div class="image-wrapper">
+                    <img src="~/images/products/accessoire-2.jpg" alt="" />
+                </div>
             </div>
             <span>Abrazi</span>
         </div>
@@ -146,25 +156,33 @@
     <div class="row">
         <div class="col-md-3 col-sm-12 addition-item">
             <div class="addition-image">
-                <img src="~/images/uploads/addition-picture.jpg" alt="" />
+                <div class="image-wrapper">
+                    <img src="~/images/uploads/default/annabelle-2.jpg" alt="" />
+                </div>
             </div>
             <span>Maggie Sottero</span>
         </div>
         <div class="col-md-3 col-sm-12 addition-item">
             <div class="addition-image">
-                <img src="~/images/uploads/addition-picture.jpg" alt="" />
+                <div class="image-wrapper">
+                    <img src="~/images/uploads/default/ladybird-2.jpg" alt="" />
+                </div>
             </div>
             <span>Beautiful by Ensoani</span>
         </div>
         <div class="col-md-3 col-sm-12 addition-item">
             <div class="addition-image">
-                <img src="~/images/uploads/addition-picture.jpg" alt="" />
+                <div class="image-wrapper">
+                    <img src="~/images/uploads/default/ladybird-nude-1.jpg" alt="" />
+                </div>
             </div>
             <span>Ladybird</span>
         </div>
         <div class="col-md-3 col-sm-12 addition-item">
             <div class="addition-image">
-                <img src="~/images/uploads/addition-picture.jpg" alt="" />
+                <div class="image-wrapper">
+                    <img src="~/images/uploads/default/pronovias-wit-1.jpg" alt="" />
+                </div>
             </div>
             <span>Tres Chic</span>
         </div>
