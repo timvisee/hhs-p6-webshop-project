@@ -1,9 +1,9 @@
 @using System.Threading.Tasks
 @using hhs_p6_webshop_project.Models.NewsModels
-@model hhs_p6_webshop_project.Models.NewsModels.NewsCategoryVM
+@model hhs_p6_webshop_project.Models.NewsModels.NewsCategoryView
 
 @{
-    ViewData["Title"] = Model.NewsCategory.Name;
+    ViewData["Title"] = "Blog - " + @Model.NewsCategory.Name;
     ViewData["PinkBackground"] = true;
 
     var random = new Random();
@@ -55,5 +55,10 @@
                 </div>
             }
         }
+    </div>
+</div>
+<div class="row">
+    <div class="col col-full-width">
+        <img class="img-full-width" src="~/images/home-banner-footer.jpg" />
     </div>
 </div>

@@ -101,11 +101,5 @@ namespace hhs_p6_webshop_project.Api
         public void Put(int id, [FromBody]string value)
         {
         }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

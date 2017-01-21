@@ -1,15 +1,14 @@
-@model hhs_p6_webshop_project.Models.NewsModels.NewsCategoryVM
+@model hhs_p6_webshop_project.Models.NewsModels.NewsCategoryView
 
 @{
-    ViewData["Title"] = "Blog - Bewerk categorie";
+    ViewData["Title"] = "Blog - Bewerk " + @Model.NewsCategory.Name;
 }
 
 
-<h2>Edit</h2>
+<h2>Bewerk @Model.NewsCategory.Name</h2>
 
 <form asp-action="Edit">
     <div class="form-horizontal">
-        <h4>NewsCategory</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="@Model.NewsCategory.NewsCategoryID" />

@@ -18,7 +18,7 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers {
 
         // GET: NewsCategories
         public IActionResult Index() {
-            return View(getCategoriesVM());
+            return View(getNewsCategoriesView());
         }
 
         // GET: NewsCategories/Details/5
@@ -36,18 +36,18 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers {
             var nac = _context.NewsArticleCategory.Where(sc => sc.NewsCategoryID == id);
             List<NewsArticle> naObjects = new List<NewsArticle>();
 
-
+            // Fill a list with article objects which contains the current category id and add them to the view object
             foreach (var naId in nac) {
                 naObjects.Add(_context.NewsArticle.FirstOrDefault(n => n.NewsArticleID == naId.NewsArticleID));
             }
+            
+            // Get a new category view
+            var ncvm = getNewsCategoriesView(nc, new SelectList(_context.NewsArticle, "NewsArticleID", "Name"));
 
-            var ncvm = getNewsCategoryVM(nc, new SelectList(_context.NewsArticle, "NewsArticleID", "Name"));
-
+            // Fill a list with all the newscategories/articles and add them to the view object
             ncvm.NewsCategories = new List<NewsCategory>(_context.NewsCategory);
-
-
             ncvm.NewsArticles = naObjects;
-
+            
             return View(ncvm);
         }
 
@@ -58,7 +58,7 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers {
             }
 
             NewsCategory nc = new NewsCategory();
-            return View(getNewsCategoryVM(nc, new SelectList(_context.NewsArticle, "NewsArticleID", "Name")));
+            return View(getNewsCategoriesView(nc, new SelectList(_context.NewsArticle, "NewsArticleID", "Name")));
         }
 
         // POST: NewsCategories/Create
@@ -66,11 +66,12 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers {
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(NewsCategoryVM newNewsCategory) {
+        public IActionResult Create(NewsCategoryView newNewsCategory) {
             if (ModelState.IsValid) {
                 _context.Add(newNewsCategory.NewsCategory);
                 _context.SaveChanges();
 
+                // Add articles to the category
                 if (newNewsCategory.SelectedNewsArticles != null) {
                     foreach (int id in newNewsCategory.SelectedNewsArticles) {
                         _context.NewsArticleCategory.Add(new NewsArticleCategory() { NewsCategoryID = newNewsCategory.NewsCategory.NewsCategoryID, NewsArticleID = id });
@@ -101,7 +102,7 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers {
                 return NotFound();
             }
 
-            return View(getNewsCategoryVM(nc, new SelectList(_context.NewsArticle, "NewsArticleID", "Name")));
+            return View(getNewsCategoriesView(nc, new SelectList(_context.NewsArticle, "NewsArticleID", "Name")));
         }
 
         // POST: NewsCategories/Edit/5
@@ -109,16 +110,18 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers {
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, NewsCategoryVM updatedNewsCategory) {
+        public IActionResult Edit(int id, NewsCategoryView updatedNewsCategory) {
             if (id != updatedNewsCategory.NewsCategory.NewsCategoryID) {
                 return NotFound();
             }
 
             if (ModelState.IsValid) {
+                // First remove all the current couplings between this category and articles
                 var rml = _context.NewsArticleCategory.Where(sc => sc.NewsCategoryID == id);
                 _context.RemoveRange(rml);
                 _context.SaveChanges();
-
+                
+                // Add all the selected articles to the current category
                 updatedNewsCategory.NewsCategory.NewsArticleCategories = new List<NewsArticleCategory>();
 
                 if (updatedNewsCategory.SelectedNewsArticles != null) {
@@ -152,7 +155,7 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers {
                 return NotFound();
             }
 
-            return View(getNewsCategoryVM(nc, new SelectList(_context.NewsArticle, "NewsArticleID", "Name")));
+            return View(getNewsCategoriesView(nc, new SelectList(_context.NewsArticle, "NewsArticleID", "Name")));
         }
 
         // POST: NewsCategories/Delete/5
@@ -169,25 +172,25 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers {
             return _context.NewsCategory.Any(e => e.NewsCategoryID == id);
         }
 
-        private List<NewsCategoryVM> getCategoriesVM() {
-            List<NewsCategoryVM> lijst = new List<NewsCategoryVM>();
+        private List<NewsCategoryView> getNewsCategoriesView() {
+            List<NewsCategoryView> cvl = new List<NewsCategoryView>();
             SelectList courseList = new SelectList(_context.NewsArticle, "NewsArticleID", "Name");
 
             foreach (int id in _context.NewsCategory.Select(x => x.NewsCategoryID)) {
-                lijst.Add(getNewsCategoryVM(getNewsCategory(id), courseList));
+                cvl.Add(getNewsCategoriesView(getNewsCategory(id), courseList));
             }
 
-            return lijst;
+            return cvl;
         }
 
-        private NewsCategoryVM getNewsCategoryVM(NewsCategory nc, SelectList courseList) {
-            NewsCategoryVM ncVM = new NewsCategoryVM() {
+        private NewsCategoryView getNewsCategoriesView(NewsCategory nc, SelectList courseList) {
+            NewsCategoryView ncView = new NewsCategoryView() {
                 NewsCategory = nc,
                 NewsArticleList = courseList,
                 SelectedNewsArticles = nc.NewsArticleCategories.Select(sc => sc.NewsArticleID)
             };
 
-            return ncVM;
+            return ncView;
         }
 
         private NewsCategory getNewsCategory(int? id) {
