@@ -354,17 +354,21 @@
     min-height: 200px;
 }
 
+    .addition-image .image-wrapper {
+        overflow: hidden;
+        display: block;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        background: white;
+        height: 100%;
+    }
+
     .addition-image img {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        -webkit-transform: translateY(-50%) translateX(-50%);
-        -moz-transform: translateY(-50%) translateX(-50%);
-        transform: translateY(-50%) translateX(-50%);
-        z-index: 0;
         opacity: 1;
-        max-width: 100%;
-        height: auto;
+        height: 100%;
+        width: auto;
+        display: block;
     }
 
 .addition-item:hover .addition-image,
