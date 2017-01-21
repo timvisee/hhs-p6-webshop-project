@@ -2,14 +2,13 @@
 @model hhs_p6_webshop_project.Models.ProductModels.ColorOption
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Bewerk kleur";
 }
 
-<h2>Edit</h2>
+<h2>Bewerk @Model.Color voor dit product</h2>
 
 <form asp-action="Edit">
     <div class="form-horizontal">
-        <h4>ColorOption</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="ColorOptionId" />
