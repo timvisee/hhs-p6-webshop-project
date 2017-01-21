@@ -5,13 +5,10 @@
     ViewData["Title"] = "Bewerk afspraak";
 }
 
-<h2>Afspraak</h2>
-
-
+<h2>Bewerk afspraak van @Model.Name</h2>
 
 <form asp-action="Edit">
     <div class="form-horizontal">
-        <h4>Bewerk afspraak</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="ID" />
