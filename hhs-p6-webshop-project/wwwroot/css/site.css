@@ -89,11 +89,11 @@ body {
 
 *::selection {
     background-color: #f0597c;
-    color: #fff
+    color: #fff;
 }
 
-.extra-padding{
-    padding:20px 0px;
+.extra-padding {
+    padding: 20px 0px;
 }
 
 /*--- Custom beun bootstrap ---*/
@@ -181,13 +181,13 @@ a:active {
     outline: 0 !important;
 }
 
-textarea.form-control{
-    resize:none;
+textarea.form-control {
+    resize: none;
     border: 2px solid #e5e5e5;
     border-radius: 0px;
     box-shadow: none;
     -webkit-box-shadow: 0 0 0px 1000px white inset;
-    height:100px;
+    height: 100px;
 }
 
 input.form-control[disabled] {
@@ -1317,7 +1317,15 @@ footer {
 
 .footer-wedding-show {
     margin-bottom: 5em;
+    display: flex;
+    justify-content: center;
 }
+
+    .footer-wedding-show img {
+        height: 50px;
+        margin: 0 30px;
+        width: auto;
+    }
 
 footer h4 {
     font-weight: bold;
@@ -1337,8 +1345,13 @@ footer ul {
         font-size: 1.2em;
     }
 
+
 .titanic .groetjes-tim {
     float: none;
+}
+
+.titanic .bem-fixt-het-wel {
+    float: top;
 }
 
 .loading-overlay {
@@ -1553,15 +1566,15 @@ footer ul {
             font-size: 9em;
         }
 
-        /*--- Category overview ---*/
-        .category-buttons {
-            flex-direction: column;
-        }
+    /*--- Category overview ---*/
+    .category-buttons {
+        flex-direction: column;
+    }
 
-        .category-button {
-            margin: 5px 0;
-            width: 100%;
-        }
+    .category-button {
+        margin: 5px 0;
+        width: 100%;
+    }
 
     /*--- Footer ---*/
     .social-box:first-child,
@@ -1826,13 +1839,13 @@ footer ul {
     justify-content: center;
 }
 
-.social-buttons a {
-    margin: 0 10px;
-}
+    .social-buttons a {
+        margin: 0 10px;
+    }
 
-.social-buttons a:hover {
-    transform: scale(1.05);
-}
+        .social-buttons a:hover {
+            transform: scale(1.05);
+        }
 
 .cursor-pointer {
     cursor: pointer !important;
