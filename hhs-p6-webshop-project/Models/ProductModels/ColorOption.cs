@@ -18,12 +18,16 @@ namespace hhs_p6_webshop_project.Models.ProductModels
         public int ColorOptionId { get; set; }
 
         [Required]
+        [DisplayName("Kleur")]
         public string Color { get; set; }
 
+        [DisplayName("Product")]
         public int ProductId { get; set; }
 
+        [DisplayName("Product")]
         public Product Product { get; set; }
 
+        [DisplayName("Afbeeldingen")]
         public List<ProductImage> Images { get; set; }
 
         public bool Equals(ColorOption other) {

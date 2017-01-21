@@ -17,9 +17,14 @@ namespace hhs_p6_webshop_project.Models.ProductModels
         public int ProductId { get; set; }
         [DisplayName("Product")]
         public string Name { get; set; }
+
+        [DisplayName("Beschrijving")]
         public string Description { get; set; }
+        
+        [DisplayName("Prijs")]
         public double Price { get; set; }
 
+        [DisplayName("Kleuren")]
         public List<ColorOption> ColorOptions { get; set; }
 
         public Tuple<double, double, bool> ParsePriceRange(HashSet<object> set) {
