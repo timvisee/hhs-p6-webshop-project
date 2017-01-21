@@ -7,6 +7,9 @@ $(document).ready(function () {
 
     $(".color-circle").click(function () {
         colorId = $(this).attr("value");
+        console.log(colorId);
+        $(".delete-color-btn").attr("href", "/ColorOptions/Delete/" + colorId);
+        $(".delete-color-btn").fadeIn("slow");
         getImagePaths(colorId);
 
         // Update the URL hash to match the color
