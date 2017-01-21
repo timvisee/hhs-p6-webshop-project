@@ -106,7 +106,14 @@
         </div>
         <div id="header_nav">
             <a asp-controller="Home" asp-action="Index" class="header-nav-logo">
-                <img class="navbar-brand" src="~/images/logo.png" alt="Honeymoon Shop"/>
+                @if (showBanner || showHomeBanner)
+                {
+                    <img class="navbar-brand" src="~/images/logo-white.png" alt="Honeymoon Shop" />
+                }
+                else
+                {
+                    <img class="navbar-brand" src="~/images/logo-black.png" alt="Honeymoon Shop" />
+                }
             </a>
             <nav>
                 <ul>
