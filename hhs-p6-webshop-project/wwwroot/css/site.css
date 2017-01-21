@@ -1354,6 +1354,10 @@ footer ul {
     float: top;
 }
 
+.titanic .henk-gaat-voor-de-realiteit{
+	float:bottom;
+}
+
 .loading-overlay {
     position: absolute;
     z-index: 99998;
