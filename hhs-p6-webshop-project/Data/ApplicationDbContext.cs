@@ -19,7 +19,7 @@ namespace hhs_p6_webshop_project.Data {
 
         static DbContextOptions<ApplicationDbContext> CreateTestContext() {
             var builder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            builder.UseSqlite("test.db");
+            builder.UseSqlite("Data source=test.db");
             return builder.Options;
         }
 
