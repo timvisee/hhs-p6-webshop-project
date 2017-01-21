@@ -5,7 +5,7 @@
 @inject SignInManager<ApplicationUser> SignInManager
 
 @{
-    ViewData["Title"] = "Log in";
+    ViewData["Title"] = "Inloggen";
 }
 
 <h2>@ViewData["Title"].</h2>
@@ -13,7 +13,6 @@
   <div class="col-md-8">
     <section>
       <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
-        <h4>Honeymoon shop adminpanel</h4>
         <hr/>
         <div asp-validation-summary="All" class="text-danger"></div>
         <div class="form-group">
@@ -50,7 +49,7 @@
   </div>
   <div class="col-md-4">
     <section>
-      <h4>Use another service to log in.</h4>
+      <h4>Of gebruik een andere inlogmethode.</h4>
       <hr/>
       @{
           var loginProviders = SignInManager.GetExternalAuthenticationSchemes().ToList();
