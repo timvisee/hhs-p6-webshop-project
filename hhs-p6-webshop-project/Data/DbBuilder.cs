@@ -394,7 +394,68 @@ namespace hhs_p6_webshop_project.Data
 
             context.Products.Add(pronovias);
             #endregion
-            
+
+            #region Mori Lee
+            Product morilee = GenerateProduct(
+                "Mori Lee",
+                "Trouwjurk van Ronald Joyce model Paphos, Glamour japon uitgevoerd in ivoor kleurig organza met rijke bewerking. De volle rok van organza heeft een lange sleep en is onbewerkt. De strapless sweetheart top is volledig bewerkt met steentjes pareltjes en lovertjes. De jurk sluit met een rijgsluiting.",
+                2250.0d);
+
+            morilee.ColorOptions.Add(
+                GenerateColor(
+                    "Nude",
+                    new string[] { "/images/uploads/default/morilee-1.jpg", "/images/uploads/default/morilee-2.jpg", "/images/uploads/default/morilee-3.jpg" }));
+
+            context.Products.Add(morilee);
+            #endregion
+
+            #region Tres Chic
+            Product treschic = GenerateProduct(
+                "Tres Chic",
+                "Trouwjurk van het merk Tres Chic gemaakt van kant. De top heeft een offshoulder model met een kleine mouwtje. De rok is kort van voor en lang van achter met een sleep.",
+                1750.0d);
+
+            treschic.ColorOptions.Add(
+                GenerateColor(
+                    "Ivoor",
+                    new string[] { "/images/uploads/default/treschic-1.jpg" }));
+
+            context.Products.Add(treschic);
+            #endregion
+
+            #region Jarice
+            Product jarice = GenerateProduct(
+                "Jarice",
+                "Trouwjurk van het merk Jarice gemaakt van kant. De top is strapless met een sweetheart lijn. De taille wordt geaccentueerd door een beaded belt. De rok heeft een A-lijn met een sleep.",
+                1500.0d);
+
+            jarice.ColorOptions.Add(
+                GenerateColor(
+                    "Ivoor",
+                    new string[] { "/images/uploads/default/jarice-1.jpg", "/images/uploads/default/jarice-2.jpg" }));
+
+            jarice.ColorOptions.Add(
+                GenerateColor(
+                    "Wit",
+                    new string[] { "/images/uploads/default/jarice-wit-1.jpg", "/images/uploads/default/jarice-wit-2.jpg" }));
+
+            context.Products.Add(jarice);
+            #endregion
+
+            #region Emma Charlotte
+            Product emmacharlotte = GenerateProduct(
+                "Emma Charlotte",
+                "Trouwjurk van het merk Emma Charlotte gemaakt van kant. De top heeft een hoge doorzichtige neklijn en een laag uitgesneden rug, afgewerkt met kanten applicaties. De jurk heeft een A-lijn met een sleep.",
+                1750.0d);
+
+            emmacharlotte.ColorOptions.Add(
+                GenerateColor(
+                    "Ivoor",
+                    new string[] { "/images/uploads/default/emmacharlotte-1.jpg", "/images/uploads/default/emmacharlotte-2.jpg" }));
+
+            context.Products.Add(emmacharlotte);
+            #endregion
+
             context.SaveChanges();
         }
     }
