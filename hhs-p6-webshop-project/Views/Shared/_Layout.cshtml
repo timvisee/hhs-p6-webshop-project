@@ -77,14 +77,12 @@
     <header>
         <div id="header_top" class="hm-pink">
             <div id="choose_website">
-                <!--
-                <a href="#" id="choice_website" class="hm-pink-dark-text active">Website</a>
-                <a href="#" id="choice_webshop" class="hm-pink-dark-text">Webshop</a>
-                -->
+                <a asp-controller="Home" asp-action="Index" id="choice_website" class="hm-pink-dark-text">Website</a>
+                <a asp-controller="Products" asp-action="Index" id="choice_webshop" class="hm-pink-dark-text">Webshop</a>
+              
                 @if (!User.Identity.IsAuthenticated) {
                 <a asp-controller="Account" asp-action="Login" class="hm-pink-dark-text loginBtn">Inloggen</a>
                 }
-                <a href="#" id="comic_sans_button" class="hm-pink-dark-text">Comic sans this website!</a>
             </div>
             <div id="header_contact">
                 <div class="phone-number">
