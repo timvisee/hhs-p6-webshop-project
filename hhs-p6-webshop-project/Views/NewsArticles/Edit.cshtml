@@ -12,11 +12,10 @@
     });
 </script>
 
-<h2>Edit</h2>
+<h2>Bewerk @Model.NewsArticle.Name</h2>
 
 <form asp-action="Edit" enctype="multipart/form-data">
     <div class="form-horizontal">
-        <h4>NewsArticle</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="@Model.NewsArticle.NewsArticleID" />
