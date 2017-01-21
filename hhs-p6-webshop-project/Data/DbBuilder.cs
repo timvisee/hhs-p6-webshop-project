@@ -106,20 +106,11 @@ namespace hhs_p6_webshop_project.Data
 
         private static void GenerateNews(ApplicationDbContext context)
         {
-            #region Template newsarticle
-            NewsArticle template = new NewsArticle()
-            {
-                Name = "",
-                ImagePath = "",
-                Excerpt = "",
-                Content = "",
-            };
-            #endregion
-
+            #region Articles
             NewsArticle article1 = new NewsArticle()
             {
                 Name = "Collectie",
-                ImagePath = "/images/uploads/default/ladybird-1.jpg",
+                ImagePath = "//images/uploads/default/ladybird-1.jpg",
                 Excerpt = "De super sexy collectie van Martina Liana is gearriveerd",
                 Content = "<p>Wat is Lorem Ipsum?\r\nLorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren \'60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.</p>",
             };
@@ -183,11 +174,13 @@ namespace hhs_p6_webshop_project.Data
             NewsArticle article9 = new NewsArticle()
             {
                 Name = "Wijsheden",
-                ImagePath = "/images/uploads/default/ladybird-1.jpg",
+                ImagePath = "//images/uploads/default/ladybird-1.jpg",
                 Excerpt = "Laten we een voorbeeld nemen aan de schijf van 5: K, G, F, M, P",
                 Content = "<p>Wat is Lorem Ipsum?\r\nLorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren \'60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.</p><p>Wat is Lorem Ipsum?\r\nLorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren \'60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.</p>",
             };
+            #endregion
 
+            #region Categories
             NewsCategory cat1 = new NewsCategory()
             {
                 Name = "Collectie"
@@ -207,7 +200,9 @@ namespace hhs_p6_webshop_project.Data
             {
                 Name = "Lovely real brides"
             };
+            #endregion
 
+            #region Couplings
             NewsArticleCategory nac1 = new NewsArticleCategory()
             {
                 NewsCategory = cat1,
@@ -298,7 +293,9 @@ namespace hhs_p6_webshop_project.Data
                 NewsCategory = cat3,
                 NewsArticle = article9
             };
+            #endregion
 
+            #region Fill context
             context.NewsArticle.Add(article1);
             context.NewsArticle.Add(article2);
             context.NewsArticle.Add(article3);
@@ -329,6 +326,7 @@ namespace hhs_p6_webshop_project.Data
             context.NewsArticleCategory.Add(nac13);
             context.NewsArticleCategory.Add(nac14);
             context.NewsArticleCategory.Add(nac15);
+            #endregion
 
             context.SaveChanges();
         }
@@ -344,7 +342,7 @@ namespace hhs_p6_webshop_project.Data
             annabelle.ColorOptions.Add(
                 GenerateColor(
                     "Ivoor",
-                    new string[] { "images/uploads/default/annabelle-1.jpg", "images/uploads/default/annabelle-2.jpg", "images/uploads/default/annabelle-3.jpg" }));
+                    new string[] { "/images/uploads/default/annabelle-1.jpg", "/images/uploads/default/annabelle-2.jpg", "/images/uploads/default/annabelle-3.jpg" }));
 
             context.Products.Add(annabelle);
             #endregion
@@ -358,22 +356,22 @@ namespace hhs_p6_webshop_project.Data
             ladybird.ColorOptions.Add(
                 GenerateColor(
                     "Ivoor",
-                    new string[] { "images/uploads/default/ladybird-ivoor-1.jpg", "images/uploads/default/ladybird-ivoor-2.jpg", "images/uploads/default/ladybird-ivoor-3.jpg" }));
+                    new string[] { "/images/uploads/default/ladybird-ivoor-1.jpg", "/images/uploads/default/ladybird-ivoor-2.jpg", "/images/uploads/default/ladybird-ivoor-3.jpg" }));
 
             ladybird.ColorOptions.Add(
                 GenerateColor(
                     "Blauw",
-                    new string[] { "images/uploads/default/ladybird-blauw-1.jpg" }));
+                    new string[] { "/images/uploads/default/ladybird-blauw-1.jpg" }));
 
             ladybird.ColorOptions.Add(
                 GenerateColor(
                     "Wit",
-                    new string[] { "images/uploads/default/ladybird-1.jpg", "images/uploads/default/ladybird-2.jpg", "images/uploads/default/ladybird-3.jpg" }));
+                    new string[] { "/images/uploads/default/ladybird-1.jpg", "/images/uploads/default/ladybird-2.jpg", "/images/uploads/default/ladybird-3.jpg" }));
 
             ladybird.ColorOptions.Add(
                 GenerateColor(
                     "Roze",
-                    new string[] { "images/uploads/default/ladybird-nude-1.jpg", "images/uploads/default/ladybird-nude-2.jpg", "images/uploads/default/ladybird-nude-3.jpg" }));
+                    new string[] { "/images/uploads/default/ladybird-nude-1.jpg", "/images/uploads/default/ladybird-nude-2.jpg", "/images/uploads/default/ladybird-nude-3.jpg" }));
 
             context.Products.Add(ladybird);
             #endregion
@@ -387,12 +385,12 @@ namespace hhs_p6_webshop_project.Data
             pronovias.ColorOptions.Add(
                 GenerateColor(
                     "Ivoor",
-                    new string[] { "images/uploads/default/pronovias-ivoor-1.jpg", "images/uploads/default/pronovias-ivoor-2.jpg", "images/uploads/default/pronovias-ivoor-3.jpg" }));
+                    new string[] { "/images/uploads/default/pronovias-ivoor-1.jpg", "/images/uploads/default/pronovias-ivoor-2.jpg", "/images/uploads/default/pronovias-ivoor-3.jpg" }));
 
             pronovias.ColorOptions.Add(
                 GenerateColor(
                     "Wit",
-                    new string[] { "images/uploads/default/pronovias-wit-1.jpg", "images/uploads/default/pronovias-wit-2.jpg", "images/uploads/default/pronovias-wit-3.jpg" }));
+                    new string[] { "/images/uploads/default/pronovias-wit-1.jpg", "/images/uploads/default/pronovias-wit-2.jpg", "/images/uploads/default/pronovias-wit-3.jpg" }));
 
             context.Products.Add(pronovias);
             #endregion
