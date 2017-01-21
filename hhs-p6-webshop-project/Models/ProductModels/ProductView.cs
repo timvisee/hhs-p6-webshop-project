@@ -2,7 +2,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using hhs_p6_webshop_project.Models.FilterModel;
+using hhs_p6_webshop_project.Models.FilterModels;
 
 namespace hhs_p6_webshop_project.Models.ProductModels
 {

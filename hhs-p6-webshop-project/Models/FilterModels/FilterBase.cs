@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace hhs_p6_webshop_project.Models.FilterModel
+namespace hhs_p6_webshop_project.Models.FilterModels
 {
     public abstract class FilterBase
     {

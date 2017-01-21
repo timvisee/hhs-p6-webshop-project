@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using hhs_p6_webshop_project.Api;
 using hhs_p6_webshop_project.Data;
-using hhs_p6_webshop_project.Models.FilterModel;
+using hhs_p6_webshop_project.Models.FilterModels;
 using hhs_p6_webshop_project.Models.ProductModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
