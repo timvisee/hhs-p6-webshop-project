@@ -1354,6 +1354,10 @@ footer ul {
     float: top;
 }
 
+.iceberg .te-laat {
+    visibility: hidden;
+}
+
 .loading-overlay {
     position: absolute;
     z-index: 99998;
