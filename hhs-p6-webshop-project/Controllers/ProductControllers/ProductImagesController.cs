@@ -16,7 +16,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
     public class ProductImagesController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly string basepath = "images/uploads/";
+        private readonly string basepath = "/images/uploads/";
 
         public ProductImagesController(ApplicationDbContext context)
         {
@@ -104,7 +104,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
                     string extension = fi.Extension;
                     string path = basepath + filename + extension;
                     productImage.Path = path;
-                    using (FileStream fs = System.IO.File.Create("wwwroot/" + path))
+                    using (FileStream fs = System.IO.File.Create("wwwroot" + path))
                     {
                         image.CopyTo(fs);
                         fs.Flush();
@@ -176,9 +176,9 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
                         string filename = ChangePathName(productImage.Path);
                         FileInfo fi = new FileInfo(image.FileName);
                         string extension = fi.Extension;
-                        string path = "images/uploads/" + filename + extension;
+                        string path = basepath + filename + extension;
                         productImage.Path = path;
-                        using (FileStream fs = System.IO.File.Create("wwwroot/" + path))
+                        using (FileStream fs = System.IO.File.Create("wwwroot" + path))
                         {
                             image.CopyTo(fs);
                             fs.Flush();

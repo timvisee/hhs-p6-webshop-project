@@ -29,7 +29,7 @@ $(document).ready(function () {
             },
             success: function (data) {
                 // Set the product image source
-                parentDiv.find(".product-image").attr("src", "/" + data["data"]["paths"][0]);
+                parentDiv.find(".product-image").attr("src", data["data"]["paths"][0]);
             },
             complete: function () {
                 
