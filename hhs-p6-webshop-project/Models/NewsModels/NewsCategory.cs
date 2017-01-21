@@ -20,7 +20,7 @@ namespace hhs_p6_webshop_project.Models.NewsModels {
         public virtual ICollection<NewsArticleCategory> NewsArticleCategories { get; set; }
     }
 
-    public class NewsCategoryVM {
+    public class NewsCategoryView {
         public NewsCategory NewsCategory { get; set; }
 
         public List<NewsCategory> NewsCategories { get; set; }

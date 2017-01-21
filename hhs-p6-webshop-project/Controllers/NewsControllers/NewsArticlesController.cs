@@ -20,7 +20,7 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers {
 
         // GET: NewsArticles
         public async Task<IActionResult> Index() {
-            return View(getNewsArticlesVM());
+            return View(getNewsArticlesView());
         }
 
         // GET: NewsArticles/Details/5
@@ -35,7 +35,7 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers {
                 return NotFound();
             }
 
-            return View(getNewsArticlesVM(newsArticle, new SelectList(_context.NewsCategory, "NewsCategoryID", "Name")));
+            return View(getNewsArticlesView(newsArticle, new SelectList(_context.NewsCategory, "NewsCategoryID", "Name")));
         }
 
         // GET: NewsArticles/Create
@@ -45,7 +45,7 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers {
             }
 
             NewsArticle na = new NewsArticle();
-            return View(getNewsArticlesVM(na, new SelectList(_context.NewsCategory, "NewsCategoryID", "Name")));
+            return View(getNewsArticlesView(na, new SelectList(_context.NewsCategory, "NewsCategoryID", "Name")));
         }
 
 
@@ -54,7 +54,7 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers {
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(NewsArticleVM newNewsArticle, IFormFile image) {
+        public IActionResult Create(NewsArticleView newNewsArticle, IFormFile image) {
             if (ModelState.IsValid || image != null) {
                 string filename = ChangePathName(newNewsArticle.NewsArticle.ImagePath);
                 FileInfo fi = new FileInfo(image.FileName);
@@ -99,7 +99,7 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers {
                 return NotFound();
             }
 
-            return View(getNewsArticlesVM(newsArticle, new SelectList(_context.NewsCategory, "NewsCategoryID", "Name")));
+            return View(getNewsArticlesView(newsArticle, new SelectList(_context.NewsCategory, "NewsCategoryID", "Name")));
         }
 
         // POST: NewsArticles/Edit/5
@@ -107,7 +107,7 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers {
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, NewsArticleVM updatedNewsArticle, IFormFile image) {
+        public IActionResult Edit(int id, NewsArticleView updatedNewsArticle, IFormFile image) {
             if (id != updatedNewsArticle.NewsArticle.NewsArticleID) {
                 return NotFound();
             }
@@ -162,7 +162,7 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers {
                 return NotFound();
             }
 
-            return View(getNewsArticlesVM(na, new SelectList(_context.NewsCategory, "NewsCategoryID", "Name")));
+            return View(getNewsArticlesView(na, new SelectList(_context.NewsCategory, "NewsCategoryID", "Name")));
         }
 
         // POST: NewsArticles/Delete/5
@@ -180,25 +180,25 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers {
         }
 
 
-        private List<NewsArticleVM> getNewsArticlesVM() {
-            List<NewsArticleVM> lijst = new List<NewsArticleVM>();
+        private List<NewsArticleView> getNewsArticlesView() {
+            List<NewsArticleView> lijst = new List<NewsArticleView>();
             SelectList categoryList = new SelectList(_context.NewsCategory, "NewsCategoryID", "Name");
 
             foreach (int id in _context.NewsArticle.Select(x => x.NewsArticleID)) {
-                lijst.Add(getNewsArticlesVM(getNewsArticle(id), categoryList));
+                lijst.Add(getNewsArticlesView(getNewsArticle(id), categoryList));
             }
 
             return lijst;
         }
 
-        private NewsArticleVM getNewsArticlesVM(NewsArticle newsArticle, SelectList newsCategoriesList) {
-            NewsArticleVM NewsArticleVM = new NewsArticleVM() {
+        private NewsArticleView getNewsArticlesView(NewsArticle newsArticle, SelectList newsCategoriesList) {
+            NewsArticleView newsArticleView = new NewsArticleView() {
                 NewsArticle = newsArticle,
                 NewsCategoriesList = newsCategoriesList,
                 SelectedNewsCategories = newsArticle.NewsArticleCategories.Select(sc => sc.NewsCategoryID)
             };
 
-            return NewsArticleVM;
+            return newsArticleView;
         }
 
         private NewsArticle getNewsArticle(int? id) {
