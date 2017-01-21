@@ -47,8 +47,7 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers {
             // Fill a list with all the newscategories/articles and add them to the view object
             ncvm.NewsCategories = new List<NewsCategory>(_context.NewsCategory);
             ncvm.NewsArticles = naObjects;
-
-
+            
             return View(ncvm);
         }
 
@@ -72,6 +71,7 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers {
                 _context.Add(newNewsCategory.NewsCategory);
                 _context.SaveChanges();
 
+                // Add articles to the category
                 if (newNewsCategory.SelectedNewsArticles != null) {
                     foreach (int id in newNewsCategory.SelectedNewsArticles) {
                         _context.NewsArticleCategory.Add(new NewsArticleCategory() { NewsCategoryID = newNewsCategory.NewsCategory.NewsCategoryID, NewsArticleID = id });
@@ -116,10 +116,12 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers {
             }
 
             if (ModelState.IsValid) {
+                // First remove all the current couplings between this category and articles
                 var rml = _context.NewsArticleCategory.Where(sc => sc.NewsCategoryID == id);
                 _context.RemoveRange(rml);
                 _context.SaveChanges();
-
+                
+                // Add all the selected articles to the current category
                 updatedNewsCategory.NewsCategory.NewsArticleCategories = new List<NewsArticleCategory>();
 
                 if (updatedNewsCategory.SelectedNewsArticles != null) {
@@ -171,14 +173,14 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers {
         }
 
         private List<NewsCategoryView> getNewsCategoriesView() {
-            List<NewsCategoryView> lijst = new List<NewsCategoryView>();
+            List<NewsCategoryView> cvl = new List<NewsCategoryView>();
             SelectList courseList = new SelectList(_context.NewsArticle, "NewsArticleID", "Name");
 
             foreach (int id in _context.NewsCategory.Select(x => x.NewsCategoryID)) {
-                lijst.Add(getNewsCategoriesView(getNewsCategory(id), courseList));
+                cvl.Add(getNewsCategoriesView(getNewsCategory(id), courseList));
             }
 
-            return lijst;
+            return cvl;
         }
 
         private NewsCategoryView getNewsCategoriesView(NewsCategory nc, SelectList courseList) {

@@ -13,6 +13,7 @@ namespace hhs_p6_webshop_project.Models.NewsModels {
 
         public int NewsArticleID { get; set; }
 
+        [Required]
         [Display(Name = "Titel")]
         public string Name { get; set; }
 
