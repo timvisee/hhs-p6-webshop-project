@@ -12,6 +12,8 @@ $(document).ready(function () {
         getImagePaths(colorId, parentDiv);
     });
 
+    $("body").addClass("dressfinder-page");
+
     function getImagePaths(colorId, parentDiv) {
         // Filter the dresses and fetch the new list through AJAX
         $.ajax({
