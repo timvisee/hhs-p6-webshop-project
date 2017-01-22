@@ -11,14 +11,14 @@ log() {
 log "Testing deployment configuration..."
 
 # Ensure we're on the master branch
-if [ "$CIRCLE_BRANCH" = "master" ]
-then
-    echo "OK: We're on the 'master' branch."
-else
-	echo "ERR: Not on the 'master branch'."
-	log "Not on the 'master' branch, skipping deployment!"
-	exit 0
-fi
+# if [ "$CIRCLE_BRANCH" = "master" ]
+# then
+     echo "OK: We're on a deployment branch."
+# else
+# 	echo "ERR: Not on a deployment branch."
+# 	log "Not on the 'master' branch, skipping deployment!"
+# 	exit 0
+# fi
 
 # Ensure an SSH user and host is given
 if [ "$DEPLOY_LINUX_USER_HOST" = "" ]
