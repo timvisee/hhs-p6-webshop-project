@@ -178,31 +178,6 @@
     text-align: center;
 }
 
-/*--- Product filter ---*/
-.filter-list {
-    list-style: none;
-    min-height: 1px;
-    padding: 0 0 0 10px;
-}
-
-    .filter-list li {
-        width: 100%;
-        float: left;
-    }
-
-    .filter-list input {
-        height: 15px;
-        margin: 5px 10px 5px 0;
-        float: left;
-    }
-
-    .filter-list label {
-        float: left;
-        cursor: pointer;
-        line-height: 30px;
-        margin: 0;
-    }
-
 /*--- Single product page ---*/
 .back-to-dress-finder {
     padding: 10px;
@@ -442,7 +417,7 @@
         border-radius: 25px;
     }
 
-.ui-corner-all:focus{
+.ui-corner-all:focus {
     outline: 0;
 }
 

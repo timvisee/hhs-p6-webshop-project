@@ -911,21 +911,21 @@ nav li {
             cursor: pointer;
         }
 
-.home-list.pinkTheme .active {
-    color: #f0597c;
-}
+    .home-list.pinkTheme .active {
+        color: #f0597c;
+    }
 
-.home-list.blueTheme .active {
-    color: #1a91be;
-}
+    .home-list.blueTheme .active {
+        color: #1a91be;
+    }
 
-.home-list.pinkTheme .active:before {
-    background-color: #f0597c;
-}
+    .home-list.pinkTheme .active:before {
+        background-color: #f0597c;
+    }
 
-.home-list.blueTheme .active:before {
-    background-color: #1a91be;
-}
+    .home-list.blueTheme .active:before {
+        background-color: #1a91be;
+    }
 
 /*--- Content ---*/
 .container {
@@ -1560,19 +1560,19 @@ footer ul {
             font-size: 9em;
         }
 
-        /*--- Appointment banner ---*/
-        .appointment-banner-image-container {
-            width: 100%;
-        }
+    /*--- Appointment banner ---*/
+    .appointment-banner-image-container {
+        width: 100%;
+    }
 
-        .appointment-banner-text-wrapper {
-            margin-left: 30%;
-            width: 70%;
-        }
+    .appointment-banner-text-wrapper {
+        margin-left: 30%;
+        width: 70%;
+    }
 
-        .home-list {
-            width: 100%;
-        }
+    .home-list {
+        width: 100%;
+    }
 
         .home-list li {
             width: 50%;
@@ -1737,6 +1737,7 @@ footer ul {
     animation-name: productCatalogLeave;
 }
 
+/*--- Product filters ---*/
 .filters-container h3 {
     outline: none;
 }
@@ -1779,6 +1780,10 @@ footer ul {
         margin-left: 0;
     }
 
+        .filters-container ul li label {
+            cursor: pointer;
+        }
+
 .product-filters h4 {
     font-weight: bold;
 }
@@ -1810,6 +1815,7 @@ footer ul {
     border-color: #FAC9C4 !important;
     -ms-border-radius: 11px !important;
     border-radius: 11px !important;
+    cursor: pointer !important;
 }
 
 .ui-slider-horizontal {
@@ -1847,6 +1853,7 @@ footer ul {
     width: 220px;
 }
 
+/*--- Social media buttons on appointment thank you page ---*/
 .social-buttons {
     margin: 50px 0 25px 0;
     width: 100%;
