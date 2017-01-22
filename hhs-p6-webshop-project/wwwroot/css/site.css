@@ -1793,7 +1793,7 @@ footer ul {
 .ui-accordion-content-active {
     border: none !important;
     overflow-y: scroll;
-    max-height: 560px;
+    max-height: 350px;
 }
 
 .ui-slider-handle {
