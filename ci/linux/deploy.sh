@@ -8,9 +8,13 @@ log() {
 }
 
 # Deploy the product
-log "Deploying on server..."
+log "Starting Linux deployment process..."
 
-ssh -o StrictHostKeyChecking=no root@honeymoon.timvisee.com "~/updateSite"
+log "Adding deployment key..."
+echo "$LINUX_DEPLOY_KEY" >> ~/.ssh/authorized_keys
+
+log "Deploying site..."
+ssh -v -o StrictHostKeyChecking=no root@honeymoon.timvisee.com "~/updateSite"
 
 # Show a success message
 log "Site successfully deployed.\nURL: http://honeymoon.timvisee.com/"
