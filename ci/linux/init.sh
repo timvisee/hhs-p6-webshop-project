@@ -11,3 +11,4 @@ echo ""
 sudo chmod 777 ./ci/linux/setup.sh
 sudo chmod 777 ./ci/linux/build.sh
 sudo chmod 777 ./ci/linux/test.sh
+sudo chmod 777 ./ci/linux/deploy.sh

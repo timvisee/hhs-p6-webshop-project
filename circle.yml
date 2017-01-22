@@ -11,3 +11,8 @@ test:
   override:
     - ./ci/linux/build.sh
     - ./ci/linux/test.sh
+deployment:
+  production:
+    branch: master
+    commands:
+      - ./ci/linux/deploy.sh
