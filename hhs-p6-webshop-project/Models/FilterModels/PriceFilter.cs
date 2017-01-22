@@ -11,6 +11,15 @@ namespace hhs_p6_webshop_project.Models.FilterModels
             get { return "Prijs"; }
         }
 
+        public PriceFilter() {
+            
+        }
+
+        public PriceFilter(double min, double max) {
+            Min = min;
+            Max = max;
+        }
+
         public double Min { get; set; }
         public double Max { get; set; }
 

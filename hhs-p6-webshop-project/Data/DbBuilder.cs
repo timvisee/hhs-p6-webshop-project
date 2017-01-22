@@ -92,7 +92,7 @@ namespace hhs_p6_webshop_project.Data {
             return co;
         }
 
-        private static void GenerateNews(ApplicationDbContext context) {
+        public static void GenerateNews(ApplicationDbContext context) {
             #region Articles
 
             NewsArticle article1 = new NewsArticle() {
@@ -307,7 +307,17 @@ namespace hhs_p6_webshop_project.Data {
             context.SaveChanges();
         }
 
-        private static void GenerateProducts(ApplicationDbContext context) {
+        public static void GenerateProducts(ApplicationDbContext context) {
+
+            context.Products.AddRange(GenerateProductsAsList());
+           
+            context.SaveChanges();
+        }
+        
+        //public for mocking
+        public static List<Product> GenerateProductsAsList() {
+            List<Product> products = new List<Product>();
+
             #region Annabelle
 
             Product annabelle = GenerateProduct(
@@ -324,7 +334,7 @@ namespace hhs_p6_webshop_project.Data {
                                                          "/images/uploads/default/annabelle-3.jpg"
                                                      }));
 
-            context.Products.Add(annabelle);
+            products.Add(annabelle);
 
             #endregion
 
@@ -369,7 +379,7 @@ namespace hhs_p6_webshop_project.Data {
                                                         "/images/uploads/default/ladybird-nude-3.jpg"
                                                     }));
 
-            context.Products.Add(ladybird);
+            products.Add(ladybird);
 
             #endregion
 
@@ -398,7 +408,7 @@ namespace hhs_p6_webshop_project.Data {
                                                          "/images/uploads/default/pronovias-wit-3.jpg"
                                                      }));
 
-            context.Products.Add(pronovias);
+            products.Add(pronovias);
 
             #endregion
 
@@ -418,7 +428,7 @@ namespace hhs_p6_webshop_project.Data {
                                                        "/images/uploads/default/morilee-3.jpg"
                                                    }));
 
-            context.Products.Add(morilee);
+            products.Add(morilee);
 
             #endregion
 
@@ -436,7 +446,7 @@ namespace hhs_p6_webshop_project.Data {
                                                         "/images/uploads/default/treschic-1.jpg"
                                                     }));
 
-            context.Products.Add(treschic);
+            products.Add(treschic);
 
             #endregion
 
@@ -463,7 +473,7 @@ namespace hhs_p6_webshop_project.Data {
                                                       "/images/uploads/default/jarice-wit-2.jpg"
                                                   }));
 
-            context.Products.Add(jarice);
+            products.Add(jarice);
 
             #endregion
 
@@ -482,11 +492,11 @@ namespace hhs_p6_webshop_project.Data {
                                                              "/images/uploads/default/emmacharlotte-2.jpg"
                                                          }));
 
-            context.Products.Add(emmacharlotte);
+            products.Add(emmacharlotte);
 
             #endregion
 
-            context.SaveChanges();
+            return products;
         }
 
     }

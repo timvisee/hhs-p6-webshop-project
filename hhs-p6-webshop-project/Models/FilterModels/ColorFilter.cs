@@ -11,6 +11,11 @@ namespace hhs_p6_webshop_project.Models.FilterModels
             Colors = new List<string>();
         }
 
+        public ColorFilter(string[] colors) {
+            Colors = new List<string>();
+            Colors.AddRange(colors);
+        }
+
         public override string Name {
             get { return "Kleur"; }
         }
