@@ -363,6 +363,10 @@
 
 
 @media (max-width: 991px) {
+    .dressfinder-page #banner {
+        display: none;
+    }
+
     .product-overview .product {
         width: 48%;
         margin: 0 0 20px 0;
