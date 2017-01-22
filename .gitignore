@@ -210,6 +210,7 @@ crashlytics-build.properties
 fabric.properties
 
 # Project files
+project.lock.json
 */wwwroot/lib
 */wwwroot/images/uploads/*
 !*/wwwroot/images/uploads/default/
