@@ -11,3 +11,4 @@ test:
   override:
     - ./ci/linux/build.sh
     - ./ci/linux/test.sh
+    - ./ci/linux/deploy.sh
