@@ -210,7 +210,6 @@ crashlytics-build.properties
 fabric.properties
 
 # Project files
-*/wwwroot/lib
 */wwwroot/images/uploads/*
 !*/wwwroot/images/uploads/default/
 hhs-p6-webshop-project/node_modules
