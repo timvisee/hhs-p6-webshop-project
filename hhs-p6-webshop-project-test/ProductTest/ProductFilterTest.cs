@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models.FilterModels;
+using hhs_p6_webshop_project.Models.ProductModels;
 using hhs_p6_webshop_project.Services;
 using hhs_p6_webshop_project_test.MoqTools;
 using Microsoft.EntityFrameworkCore;
@@ -37,17 +38,22 @@ namespace hhs_p6_webshop_project_test.ProductTest
                 filters.Add(new ColorFilter(new string[] { "Ivoor" }));
                 filters.Add(new PriceFilter(1000d, 1500d));
 
+                
+
                 List<string> expectedResults = new List<string>();
-                expectedResults.Add("( 2 -> 'Ladybird', 1250 )");
-                expectedResults.Add("( 6 -> 'Jarice', 1500 )");
+                expectedResults.Add(context.Products.First( p=> p.Name == "Ladybird" && (int)p.Price == 1250).ToString());
+                expectedResults.Add(context.Products.First( p=> p.Name == "Jarice" && (int)p.Price == 1500).ToString());
 
                 var result = productService.Filter(filters);
-
+                
                 foreach (var p in result) 
                      Assert.Contains(p.ToString(), expectedResults);
             }
             
 
         }
+
+
+
     }
 }
