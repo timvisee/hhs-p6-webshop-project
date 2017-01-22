@@ -79,6 +79,12 @@
     color: #333;
 }
 
+@media only screen and (max-width: 990px){
+    .product .product-title{
+        text-align: center;
+    }
+}
+
 .product .product-sku {
     display: none;
     font-size: 16px;

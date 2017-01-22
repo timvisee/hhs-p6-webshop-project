@@ -35,6 +35,15 @@ namespace hhs_p6_webshop_project {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
+            //Enable CORS
+            services.AddCors(o => o.AddPolicy("AllowEverything", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
+
             //Initialize configuration options
             // Adds services required for using options.
             services.AddOptions();
@@ -109,7 +118,7 @@ namespace hhs_p6_webshop_project {
                 ClientSecret = secureConfig.Value.GoogleClientSecret
             });
 
-
+            app.UseCors("AllowEverything");
             app.UseMvc(routes => {
                 routes.MapRoute(
                     name: "default",
