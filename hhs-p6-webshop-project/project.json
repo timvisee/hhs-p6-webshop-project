@@ -103,9 +103,7 @@
       "gulp clean",
       "gulp min"
     ],
-    "postpublish": [
-      "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%"
-    ]
+    "postpublish": []
   },
   "tooling": {
     "defaultNamespace": "hhs_p6_webshop_project"
