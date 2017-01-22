@@ -19,7 +19,7 @@
     <div class="row">
         @if (User.Identity.IsAuthenticated)
         {
-            <div class="pull-right">
+            <div class="product-buttons">
                 <div class="product-button">
                     @Html.ActionLink("Nog een kleur toevoegen", "Create", "ColorOptions", new { id = Model.ProductId }, new { @class = "btn" })
                 </div>
