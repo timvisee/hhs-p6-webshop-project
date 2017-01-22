@@ -13,6 +13,6 @@ test:
     - ./ci/linux/test.sh
 deployment:
   production:
-    branch: master
+    branch: production
     commands:
       - ./ci/linux/deploy.sh
