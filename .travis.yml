@@ -1,0 +1,16 @@
+language: csharp
+solution: hhs-p6-webshop-project.sln
+
+mono:
+  - latest
+  - beta
+  - alpha
+
+matrix:
+  include:
+    - os: osx
+      mono: latest
+  allow_failures:
+    - mono: alpha
+    - os: osx
+  fast_finish: true

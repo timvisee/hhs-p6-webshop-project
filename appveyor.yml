@@ -1,0 +1,8 @@
+version: 0.0.1.{build}
+
+image: Visual Studio 2015
+
+services: iis
+
+build_script:
+- ps: '& .\ci\win\ci.ps1'
