@@ -42,11 +42,11 @@ namespace hhs_p6_webshop_project {
             // Show a program initialization message
             LogUtils.Info("Starting " + APP_NAME + " v" + APP_VERSION_NAME + " (" + APP_VERSION_CODE + ")...");
 
-#if DEBUG
-            // Enable development environment and debugging features
-            Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Development");
-            LogUtils.Info("Enabled development environment.");
-#endif
+//#if DEBUG
+//            // Enable development environment and debugging features
+//            Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Development");
+//            LogUtils.Info("Enabled development environment.");
+//#endif
 
             try {
                 // Initialize the application configuration
