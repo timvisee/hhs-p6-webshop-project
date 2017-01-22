@@ -807,14 +807,13 @@ $(document).ready(function () {
     }
 
     /** Appointment banner **/
-    $(".home-list>ol>li").click(function () {
-        $(".home-list>ol>li").removeClass("active");
-        var counter = $(this).index() + 1;
-        console.log(counter);
-        $(".appointment-banner-image-counter").empty();
-        $(".appointment-banner-image-counter").html(counter);
-        $(".home-list>ol>li").eq(counter - 1).addClass("active");
-        $(".appointment-banner-image-container>img").attr('src', "images/mooi-meisje-" + counter + ".jpg");
+    $(".home-list li").click(function () {
+        var num = $(this).attr("data-attribute");
+        $(".home-list li").removeClass("active");
+        $(this).addClass("active");
+
+        $(".appointment-banner-image-counter").html(num);
+        $(".appointment-banner-image").css("background-image", "url('/images/home/banner-" + num + ".jpg')");
     });
 
     // Find the product overview

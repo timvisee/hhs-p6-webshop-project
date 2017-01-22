@@ -785,39 +785,31 @@ nav li {
 }
 
 .appointment-banner-image-container {
-    width: 100%;
+    width: 65%;
     height: 550px;
-    position: absolute;
+    float: left;
 }
 
-    .appointment-banner-image-container img {
-        width: 65%;
-        height: 480px;
-        position: absolute;
-    }
-
-.appointment-banner-text-outer-wrapper {
+.appointment-banner-image {
     width: 100%;
-    height: 270px;
-    position: absolute;
-    bottom: 0;
+    height: 480px;
+    background-position: center;
+    background-size: cover;
+    z-index: 0;
 }
+
 
 .appointment-banner-image-text {
-    display: block;
     font-family: nexa-black;
-    position: absolute;
-    width: 250px;
-    height: 30px;
+    max-width: 100%;
     text-transform: uppercase;
     font-size: 1.7em;
-    padding-left: 20px;
-    margin-left: 25px;
+    padding-left: 25px;
 }
 
     .appointment-banner-image-text.pinkTheme:before {
-        position: absolute;
         margin-left: -25px;
+        position: absolute;
         width: 0;
         height: 0;
         content: '';
@@ -836,45 +828,40 @@ nav li {
         border-left: 15px solid #1a91be;
     }
 
-.appointment-banner-card {
-    position: absolute;
-    background-color: #fff;
-    width: 350px;
-    height: 220px;
-    font-size: .9em;
-    padding: 30px;
-    margin-top: 40px;
+.appointment-banner-text-outer-wrapper {
+    margin-top: -200px;
+    z-index: 2;
 }
 
 .appointment-banner-text-wrapper {
     height: 260px;
     width: 350px;
-    position: absolute;
     bottom: 0;
-    margin-left: 27%;
+    margin-left: 40%;
+}
+
+.appointment-banner-card {
+    background-color: #fff;
+    font-size: .9em;
+    padding: 30px;
+    margin-top: 15px;
 }
 
 .appointment-banner-counter-wrapper {
     width: 65%;
     height: 100px;
-    bottom: 0;
-    position: absolute;
-    margin-bottom: 70px;
+    margin-top: -110px;
 }
 
 .appointment-banner-image-counter-container {
-    position: relative;
-    bottom: 0;
     font-size: 4.8em;
     color: #fff;
     width: 100px;
-    height: 100px;
     line-height: 100px;
     text-align: center;
     font-family: nexa-black;
     border-radius: 50px;
     margin-left: 10%;
-    margin-top: 50px;
 }
 
     .appointment-banner-image-counter-container.pinkTheme {
@@ -885,29 +872,29 @@ nav li {
         background-color: #1a91be;
     }
 
-.home-list ol {
+.home-list {
     list-style-type: none;
-    counter-reset: pinkListCounter;
     margin-left: 0px;
     background-color: #fff;
     font-family: nexa-regular;
     font-weight: bold;
-    width: 320px;
+    width: 35%;
+    float: left;
 }
 
 
-    .home-list ol li {
+    .home-list li {
         color: #000;
-        width: 300px;
+        width: 100%;
         font-size: 1.5em;
+        padding-left: 50px;
         padding-top: 30px;
     }
 
-        .home-list ol li:before {
+        .home-list li:before {
             position: absolute;
             margin-left: -50px;
-            content: counter(pinkListCounter);
-            counter-increment: pinkListCounter;
+            content: attr(data-attribute);
             margin-top: -5px;
             color: #fff;
             font-family: nexa-black;
@@ -915,29 +902,28 @@ nav li {
             line-height: normal;
             background-color: #d1d2d4;
             width: 40px;
-            height: 40px;
             line-height: 40px;
             text-align: center;
-            border-radius: 50px;
+            border-radius: 100%;
         }
 
-        .home-list ol li:hover {
+        .home-list li:hover {
             cursor: pointer;
         }
 
-.home-list .pinkTheme .active {
+.home-list.pinkTheme .active {
     color: #f0597c;
 }
 
-.home-list .blueTheme .active {
+.home-list.blueTheme .active {
     color: #1a91be;
 }
 
-.home-list .pinkTheme .active:before {
+.home-list.pinkTheme .active:before {
     background-color: #f0597c;
 }
 
-.home-list .blueTheme .active:before {
+.home-list.blueTheme .active:before {
     background-color: #1a91be;
 }
 
@@ -1354,10 +1340,10 @@ footer ul {
     float: top;
 }
 
-.titanic .henk-gaat-voor-de-realiteit{
-	float:bottom;
+.titanic .henk-gaat-voor-de-realiteit {
+    float: bottom;
 }
-  
+
 .iceberg .te-laat {
     visibility: hidden;
 }
@@ -1572,6 +1558,26 @@ footer ul {
 
         .text-banner .banner-bg-title-text {
             font-size: 9em;
+        }
+
+        /*--- Appointment banner ---*/
+        .appointment-banner-image-container {
+            width: 100%;
+        }
+
+        .appointment-banner-text-wrapper {
+            margin-left: 30%;
+            width: 70%;
+        }
+
+        .home-list {
+            width: 100%;
+        }
+
+        .home-list li {
+            width: 50%;
+            display: block;
+            float: left;
         }
 
     /*--- Category overview ---*/

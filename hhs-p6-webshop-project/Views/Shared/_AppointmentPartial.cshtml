@@ -14,37 +14,47 @@
     // Determine whether the theme is pink or not
     var pinkTheme = ViewData.ContainsKey("PinkTheme") && (bool)ViewData["PinkTheme"];
 
-    if (ViewData.ContainsKey("AppointmentBannerTitle")) {
+    if (ViewData.ContainsKey("AppointmentBannerTitle"))
+    {
         appointmentBannerTitle = ViewData["AppointmentBannerTitle"].ToString();
     }
 
-    if (ViewData.ContainsKey("AppointmentBannerSmallTitle")) {
+    if (ViewData.ContainsKey("AppointmentBannerSmallTitle"))
+    {
         appointmentBannerSmallTitle = ViewData["AppointmentBannerSmallTitle"].ToString();
     }
 
-    if (ViewData.ContainsKey("AppointmentBannerSmallTitle2")) {
+    if (ViewData.ContainsKey("AppointmentBannerSmallTitle2"))
+    {
         appointmentBannerSmallTitle2 = ViewData["AppointmentBannerSmallTitle2"].ToString();
     }
 
-    if (ViewData.ContainsKey("orderdList1")) {
+    if (ViewData.ContainsKey("orderdList1"))
+    {
         orderdList1 = ViewData["orderdList1"].ToString();
     }
 
-    if (ViewData.ContainsKey("orderdList2")) {
+    if (ViewData.ContainsKey("orderdList2"))
+    {
         orderdList2 = ViewData["orderdList2"].ToString();
     }
 
-    if (ViewData.ContainsKey("orderdList3")) {
+    if (ViewData.ContainsKey("orderdList3"))
+    {
         orderdList3 = ViewData["orderdList3"].ToString();
     }
 
-    if (ViewData.ContainsKey("orderdList4")) {
+    if (ViewData.ContainsKey("orderdList4"))
+    {
         orderdList4 = ViewData["orderdList4"].ToString();
     }
 
-    if (pinkTheme) {
+    if (pinkTheme)
+    {
         themeClass = "pinkTheme";
-    }else {
+    }
+    else
+    {
         themeClass = "blueTheme";
     }
 
@@ -61,7 +71,7 @@
 <div class="row">
     <div class="appointment-banner-container">
         <div class="appointment-banner-image-container">
-            <img src="/images/mooi-meisje-1.jpg" />
+            <div class="appointment-banner-image" style="background-image: url('/images/home/banner-1.jpg');"></div>
             <div class="appointment-banner-text-outer-wrapper">
                 <div class="appointment-banner-text-wrapper">
                     <div class="appointment-banner-image-text @themeClass">
@@ -78,17 +88,17 @@
                 </div>
             </div>
         </div>
-        <div class="pull-right home-list">
-            <ol class="@themeClass">
-                <li class="active home-list-number-1">@orderdList1</li>
-                <li class="home-list-number-2">@orderdList2</li>
-                @if (ViewData.ContainsKey("orderdList3")) {
-                    <li class="home-list-number-3">@orderdList3</li>
-                }
-                @if (ViewData.ContainsKey("orderdList4")) {
-                    <li class="home-list-number-4">@orderdList4</li>
-                }
-            </ol>
-        </div>
+        <ol class="home-list @themeClass">
+            <li class="active" data-attribute="1">@orderdList1</li>
+            <li data-attribute="2">@orderdList2</li>
+            @if (ViewData.ContainsKey("orderdList3"))
+            {
+                <li data-attribute="3">@orderdList3</li>
+            }
+            @if (ViewData.ContainsKey("orderdList4"))
+            {
+                <li data-attribute="4">@orderdList4</li>
+            }
+        </ol>
     </div>
 </div>
