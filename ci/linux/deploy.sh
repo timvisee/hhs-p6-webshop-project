@@ -10,7 +10,7 @@ log() {
 # Deploy the product
 log "Deploying on server..."
 
-ssh root@honeymoon.timvisee.com "~/updateSite"
+ssh -o StrictHostKeyChecking=no root@honeymoon.timvisee.com "~/updateSite"
 
 # Show a success message
 log "Site successfully deployed.\nURL: http://honeymoon.timvisee.com/"
