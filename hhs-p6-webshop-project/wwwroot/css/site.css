@@ -606,20 +606,20 @@ nav li {
         bottom: 5%;
     }
 
-@media only screen and (max-width: 630px) {    
-    .text-banner .banner-bg-title-text{
-        font-size:6em;
-        bottom:40%;
+@media only screen and (max-width: 630px) {
+    .text-banner .banner-bg-title-text {
+        font-size: 6em;
+        bottom: 40%;
     }
 
-    .text-banner .banner-title-text{
-        font-size:1.5em;
-        bottom:40%;
+    .text-banner .banner-title-text {
+        font-size: 1.5em;
+        bottom: 40%;
     }
 
-    .text-banner .banner-title-text2{
-        font-size:1.5em;
-        bottom:30%;
+    .text-banner .banner-title-text2 {
+        font-size: 1.5em;
+        bottom: 30%;
     }
 }
 
@@ -1673,6 +1673,10 @@ footer ul {
     }
 }
 
+.product-buttons {
+    float: right;
+}
+
 .product-button {
     display: inline-block;
     float: left;
@@ -1683,6 +1687,26 @@ footer ul {
     .product-button:first-child {
         margin-left: 0;
     }
+
+@media only screen and (max-width: 850px) {
+
+    .product-buttons {
+        margin-top: 10%;
+        width:100%;
+        display:block;
+        margin:auto;
+    }
+
+    .product-button, .product-button:first-child {
+        display: block;
+        width: 80%;
+        margin-left: 10%;
+    }
+
+    .product-button .btn{
+        width:100%;
+    }
+}
 
 /*--- CSS Animations for the product catalog ---*/
 @-webkit-keyframes productCatalogEnter {
@@ -1909,7 +1933,7 @@ footer ul {
     width: 80%;
     display: flex;
     justify-content: space-between;
-    margin-left:10%;
+    margin-left: 10%;
 }
 
     .contact-buttons .btn {
