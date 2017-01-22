@@ -7,16 +7,25 @@ log() {
     printf "\n%s\n\n" "----------------------------------------------------------------"
 }
 
-# Deploy the product
-log "Starting Linux deployment process..."
+# Testing deployment configuration
+log "Testing deployment configuration..."
 
-# Install required sshpass application
-log "Installing sshpass to access deployment server..."
-sudo apt-get -y install sshpass
+if [ "$CIRCLE_BRANCH" = "master" ]
+then
+    # Install required sshpass application
+	log "Installing sshpass to access deployment server..."
+	sudo apt-get -y install sshpass
 
-# Actually deploy the site
-log "Connecting Linux deployment server and deploying site..."
-sshpass -p "$LINUX_DEPLOY_PASS" ssh -o StrictHostKeyChecking=no root@honeymoon.timvisee.com "~/updateSite"
+	# Actually deploy the site
+	log "Connecting Linux deployment server and deploying site..."
+	sshpass -p "$LINUX_DEPLOY_PASS" ssh -o StrictHostKeyChecking=no root@honeymoon.timvisee.com "~/updateSite"
 
-# Show a success message
-log "Site successfully deployed.\nURL: http://honeymoon.timvisee.com/"
+	# Show a success message
+	log "Site successfully deployed!\nURL: http://honeymoon.timvisee.com/"
+
+else
+	log "Not on the 'master' branch, skipping deployment!"
+	exit 0
+fi
+
+
