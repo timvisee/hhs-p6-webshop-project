@@ -111,6 +111,10 @@ a {
     cursor: pointer;
 }
 
+.row {
+    margin: 0;
+}
+
 /*--- Main structure ---*/
 header,
 #main_content,
@@ -253,6 +257,14 @@ input[type="reset"]:active,
     font-weight: bold;
     font-size: 1.4rem;
     line-height: 30px;
+}
+
+@media only screen and (max-width:810px) {
+    .btn {
+        display: block;
+        margin: 0;
+        margin-top: 25px;
+    }
 }
 
 .upload-image {
@@ -593,6 +605,23 @@ nav li {
         position: absolute;
         bottom: 5%;
     }
+
+@media only screen and (max-width: 630px) {    
+    .text-banner .banner-bg-title-text{
+        font-size:6em;
+        bottom:40%;
+    }
+
+    .text-banner .banner-title-text{
+        font-size:1.5em;
+        bottom:40%;
+    }
+
+    .text-banner .banner-title-text2{
+        font-size:1.5em;
+        bottom:30%;
+    }
+}
 
 #banner {
     overflow: hidden;
@@ -1325,6 +1354,7 @@ footer {
         height: 50px;
         margin: 0 30px;
         width: auto;
+        overflow: hidden;
     }
 
 footer h4 {
@@ -1354,10 +1384,10 @@ footer ul {
     float: top;
 }
 
-.titanic .henk-gaat-voor-de-realiteit{
-	float:bottom;
+.titanic .henk-gaat-voor-de-realiteit {
+    float: bottom;
 }
-  
+
 .iceberg .te-laat {
     visibility: hidden;
 }
@@ -1410,6 +1440,7 @@ footer ul {
     line-height: 35px;
     font-family: nexa-bold;
     font-size: 1.6em;
+    text-align: center;
 }
 
 /*--- Articles overview ---*/
@@ -1627,6 +1658,19 @@ footer ul {
 .create-btn {
     margin-top: -50px;
     margin-bottom: 50px;
+    float: right;
+    right: 5%;
+    width: 200px;
+}
+
+@media only screen and (max-width:800px) {
+    .create-btn {
+        float: none;
+        display: block;
+        margin: auto;
+        right: 0;
+        width: 60%;
+    }
 }
 
 .product-button {
@@ -1857,4 +1901,30 @@ footer ul {
 
 .cursor-pointer {
     cursor: pointer !important;
+}
+
+/*** Contact styles ***/
+
+.contact-buttons {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    margin-left:10%;
+}
+
+    .contact-buttons .btn {
+        width: 25%;
+    }
+
+@media only screen and (max-width:750px) {
+    .contact-buttons {
+        display: block;
+        width: 80%;
+        margin: auto;
+        margin-top: 25px;
+    }
+
+        .contact-buttons .btn {
+            width: 100%;
+        }
 }
