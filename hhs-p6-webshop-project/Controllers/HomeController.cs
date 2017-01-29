@@ -4,11 +4,19 @@ using System.Text;
 using MailKit;
 using System;
 using System.Collections.Generic;
+using hhs_p6_webshop_project.App.Config;
 using MimeKit;
 using MailKit.Security;
 using MailKit.Net.Smtp;
+using Microsoft.Extensions.Options;
+
 namespace hhs_p6_webshop_project.Controllers {
     public class HomeController : Controller {
+        private IOptions<SecureAppConfig> _secretConfig;
+
+        public HomeController(IOptions<SecureAppConfig> cfg) {
+            _secretConfig = cfg;
+        }
         public IActionResult Index() {
             return View();
         }
@@ -26,56 +34,13 @@ namespace hhs_p6_webshop_project.Controllers {
         [HttpPost]
         public ActionResult Contact(ContactModels c)
         {
-            if (ModelState.IsValid)
-              {
-                try
-                {
+            if (ModelState.IsValid) {
+                if (Beun.Mail.MailClient.ApiKey == null)
+                    Beun.Mail.MailClient.ApiKey = _secretConfig.Value.SparkpostApiKey;
 
-                    using (var client = new SmtpClient(new ProtocolLogger("smtp.log")))
-                    {
-
-                        client.Connect("smtp.gmail.com", 465, SecureSocketOptions.SslOnConnect);
-
-                        client.Authenticate("miladintjuh@gmail.com", "Scouting1");
-
-                        MimeMessage msg = new MimeMessage();
-                        var from = c.Email.ToString();
-                        StringBuilder sb = new StringBuilder();
-                        msg.To.Add(new MailboxAddress("Honeymoonshop", "miladin@live.nl"));
-                        msg.To.Add(new MailboxAddress(c.Name, c.Email));
-                        msg.From.Add(new MailboxAddress("Contactformulier", from));
-
-
-                        msg.Subject = "Contactformulier";
-                        var msgBody = "Bedankt dat u contact heeft opgenomen met de Honeymoon Shop."
-                                     + "Wij zullen uw vraag zo spoedig mogelijk beantwoorden"
-                                     + "Hier onder vindt u een kopie van het bericht dat naar ons is gestuurd.";
-                        sb.Append(msgBody);
-                        sb.Append(Environment.NewLine);
-                        sb.Append("First name: " + c.Name);
-                        sb.Append(Environment.NewLine);
-                        sb.Append("Last name: " + c.Phone);
-                        sb.Append(Environment.NewLine);
-                        sb.Append("Email: " + c.Email);
-                        sb.Append(Environment.NewLine);
-                        sb.Append("Reference:" + c.Reference);
-                        sb.Append(Environment.NewLine);
-                        sb.Append("Comments: " + c.Comment);
-                        msg.Body = new TextPart("plain")
-                        {
-                            Text = sb.ToString()
-                        };
-                        Console.WriteLine("The message is: " + sb);
-                        client.Send(msg);
-                        return View("Success");
-                    }
-                }
-
-
-                catch (Exception)
-                {
-                    return View("Error");
-                }
+                Beun.Mail.MailClient.SendContactMail(c.Name, c.Email, c.Reference, c.Comment, c.Phone);
+                
+                return View("Success");
     }
      return View();
 }
