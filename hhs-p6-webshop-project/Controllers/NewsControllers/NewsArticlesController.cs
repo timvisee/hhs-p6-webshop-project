@@ -63,7 +63,7 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers {
                 string extension = fi.Extension;
                 string path = Basepath + filename + extension;
                 newNewsArticle.NewsArticle.ImagePath = path;
-                using (FileStream fs = System.IO.File.Create("wwwroot/" + path)) {
+                using (FileStream fs = System.IO.File.Create("wwwroot" + path)) {
                     image.CopyTo(fs);
                     fs.Flush();
                 }
