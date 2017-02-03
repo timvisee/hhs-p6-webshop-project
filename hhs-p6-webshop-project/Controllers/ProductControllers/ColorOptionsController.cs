@@ -13,7 +13,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
     public class ColorOptionsController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private string[] _coloroptions = { "Wit", "Ivoor", "Roze", "Rood", "Grijs", "Zwart" };
+        private string[] _coloroptions = {"Wit", "Ivoor", "Roze", "Rood", "Grijs", "Zwart"};
 
         public ColorOptionsController(ApplicationDbContext context)
         {
@@ -73,15 +73,17 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
                 }
 
                 var color = _context.ColorOptions.Where(c => c.ProductId == id).Select(c => c.Color).ToList();
-                foreach(string colorOption in _coloroptions)
+                foreach (string colorOption in _coloroptions)
                 {
                     bool exists = color.Contains(colorOption);
                     if (exists)
                         _coloroptions = _coloroptions.Where(c => c != colorOption).ToArray();
                 }
 
-                ViewData["ColorOption"] = _coloroptions.Select(r => new SelectListItem { Text = r, Value = r });
-                var dress = _context.Products.Where(c => c.ProductId == id).Select(o => new { Value = o.ProductId, Text = o.Name }).ToList();
+                ViewData["ColorOption"] = _coloroptions.Select(r => new SelectListItem {Text = r, Value = r});
+                var dress = _context.Products.Where(c => c.ProductId == id)
+                    .Select(o => new {Value = o.ProductId, Text = o.Name})
+                    .ToList();
                 ViewData["Name"] = new SelectList(dress, "Value", "Text", selectedItem);
                 return View();
             }
@@ -96,7 +98,8 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ColorOptionId,Color,ProductId")] ColorOption colorOption, bool again)
+        public async Task<IActionResult> Create([Bind("ColorOptionId,Color,ProductId")] ColorOption colorOption,
+            bool again)
         {
             // Check if user is authenticated
             if (User.Identity.IsAuthenticated)
@@ -106,10 +109,11 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
                     _context.Add(colorOption);
                     await _context.SaveChangesAsync();
                     if (again)
-                        return RedirectToAction("Create", "ColorOptions", new { id = colorOption.ProductId });
-                    return RedirectToAction("Create", "ProductImages", new { id = colorOption.ProductId });
+                        return RedirectToAction("Create", "ColorOptions", new {id = colorOption.ProductId});
+                    return RedirectToAction("Create", "ProductImages", new {id = colorOption.ProductId});
                 }
-                ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", colorOption.ProductId);
+                ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId",
+                    colorOption.ProductId);
                 return View(colorOption);
             }
             else
@@ -134,9 +138,10 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
                 {
                     return NotFound();
                 }
-                
-                ViewData["ColorOption"] = _coloroptions.Select(r => new SelectListItem { Text = r, Value = r });
-                ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", colorOption.ProductId);
+
+                ViewData["ColorOption"] = _coloroptions.Select(r => new SelectListItem {Text = r, Value = r});
+                ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId",
+                    colorOption.ProductId);
                 return View(colorOption);
             }
             else
@@ -180,7 +185,8 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
                     }
                     return RedirectToAction("Index");
                 }
-                ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", colorOption.ProductId);
+                ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId",
+                    colorOption.ProductId);
                 return View(colorOption);
             }
             else

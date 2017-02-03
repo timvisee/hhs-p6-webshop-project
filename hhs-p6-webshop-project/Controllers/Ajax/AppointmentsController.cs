@@ -5,11 +5,11 @@ using System.Linq;
 using hhs_p6_webshop_project.Data;
 using Microsoft.AspNetCore.Mvc;
 
-namespace hhs_p6_webshop_project.Controllers.Ajax {
-
+namespace hhs_p6_webshop_project.Controllers.Ajax
+{
     [Route("Ajax/Appointments")]
-    public class AppointmentController : Controller {
-
+    public class AppointmentController : Controller
+    {
         /// <summary>
         /// Application database context.
         /// </summary>
@@ -19,7 +19,8 @@ namespace hhs_p6_webshop_project.Controllers.Ajax {
         /// Constructor.
         /// </summary>
         /// <param name="context">Application database context.</param>
-        public AppointmentController(ApplicationDbContext context) {
+        public AppointmentController(ApplicationDbContext context)
+        {
             _context = context;
         }
 
@@ -28,7 +29,8 @@ namespace hhs_p6_webshop_project.Controllers.Ajax {
         /// </summary>
         /// <returns>JSON response.</returns>
         [HttpGet("GetDates")]
-        public JsonResult GetDates() {
+        public JsonResult GetDates()
+        {
             // Determine the base date time, get the appointments after it
             DateTime afterDateTime = DateTime.Now;
 
@@ -40,14 +42,17 @@ namespace hhs_p6_webshop_project.Controllers.Ajax {
             HashSet<string> occupiedDates = new HashSet<string>();
 
             // Determine whether a date
-            foreach (var appointment in dates) {
+            foreach (var appointment in dates)
+            {
                 var amount = 0;
 
-                foreach (var appointment2 in dates) {
+                foreach (var appointment2 in dates)
+                {
                     if (appointment.AppointmentDateTime.Date == appointment2.AppointmentDateTime.Date)
                         amount++;
 
-                    if (amount >= 3) {
+                    if (amount >= 3)
+                    {
                         occupiedDates.Add(appointment.AppointmentDateTime.ToString("yyyy-MM-dd"));
                         break;
                     }
@@ -55,7 +60,8 @@ namespace hhs_p6_webshop_project.Controllers.Ajax {
             }
 
             // Return a JSON result of occupied dates
-            return new JsonResult(new {
+            return new JsonResult(new
+            {
                 dates = occupiedDates
             });
         }
@@ -65,12 +71,14 @@ namespace hhs_p6_webshop_project.Controllers.Ajax {
         /// </summary>
         /// <returns>JSON response.</returns>
         [HttpGet("GetTimes")]
-        public JsonResult GetTimes(string date) {
+        public JsonResult GetTimes(string date)
+        {
             // Determine the date to get the free times for
             DateTime dateObject = DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
             var appointments = _context.Appointment.Where(a => a.AppointmentDateTime.Date == dateObject.Date)
-                .Select(a => a.AppointmentDateTime).ToList();
+                .Select(a => a.AppointmentDateTime)
+                .ToList();
 
             var timeslots = new List<TimeSpan>();
             timeslots.Add(TimeSpan.FromHours(9).Add(TimeSpan.FromMinutes(30)));
@@ -81,21 +89,23 @@ namespace hhs_p6_webshop_project.Controllers.Ajax {
 
             List<Object> times = new List<Object>();
 
-            foreach (var slot in timeslots) {
-
+            foreach (var slot in timeslots)
+            {
                 bool taken = false;
 
-                foreach(var app in appointments) {
+                foreach (var app in appointments)
+                {
                     if (app.TimeOfDay == slot)
                         taken = true;
-
                 }
 
 
-                times.Add(new {
+                times.Add(new
+                {
                     available = !taken,
                     formattedTime = slot.ToString(@"hh\:mm"),
-                    time = new {
+                    time = new
+                    {
                         hour = slot.Hours,
                         minute = slot.Minutes,
                         second = slot.Seconds
@@ -104,7 +114,8 @@ namespace hhs_p6_webshop_project.Controllers.Ajax {
             }
 
             // Return a JSON result of available times
-            return new JsonResult(new {
+            return new JsonResult(new
+            {
                 times = times
             });
         }

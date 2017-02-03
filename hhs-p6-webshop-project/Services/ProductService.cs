@@ -15,26 +15,29 @@ namespace hhs_p6_webshop_project.Services
 {
     public class ProductService : IProductService
     {
-
         private ApplicationDbContext DatabaseContext { get; set; }
-        public ProductService(ApplicationDbContext dbContext) {
+
+        public ProductService(ApplicationDbContext dbContext)
+        {
             DatabaseContext = dbContext;
         }
 
-        public List<Product> GetAllProducts() {
+        public List<Product> GetAllProducts()
+        {
             return DatabaseContext.Products
                 .Include(p => p.ColorOptions)
                 .ThenInclude(co => co.Images)
                 .ToList();
-            
         }
 
         private List<object>
-            ParseFuckingAnoyingJsonArrayOfArraysToJustAFuckingListGodFuckingDamnitIHateThisFuckingBullshit(HashSet<object> objects) {
-            List<object> values  = new List<object>();
-            
-            foreach (object value in objects) {
+            ParseFuckingAnoyingJsonArrayOfArraysToJustAFuckingListGodFuckingDamnitIHateThisFuckingBullshit(
+                HashSet<object> objects)
+        {
+            List<object> values = new List<object>();
 
+            foreach (object value in objects)
+            {
                 if (value is Int64)
                     values.Add(Convert.ToDouble(value));
                 else
@@ -43,11 +46,13 @@ namespace hhs_p6_webshop_project.Services
             return values;
         }
 
-        public List<ColorOption> GetColorOptions() {
+        public List<ColorOption> GetColorOptions()
+        {
             return DatabaseContext.ColorOptions.Distinct().ToList();
         }
 
-        public Dictionary<string, HashSet<object>> GetFilters() {
+        public Dictionary<string, HashSet<object>> GetFilters()
+        {
             Dictionary<string, HashSet<object>> val = new Dictionary<string, HashSet<object>>();
 
             val.Add("Prijs", new HashSet<object>());
@@ -62,7 +67,8 @@ namespace hhs_p6_webshop_project.Services
             return val;
         }
 
-        public List<FilterBase> GetAllFilters() {
+        public List<FilterBase> GetAllFilters()
+        {
             List<FilterBase> filters = new List<FilterBase>();
 
             PriceFilter pf = new PriceFilter();
@@ -74,42 +80,56 @@ namespace hhs_p6_webshop_project.Services
             cf.Colors.AddRange(DatabaseContext.ColorOptions.Select(co => co.Color).Distinct());
             filters.Add(pf);
             filters.Add(cf);
-            
+
             return filters;
         }
 
-        public List<Product> Filter(List<FilterBase> filters) {
+        public List<Product> Filter(List<FilterBase> filters)
+        {
             List<Product> products = GetAllProducts();
             List<Product> results = new List<Product>();
-            
-            foreach (Product product in products) {
-                if (product.IsMatch(filters)) {
-                    var temp = filters.Where(f => f.Name == "Kleur").Cast<ColorFilter>().SelectMany(cf => cf.Colors).Distinct().ToList();
+
+            foreach (Product product in products)
+            {
+                if (product.IsMatch(filters))
+                {
+                    var temp = filters.Where(f => f.Name == "Kleur")
+                        .Cast<ColorFilter>()
+                        .SelectMany(cf => cf.Colors)
+                        .Distinct()
+                        .ToList();
                     product.Sort(temp);
                     results.Add(product);
                 }
             }
-            
+
             return results;
         }
 
-        public List<FilterBase> ParseFilters(Dictionary<string, HashSet<object>> filters) {
-
+        public List<FilterBase> ParseFilters(Dictionary<string, HashSet<object>> filters)
+        {
             List<FilterBase> f = new List<FilterBase>();
 
-            foreach (var pair in filters) {
-                if (pair.Key == "Kleur") {
+            foreach (var pair in filters)
+            {
+                if (pair.Key == "Kleur")
+                {
                     ColorFilter filt = new ColorFilter();
-                    filt.Colors.AddRange(ParseFuckingAnoyingJsonArrayOfArraysToJustAFuckingListGodFuckingDamnitIHateThisFuckingBullshit(pair.Value).Cast<string>());
+                    filt.Colors.AddRange(
+                        ParseFuckingAnoyingJsonArrayOfArraysToJustAFuckingListGodFuckingDamnitIHateThisFuckingBullshit(
+                                pair.Value)
+                            .Cast<string>());
 
                     if (filt.Colors.Count > 0)
                         f.Add(filt);
                 }
 
-                if (pair.Key == "Prijs") {
+                if (pair.Key == "Prijs")
+                {
                     var vals =
                         ParseFuckingAnoyingJsonArrayOfArraysToJustAFuckingListGodFuckingDamnitIHateThisFuckingBullshit(
-                            pair.Value).Cast<double>();
+                                pair.Value)
+                            .Cast<double>();
 
                     PriceFilter filt = new PriceFilter();
                     filt.Min = vals.Min();
@@ -121,33 +141,36 @@ namespace hhs_p6_webshop_project.Services
             return f;
         }
 
-        public PagedResponse GetAllProductsPaged(int start, int count) {
+        public PagedResponse GetAllProductsPaged(int start, int count)
+        {
             PagedResponse response = new PagedResponse();
             int prev = start - count;
             if (prev < 0)
                 prev = 0;
 
             var products = GetAllProducts();
-            if (start + count > products.Count) {
+            if (start + count > products.Count)
+            {
                 int num = Math.Abs(products.Count - (start + count));
                 response.Data = products.GetRange(start, num);
                 response.PreviousPage = $"api/dressfinder/product/{prev}/{count}";
                 response.NextPage = null;
             }
-            else {
+            else
+            {
                 response.Data = products.GetRange(start, count);
                 response.PreviousPage = (prev == 0) ? null : $"api/dressfinder/product/{prev}/{count}";
 
-                if (start + count >= products.Count) {
+                if (start + count >= products.Count)
+                {
                     response.NextPage = null;
                 }
-                else {
+                else
+                {
                     response.NextPage = $"api/dressfinder/product/{start + count}/{count}";
                 }
-                
             }
             return response;
         }
-
     }
 }

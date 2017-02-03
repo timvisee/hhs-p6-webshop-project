@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace hhs_p6_webshop_project.App.Config {
-    public class SecureAppConfig {
-        public SecureAppConfig() {
+namespace hhs_p6_webshop_project.App.Config
+{
+    public class SecureAppConfig
+    {
+        public SecureAppConfig()
+        {
             // Set default values.
-
         }
 
         public string Owner { get; set; }
@@ -20,6 +22,5 @@ namespace hhs_p6_webshop_project.App.Config {
 
         public string GoogleClientId { get; set; }
         public string GoogleClientSecret { get; set; }
-
     }
 }

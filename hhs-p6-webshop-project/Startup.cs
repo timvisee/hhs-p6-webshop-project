@@ -14,9 +14,12 @@ using hhs_p6_webshop_project.Services;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
-namespace hhs_p6_webshop_project {
-    public class Startup {
-        public Startup(IHostingEnvironment env) {
+namespace hhs_p6_webshop_project
+{
+    public class Startup
+    {
+        public Startup(IHostingEnvironment env)
+        {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -24,7 +27,8 @@ namespace hhs_p6_webshop_project {
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddJsonFile("hosting.json", optional: true);
 
-            if (env.IsDevelopment()) {
+            if (env.IsDevelopment())
+            {
                 // For more details on using the user secret store see https://go.microsoft.com/fwlink/?LinkID=532709
                 builder.AddUserSecrets();
             }
@@ -34,13 +38,14 @@ namespace hhs_p6_webshop_project {
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services) {
+        public void ConfigureServices(IServiceCollection services)
+        {
             //Enable CORS
             services.AddCors(o => o.AddPolicy("AllowEverything", builder =>
             {
                 builder.AllowAnyOrigin()
-                       .AllowAnyMethod()
-                       .AllowAnyHeader();
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
             }));
 
 
@@ -55,14 +60,14 @@ namespace hhs_p6_webshop_project {
             // Get the database connection string, and check whether it's remote
             String dbConStr = DbUtils.GetAndInjectConnectionString();
             bool isRemote = DbUtils.IsRemote();
-            
+
             // Add framework services for local or remote databases
-            if(isRemote)
+            if (isRemote)
                 services.AddDbContext<ApplicationDbContext>(options =>
-                        options.UseSqlServer(dbConStr));
+                    options.UseSqlServer(dbConStr));
             else
                 services.AddDbContext<ApplicationDbContext>(options =>
-                        options.UseSqlite(dbConStr));
+                    options.UseSqlite(dbConStr));
 
             // Print the selected database
             Console.WriteLine("Selected database: " + dbConStr);
@@ -72,11 +77,12 @@ namespace hhs_p6_webshop_project {
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc().AddJsonOptions(options =>
-            {
-                options.SerializerSettings.Formatting = Formatting.Indented;
-                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            });
+            services.AddMvc()
+                .AddJsonOptions(options =>
+                {
+                    options.SerializerSettings.Formatting = Formatting.Indented;
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                });
 
             //Add support for SparkPost Transactional Email Service
             //services.AddSparkPost();
@@ -85,24 +91,26 @@ namespace hhs_p6_webshop_project {
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddScoped<IProductService, ProductService>();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ApplicationDbContext context, IServiceProvider serviceProvider, IOptions<SecureAppConfig> secureConfig) {
-
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory,
+            ApplicationDbContext context, IServiceProvider serviceProvider, IOptions<SecureAppConfig> secureConfig)
+        {
             //Save reference to the mail client
             //MailClient.Client = serviceProvider.GetService<SparkPostClient>();
 
             loggerFactory.AddConsole(Program.FileConfig.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            if (env.IsDevelopment()) {
+            if (env.IsDevelopment())
+            {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
                 app.UseBrowserLink();
             }
-            else {
+            else
+            {
                 app.UseStatusCodePagesWithRedirects("/Home/Error");
                 app.UseExceptionHandler("/Home/Error");
             }
@@ -113,13 +121,15 @@ namespace hhs_p6_webshop_project {
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
 
-            app.UseGoogleAuthentication(new GoogleOptions() {
+            app.UseGoogleAuthentication(new GoogleOptions()
+            {
                 ClientId = secureConfig.Value.GoogleClientId,
                 ClientSecret = secureConfig.Value.GoogleClientSecret
             });
 
             app.UseCors("AllowEverything");
-            app.UseMvc(routes => {
+            app.UseMvc(routes =>
+            {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

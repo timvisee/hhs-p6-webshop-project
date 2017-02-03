@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace hhs_p6_webshop_project.Models.ProductModels
 {
-        public class ProductImage {
-
-        public ProductImage() {
-            
+    public class ProductImage
+    {
+        public ProductImage()
+        {
         }
 
-        public ProductImage(string path) {
+        public ProductImage(string path)
+        {
             Path = path;
         }
 

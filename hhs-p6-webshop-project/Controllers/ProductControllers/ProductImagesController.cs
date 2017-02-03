@@ -74,8 +74,13 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
                     selectedItem = id;
                 }
 
-                var dressPerColor = _context.ColorOptions.Join(_context.Products, c => c.ProductId, o => o.ProductId, (c, o) => new { c.ColorOptionId, c.Color, o.Name, o.ProductId }).Where(c => c.ProductId == id).ToList();
-                IEnumerable<SelectListItem> selectList = from d in dressPerColor select new SelectListItem { Value = d.ColorOptionId.ToString(), Text = d.Name + " - " + d.Color };
+                var dressPerColor = _context.ColorOptions
+                    .Join(_context.Products, c => c.ProductId, o => o.ProductId,
+                        (c, o) => new {c.ColorOptionId, c.Color, o.Name, o.ProductId})
+                    .Where(c => c.ProductId == id)
+                    .ToList();
+                IEnumerable<SelectListItem> selectList = from d in dressPerColor
+                    select new SelectListItem {Value = d.ColorOptionId.ToString(), Text = d.Name + " - " + d.Color};
                 ViewData["ColorOptionId"] = new SelectList(selectList, "Value", "Text", selectedItem);
                 return View();
             }
@@ -90,14 +95,14 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductImageId,ColorOptionId,Path")] ProductImage productImage, IFormFile image, bool again)
+        public async Task<IActionResult> Create([Bind("ProductImageId,ColorOptionId,Path")] ProductImage productImage,
+            IFormFile image, bool again)
         {
             // Check if user is authenticated
             if (User.Identity.IsAuthenticated)
             {
                 if (ModelState.IsValid || image != null)
                 {
-
                     string filename = ChangePathName(productImage.Path);
                     FileInfo fi = new FileInfo(image.FileName);
                     string extension = fi.Extension;
@@ -116,7 +121,8 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
 
                     return RedirectToAction("Index", "Products");
                 }
-                ViewData["ColorOptionId"] = new SelectList(_context.ColorOptions, "ColorOptionId", "Color", productImage.ColorOptionId);
+                ViewData["ColorOptionId"] = new SelectList(_context.ColorOptions, "ColorOptionId", "Color",
+                    productImage.ColorOptionId);
                 return View(productImage);
             }
             else
@@ -141,8 +147,12 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
                 {
                     return NotFound();
                 }
-                var dressPerColor = _context.ColorOptions.Join(_context.Products, c => c.ProductId, o => o.ProductId, (c, o) => new { c.ColorOptionId, c.Color, o.Name }).ToList();
-                IEnumerable<SelectListItem> selectList = from d in dressPerColor select new SelectListItem { Value = d.ColorOptionId.ToString(), Text = d.Name + " - " + d.Color };
+                var dressPerColor = _context.ColorOptions
+                    .Join(_context.Products, c => c.ProductId, o => o.ProductId,
+                        (c, o) => new {c.ColorOptionId, c.Color, o.Name})
+                    .ToList();
+                IEnumerable<SelectListItem> selectList = from d in dressPerColor
+                    select new SelectListItem {Value = d.ColorOptionId.ToString(), Text = d.Name + " - " + d.Color};
                 ViewData["ColorOptionId"] = new SelectList(selectList, "Value", "Text");
                 return View(productImage);
             }
@@ -157,7 +167,8 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductImageId,ColorOptionId,Path")] ProductImage productImage, IFormFile image)
+        public async Task<IActionResult> Edit(int id,
+            [Bind("ProductImageId,ColorOptionId,Path")] ProductImage productImage, IFormFile image)
         {
             // Check if user is authenticated
             if (User.Identity.IsAuthenticated)
@@ -171,7 +182,6 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
                 {
                     try
                     {
-
                         string filename = ChangePathName(productImage.Path);
                         FileInfo fi = new FileInfo(image.FileName);
                         string extension = fi.Extension;
@@ -200,7 +210,8 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
 
                     return RedirectToAction("Index");
                 }
-                ViewData["ColorOptionId"] = new SelectList(_context.ColorOptions, "ColorOptionId", "Color", productImage.ColorOptionId);
+                ViewData["ColorOptionId"] = new SelectList(_context.ColorOptions, "ColorOptionId", "Color",
+                    productImage.ColorOptionId);
                 return View(productImage);
             }
             else
@@ -277,11 +288,12 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
 
             // Create a list of paths
             List<string> paths = new List<string>();
-            foreach(var color in colorOptions)
+            foreach (var color in colorOptions)
                 paths.Add(color.Path);
 
             // Create a JSON result object with the paths and return it
-            return new JsonResult(new {
+            return new JsonResult(new
+            {
                 paths = paths
             });
         }

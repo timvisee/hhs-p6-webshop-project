@@ -1,6 +1,4 @@
-﻿
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using hhs_p6_webshop_project.Models.FilterModels;
 
@@ -13,20 +11,20 @@ namespace hhs_p6_webshop_project.Models.ProductModels
 
         public List<FilterBase> Filters { get; set; }
 
-        public double MaxPrice {
-            get {
-                return Filters.Where(f => f.Name == "Prijs").Cast<PriceFilter>().First().Max;
-            }
+        public double MaxPrice
+        {
+            get { return Filters.Where(f => f.Name == "Prijs").Cast<PriceFilter>().First().Max; }
         }
 
-        public double MinPrice {
-            get {
-                return Filters.Where(f => f.Name == "Prijs").Cast<PriceFilter>().First().Min;
-            }
+        public double MinPrice
+        {
+            get { return Filters.Where(f => f.Name == "Prijs").Cast<PriceFilter>().First().Min; }
         }
 
-        public List<string> Colors {
-            get {
+        public List<string> Colors
+        {
+            get
+            {
                 return Filters.Where(f => f.Name == "Kleur").Cast<ColorFilter>().SelectMany(cf => cf.Colors).ToList();
             }
         }
