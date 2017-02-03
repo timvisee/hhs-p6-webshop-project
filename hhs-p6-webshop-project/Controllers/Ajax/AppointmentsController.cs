@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using hhs_p6_webshop_project.App.Ajax;
 using hhs_p6_webshop_project.Data;
 using Microsoft.AspNetCore.Mvc;
 

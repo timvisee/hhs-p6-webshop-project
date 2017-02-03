@@ -9,7 +9,6 @@ using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models.ProductModels;
 using Microsoft.AspNetCore.Http;
 using System.IO;
-using hhs_p6_webshop_project.App.Ajax;
 
 namespace hhs_p6_webshop_project.Controllers.ProductControllers
 {
