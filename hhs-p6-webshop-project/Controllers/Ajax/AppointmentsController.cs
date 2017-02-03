@@ -24,16 +24,6 @@ namespace hhs_p6_webshop_project.Controllers.Ajax {
         }
 
         /// <summary>
-        /// Endpoint index.
-        /// </summary>
-        /// <returns>JSON response.</returns>
-        [HttpGet("")]
-        public JsonResult Index() {
-            // Respond with a not found error
-            return new AjaxResponse(new NotFoundErrorStatus());
-        }
-
-        /// <summary>
         /// GetDates endpoint
         /// </summary>
         /// <returns>JSON response.</returns>
