@@ -269,29 +269,21 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
             return GuidString;
         }
 
-
-
         // GET: ProductImages/GetImagePaths/5
-        public JsonResult GetImagePaths(int? id)
+        public JsonResult GetImagePaths(int id)
         {
-            if (id == null)
-            {
-                //return not found
-            }
-
             // Get all the images where the color id is the same as requested
             var colorOptions = _context.ProductImages.Where(pi => pi.ColorOptionId == id);
 
+            // Create a list of paths
             List<string> paths = new List<string>();
-
-            // Add the paths from all the images to an list
-            foreach (var color in colorOptions)
-            {
+            foreach(var color in colorOptions)
                 paths.Add(color.Path);
-            }
 
-            // Return the list of image paths
-            return new AjaxResponse().SetDataField("paths", paths);
+            // Create a JSON result object with the paths and return it
+            return new JsonResult(new {
+                paths = paths
+            });
         }
     }
 }
