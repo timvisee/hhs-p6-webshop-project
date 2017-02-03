@@ -12,17 +12,18 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Path)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ColorOption.Color)
-            </th>
-        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Path)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ColorOption.Color)
+        </th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Path)
@@ -36,6 +37,6 @@
                 <a asp-action="Delete" asp-route-id="@item.ProductImageId">Verwijder</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>
