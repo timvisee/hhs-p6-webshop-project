@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace hhs_p6_webshop_project.App {
-    public sealed class PropertyDataType {
-
+namespace hhs_p6_webshop_project.App
+{
+    public sealed class PropertyDataType
+    {
         /// <summary>
         /// Data type (as used by C#).
         /// </summary>
@@ -37,7 +38,8 @@ namespace hhs_p6_webshop_project.App {
         /// <summary>
         /// List of possible values.
         /// </summary>
-        private static readonly PropertyDataType[] _VALUES =  {
+        private static readonly PropertyDataType[] _VALUES =
+        {
             STRING,
             INTEGER,
             DECIMAL,
@@ -49,7 +51,8 @@ namespace hhs_p6_webshop_project.App {
         /// </summary>
         /// <param name="dataType">Data type.</param>
         /// <param name="displayName">Display name.</param>
-        public PropertyDataType(String dataType, String displayName) {
+        public PropertyDataType(String dataType, String displayName)
+        {
             this.dataType = dataType;
             this.displayName = displayName;
         }
@@ -60,17 +63,18 @@ namespace hhs_p6_webshop_project.App {
         /// <param name="dataType">String prepresentation of the data type.</param>
         /// <returns>Data type.</returns>
         /// <exception cref="Exception">Throws if the data type string is unsupported and/or invalid.</exception>
-        public static PropertyDataType GetByDataType(string dataType) {
+        public static PropertyDataType GetByDataType(string dataType)
+        {
             // Make sure some data type is given
-            if(dataType == null)
+            if (dataType == null)
                 throw new Exception("Unsupported property data type, data type is null.");
 
             // Trim the data type
             dataType = dataType.Trim();
 
             // Loop through the list of values, and return the value with the same data type
-            foreach(var propertyDataType in _VALUES)
-                if(propertyDataType.dataType.Equals(dataType))
+            foreach (var propertyDataType in _VALUES)
+                if (propertyDataType.dataType.Equals(dataType))
                     return propertyDataType;
 
             // No data type found, throw an exception
@@ -81,7 +85,8 @@ namespace hhs_p6_webshop_project.App {
         /// Return a list of possible property data type values.
         /// </summary>
         /// <returns>Property data type values.</returns>
-        public static PropertyDataType[] GetValues() {
+        public static PropertyDataType[] GetValues()
+        {
             return _VALUES;
         }
 
@@ -90,7 +95,8 @@ namespace hhs_p6_webshop_project.App {
         /// </summary>
         /// <param name="other">Other object.</param>
         /// <returns>True if they equal, false if not.</returns>
-        public override bool Equals(object other) {
+        public override bool Equals(object other)
+        {
             // Compare a raw string to the data type
             if (other is string)
                 return this.dataType.Equals(other.ToString().Trim());
@@ -103,7 +109,8 @@ namespace hhs_p6_webshop_project.App {
         /// Get the string representation of this property data type.
         /// </summary>
         /// <returns>String representation.</returns>
-        public override String ToString() {
+        public override String ToString()
+        {
             return this.displayName;
         }
     }

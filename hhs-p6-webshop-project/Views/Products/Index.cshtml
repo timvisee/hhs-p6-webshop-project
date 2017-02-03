@@ -1,14 +1,13 @@
 @using hhs_p6_webshop_project.Models.ProductModels
 @model hhs_p6_webshop_project.Models.ProductModels.ProductView
 
-<link href="~/css/products.css" rel="stylesheet" />
+<link href="~/css/products.css" rel="stylesheet"/>
 <script src="~/js/product-overview.js"></script>
 
 @{
     ViewData["Title"] = "Dressfinder";
     ViewData["ShowBanner"] = true;
     ViewData["BannerPath"] = "/images/dressfinder-banner-top.png";
-
 }
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -25,9 +24,6 @@
 </div>
 
 
-
-
-
 <div class="container">
     <div class="row">
         <div class="col-md-3 col-sm-12 product-filters">
@@ -37,10 +33,10 @@
                 <h3>Prijs</h3>
                 <div id="filter-price">
                     <div id="filter-price-slider">
-                        <input type="hidden" name="range-min" value="@Model.MinPrice" />
-                        <input type="hidden" name="range-max" value="@Model.MaxPrice" />
+                        <input type="hidden" name="range-min" value="@Model.MinPrice"/>
+                        <input type="hidden" name="range-max" value="@Model.MaxPrice"/>
                     </div>
-                    <input type="text" id="filter-price-amount" readonly />
+                    <input type="text" id="filter-price-amount" readonly/>
                 </div>
             </div>
 
@@ -48,9 +44,10 @@
                 <h3>Kleur</h3>
                 <div id="filter-color">
                     <ul>
-                        @foreach(var color in Model.Colors) {
+                        @foreach (var color in Model.Colors)
+                        {
                             <li>
-                                <input id="filter-color-@color" type="checkbox" value="@color" />
+                                <input id="filter-color-@color" type="checkbox" value="@color"/>
                                 <label for="filter-color-@color">@color</label>
                             </li>
                         }
@@ -84,6 +81,6 @@
 
 <div class="row">
     <div class="col col-md-12 col-full-width">
-        <img class="img-full-width" src="~/images/dressfinder-banner.jpg" />
+        <img class="img-full-width" src="~/images/dressfinder-banner.jpg"/>
     </div>
 </div>

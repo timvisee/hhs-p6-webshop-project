@@ -2,7 +2,10 @@
  * List of month names.
  * @const
  */
-var MONTH_NAMES = ["JANUARI", "FEBRUARI", "MAART", "APRIL", "MEI", "JUNI", "JULI", "AUGUSTUS", "SEPTEMBER", "OKTOBER", "NOVEMBER", "DECEMBER"];
+var MONTH_NAMES = [
+    "JANUARI", "FEBRUARI", "MAART", "APRIL", "MEI", "JUNI", "JULI", "AUGUSTUS", "SEPTEMBER", "OKTOBER", "NOVEMBER",
+    "DECEMBER"
+];
 
 /**
  * List of dates that are unavailable/occupied.
@@ -19,7 +22,7 @@ var uniqueIdIndex = 0;
  */
 function getUniqueId(prefix) {
     // Set the default prefix
-    if(prefix == undefined)
+    if (prefix == undefined)
         prefix = "unique-id";
 
     // Return an unique ID
@@ -38,31 +41,35 @@ function formatDateTime(dateTime, formatDate, formatTime) {
     var formatted = "";
 
     // Format the date
-    if(formatDate)
-        formatted = dateTime.getFullYear() + "-" +
-                ("0" + (dateTime.getMonth() + 1)).slice(-2) + "-" +
-                ("0" + dateTime.getDate()).slice(-2);
+    if (formatDate)
+        formatted = dateTime.getFullYear() +
+            "-" +
+            ("0" + (dateTime.getMonth() + 1)).slice(-2) +
+            "-" +
+            ("0" + dateTime.getDate()).slice(-2);
 
     // Format the time
-    if(formatTime)
+    if (formatTime)
         formatted = (formatDate ? " " : "") +
-                ("0" + dateTime.getHours()).slice(-2) + ":" +
-                ("0" + dateTime.getMinutes()).slice(-2) + ":" +
-                ("0" + dateTime.getSeconds()).slice(-2);
+            ("0" + dateTime.getHours()).slice(-2) +
+            ":" +
+            ("0" + dateTime.getMinutes()).slice(-2) +
+            ":" +
+            ("0" + dateTime.getSeconds()).slice(-2);
 
     // Return the formatted string
     return formatted;
 }
 
 // Run this code when the page is finished loading
-$(document).ready(function () {
+$(document).ready(function() {
 
     // Initialize WOW
     new WOW({
-            boxClass:     'wow',
-            animateClass: 'animated',
-            offset:       0,
-            live:         true
+        boxClass: 'wow',
+        animateClass: 'animated',
+        offset: 0,
+        live: true
     }).init();
 
     // Create an accordion of the filters container
@@ -74,7 +81,7 @@ $(document).ready(function () {
      * Update the price range label in the filters for products.
      */
     function updateSelectedPriceRange(min, max) {
-        $( "#filter-price-amount" ).val( "€" + min + " tot €" + max);
+        $("#filter-price-amount").val("€" + min + " tot €" + max);
     }
 
     /**
@@ -87,7 +94,7 @@ $(document).ready(function () {
         var result = [];
 
         // Put the values in the result array
-        for(var i = 0; i < 2; i++)
+        for (var i = 0; i < 2; i++)
             result.push($("#filter-price-slider").slider("values", i));
 
         // Return the result array
@@ -98,7 +105,7 @@ $(document).ready(function () {
     var filterPriceSliderElement = $("#filter-price-slider");
 
     // Configure the slider if any is found on the page
-    if(filterPriceSliderElement.length > 0) {
+    if (filterPriceSliderElement.length > 0) {
         // Get the minimum and maximum of the range
         var rangeMin = parseInt(filterPriceSliderElement.find("input[type='hidden'][name='range-min']").val());
         var rangeMax = parseInt(filterPriceSliderElement.find("input[type='hidden'][name='range-max']").val());
@@ -118,24 +125,27 @@ $(document).ready(function () {
         });
 
         // Render the label when loading the page
-        updateSelectedPriceRange($("#filter-price-slider").slider("values", 0), $("#filter-price-slider").slider("values", 1));
+        updateSelectedPriceRange($("#filter-price-slider").slider("values", 0),
+            $("#filter-price-slider").slider("values", 1));
     }
 
     /**
      * Toggle the search box when the search button is clicked
      */
-    $("#header_search_toggle").click(function () {
+    $("#header_search_toggle").click(function() {
         // Make the search box and field visible
-        $("#search_box").animate({ width: 'toggle' }, 350, function () {
-            // Focus the search field
-            $("#header_search").focus();
-        });
+        $("#search_box").animate({ width: 'toggle' },
+            350,
+            function() {
+                // Focus the search field
+                $("#header_search").focus();
+            });
     });
 
     /**
      * Toggle the menu when the toggle menu button is clicked
      */
-    $("#menu_toggle").click(function () {
+    $("#menu_toggle").click(function() {
         $(this).toggleClass("glyphicon-remove glyphicon-menu-hamburger");
         $("#header_nav").slideToggle();
     });
@@ -143,7 +153,7 @@ $(document).ready(function () {
     /**
      * Scroll down when you click the scroll down button
      */
-    $(".scrollToggle").click(function () {
+    $(".scrollToggle").click(function() {
         $("html, body").animate({ scrollTop: $(window).height() - 90 }, 1200, "easeInOutCubic");
     });
 
@@ -156,12 +166,13 @@ $(document).ready(function () {
 
         $("#home_banner").height(scrHeight - 150);
     }
+
     setHomeBannerHeight();
 
     /**
      * Resize the height of the banner when you resize your window
      */
-    $(window).resize(function () {
+    $(window).resize(function() {
         var scrWidth = $(window).width();
 
         // Check for mobile devices
@@ -170,7 +181,7 @@ $(document).ready(function () {
         }
     });
 
-    $(window).scroll(function (event) {
+    $(window).scroll(function(event) {
         var scroll = $(window).scrollTop() / -2;
         var scrollVid = $(window).scrollTop() / 3;
         $("#home_banner .home-text-banner, #home_banner .home-button-container").css("margin-bottom", scroll);
@@ -186,7 +197,7 @@ $(document).ready(function () {
     var calendarElement = $("#calendar");
 
     // Initialize the calendar with a date picker, if any element is selected
-    if(calendarElement.length > 0) {
+    if (calendarElement.length > 0) {
         // Create a variable for the selected date and time
         var selectedDateTime = new Date();
         selectedDateTime.setTime(selectedDateTime.getTime() + 7 * 24 * 60 * 60 * 1000);
@@ -201,14 +212,14 @@ $(document).ready(function () {
         // Create a date picker render function
         function renderDatePickerDay(date) {
             // Return if the date is undefined
-            if(date == undefined)
+            if (date == undefined)
                 return [false];
 
             // Define the variable
             var isAvailable = false;
 
             // Check whether the date is available, if the unavailable dates array isn't null
-            if(unavailableDates != null) {
+            if (unavailableDates != null) {
                 // Build the date string
                 var dateString = formatDateTime(date, true, false);
 
@@ -217,7 +228,7 @@ $(document).ready(function () {
             }
 
             // Return depending on whether the date is avaialble or not
-            if(isAvailable)
+            if (isAvailable)
                 return [true];
             else
                 return [false, "", "Deze datum is bezet."];
@@ -234,7 +245,7 @@ $(document).ready(function () {
          */
         function showDatePage(initial) {
             // Animate the pages when we're not on the initial page
-            if(!initial)
+            if (!initial)
                 $(".time-date-box").slideToggle({
                     "duration": 500,
                     "easing": "easeInOutCubic"
@@ -252,16 +263,17 @@ $(document).ready(function () {
             secondStepButton.removeClass("animated fadeIn pulse").delay(1).addClass("animated fadeOut");
 
             // Disable the animations when they complete
-            setTimeout(function () {
-                // Reset the radio button box contents, to remove the time selection radio buttons
-                timeRadioButtonContainer.html("");
+            setTimeout(function() {
+                    // Reset the radio button box contents, to remove the time selection radio buttons
+                    timeRadioButtonContainer.html("");
 
-                // Remove the animations from the toggle to date button
-                toggleToDateButton.removeClass("animated fadeOutLeft").addClass("toggle-btn-disabled");
+                    // Remove the animations from the toggle to date button
+                    toggleToDateButton.removeClass("animated fadeOutLeft").addClass("toggle-btn-disabled");
 
-                // Hide the second step button
-                secondStepButton.hide();
-            }, 500);
+                    // Hide the second step button
+                    secondStepButton.hide();
+                },
+                500);
 
             // Force select the currently selected date
             calendarElement.datepicker("setDate", selectedDateTime);
@@ -286,9 +298,10 @@ $(document).ready(function () {
             toggleToDateButton.addClass("animated fadeInRight");
 
             // Disable the animations when they complete
-            setTimeout(function () {
-                toggleToTimeButton.removeClass("animated fadeOutRight").addClass("toggle-btn-disabled");
-            }, 500);
+            setTimeout(function() {
+                    toggleToTimeButton.removeClass("animated fadeOutRight").addClass("toggle-btn-disabled");
+                },
+                500);
         }
 
         /**
@@ -305,7 +318,7 @@ $(document).ready(function () {
             toggleTimeDateButton.attr("title", "").addClass("animated fadeInLeft");
 
             // Update the selected date label
-            $(".selected-date").each(function () {
+            $(".selected-date").each(function() {
                 $(this).html(showDate);
             });
 
@@ -337,11 +350,11 @@ $(document).ready(function () {
         setLoadingIndicator(calendarElement, true);
 
         // Fetch the unavailable dates
-        fetchUnavailableDates(function (err, dates) {
+        fetchUnavailableDates(function(err, dates) {
             // Print errors to the console
-            if(err != null) {
+            if (err != null) {
                 console.log(err);
-                return ;
+                return;
             }
 
             // Fill the list of unavailable dates
@@ -365,96 +378,110 @@ $(document).ready(function () {
 
             // Wait for the slide animation to complete
             setTimeout(function() {
-                // Create a function to append a radio button to the container
-                function createTimeRadioButton(appointmentTimeObject) {
-                    // Generate an unique ID
-                    var uniqueId = getUniqueId("time-button");
+                    // Create a function to append a radio button to the container
+                    function createTimeRadioButton(appointmentTimeObject) {
+                        // Generate an unique ID
+                        var uniqueId = getUniqueId("time-button");
 
-                    // Determine the value
-                    var value = appointmentTimeObject.time.hour + ":" + ("0" + appointmentTimeObject.time.minute).slice(-2);
+                        // Determine the value
+                        var value = appointmentTimeObject.time.hour +
+                            ":" +
+                            ("0" + appointmentTimeObject.time.minute).slice(-2);
 
-                    // Append the radio button
-                    timeRadioButtonContainer.append("<li>" +
-                        "<input class=\"time-option animated fadeInRight\" type=\"radio\" name=\"appointment_time\" value=\"" + value + "\" id=\"" + uniqueId + "\">" +
-                        "<label class=\"time-option-label animated fadeInRight\" for=\"" + uniqueId + "\">" + appointmentTimeObject.formattedTime + " uur</label>" +
-                        "</li>");
-                }
-
-                // Set the loading indicator
-                setLoadingIndicator(timeContainer, true);
-
-                // Fetch the times
-                fetchTimes(selectedDateTime, function(err, times) {
-                    // Print errors to the console
-                    if (err != null) {
-                        console.log(err);
-                        return;
+                        // Append the radio button
+                        timeRadioButtonContainer.append("<li>" +
+                            "<input class=\"time-option animated fadeInRight\" type=\"radio\" name=\"appointment_time\" value=\"" +
+                            value +
+                            "\" id=\"" +
+                            uniqueId +
+                            "\">" +
+                            "<label class=\"time-option-label animated fadeInRight\" for=\"" +
+                            uniqueId +
+                            "\">" +
+                            appointmentTimeObject.formattedTime +
+                            " uur</label>" +
+                            "</li>");
                     }
-
-                    // Clear the list of radio buttons
-                    timeRadioButtonContainer.html("");
-
-                    // Loop through the times
-                    var hasTime = false;
-                    for(var i = 0; i < times.length; i++) {
-                        // Get the time entry
-                        var timeEntry = times[i];
-
-                        // Skip the time if it's not available
-                        if(!timeEntry.available)
-                            continue;
-
-                        // Create the radio buttons
-                        createTimeRadioButton(timeEntry);
-
-                        // Set the has time flag
-                        hasTime = true;
-                    }
-
-                    // Show a message if no time is available
-                    if(!hasTime)
-                        timeRadioButtonContainer.html("<i>Geen tijd beschikbaar op deze dag</i>");
-
-                    // Link the radio buttons to the date time field
-                    timeRadioButtonContainer.find("input.time-option").change(function () {
-                        // Get the radio button element, and check whether it's selected
-                        var radioButton = $(this);
-                        var isSelected = radioButton.is(":checked");
-
-                        // Return if the radio button isn't selected
-                        if(!isSelected)
-                            return;
-
-                        // Parse the time
-                        var timeString = radioButton.val();
-                        var hour = parseInt(timeString.split(":")[0]);
-                        var minute = parseInt(timeString.split(":")[1]);
-
-                        // Modify the selected date
-                        selectedDateTime.setHours(hour);
-                        selectedDateTime.setMinutes(minute);
-                        selectedDateTime.setSeconds(0);
-
-                        // Set the date input field value
-                        $("#date_input").val(formatDateTime(selectedDateTime, true, true));
-
-                        // Show the go to second button
-                        $(".selected-time").html(" OM " + timeString);
-
-                        // Show the second button
-                        secondStepButton.show();
-
-                        // Pulse the button once
-                        setTimeout(function () {
-                            secondStepButton.removeClass("animated fadeIn").delay(0).addClass("animated pulse");
-                        }, 750);
-                    });
 
                     // Set the loading indicator
-                    setLoadingIndicator(timeContainer, false);
-                });
+                    setLoadingIndicator(timeContainer, true);
 
-            }, 500);
+                    // Fetch the times
+                    fetchTimes(selectedDateTime,
+                        function(err, times) {
+                            // Print errors to the console
+                            if (err != null) {
+                                console.log(err);
+                                return;
+                            }
+
+                            // Clear the list of radio buttons
+                            timeRadioButtonContainer.html("");
+
+                            // Loop through the times
+                            var hasTime = false;
+                            for (var i = 0; i < times.length; i++) {
+                                // Get the time entry
+                                var timeEntry = times[i];
+
+                                // Skip the time if it's not available
+                                if (!timeEntry.available)
+                                    continue;
+
+                                // Create the radio buttons
+                                createTimeRadioButton(timeEntry);
+
+                                // Set the has time flag
+                                hasTime = true;
+                            }
+
+                            // Show a message if no time is available
+                            if (!hasTime)
+                                timeRadioButtonContainer.html("<i>Geen tijd beschikbaar op deze dag</i>");
+
+                            // Link the radio buttons to the date time field
+                            timeRadioButtonContainer.find("input.time-option").change(function() {
+                                // Get the radio button element, and check whether it's selected
+                                var radioButton = $(this);
+                                var isSelected = radioButton.is(":checked");
+
+                                // Return if the radio button isn't selected
+                                if (!isSelected)
+                                    return;
+
+                                // Parse the time
+                                var timeString = radioButton.val();
+                                var hour = parseInt(timeString.split(":")[0]);
+                                var minute = parseInt(timeString.split(":")[1]);
+
+                                // Modify the selected date
+                                selectedDateTime.setHours(hour);
+                                selectedDateTime.setMinutes(minute);
+                                selectedDateTime.setSeconds(0);
+
+                                // Set the date input field value
+                                $("#date_input").val(formatDateTime(selectedDateTime, true, true));
+
+                                // Show the go to second button
+                                $(".selected-time").html(" OM " + timeString);
+
+                                // Show the second button
+                                secondStepButton.show();
+
+                                // Pulse the button once
+                                setTimeout(function() {
+                                        secondStepButton.removeClass("animated fadeIn").delay(0)
+                                            .addClass("animated pulse");
+                                    },
+                                    750);
+                            });
+
+                            // Set the loading indicator
+                            setLoadingIndicator(timeContainer, false);
+                        });
+
+                },
+                500);
         });
 
         // Load time data when a date is selected
@@ -470,10 +497,10 @@ $(document).ready(function () {
     /**
      * Change the image based on the current step within the appointment creation
      */
-    $("#back_to_first").click(function () {
+    $("#back_to_first").click(function() {
         $("#appointment_step_image").attr("src", "/images/appointment/step-1.png");
     });
-    $("#go_to_second, #back_to_second").click(function () {
+    $("#go_to_second, #back_to_second").click(function() {
         // TODO: Possibly fade this
         $("#appointment_step_image").attr("src", "/images/appointment/step-2.png");
     });
@@ -499,15 +526,15 @@ $(document).ready(function () {
             var panel = $(this);
             var isLeft = !panel.hasClass("right-box");
             var container = panel.parent();
-            if(isLeft)
+            if (isLeft)
                 container = container.parent();
 
             // Update the left and right container instances, give the containers a fixed width, and update the offset
-            if(isLeft) {
-                if(leftOffsetHeight == undefined && panel.is(":visible"))
+            if (isLeft) {
+                if (leftOffsetHeight == undefined && panel.is(":visible"))
                     leftOffsetHeight = container.height() - panel.height();
 
-                if(leftContainer == undefined) {
+                if (leftContainer == undefined) {
                     leftContainer = container;
 
 //                    container.width(container.width());
@@ -517,10 +544,10 @@ $(document).ready(function () {
                 leftPanels.push(panel);
 
             } else {
-                if(rightOffsetHeight == undefined && panel.is(":visible"))
+                if (rightOffsetHeight == undefined && panel.is(":visible"))
                     rightOffsetHeight = container.height() - panel.height();
 
-                if(rightContainer == undefined) {
+                if (rightContainer == undefined) {
                     rightContainer = container;
 
 //                    container.width(container.outerWidth());
@@ -542,24 +569,25 @@ $(document).ready(function () {
             var panel = $(this);
             var isLeft = !panel.hasClass("right-box");
             var container = panel.parent();
-            if(isLeft)
+            if (isLeft)
                 container = container.parent();
 
             // Check whether the component is visible
-            if(panel.is(":visible")) {
+            if (panel.is(":visible")) {
                 // Toggle the fadeIn class to fadeOut
                 panel.removeClass("fadeIn animated").delay(0).addClass("animated fadeOut");
 
                 // Hide the panel when done
                 setTimeout(function() {
-                    panel.removeClass("fadeOut").addClass("fadeIn").hide();
-                    panel.css("position", wasPos);
-                }, 1000);
+                        panel.removeClass("fadeOut").addClass("fadeIn").hide();
+                        panel.css("position", wasPos);
+                    },
+                    1000);
 
             } else {
                 // Update the target height
                 var height = panel.height() + (isLeft ? leftOffsetHeight : rightOffsetHeight);
-                if(height > targetHeight)
+                if (height > targetHeight)
                     targetHeight = height;
 
                 // Show the panel, this will animate using CSS
@@ -570,10 +598,12 @@ $(document).ready(function () {
         // Properly resize the parent panel
         leftContainer.animate({
                 "height": targetHeight
-        }, 500);
+            },
+            500);
         rightContainer.animate({
                 "height": targetHeight
-        }, 500);
+            },
+            500);
 
         // Make the position absolute of the first elements
         var bigPanelLeft = leftPanels[0].index() < leftPanels[1].index() ? leftPanels[0] : leftPanels[1];
@@ -585,30 +615,31 @@ $(document).ready(function () {
 
         // Reset the position of the element
         setTimeout(function() {
-            bigPanelLeft.css("position", wasPos);
-            bigPanelRight.css("position", wasPos);
-        }, 1000);
+                bigPanelLeft.css("position", wasPos);
+                bigPanelRight.css("position", wasPos);
+            },
+            1000);
     }
 
-    $("#go_to_second, #back_to_first").click(function () {
+    $("#go_to_second, #back_to_first").click(function() {
         switchStep("#left_1, #right_1", "#left_2, #right_2");
     });
 
-    $("#back_to_second").click(function () {
+    $("#back_to_second").click(function() {
         switchStep("#left_2, #right_2", "#left_3, #right_3");
     });
 
     /**
      * Add Comic Sans font family to the whole body
      */
-    $("#comic_sans_button").click(function () {
+    $("#comic_sans_button").click(function() {
         $("body").toggleClass("comic-sans");
     });
 
     /**
      * Push the filled in data to the overview
      */
-    $("#go_to_third").click(function () {
+    $("#go_to_third").click(function() {
         $("#overview_name").text($("#Name").val());
         $("#overview_datemarried").text($("#DateMarried").val());
         $("#overview_phone").text($("#Phone").val());
@@ -647,7 +678,7 @@ $(document).ready(function () {
      */
     function fetchData(endpoint, callback, data) {
         // Make sure an endpoint and callback is specified
-        if(endpoint == undefined || typeof callback !== "function") {
+        if (endpoint == undefined || typeof callback !== "function") {
             callback(new Error("Endpoint or callback not specified"));
             return;
         }
@@ -661,29 +692,17 @@ $(document).ready(function () {
             data: data,
             error: function(jqXhr, textStatus) {
                 // Define the error message
-                var error = "Failed to fetch data.\n\nError: " + textStatus;
+                var error = "Failed to fetch data.\n\nError: '" + textStatu + "'";
 
-                // Alert the user
+                // Alert the user with the error
                 alert(error);
 
                 // Call back with an error
                 callback(new Error(error));
             },
             success: function(data) {
-                // Make sure the status is OK
-                if(data.status !== "ok") {
-                    // Define the error message
-                    var error = "Failed to fetch data. The website returned an error.\n\nError: " + data.error.message;
-
-                    // Alert the user
-                    alert(error);
-
-                    // Call back with an error
-                    callback(new Error(error));
-                }
-
                 // Call back the fetched data
-                callback(null, data.data);
+                callback(null, data);
             }
         });
     }
@@ -703,16 +722,17 @@ $(document).ready(function () {
      */
     function fetchUnavailableDates(callback) {
         // Fetch the data
-        fetchData("Appointments/GetDates", function (err, data) {
-            // Call back errors
-            if(err != null) {
-                callback(err);
-                return;
-            }
+        fetchData("Appointments/GetDates",
+            function(err, data) {
+                // Call back errors
+                if (err != null) {
+                    callback(err);
+                    return;
+                }
 
-            // Call back with the dates
-            callback(null, data.dates);
-        });
+                // Call back with the dates
+                callback(null, data.dates);
+            });
     }
 
     /**
@@ -731,19 +751,21 @@ $(document).ready(function () {
      */
     function fetchTimes(date, callback) {
         // Fetch the data
-        fetchData("Appointments/GetTimes", function (err, data) {
-            // Call back errors
-            if(err != null) {
-                callback(err);
-                return;
-            }
+        fetchData("Appointments/GetTimes",
+            function(err, data) {
+                // Call back errors
+                if (err != null) {
+                    callback(err);
+                    return;
+                }
 
-            // Call back with the time
-            callback(null, data.times);
+                // Call back with the time
+                callback(null, data.times);
 
-        }, {
-            date: formatDateTime(date, true, false)
-        });
+            },
+            {
+                date: formatDateTime(date, true, false)
+            });
     }
 
     /**
@@ -799,15 +821,16 @@ $(document).ready(function () {
 
         } else {
             // Remove the loading element
-            currentOverlay.fadeOut(350, function () {
-                // Remove the element when fading is complete
-                $(this).remove();
-            });
+            currentOverlay.fadeOut(350,
+                function() {
+                    // Remove the element when fading is complete
+                    $(this).remove();
+                });
         }
     }
 
     /** Appointment banner **/
-    $(".home-list li").click(function () {
+    $(".home-list li").click(function() {
         var num = $(this).attr("data-attribute");
         $(".home-list li").removeClass("active");
         $(this).addClass("active");
@@ -823,7 +846,7 @@ $(document).ready(function () {
     var ajaxFilterRequest;
 
     // Load the filter logic when a product overview is available
-    if(productOverviewElement.length > 0) {
+    if (productOverviewElement.length > 0) {
         // Get the sort selection box
         var sortElement = $("#filters-sort");
 
@@ -853,7 +876,7 @@ $(document).ready(function () {
                 var checkedBoxes = filterElement.find("input:checked");
 
                 // Skip if no boxes are selected
-                if(checkedBoxes.length <= 0)
+                if (checkedBoxes.length <= 0)
                     return;
 
                 // Put the checkbox IDs in the array
@@ -866,7 +889,7 @@ $(document).ready(function () {
             endpointUrl += "/sort/" + sortElement.find("option:selected").val();
 
             // Abort pending AJAX calls for filtering
-            if(ajaxFilterRequest != undefined)
+            if (ajaxFilterRequest != undefined)
                 ajaxFilterRequest.abort();
 
             // Get the product filters element
@@ -899,13 +922,14 @@ $(document).ready(function () {
 
                     // Show the new elements when the previous animation is complete
                     setTimeout(function() {
-                        // Remove the current list of products (that is already faded away)
-                        productElements.remove();
+                            // Remove the current list of products (that is already faded away)
+                            productElements.remove();
 
-                        // Set the new products
-                        productOverviewElement.append(data);
+                            // Set the new products
+                            productOverviewElement.append(data);
 
-                    }, 300);
+                        },
+                        300);
                 },
                 complete: function() {
                     // Hide the loading indiator
@@ -916,10 +940,11 @@ $(document).ready(function () {
 
                     // Show the new elements when the previous animation is complete
                     setTimeout(function() {
-                        // Re-enable the buttons
-                        productFiltersElement.find(":input").prop("disabled", false);
+                            // Re-enable the buttons
+                            productFiltersElement.find(":input").prop("disabled", false);
 
-                    }, 300);
+                        },
+                        300);
                 }
             });
         }
@@ -937,14 +962,14 @@ $(document).ready(function () {
     var createAppointmentFormElement = $("#create_appointment_form");
 
     // Execute the appointment creation form logic when it's available on the page
-    if(createAppointmentFormElement.length > 0) {
+    if (createAppointmentFormElement.length > 0) {
         // Get the button element to go to step 3
         var stepThreeButton = $("#go_to_third");
 
         // Handle key press events, and prevent the enter key from submitting the form
         createAppointmentFormElement.keypress(function(event) {
             // Continue if this wasn't the enter key that is pressed
-            if(event.keyCode !== 13)
+            if (event.keyCode !== 13)
                 return true;
 
             // Validate the form
@@ -952,7 +977,7 @@ $(document).ready(function () {
             var isValid = createAppointmentFormElement.valid();
 
             // Go to step 3 if the form is valid
-            if(isValid)
+            if (isValid)
                 stepThreeButton.click();
 
             // The enter key is pressed, prevent the default action
@@ -962,12 +987,12 @@ $(document).ready(function () {
     }
 
     // File uploading custom button
-    $('.inputfile').change(function (e) {
+    $('.inputfile').change(function(e) {
         // Get the input file selectors
         var inputs = document.querySelectorAll('.inputfile');
 
         // Loop through the selected inputs
-        for(var i = 0; i < inputs.length; i++) {
+        for (var i = 0; i < inputs.length; i++) {
             // Get the current entry
             var input = inputs[i];
 
@@ -975,7 +1000,7 @@ $(document).ready(function () {
             var fileName = e.target.value.split('\\').pop();
 
             // Append the file name to the upload image box
-            if(fileName !== null)
+            if (fileName !== null)
                 $('.upload-image').html(fileName);
         }
     });

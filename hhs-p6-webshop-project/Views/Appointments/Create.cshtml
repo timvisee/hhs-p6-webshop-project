@@ -11,228 +11,243 @@
     <h2 class="banner-title-text">Maak je pasafspraak</h2>
 </div>
 <form asp-action="Create" id="create_appointment_form">
-    <div class="row" id="create_appointment">
-        <div class="appiontment-wrapper font-nexa-regular">
-            <div class="col-sm-12 col-md-7 box-shadow appointment-form">
-                <div class="col-md-2 col-sm-12">
-                    <img id="appointment_step_image" src="~/images/appointment/step-1.png" />
+<div class="row" id="create_appointment">
+<div class="appiontment-wrapper font-nexa-regular">
+<div class="col-sm-12 col-md-7 box-shadow appointment-form">
+    <div class="col-md-2 col-sm-12">
+        <img id="appointment_step_image" src="~/images/appointment/step-1.png"/>
+    </div>
+    <div class="create-appointment-part col-md-10 col-sm-12">
+        <!-- Left box - Step 1, Select date and time -->
+        <div class="left-box step-1" id="left_1">
+            <h3>Stap 1, datum en tijd selecteren</h3>
+            @if (ViewBag.dressColor != null)
+            {
+                <h3>
+                    @ViewBag.selectedDress <span style="color: gray;">(@ViewBag.dressColor)</span>
+                </h3>
+            }
+            else
+            {
+                <h3>@ViewBag.selectedDress</h3>
+            }
+            <p>
+                Selecteer eerst een datum en vervolgens een tijdstip dat je wilt komen passen!
+            </p>
+            <div class="opening-times">
+                Openingstijden:
+                <br/>
+                <p class="times">
+                    <label>MA</label>12:00-17:30<br/>
+                    <label>DI-VR</label>09:30-17:30<br/>
+                    <label>ZA</label>09:30-18:00<br/>
+                    <label>ZO</label>11:00-17:00
+                </p>
+            </div>
+            <small>
+                *Op alle werkdagen kunnen er ook schoenen worden gepast. Helaas is dit niet mogelijk in het weekend.
+            </small>
+            <br/>
+            <span class="btn next-button" id="go_to_second" style="display: none; cursor: pointer;">Naar stap 2</span>
+        </div>
+
+        <!-- Left box - Step 2, fill in form -->
+        <div class="left-box step-2" id="left_2" style="display: none;">
+            <h3>Stap 2, Gegevens invullen</h3>
+            @if (ViewBag.dressColor != null)
+            {
+                <h3>
+                    @ViewBag.selectedDress <span style="color: gray;">(@ViewBag.dressColor)</span>
+                </h3>
+            }
+            else
+            {
+                <h3>@ViewBag.selectedDress</h3>
+            }
+            <div class="form-horizontal">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="col-md-12 control-label"></label>
+                    <div class="col-md-12">
+                        <input asp-for="Name" type="text" class="form-control"/>
+                        <span asp-validation-for="Name" class="text-danger"/>
+                    </div>
                 </div>
-                <div class="create-appointment-part col-md-10 col-sm-12">
-                    <!-- Left box - Step 1, Select date and time -->
-                    <div class="left-box step-1" id="left_1">
-                        <h3>Stap 1, datum en tijd selecteren</h3>
-                        @if(ViewBag.dressColor != null) {
-                            <h3>@ViewBag.selectedDress <span style="color: gray;">(@ViewBag.dressColor)</span></h3>
-                        } else {
-                            <h3>@ViewBag.selectedDress</h3>
-                        }
-                        <p>
-                            Selecteer eerst een datum en vervolgens een tijdstip dat je wilt komen passen!
-                        </p>
-                        <div class="opening-times">
-                            Openingstijden:
-                            <br />
-                            <p class="times">
-                                <label>MA</label>12:00-17:30<br />
-                                <label>DI-VR</label>09:30-17:30<br />
-                                <label>ZA</label>09:30-18:00<br />
-                                <label>ZO</label>11:00-17:00
-                            </p>
-                        </div>
-                        <small>
-                            *Op alle werkdagen kunnen er ook schoenen worden gepast. Helaas is dit niet mogelijk in het weekend.
-                        </small>
-                        <br />
-                        <span class="btn next-button" id="go_to_second" style="display: none; cursor: pointer;">Naar stap 2</span>
+                <div class="form-group">
+                    <label asp-for="DateMarried" class="col-md-12 control-label"></label>
+                    <div class="col-md-12">
+                        <input asp-for="DateMarried" type="date" class="form-control"/>
+                        <span asp-validation-for="DateMarried" class="text-danger"/>
                     </div>
-
-                    <!-- Left box - Step 2, fill in form -->
-                    <div class="left-box step-2" id="left_2" style="display: none;">
-                        <h3>Stap 2, Gegevens invullen</h3>
-                        @if(ViewBag.dressColor != null) {
-                        <h3>@ViewBag.selectedDress <span style="color: gray;">(@ViewBag.dressColor)</span></h3>
-                        } else {
-                        <h3>@ViewBag.selectedDress</h3>
-                        }
-                        <div class="form-horizontal">
-                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <div class="form-group">
-                                <label asp-for="Name" class="col-md-12 control-label"></label>
-                                <div class="col-md-12">
-                                    <input asp-for="Name" type="text" class="form-control" />
-                                    <span asp-validation-for="Name" class="text-danger" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="DateMarried" class="col-md-12 control-label"></label>
-                                <div class="col-md-12">
-                                    <input asp-for="DateMarried" type="date" class="form-control" />
-                                    <span asp-validation-for="DateMarried" class="text-danger" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Phone" class="col-md-12 control-label"></label>
-                                <div class="col-md-12">
-                                    <input asp-for="Phone" type="tel" class="form-control" />
-                                    <span asp-validation-for="Phone" class="text-danger" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Mail" class="col-md-12 control-label"></label>
-                                <div class="col-md-12">
-                                    <input asp-for="Mail" type="email" class="form-control" />
-                                    <span asp-validation-for="Mail" class="text-danger" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-12 control-label">Herhaal E-Mailadres*</label>
-                                <div class="col-md-12">
-                                    <input type="text" equalTo='#Mail' id="mail_verify" name="mail_verify" class="form-control email-verify" equalTo="#Mail" />
-                                    <span data-valmsg-for="mail_verify" data-valmsg-replace="true" class="text-danger" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-1">
-                                    <input type="checkbox" class="form-control" />
-                                </div>
-                                <div class="col-md-11">
-                                    Ja, ik wil me graag aanmelden voor de inspirerende nieuwsbrief van Honeymoon Shop
-                                </div>
-                            </div>
-                        </div>
-                        <br />
-                        <span class="btn next-button" id="go_to_third">Naar stap 3</span>
-                        <br />
-                        <span id="fill_in_fields_warning"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Phone" class="col-md-12 control-label"></label>
+                    <div class="col-md-12">
+                        <input asp-for="Phone" type="tel" class="form-control"/>
+                        <span asp-validation-for="Phone" class="text-danger"/>
                     </div>
-
-                    <!-- Left box - Step 3, verify filled in data -->
-                    <div class="left-box step-3" id="left_3" style="display: none;">
-                        <h3>Stap 3, Gegevens controleren</h3>
-                        @if(ViewBag.dressColor != null) {
-                        <h3>@ViewBag.selectedDress <span style="color: gray;">(@ViewBag.dressColor)</span></h3>
-                        } else {
-                        <h3>@ViewBag.selectedDress</h3>
-                        }
-                        <p>
-                            Controleer alle gegevens voor je pasafspraak bij Honeymoon shop aan de Korte Hoogstraat 4, te Rotterdam.
-                        </p>
-                        <input type="hidden" value="@ViewBag.selectedDress" name="dressName"/>
-                        <input type="hidden" name="dressColor" value="@ViewBag.dressColor" />
-                        <input type="submit" value="Afspraak bevestigen" class="btn btn-default" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Mail" class="col-md-12 control-label"></label>
+                    <div class="col-md-12">
+                        <input asp-for="Mail" type="email" class="form-control"/>
+                        <span asp-validation-for="Mail" class="text-danger"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-12 control-label">Herhaal E-Mailadres*</label>
+                    <div class="col-md-12">
+                        <input type="text" equalTo='#Mail' id="mail_verify" name="mail_verify" class="form-control email-verify" equalTo="#Mail"/>
+                        <span data-valmsg-for="mail_verify" data-valmsg-replace="true" class="text-danger"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-1">
+                        <input type="checkbox" class="form-control"/>
+                    </div>
+                    <div class="col-md-11">
+                        Ja, ik wil me graag aanmelden voor de inspirerende nieuwsbrief van Honeymoon Shop
                     </div>
                 </div>
             </div>
+            <br/>
+            <span class="btn next-button" id="go_to_third">Naar stap 3</span>
+            <br/>
+            <span id="fill_in_fields_warning"></span>
+        </div>
 
-            <div class="create-appointment-part col-md-5 col-sm-12 hm-pink-dark white-text">
-
-                <!-- Right box - Step 1, Select date and time -->
-                <div class="right-box step-1" id="right_1">
-                    <!-- Select a date -->
-                    <div id="right_1_date" class="time-date-box">
-                        <h3>
-                            <span class="glyphicon glyphicon-heart"></span>Selecteer een datum:
-                        </h3>
-
-                        <!-- Calendar -->
-                        <div class="date-container">
-                            <div id="calendar"></div>
-                        </div>
-
-                        <span class="toggle-time-date toggle-time-date-to-time toggle-btn toggle-btn-disabled cursor-pointer" title="Selecteer eerst een datum">
-                            Selecteer een tijd
-                            <img src="~/images/appointment/arrow-next.png" />
-                        </span>
-                    </div>
-
-                    <!-- Select a time -->
-                    <div id="right_1_time" class="time-date-box" style="display: none;">
-                        <h3>
-                            <span class="glyphicon glyphicon-heart"></span>Selecteer een tijdstip:
-                        </h3>
-
-                        <div class="time-container">
-
-                            <div class="selected-date-time">
-                                <span class="selected-date">Nog geen datum gekozen</span>
-                                <span class="selected-time"></span>
-                            </div>
-
-                            <ul id="select_time"></ul>
-                        </div>
-
-                        <span class="toggle-time-date toggle-time-time-to-date toggle-btn previous-btn cursor-pointer">
-                            <img src="~/images/appointment/arrow-back.png" />
-                            Terug naar datum selecteren
-                        </span>
-
-                    </div>
-                </div>
-
-                <!-- Right box - Step 2, Selected time and date -->
-                <div class="right-box step-2" id="right_2" style="display: none;">
-                    <h3>
-                        <span class="glyphicon glyphicon-heart"></span>Gekozen tijd en datum:
-                    </h3>
-
-                    <div class="selected-date-time">
-                        <span class="selected-date">Nog geen datum gekozen</span>
-                        <span class="selected-time"></span>
-                    </div>
-
-                    <p>
-                        Vul je persoonlijke gegevens in om de pasafspraak compleet te maken.
-                    </p>
-
-                    <span id="back_to_first" class="toggle-btn previous-btn">
-                        <img src="~/images/appointment/arrow-back.png" />
-                        Terug naar stap 1 om datum te wijzigen
-                    </span>
-                </div>
-
-                <!-- Right box - Step 3, Verify filled in data -->
-                <div class="right-box step-3" id="right_3" style="display: none;">
-                    <h3>
-                        <span class="glyphicon glyphicon-heart"></span>Controleer je gegevens:
-                    </h3>
-
-                    <div class="selected-date-time">
-                        <span class="selected-date">Nog geen datum gekozen</span>
-                        <span class="selected-time"></span>
-                    </div>
-
-                    <div class="form-horizontal form-overview">
-                        <div class="form-group">
-                            <strong class="col-md-4 col-sm-12">Naam:</strong>
-                            <span id="overview_name" class="col-md-8 col-sm-12"></span>
-                        </div>
-                        <div class="form-group">
-                            <strong class="col-md-4 col-sm-12">Trouwdatum:</strong>
-                            <span id="overview_datemarried" class="col-md-8 col-sm-12"></span>
-                        </div>
-                        <div class="form-group">
-                            <strong class="col-md-4 col-sm-12">Telefoon:</strong>
-                            <span id="overview_phone" class="col-md-8 col-sm-12"></span>
-                        </div>
-                        <div class="form-group">
-                            <strong class="col-md-4 col-sm-12">E-mail:</strong>
-                            <span id="overview_mail" class="col-md-8 col-sm-12"></span>
-                        </div>
-                    </div>
-
-                    <span id="back_to_second" class="toggle-btn previous-btn">
-                        <img src="~/images/appointment/arrow-back.png" /> Terug naar stap 2 om gegevens te wijzigen
-                    </span>
-                </div>
-                <input asp-for="AppointmentDateTime" id="date_input" value="" type="datetime" class="form-control" />
-            </div>
+        <!-- Left box - Step 3, verify filled in data -->
+        <div class="left-box step-3" id="left_3" style="display: none;">
+            <h3>Stap 3, Gegevens controleren</h3>
+            @if (ViewBag.dressColor != null)
+            {
+                <h3>
+                    @ViewBag.selectedDress <span style="color: gray;">(@ViewBag.dressColor)</span>
+                </h3>
+            }
+            else
+            {
+                <h3>@ViewBag.selectedDress</h3>
+            }
+            <p>
+                Controleer alle gegevens voor je pasafspraak bij Honeymoon shop aan de Korte Hoogstraat 4, te Rotterdam.
+            </p>
+            <input type="hidden" value="@ViewBag.selectedDress" name="dressName"/>
+            <input type="hidden" name="dressColor" value="@ViewBag.dressColor"/>
+            <input type="submit" value="Afspraak bevestigen" class="btn btn-default"/>
         </div>
     </div>
+</div>
+
+<div class="create-appointment-part col-md-5 col-sm-12 hm-pink-dark white-text">
+
+    <!-- Right box - Step 1, Select date and time -->
+    <div class="right-box step-1" id="right_1">
+        <!-- Select a date -->
+        <div id="right_1_date" class="time-date-box">
+            <h3>
+                <span class="glyphicon glyphicon-heart"></span>Selecteer een datum:
+            </h3>
+
+            <!-- Calendar -->
+            <div class="date-container">
+                <div id="calendar"></div>
+            </div>
+
+            <span class="toggle-time-date toggle-time-date-to-time toggle-btn toggle-btn-disabled cursor-pointer" title="Selecteer eerst een datum">
+                Selecteer een tijd
+                <img src="~/images/appointment/arrow-next.png"/>
+            </span>
+        </div>
+
+        <!-- Select a time -->
+        <div id="right_1_time" class="time-date-box" style="display: none;">
+            <h3>
+                <span class="glyphicon glyphicon-heart"></span>Selecteer een tijdstip:
+            </h3>
+
+            <div class="time-container">
+
+                <div class="selected-date-time">
+                    <span class="selected-date">Nog geen datum gekozen</span>
+                    <span class="selected-time"></span>
+                </div>
+
+                <ul id="select_time"></ul>
+            </div>
+
+            <span class="toggle-time-date toggle-time-time-to-date toggle-btn previous-btn cursor-pointer">
+                <img src="~/images/appointment/arrow-back.png"/>
+                Terug naar datum selecteren
+            </span>
+
+        </div>
+    </div>
+
+    <!-- Right box - Step 2, Selected time and date -->
+    <div class="right-box step-2" id="right_2" style="display: none;">
+        <h3>
+            <span class="glyphicon glyphicon-heart"></span>Gekozen tijd en datum:
+        </h3>
+
+        <div class="selected-date-time">
+            <span class="selected-date">Nog geen datum gekozen</span>
+            <span class="selected-time"></span>
+        </div>
+
+        <p>
+            Vul je persoonlijke gegevens in om de pasafspraak compleet te maken.
+        </p>
+
+        <span id="back_to_first" class="toggle-btn previous-btn">
+            <img src="~/images/appointment/arrow-back.png"/>
+            Terug naar stap 1 om datum te wijzigen
+        </span>
+    </div>
+
+    <!-- Right box - Step 3, Verify filled in data -->
+    <div class="right-box step-3" id="right_3" style="display: none;">
+        <h3>
+            <span class="glyphicon glyphicon-heart"></span>Controleer je gegevens:
+        </h3>
+
+        <div class="selected-date-time">
+            <span class="selected-date">Nog geen datum gekozen</span>
+            <span class="selected-time"></span>
+        </div>
+
+        <div class="form-horizontal form-overview">
+            <div class="form-group">
+                <strong class="col-md-4 col-sm-12">Naam:</strong>
+                <span id="overview_name" class="col-md-8 col-sm-12"></span>
+            </div>
+            <div class="form-group">
+                <strong class="col-md-4 col-sm-12">Trouwdatum:</strong>
+                <span id="overview_datemarried" class="col-md-8 col-sm-12"></span>
+            </div>
+            <div class="form-group">
+                <strong class="col-md-4 col-sm-12">Telefoon:</strong>
+                <span id="overview_phone" class="col-md-8 col-sm-12"></span>
+            </div>
+            <div class="form-group">
+                <strong class="col-md-4 col-sm-12">E-mail:</strong>
+                <span id="overview_mail" class="col-md-8 col-sm-12"></span>
+            </div>
+        </div>
+
+        <span id="back_to_second" class="toggle-btn previous-btn">
+            <img src="~/images/appointment/arrow-back.png"/> Terug naar stap 2 om gegevens te wijzigen
+        </span>
+    </div>
+    <input asp-for="AppointmentDateTime" id="date_input" value="" type="datetime" class="form-control"/>
+</div>
+</div>
+</div>
 </form>
 
 <div class="row">
     <div class="col col-md-12 col-full-width">
-        <img class="img-full-width" src="~/images/appointment/appointment-banner.png" />
+        <img class="img-full-width" src="~/images/appointment/appointment-banner.png"/>
     </div>
 </div>
 

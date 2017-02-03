@@ -1,6 +1,7 @@
-﻿namespace hhs_p6_webshop_project.App.Config {
-    public class AppConfig {
-
+﻿namespace hhs_p6_webshop_project.App.Config
+{
+    public class AppConfig
+    {
         /// <summary>
         /// True to reset the database on startup, false to use the existing database.
         /// </summary>
@@ -16,17 +17,18 @@
         /// Constructor.
         /// </summary>
         /// <param name="init">True to immediately initialize the configuration, false if not.</param>
-        public AppConfig(bool init) {
+        public AppConfig(bool init)
+        {
             // Initialize
-            if (init) {
+            if (init)
                 Init();
-            }
         }
 
         /// <summary>
         /// Configuration initialization code.
         /// </summary>
-        public void Init() {
+        public void Init()
+        {
             // Add configuration initialization code here, such as environment variable parsing.
         }
     }

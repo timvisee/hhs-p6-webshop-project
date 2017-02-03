@@ -4,8 +4,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace hhs_p6_webshop_project.Models.AppointmentModels {
-    public class Appointment {
+namespace hhs_p6_webshop_project.Models.AppointmentModels
+{
+    public class Appointment
+    {
         public int ID { get; set; }
 
         [DisplayName("E-Mailadres*")]
@@ -13,7 +15,7 @@ namespace hhs_p6_webshop_project.Models.AppointmentModels {
 
         [DisplayName("Trouwdatum*")]
         public DateTime DateMarried { get; set; }
-        
+
         [DisplayName("Datum afspraak")]
         public DateTime AppointmentDateTime { get; set; }
 

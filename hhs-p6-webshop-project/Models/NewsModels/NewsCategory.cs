@@ -5,9 +5,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace hhs_p6_webshop_project.Models.NewsModels {
-    public class NewsCategory {
-        public NewsCategory() {
+namespace hhs_p6_webshop_project.Models.NewsModels
+{
+    public class NewsCategory
+    {
+        public NewsCategory()
+        {
             NewsArticleCategories = new List<NewsArticleCategory>();
         }
 
@@ -21,7 +24,8 @@ namespace hhs_p6_webshop_project.Models.NewsModels {
         public virtual ICollection<NewsArticleCategory> NewsArticleCategories { get; set; }
     }
 
-    public class NewsCategoryView {
+    public class NewsCategoryView
+    {
         public NewsCategory NewsCategory { get; set; }
 
         public List<NewsCategory> NewsCategories { get; set; }

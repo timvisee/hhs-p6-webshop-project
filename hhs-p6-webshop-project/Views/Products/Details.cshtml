@@ -3,9 +3,8 @@
 @model hhs_p6_webshop_project.Models.ProductModels.Product
 
 
-
-<link rel="stylesheet" href="~/lib/lightbox2/dist/css/lightbox.min.css" />
-<link href="~/css/products.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/lib/lightbox2/dist/css/lightbox.min.css"/>
+<link href="~/css/products.css" rel="stylesheet"/>
 
 <script src="~/lib/lightbox2/dist/js/lightbox.min.js"></script>
 <script src="~/js/product-details.js"></script>
@@ -21,21 +20,21 @@
         {
             <div class="product-buttons">
                 <div class="product-button">
-                    @Html.ActionLink("Nog een kleur toevoegen", "Create", "ColorOptions", new { id = Model.ProductId }, new { @class = "btn" })
+                    @Html.ActionLink("Nog een kleur toevoegen", "Create", "ColorOptions", new {id = Model.ProductId}, new {@class = "btn"})
                 </div>
                 <div class="product-button">
                     <a asp-action="Edit" asp-route-id="@Model.ProductId" class="btn">Bewerk</a>
                 </div>
                 <div class="product-button">
-                    @Html.ActionLink("Nog een foto toevoegen", "Create", "ProductImages", new { id = Model.ProductId }, new { @class = "btn" })
+                    @Html.ActionLink("Nog een foto toevoegen", "Create", "ProductImages", new {id = Model.ProductId}, new {@class = "btn"})
                 </div>
                 <div class="product-button">
-                    <a href="" class="btn delete-color-btn" style="display:none;">Verwijder kleur</a>
+                    <a href="" class="btn delete-color-btn" style="display: none;">Verwijder kleur</a>
                 </div>
             </div>
         }
         <div class="back-to-dress-finder">
-            <a asp-action="Index"><img src="/images/products/white-arrow-back.png" alt="<" />Terug naar overzicht</a>
+            <a asp-action="Index"><img src="/images/products/white-arrow-back.png" alt="<"/>Terug naar overzicht</a>
         </div>
     </div>
     <div class="row product-details">
@@ -48,7 +47,7 @@
                 <div class="horizontal-align">
                     <a href="" data-lightbox="dress-images">
                         @*src is loaded with ajax*@
-                        <img src="" alt="" />
+                        <img src="" alt=""/>
                     </a>
                 </div>
             </div>
@@ -81,13 +80,13 @@
                     <div class="product-make-appointment-container">
                         <p>Kom deze jurk passen!</p>
                         @Html.ActionLink("Pasafspraak maken", "Create", "Appointments", new
-                   {
-                       id = Model.ProductId
-                   }, new
-                   {
-                       @id = "appointment-create-button",
-                       @class = "btn"
-                   })
+                        {
+                            id = Model.ProductId
+                        }, new
+                        {
+                            @id = "appointment-create-button",
+                            @class = "btn"
+                        })
                     </div>
                 </div>
             </div>
@@ -95,7 +94,7 @@
     </div>
     <div class="row">
         <div class="additions-container col-sm-12">
-            <hr class="additions" />
+            <hr class="additions"/>
             <span class="additions-text">Bijpassende sieraden</span>
         </div>
     </div>
@@ -103,7 +102,7 @@
         <div class="col-md-3 col-sm-12 addition-item">
             <div class="addition-image">
                 <div class="image-wrapper">
-                    <img src="~/images/products/accessoire-1.jpg" alt="" />
+                    <img src="~/images/products/accessoire-1.jpg" alt=""/>
                 </div>
             </div>
             <span>Abrazi</span>
@@ -111,7 +110,7 @@
         <div class="col-md-3 col-sm-12 addition-item">
             <div class="addition-image">
                 <div class="image-wrapper">
-                    <img src="~/images/products/accessoire-2.jpg" alt="" />
+                    <img src="~/images/products/accessoire-2.jpg" alt=""/>
                 </div>
             </div>
             <span>Abrazi</span>
@@ -119,7 +118,7 @@
         <div class="col-md-3 col-sm-12 addition-item">
             <div class="addition-image">
                 <div class="image-wrapper">
-                    <img src="~/images/products/accessoire-1.jpg" alt="" />
+                    <img src="~/images/products/accessoire-1.jpg" alt=""/>
                 </div>
             </div>
             <span>Abrazi</span>
@@ -127,7 +126,7 @@
         <div class="col-md-3 col-sm-12 addition-item">
             <div class="addition-image">
                 <div class="image-wrapper">
-                    <img src="~/images/products/accessoire-2.jpg" alt="" />
+                    <img src="~/images/products/accessoire-2.jpg" alt=""/>
                 </div>
             </div>
             <span>Abrazi</span>
@@ -138,7 +137,7 @@
     </div>
     <div class="row">
         <div class="additions-container col-sm-12">
-            <hr class="additions" />
+            <hr class="additions"/>
             <span class="additions-text">Of zijn deze jurken meer iets voor jou?</span>
         </div>
     </div>
@@ -146,7 +145,7 @@
         <div class="col-md-3 col-sm-12 addition-item">
             <div class="addition-image">
                 <div class="image-wrapper">
-                    <img src="~/images/uploads/default/annabelle-2.jpg" alt="" />
+                    <img src="~/images/uploads/default/annabelle-2.jpg" alt=""/>
                 </div>
             </div>
             <span>Maggie Sottero</span>
@@ -154,7 +153,7 @@
         <div class="col-md-3 col-sm-12 addition-item">
             <div class="addition-image">
                 <div class="image-wrapper">
-                    <img src="~/images/uploads/default/ladybird-2.jpg" alt="" />
+                    <img src="~/images/uploads/default/ladybird-2.jpg" alt=""/>
                 </div>
             </div>
             <span>Beautiful by Ensoani</span>
@@ -162,7 +161,7 @@
         <div class="col-md-3 col-sm-12 addition-item">
             <div class="addition-image">
                 <div class="image-wrapper">
-                    <img src="~/images/uploads/default/ladybird-nude-1.jpg" alt="" />
+                    <img src="~/images/uploads/default/ladybird-nude-1.jpg" alt=""/>
                 </div>
             </div>
             <span>Ladybird</span>
@@ -170,7 +169,7 @@
         <div class="col-md-3 col-sm-12 addition-item">
             <div class="addition-image">
                 <div class="image-wrapper">
-                    <img src="~/images/uploads/default/pronovias-wit-1.jpg" alt="" />
+                    <img src="~/images/uploads/default/pronovias-wit-1.jpg" alt=""/>
                 </div>
             </div>
             <span>Tres Chic</span>

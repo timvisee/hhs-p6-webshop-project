@@ -16,9 +16,7 @@ body {
 
 input,
 select,
-textarea {
-    max-width: 280px;
-}
+textarea { max-width: 280px; }
 
 /* Carousel */
 
@@ -45,7 +43,5 @@ textarea {
 
 @media screen and (max-width: 767px) {
     /* Hide captions */
-    .carousel-caption {
-        display: none
-    }
+    .carousel-caption { display: none }
 }

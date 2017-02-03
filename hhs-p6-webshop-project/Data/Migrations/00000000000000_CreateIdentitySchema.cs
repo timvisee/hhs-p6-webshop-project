@@ -2,12 +2,16 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace hhs_p6_webshop_project.Data.Migrations {
-    public partial class CreateIdentitySchema : Migration {
-        protected override void Up(MigrationBuilder migrationBuilder) {
+namespace hhs_p6_webshop_project.Data.Migrations
+{
+    public partial class CreateIdentitySchema : Migration
+    {
+        protected override void Up(MigrationBuilder migrationBuilder)
+        {
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
-                columns: table => new {
+                columns: table => new
+                {
                     Id = table.Column<string>(nullable: false),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
@@ -17,7 +21,8 @@ namespace hhs_p6_webshop_project.Data.Migrations {
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserTokens",
-                columns: table => new {
+                columns: table => new
+                {
                     UserId = table.Column<string>(nullable: false),
                     LoginProvider = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: false),
@@ -28,7 +33,8 @@ namespace hhs_p6_webshop_project.Data.Migrations {
 
             migrationBuilder.CreateTable(
                 name: "AspNetUsers",
-                columns: table => new {
+                columns: table => new
+                {
                     Id = table.Column<string>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
@@ -49,14 +55,16 @@ namespace hhs_p6_webshop_project.Data.Migrations {
 
             migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
-                columns: table => new {
+                columns: table => new
+                {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Autoincrement", true),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true),
                     RoleId = table.Column<string>(nullable: false)
                 },
-                constraints: table => {
+                constraints: table =>
+                {
                     table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
                     table.ForeignKey(
                         name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
@@ -68,14 +76,16 @@ namespace hhs_p6_webshop_project.Data.Migrations {
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
-                columns: table => new {
+                columns: table => new
+                {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Autoincrement", true),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: false)
                 },
-                constraints: table => {
+                constraints: table =>
+                {
                     table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
                     table.ForeignKey(
                         name: "FK_AspNetUserClaims_AspNetUsers_UserId",
@@ -87,13 +97,15 @@ namespace hhs_p6_webshop_project.Data.Migrations {
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserLogins",
-                columns: table => new {
+                columns: table => new
+                {
                     LoginProvider = table.Column<string>(nullable: false),
                     ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: false)
                 },
-                constraints: table => {
+                constraints: table =>
+                {
                     table.PrimaryKey("PK_AspNetUserLogins", x => new {x.LoginProvider, x.ProviderKey});
                     table.ForeignKey(
                         name: "FK_AspNetUserLogins_AspNetUsers_UserId",
@@ -105,11 +117,13 @@ namespace hhs_p6_webshop_project.Data.Migrations {
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserRoles",
-                columns: table => new {
+                columns: table => new
+                {
                     UserId = table.Column<string>(nullable: false),
                     RoleId = table.Column<string>(nullable: false)
                 },
-                constraints: table => {
+                constraints: table =>
+                {
                     table.PrimaryKey("PK_AspNetUserRoles", x => new {x.UserId, x.RoleId});
                     table.ForeignKey(
                         name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
@@ -166,7 +180,8 @@ namespace hhs_p6_webshop_project.Data.Migrations {
                 column: "NormalizedUserName");
         }
 
-        protected override void Down(MigrationBuilder migrationBuilder) {
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 

@@ -4,15 +4,17 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace hhs_p6_webshop_project.Models.AccountViewModels {
-    public class ResetPasswordViewModel {
+namespace hhs_p6_webshop_project.Models.AccountViewModels
+{
+    public class ResetPasswordViewModel
+    {
         [Required]
         [EmailAddress]
         public string Email { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "De {0} moet minimaal {2} en maximaal {1} karakters lang zijn.",
-             MinimumLength = 6)]
+            MinimumLength = 6)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
