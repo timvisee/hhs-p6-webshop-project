@@ -9,7 +9,8 @@ using hhs_p6_webshop_project.Models.ProductModels;
 
 namespace hhs_p6_webshop_project.Services
 {
-    public interface IProductService {
+    public interface IProductService
+    {
         /// <summary>
         /// Returns a list of all products, sorted by Id, ascending.
         /// </summary>
@@ -26,7 +27,7 @@ namespace hhs_p6_webshop_project.Services
 
         List<FilterBase> ParseFilters(Dictionary<string, HashSet<object>> filters);
 
-            /// <summary>
+        /// <summary>
         /// Returns a list of all products, sorted by Id, ascending.
         /// </summary>
         /// <returns>A <see cref="List{T}"/> of all <see cref="Product"/> product instances.</returns>

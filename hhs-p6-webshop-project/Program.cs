@@ -5,9 +5,10 @@ using hhs_p6_webshop_project.App.Util;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 
-namespace hhs_p6_webshop_project {
-    public class Program {
-
+namespace hhs_p6_webshop_project
+{
+    public class Program
+    {
         /// <summary>
         /// Application name.
         /// </summary>
@@ -38,7 +39,8 @@ namespace hhs_p6_webshop_project {
         /// Main application entry point.
         /// </summary>
         /// <param name="args">Startup arguments.</param>
-        public static void Main(string[] args) {
+        public static void Main(string[] args)
+        {
             // Show a program initialization message
             LogUtils.Info("Starting " + APP_NAME + " v" + APP_VERSION_NAME + " (" + APP_VERSION_CODE + ")...");
 
@@ -48,7 +50,8 @@ namespace hhs_p6_webshop_project {
 //            LogUtils.Info("Enabled development environment.");
 //#endif
 
-            try {
+            try
+            {
                 // Initialize the application configuration
                 Program.AppConfig = new AppConfig(true);
 
@@ -65,18 +68,19 @@ namespace hhs_p6_webshop_project {
 
                 // Run the actual web host
                 host.Run();
-
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 // Print the exception
                 Console.WriteLine(ex);
 
                 // Show a warning
-                Console.WriteLine("\n\nAn unrecorerable exception occurred.\nThe application will not quit (code: -1).");
+                Console.WriteLine(
+                    "\n\nAn unrecorerable exception occurred.\nThe application will not quit (code: -1).");
 
                 // Exit
                 Environment.Exit(-1);
             }
-
         }
     }
 }

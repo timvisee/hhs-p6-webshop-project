@@ -4,8 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace hhs_p6_webshop_project.Models.AccountViewModels {
-    public class RegisterViewModel {
+namespace hhs_p6_webshop_project.Models.AccountViewModels
+{
+    public class RegisterViewModel
+    {
         [Required]
         [EmailAddress]
         [Display(Name = "E-Mail")]
@@ -13,7 +15,7 @@ namespace hhs_p6_webshop_project.Models.AccountViewModels {
 
         [Required]
         [StringLength(100, ErrorMessage = "De {0} moet minimaal {2} en maximaal {1} karakters lang zijn.",
-             MinimumLength = 6)]
+            MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Wachtwoord")]
         public string Password { get; set; }

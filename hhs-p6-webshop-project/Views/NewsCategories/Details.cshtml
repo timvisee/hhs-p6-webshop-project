@@ -9,7 +9,8 @@
     var random = new Random();
 }
 
-@if (User.Identity.IsAuthenticated) {
+@if (User.Identity.IsAuthenticated)
+{
     <a class="btn" asp-action="Delete" asp-route-id="@Model.NewsCategory.NewsCategoryID">Verwijder deze categorie</a>
     <a class="btn" asp-action="Edit" asp-route-id="@Model.NewsCategory.NewsCategoryID">Bewerk deze categorie</a>
     <a class="btn" asp-action="Create" asp-controller="NewsArticles">Maak nieuw artikel aan</a>
@@ -43,9 +44,9 @@
                         <div class="news-article">
                             <div class="news-article-top">
                                 <h2>
-                                    @na.Name <img src="~/images/heart-icon.png" />
+                                    @na.Name <img src="~/images/heart-icon.png"/>
                                 </h2>
-                                <hr style="border-color: @(String.Format("#{0:X6}", random.Next(0x1000000)));" />
+                                <hr style="border-color: @(String.Format("#{0:X6}", random.Next(0x1000000)));"/>
                                 <p>@Html.Raw(na.Excerpt)</p>
                             </div>
                             <div class="img-box" style="background-image: url('@na.ImagePath');">
@@ -59,6 +60,6 @@
 </div>
 <div class="row">
     <div class="col col-full-width">
-        <img class="img-full-width" src="~/images/home-banner-footer.jpg" />
+        <img class="img-full-width" src="~/images/home-banner-footer.jpg"/>
     </div>
 </div>

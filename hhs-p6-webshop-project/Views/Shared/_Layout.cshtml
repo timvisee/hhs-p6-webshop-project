@@ -2,32 +2,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"] | Honeymoon Shop</title>
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sumana|Niconne" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sumana|Niconne"/>
 
-    @*<environment names="Development">*@
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/lib/animate.css/animate.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="~/lib/animate.css/animate.css"/>
+    <link rel="stylesheet" href="~/css/site.css"/>
 
-        <script src="~/js/jquery-1.9.1.js"></script>
-        <script src="~/js/bootstrap.js"></script>
-        <script src="~/lib/jquery-ui/jquery-ui.js"></script>
-        <script src="~/js/site.js"></script>
-    @*</environment>
-    <environment names="Staging,Production">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="~/lib/animate.css/animate.min.css" />
-        <link rel="stylesheet" href="~/css/site.min.css" />
-
-        <script src="~/js/jquery-1.9.1.min.js"></script>
-        <script src="~/js/bootstrap.min.js"></script>
-        <script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
-        <script src="~/js/site.min.js"></script>
-    </environment>*@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/lib/jquery-ui/jquery-ui.js"></script>
+    <script src="~/js/site.js"></script>
 
     <script src="~/js/wow.min.js"></script>
 
@@ -38,275 +26,286 @@
 
 @{
     // Determine whether a banner is shown in the layout
-    var showBanner = ViewData.ContainsKey("ShowBanner") && (bool)ViewData["ShowBanner"];
-    var showHomeBanner = ViewData.ContainsKey("ShowHomeBanner") && (bool)ViewData["ShowHomeBanner"];
+    var showBanner = ViewData.ContainsKey("ShowBanner") && (bool) ViewData["ShowBanner"];
+    var showHomeBanner = ViewData.ContainsKey("ShowHomeBanner") && (bool) ViewData["ShowHomeBanner"];
     var bannerPath = "/images/home-banner-main.jpg";
 
 
     // Set the banner URL from the view data
-    if (ViewData.ContainsKey("BannerPath")) {
+    if (ViewData.ContainsKey("BannerPath"))
+    {
         bannerPath = ViewData["BannerPath"].ToString();
     }
 
     // Initialize title variables
-    var showHomeBannerButtons = ViewData.ContainsKey("ShowHomeBannerButtons") && (bool)ViewData["ShowHomeBannerButtons"];
+    var showHomeBannerButtons = ViewData.ContainsKey("ShowHomeBannerButtons") && (bool) ViewData["ShowHomeBannerButtons"];
     var homeBannerBgTitle = "";
     var homeBannerSmallTitle = "";
     var homeBannerBoldTitle = "";
 
     // Set the home banner titles and text
-    if (ViewData.ContainsKey("HomeBannerBgTitle")) {
+    if (ViewData.ContainsKey("HomeBannerBgTitle"))
+    {
         homeBannerBgTitle = ViewData["HomeBannerBgTitle"].ToString();
     }
-    if (ViewData.ContainsKey("HomeBannerSmallTitle")) {
+    if (ViewData.ContainsKey("HomeBannerSmallTitle"))
+    {
         homeBannerSmallTitle = ViewData["HomeBannerSmallTitle"].ToString();
     }
-    if (ViewData.ContainsKey("HomeBannerBoldTitle")) {
+    if (ViewData.ContainsKey("HomeBannerBoldTitle"))
+    {
         homeBannerBoldTitle = ViewData["HomeBannerBoldTitle"].ToString();
     }
 
     // Determine whether the background is pink or not
-    var pinkBg = ViewData.ContainsKey("PinkBackground") && (bool)ViewData["PinkBackground"];
+    var pinkBg = ViewData.ContainsKey("PinkBackground") && (bool) ViewData["PinkBackground"];
 
     // Create a variable to build the body classes in
     var bodyClasses = "";
 
     // Determine whether the layout contains a banner, add the proper body class accordingly
-    if (showBanner || showHomeBanner) {
+    if (showBanner || showHomeBanner)
+    {
         bodyClasses += "layout-with-banner ";
     }
 
-    if (pinkBg) {
+    if (pinkBg)
+    {
         bodyClasses += "hm-pink-light ";
-    } else {
+    }
+    else
+    {
         bodyClasses += "white ";
     }
 }
 
 <body class="@bodyClasses">
 
-    @if (User.Identity.IsAuthenticated) {
+@if (User.Identity.IsAuthenticated)
+{
     @Html.Partial("_AdminBar")
+}
+
+<header>
+    <div id="header_top" class="hm-pink">
+        <div id="choose_website">
+            <a asp-controller="Home" asp-action="Index" id="choice_website" class="hm-pink-dark-text">Website</a>
+            <a asp-controller="Products" asp-action="Index" id="choice_webshop" class="hm-pink-dark-text">Webshop</a>
+
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <a asp-controller="Account" asp-action="Login" class="hm-pink-dark-text loginBtn">Inloggen</a>
+            }
+        </div>
+        <div id="header_contact">
+            <div class="phone-number">
+                <strong>T</strong>
+                <span>(010) 4126143</span>
+            </div>
+            <div id="search_wrapper">
+                <button id="header_search_toggle">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+
+                <div id="search_box">
+                    <input id="header_search" type="search" placeholder="Wat zoek je?"/>
+                    <button id="header_search_submit">
+                        <span class="glyphicon glyphicon-search hm-pink-dark-text"></span>
+                    </button>
+                </div>
+            </div>
+            <span class="no-user-select glyphicon glyphicon-menu-hamburger" id="menu_toggle"></span>
+        </div>
+    </div>
+    <div id="header_nav">
+        <a asp-controller="Home" asp-action="Index" class="header-nav-logo">
+            @if (showBanner || showHomeBanner)
+            {
+                <img class="navbar-brand" src="~/images/logo-white.png" alt="Honeymoon Shop"/>
+            }
+            else
+            {
+                <img class="navbar-brand" src="~/images/logo-black.png" alt="Honeymoon Shop"/>
+            }
+        </a>
+        <nav>
+            <ul>
+                <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>@Html.ActionLink("Bruid", "Index", "Products")</li>
+                <li>@Html.ActionLink("Bruidegom", "Index", "Products")</li>
+                <li>@Html.ActionLink("De winkel", "Index", "Products")</li>
+                <li>@Html.ActionLink("Blog", "Index", "NewsCategories")</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                <li>
+                    <a asp-controller="Appointments" asp-action="Create" class="make-appointment">Afspraak maken</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<div id="main_content" class="container body-content">
+
+    @* Banner image *@
+    @if (showBanner)
+    {
+        <div id="banner">
+            <img class="banner-image" src="@bannerPath" alt="banner"/>
+            <div class="text-center home-text-banner no-user-select">
+                <h1 class="banner-bg-title-text hm-white-transparent-text">@homeBannerBgTitle</h1>
+                <h2 class="banner-title-text hm-white-light-text">@homeBannerSmallTitle</h2>
+                <h2 class="banner-undertitle-text hm-white-text">@homeBannerBoldTitle</h2>
+            </div>
+        </div>
     }
 
-    <header>
-        <div id="header_top" class="hm-pink">
-            <div id="choose_website">
-                <a asp-controller="Home" asp-action="Index" id="choice_website" class="hm-pink-dark-text">Website</a>
-                <a asp-controller="Products" asp-action="Index" id="choice_webshop" class="hm-pink-dark-text">Webshop</a>
-              
-                @if (!User.Identity.IsAuthenticated) {
-                <a asp-controller="Account" asp-action="Login" class="hm-pink-dark-text loginBtn">Inloggen</a>
-                }
-            </div>
-            <div id="header_contact">
-                <div class="phone-number">
-                    <strong>T</strong>
-                    <span>(010) 4126143</span>
-                </div>
-                <div id="search_wrapper">
-                    <button id="header_search_toggle">
-                        <span class="glyphicon glyphicon-search"></span>
-                    </button>
+        @* Home Banner image *@@if (showHomeBanner)
+                               {
+                                   <div id="home_banner">
+                                       <div class="text-center home-text-banner no-user-select">
+                                           <h1 class="banner-bg-title-text hm-white-transparent-text">@homeBannerBgTitle</h1>
+                                           <h2 class="banner-title-text hm-white-light-text">@homeBannerSmallTitle</h2>
+                                           <h2 class="banner-undertitle-text hm-white-text">@homeBannerBoldTitle</h2>
+                                       </div>
+                                       @if (showHomeBannerButtons)
+                                       {
+                                           <div class="home-button-container">
+                                               <a asp-controller="Products" asp-action="Index">Bruid</a>
+                                               <a asp-controller="Products" asp-action="Index">Bruidegom</a>
+                                           </div>
+                                       }
+                                       <img class="banner-image" src="@bannerPath" alt="banner"/>
+                                       <div class="scrollToggle white-text">
+                                           <p class="scroll-down-text font-nexa-regular">Scroll</p>
+                                           <span class="scroll-down-icon"></span>
+                                       </div>
+                                   </div>
+                               }
 
-                    <div id="search_box">
-                        <input id="header_search" type="search" placeholder="Wat zoek je?" />
-                        <button id="header_search_submit">
-                            <span class="glyphicon glyphicon-search hm-pink-dark-text"></span>
-                        </button>
-                    </div>
-                </div>
-                <span class="no-user-select glyphicon glyphicon-menu-hamburger" id="menu_toggle"></span>
-            </div>
-        </div>
-        <div id="header_nav">
-            <a asp-controller="Home" asp-action="Index" class="header-nav-logo">
-                @if (showBanner || showHomeBanner)
-                {
-                    <img class="navbar-brand" src="~/images/logo-white.png" alt="Honeymoon Shop" />
-                }
-                else
-                {
-                    <img class="navbar-brand" src="~/images/logo-black.png" alt="Honeymoon Shop" />
-                }
-            </a>
-            <nav>
-                <ul>
-                    <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Bruid", "Index", "Products")</li>
-                    <li>@Html.ActionLink("Bruidegom", "Index", "Products")</li>
-                    <li>@Html.ActionLink("De winkel", "Index", "Products")</li>
-                    <li>@Html.ActionLink("Blog", "Index", "NewsCategories")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>
-                        <a asp-controller="Appointments" asp-action="Create" class="make-appointment">Afspraak maken</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-    <div id="main_content" class="container body-content">
+        @* Render the actual page body *@@RenderBody()
 
-        @* Banner image *@
-        @if (showBanner) {
-        <div id="banner">
-            <img class="banner-image" src="@bannerPath" alt="banner" />
-            <div class="text-center home-text-banner no-user-select">
-                <h1 class="banner-bg-title-text hm-white-transparent-text">@homeBannerBgTitle</h1>
-                <h2 class="banner-title-text hm-white-light-text">@homeBannerSmallTitle</h2>
-                <h2 class="banner-undertitle-text hm-white-text">@homeBannerBoldTitle</h2>
-            </div>
-        </div>
-        }
+</div>
 
-        @* Home Banner image *@
-        @if (showHomeBanner) {
-        <div id="home_banner">
-            <div class="text-center home-text-banner no-user-select">
-                <h1 class="banner-bg-title-text hm-white-transparent-text">@homeBannerBgTitle</h1>
-                <h2 class="banner-title-text hm-white-light-text">@homeBannerSmallTitle</h2>
-                <h2 class="banner-undertitle-text hm-white-text">@homeBannerBoldTitle</h2>
+<footer class="hm-pink-light">
+    <div class="row" id="footer_bottom">
+        <a asp-controller="Appointments" asp-action="Create" class="social-box text-center col-sm-12 white-text hm-pink-dark">
+            <span class="bg-text">Afspraak</span>
+            <div class="front-text">
+                Maak een<br/>pasafspraak
             </div>
-            @if (showHomeBannerButtons) {
-            <div class="home-button-container">
-                <a asp-controller="Products" asp-action="Index">Bruid</a>
-                <a asp-controller="Products" asp-action="Index">Bruidegom</a>
-            </div>
-            }
-            <img class="banner-image" src="@bannerPath" alt="banner" />
-            <div class="scrollToggle white-text">
-                <p class="scroll-down-text font-nexa-regular">Scroll</p>
-                <span class="scroll-down-icon"></span>
-            </div>
-        </div>
-        }
+        </a>
 
-        @* Render the actual page body *@
-        @RenderBody()
+        <a href="https://www.facebook.com/HoneymoonshopNL/" target="_blank" class="social-box text-center col-sm-12 white-text hm-pink-dark">
+            <span class="bg-text">Facebook</span>
+            <div class="front-text">Volg ons</div>
+        </a>
 
+        <a href="https://www.theperfectwedding.nl/bedrijven/456/honeymoon-shop" target="_blank" class="social-box text-center col-sm-12 white-text hm-pink-dark">
+            <span class="bg-text">Reviews</span>
+            <div class="front-text">
+                Bekijk onze<br/>reviews
+            </div>
+        </a>
     </div>
 
-    <footer class="hm-pink-light">
-        <div class="row" id="footer_bottom">
-            <a asp-controller="Appointments" asp-action="Create" class="social-box text-center col-sm-12 white-text hm-pink-dark">
-                <span class="bg-text">Afspraak</span>
-                <div class="front-text">
-                    Maak een<br />pasafspraak
-                </div>
-            </a>
+    <div class="row">
+        <div class="col-sm-12">
+            <p id="footer_shop_info" class="text-center">
+                Korte Haagstraat 4, 3011 GL Rotterdam
+                <strong>email</strong> info@honeymoonshop.nl
+                <strong>tel</strong> (010) 412 61 43
+                <strong>whatsapp</strong> (06) 25 19 99 27
+                <br/>
 
-            <a href="https://www.facebook.com/HoneymoonshopNL/" target="_blank" class="social-box text-center col-sm-12 white-text hm-pink-dark">
-                <span class="bg-text">Facebook</span>
-                <div class="front-text">Volg ons</div>
-            </a>
-
-            <a href="https://www.theperfectwedding.nl/bedrijven/456/honeymoon-shop" target="_blank" class="social-box text-center col-sm-12 white-text hm-pink-dark">
-                <span class="bg-text">Reviews</span>
-                <div class="front-text">
-                    Bekijk onze<br />reviews
-                </div>
-            </a>
+                <strong>Openingstijden</strong>
+                <strong>MA</strong> 12.00-17.00
+                <strong>DI t/m VR</strong> 09.30-18.00
+                <strong>ZA</strong> 09.30-18.00
+                <strong>DI t/m VR</strong> 11.00-17.00
+            </p>
         </div>
-
-        <div class="row">
-            <div class="col-sm-12">
-                <p id="footer_shop_info" class="text-center">
-                    Korte Haagstraat 4, 3011 GL Rotterdam
-                    <strong>email</strong> info@honeymoonshop.nl
-                    <strong>tel</strong> (010) 412 61 43
-                    <strong>whatsapp</strong> (06) 25 19 99 27
-                    <br />
-
-                    <strong>Openingstijden</strong>
-                    <strong>MA</strong> 12.00-17.00
-                    <strong>DI t/m VR</strong> 09.30-18.00
-                    <strong>ZA</strong> 09.30-18.00
-                    <strong>DI t/m VR</strong> 11.00-17.00
-                </p>
-            </div>
-            <div class="col-sm-12 footer-wedding-show text-center" style="display: flex; justify-content: center;">
-                <img src="~/images/footer-grand-wedding-show.png" alt="The Grand Wedding Show" />
-                <img class="logo-beunit" src="~/images/logo-beunit.png" alt="Beun IT" />
-            </div>
-            <div class="col-md-offset-1-5 col-md-3 col-sm-12">
-                <h4 class="hm-pink-dark-text">Winkel</h4>
-                <ul>
-                    <li>
-                        <a href="#">Over de Honeymoon Shop</a>
-                    </li>
-                    <li>
-                        <a href="#">Servicepunten</a>
-                    </li>
-                    <li>
-                        <a href="#">Routebeschrijving</a>
-                    </li>
-                    <li>
-                        <a href="#">Beurzen en evenementen</a>
-                    </li>
-                    <li>
-                        <a href="#">Vacatures</a>
-                    </li>
-                    <li>
-                        <a href="#">Verkoopvoorwaarden</a>
-                    </li>
-                    <li>
-                        <a href="#">CBW erkend</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-md-3 col-sm-12">
-                <h4 class="hm-pink-dark-text">Service</h4>
-                <ul>
-                    <li>
-                        <a href="#">Beoordelingen</a>
-                    </li>
-                    <li>
-                        <a href="#">Dressfinder</a>
-                    </li>
-                    <li>
-                        <a href="#">Gratis trouwmagazine</a>
-                    </li>
-                    <li>
-                        <a href="#">Nieuwsbrief</a>
-                    </li>
-                    <li>
-                        <a href="#">Veelgestelde vragen</a>
-                    </li>
-                    <li>
-                        <a href="#">CBW erkend</a>
-                    </li>
-                    <li>
-                        <a href="#">Reinigen van je trouwjurk</a>
-                    </li>
-                    <li>
-                        <a href="#">10 redenen om je afspraak te maken</a>
-                    </li>
-                    <li>
-                        <a href="#">The Perfect Match</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-md-3 col-sm-12">
-                <h4 class="hm-pink-dark-text">Acties</h4>
-                <ul>
-                    <li>
-                        <a href="#">The Grand Wedding Show</a>
-                    </li>
-                    <li>
-                        <a href="#">Summer Sale</a>
-                    </li>
-                    <li>
-                        <a href="#">Trouwjurken onder de 1000 euro</a>
-                    </li>
-                    <li>
-                        <a href="#">Trouwjurken voor de volslanke bruid</a>
-                    </li>
-                </ul>
-            </div>
+        <div class="col-sm-12 footer-wedding-show text-center" style="display: flex; justify-content: center;">
+            <img src="~/images/footer-grand-wedding-show.png" alt="The Grand Wedding Show"/>
+            <img class="logo-beunit" src="~/images/logo-beunit.png" alt="Beun IT"/>
         </div>
-    </footer>
+        <div class="col-md-offset-1-5 col-md-3 col-sm-12">
+            <h4 class="hm-pink-dark-text">Winkel</h4>
+            <ul>
+                <li>
+                    <a href="#">Over de Honeymoon Shop</a>
+                </li>
+                <li>
+                    <a href="#">Servicepunten</a>
+                </li>
+                <li>
+                    <a href="#">Routebeschrijving</a>
+                </li>
+                <li>
+                    <a href="#">Beurzen en evenementen</a>
+                </li>
+                <li>
+                    <a href="#">Vacatures</a>
+                </li>
+                <li>
+                    <a href="#">Verkoopvoorwaarden</a>
+                </li>
+                <li>
+                    <a href="#">CBW erkend</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <h4 class="hm-pink-dark-text">Service</h4>
+            <ul>
+                <li>
+                    <a href="#">Beoordelingen</a>
+                </li>
+                <li>
+                    <a href="#">Dressfinder</a>
+                </li>
+                <li>
+                    <a href="#">Gratis trouwmagazine</a>
+                </li>
+                <li>
+                    <a href="#">Nieuwsbrief</a>
+                </li>
+                <li>
+                    <a href="#">Veelgestelde vragen</a>
+                </li>
+                <li>
+                    <a href="#">CBW erkend</a>
+                </li>
+                <li>
+                    <a href="#">Reinigen van je trouwjurk</a>
+                </li>
+                <li>
+                    <a href="#">10 redenen om je afspraak te maken</a>
+                </li>
+                <li>
+                    <a href="#">The Perfect Match</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <h4 class="hm-pink-dark-text">Acties</h4>
+            <ul>
+                <li>
+                    <a href="#">The Grand Wedding Show</a>
+                </li>
+                <li>
+                    <a href="#">Summer Sale</a>
+                </li>
+                <li>
+                    <a href="#">Trouwjurken onder de 1000 euro</a>
+                </li>
+                <li>
+                    <a href="#">Trouwjurken voor de volslanke bruid</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</footer>
 </body>
 </html>

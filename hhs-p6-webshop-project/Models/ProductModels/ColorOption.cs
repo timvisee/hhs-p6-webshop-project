@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace hhs_p6_webshop_project.Models.ProductModels
 {
-    public class ColorOption : IEquatable<ColorOption>, IComparable<List<string>> 
+    public class ColorOption : IEquatable<ColorOption>, IComparable<List<string>>
     {
-        public ColorOption() {
+        public ColorOption()
+        {
             Images = new List<ProductImage>();
         }
 
@@ -30,11 +31,13 @@ namespace hhs_p6_webshop_project.Models.ProductModels
         [DisplayName("Afbeeldingen")]
         public List<ProductImage> Images { get; set; }
 
-        public bool Equals(ColorOption other) {
+        public bool Equals(ColorOption other)
+        {
             return Color == other.Color;
         }
 
-        public int CompareTo(List<string> list) {
+        public int CompareTo(List<string> list)
+        {
             if (list.Contains(Color))
                 return 5;
 

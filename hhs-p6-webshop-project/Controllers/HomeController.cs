@@ -10,39 +10,47 @@ using MailKit.Security;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Options;
 
-namespace hhs_p6_webshop_project.Controllers {
-    public class HomeController : Controller {
+namespace hhs_p6_webshop_project.Controllers
+{
+    public class HomeController : Controller
+    {
         private IOptions<SecureAppConfig> _secretConfig;
 
-        public HomeController(IOptions<SecureAppConfig> cfg) {
+        public HomeController(IOptions<SecureAppConfig> cfg)
+        {
             _secretConfig = cfg;
         }
-        public IActionResult Index() {
+
+        public IActionResult Index()
+        {
             return View();
         }
 
-        public IActionResult Contact() {
+        public IActionResult Contact()
+        {
             ViewData["Message"] = "Your contact page.";
 
             return View();
         }
 
-        public IActionResult Error() {
+        public IActionResult Error()
+        {
             return View();
         }
 
         [HttpPost]
         public ActionResult Contact(ContactModels c)
         {
-            if (ModelState.IsValid) {
+            if (ModelState.IsValid)
+            {
                 if (Beun.Mail.MailClient.ApiKey == null)
                     Beun.Mail.MailClient.ApiKey = _secretConfig.Value.SparkpostApiKey;
 
                 Beun.Mail.MailClient.SendContactMail(c.Name, c.Email, c.Reference, c.Comment, c.Phone);
-                
+
                 return View("Success");
-    }
-     return View();
-}
+            }
+            return View();
+        }
     }
 }

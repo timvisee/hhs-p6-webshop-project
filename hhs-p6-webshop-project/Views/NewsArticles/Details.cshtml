@@ -5,7 +5,8 @@
     ViewData["PinkBackground"] = true;
 }
 
-@if (User.Identity.IsAuthenticated) {
+@if (User.Identity.IsAuthenticated)
+{
     <a class="btn" onclick="window.history.back()">Terug naar overzicht</a>
     <a class="btn" asp-action="Edit" asp-route-id="@Model.NewsArticle.NewsArticleID">Bewerk</a>
     <a class="btn" asp-action="Delete" asp-route-id="@Model.NewsArticle.NewsArticleID">Verwijder</a>
@@ -18,21 +19,21 @@
 
 <div class="container single-article">
     <div class="col-xs-12">
-        <img class="single-article-image" src="@Html.DisplayFor(model => model.NewsArticle.ImagePath)" alt="@Html.DisplayFor(model => model.NewsArticle.Name)" />
+        <img class="single-article-image" src="@Html.DisplayFor(model => model.NewsArticle.ImagePath)" alt="@Html.DisplayFor(model => model.NewsArticle.Name)"/>
     </div>
     <div class="col-xs-12 col-md-offset-3 col-md-6 single-article-content">
         <h1>@Model.NewsArticle.Name</h1>
-        <hr />
+        <hr/>
         <p>
             <i>@Model.NewsArticle.Excerpt</i>
         </p>
-        <hr />
+        <hr/>
         @Html.Raw(Model.NewsArticle.Content)
     </div>
 </div>
 
 <div class="row">
     <div class="col col-full-width">
-        <img class="img-full-width" src="~/images/home-banner-footer.jpg" />
+        <img class="img-full-width" src="~/images/home-banner-footer.jpg"/>
     </div>
 </div>
