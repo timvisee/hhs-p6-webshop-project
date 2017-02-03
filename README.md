@@ -1,3 +1,4 @@
+[![Build status on Circle CI in production branch](https://img.shields.io/circleci/token/b86ed6918f78b8ae37292aabbcd0afcd381ff7a9/project/github/timvisee/hhs-p6-webshop-project/production.svg)](https://circleci.com/gh/timvisee/hhs-p6-webshop-project/tree/production)
 [![Build status on Circle CI in master branch](https://img.shields.io/circleci/token/b86ed6918f78b8ae37292aabbcd0afcd381ff7a9/project/github/timvisee/hhs-p6-webshop-project/master.svg)](https://circleci.com/gh/timvisee/hhs-p6-webshop-project/tree/master)
 [![Build status on Circle CI in last commit](https://img.shields.io/circleci/token/b86ed6918f78b8ae37292aabbcd0afcd381ff7a9/project/github/timvisee/hhs-p6-webshop-project.svg)](https://circleci.com/gh/timvisee/hhs-p6-webshop-project)
 
@@ -25,5 +26,6 @@ The project is currently being built automatically using the CI services in the 
 
 |Platform|Branch|Build Status|Service||
 |:---|:---:|:---:|:---|---|
+|Linux|production|[![Build status on Circle CI](https://img.shields.io/circleci/token/b86ed6918f78b8ae37292aabbcd0afcd381ff7a9/project/github/timvisee/hhs-p6-webshop-project/production.svg)](https://circleci.com/gh/timvisee/hhs-p6-webshop-project)|CircleCI|[View Status (private)](https://circleci.com/gh/timvisee/hhs-p6-webshop-project/tree/production)|
 |Linux|master|[![Build status on Circle CI](https://img.shields.io/circleci/token/b86ed6918f78b8ae37292aabbcd0afcd381ff7a9/project/github/timvisee/hhs-p6-webshop-project/master.svg)](https://circleci.com/gh/timvisee/hhs-p6-webshop-project)|CircleCI|[View Status (private)](https://circleci.com/gh/timvisee/hhs-p6-webshop-project/tree/master)|
 |Linux|last commit|[![Build status on Circle CI](https://img.shields.io/circleci/token/b86ed6918f78b8ae37292aabbcd0afcd381ff7a9/project/github/timvisee/hhs-p6-webshop-project.svg)](https://circleci.com/gh/timvisee/hhs-p6-webshop-project)|CircleCI|[View Status (private)](https://circleci.com/gh/timvisee/hhs-p6-webshop-project)|
