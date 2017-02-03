@@ -50,16 +50,13 @@ namespace hhs_p6_webshop_project.Controllers.Ajax {
             // Create a list to put the occupied dates in
             HashSet<string> occupiedDates = new HashSet<string>();
 
-            //            // TODO: We should check whether the date is fully occupied!
-            //            // Fill the list with the occupied dates
-
+            // Determine whether a date
             foreach (var appointment in dates) {
                 var amount = 0;
 
                 foreach (var appointment2 in dates) {
-                    if (appointment.AppointmentDateTime.Date == appointment2.AppointmentDateTime.Date) {
+                    if (appointment.AppointmentDateTime.Date == appointment2.AppointmentDateTime.Date)
                         amount++;
-                    }
 
                     if (amount >= 3) {
                         occupiedDates.Add(appointment.AppointmentDateTime.ToString("yyyy-MM-dd"));
@@ -68,8 +65,10 @@ namespace hhs_p6_webshop_project.Controllers.Ajax {
                 }
             }
 
-            // Return the data fields
-            return new AjaxResponse().SetDataField("dates", occupiedDates);
+            // Return a JSON result of occupied dates
+            return new JsonResult(new {
+                dates = occupiedDates
+            });
         }
 
         /// <summary>
@@ -113,12 +112,12 @@ namespace hhs_p6_webshop_project.Controllers.Ajax {
                         second = slot.Seconds
                     }
                 });
-
-
             }
 
-            // Return the list of times
-            return new AjaxResponse().SetDataField("times", times);
+            // Return a JSON result of available times
+            return new JsonResult(new {
+                times = times
+            });
         }
     }
 }

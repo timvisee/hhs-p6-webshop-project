@@ -661,29 +661,17 @@ $(document).ready(function () {
             data: data,
             error: function(jqXhr, textStatus) {
                 // Define the error message
-                var error = "Failed to fetch data.\n\nError: " + textStatus;
+                var error = "Failed to fetch data.\n\nError: '" + textStatu + "'";
 
-                // Alert the user
+                // Alert the user with the error
                 alert(error);
 
                 // Call back with an error
                 callback(new Error(error));
             },
             success: function(data) {
-                // Make sure the status is OK
-                if(data.status !== "ok") {
-                    // Define the error message
-                    var error = "Failed to fetch data. The website returned an error.\n\nError: " + data.error.message;
-
-                    // Alert the user
-                    alert(error);
-
-                    // Call back with an error
-                    callback(new Error(error));
-                }
-
                 // Call back the fetched data
-                callback(null, data.data);
+                callback(null, data);
             }
         });
     }
