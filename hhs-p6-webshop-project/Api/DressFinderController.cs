@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace hhs_p6_webshop_project.Api
 {
     [Route("api/dressfinder")]
-    public class ProductsController : Controller
+    public class DressFinderController : Controller
     {
         public IProductService ProductService { get; }
 
-        public ProductsController(IProductService productService)
+        public DressFinderController(IProductService productService)
         {
             ProductService = productService;
         }
