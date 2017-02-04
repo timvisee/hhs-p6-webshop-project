@@ -21,6 +21,10 @@ namespace hhs_p6_webshop_project.Controllers
             _secretConfig = secretConfig;
         }
 
+        public AppointmentsController()
+        {
+        }
+
         // GET: Appointments
         public async Task<IActionResult> Index()
         {

@@ -1,4 +1,6 @@
 ﻿using hhs_p6_webshop_project.Controllers;
+using hhs_p6_webshop_project.Models.AppointmentModels;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,21 +12,20 @@ namespace hhs_p6_webshop_project_test
     public class editAfpsraakTest
     {
 
-        [Fact]
-        public void Invalid_Edit_AfspraakController()
+       [Fact]
+        public void Valid_Edit_AppointmentController()
         {
-            AppointmentsController a = new AppointmentsController();
+            //Instantieer de controller
+            AppointmentsController c = new AppointmentsController();
+            //Geef mee welke appointment er bewerkt moet worden
+            var result = c.Edit(1);
+            //Check of het goede wordt doorgelinkt
 
-            Student s = new Student() { Name = "Willem-Alexander" };
-
-            var result = c.Edit(s);
-            var viewResult = Assert.IsType<ViewResult>(result);
-            Assert.Equal(null, viewResult.ViewName);
-            // als dezelfde naam als de action methode
-
-            //Checking model enz.
-            //Checking voor juiste foutboodschap bij de Model error
+            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Null(redirectToActionResult.ControllerName);
+            Assert.Equal("Index", redirectToActionResult.ActionName);
         }
+
 
     }
 }

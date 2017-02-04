@@ -21,6 +21,10 @@ namespace hhs_p6_webshop_project.Controllers
             _secretConfig = cfg;
         }
 
+        public HomeController()
+        {
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -48,7 +52,6 @@ namespace hhs_p6_webshop_project.Controllers
 
                 Beun.Mail.MailClient.SendContactMail(c.Name, c.Email, c.Reference, c.Comment, c.Phone);
 
-                ViewData["Message"] = "Your contact page.";
                 return View("Success");
             }
             return View();
