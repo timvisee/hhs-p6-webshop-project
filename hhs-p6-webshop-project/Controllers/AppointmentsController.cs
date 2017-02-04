@@ -7,6 +7,8 @@ using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models.AppointmentModels;
 using Microsoft.Extensions.Options;
 using System;
+using hhs_p6_webshop_project.Services.Abstracts;
+using hhs_p6_webshop_project.Services.Containers;
 
 namespace hhs_p6_webshop_project.Controllers
 {
@@ -14,11 +16,13 @@ namespace hhs_p6_webshop_project.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IOptions<SecureAppConfig> _secretConfig;
+        private readonly ITransactionalEmailService _emailService;
 
-        public AppointmentsController(ApplicationDbContext context, IOptions<SecureAppConfig> secretConfig)
+        public AppointmentsController(ApplicationDbContext context, IOptions<SecureAppConfig> secretConfig, ITransactionalEmailService emailService)
         {
             _context = context;
             _secretConfig = secretConfig;
+            _emailService = emailService;
         }
 
         // GET: Appointments
@@ -89,15 +93,20 @@ namespace hhs_p6_webshop_project.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (Beun.Mail.MailClient.ApiKey == null)
-                    Beun.Mail.MailClient.ApiKey = _secretConfig.Value.SparkpostApiKey;
+                //Prepare email data
+                AppointmentMessageContainer container = new AppointmentMessageContainer
+                {
+                    Name = appointment.Name,
+                    Recipient = appointment.Mail,
+                    Date = appointment.AppointmentDateTime,
+                    Garment = $"{dressName} ({dressColor})"
+                };
 
-                Beun.Mail.MailClient.SendAppointmentEmail(appointment.Name, appointment.Mail,
-                    appointment.AppointmentDateTime, $"{dressName} ({dressColor})");
-
+                //Send the email
+                await _emailService.SendAppointmentEmail(container);
+                
                 _context.Add(appointment);
-
-
+                
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Thanks");
             }

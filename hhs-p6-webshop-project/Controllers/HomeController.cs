@@ -5,6 +5,8 @@ using MailKit;
 using System;
 using System.Collections.Generic;
 using hhs_p6_webshop_project.App.Config;
+using hhs_p6_webshop_project.Services.Abstracts;
+using hhs_p6_webshop_project.Services.Containers;
 using MimeKit;
 using MailKit.Security;
 using MailKit.Net.Smtp;
@@ -14,11 +16,13 @@ namespace hhs_p6_webshop_project.Controllers
 {
     public class HomeController : Controller
     {
-        private IOptions<SecureAppConfig> _secretConfig;
+        private readonly IOptions<SecureAppConfig> _secretConfig;
+        private readonly ITransactionalEmailService _emailService;
 
-        public HomeController(IOptions<SecureAppConfig> cfg)
+        public HomeController(IOptions<SecureAppConfig> cfg, ITransactionalEmailService emailService)
         {
             _secretConfig = cfg;
+            _emailService = emailService;
         }
 
         public IActionResult Index()
@@ -43,10 +47,7 @@ namespace hhs_p6_webshop_project.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (Beun.Mail.MailClient.ApiKey == null)
-                    Beun.Mail.MailClient.ApiKey = _secretConfig.Value.SparkpostApiKey;
-
-                Beun.Mail.MailClient.SendContactMail(c.Name, c.Email, c.Reference, c.Comment, c.Phone);
+                _emailService.SendContactEmail(c);
 
                 return View("Success");
             }

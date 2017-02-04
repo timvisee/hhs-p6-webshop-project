@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using hhs_p6_webshop_project.Models;
 using hhs_p6_webshop_project.Models.AccountViewModels;
 using hhs_p6_webshop_project.Services;
+using hhs_p6_webshop_project.Services.Abstracts;
 
 namespace hhs_p6_webshop_project.Controllers
 {
