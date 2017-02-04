@@ -69,6 +69,7 @@ namespace hhs_p6_webshop_project_test.NewsTests
             // Render the create news category page
             var cView = c.Create();
 
+            // TODO: returns an redirecttoaction????
             // Test for a 404 error
             Assert.IsType<NotFoundResult>(cView);
         }
