@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace hhs_p6_webshop_project.Models.AccountViewModels {
-    public class SendCodeViewModel {
+namespace hhs_p6_webshop_project.Models.AccountViewModels
+{
+    public class SendCodeViewModel
+    {
         public string SelectedProvider { get; set; }
 
         public ICollection<SelectListItem> Providers { get; set; }

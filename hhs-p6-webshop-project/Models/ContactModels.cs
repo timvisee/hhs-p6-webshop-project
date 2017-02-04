@@ -5,8 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
-namespace hhs_p6_webshop_project.Models {
-    public class ContactModels {
+namespace hhs_p6_webshop_project.Models
+{
+    public class ContactModels
+    {
         [DisplayName("Naam")]
         [Required(ErrorMessage = "Naam is verplicht")]
         public string Name { get; set; }

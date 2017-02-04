@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models.ProductModels;
-
 using hhs_p6_webshop_project.Services;
 
 namespace hhs_p6_webshop_project.Controllers.ProductControllers
@@ -63,7 +62,8 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
             {
                 return View();
             }
-            else {
+            else
+            {
                 return NotFound();
             }
         }
@@ -84,7 +84,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
                     await _context.SaveChangesAsync();
                     if (again)
                         return RedirectToAction("Create");
-                    return RedirectToAction("Create", "ColorOptions", new { id = product.ProductId });
+                    return RedirectToAction("Create", "ColorOptions", new {id = product.ProductId});
                 }
                 return View(product);
             }
@@ -97,7 +97,6 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-
             // Check if user is authenticated
             if (User.Identity.IsAuthenticated)
             {

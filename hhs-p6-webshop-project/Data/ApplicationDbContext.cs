@@ -10,27 +10,35 @@ using hhs_p6_webshop_project.Models.NewsModels;
 using Microsoft.Extensions.Configuration;
 using hhs_p6_webshop_project.Models.ProductModels;
 
-namespace hhs_p6_webshop_project.Data {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser> {
+namespace hhs_p6_webshop_project.Data
+{
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options) { }
+            : base(options)
+        {
+        }
 
-        public ApplicationDbContext() : base(CreateTestContext()) { }
+        public ApplicationDbContext() : base(CreateTestContext())
+        {
+        }
 
-        static DbContextOptions<ApplicationDbContext> CreateTestContext() {
+        static DbContextOptions<ApplicationDbContext> CreateTestContext()
+        {
             var builder = new DbContextOptionsBuilder<ApplicationDbContext>();
             builder.UseSqlite("Data source=test.db");
             return builder.Options;
         }
 
-        protected override void OnModelCreating(ModelBuilder builder) {
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
             base.OnModelCreating(builder);
 
             builder.Entity<Product>()
                 .HasMany(p => p.ColorOptions)
                 .WithOne(co => co.Product)
                 .HasForeignKey(co => co.ProductId);
-            
+
 
             builder.Entity<ColorOption>()
                 .HasMany(co => co.Images)
@@ -39,7 +47,7 @@ namespace hhs_p6_webshop_project.Data {
 
 
             builder.Entity<NewsArticleCategory>()
-                .HasKey(sc => new { sc.NewsArticleID, sc.NewsCategoryID });
+                .HasKey(sc => new {sc.NewsArticleID, sc.NewsCategoryID});
 
             builder.Entity<NewsArticleCategory>()
                 .HasOne(sc => sc.NewsArticle)
@@ -53,13 +61,13 @@ namespace hhs_p6_webshop_project.Data {
         }
 
         public DbSet<Appointment> Appointment { get; set; }
-        
+
         public DbSet<Product> Products { get; set; }
 
         public DbSet<ColorOption> ColorOptions { get; set; }
 
         public DbSet<ProductImage> ProductImages { get; set; }
-        
+
         public DbSet<NewsArticle> NewsArticle { get; set; }
 
         public DbSet<NewsCategory> NewsCategory { get; set; }

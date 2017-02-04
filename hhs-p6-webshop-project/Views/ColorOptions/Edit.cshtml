@@ -9,9 +9,9 @@
 
 <form asp-action="Edit">
     <div class="form-horizontal">
-        <hr />
+        <hr/>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="ColorOptionId" />
+        <input type="hidden" asp-for="ColorOptionId"/>
         <div class="form-group">
             <label asp-for="Color" class="col-md-2 control-label"></label>
             <div class="col-md-10">
@@ -22,12 +22,12 @@
             <label asp-for="ProductId" class="control-label col-md-2"></label>
             <div class="col-md-10">
                 <select asp-for="ProductId" asp-items="ViewBag.ProductId"></select>
-                <span asp-validation-for="ProductId" class="text-danger" />
+                <span asp-validation-for="ProductId" class="text-danger"/>
             </div>
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default"/>
             </div>
         </div>
     </div>
@@ -38,5 +38,5 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

@@ -7,15 +7,17 @@ namespace hhs_p6_webshop_project.Models.FilterModels
 {
     public class PriceFilter : FilterBase
     {
-        public override string Name {
+        public override string Name
+        {
             get { return "Prijs"; }
         }
 
-        public PriceFilter() {
-            
+        public PriceFilter()
+        {
         }
 
-        public PriceFilter(double min, double max) {
+        public PriceFilter(double min, double max)
+        {
             Min = min;
             Max = max;
         }
@@ -23,7 +25,8 @@ namespace hhs_p6_webshop_project.Models.FilterModels
         public double Min { get; set; }
         public double Max { get; set; }
 
-         public override string ToString() {
+        public override string ToString()
+        {
             return $"({Name}, (Min -> {Min}, Max -> {Max}))";
         }
     }

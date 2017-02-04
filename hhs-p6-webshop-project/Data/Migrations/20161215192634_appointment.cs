@@ -22,15 +22,15 @@ namespace hhs_p6_webshop_project.Data.Migrations
                 table: "AspNetUsers");
 
             migrationBuilder.AlterColumn<int>(
-                name: "Id",
-                table: "AspNetUserClaims",
-                nullable: false)
+                    name: "Id",
+                    table: "AspNetUserClaims",
+                    nullable: false)
                 .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             migrationBuilder.AlterColumn<int>(
-                name: "Id",
-                table: "AspNetRoleClaims",
-                nullable: false)
+                    name: "Id",
+                    table: "AspNetRoleClaims",
+                    nullable: false)
                 .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             migrationBuilder.CreateTable(
@@ -38,20 +38,19 @@ namespace hhs_p6_webshop_project.Data.Migrations
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy",
+                            SqlServerValueGenerationStrategy.IdentityColumn),
                     DateTime = table.Column<DateTime>(nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AppointmentTime", x => x.ID);
-                });
+                constraints: table => { table.PrimaryKey("PK_AppointmentTime", x => x.ID); });
 
             migrationBuilder.CreateTable(
                 name: "Appointment",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy",
+                            SqlServerValueGenerationStrategy.IdentityColumn),
                     AppointmentDateTime = table.Column<DateTime>(nullable: false),
                     AppointmentTimeID = table.Column<int>(nullable: true),
                     Confirmation = table.Column<bool>(nullable: false),
