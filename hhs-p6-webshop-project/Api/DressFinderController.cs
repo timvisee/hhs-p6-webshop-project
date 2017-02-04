@@ -31,10 +31,10 @@ namespace hhs_p6_webshop_project.Api
         [HttpPost("product/filter/partial")]
         public PartialViewResult FilterPartial([FromBody] Dictionary<string, HashSet<object>> filters)
         {
-            ProductView view = new ProductView();
-            view.Products = ProductService.Filter(ProductService.ParseFilters(filters));
+            var filteredProducts = ProductService.Filter(ProductService.ParseFilters(filters));
+            var model = ProductService.BuildProductViewModel(filteredProducts, null);
 
-            return PartialView("~/Views/Products/ProductOverview.cshtml", view);
+            return PartialView("~/Views/Products/ProductOverview.cshtml", model);
         }
 
         [HttpPost("product/filter/partial/sort/{id}")]
@@ -58,10 +58,9 @@ namespace hhs_p6_webshop_project.Api
                     break;
             }
 
-            ProductView view = new ProductView();
-            view.Products = p;
-
-            return PartialView("~/Views/Products/ProductOverview.cshtml", view);
+            var model = ProductService.BuildProductViewModel(p, null);
+            
+            return PartialView("~/Views/Products/ProductOverview.cshtml", model);
         }
 
         [HttpPost("product/filter")]

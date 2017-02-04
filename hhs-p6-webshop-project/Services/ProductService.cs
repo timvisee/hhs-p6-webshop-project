@@ -33,6 +33,23 @@ namespace hhs_p6_webshop_project.Services
                 .ToList();
         }
 
+        public ProductViewModel BuildProductViewModel(List<Product> products, List<FilterBase> filters)
+        {
+            //Build the model and calculate the required properties
+            var model = new ProductViewModel();
+            model.Products = products;
+            model.Filters = filters;
+
+            if (filters != null && filters.Count > 0)
+            {
+                model.MaxPrice = filters.Where(f => f.Name == "Prijs").Cast<PriceFilter>().First().Max;
+                model.MinPrice = filters.Where(f => f.Name == "Prijs").Cast<PriceFilter>().First().Min;
+                model.Colors =
+                    filters.Where(f => f.Name == "Kleur").Cast<ColorFilter>().SelectMany(cf => cf.Colors).ToList();
+            }
+            return model;
+        }
+
         private List<object> ParseJsonArray(HashSet<object> objects)
         {
             List<object> values = new List<object>();

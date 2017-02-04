@@ -25,6 +25,8 @@ namespace hhs_p6_webshop_project.Services
 
         List<Product> Filter(List<FilterBase> filters);
 
+        ProductViewModel BuildProductViewModel(List<Product> products, List<FilterBase> filters);
+
         List<FilterBase> ParseFilters(Dictionary<string, HashSet<object>> filters);
 
         /// <summary>

@@ -28,13 +28,9 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            ProductView pv = new ProductView();
-
-            pv.Products = _service.GetAllProducts();
-
-            pv.Filters = _service.GetAllFilters();
-
-            return View(pv);
+            var model = _service.BuildProductViewModel(_service.GetAllProducts(), _service.GetAllFilters());
+            
+            return View(model);
         }
 
         // GET: Products/Details/5
