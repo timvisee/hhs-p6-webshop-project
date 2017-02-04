@@ -21,7 +21,7 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers
         {
             _context = context;
         }
-
+        
         // GET: NewsArticles
         public async Task<IActionResult> Index()
         {

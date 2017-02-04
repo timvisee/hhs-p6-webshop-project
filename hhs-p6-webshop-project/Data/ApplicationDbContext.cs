@@ -68,9 +68,9 @@ namespace hhs_p6_webshop_project.Data
 
         public DbSet<ProductImage> ProductImages { get; set; }
 
-        public DbSet<NewsArticle> NewsArticle { get; set; }
+        public virtual DbSet<NewsArticle> NewsArticle { get; set; }
 
-        public DbSet<NewsCategory> NewsCategory { get; set; }
+        public virtual DbSet<NewsCategory> NewsCategory { get; set; }
 
         public DbSet<NewsArticleCategory> NewsArticleCategory { get; set; }
     }
