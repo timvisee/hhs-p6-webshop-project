@@ -30,9 +30,7 @@ namespace hhs_p6_webshop_project.Services
                 .ToList();
         }
 
-        private List<object>
-            ParseFuckingAnoyingJsonArrayOfArraysToJustAFuckingListGodFuckingDamnitIHateThisFuckingBullshit(
-                HashSet<object> objects)
+        private List<object> ParseJsonArray(HashSet<object> objects)
         {
             List<object> values = new List<object>();
 
@@ -53,7 +51,7 @@ namespace hhs_p6_webshop_project.Services
 
         public Dictionary<string, HashSet<object>> GetFilters()
         {
-            Dictionary<string, HashSet<object>> val = new Dictionary<string, HashSet<object>>();
+            var val = new Dictionary<string, HashSet<object>>();
 
             val.Add("Prijs", new HashSet<object>());
 
@@ -116,7 +114,7 @@ namespace hhs_p6_webshop_project.Services
                 {
                     ColorFilter filt = new ColorFilter();
                     filt.Colors.AddRange(
-                        ParseFuckingAnoyingJsonArrayOfArraysToJustAFuckingListGodFuckingDamnitIHateThisFuckingBullshit(
+                        ParseJsonArray(
                                 pair.Value)
                             .Cast<string>());
 
@@ -127,7 +125,7 @@ namespace hhs_p6_webshop_project.Services
                 if (pair.Key == "Prijs")
                 {
                     var vals =
-                        ParseFuckingAnoyingJsonArrayOfArraysToJustAFuckingListGodFuckingDamnitIHateThisFuckingBullshit(
+                        ParseJsonArray(
                                 pair.Value)
                             .Cast<double>();
 
