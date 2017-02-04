@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models.ProductModels;
 using hhs_p6_webshop_project.Services;
+using hhs_p6_webshop_project.Services.Abstracts;
 
 namespace hhs_p6_webshop_project.Controllers.ProductControllers
 {
@@ -15,11 +16,13 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IProductService _service;
+        private readonly IProductFilterService _filterService;
 
-        public ProductsController(ApplicationDbContext context, IProductService service)
+        public ProductsController(ApplicationDbContext context, IProductService service, IProductFilterService filterService)
         {
             _context = context;
             _service = service;
+            _filterService = filterService;
         }
 
         // GET: Products
@@ -49,7 +52,7 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
                 return NotFound();
             }
 
-            product.Sort(color);
+            _filterService.Sort(product, color);
 
             return View(product);
         }

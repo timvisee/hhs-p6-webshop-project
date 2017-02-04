@@ -6,6 +6,7 @@ using hhs_p6_webshop_project.Api;
 using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models.FilterModels;
 using hhs_p6_webshop_project.Models.ProductModels;
+using hhs_p6_webshop_project.Services.Abstracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
@@ -16,10 +17,12 @@ namespace hhs_p6_webshop_project.Services
     public class ProductService : IProductService
     {
         private ApplicationDbContext DatabaseContext { get; set; }
+        private IProductFilterService FilterService { get; set; }
 
-        public ProductService(ApplicationDbContext dbContext)
+        public ProductService(ApplicationDbContext dbContext, IProductFilterService filterService)
         {
             DatabaseContext = dbContext;
+            FilterService = filterService;
         }
 
         public List<Product> GetAllProducts()
@@ -89,14 +92,14 @@ namespace hhs_p6_webshop_project.Services
 
             foreach (Product product in products)
             {
-                if (product.IsMatch(filters))
+                if (FilterService.IsMatch(product, filters))
                 {
                     var temp = filters.Where(f => f.Name == "Kleur")
                         .Cast<ColorFilter>()
                         .SelectMany(cf => cf.Colors)
                         .Distinct()
                         .ToList();
-                    product.Sort(temp);
+                    FilterService.Sort(product, temp);
                     results.Add(product);
                 }
             }

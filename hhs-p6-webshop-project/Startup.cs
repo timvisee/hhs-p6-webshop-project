@@ -93,6 +93,7 @@ namespace hhs_p6_webshop_project
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ITransactionalEmailService, TransactionalEmailService>();
+            services.AddScoped<IProductFilterService, ProductFilterService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
