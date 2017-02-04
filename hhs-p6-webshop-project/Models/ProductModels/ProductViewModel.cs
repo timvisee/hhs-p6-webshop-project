@@ -10,6 +10,7 @@ namespace hhs_p6_webshop_project.Models.ProductModels
         {
             Colors = new List<string>();
         }
+
         public List<Product> Products { get; set; }
        
         public List<FilterBase> Filters { get; set; }
