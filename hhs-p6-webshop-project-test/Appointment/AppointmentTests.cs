@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Linq;
+using hhs_p6_webshop_project.Controllers;
+using hhs_p6_webshop_project.Controllers.Ajax;
+using Microsoft.AspNetCore.Mvc;
 using Xunit;
 
 namespace hhs_p6_webshop_project_test {
