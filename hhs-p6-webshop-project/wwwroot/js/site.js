@@ -731,7 +731,7 @@ $(document).ready(function() {
                 }
 
                 // Call back with the dates
-                callback(null, data.dates);
+                callback(null, data);
             });
     }
 
