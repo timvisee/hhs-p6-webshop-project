@@ -50,7 +50,7 @@ function formatDateTime(dateTime, formatDate, formatTime) {
 
     // Format the time
     if (formatTime)
-        formatted = (formatDate ? " " : "") +
+        formatted += (formatDate ? " " : "") +
             ("0" + dateTime.getHours()).slice(-2) +
             ":" +
             ("0" + dateTime.getMinutes()).slice(-2) +
@@ -326,6 +326,8 @@ $(document).ready(function() {
             selectedDateTime.setFullYear(date.getFullYear());
             selectedDateTime.setMonth(date.getMonth());
             selectedDateTime.setDate(date.getDate());
+
+            console.log("new selected date: " + date);
         }
 
         // Set up the date picker
@@ -472,8 +474,8 @@ $(document).ready(function() {
                                 setTimeout(function() {
                                         secondStepButton.removeClass("animated fadeIn").delay(0)
                                             .addClass("animated pulse");
-                                    },
-                                    750);
+                                },
+                                750);
                             });
 
                             // Set the loading indicator
