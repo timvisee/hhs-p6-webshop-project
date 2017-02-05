@@ -686,7 +686,7 @@ $(document).ready(function() {
         // Do an AJAX request
         // TODO: Use inline error notifications.
         $.ajax({
-            url: "/Ajax/" + endpoint,
+            url: "/api/" + endpoint,
             dataType: "json",
             type: "GET",
             data: data,
