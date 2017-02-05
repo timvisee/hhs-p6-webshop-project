@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using hhs_p6_webshop_project.Models.FilterModels;
 using hhs_p6_webshop_project.Models.ProductModels;
 using hhs_p6_webshop_project.Services.Abstracts;
 
@@ -13,12 +11,21 @@ namespace hhs_p6_webshop_project.Services
     /// </summary>
     internal class ProductFilterService : IProductFilterService
     {
-
+        /// <summary>
+        /// Filters the <see cref="ColorOption"/> list of a <see cref="Product"/> by the selected colors filters.
+        /// </summary>
+        /// <param name="product">the <see cref="Product"/> to sort</param>
+        /// <param name="colors">the <see cref="List{T}"/> of selected colors</param>
         public void Sort(Product product, List<string> colors)
         {
             product.ColorOptions = product.ColorOptions.OrderByDescending(obj => obj.CompareTo(colors)).ToList();
         }
 
+        /// <summary>
+        /// Filters the <see cref="ColorOption"/> list of a <see cref="Product"/> by the selected color filter.
+        /// </summary>
+        /// <param name="product">the <see cref="Product"/> to sort</param>
+        /// <param name="color">the <see cref="List{T}"/> of selected colors</param>
         public void Sort(Product product, string color)
         {
             Sort(product, new List<String>
@@ -30,6 +37,7 @@ namespace hhs_p6_webshop_project.Services
         /// <summary>
         /// Filters all available products based on a filter selection.
         /// </summary>
+        /// <param name="products">the <see cref="List{T}"/> of all available <see cref="Product"/></param>
         /// <param name="filters"></param>
         /// <returns>a filtered <see cref="List{T}"/> of <see cref="Product"/> sorted by chosen filter options</returns>
         public List<Product> Filter(List<Product> products, Dictionary<string, HashSet<object>> filters)
@@ -53,11 +61,12 @@ namespace hhs_p6_webshop_project.Services
             if (colors.Count == 0)
                 return products; //No color filters selected, no need to filter
 
-            //var temp = result.Where(p => p.ColorOptions.Any(co => colors.Contains(co.Color)));
+            //Select products that match the selected colors
+            result = result.Where(p => p.ColorOptions.Any(co => colors.Contains(co.Color))).ToList();
+            //Sort all products pased on the selected colors (so that if the user filtered on blue, the blue dress images are shown first)
+            result.ForEach(p => Sort(p, colors)); 
 
-            //temp.Select(p => { return Sort(p, colors); });
-
-            return result.Where(p => p.ColorOptions.Any(co => colors.Contains(co.Color))).ToList();
+            return result;
         }
 
         private List<object> ParseJsonArray(HashSet<object> objects)

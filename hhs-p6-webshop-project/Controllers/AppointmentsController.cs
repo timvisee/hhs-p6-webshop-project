@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models.AppointmentModels;
 using Microsoft.Extensions.Options;
-using System;
 using hhs_p6_webshop_project.Services.Abstracts;
 using hhs_p6_webshop_project.Services.Containers;
 
@@ -26,28 +25,26 @@ namespace hhs_p6_webshop_project.Controllers
         }
 
         // GET: Appointments
-        public async Task<IActionResult> Index()
+        public ActionResult Index()
         {
             // Check if user is authenticated
             if (User.Identity.IsAuthenticated)
             {
-                return View(await _context.Appointment.ToListAsync());
+                return View(_context.Appointment.ToList());
             }
-            else
-            {
-                return NotFound();
-            }
+
+            return NotFound();
         }
 
         // GET: Appointments/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var appointment = await _context.Appointment.SingleOrDefaultAsync(m => m.ID == id);
+            var appointment = _context.Appointment.SingleOrDefault(m => m.ID == id);
             if (appointment == null)
             {
                 return NotFound();
@@ -58,18 +55,16 @@ namespace hhs_p6_webshop_project.Controllers
             {
                 return View(appointment);
             }
-            else
-            {
-                return NotFound();
-            }
+
+            return Forbid();
         }
 
         // GET: Appointments/Create
-        public IActionResult Create(int? id, [FromQuery] string color)
+        public ActionResult Create(int? productId, [FromQuery] string color)
         {
-            if (id != null)
+            if (productId != null)
             {
-                ViewBag.selectedDress = _context.Products.Where(p => p.ProductId == id)
+                ViewBag.selectedDress = _context.Products.Where(p => p.ProductId == productId)
                     .Select(p => p.Name)
                     .ToList()
                     .First();
@@ -87,10 +82,13 @@ namespace hhs_p6_webshop_project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(
+        public ActionResult Create(
             [Bind("ID,Confirmation,DateMarried,AppointmentDateTime,Mail,Name,Phone")] Appointment appointment,
             string dressName, string dressColor)
         {
+            if (appointment == null)
+                return BadRequest();
+
             if (ModelState.IsValid)
             {
                 //Prepare email data
@@ -103,11 +101,11 @@ namespace hhs_p6_webshop_project.Controllers
                 };
 
                 //Send the email
-                await _emailService.SendAppointmentEmail(container);
+                _emailService.SendAppointmentEmail(container);
                 
-                _context.Add(appointment);
+                _context.Appointment.Add(appointment);
                 
-                await _context.SaveChangesAsync();
+               _context.SaveChanges();
                 return RedirectToAction("Thanks");
             }
             return View(appointment);

@@ -152,14 +152,8 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers
 
                 if (updatedNewsArticle.SelectedNewsCategories != null)
                 {
-                    foreach (int newsCategoryID in updatedNewsArticle.SelectedNewsCategories)
-                    {
-                        _context.NewsArticleCategory.Add(new NewsArticleCategory()
-                        {
-                            NewsArticleID = updatedNewsArticle.NewsArticle.NewsArticleID,
-                            NewsCategoryID = newsCategoryID
-                        });
-                    }
+                    updatedNewsArticle.SelectedNewsCategories.ToList().ForEach(x => _context.NewsArticleCategory.Add(new NewsArticleCategory() { NewsArticleID = updatedNewsArticle.NewsArticle.NewsArticleID, NewsCategoryID = x }));
+                    
                 }
 
                 // Update the image path if an image is selected
@@ -231,11 +225,8 @@ namespace hhs_p6_webshop_project.Controllers.NewsControllers
             List<NewsArticleView> avl = new List<NewsArticleView>();
             SelectList categoryList = new SelectList(_context.NewsCategory, "NewsCategoryID", "Name");
 
-            foreach (int id in _context.NewsArticle.Select(x => x.NewsArticleID))
-            {
-                avl.Add(getNewsArticlesView(getNewsArticle(id), categoryList));
-            }
-
+            _context.NewsArticle.Select(x => x.NewsArticleID).ToList().ForEach(x => avl.Add(getNewsArticlesView(getNewsArticle(x), categoryList)));
+            
             return avl;
         }
 

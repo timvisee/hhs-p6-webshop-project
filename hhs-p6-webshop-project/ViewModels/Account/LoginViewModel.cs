@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace hhs_p6_webshop_project.Models.AccountViewModels
+namespace hhs_p6_webshop_project.ViewModels.Account
 {
     public class LoginViewModel
     {

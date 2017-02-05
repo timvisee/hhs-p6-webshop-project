@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using hhs_p6_webshop_project.Api;
 using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models.FilterModels;
 using hhs_p6_webshop_project.Models.ProductModels;
 using hhs_p6_webshop_project.Services.Abstracts;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json.Linq;
 
 namespace hhs_p6_webshop_project.Services
 {

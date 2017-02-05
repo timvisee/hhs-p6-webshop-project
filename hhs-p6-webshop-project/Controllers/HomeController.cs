@@ -1,15 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using hhs_p6_webshop_project.Models;
-using System.Text;
-using MailKit;
-using System;
-using System.Collections.Generic;
 using hhs_p6_webshop_project.App.Config;
 using hhs_p6_webshop_project.Services.Abstracts;
-using hhs_p6_webshop_project.Services.Containers;
-using MimeKit;
-using MailKit.Security;
-using MailKit.Net.Smtp;
 using Microsoft.Extensions.Options;
 
 namespace hhs_p6_webshop_project.Controllers

@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -9,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using hhs_p6_webshop_project.Models;
-using hhs_p6_webshop_project.Models.AccountViewModels;
+using hhs_p6_webshop_project.ViewModels.Account;
 using hhs_p6_webshop_project.Services;
 using hhs_p6_webshop_project.Services.Abstracts;
 
