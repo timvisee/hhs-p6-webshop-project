@@ -4,7 +4,6 @@ using hhs_p6_webshop_project.Controllers;
 using hhs_p6_webshop_project.Models.AppointmentModels;
 using Microsoft.AspNetCore.Mvc;
 using Xunit;
-using hhs_p6_webshop_project_test.Roderick;
 
 namespace hhs_p6_webshop_project_test.Roderick
 {
