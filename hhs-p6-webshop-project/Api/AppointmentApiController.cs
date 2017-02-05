@@ -46,50 +46,24 @@ namespace hhs_p6_webshop_project.Controllers.Ajax
         public JsonResult GetTimes(string date)
         {
             // Determine the date to get the free times for
-            DateTime dateObject = DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-
-            var appointments = _context.Appointment.Where(a => a.AppointmentDateTime.Date == dateObject.Date)
-                .Select(a => a.AppointmentDateTime)
-                .ToList();
+            DateTime selectedDate = DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
             var timeslots = new List<TimeSpan>();
             timeslots.Add(TimeSpan.FromHours(9).Add(TimeSpan.FromMinutes(30)));
             timeslots.Add(TimeSpan.FromHours(12).Add(TimeSpan.FromMinutes(30)));
             timeslots.Add(TimeSpan.FromHours(15).Add(TimeSpan.FromMinutes(0)));
 
-            //var freeSlots = new List<TimeSpan>();
-
-            List<Object> times = new List<Object>();
-
-            foreach (var slot in timeslots)
+            return Json(timeslots.Select(t => new
             {
-                bool taken = false;
-
-                foreach (var app in appointments)
+                available = !_context.Appointment.Any(a => a.AppointmentDateTime == selectedDate.Add(t)),
+                formattedTime = t.ToString(@"hh\:mm"),
+                time = new
                 {
-                    if (app.TimeOfDay == slot)
-                        taken = true;
+                    hour = t.Hours,
+                    minute = t.Minutes,
+                    second = t.Seconds
                 }
-
-
-                times.Add(new
-                {
-                    available = !taken,
-                    formattedTime = slot.ToString(@"hh\:mm"),
-                    time = new
-                    {
-                        hour = slot.Hours,
-                        minute = slot.Minutes,
-                        second = slot.Seconds
-                    }
-                });
-            }
-
-            // Return a JSON result of available times
-            return new JsonResult(new
-            {
-                times = times
-            });
+            }));
         }
     }
 }
