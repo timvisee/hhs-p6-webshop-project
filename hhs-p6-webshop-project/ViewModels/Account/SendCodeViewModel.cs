@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace hhs_p6_webshop_project.Models.AccountViewModels
+namespace hhs_p6_webshop_project.ViewModels.Account
 {
     public class SendCodeViewModel
     {
