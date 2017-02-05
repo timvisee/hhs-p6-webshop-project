@@ -692,7 +692,7 @@ $(document).ready(function() {
             data: data,
             error: function(jqXhr, textStatus) {
                 // Define the error message
-                var error = "Failed to fetch data.\n\nError: '" + textStatu + "'";
+                var error = "Failed to fetch data.\n\nError: '" + textStatus + "'";
 
                 // Alert the user with the error
                 alert(error);
