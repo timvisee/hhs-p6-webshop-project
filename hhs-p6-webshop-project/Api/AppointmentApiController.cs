@@ -7,8 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace hhs_p6_webshop_project.Controllers.Ajax
 {
-    [Route("Ajax/Appointments")]
-    public class AppointmentController : Controller
+    [Produces("application/json")]
+    [Route("api/appointments")]
+    public class AppointmentApiController : Controller
     {
         /// <summary>
         /// Application database context.
@@ -19,7 +20,7 @@ namespace hhs_p6_webshop_project.Controllers.Ajax
         /// Constructor.
         /// </summary>
         /// <param name="context">Application database context.</param>
-        public AppointmentController(ApplicationDbContext context)
+        public AppointmentApiController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -28,49 +29,20 @@ namespace hhs_p6_webshop_project.Controllers.Ajax
         /// GetDates endpoint
         /// </summary>
         /// <returns>JSON response.</returns>
-        [HttpGet("GetDates")]
+        [HttpGet("getdates")]
         public JsonResult GetDates()
         {
-            // Determine the base date time, get the appointments after it
-            DateTime afterDateTime = DateTime.Now;
-
-            // TODO: Fetch the actual occupied dates from the database!
-            // Fetch the occupied dates from the database
-            var dates = _context.Appointment.Where(a => a.AppointmentDateTime > afterDateTime).ToList();
-
-            // Create a list to put the occupied dates in
-            HashSet<string> occupiedDates = new HashSet<string>();
-
-            // Determine whether a date
-            foreach (var appointment in dates)
-            {
-                var amount = 0;
-
-                foreach (var appointment2 in dates)
-                {
-                    if (appointment.AppointmentDateTime.Date == appointment2.AppointmentDateTime.Date)
-                        amount++;
-
-                    if (amount >= 3)
-                    {
-                        occupiedDates.Add(appointment.AppointmentDateTime.ToString("yyyy-MM-dd"));
-                        break;
-                    }
-                }
-            }
-
-            // Return a JSON result of occupied dates
-            return new JsonResult(new
-            {
-                dates = occupiedDates
-            });
+            return Json(_context.Appointment
+                .GroupBy(a => a.AppointmentDateTime.Date)
+                .Where(k => k.Count() >= 3)
+                .Select(a => a.Key.ToString("yyyy-MM-dd")));
         }
 
         /// <summary>
         /// GetTimes endpoint
         /// </summary>
         /// <returns>JSON response.</returns>
-        [HttpGet("GetTimes")]
+        [HttpGet("gettimes")]
         public JsonResult GetTimes(string date)
         {
             // Determine the date to get the free times for
