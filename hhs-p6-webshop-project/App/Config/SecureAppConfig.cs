@@ -7,15 +7,15 @@
             // Set default values.
         }
 
-        public string Owner { get; set; }
+        public virtual string Owner { get; set; }
 
-        public string SparkpostApiKey { get; set; }
-        public string DbServer { get; set; }
-        public string DbUser { get; set; }
-        public string DbPassword { get; set; }
-        public string DbName { get; set; }
+        public virtual string SparkpostApiKey { get; set; }
+        public virtual string DbServer { get; set; }
+        public virtual string DbUser { get; set; }
+        public virtual string DbPassword { get; set; }
+        public virtual string DbName { get; set; }
 
-        public string GoogleClientId { get; set; }
-        public string GoogleClientSecret { get; set; }
+        public virtual string GoogleClientId { get; set; }
+        public virtual string GoogleClientSecret { get; set; }
     }
 }
