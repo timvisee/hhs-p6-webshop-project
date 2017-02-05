@@ -1,7 +1,5 @@
 ﻿using System;
-using hhs_p6_webshop_project.App.Config;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
 
 namespace hhs_p6_webshop_project.App.Util
 {

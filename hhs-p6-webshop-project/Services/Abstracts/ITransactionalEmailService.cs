@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using hhs_p6_webshop_project.Models;
 using hhs_p6_webshop_project.Services.Containers;
 using SparkPost;

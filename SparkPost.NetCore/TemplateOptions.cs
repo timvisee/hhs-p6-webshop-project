@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SparkPost
+﻿namespace SparkPost
 {
     public class TemplateOptions
     {

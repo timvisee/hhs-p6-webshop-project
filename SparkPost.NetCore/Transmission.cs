@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using SparkPost.Utilities;
+
 #if FRAMEWORK
 using System.Net.Mail;
 #endif

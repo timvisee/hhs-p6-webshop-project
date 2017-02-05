@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using hhs_p6_webshop_project.Models;
 using hhs_p6_webshop_project.Models.AppointmentModels;
 using hhs_p6_webshop_project.Models.NewsModels;
-using Microsoft.Extensions.Configuration;
 using hhs_p6_webshop_project.Models.ProductModels;
 
 namespace hhs_p6_webshop_project.Data

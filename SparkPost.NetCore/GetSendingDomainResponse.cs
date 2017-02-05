@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-namespace SparkPost
+﻿namespace SparkPost
 {
     public class GetSendingDomainResponse : Response
     {

@@ -1,23 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models.FilterModels;
-using hhs_p6_webshop_project.Models.ProductModels;
 using hhs_p6_webshop_project.Services;
-using hhs_p6_webshop_project_test.MoqTools;
 using Microsoft.EntityFrameworkCore;
-using Moq;
-using Org.BouncyCastle.Crypto;
 using Xunit;
-
 
 namespace hhs_p6_webshop_project_test.ProductTest
 {
     public class ProductFilterTest
     {
-
         [Fact]
         public void TestFilter() {
             //Setup data
@@ -49,11 +41,6 @@ namespace hhs_p6_webshop_project_test.ProductTest
                 foreach (var p in result) 
                      Assert.Contains(p.ToString(), expectedResults);
             }
-            
-
         }
-
-
-
     }
 }
