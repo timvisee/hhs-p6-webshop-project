@@ -122,11 +122,8 @@ namespace hhs_p6_webshop_project_test.Tim {
             int timeCount = 0;
             foreach (var timeObject in times)
             {
-                // Get the time object
-                var time = timeObject.Value;
-
                 // Make sure the time is occupied
-                Assert.False(time.Value.available);
+                Assert.False(timeObject.Value.available);
 
                 // Increase the time count
                 timeCount++;
