@@ -326,8 +326,6 @@ $(document).ready(function() {
             selectedDateTime.setFullYear(date.getFullYear());
             selectedDateTime.setMonth(date.getMonth());
             selectedDateTime.setDate(date.getDate());
-
-            console.log("new selected date: " + date);
         }
 
         // Set up the date picker
