@@ -1,0 +1,89 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using hhs_p6_webshop_project.Api;
+using hhs_p6_webshop_project.Controllers;
+using hhs_p6_webshop_project.Data;
+using hhs_p6_webshop_project.Models.AppointmentModels;
+using hhs_p6_webshop_project.Services.Abstracts;
+using Microsoft.AspNetCore.Mvc;
+using Moq;
+using Xunit;
+
+namespace hhs_p6_webshop_project_test.Tim {
+
+    [Collection("main")]
+    public class AppointmentTests {
+
+        /// <summary>
+        /// A date that is fully booked.
+        /// </summary>
+        private static readonly String FULL_DATE = "2017-01-26";
+
+        /// <summary>
+        /// Constant list of dates used for testing purposes.
+        /// </summary>
+        static readonly List<DateTime> TestDates = new List<DateTime>()
+        {
+            DateTime.Parse("2017-01-24 09:00:00"),
+            DateTime.Parse("2017-01-25 12:30:00"),
+            DateTime.Parse(FULL_DATE + " 09:00:00"),
+            DateTime.Parse(FULL_DATE + " 12:30:00"),
+            DateTime.Parse(FULL_DATE + " 15:00:00"),
+        };
+
+        /// <summary>
+        /// Create a constant list of appointments based on the template list.
+        /// </summary>
+        /// <returns>Constant list of appointments.</returns>
+        private List<Appointment> CreateTestAppointments()
+        {
+            // Stream the list of testing dates to appointments
+            return TestDates.Select(dateTime => new Appointment()
+            {
+                AppointmentDateTime = dateTime
+            }).ToList();
+        }
+
+        /// <summary>
+        /// Test whether the response given by the API to get the unavailable dates works.
+        /// </summary>
+        [Fact]
+        public void GetDatesTest()
+        {
+            // Set up the mock for the service
+            var mockAppointmentService = new Mock<IAppointmentService>();
+            mockAppointmentService.Setup(a => a.GetAllAppointments()).Returns(CreateTestAppointments);
+
+            // Get the mocked appointment API controller
+            var appointmentApiController = new AppointmentApiController(mockAppointmentService.Object);
+
+            // Get the unavailable dates
+            var datesResponse = appointmentApiController.GetDates();
+
+            // Make sure the response is of the correct type
+            Assert.IsType<JsonResult>(datesResponse);
+
+            // Get the list of dates as dynamic object
+            var dates = datesResponse.Value as dynamic;
+
+            // Loop through the values, keep track of the count
+            int count = 0;
+            foreach (var dateString in dates)
+            {
+                // Make sure the value is a string
+                Assert.IsType<String>(dateString);
+
+                // Make sure this date equals the full date
+                Assert.Equal(dateString, FULL_DATE);
+
+                // Increase the count
+                count++;
+            }
+
+            // Assert the count
+            Assert.Equal(count, 1);
+        }
+    }
+}
