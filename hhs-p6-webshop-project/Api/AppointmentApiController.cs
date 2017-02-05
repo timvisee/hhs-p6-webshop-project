@@ -5,7 +5,7 @@ using System.Linq;
 using hhs_p6_webshop_project.Data;
 using Microsoft.AspNetCore.Mvc;
 
-namespace hhs_p6_webshop_project.Controllers.Ajax
+namespace hhs_p6_webshop_project.Api
 {
     [Produces("application/json")]
     [Route("api/appointments")]
