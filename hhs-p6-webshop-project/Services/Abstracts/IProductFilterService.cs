@@ -10,13 +10,9 @@ namespace hhs_p6_webshop_project.Services.Abstracts
     public interface IProductFilterService
     {
 
-        Tuple<double, double, bool> ParsePriceRange(HashSet<object> set);
-
         void Sort(Product product, List<string> colors);
         void Sort(Product product, string color);
 
-        bool IsMatch(Product product, List<FilterBase> filters);
-        bool IsMatch(Product product, Dictionary<string, HashSet<object>> filterSet);
-
+        List<Product> Filter(List<Product> products, Dictionary<string, HashSet<object>> filters);
     }
 }

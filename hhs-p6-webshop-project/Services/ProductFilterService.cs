@@ -5,24 +5,18 @@ using System.Threading.Tasks;
 using hhs_p6_webshop_project.Models.FilterModels;
 using hhs_p6_webshop_project.Models.ProductModels;
 using hhs_p6_webshop_project.Services.Abstracts;
-using Newtonsoft.Json.Linq;
 
 namespace hhs_p6_webshop_project.Services
 {
-    public class ProductFilterService : IProductFilterService
+    /// <summary>
+    /// Internal helper service to help with filtering the available products.
+    /// </summary>
+    internal class ProductFilterService : IProductFilterService
     {
-        public Tuple<double, double, bool> ParsePriceRange(HashSet<object> set)
-        {
-            double min = (double) set.Min();
-            double max = (double) set.Max();
-
-            return new Tuple<double, double, bool>(min, max, min == max);
-        }
 
         public void Sort(Product product, List<string> colors)
         {
             product.ColorOptions = product.ColorOptions.OrderByDescending(obj => obj.CompareTo(colors)).ToList();
-            //ColorOptions.Sort((x, y) => x.CompareTo(colors) + y.CompareTo(colors));
         }
 
         public void Sort(Product product, string color)
@@ -32,109 +26,85 @@ namespace hhs_p6_webshop_project.Services
                 color
             });
         }
-
-        public bool IsMatch(Product product, List<FilterBase> filters)
+        
+        /// <summary>
+        /// Filters all available products based on a filter selection.
+        /// </summary>
+        /// <param name="filters"></param>
+        /// <returns>a filtered <see cref="List{T}"/> of <see cref="Product"/> sorted by chosen filter options</returns>
+        public List<Product> Filter(List<Product> products, Dictionary<string, HashSet<object>> filters)
         {
-            bool isMatch = true;
+            var filt = ParseFilters(filters);
 
-            foreach (FilterBase filter in filters)
+            return Filter(products, filt.Item1, filt.Item2, filt.Item3);
+        }
+
+        #region Helper Methods
+
+        private List<Product> Filter(List<Product> products, List<string> colors, double minPrice, double maxPrice)
+        {
+            var result = products;
+            if (!maxPrice.Equals(0))
             {
-                if (filter is ColorFilter)
-                {
-                    ColorFilter filt = filter as ColorFilter;
-                    bool colorMatch = false;
+                //We need to filter prices, only select products in the price range
+                result = result.Where(p => p.Price >= minPrice && p.Price <= maxPrice).ToList();
+            }
 
-                    foreach (ColorOption co in product.ColorOptions)
-                    {
-                        if (filt.Colors.Contains(co.Color))
-                            colorMatch = true;
-                    }
+            if (colors.Count == 0)
+                return products; //No color filters selected, no need to filter
 
-                    if (!colorMatch)
-                        isMatch = false;
-                }
-                else if (filter is PriceFilter)
-                {
-                    PriceFilter filt = filter as PriceFilter;
-                    isMatch = product.Price >= filt.Min && product.Price <= filt.Max;
-                }
+            var temp = result.Where(p => p.ColorOptions.Any(co => colors.Contains(co.Color)));
 
-                if (!isMatch)
-                {
-                    Console.WriteLine(
-                        $"Filter mismatch for {this} on {filter.Name} with values ({string.Join(", ", filters)})!");
-                    return false;
-                }
+            temp.Select(p => Sort(p, colors));
+
+            return result.Where(p => p.ColorOptions.Any(co => colors.Contains(co.Color))).ToList();
+        }
+
+        private List<object> ParseJsonArray(HashSet<object> objects)
+        {
+            List<object> values = new List<object>();
+
+            foreach (object value in objects)
+            {
+                if (value is Int64)
+                    values.Add(Convert.ToDouble(value));
                 else
+                    values.Add(value);
+            }
+            return values;
+        }
+
+        private Tuple<List<string>, double, double>  ParseFilters(Dictionary<string, HashSet<object>> filters)
+        {
+            var colors = new List<string>();
+            double min = 0;
+            double max = 0;
+
+            foreach (var pair in filters)
+            {
+                if (pair.Key == "Kleur")
                 {
-                    Console.WriteLine(
-                        $"Filter MATCH for {this} on {filter.Name} with values ({string.Join(", ", filters)})!");
+                    colors.AddRange(
+                        ParseJsonArray(
+                                pair.Value)
+                            .Cast<string>());
+                }
+
+                if (pair.Key == "Prijs")
+                {
+                    var vals =
+                        ParseJsonArray(
+                                pair.Value)
+                            .Cast<double>();
+
+                    min = vals.Min();
+                    max = vals.Max();
                 }
             }
 
-            Console.WriteLine($"Filter MATCH on product {this}");
-            return true;
+            return new Tuple<List<string>, double, double>(colors, min, max);
         }
 
-        public bool IsMatch(Product product, Dictionary<string, HashSet<object>> filterSet)
-        {
-            bool isMatch = true;
-
-            foreach (KeyValuePair<string, HashSet<object>> filter in filterSet)
-            {
-                if (filter.Key == "Prijs")
-                {
-                    Tuple<double, double, bool> priceFilter = ParsePriceRange(filter.Value);
-
-                    if (priceFilter.Item3)
-                    {
-                        isMatch = product.Price == priceFilter.Item1;
-                    }
-                    else
-                    {
-                        isMatch = product.Price >= priceFilter.Item1 && product.Price <= priceFilter.Item2;
-                    }
-                }
-
-                if (filter.Key == "Kleur")
-                {
-                    bool colorMatch = false;
-
-                    List<string> colorValues = new List<string>();
-
-                    foreach (JArray value in filter.Value)
-                    {
-                        for (int i = 0; i < value.Count; i++)
-                        {
-                            colorValues.Add(value[i].Value<string>());
-                        }
-                    }
-
-                    foreach (ColorOption co in product.ColorOptions)
-                    {
-                        if (colorValues.Contains(co.Color))
-                            colorMatch = true;
-                    }
-
-                    if (!colorMatch)
-                        isMatch = false;
-                }
-
-                if (!isMatch)
-                {
-                    Console.WriteLine(
-                        $"Filter mismatch for {this} on {filter.Key} with values ({string.Join(", ", filter.Value)})!");
-                    return false;
-                }
-                else
-                {
-                    Console.WriteLine(
-                        $"Filter MATCH for {this} on {filter.Key} with values ({string.Join(", ", filter.Value)})!");
-                }
-            }
-
-            Console.WriteLine($"Filter MATCH on product {this}");
-            return true;
-        }
+        #endregion
     }
 }

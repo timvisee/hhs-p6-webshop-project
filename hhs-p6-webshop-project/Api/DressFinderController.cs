@@ -2,6 +2,7 @@
 using System.Linq;
 using hhs_p6_webshop_project.Models.ProductModels;
 using hhs_p6_webshop_project.Services;
+using hhs_p6_webshop_project.Services.Abstracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace hhs_p6_webshop_project.Api
@@ -10,7 +11,7 @@ namespace hhs_p6_webshop_project.Api
     public class DressFinderController : Controller
     {
         public IProductService ProductService { get; }
-
+      
         public DressFinderController(IProductService productService)
         {
             ProductService = productService;
@@ -31,8 +32,9 @@ namespace hhs_p6_webshop_project.Api
         [HttpPost("product/filter/partial")]
         public PartialViewResult FilterPartial([FromBody] Dictionary<string, HashSet<object>> filters)
         {
-            var filteredProducts = ProductService.Filter(ProductService.ParseFilters(filters));
-            var model = ProductService.BuildProductViewModel(filteredProducts, null);
+            var products = ProductService.Filter(filters);
+            
+            var model = ProductService.BuildProductViewModel(products, null);
 
             return PartialView("~/Views/Products/ProductOverview.cshtml", model);
         }
@@ -40,25 +42,25 @@ namespace hhs_p6_webshop_project.Api
         [HttpPost("product/filter/partial/sort/{id}")]
         public PartialViewResult FilterPartialSort([FromBody] Dictionary<string, HashSet<object>> filters, int id)
         {
-            var p = ProductService.Filter(ProductService.ParseFilters(filters));
+            var products = ProductService.Filter(filters);
 
             switch (id)
             {
                 case 0: //prijs laag->hoog
-                    p = p.OrderBy(o => o.Price).ToList();
+                    products = products.OrderBy(o => o.Price).ToList();
                     break;
                 case 1: //prijs hoog->laag
-                    p = p.OrderByDescending(o => o.Price).ToList();
+                    products = products.OrderByDescending(o => o.Price).ToList();
                     break;
                 case 2: //naam oplopend
-                    p = p.OrderBy(o => o.Name).ToList();
+                    products = products.OrderBy(o => o.Name).ToList();
                     break;
                 case 3: //naam aflopend
-                    p = p.OrderByDescending(o => o.Name).ToList();
+                    products = products.OrderByDescending(o => o.Name).ToList();
                     break;
             }
 
-            var model = ProductService.BuildProductViewModel(p, null);
+            var model = ProductService.BuildProductViewModel(products, null);
             
             return PartialView("~/Views/Products/ProductOverview.cshtml", model);
         }
@@ -66,19 +68,13 @@ namespace hhs_p6_webshop_project.Api
         [HttpPost("product/filter")]
         public JsonResult Filter([FromBody] Dictionary<string, HashSet<object>> filters)
         {
-            return Json(ProductService.Filter(ProductService.ParseFilters(filters)));
+            return Json(ProductService.Filter(filters));
         }
 
         [HttpGet("product/test")]
         public JsonResult GetAll()
         {
             return Json(ProductService.GetColorOptions());
-        }
-
-        [HttpGet("product/{start}/{count}")]
-        public JsonResult GetAllProductsPaged(int start, int count)
-        {
-            return Json(ProductService.GetAllProductsPaged(start, count));
         }
         
     }

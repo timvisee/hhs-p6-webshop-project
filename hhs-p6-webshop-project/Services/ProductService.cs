@@ -14,6 +14,9 @@ using Newtonsoft.Json.Linq;
 
 namespace hhs_p6_webshop_project.Services
 {
+    /// <summary>
+    /// Service to help with database querying for products and filtering the results.
+    /// </summary>
     public class ProductService : IProductService
     {
         private ApplicationDbContext DatabaseContext { get; set; }
@@ -25,6 +28,10 @@ namespace hhs_p6_webshop_project.Services
             FilterService = filterService;
         }
 
+        /// <summary>
+        /// Returns a list of all products, sorted by Id, ascending.
+        /// </summary>
+        /// <returns>A <see cref="List{T}"/> of all <see cref="Product"/> product instances.</returns>
         public List<Product> GetAllProducts()
         {
             return DatabaseContext.Products
@@ -33,6 +40,12 @@ namespace hhs_p6_webshop_project.Services
                 .ToList();
         }
 
+        /// <summary>
+        /// Builds a <see cref="ProductViewModel"/> based upon a <see cref="List{T}"/> of <see cref="Product"/>s and a <see cref="List{T}"/> of <see cref="FilterBase"/> objects.
+        /// </summary>
+        /// <param name="products">the products to populate this view with</param>
+        /// <param name="filters">the filters to populate this view with</param>
+        /// <returns></returns>
         public ProductViewModel BuildProductViewModel(List<Product> products, List<FilterBase> filters)
         {
             //Build the model and calculate the required properties
@@ -49,26 +62,20 @@ namespace hhs_p6_webshop_project.Services
             }
             return model;
         }
-
-        private List<object> ParseJsonArray(HashSet<object> objects)
-        {
-            List<object> values = new List<object>();
-
-            foreach (object value in objects)
-            {
-                if (value is Int64)
-                    values.Add(Convert.ToDouble(value));
-                else
-                    values.Add(value);
-            }
-            return values;
-        }
-
+        
+        /// <summary>
+        /// Returns a list of all available <see cref="ColorOption"/>s.
+        /// </summary>
+        /// <returns>a <see cref="List{T}"/> of <see cref="ColorOption"/></returns>
         public List<ColorOption> GetColorOptions()
         {
             return DatabaseContext.ColorOptions.Distinct().ToList();
         }
 
+        /// <summary>
+        /// Fetches a list of all available filter options as JSON serialization friendly object.
+        /// </summary>
+        /// <returns>a <see cref="Dictionary{TKey,TValue}"/> with a <see cref="string"/> as key and a <see cref="HashSet{T}"/> as value</returns>
         public Dictionary<string, HashSet<object>> GetFilters()
         {
             var val = new Dictionary<string, HashSet<object>>();
@@ -85,6 +92,10 @@ namespace hhs_p6_webshop_project.Services
             return val;
         }
 
+        /// <summary>
+        /// Detches a list of allavailable filter options as a C# friendly object.
+        /// </summary>
+        /// <returns>a <see cref="List{T}"/> of <see cref="FilterBase"/> objects</returns>
         public List<FilterBase> GetAllFilters()
         {
             List<FilterBase> filters = new List<FilterBase>();
@@ -102,93 +113,15 @@ namespace hhs_p6_webshop_project.Services
             return filters;
         }
 
-        public List<Product> Filter(List<FilterBase> filters)
+        /// <summary>
+        /// Filters all available products based on a filter selection.
+        /// </summary>
+        /// <param name="filters"></param>
+        /// <returns>a filtered <see cref="List{T}"/> of <see cref="Product"/> sorted by chosen filter options</returns>
+        public List<Product> Filter(Dictionary<string, HashSet<object>> filters)
         {
-            List<Product> products = GetAllProducts();
-            List<Product> results = new List<Product>();
-
-            foreach (Product product in products)
-            {
-                if (FilterService.IsMatch(product, filters))
-                {
-                    var temp = filters.Where(f => f.Name == "Kleur")
-                        .Cast<ColorFilter>()
-                        .SelectMany(cf => cf.Colors)
-                        .Distinct()
-                        .ToList();
-                    FilterService.Sort(product, temp);
-                    results.Add(product);
-                }
-            }
-
-            return results;
+            return FilterService.Filter(GetAllProducts(), filters);
         }
-
-        public List<FilterBase> ParseFilters(Dictionary<string, HashSet<object>> filters)
-        {
-            List<FilterBase> f = new List<FilterBase>();
-
-            foreach (var pair in filters)
-            {
-                if (pair.Key == "Kleur")
-                {
-                    ColorFilter filt = new ColorFilter();
-                    filt.Colors.AddRange(
-                        ParseJsonArray(
-                                pair.Value)
-                            .Cast<string>());
-
-                    if (filt.Colors.Count > 0)
-                        f.Add(filt);
-                }
-
-                if (pair.Key == "Prijs")
-                {
-                    var vals =
-                        ParseJsonArray(
-                                pair.Value)
-                            .Cast<double>();
-
-                    PriceFilter filt = new PriceFilter();
-                    filt.Min = vals.Min();
-                    filt.Max = vals.Max();
-                    f.Add(filt);
-                }
-            }
-
-            return f;
-        }
-
-        public PagedResponse GetAllProductsPaged(int start, int count)
-        {
-            PagedResponse response = new PagedResponse();
-            int prev = start - count;
-            if (prev < 0)
-                prev = 0;
-
-            var products = GetAllProducts();
-            if (start + count > products.Count)
-            {
-                int num = Math.Abs(products.Count - (start + count));
-                response.Data = products.GetRange(start, num);
-                response.PreviousPage = $"api/dressfinder/product/{prev}/{count}";
-                response.NextPage = null;
-            }
-            else
-            {
-                response.Data = products.GetRange(start, count);
-                response.PreviousPage = (prev == 0) ? null : $"api/dressfinder/product/{prev}/{count}";
-
-                if (start + count >= products.Count)
-                {
-                    response.NextPage = null;
-                }
-                else
-                {
-                    response.NextPage = $"api/dressfinder/product/{start + count}/{count}";
-                }
-            }
-            return response;
-        }
+        
     }
 }
