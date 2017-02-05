@@ -760,7 +760,7 @@ $(document).ready(function() {
                 }
 
                 // Call back with the time
-                callback(null, data.times);
+                callback(null, data);
 
             },
             {
