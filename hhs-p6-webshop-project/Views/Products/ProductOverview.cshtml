@@ -4,19 +4,9 @@
 
 @foreach (Product item in Model.Products)
 {
-    var imagePath = "/images/default.jpg";
+    string itemColorType = item.ColorOptions?.First()?.Color ?? "Kleurloos";
 
-    string itemColorType = item.ColorOptions.First().Color;
-
-    try
-    {
-        // Get first image (todo fix)
-        imagePath = item.ColorOptions.FirstOrDefault().Images.FirstOrDefault().Path;
-    }
-    catch (Exception e)
-    {
-        // Tering harde beun maar het werkt echt perfect
-    }
+    string imagePath = item.ColorOptions?.FirstOrDefault()?.Images?.FirstOrDefault()?.Path ?? "/images/default.jpg";
 
     <div class="product col-md-4 col-sm-12">
         <a asp-controller="Products" asp-action="Details" asp-route-id="@item.ProductId" asp-route-color="@itemColorType">
