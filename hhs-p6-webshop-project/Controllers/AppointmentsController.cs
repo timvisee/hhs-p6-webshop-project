@@ -64,11 +64,11 @@ namespace hhs_p6_webshop_project.Controllers
         }
 
         // GET: Appointments/Create
-        public IActionResult Create(int? id, [FromQuery] string color)
+        public ActionResult Create(int? productId, [FromQuery] string color)
         {
-            if (id != null)
+            if (productId != null)
             {
-                ViewBag.selectedDress = _context.Products.Where(p => p.ProductId == id)
+                ViewBag.selectedDress = _context.Products.Where(p => p.ProductId == productId)
                     .Select(p => p.Name)
                     .ToList()
                     .First();
