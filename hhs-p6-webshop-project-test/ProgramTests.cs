@@ -31,6 +31,5 @@ namespace hhs_p6_webshop_project_test {
             // Application version code should be specified and above zero
             Assert.True(Program.APP_VERSION_CODE > 0);
         }
-
     }
 }

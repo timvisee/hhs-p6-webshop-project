@@ -90,6 +90,30 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
             }
         }
 
+        // GET: ProductImages/Create
+        public IActionResult Create()
+        {
+            // Check if user is authenticated
+            if (User.Identity.IsAuthenticated)
+            {
+                int? id = 0;
+
+                var dressPerColor = _context.ColorOptions
+                    .Join(_context.Products, c => c.ProductId, o => o.ProductId,
+                        (c, o) => new { c.ColorOptionId, c.Color, o.Name, o.ProductId })
+                    .Where(c => c.ProductId == id)
+                    .ToList();
+                IEnumerable<SelectListItem> selectList = from d in dressPerColor
+                                                         select new SelectListItem { Value = d.ColorOptionId.ToString(), Text = d.Name + " - " + d.Color };
+                ViewData["ColorOptionId"] = new SelectList(selectList, "Value", "Text", id);
+                return View();
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
         // POST: ProductImages/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.

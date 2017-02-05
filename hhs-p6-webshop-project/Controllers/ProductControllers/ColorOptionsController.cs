@@ -59,6 +59,35 @@ namespace hhs_p6_webshop_project.Controllers.ProductControllers
         }
 
         // GET: ColorOptions/Create
+        public IActionResult Create()
+        {
+            // Check if user is authenticated
+            if (User.Identity.IsAuthenticated)
+            {
+                int? id = 0;
+
+                var color = _context.ColorOptions.Where(c => c.ProductId == id).Select(c => c.Color).ToList();
+                foreach (string colorOption in _coloroptions)
+                {
+                    bool exists = color.Contains(colorOption);
+                    if (exists)
+                        _coloroptions = _coloroptions.Where(c => c != colorOption).ToArray();
+                }
+
+                ViewData["ColorOption"] = _coloroptions.Select(r => new SelectListItem { Text = r, Value = r });
+                var dress = _context.Products.Where(c => c.ProductId == id)
+                    .Select(o => new { Value = o.ProductId, Text = o.Name })
+                    .ToList();
+                ViewData["Name"] = new SelectList(dress, "Value", "Text", id);
+                return View();
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        // GET: ColorOptions/Create
         public IActionResult Create(int? id)
         {
             // Check if user is authenticated
