@@ -49,7 +49,7 @@ namespace hhs_p6_webshop_project_test.ProductTest
         }
 
         [Fact]
-        public async void detailsPage_NotAuthenticated()
+        public void detailsPage_NotAuthenticated()
         {
             //Arrange
             var dataSource = new Mock<ApplicationDbContext>();
@@ -61,8 +61,9 @@ namespace hhs_p6_webshop_project_test.ProductTest
             //Act
             int? testValue = dataSource.Object.ProductImages.Select(m => m.ProductImageId).FirstOrDefault();
             var methodToTest = controller.Details(testValue);
-            //Assert
 
+            //Assert
+            Assert.IsType<ViewResult>(methodToTest);
         }
     }
 }
