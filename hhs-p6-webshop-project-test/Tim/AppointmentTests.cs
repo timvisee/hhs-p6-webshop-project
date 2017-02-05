@@ -122,6 +122,7 @@ namespace hhs_p6_webshop_project_test.Tim {
             int timeCount = 0;
             foreach (var timeObject in times)
             {
+                // Cast the time object to a dynamic, to be able to access availability
                 var dynamicTimeObject = timeObject as dynamic;
 
                 // Make sure the time is occupied
