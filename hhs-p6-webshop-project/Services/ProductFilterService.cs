@@ -53,9 +53,9 @@ namespace hhs_p6_webshop_project.Services
             if (colors.Count == 0)
                 return products; //No color filters selected, no need to filter
 
-            var temp = result.Where(p => p.ColorOptions.Any(co => colors.Contains(co.Color)));
+            //var temp = result.Where(p => p.ColorOptions.Any(co => colors.Contains(co.Color)));
 
-            temp.Select(p => Sort(p, colors));
+            //temp.Select(p => { return Sort(p, colors); });
 
             return result.Where(p => p.ColorOptions.Any(co => colors.Contains(co.Color))).ToList();
         }
