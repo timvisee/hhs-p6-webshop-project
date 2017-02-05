@@ -1,10 +1,9 @@
-﻿using hhs_p6_webshop_project.Controllers;
+﻿using hhs_p6_webshop_project.App.Config;
+using hhs_p6_webshop_project.Controllers;
+using hhs_p6_webshop_project.Services.Abstracts;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace hhs_p6_webshop_project_test
@@ -14,29 +13,27 @@ namespace hhs_p6_webshop_project_test
         [Fact]
         public void ContactReturnViewTest()
         {
-            //instantieer de controller
-            HomeController c = new HomeController();
+            //mock de parameters
+            var cfgMock = new Mock<IOptions<SecureAppConfig>> ();
+            var mailMock = new Mock<ITransactionalEmailService>();
+            //instantieer de controller 
+            HomeController c = new HomeController(null, null);
             var result = c.Contact();
-            Console.WriteLine("Hoi");
             
             //result moet een view zijn
-            var viewResult = Assert.IsType<ViewResult>(result);
-
-
-
+            Assert.IsType<ViewResult>(result);
 
         }
 
         [Fact]
         public void ContactViewDataTest()
         {
-            HomeController c = new HomeController();
+            HomeController c = new HomeController(null, null);
             var result = c.Contact();
             
 
             var viewResult = Assert.IsType<ViewResult>(result);
             var message = viewResult.ViewData["Message"];
-            Console.WriteLine(viewResult.ViewData["Message"]);
             Assert.Equal(message, "Contact | Honeymoon Shop");
         }
 

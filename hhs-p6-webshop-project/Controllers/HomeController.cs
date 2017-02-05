@@ -25,10 +25,6 @@ namespace hhs_p6_webshop_project.Controllers
             _emailService = emailService;
         }
 
-        public HomeController()
-        {
-        }
-
         public IActionResult Index()
         {
             return View();

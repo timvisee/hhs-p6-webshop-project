@@ -10,9 +10,9 @@
     "System.Runtime.Serialization.Primitives": "4.1.1",
     "xunit": "2.1.0",
     "dotnet-test-xunit": "1.0.0-rc2-192208-24",
-    "hhs-p6-webshop-project": "0.0.0",
     "Moq": "4.6.38-alpha",
-    "Microsoft.EntityFrameworkCore.InMemory": "1.1.0"
+    "Microsoft.EntityFrameworkCore.InMemory": "1.1.0",
+    "hhs-p6-webshop-project": "1.0.0-*"
   },
 
 
