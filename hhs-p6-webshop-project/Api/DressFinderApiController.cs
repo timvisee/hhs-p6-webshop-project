@@ -7,12 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace hhs_p6_webshop_project.Api
 {
+    [Produces("application/json")]
     [Route("api/dressfinder")]
-    public class DressFinderController : Controller
+    public class DressFinderApiController : Controller
     {
         public IProductService ProductService { get; }
       
-        public DressFinderController(IProductService productService)
+        public DressFinderApiController(IProductService productService)
         {
             ProductService = productService;
         }
