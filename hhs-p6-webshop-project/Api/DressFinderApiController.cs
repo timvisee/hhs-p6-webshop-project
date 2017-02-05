@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using hhs_p6_webshop_project.Services.Abstracts;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace hhs_p6_webshop_project.Api
@@ -39,7 +41,7 @@ namespace hhs_p6_webshop_project.Api
         }
 
         [HttpPost("product/filter/partial/sort/{id}")]
-        public PartialViewResult FilterPartialSort([FromBody] Dictionary<string, HashSet<object>> filters, int id)
+        public ActionResult FilterPartialSort([FromBody] Dictionary<string, HashSet<object>> filters, int id)
         {
             var products = ProductService.Filter(filters);
 
@@ -57,10 +59,12 @@ namespace hhs_p6_webshop_project.Api
                 case 3: //naam aflopend
                     products = products.OrderByDescending(o => o.Name).ToList();
                     break;
+                default:
+                    return BadRequest("Id out of range");
             }
 
             var model = ProductService.BuildProductViewModel(products, null);
-            
+
             return PartialView("~/Views/Products/ProductOverview.cshtml", model);
         }
 
