@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using hhs_p6_webshop_project.Data;
+using hhs_p6_webshop_project.Services.Abstracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace hhs_p6_webshop_project.Api
@@ -14,15 +14,15 @@ namespace hhs_p6_webshop_project.Api
         /// <summary>
         /// Application database context.
         /// </summary>
-        private readonly ApplicationDbContext _context;
+        private IAppointmentService AppointmentService { get; }
 
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="context">Application database context.</param>
-        public AppointmentApiController(ApplicationDbContext context)
+        public AppointmentApiController(IAppointmentService appointmentService)
         {
-            _context = context;
+            AppointmentService = appointmentService;
         }
 
         /// <summary>
@@ -32,7 +32,8 @@ namespace hhs_p6_webshop_project.Api
         [HttpGet("getdates")]
         public JsonResult GetDates()
         {
-            return Json(_context.Appointment
+            return Json(AppointmentService
+                .GetAllAppointments()
                 .GroupBy(a => a.AppointmentDateTime.Date)
                 .Where(k => k.Count() >= 3)
                 .Select(a => a.Key.ToString("yyyy-MM-dd")));
@@ -48,14 +49,16 @@ namespace hhs_p6_webshop_project.Api
             // Determine the date to get the free times for
             DateTime selectedDate = DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
-            var timeslots = new List<TimeSpan>();
-            timeslots.Add(TimeSpan.FromHours(9).Add(TimeSpan.FromMinutes(30)));
-            timeslots.Add(TimeSpan.FromHours(12).Add(TimeSpan.FromMinutes(30)));
-            timeslots.Add(TimeSpan.FromHours(15).Add(TimeSpan.FromMinutes(0)));
+            var timeslots = new List<TimeSpan>
+            {
+                TimeSpan.FromHours(9).Add(TimeSpan.FromMinutes(30)),
+                TimeSpan.FromHours(12).Add(TimeSpan.FromMinutes(30)),
+                TimeSpan.FromHours(15).Add(TimeSpan.FromMinutes(0))
+            };
 
             return Json(timeslots.Select(t => new
             {
-                available = !_context.Appointment.Any(a => a.AppointmentDateTime == selectedDate.Add(t)),
+                available = AppointmentService.GetAllAppointments().All(a => a.AppointmentDateTime != selectedDate.Add(t)),
                 formattedTime = t.ToString(@"hh\:mm"),
                 time = new
                 {
