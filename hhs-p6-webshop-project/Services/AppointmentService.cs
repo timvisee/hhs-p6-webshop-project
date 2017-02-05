@@ -20,7 +20,7 @@ namespace hhs_p6_webshop_project.Services
 
         public List<Appointment> GetAllAppointments()
         {
-            return DatabaseContext.Appointment.Include(a => a.AppointmentDateTime).ToList();
+            return DatabaseContext.Appointment.ToList();
         }
     }
 }
