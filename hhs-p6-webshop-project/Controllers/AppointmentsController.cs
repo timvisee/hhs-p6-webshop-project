@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models.AppointmentModels;
 using Microsoft.Extensions.Options;
-using System;
 using hhs_p6_webshop_project.Services.Abstracts;
 using hhs_p6_webshop_project.Services.Containers;
 

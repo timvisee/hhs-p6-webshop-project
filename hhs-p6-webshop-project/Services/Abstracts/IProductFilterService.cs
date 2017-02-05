@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using hhs_p6_webshop_project.Models.FilterModels;
+﻿using System.Collections.Generic;
 using hhs_p6_webshop_project.Models.ProductModels;
 
 namespace hhs_p6_webshop_project.Services.Abstracts

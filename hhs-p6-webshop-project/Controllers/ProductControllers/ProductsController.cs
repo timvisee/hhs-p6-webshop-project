@@ -1,13 +1,9 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models.ProductModels;
-using hhs_p6_webshop_project.Services;
 using hhs_p6_webshop_project.Services.Abstracts;
 
 namespace hhs_p6_webshop_project.Controllers.ProductControllers

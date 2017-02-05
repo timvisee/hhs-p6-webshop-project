@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using hhs_p6_webshop_project.Models.ProductModels;
-using hhs_p6_webshop_project.Services;
 using hhs_p6_webshop_project.Services.Abstracts;
 using Microsoft.AspNetCore.Mvc;
 

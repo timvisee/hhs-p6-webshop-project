@@ -761,7 +761,6 @@ $(document).ready(function() {
 
                 // Call back with the time
                 callback(null, data);
-
             },
             {
                 date: formatDateTime(date, true, false)

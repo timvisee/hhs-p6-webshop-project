@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Net;
-using System.Reflection;
 using Newtonsoft.Json;
 using SparkPost.RequestSenders;
 
