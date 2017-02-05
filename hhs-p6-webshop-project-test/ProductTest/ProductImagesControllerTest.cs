@@ -8,9 +8,9 @@ using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models.ProductModels;
 using Xunit;
 using Microsoft.EntityFrameworkCore;
-using hhs_p6_webshop_project_test.MoqTools;
 using hhs_p6_webshop_project.Models;
 using System.Security.Claims;
+using hhs_p6_webshop_project_test.Roderick;
 using Microsoft.AspNetCore.Mvc;
 
 namespace hhs_p6_webshop_project_test.ProductTest
