@@ -4,7 +4,6 @@ using System.Linq;
 using hhs_p6_webshop_project.Api;
 using hhs_p6_webshop_project.Models.AppointmentModels;
 using hhs_p6_webshop_project.Services.Abstracts;
-using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;
@@ -121,17 +120,20 @@ namespace hhs_p6_webshop_project_test.Tim {
 
             // Loop through the values, keep track of the count
             int timeCount = 0;
-            foreach (var timeObject in times)
+
+            // Create a list of expected values
+            List<string> expectedValues = new List<string>()
             {
-                // Make sure the time is occupied
-                Assert.False(timeObject.available);
+                "{ available = True, formattedTime = 09:30, time = { hour = 9, minute = 30, second = 0 } }",
+                "{ available = False, formattedTime = 12:30, time = { hour = 12, minute = 30, second = 0 } }",
+                "{ available = False, formattedTime = 15:00, time = { hour = 15, minute = 0, second = 0 } }"
+            };
 
-                // Make sure the time isn in the occupied list, and add it to the list
-                Assert.DoesNotContain(timeObject.formattedTime, occupiedTimes);
-                occupiedTimes.Add(timeObject.formattedTime);
-
-                // Make sure the time data represents the same as the formatted time
-                Assert.Equals(timeObject.time.hour.ToString("D2") + ":" + timeObject.time.minute.ToString("D2"), timeObject.formattedTime);
+            // Loop through the results and compare the actual values to the expected
+            foreach (dynamic timeObject in times)
+            {
+                // Compare the values
+                Assert.Equal(timeObject.ToString(), expectedValues[timeCount]);
 
                 // Increase the time count
                 timeCount++;
