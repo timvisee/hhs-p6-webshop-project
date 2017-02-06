@@ -12,6 +12,8 @@ using hhs_p6_webshop_project.Models;
 using System.Security.Claims;
 using hhs_p6_webshop_project_test.Roderick;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using System.Security.Principal;
 
 namespace hhs_p6_webshop_project_test.ProductTest
 {
@@ -24,7 +26,20 @@ namespace hhs_p6_webshop_project_test.ProductTest
             {
                 ProductImageId = 1,
                 ColorOptionId = 1,
-                Path = "~/images/uploads"
+                Path = "~/images/uploads",
+                ColorOption = new ColorOption()
+                {
+                    ColorOptionId = 1,
+                    Color = "Ivoor",
+                    ProductId = 1,
+                    Product = new Product()
+                    {
+                        ProductId = 1,
+                        Name = "Test",
+                        Description = "Test",
+                        Price = 2500
+                    }
+                }
             });
 
             return ProductImages;
@@ -49,21 +64,139 @@ namespace hhs_p6_webshop_project_test.ProductTest
         }
 
         [Fact]
-        public void detailsPage_NotAuthenticated()
+        public void detailsPage_NotAuthenticated_Null()
         {
             //Arrange
             var dataSource = new Mock<ApplicationDbContext>();
             var temp = Tools.GetQueryableMockDbSet<ProductImage>(GetTestProductImages());
             dataSource.Setup(m => m.ProductImages).Returns(temp);
-            var controller = new ProductImagesController(dataSource.Object);
-            var User = new ClaimsIdentity("Admin");
+            var controller = new ProductImagesController(dataSource.Object)
+            {
+                ControllerContext = new ControllerContext()
+                {
+                    HttpContext = Tools.MockHttpContext(false)
+                }
+            };
 
             //Act
-            int? testValue = dataSource.Object.ProductImages.Select(m => m.ProductImageId).FirstOrDefault();
-            var methodToTest = controller.Details(testValue);
+            var result = controller.Details(null);
+       
+            //Assert
+            Assert.IsType<NotFoundResult>(result.Result);
+
+        }
+
+        [Fact]
+        public void detailsPage_Authenticated_Null()
+        {
+            //Arrange
+            var dataSource = new Mock<ApplicationDbContext>();
+            var temp = Tools.GetQueryableMockDbSet<ProductImage>(GetTestProductImages());
+            dataSource.Setup(m => m.ProductImages).Returns(temp);
+            var controller = new ProductImagesController(dataSource.Object)
+            {
+                ControllerContext = new ControllerContext()
+                {
+                    HttpContext = Tools.MockHttpContext(true)
+                }
+            };
+
+            //Act
+            var result = controller.Details(null);
 
             //Assert
-            Assert.IsType<ViewResult>(methodToTest);
+            Assert.IsType<NotFoundResult>(result.Result);
+
+        }
+
+        [Fact]
+        public void detailsPage_NotAuthenticated_CorrectNumber()
+        {
+            //Arrange
+            var dataSource = new Mock<ApplicationDbContext>();
+            var temp = Tools.GetQueryableMockDbSet<ProductImage>(GetTestProductImages());
+            dataSource.Setup(m => m.ProductImages).Returns(temp);
+            var controller = new ProductImagesController(dataSource.Object)
+            {
+                ControllerContext = new ControllerContext()
+                {
+                    HttpContext = Tools.MockHttpContext(false)
+                }
+            };
+
+            //Act
+            var result = controller.Details(1);
+
+            //Assert
+            Assert.IsType<NotFoundResult>(result.Result);
+
+        }
+
+        [Fact]
+        public void indexPage_NotAuthenticated()
+        {
+            //Arrange
+            var dataSource = new Mock<ApplicationDbContext>();
+            var temp = Tools.GetQueryableMockDbSet<ProductImage>(GetTestProductImages());
+            dataSource.Setup(m => m.ProductImages).Returns(temp);
+            var controller = new ProductImagesController(dataSource.Object)
+            {
+                ControllerContext = new ControllerContext()
+                {
+                    HttpContext = Tools.MockHttpContext(false)
+                }
+            };
+
+            //Act
+            var result = controller.Index();
+
+            //Assert
+            Assert.IsType<NotFoundResult>(result.Result);
+
+        }
+
+        [Fact]
+        public void deletePage_Authenticated_Null()
+        {
+            //Arrange
+            var dataSource = new Mock<ApplicationDbContext>();
+            var temp = Tools.GetQueryableMockDbSet<ProductImage>(GetTestProductImages());
+            dataSource.Setup(m => m.ProductImages).Returns(temp);
+            var controller = new ProductImagesController(dataSource.Object)
+            {
+                ControllerContext = new ControllerContext()
+                {
+                    HttpContext = Tools.MockHttpContext(true)
+                }
+            };
+
+            //Act
+            var result = controller.Delete(null);
+
+            //Assert
+            Assert.IsType<NotFoundResult>(result.Result);
+        }
+
+        [Fact]
+        public void deletePage_NotAuthenticated_NormalValue()
+        {
+            //Arrange
+            var dataSource = new Mock<ApplicationDbContext>();
+            var temp = Tools.GetQueryableMockDbSet<ProductImage>(GetTestProductImages());
+            dataSource.Setup(m => m.ProductImages).Returns(temp);
+            var controller = new ProductImagesController(dataSource.Object)
+            {
+                ControllerContext = new ControllerContext()
+                {
+                    HttpContext = Tools.MockHttpContext(false)
+                }
+            };
+
+            //Act
+            var result = controller.Delete(1);
+
+            //Assert
+            Assert.IsType<NotFoundResult>(result.Result);
         }
     }
 }
