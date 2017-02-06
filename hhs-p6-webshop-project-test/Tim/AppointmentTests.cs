@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using hhs_p6_webshop_project.Api;
-using hhs_p6_webshop_project.Controllers;
-using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models.AppointmentModels;
 using hhs_p6_webshop_project.Services.Abstracts;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;
@@ -118,12 +116,22 @@ namespace hhs_p6_webshop_project_test.Tim {
             // Get the list of times as dynamic object
             var times = timesResponse.Value as dynamic;
 
+            // Create a list of times
+            List<String> occupiedTimes = new List<String>();
+
             // Loop through the values, keep track of the count
             int timeCount = 0;
             foreach (var timeObject in times)
             {
                 // Make sure the time is occupied
-                Assert.False(timeObject.Value.available);
+                Assert.False(timeObject.available);
+
+                // Make sure the time isn in the occupied list, and add it to the list
+                Assert.DoesNotContain(timeObject.formattedTime, occupiedTimes);
+                occupiedTimes.Add(timeObject.formattedTime);
+
+                // Make sure the time data represents the same as the formatted time
+                Assert.Equals(timeObject.time.hour.ToString("D2") + ":" + timeObject.time.minute.ToString("D2"), timeObject.formattedTime);
 
                 // Increase the time count
                 timeCount++;
