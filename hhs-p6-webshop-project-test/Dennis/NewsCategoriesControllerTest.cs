@@ -35,24 +35,27 @@ namespace hhs_p6_webshop_project_test.Dennis
                 }
             };
             
+            // Mocking
             var dbContext = Tools.MockTestDatabaseContext();
             var controller = new NewsCategoriesController(dbContext);
 
             // Create a category
             var result = controller.Create(na);
             
-
-            // Assert
+            // Check if the result is a redirect
             Assert.IsType<RedirectToActionResult>(result);
 
+            // Check if the name is saved correct
             Assert.Contains(na.NewsCategory.Name, dbContext.NewsCategory.FirstOrDefault().Name);
         }
 
         [Fact]
         public void CreateViewInNewsCategoriesController_NotLoggedIn()
         {
+            // Initialize the controller instance, with a user which is not logged in.
             var controller = Tools.CreateNewsCategoriesControllerInstance();
 
+            // Create the create news category view
             var cView = controller.Create();
 
             // User is not able to create a category because it's not logged in
