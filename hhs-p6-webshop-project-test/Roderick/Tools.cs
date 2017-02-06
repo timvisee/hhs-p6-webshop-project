@@ -5,8 +5,10 @@ using System.Security.Claims;
 using System.Security.Principal;
 using hhs_p6_webshop_project.App.Config;
 using hhs_p6_webshop_project.Controllers;
+using hhs_p6_webshop_project.Controllers.NewsControllers;
 using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models.AppointmentModels;
+using hhs_p6_webshop_project.Models.NewsModels;
 using hhs_p6_webshop_project.Services.Abstracts;
 using hhs_p6_webshop_project.Services.Containers;
 using Microsoft.AspNetCore.Http;
@@ -50,6 +52,21 @@ namespace hhs_p6_webshop_project_test.Roderick
             };
         }
 
+        public static NewsCategoriesController CreateNewsCategoriesControllerInstance(bool isAuthenticated = false)
+        {
+            var httpContext = MockHttpContext(isAuthenticated);
+            var dbContext = MockTestDatabaseContext();
+
+            return new NewsCategoriesController(dbContext)
+            {
+                ControllerContext = new ControllerContext()
+                {
+                    //Override http context, to return the proper user
+                    HttpContext = httpContext
+                }
+            };
+        }
+
         public static HttpContext MockHttpContext(bool isAuthenticated)
         {
             var mockHttpContext = new Mock<HttpContext>();
@@ -81,6 +98,7 @@ namespace hhs_p6_webshop_project_test.Roderick
         {
             var mockContext = new Mock<ApplicationDbContext>();
             mockContext.Setup(c => c.Appointment).Returns(GetQueryableMockDbSet(CreateTestAppointments()));
+            mockContext.Setup(c => c.NewsCategory).Returns(GetQueryableMockDbSet(CreateTestCategory()));
             mockContext.Setup(c => c.Products).Returns(GetQueryableMockDbSet(DbBuilder.GenerateProductsAsList()));
             return mockContext.Object;
         }
@@ -109,6 +127,17 @@ namespace hhs_p6_webshop_project_test.Roderick
                     Mail = "fake@fake.com",
                     Name = "Name",
                     Phone = "+000000000"
+                }
+            };
+        }
+
+        public static List<NewsCategory> CreateTestCategory()
+        {
+            return new List<NewsCategory>()
+            {
+                new NewsCategory()
+                {
+                    Name = "Nieuws"
                 }
             };
         }
