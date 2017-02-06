@@ -18,7 +18,7 @@ using Moq;
 using Xunit;
 
 
-namespace hhs_p6_webshop_project_test.NewsTests
+namespace hhs_p6_webshop_project_test.Dennis
 {
     public class NewsCategoriesControllerTest
     {
