@@ -722,7 +722,7 @@ $(document).ready(function() {
      */
     function fetchUnavailableDates(callback) {
         // Fetch the data
-        fetchData("Appointments/GetDates",
+        fetchData("appointments/getdates",
             function(err, data) {
                 // Call back errors
                 if (err != null) {
@@ -751,7 +751,7 @@ $(document).ready(function() {
      */
     function fetchTimes(date, callback) {
         // Fetch the data
-        fetchData("Appointments/GetTimes",
+        fetchData("appointments/gettimes",
             function(err, data) {
                 // Call back errors
                 if (err != null) {
