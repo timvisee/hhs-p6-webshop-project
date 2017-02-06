@@ -66,7 +66,7 @@ namespace hhs_p6_webshop_project_test.ProductTest
         [Fact]
         public void detailsPage_NotAuthenticated_Null()
         {
-            var controller = createMockedController();
+            var controller = createMockedController(false);
 
             //Act
             var result = controller.Details(null);
@@ -79,7 +79,7 @@ namespace hhs_p6_webshop_project_test.ProductTest
         [Fact]
         public void detailsPage_Authenticated_Null()
         {
-            var controller = createMockedController();
+            var controller = createMockedController(true);
 
             //Act
             var result = controller.Details(null);
@@ -92,7 +92,7 @@ namespace hhs_p6_webshop_project_test.ProductTest
         [Fact]
         public void detailsPage_NotAuthenticated_CorrectNumber()
         {
-            var controller = createMockedController();
+            var controller = createMockedController(false);
 
             //Act
             var result = controller.Details(1);
@@ -105,7 +105,7 @@ namespace hhs_p6_webshop_project_test.ProductTest
         [Fact]
         public void indexPage_NotAuthenticated()
         {
-            var controller = createMockedController();
+            var controller = createMockedController(false);
 
             //Act
             var result = controller.Index();
@@ -118,7 +118,7 @@ namespace hhs_p6_webshop_project_test.ProductTest
         [Fact]
         public void deletePage_Authenticated_Null()
         {
-            var controller = createMockedController();
+            var controller = createMockedController(true);
 
             //Act
             var result = controller.Delete(null);
@@ -130,7 +130,7 @@ namespace hhs_p6_webshop_project_test.ProductTest
         [Fact]
         public void deletePage_NotAuthenticated_NormalValue()
         {
-            var controller = createMockedController();
+            var controller = createMockedController(false);
 
             //Act
             var result = controller.Delete(1);
@@ -139,7 +139,7 @@ namespace hhs_p6_webshop_project_test.ProductTest
             Assert.IsType<NotFoundResult>(result.Result);
         }
 
-        private ProductImagesController createMockedController()
+        private ProductImagesController createMockedController(bool isAuthenticated)
         {
             //Arrange
             var dataSource = new Mock<ApplicationDbContext>();
@@ -149,7 +149,7 @@ namespace hhs_p6_webshop_project_test.ProductTest
             {
                 ControllerContext = new ControllerContext()
                 {
-                    HttpContext = Tools.MockHttpContext(false)
+                    HttpContext = Tools.MockHttpContext(isAuthenticated)
                 }
             };
 
