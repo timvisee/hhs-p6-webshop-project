@@ -1,24 +1,15 @@
+@using System
+@using System.Linq
 @using hhs_p6_webshop_project.Models.ProductModels
-@using Microsoft.AspNetCore.Mvc.Rendering
 
 @foreach (Product item in Model.Products)
 {
-    var imagePath = "/images/default.jpg";
+    string itemColorType = item.ColorOptions?.First()?.Color ?? "Kleurloos";
 
-    string itemColorType = item.ColorOptions.First().Color;
-
-    try
-    {
-        // Get first image (todo fix)
-        imagePath = item.ColorOptions.FirstOrDefault().Images.FirstOrDefault().Path;
-    }
-    catch (Exception e)
-    {
-        // Tering harde beun maar het werkt echt perfect
-    }
+    string imagePath = item.ColorOptions?.FirstOrDefault()?.Images?.FirstOrDefault()?.Path ?? "/images/default.jpg";
 
     <div class="product col-md-4 col-sm-12">
-        <a asp-action="Details" asp-route-id="@item.ProductId" asp-route-color="@itemColorType">
+        <a asp-controller="Products" asp-action="Details" asp-route-id="@item.ProductId" asp-route-color="@itemColorType">
             <div class="vertical-align">
                 <div class="horizontal-align">
                     <img class="product-image" src="@imagePath" alt="@item.Name"/>
@@ -46,8 +37,8 @@
             @if (User.Identity.IsAuthenticated)
             {
                 <div class="product-edit-buttons">
-                    <a class="btn" asp-action="Edit" asp-route-id="@item.ProductId">Bewerk</a>
-                    <a class="btn" asp-action="Delete" asp-route-id="@item.ProductId" asp-controller="Products">Verwijder</a>
+                    <a class="btn" asp-controller="Products" asp-action="Edit" asp-route-id="@item.ProductId">Bewerk</a>
+                    <a class="btn" asp-controller="Products" asp-action="Delete" asp-route-id="@item.ProductId">Verwijder</a>
                 </div>
             }
         </a>

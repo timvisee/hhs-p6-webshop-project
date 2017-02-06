@@ -1,27 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using hhs_p6_webshop_project.Api;
 using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models.FilterModels;
 using hhs_p6_webshop_project.Models.ProductModels;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis;
+using hhs_p6_webshop_project.Services.Abstracts;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json.Linq;
 
 namespace hhs_p6_webshop_project.Services
 {
+    /// <summary>
+    /// Service to help with database querying for products and filtering the results.
+    /// </summary>
     public class ProductService : IProductService
     {
         private ApplicationDbContext DatabaseContext { get; set; }
+        private IProductFilterService FilterService { get; set; }
 
-        public ProductService(ApplicationDbContext dbContext)
+        public ProductService(ApplicationDbContext dbContext, IProductFilterService filterService)
         {
             DatabaseContext = dbContext;
+            FilterService = filterService;
         }
 
+        /// <summary>
+        /// Returns a list of all products, sorted by Id, ascending.
+        /// </summary>
+        /// <returns>A <see cref="List{T}"/> of all <see cref="Product"/> product instances.</returns>
         public List<Product> GetAllProducts()
         {
             return DatabaseContext.Products
@@ -30,30 +34,45 @@ namespace hhs_p6_webshop_project.Services
                 .ToList();
         }
 
-        private List<object>
-            ParseFuckingAnoyingJsonArrayOfArraysToJustAFuckingListGodFuckingDamnitIHateThisFuckingBullshit(
-                HashSet<object> objects)
+        /// <summary>
+        /// Builds a <see cref="ProductViewModel"/> based upon a <see cref="List{T}"/> of <see cref="Product"/>s and a <see cref="List{T}"/> of <see cref="FilterBase"/> objects.
+        /// </summary>
+        /// <param name="products">the products to populate this view with</param>
+        /// <param name="filters">the filters to populate this view with</param>
+        /// <returns></returns>
+        public ProductViewModel BuildProductViewModel(List<Product> products, List<FilterBase> filters)
         {
-            List<object> values = new List<object>();
+            //Build the model and calculate the required properties
+            var model = new ProductViewModel();
+            model.Products = products;
+            model.Filters = filters;
 
-            foreach (object value in objects)
+            if (filters != null && filters.Count > 0)
             {
-                if (value is Int64)
-                    values.Add(Convert.ToDouble(value));
-                else
-                    values.Add(value);
+                model.MaxPrice = filters.Where(f => f.Name == "Prijs").Cast<PriceFilter>().First().Max;
+                model.MinPrice = filters.Where(f => f.Name == "Prijs").Cast<PriceFilter>().First().Min;
+                model.Colors =
+                    filters.Where(f => f.Name == "Kleur").Cast<ColorFilter>().SelectMany(cf => cf.Colors).ToList();
             }
-            return values;
+            return model;
         }
-
+        
+        /// <summary>
+        /// Returns a list of all available <see cref="ColorOption"/>s.
+        /// </summary>
+        /// <returns>a <see cref="List{T}"/> of <see cref="ColorOption"/></returns>
         public List<ColorOption> GetColorOptions()
         {
             return DatabaseContext.ColorOptions.Distinct().ToList();
         }
 
+        /// <summary>
+        /// Fetches a list of all available filter options as JSON serialization friendly object.
+        /// </summary>
+        /// <returns>a <see cref="Dictionary{TKey,TValue}"/> with a <see cref="string"/> as key and a <see cref="HashSet{T}"/> as value</returns>
         public Dictionary<string, HashSet<object>> GetFilters()
         {
-            Dictionary<string, HashSet<object>> val = new Dictionary<string, HashSet<object>>();
+            var val = new Dictionary<string, HashSet<object>>();
 
             val.Add("Prijs", new HashSet<object>());
 
@@ -67,6 +86,10 @@ namespace hhs_p6_webshop_project.Services
             return val;
         }
 
+        /// <summary>
+        /// Detches a list of allavailable filter options as a C# friendly object.
+        /// </summary>
+        /// <returns>a <see cref="List{T}"/> of <see cref="FilterBase"/> objects</returns>
         public List<FilterBase> GetAllFilters()
         {
             List<FilterBase> filters = new List<FilterBase>();
@@ -84,93 +107,15 @@ namespace hhs_p6_webshop_project.Services
             return filters;
         }
 
-        public List<Product> Filter(List<FilterBase> filters)
+        /// <summary>
+        /// Filters all available products based on a filter selection.
+        /// </summary>
+        /// <param name="filters"></param>
+        /// <returns>a filtered <see cref="List{T}"/> of <see cref="Product"/> sorted by chosen filter options</returns>
+        public List<Product> Filter(Dictionary<string, HashSet<object>> filters)
         {
-            List<Product> products = GetAllProducts();
-            List<Product> results = new List<Product>();
-
-            foreach (Product product in products)
-            {
-                if (product.IsMatch(filters))
-                {
-                    var temp = filters.Where(f => f.Name == "Kleur")
-                        .Cast<ColorFilter>()
-                        .SelectMany(cf => cf.Colors)
-                        .Distinct()
-                        .ToList();
-                    product.Sort(temp);
-                    results.Add(product);
-                }
-            }
-
-            return results;
+            return FilterService.Filter(GetAllProducts(), filters);
         }
-
-        public List<FilterBase> ParseFilters(Dictionary<string, HashSet<object>> filters)
-        {
-            List<FilterBase> f = new List<FilterBase>();
-
-            foreach (var pair in filters)
-            {
-                if (pair.Key == "Kleur")
-                {
-                    ColorFilter filt = new ColorFilter();
-                    filt.Colors.AddRange(
-                        ParseFuckingAnoyingJsonArrayOfArraysToJustAFuckingListGodFuckingDamnitIHateThisFuckingBullshit(
-                                pair.Value)
-                            .Cast<string>());
-
-                    if (filt.Colors.Count > 0)
-                        f.Add(filt);
-                }
-
-                if (pair.Key == "Prijs")
-                {
-                    var vals =
-                        ParseFuckingAnoyingJsonArrayOfArraysToJustAFuckingListGodFuckingDamnitIHateThisFuckingBullshit(
-                                pair.Value)
-                            .Cast<double>();
-
-                    PriceFilter filt = new PriceFilter();
-                    filt.Min = vals.Min();
-                    filt.Max = vals.Max();
-                    f.Add(filt);
-                }
-            }
-
-            return f;
-        }
-
-        public PagedResponse GetAllProductsPaged(int start, int count)
-        {
-            PagedResponse response = new PagedResponse();
-            int prev = start - count;
-            if (prev < 0)
-                prev = 0;
-
-            var products = GetAllProducts();
-            if (start + count > products.Count)
-            {
-                int num = Math.Abs(products.Count - (start + count));
-                response.Data = products.GetRange(start, num);
-                response.PreviousPage = $"api/dressfinder/product/{prev}/{count}";
-                response.NextPage = null;
-            }
-            else
-            {
-                response.Data = products.GetRange(start, count);
-                response.PreviousPage = (prev == 0) ? null : $"api/dressfinder/product/{prev}/{count}";
-
-                if (start + count >= products.Count)
-                {
-                    response.NextPage = null;
-                }
-                else
-                {
-                    response.NextPage = $"api/dressfinder/product/{start + count}/{count}";
-                }
-            }
-            return response;
-        }
+        
     }
 }

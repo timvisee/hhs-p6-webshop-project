@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using hhs_p6_webshop_project.Data;
 using Microsoft.EntityFrameworkCore;
 using Xunit;

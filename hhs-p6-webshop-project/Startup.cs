@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using hhs_p6_webshop_project.Data;
 using hhs_p6_webshop_project.Models;
 using hhs_p6_webshop_project.Services;
+using hhs_p6_webshop_project.Services.Abstracts;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
@@ -91,6 +92,9 @@ namespace hhs_p6_webshop_project
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<ITransactionalEmailService, TransactionalEmailService>();
+            services.AddScoped<IProductFilterService, ProductFilterService>();
+            services.AddScoped<IAppointmentService, AppointmentService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

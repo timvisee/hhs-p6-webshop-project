@@ -1,7 +1,8 @@
 {
-    "profiles": {
-        "hhs-p6-webshop-project": {
-            "commandName": "Project"
-        }
+  "profiles": {
+    "hhs-p6-webshop-project": {
+      "commandName": "Project",
+      "commandLineArgs": "--db-init"
     }
+  }
 }

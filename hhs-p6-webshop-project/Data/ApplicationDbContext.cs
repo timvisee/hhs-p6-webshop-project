@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using hhs_p6_webshop_project.Models;
 using hhs_p6_webshop_project.Models.AppointmentModels;
 using hhs_p6_webshop_project.Models.NewsModels;
-using Microsoft.Extensions.Configuration;
 using hhs_p6_webshop_project.Models.ProductModels;
 
 namespace hhs_p6_webshop_project.Data
@@ -60,18 +55,18 @@ namespace hhs_p6_webshop_project.Data
                 .HasForeignKey(sc => sc.NewsCategoryID);
         }
 
-        public DbSet<Appointment> Appointment { get; set; }
+        public virtual DbSet<Appointment> Appointment { get; set; }
 
-        public DbSet<Product> Products { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
 
-        public DbSet<ColorOption> ColorOptions { get; set; }
+        public virtual DbSet<ColorOption> ColorOptions { get; set; }
 
-        public DbSet<ProductImage> ProductImages { get; set; }
+        public virtual DbSet<ProductImage> ProductImages { get; set; }
 
-        public DbSet<NewsArticle> NewsArticle { get; set; }
+        public virtual DbSet<NewsArticle> NewsArticle { get; set; }
 
-        public DbSet<NewsCategory> NewsCategory { get; set; }
+        public virtual DbSet<NewsCategory> NewsCategory { get; set; }
 
-        public DbSet<NewsArticleCategory> NewsArticleCategory { get; set; }
+        public virtual DbSet<NewsArticleCategory> NewsArticleCategory { get; set; }
     }
 }

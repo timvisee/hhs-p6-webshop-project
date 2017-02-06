@@ -1,7 +1,6 @@
 {
     "userSecretsId": "aspnet-hhs_p6_webshop_project-0799fe3e-6eaf-4c5f-b40e-7c6bfd5dfa9a",
     "dependencies": {
-        "Beun.Mail": "1.0.0.0",
         "Microsoft.AspNetCore.Authentication.Cookies": "1.1.0",
         "Microsoft.AspNetCore.Authentication.Google": "1.1.0",
         "Microsoft.AspNetCore.Diagnostics": "1.1.0",
@@ -32,7 +31,10 @@
         "Microsoft.Extensions.Logging.Console": "1.1.0",
         "Microsoft.Extensions.Logging.Debug": "1.1.0",
         "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
-        "Microsoft.NETCore.App": "1.1.0",
+        "Microsoft.NETCore.App": {
+            "type": "platform",
+            "version": "1.1.0"
+        },
         "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.1.0",
         "Microsoft.VisualStudio.Web.CodeGeneration.Tools": {
             "version": "1.0.0-preview2-final",
@@ -43,7 +45,8 @@
             "type": "build"
         },
         "MimeKit": "1.10.0",
-        "NETCore.MailKit": "1.0.1"
+      "NETCore.MailKit": "1.0.1",
+      "SparkPost.NetCore": "1.0.0-*"
     },
     "tools": {
         "Microsoft.AspNetCore.Razor.Tools": {

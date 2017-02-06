@@ -33,7 +33,7 @@ $(document).ready(function() {
             },
             success: function(data) {
                 $(".side-pictures").empty();
-                data["data"]["paths"].forEach(renderImages);
+                data["paths"].forEach(renderImages);
             }
         });
     }

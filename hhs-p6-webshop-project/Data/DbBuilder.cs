@@ -37,7 +37,7 @@ namespace hhs_p6_webshop_project.Data
                 NormalizedEmail = "BEUN@BEUN.IT",
                 UserName = "beun@beun.it",
                 NormalizedUserName = "BEUN@BEUN.IT",
-                PhoneNumber = "0906-jemoeder",
+                PhoneNumber = "0612345678",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
                 SecurityStamp = Guid.NewGuid().ToString("D")

@@ -50,7 +50,7 @@ function formatDateTime(dateTime, formatDate, formatTime) {
 
     // Format the time
     if (formatTime)
-        formatted = (formatDate ? " " : "") +
+        formatted += (formatDate ? " " : "") +
             ("0" + dateTime.getHours()).slice(-2) +
             ":" +
             ("0" + dateTime.getMinutes()).slice(-2) +
@@ -472,8 +472,8 @@ $(document).ready(function() {
                                 setTimeout(function() {
                                         secondStepButton.removeClass("animated fadeIn").delay(0)
                                             .addClass("animated pulse");
-                                    },
-                                    750);
+                                },
+                                750);
                             });
 
                             // Set the loading indicator
@@ -686,13 +686,13 @@ $(document).ready(function() {
         // Do an AJAX request
         // TODO: Use inline error notifications.
         $.ajax({
-            url: "/Ajax/" + endpoint,
+            url: "/api/" + endpoint,
             dataType: "json",
             type: "GET",
             data: data,
             error: function(jqXhr, textStatus) {
                 // Define the error message
-                var error = "Failed to fetch data.\n\nError: '" + textStatu + "'";
+                var error = "Failed to fetch data.\n\nError: '" + textStatus + "'";
 
                 // Alert the user with the error
                 alert(error);
@@ -722,7 +722,7 @@ $(document).ready(function() {
      */
     function fetchUnavailableDates(callback) {
         // Fetch the data
-        fetchData("Appointments/GetDates",
+        fetchData("appointments/getdates",
             function(err, data) {
                 // Call back errors
                 if (err != null) {
@@ -731,7 +731,7 @@ $(document).ready(function() {
                 }
 
                 // Call back with the dates
-                callback(null, data.dates);
+                callback(null, data);
             });
     }
 
@@ -751,7 +751,7 @@ $(document).ready(function() {
      */
     function fetchTimes(date, callback) {
         // Fetch the data
-        fetchData("Appointments/GetTimes",
+        fetchData("appointments/gettimes",
             function(err, data) {
                 // Call back errors
                 if (err != null) {
@@ -760,8 +760,7 @@ $(document).ready(function() {
                 }
 
                 // Call back with the time
-                callback(null, data.times);
-
+                callback(null, data);
             },
             {
                 date: formatDateTime(date, true, false)

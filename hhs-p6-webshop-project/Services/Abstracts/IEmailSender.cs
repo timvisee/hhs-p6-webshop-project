@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
-namespace hhs_p6_webshop_project.Services
+namespace hhs_p6_webshop_project.Services.Abstracts
 {
     public interface IEmailSender
     {
