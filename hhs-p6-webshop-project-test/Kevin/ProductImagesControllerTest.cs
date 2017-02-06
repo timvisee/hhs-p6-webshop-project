@@ -66,17 +66,7 @@ namespace hhs_p6_webshop_project_test.ProductTest
         [Fact]
         public void detailsPage_NotAuthenticated_Null()
         {
-            //Arrange
-            var dataSource = new Mock<ApplicationDbContext>();
-            var temp = Tools.GetQueryableMockDbSet<ProductImage>(GetTestProductImages());
-            dataSource.Setup(m => m.ProductImages).Returns(temp);
-            var controller = new ProductImagesController(dataSource.Object)
-            {
-                ControllerContext = new ControllerContext()
-                {
-                    HttpContext = Tools.MockHttpContext(false)
-                }
-            };
+            var controller = createMockedController();
 
             //Act
             var result = controller.Details(null);
@@ -89,17 +79,7 @@ namespace hhs_p6_webshop_project_test.ProductTest
         [Fact]
         public void detailsPage_Authenticated_Null()
         {
-            //Arrange
-            var dataSource = new Mock<ApplicationDbContext>();
-            var temp = Tools.GetQueryableMockDbSet<ProductImage>(GetTestProductImages());
-            dataSource.Setup(m => m.ProductImages).Returns(temp);
-            var controller = new ProductImagesController(dataSource.Object)
-            {
-                ControllerContext = new ControllerContext()
-                {
-                    HttpContext = Tools.MockHttpContext(true)
-                }
-            };
+            var controller = createMockedController();
 
             //Act
             var result = controller.Details(null);
@@ -112,17 +92,7 @@ namespace hhs_p6_webshop_project_test.ProductTest
         [Fact]
         public void detailsPage_NotAuthenticated_CorrectNumber()
         {
-            //Arrange
-            var dataSource = new Mock<ApplicationDbContext>();
-            var temp = Tools.GetQueryableMockDbSet<ProductImage>(GetTestProductImages());
-            dataSource.Setup(m => m.ProductImages).Returns(temp);
-            var controller = new ProductImagesController(dataSource.Object)
-            {
-                ControllerContext = new ControllerContext()
-                {
-                    HttpContext = Tools.MockHttpContext(false)
-                }
-            };
+            var controller = createMockedController();
 
             //Act
             var result = controller.Details(1);
@@ -135,17 +105,7 @@ namespace hhs_p6_webshop_project_test.ProductTest
         [Fact]
         public void indexPage_NotAuthenticated()
         {
-            //Arrange
-            var dataSource = new Mock<ApplicationDbContext>();
-            var temp = Tools.GetQueryableMockDbSet<ProductImage>(GetTestProductImages());
-            dataSource.Setup(m => m.ProductImages).Returns(temp);
-            var controller = new ProductImagesController(dataSource.Object)
-            {
-                ControllerContext = new ControllerContext()
-                {
-                    HttpContext = Tools.MockHttpContext(false)
-                }
-            };
+            var controller = createMockedController();
 
             //Act
             var result = controller.Index();
@@ -158,17 +118,7 @@ namespace hhs_p6_webshop_project_test.ProductTest
         [Fact]
         public void deletePage_Authenticated_Null()
         {
-            //Arrange
-            var dataSource = new Mock<ApplicationDbContext>();
-            var temp = Tools.GetQueryableMockDbSet<ProductImage>(GetTestProductImages());
-            dataSource.Setup(m => m.ProductImages).Returns(temp);
-            var controller = new ProductImagesController(dataSource.Object)
-            {
-                ControllerContext = new ControllerContext()
-                {
-                    HttpContext = Tools.MockHttpContext(true)
-                }
-            };
+            var controller = createMockedController();
 
             //Act
             var result = controller.Delete(null);
@@ -179,6 +129,17 @@ namespace hhs_p6_webshop_project_test.ProductTest
 
         [Fact]
         public void deletePage_NotAuthenticated_NormalValue()
+        {
+            var controller = createMockedController();
+
+            //Act
+            var result = controller.Delete(1);
+
+            //Assert
+            Assert.IsType<NotFoundResult>(result.Result);
+        }
+
+        private ProductImagesController createMockedController()
         {
             //Arrange
             var dataSource = new Mock<ApplicationDbContext>();
@@ -192,11 +153,7 @@ namespace hhs_p6_webshop_project_test.ProductTest
                 }
             };
 
-            //Act
-            var result = controller.Delete(1);
-
-            //Assert
-            Assert.IsType<NotFoundResult>(result.Result);
+            return controller;
         }
     }
 }
